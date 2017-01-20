@@ -5,7 +5,7 @@ dir=`pwd -P`
 popd > /dev/null
 
 
-for D in `find $dir -mindepth 1 -type d`
+for D in `find $dir -mindepth 1 -type d -not -path '*/\.*'`
 do
   bash $D/install.sh
 done

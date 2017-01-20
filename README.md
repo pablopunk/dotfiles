@@ -1,8 +1,4 @@
-# scripts
-
-*Collection of useful scripts I made.*
-
-## Install dotfiles
+# dotfiles
 
 You can install all dotfiles at once:
 

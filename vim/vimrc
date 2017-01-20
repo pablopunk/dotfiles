@@ -7,8 +7,9 @@ set number
 " vimplug
 call plug#begin('~/.vim/plugged')
 Plug 'kien/ctrlp.vim' " Ctrl P
-Plug 'airblade/vim-gitgutter' " Git diff
-Plug 'powerline/powerline' " Status bar
+Plug 'airblade/vim-gitgutter' " Git-themes diff
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'alessandroyorba/sidonia' " Theme
 call plug#end()
 " tabs
@@ -23,3 +24,6 @@ set paste
 " color sheme
 set termguicolors
 colorscheme sidonia
+" airline
+set laststatus=2
+let g:airline_theme='silver'

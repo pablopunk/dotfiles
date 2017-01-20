@@ -1,0 +1,25 @@
+set nocompatible
+filetype off
+" syntax and colors
+syntax on
+" line numbers
+set number
+" vimplug
+call plug#begin('~/.vim/plugged')
+Plug 'kien/ctrlp.vim' " Ctrl P
+Plug 'airblade/vim-gitgutter' " Git diff
+Plug 'powerline/powerline' " Status bar
+Plug 'alessandroyorba/sidonia' " Theme
+call plug#end()
+" tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+" prevent not-working delete key
+set backspace=indent,eol,start
+" paste from other applications without messing the indent
+set paste
+" color sheme
+set termguicolors
+colorscheme sidonia

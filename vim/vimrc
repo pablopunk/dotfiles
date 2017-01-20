@@ -22,7 +22,9 @@ set backspace=indent,eol,start
 " paste from other applications without messing the indent
 set paste
 " color sheme
-set termguicolors
+if system("uname") == "Darwin\n"
+	set termguicolors
+endif
 colorscheme sidonia
 " airline
 set laststatus=2

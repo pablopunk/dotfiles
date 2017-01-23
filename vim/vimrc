@@ -21,11 +21,6 @@ set expandtab
 set backspace=indent,eol,start
 " paste from other applications without messing the indent
 set paste
-" color sheme
-if system("uname") == "Darwin\n"
-	set termguicolors
-endif
-colorscheme sidonia
 " airline
 set laststatus=2
 let g:airline_theme='silver'

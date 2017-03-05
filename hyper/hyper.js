@@ -4,7 +4,7 @@ module.exports = {
     fontSize: 12,
 
     // font family with optional fallbacks
-    fontFamily: '"Meslo LG L for Powerline", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -16,10 +16,10 @@ module.exports = {
     foregroundColor: '#fff',
 
     // terminal background color
-    backgroundColor: 'rgb(0,0,0,0.8)',
+    backgroundColor: '#000',
 
     // border color (window, tabs)
-    borderColor: '#777',
+    borderColor: '#333',
 
     // custom css to embed in the main window
     css: '',
@@ -27,8 +27,7 @@ module.exports = {
     // custom css to embed in the terminal window
     termCSS: '',
 
-    // set to `true` if you're using a Linux set up
-    // that doesn't shows native menus
+    // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
     showHamburgerMenu: '',
 
@@ -64,6 +63,9 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
+    // make sure to use a full path if the binary name doesn't work
+    // (e.g `C:\\Windows\\System32\\bash.exe` instad of just `bash.exe`)
+    // if you're using powershell, make sure to remove the `--login` below
     shell: '',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
@@ -79,6 +81,10 @@ module.exports = {
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false
 
+    // if true, on right click selected text will be copied or pasted if no
+    // selection is present (true by default on Windows)
+    // quickEdit: true
+
     // URL to custom bell
     // bellSoundURL: 'http://example.com/bell.mp3',
 
@@ -91,9 +97,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [
-    'hyperterm-gooey' 
-	],
+  plugins: [],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

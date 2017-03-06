@@ -1,5 +1,0 @@
-alias g=git
-alias gst='git status'
-alias gp='git push'
-alias gl='git pull'
-alias glog='git log --oneline --decorate --graph'

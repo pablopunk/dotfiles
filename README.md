@@ -12,4 +12,3 @@ Or just the one you want:
 bash vim/install.sh # only install .vimrc
 ```
 
-![shot](https://github.com/pablopunk/art/raw/master/dotfiles.gif)

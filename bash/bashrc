@@ -7,3 +7,7 @@ alias glog='git log --oneline --decorate --graph'
 # other aliases
 alias l='ls -lsah'
 alias ll='ls -lsah'
+
+
+export PATH=~/.composer/vendor/bin:$PATH
+

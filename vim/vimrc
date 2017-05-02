@@ -4,23 +4,46 @@ filetype off
 syntax on
 " line numbers
 set number
+" search files subdirectories
+set path+=**
+" allow tab to autocomplete searching files
+set wildmenu
+set wildignore+=**/node_modules/**
+set wildignore+=**/cache/**
+set wildignore+=**/logs/**
 " vimplug
 call plug#begin('~/.vim/plugged')
-Plug 'kien/ctrlp.vim' " Ctrl P
 Plug 'airblade/vim-gitgutter' " Git-themes diff
-"Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'alessandroyorba/sidonia' " Theme
+Plug 'https://github.com/w0rp/ale.git' " Linter
 call plug#end()
 " tabs
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set smartindent
 " prevent not-working delete key
 set backspace=indent,eol,start
 " paste from other applications without messing the indent
 set paste
 " airline
 set laststatus=2
-let g:airline_theme='silver'
+let g:airline_theme='light'
+" ale linting with standard
+let g:ale_linters = {'javascript': ['standard']}
+let g:ale_sign_error = '🔺'
+let g:ale_sign_warning = '🔸'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+" allow per project settings
+set exrc
+set secure
+" COMMANDS
+" Create ctags
+command! MakeTags !ctags -R . --exclude=.git --exclude=cache --exclude=logs
+" SNIPPETS
+" Html template
+nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a

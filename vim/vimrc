@@ -16,8 +16,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
-Plug 'alessandroyorba/sidonia' " Theme
-Plug 'https://github.com/w0rp/ale.git' " Linter
+Plug 'lu-ren/SerialExperimentsLain' " Theme
+Plug 'w0rp/ale' " Linter
+Plug 'terryma/vim-multiple-cursors' " Find all and edit
 call plug#end()
 " tabs
 set tabstop=2
@@ -38,12 +39,11 @@ let g:ale_sign_error = '🔺'
 let g:ale_sign_warning = '🔸'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+" Color theme
+set termguicolors
+colorscheme serialexperimentslain
 " allow per project settings
 set exrc
 set secure
 " COMMANDS
 " Create ctags
-command! MakeTags !ctags -R . --exclude=.git --exclude=cache --exclude=logs
-" SNIPPETS
-" Html template
-nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a

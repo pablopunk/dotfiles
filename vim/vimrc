@@ -40,8 +40,8 @@ let g:ale_sign_warning = '🔸'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 " Color theme
-set termguicolors
-colorscheme serialexperimentslain
+"set termguicolors
+"colorscheme serialexperimentslain
 " allow per project settings
 set exrc
 set secure

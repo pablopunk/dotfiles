@@ -39,6 +39,8 @@ let g:ale_sign_error = '🔺'
 let g:ale_sign_warning = '🔸'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+" incremental command live feedback (like search and replace)
+set inccommand=nosplit
 " Color theme
 "set termguicolors
 "colorscheme serialexperimentslain

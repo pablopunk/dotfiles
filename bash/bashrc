@@ -15,4 +15,4 @@ alias vi=vim
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
 bold=$(tput bold)
 normal=$(tput sgr0)
-export PS1='$machine△ \W ${bold}$(vcprompt -f "%b ")${normal}'
+export PS1='${machine}△ \W ${bold}$(vcprompt -f "%b ")${normal}'

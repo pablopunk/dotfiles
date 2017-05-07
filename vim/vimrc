@@ -17,8 +17,8 @@ Plug 'airblade/vim-gitgutter' " Git-themes diff
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'lu-ren/SerialExperimentsLain' " Theme
-Plug 'w0rp/ale' " Linter
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
+Plug 'haya14busa/incsearch.vim'
 call plug#end()
 " tabs
 set tabstop=2
@@ -26,6 +26,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set smartindent
+set smarttab
+set autoindent
 " prevent not-working delete key
 set backspace=indent,eol,start
 " paste from other applications without messing the indent
@@ -33,14 +35,6 @@ set paste
 " airline
 set laststatus=2
 let g:airline_theme='light'
-" ale linting with standard
-let g:ale_linters = {'javascript': ['standard']}
-let g:ale_sign_error = '🔺'
-let g:ale_sign_warning = '🔸'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-" incremental command live feedback (like search and replace)
-set inccommand=nosplit
 " Color theme
 "set termguicolors
 "colorscheme serialexperimentslain
@@ -48,4 +42,8 @@ set inccommand=nosplit
 set exrc
 set secure
 " COMMANDS
-" Create ctags
+"" set tab to be 4
+command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smartindent autoindent
+" SNIPPETS
+"" Html template
+nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a

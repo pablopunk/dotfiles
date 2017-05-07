@@ -8,6 +8,14 @@ alias glog='git log --oneline --decorate --graph'
 alias l='ls -lsah'
 alias ll='ls -lsah'
 
+export PATH=$PATH:~/.composer/vendor/bin/:/opt/bin/:$HOME/.yarn/bin/
+alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
+alias vi=vim
 
-export PATH=~/.composer/vendor/bin:$PATH
-
+bold=$(tput bold)
+normal=$(tput sgr0)
+branch=$(vcprompt -f %b)
+export PS1='△ \W ${bold}${branch}${normal}'
+if [ ! -z $branch ]; then
+	export PS1='$PS1 '
+fi

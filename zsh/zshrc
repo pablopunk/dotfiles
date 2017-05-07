@@ -88,6 +88,5 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:~/.composer/vendor/bin/:/opt/bin/:$HOME/.yarn/bin/
 
 # aliases
-alias cacl='cd ~/www/stang && php app/console ca:cl -e prod && php app/console ca:cl -e dev'
-alias vi=nvim
-alias vim=nvim
+alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
+alias vi=vim

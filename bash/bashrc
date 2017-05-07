@@ -14,8 +14,4 @@ alias vi=vim
 
 bold=$(tput bold)
 normal=$(tput sgr0)
-branch=$(vcprompt -f %b)
-export PS1='△ \W ${bold}${branch}${normal}'
-if [ ! -z $branch ]; then
-	export PS1="${PS1} "
-fi
+export PS1='△ \W ${bold}$(vcprompt -f %b)${normal} '

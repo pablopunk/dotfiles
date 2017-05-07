@@ -1,7 +1,5 @@
 set nocompatible
 filetype off
-" syntax and colors
-syntax on
 " line numbers
 set number
 " search files subdirectories
@@ -16,9 +14,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
-Plug 'lu-ren/SerialExperimentsLain' " Theme
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
 Plug 'haya14busa/incsearch.vim'
+Plug 'fxn/vim-monochrome'
 call plug#end()
 " tabs
 set tabstop=2
@@ -35,15 +33,18 @@ set paste
 " airline
 set laststatus=2
 let g:airline_theme='light'
-" Color theme
-"set termguicolors
-"colorscheme serialexperimentslain
 " allow per project settings
 set exrc
 set secure
 " COMMANDS
 "" set tab to be 4
 command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smartindent autoindent
+command! MakeTags !ctags -R . --exclude=.git --exclude=cache --exclude=logs
 " SNIPPETS
 "" Html template
 nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a
+" Remap keys
+nnoremap ] <C-]>
+" syntax and colors
+syntax on
+colorscheme monochrome

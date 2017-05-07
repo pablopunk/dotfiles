@@ -12,6 +12,7 @@ export PATH=$PATH:~/.composer/vendor/bin/:/opt/bin/:$HOME/.yarn/bin/
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias vi=vim
 
+[ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
 bold=$(tput bold)
 normal=$(tput sgr0)
-export PS1='△ \W ${bold}$(vcprompt -f "%b ")${normal}'
+export PS1='$machine△ \W ${bold}$(vcprompt -f "%b ")${normal}'

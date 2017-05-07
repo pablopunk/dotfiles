@@ -105,10 +105,10 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-//		'hyperline',
-//  'hyperterm-gooey',
-//  'hyper-chesterish',
-		'hyperterm-lastpass'
+//    'hyperline',
+//    'hyperterm-gooey',
+//    'hyper-chesterish',
+    'hyperterm-lastpass'
 	],
 
   // in development, you can create a directory under

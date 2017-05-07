@@ -14,4 +14,4 @@ alias vi=vim
 
 bold=$(tput bold)
 normal=$(tput sgr0)
-export PS1='△ \W ${bold}$(vcprompt -f %b)${normal} '
+export PS1='△ \W ${bold}$(vcprompt -f "%b ")${normal}'

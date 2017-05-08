@@ -44,11 +44,9 @@ command! MakeTags !ctags -R . --exclude=.git --exclude=cache --exclude=logs
 "" Html template
 nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a
 " Remap keys
-nnoremap ] <C-]> " easier to navigate through ctags in hyper.app
-nnoremap <Up> <Nop>    " use k instead
-nnoremap <Down> <Nop>  " use j instead
-nnoremap <Left> <Nop>  " use h instead
-nnoremap <Right> <Nop> " use l instead
+nnoremap ] <C-]> 
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
 " syntax and colors
-syntax on
-colorscheme monochrome

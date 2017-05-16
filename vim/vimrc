@@ -15,17 +15,10 @@ Plug 'airblade/vim-gitgutter' " Git-themes diff
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
-Plug 'haya14busa/incsearch.vim'
-Plug 'fxn/vim-monochrome'
+Plug 'haya14busa/incsearch.vim' " Search feedback
+Plug 'fxn/vim-monochrome' " Grayscale theme
+Plug 'mileszs/ack.vim' " Find in all project
 call plug#end()
-" tabs
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set smartindent
-set smarttab
-set autoindent
 " prevent not-working delete key
 set backspace=indent,eol,start
 " paste from other applications without messing the indent
@@ -52,3 +45,11 @@ nnoremap <Right> <Nop>
 " syntax and colors
 syntax on
 color monochrome
+" tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smartindent
+set smarttab
+set autoindent

@@ -7,6 +7,7 @@ alias glog='git log --oneline --decorate --graph'
 # other aliases
 alias l='ls -lsah'
 alias ll='ls -lsah'
+alias y='yarn'
 
 export PATH=$PATH:~/.composer/vendor/bin/:/opt/bin/:$HOME/.yarn/bin/
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'

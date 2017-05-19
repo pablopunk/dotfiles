@@ -14,6 +14,4 @@ alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias vi=vim
 
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
-bold=$(tput bold)
-normal=$(tput sgr0)
-export PS1='${machine}△ \W ${bold}$(vcprompt -f "%b%m " -M "\[\e[1;31m\]⨯\[\e[0m\]")${normal}'
+export PS1='${machine}△ \W $(vcprompt -f "%b%m " -M "\[\e[1;31m\]⨯\[\e[0m\]")'

@@ -14,4 +14,8 @@ alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias vi=vim
 
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
-export PS1='\[${machine}\]△ \[$(/opt/bin/gitprompt)\] '
+if hash gitprompt 2>/dev/null; then
+  export PS1='\[${machine}\]△ \[$(gitprompt)\] '
+else
+  export PS1='\[${machine}\]△ '
+fi

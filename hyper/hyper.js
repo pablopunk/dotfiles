@@ -107,7 +107,7 @@ module.exports = {
   plugins: [
 //    'hyperline',
 //    'hyperterm-gooey',
-//    'hyper-chesterish',
+    'hyper-chesterish',
     'hyperterm-lastpass'
 	],
 

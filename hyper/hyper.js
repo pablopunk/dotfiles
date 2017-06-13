@@ -5,10 +5,10 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 14,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -86,7 +86,7 @@ module.exports = {
     bell: 'SOUND',
 
     // if true, selected text will automatically be copied to the clipboard
-    copyOnSelect: false
+    copyOnSelect: false,
 
     // if true, on right click selected text will be copied or pasted if no
     // selection is present (true by default on Windows)
@@ -96,6 +96,10 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+
+    hyperTabs: {
+      trafficButtons: true
+    }
   },
 
   // a list of plugins to fetch and install from npm
@@ -107,7 +111,11 @@ module.exports = {
   plugins: [
 //    'hyperline',
 //    'hyperterm-gooey',
-    'hyper-chesterish',
+//    'hyper-chesterish',
+//    'hyper-snazzy',
+//    'hyper-criollo',
+    'hyper-firewatch',
+    'hyper-tabs-enhanced',
     'hyperterm-lastpass'
 	],
 

@@ -12,7 +12,7 @@ set wildignore+=**/logs/**
 " vimplug
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff
-"Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
 Plug 'haya14busa/incsearch.vim' " Search feedback

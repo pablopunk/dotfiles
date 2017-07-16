@@ -16,8 +16,10 @@ Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
 Plug 'haya14busa/incsearch.vim' " Search feedback
-"Plug 'fxn/vim-monochrome' " Grayscale theme
+Plug 'fxn/vim-monochrome' " Grayscale theme
+"Plug 'herrbischoff/cobalt2.vim' " Cobalt2 theme
 Plug 'mileszs/ack.vim' " Find in all project
+Plug 'Valloric/YouCompleteMe' " Autocomplete
 call plug#end()
 " prevent not-working delete key
 set backspace=indent,eol,start
@@ -44,7 +46,7 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 " syntax and colors
 syntax on
-"color monochrome
+color monochrome
 " tabs
 set tabstop=2
 set shiftwidth=2

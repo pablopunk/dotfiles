@@ -5,7 +5,7 @@ alias gp='git push'
 alias gl='git pull'
 alias glog='git log --oneline --decorate --graph'
 # other aliases
-alias l='ls -lsah'
+alias l='ls -lh'
 alias ll='ls -lsah'
 alias y='yarn'
 
@@ -15,7 +15,7 @@ alias vi=vim
 
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
 if hash bashy 2>/dev/null; then
-  export PS1='${machine}△ $(bashy) '
+  export PS1='${machine}$(bashy) '
 else
-  export PS1='${machine}△ \W '
+  export PS1='${machine}\W '
 fi

@@ -2,3 +2,7 @@
 "\e[A":history-search-backward
 # arrow down
 "\e[B":history-search-forward
+# Ignore case
+$if Bash
+set completion-ignore-case on
+$endif

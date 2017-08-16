@@ -55,3 +55,5 @@ set expandtab
 set smartindent
 set smarttab
 set autoindent
+" hyper.app first line bug
+set t_RV=

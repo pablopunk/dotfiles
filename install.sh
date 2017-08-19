@@ -10,7 +10,3 @@ for D in `find $dir -mindepth 1 -type d -not -path '*/\.*'`
 do
   bash $D/install.sh
 done
-
-# link repo
-ln -snvf $dir ~/.dotfiles
-

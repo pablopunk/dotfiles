@@ -1,5 +1,7 @@
 set nocompatible
-filetype off
+filetype on
+filetype plugin on
+filetype indent on
 " line numbers
 set number
 " search files subdirectories
@@ -9,6 +11,7 @@ set wildmenu
 set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
+set wildignore+=**/cov/**
 " vimplug
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff
@@ -16,10 +19,10 @@ Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
 Plug 'haya14busa/incsearch.vim' " Search feedback
-Plug 'fxn/vim-monochrome' " Grayscale theme
+"Plug 'fxn/vim-monochrome' " Grayscale theme
 "Plug 'herrbischoff/cobalt2.vim' " Cobalt2 theme
 Plug 'mileszs/ack.vim' " Find in all project
-"Plug 'Valloric/YouCompleteMe' " Autocomplete
+Plug 'tpope/vim-commentary' " Comment lines
 call plug#end()
 " prevent not-working delete key
 set backspace=indent,eol,start
@@ -31,19 +34,25 @@ let g:airline_theme='light'
 " allow per project settings
 set exrc
 set secure
+" use ag instead of ack with ack.vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
 " COMMANDS
 "" set tab to be 4
 command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smartindent autoindent
-command! MakeTags !ctags -R . --exclude=.git --exclude=cache --exclude=logs
-" SNIPPETS
-"" Html template
-nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>2jwf>a
+command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
 " Remap keys
 nnoremap ] <C-]> 
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
+" Tweaks for file browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " syntax and colors
 syntax on
 "color monochrome
@@ -52,8 +61,6 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set smartindent
-set smarttab
 set autoindent
 " hyper.app first line bug
 set t_RV=

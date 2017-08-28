@@ -58,6 +58,8 @@ command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* 
 " Remap keys
 "" ] is gonna do CTRL+] (used to search tags)
 nnoremap ] <C-]>
+"" ALT+N opens NERDTree
+nnoremap ß :NERDTreeToggle<CR>
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

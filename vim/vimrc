@@ -32,6 +32,7 @@ Plug 'haya14busa/incsearch.vim' " Search feedback
 "Plug 'herrbischoff/cobalt2.vim' " Cobalt2 theme
 Plug 'mileszs/ack.vim' " Find in all project
 Plug 'tpope/vim-commentary' " Comment lines
+Plug 'pangloss/vim-javascript' " Improve javascript
 Plug 'mxw/vim-jsx' " jsx syntax
 call plug#end()
 set paste

@@ -21,6 +21,7 @@ syntax on
 set list
 set listchars=tab:▸\ ,eol:¬,trail:▫
 highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
+highlight NonText ctermfg=grey guifg=grey70
 
 " Plugins
 call plug#begin('~/.vim/plugged')
@@ -36,8 +37,19 @@ Plug 'tpope/vim-commentary' " Comment lines
 Plug 'scrooloose/nerdtree' " NerdTree
 Plug 'pangloss/vim-javascript' " Improve javascript
 Plug 'mxw/vim-jsx' " jsx syntax
+Plug 'vim-syntastic/syntastic' " Syntax checker
 call plug#end()
 set paste
+
+" Syntastic settings
+let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -71,6 +83,7 @@ nnoremap <Right> <Nop>
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set autoindent
 
 " hyper.app first line bug
 set t_RV=

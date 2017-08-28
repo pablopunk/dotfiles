@@ -5,9 +5,11 @@ alias gp='git push'
 alias gl='git pull'
 alias glog='git log --oneline --decorate --graph'
 # other aliases
-alias l='ls -lh'
-alias ll='ls -lsah'
-alias y='yarn'
+alias ls='exa'          # default
+alias l='exa -1'        # 1 column
+alias la='exa -la'      # long and hidden
+alias ll='exa -bghHliS' # 1 column and a lot of shit
+alias lt='exa -T'       # tree
 
 export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'

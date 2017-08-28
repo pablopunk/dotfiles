@@ -20,6 +20,7 @@ syntax on
 " invisible characters (tab, eol and trailing whitespace)
 set list
 set listchars=tab:▸\ ,eol:¬,trail:▫
+highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
 
 " Plugins
 call plug#begin('~/.vim/plugged')

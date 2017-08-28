@@ -1,7 +1,5 @@
 set nocompatible
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " line numbers
 set number
@@ -34,19 +32,23 @@ Plug 'haya14busa/incsearch.vim' " Search feedback
 "Plug 'herrbischoff/cobalt2.vim' " Cobalt2 theme
 Plug 'mileszs/ack.vim' " Find in all project
 Plug 'tpope/vim-commentary' " Comment lines
+Plug 'mxw/vim-jsx' " jsx syntax
 call plug#end()
 set paste
+
+" use ag instead of ack with ack.vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" JSX syntax in JS files
+let g:jsx_ext_required = 0
 
 " airline
 set laststatus=2
 let g:airline_theme='light'
 
 " allow per project settings
-"set exrc
-"set secure
-
-" use ag instead of ack with ack.vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
+set exrc
+set secure
 
 " COMMANDS
 command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
@@ -59,6 +61,11 @@ nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
+
+" Indentation
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " hyper.app first line bug
 set t_RV=

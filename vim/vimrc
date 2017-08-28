@@ -19,6 +19,10 @@ set wildignore+=**/cov/**
 " syntax and colors
 syntax on
 
+" invisible characters (tab, eol and trailing whitespace)
+set list
+set listchars=tab:▸\ ,eol:¬,trail:▫
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff

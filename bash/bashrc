@@ -5,7 +5,7 @@ alias gp='git push'
 alias gl='git pull'
 alias glog='git log --oneline --decorate --graph'
 # other aliases
-alias ll='ls -lag'
+alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls'
 

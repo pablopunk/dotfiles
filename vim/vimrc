@@ -1,18 +1,27 @@
 set nocompatible
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
+
 " line numbers
 set number
+
 " search files subdirectories
 set path+=**
+
 " allow tab to autocomplete searching files
 set wildmenu
 set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
 set wildignore+=**/cov/**
-" vimplug
+
+" syntax and colors
+syntax on
+
+" invisible characters (tab, eol and trailing whitespace)
+set list
+set listchars=tab:▸\ ,eol:¬,trail:▫
+
+" Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter' " Git-themes diff
 Plug 'vim-airline/vim-airline' " Status bar
@@ -24,37 +33,41 @@ Plug 'haya14busa/incsearch.vim' " Search feedback
 Plug 'mileszs/ack.vim' " Find in all project
 Plug 'tpope/vim-commentary' " Comment lines
 Plug 'scrooloose/nerdtree' " NerdTree
+Plug 'pangloss/vim-javascript' " Improve javascript
+Plug 'mxw/vim-jsx' " jsx syntax
 call plug#end()
-" prevent not-working delete key
-set backspace=indent,eol,start
-" paste from other applications without messing the indent
 set paste
+
+" use ag instead of ack with ack.vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" JSX syntax in JS files
+let g:jsx_ext_required = 0
+
 " airline
 set laststatus=2
 let g:airline_theme='light'
+
 " allow per project settings
 set exrc
 set secure
-" use ag instead of ack with ack.vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " COMMANDS
-"" set tab to be 4
-command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smartindent autoindent
 command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
+
 " Remap keys
-nnoremap ] <C-]> 
+"" ] is gonna do CTRL+] (used to search tags)
+nnoremap ] <C-]>
+"" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
-" syntax and colors
-syntax on
-"color monochrome
-" tabs
+
+" Indentation
 set tabstop=2
 set shiftwidth=2
-set softtabstop=2
 set expandtab
-set autoindent
+
 " hyper.app first line bug
 set t_RV=

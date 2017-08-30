@@ -13,6 +13,7 @@ $ bash install.sh
 ~/.bash_profile -> ~/.dotfiles/bash/bashrc
 ~/.inputrc -> ~/.dotfiles/bash/inputrc
 ~/.hyper.js -> ~/.dotfiles/hyper/hyper.js
+~/.tmux.conf -> ~/.dotfiles/tmux/tmux.conf
 ~/.vimrc -> ~/.dotfiles/vim/vimrc
 ~/.zshrc -> ~/.dotfiles/zsh/zshrc
 ```

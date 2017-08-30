@@ -34,10 +34,12 @@ Plug 'haya14busa/incsearch.vim' " Search feedback
 "Plug 'herrbischoff/cobalt2.vim' " Cobalt2 theme
 Plug 'mileszs/ack.vim' " Find in all project
 Plug 'tpope/vim-commentary' " Comment lines
-Plug 'scrooloose/nerdtree' " NerdTree
+Plug 'scrooloose/nerdtree' " NERDTree
+Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
 Plug 'pangloss/vim-javascript' " Improve javascript
 Plug 'mxw/vim-jsx' " jsx syntax
 Plug 'vim-syntastic/syntastic' " Syntax checker
+Plug 'mattn/emmet-vim' " Emmet
 call plug#end()
 set paste
 
@@ -53,6 +55,20 @@ let g:syntastic_check_on_wq = 0
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" NERDTree Git symbols
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "~",
+    \ "Staged"    : "+",
+    \ "Untracked" : "?",
+    \ "Renamed"   : "r",
+    \ "Unmerged"  : "=",
+    \ "Deleted"   : "✗",
+    \ "Dirty"     : "*",
+    \ "Clean"     : "✓",
+    \ "Ignored"   : "·",
+    \ "Unknown"   : "??"
+    \ }
 
 " JSX syntax in JS files
 let g:jsx_ext_required = 0

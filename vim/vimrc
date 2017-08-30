@@ -40,6 +40,7 @@ Plug 'pangloss/vim-javascript' " Improve javascript
 Plug 'mxw/vim-jsx' " jsx syntax
 Plug 'vim-syntastic/syntastic' " Syntax checker
 Plug 'mattn/emmet-vim' " Emmet
+Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 call plug#end()
 set paste
 
@@ -85,10 +86,10 @@ set secure
 command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
 
 " Remap keys
-"" ] is gonna do CTRL+] (used to search tags)
-nnoremap ] <C-]>
-"" Ctrl+b opens NERDTree
-nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
+nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
+nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

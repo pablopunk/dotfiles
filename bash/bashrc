@@ -19,3 +19,7 @@ if hash bashy 2>/dev/null; then
 else
   export PS1='${machine}\W '
 fi
+
+# Disable flow control commands (keeps C-s from freezing everything)
+stty start undef
+stty stop undef

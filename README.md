@@ -25,3 +25,17 @@ $ bash vim/install.sh # install just vimrc
 ~/.vimrc -> ~/.dotfiles/vim/vimrc
 ```
 
+# Contents
+
+- bash
+  - aliases
+  - [bashy prompt](https://github.com/pablopunk/bashy)
+- hyper
+  - really basic config (just one plugin I think)
+- tmux
+  - controls to navigate between tmux panes and vim panes
+- vim
+  - more plugins than I need
+  - a lot of things I don't wanna talk about-
+- zsh
+  - oh-my-zsh with zeit's prompt

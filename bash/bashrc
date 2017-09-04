@@ -4,7 +4,7 @@ alias gst='git status'
 alias gp='git push'
 alias gl='git pull'
 alias glog='git log --oneline --decorate --graph'
-# other aliases
+# ls aliases
 alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls'
@@ -23,3 +23,4 @@ fi
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef
 stty stop undef
+

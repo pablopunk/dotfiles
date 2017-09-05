@@ -40,6 +40,7 @@ Plug 'vim-syntastic/syntastic' " Syntax checker
 Plug 'mattn/emmet-vim' " Emmet
 Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 Plug 'fxn/vim-monochrome' " Grayscale theme
+Plug 'editorconfig/editorconfig-vim' " .editorconfig
 call plug#end()
 
 " Improved paste
@@ -65,17 +66,17 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " NERDTree Git symbols
 let g:NERDTreeIndicatorMapCustom = {
-            \ "Modified"  : "~", 
-            \ "Staged"    : "+", 
-            \ "Untracked" : "?", 
-            \ "Renamed"   : "r", 
-            \ "Unmerged"  : "=", 
-            \ "Deleted"   : "✗", 
-            \ "Dirty"     : "*", 
-            \ "Clean"     : "✓", 
-            \ "Ignored"   : "·", 
-            \ "Unknown"   : "??" 
-            \ }
+      \ "Modified"  : "~",
+      \ "Staged"    : "+",
+      \ "Untracked" : "?",
+      \ "Renamed"   : "r",
+      \ "Unmerged"  : "=",
+      \ "Deleted"   : "✗",
+      \ "Dirty"     : "*",
+      \ "Clean"     : "✓",
+      \ "Ignored"   : "·",
+      \ "Unknown"   : "??"
+      \ }
 
 " JSX syntax in JS files
 let g:jsx_ext_required = 0
@@ -104,10 +105,6 @@ nnoremap <Right> <Nop>
 
 " Indentation
 set expandtab shiftround smartindent autoindent
-let s:tabwidth=2
-exec 'set tabstop='    .s:tabwidth
-exec 'set shiftwidth=' .s:tabwidth
-exec 'set softtabstop='.s:tabwidth
 
 " hyper.app first line bug
 set t_RV=

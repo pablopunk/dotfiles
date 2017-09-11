@@ -40,6 +40,8 @@ Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
 Plug 'yuttie/hydrangea-vim' " Colorscheme
 Plug 'itchyny/lightline.vim' " Status bar
+Plug 'prettier/vim-prettier' " Prettier JS
+Plug 'wakatime/vim-wakatime' " Time tracker
 call plug#end()
 
 " Improved paste
@@ -48,6 +50,13 @@ set noshowmode " already showing the mode in lightline
 
 " Color scheme
 colorscheme hydrangea
+
+" Prettier settings
+Plug 'prettier/vim-prettier', {
+      \ 'do': 'npm install',
+      \ 'for': ['jvascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+let g:prettier#config#semi = 'false' " No semicolons
+let g:prettier#config#tab_width = 2
 
 " Syntastic settings
 let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
@@ -90,6 +99,9 @@ let g:lightline = {
 set exrc
 set secure
 
+" prevent not-working delete key
+set backspace=indent,eol,start
+
 " COMMANDS
 command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
 
@@ -98,6 +110,7 @@ nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
 nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
 nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
 nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
+nnoremap <C-p> <esc>:Prettier<CR> " Format file with prettier
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

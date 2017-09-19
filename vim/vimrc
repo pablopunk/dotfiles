@@ -13,6 +13,8 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
 set wildignore+=**/cov/**
+set wildignore+=**/vendor/**
+set wildignore+=**/bower_components/**
 
 " syntax and colors
 syntax on
@@ -39,24 +41,23 @@ Plug 'mattn/emmet-vim' " Emmet
 Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
 Plug 'yuttie/hydrangea-vim' " Colorscheme
-Plug 'itchyny/lightline.vim' " Status bar
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'prettier/vim-prettier' " Prettier JS
 Plug 'wakatime/vim-wakatime' " Time tracker
+Plug 'kien/ctrlp.vim' " Fuzzy finder
+Plug 'digitaltoad/vim-pug' " Pug syntax
 call plug#end()
 
-" Improved paste
-set paste
-set noshowmode " already showing the mode in lightline
+set noshowmode " already showing the mode in status bar
 
 " Color scheme
-colorscheme hydrangea
+"colorscheme hydrangea
 
 " Prettier settings
-Plug 'prettier/vim-prettier', {
-      \ 'do': 'npm install',
-      \ 'for': ['jvascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
-let g:prettier#config#semi = 'false' " No semicolons
+let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
+let g:prettier#config#trailing_comma = 'none'
 
 " Syntastic settings
 let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
@@ -89,11 +90,10 @@ let g:NERDTreeIndicatorMapCustom = {
 " JSX syntax in JS files
 let g:jsx_ext_required = 0
 
-" Lightline config
+" Airline config
 set laststatus=2
-let g:lightline = {
-      \ 'colorscheme': 'Dracula',
-      \ }
+let g:airline_theme='behelit'
+let g:airline_powerline_fonts = 1
 
 " allow per project settings
 set exrc
@@ -108,9 +108,10 @@ command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* 
 " Remap keys
 nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
 nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+nmap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+imap <C-s> <esc>:w<CR> " Ctrl+s saves file in insert mode
 nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
-nnoremap <C-p> <esc>:Prettier<CR> " Format file with prettier
+imap º <esc> " New esc key
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

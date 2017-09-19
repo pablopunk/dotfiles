@@ -92,8 +92,9 @@ let g:jsx_ext_required = 0
 
 " Airline config
 set laststatus=2
-let g:airline_theme='behelit'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " allow per project settings
 set exrc
@@ -108,8 +109,8 @@ command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* 
 " Remap keys
 nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
 nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nmap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
-imap <C-s> <esc>:w<CR> " Ctrl+s saves file in insert mode
+nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+inoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in insert mode
 nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
 imap º <esc> " New esc key
 "" Disable arrow keys

@@ -40,24 +40,25 @@ Plug 'vim-syntastic/syntastic' " Syntax checker
 Plug 'mattn/emmet-vim' " Emmet
 Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
-Plug 'yuttie/hydrangea-vim' " Colorscheme
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes' " Status bar themes
 Plug 'prettier/vim-prettier' " Prettier JS
 Plug 'wakatime/vim-wakatime' " Time tracker
 Plug 'kien/ctrlp.vim' " Fuzzy finder
 Plug 'digitaltoad/vim-pug' " Pug syntax
+Plug 'joshdick/onedark.vim' " One dark colors
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
 
 " Color scheme
-"colorscheme hydrangea
+colorscheme onedark
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#semi = 'false'
 
 " Syntastic settings
 let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
@@ -68,7 +69,7 @@ set statusline+=%*
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!"]
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "<img> escaping malformed URI reference", "<a> escaping malformed URI reference"]
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'

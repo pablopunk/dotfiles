@@ -4,6 +4,8 @@
 
 module.exports = {
   config: {
+    updateChannel: 'canary',
+
     // default font size in pixels for all tabs
     fontSize: 14,
 
@@ -44,7 +46,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px 12px 14px',
+    padding: '0px 9px 0px 9px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -108,7 +110,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperlinks"],
+  plugins: ["hyperlinks", "hyper-one-dark"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

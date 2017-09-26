@@ -34,7 +34,6 @@ Plug 'mileszs/ack.vim' " Find in all project
 Plug 'tpope/vim-commentary' " Comment lines
 Plug 'scrooloose/nerdtree' " NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
-Plug 'pangloss/vim-javascript' " Improve javascript
 Plug 'mxw/vim-jsx' " jsx syntax
 Plug 'vim-syntastic/syntastic' " Syntax checker
 Plug 'mattn/emmet-vim' " Emmet
@@ -47,6 +46,8 @@ Plug 'wakatime/vim-wakatime' " Time tracker
 Plug 'kien/ctrlp.vim' " Fuzzy finder
 Plug 'digitaltoad/vim-pug' " Pug syntax
 Plug 'joshdick/onedark.vim' " One dark colors
+Plug 'Chiel92/vim-autoformat' " Vim autoformat files
+Plug 'sindresorhus/vim-xo' " Vim xo syntastic integration
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
@@ -61,7 +62,7 @@ let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#semi = 'false'
 
 " Syntastic settings
-let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
+let g:syntastic_js_checkers = ['xo'] " make syntastic to use xo in js files
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -112,7 +113,7 @@ nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
 nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
 nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
 inoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in insert mode
-nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
+nnoremap <C-i> <esc>:Autoformat<CR> " Ctrl+i formats file indentation
 imap º <esc> " New esc key
 "" Disable arrow keys
 nnoremap <Up> <Nop>

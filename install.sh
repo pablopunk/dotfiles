@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get script directory
-pushd `dirname $0` > /dev/null
+pushd `dirname .` > /dev/null
 dir=`pwd -P`
 popd > /dev/null
 

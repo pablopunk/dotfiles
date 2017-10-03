@@ -6,7 +6,7 @@ dir=`pwd -P`
 popd > /dev/null
 
 # loop in subdirectories
-for D in `find $dir -mindepth 1 -type d -not -path '*/\.*'`
+for D in `ls -d1 "$dir"/*/`
 do
   bash $D/install.sh
 done

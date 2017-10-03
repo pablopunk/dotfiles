@@ -35,7 +35,6 @@ Plug 'tpope/vim-commentary' " Comment lines
 Plug 'scrooloose/nerdtree' " NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
 Plug 'mxw/vim-jsx' " jsx syntax
-Plug 'vim-syntastic/syntastic' " Syntax checker
 Plug 'mattn/emmet-vim' " Emmet
 Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
@@ -46,8 +45,9 @@ Plug 'wakatime/vim-wakatime' " Time tracker
 Plug 'kien/ctrlp.vim' " Fuzzy finder
 Plug 'digitaltoad/vim-pug' " Pug syntax
 Plug 'joshdick/onedark.vim' " One dark colors
-Plug 'Chiel92/vim-autoformat' " Vim autoformat files
-Plug 'sindresorhus/vim-xo' " Vim xo syntastic integration
+Plug 'w0rp/ale' " Async syntax checker
+Plug 'leafgarland/typescript-vim' " Typescript syntax
+Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
@@ -55,22 +55,23 @@ set noshowmode " already showing the mode in status bar
 " Color scheme
 colorscheme onedark
 
+" Ale settings
+let g:ale_fixers = {
+\   'javascript': []
+\}
+let g:ale_linters = {
+\   'javascript': ['xo']
+\}
+
+let g:ale_fix_on_save = 1 " FIX files on save
+let g:ale_completion_enabled = 1 " Try to complete stuff
+let g:airline#extensions#ale#enabled = 1 " Errors in airline
+
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#semi = 'false'
-
-" Syntastic settings
-let g:syntastic_js_checkers = ['xo'] " make syntastic to use xo in js files
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "<img> escaping malformed URI reference", "<a> escaping malformed URI reference"]
+"let g:prettier#config#semi = 'false'
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -106,15 +107,14 @@ set secure
 set backspace=indent,eol,start
 
 " COMMANDS
-command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
+command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
 
 " Remap keys
-nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
-nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
-inoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in insert mode
-nnoremap <C-i> <esc>:Autoformat<CR> " Ctrl+i formats file indentation
-imap º <esc> " New esc key
+nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+nnoremap <c-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
+nnoremap <c-i> <esc>gg=G`` " Ctrl+i formats file indentation
+nnoremap <c-q> :tabedit %<CR> " Move current buffer to a new tab
+inoremap º <esc> " New esc key
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

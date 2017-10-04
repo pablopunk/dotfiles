@@ -60,7 +60,7 @@ let g:ale_fixers = {
 \   'javascript': []
 \}
 let g:ale_linters = {
-\   'javascript': ['xo']
+\   'javascript': ['standard']
 \}
 
 let g:ale_fix_on_save = 1 " FIX files on save
@@ -95,7 +95,7 @@ let g:jsx_ext_required = 0
 
 " Airline config
 set laststatus=2
-let g:airline_theme='papercolor'
+let g:airline_theme='behelit'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 

@@ -48,6 +48,7 @@ Plug 'joshdick/onedark.vim' " One dark colors
 Plug 'w0rp/ale' " Async syntax checker
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
+Plug 'Valloric/YouCompleteMe' " Too much autocomplet
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
@@ -57,7 +58,7 @@ colorscheme onedark
 
 " Ale settings
 let g:ale_fixers = {
-\   'javascript': []
+\   'javascript': ['standard']
 \}
 let g:ale_linters = {
 \   'javascript': ['standard']
@@ -108,6 +109,10 @@ set backspace=indent,eol,start
 
 " COMMANDS
 command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
+"" Lint js with xo
+command XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
+"" Lint js with standard
+command ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 
 " Remap keys
 nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode

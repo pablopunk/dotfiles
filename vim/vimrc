@@ -47,13 +47,14 @@ Plug 'w0rp/ale' " Async syntax checker
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
 Plug 'Valloric/YouCompleteMe' " Too much autocomplet
-Plug 'dim13/smyck.vim' " smyck colors
+Plug 'dracula/vim'
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
 
-" Color scheme
-colo smyck
+" Colorscheme
+set termguicolors " DO. NOT. DELETE. THIS. LINE. EVER.
+colo dracula
 
 " Ale settings
 let g:ale_fixers = {
@@ -95,7 +96,7 @@ let g:jsx_ext_required = 0
 
 " Airline config
 set laststatus=2
-let g:airline_theme='behelit'
+let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 

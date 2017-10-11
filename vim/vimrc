@@ -3,6 +3,9 @@ filetype plugin on
 " line numbers
 set number
 
+" encoding
+set encoding=utf-8
+
 " search files subdirectories
 set path+=**
 
@@ -24,37 +27,56 @@ set listchars=tab:▸\ ,eol:¬,trail:▫
 highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
 highlight NonText ctermfg=grey guifg=grey70
 
-" Plugins
+" PLUGINS
 call plug#begin('~/.vim/plugged')
+" Git plugins
 Plug 'airblade/vim-gitgutter' " Git-themes diff
+Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
+" Editting tools
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
+Plug 'tpope/vim-commentary' " Comment lines
+" Search tools
 Plug 'haya14busa/incsearch.vim' " Search feedback
 Plug 'mileszs/ack.vim' " Find in all project
-Plug 'tpope/vim-commentary' " Comment lines
-Plug 'scrooloose/nerdtree' " NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
-Plug 'mxw/vim-jsx' " jsx syntax
-Plug 'mattn/emmet-vim' " Emmet
-Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
-Plug 'editorconfig/editorconfig-vim' " .editorconfig
-Plug 'vim-airline/vim-airline' " Status bar
-Plug 'vim-airline/vim-airline-themes' " Status bar themes
-Plug 'prettier/vim-prettier' " Prettier JS
-Plug 'wakatime/vim-wakatime' " Time tracker
 Plug 'kien/ctrlp.vim' " Fuzzy finder
-Plug 'digitaltoad/vim-pug' " Pug syntax
+" Navigation tools
+Plug 'scrooloose/nerdtree' " NERDTree
+Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
+Plug 'moll/vim-node' " Navigate to import files
+" Html tools
+Plug 'mattn/emmet-vim' " Emmet
+" Syntax tools
 Plug 'w0rp/ale' " Async syntax checker
+Plug 'Valloric/YouCompleteMe' " Too much autocomplet
+Plug 'editorconfig/editorconfig-vim' " .editorconfig
+Plug 'prettier/vim-prettier' " Prettier JS
+Plug 'digitaltoad/vim-pug' " Pug syntax
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
-Plug 'Valloric/YouCompleteMe' " Too much autocomplet
-Plug 'dracula/vim'
+Plug 'mxw/vim-jsx' " jsx syntax
+Plug 'othree/javascript-libraries-syntax.vim' " js libraries
+Plug 'marijnh/tern_for_vim' " Autocomplete js
+" Dashboard tools
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes' " Status bar themes
+Plug 'edkolev/tmuxline.vim' " Apply airline theme to tmux
+" Project tools
+Plug 'wakatime/vim-wakatime' " Time tracker
+" Colors
+Plug 'trevordmiller/nova-vim' " Nova theme
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
 
 " Colorscheme
 set termguicolors " DO. NOT. DELETE. THIS. LINE. EVER.
-colo dracula
+colo nova
+
+" YCM settings
+let g:ycm_auto_trigger = 0
+
+" Tern settings
+let g:tern#command = ['tern']
 
 " Ale settings
 let g:ale_fixers = {

@@ -63,14 +63,20 @@ Plug 'edkolev/tmuxline.vim' " Apply airline theme to tmux
 " Project tools
 Plug 'wakatime/vim-wakatime' " Time tracker
 " Colors
-Plug 'trevordmiller/nova-vim' " Nova theme
+Plug 'chriskempson/base16-vim' " Base 16 themes
 call plug#end()
 
 set noshowmode " already showing the mode in status bar
 
-" Colorscheme
-set termguicolors " DO. NOT. DELETE. THIS. LINE. EVER.
-colo nova
+" Colors
+if exists('$TMUX')
+  " Colors in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
+set background=dark
+color base16-flat
 
 " YCM settings
 let g:ycm_auto_trigger = 0
@@ -147,6 +153,10 @@ nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
+
+" AUTOCOMMANDS
+"" Resizing window resets splits
+autocmd VimResized * execute "normal! \<c-w>="
 
 " Indentation
 set expandtab shiftround smartindent autoindent

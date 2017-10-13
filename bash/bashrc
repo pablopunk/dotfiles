@@ -9,7 +9,7 @@ alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls'
 
-export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin
+export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias vi=vim
 

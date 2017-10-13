@@ -39,4 +39,4 @@ $ bash vim/install.sh # install just vimrc
   - more plugins than I need
   - a lot of things I don't wanna talk about
 - zsh
-  - oh-my-zsh with zeit's prompt
+  - pure prompt

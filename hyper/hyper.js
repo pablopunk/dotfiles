@@ -4,16 +4,19 @@
 
 module.exports = {
   config: {
+    updateChannel: 'stable',
+
     // default font size in pixels for all tabs
-    fontSize: 14,
+    fontSize: 18,
 
     // font family with optional fallbacks
-    fontFamily: '"OperatorMono-Light", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily:
+      '"Fira Code", Hack, "OperatorMono-Light", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
 
-    // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
+    // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for Ã¢ÂÂ
     cursorShape: 'BLOCK',
 
     // set to true for blinking cursor
@@ -44,7 +47,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px 12px 14px',
+    padding: '0px 9px 0px 9px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -108,10 +111,10 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ["hyperlinks"],
+  plugins: ['hyperlinks', 'nova-hyperterm'],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
   localPlugins: []
-};
+}

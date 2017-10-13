@@ -4,14 +4,22 @@ alias gst='git status'
 alias gp='git push'
 alias gl='git pull'
 alias glog='git log --oneline --decorate --graph'
+alias gd='git diff -w'
+alias gds='git diff -w --staged'
+alias gcm='git commit -m'
+alias gcam='git commit -am'
+alias gck='git checkout'
 # ls aliases
 alias ll='ls -lagh'
 alias la='ls -a1'
-alias l='ls'
-
-export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
+alias l='ls -a1'
+# other
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias vi=vim
+alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
+
+# PATH
+export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
 
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
 if hash bashy 2>/dev/null; then

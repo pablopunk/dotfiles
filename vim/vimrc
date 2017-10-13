@@ -1,8 +1,10 @@
-set nocompatible
 filetype plugin on
 
 " line numbers
 set number
+
+" encoding
+set encoding=utf-8
 
 " search files subdirectories
 set path+=**
@@ -13,9 +15,8 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
 set wildignore+=**/cov/**
-
-" syntax and colors
-syntax on
+set wildignore+=**/vendor/**
+set wildignore+=**/bower_components/**
 
 " invisible characters (tab, eol and trailing whitespace)
 set list
@@ -23,42 +24,81 @@ set listchars=tab:▸\ ,eol:¬,trail:▫
 highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
 highlight NonText ctermfg=grey guifg=grey70
 
-" Plugins
+" PLUGINS
 call plug#begin('~/.vim/plugged')
+" Git plugins
 Plug 'airblade/vim-gitgutter' " Git-themes diff
+Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
+" Editting tools
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
+Plug 'tpope/vim-commentary' " Comment lines
+" Search tools
 Plug 'haya14busa/incsearch.vim' " Search feedback
 Plug 'mileszs/ack.vim' " Find in all project
-Plug 'tpope/vim-commentary' " Comment lines
+Plug 'kien/ctrlp.vim' " Fuzzy finder
+" Navigation tools
 Plug 'scrooloose/nerdtree' " NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
-Plug 'pangloss/vim-javascript' " Improve javascript
-Plug 'mxw/vim-jsx' " jsx syntax
-Plug 'vim-syntastic/syntastic' " Syntax checker
-Plug 'mattn/emmet-vim' " Emmet
 Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
+Plug 'moll/vim-node' " Navigate to import files
+" Html tools
+Plug 'mattn/emmet-vim' " Emmet
+" Syntax tools
+Plug 'w0rp/ale' " Async syntax checker
+Plug 'Valloric/YouCompleteMe' " Too much autocomplet
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
-Plug 'yuttie/hydrangea-vim' " Colorscheme
-Plug 'itchyny/lightline.vim' " Status bar
+Plug 'prettier/vim-prettier' " Prettier JS
+Plug 'digitaltoad/vim-pug' " Pug syntax
+Plug 'leafgarland/typescript-vim' " Typescript syntax
+Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
+Plug 'mxw/vim-jsx' " jsx syntax
+Plug 'othree/javascript-libraries-syntax.vim' " js libraries
+Plug 'marijnh/tern_for_vim' " Autocomplete js
+" Dashboard tools
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'vim-airline/vim-airline-themes' " Status bar themes
+Plug 'edkolev/tmuxline.vim' " Apply airline theme to tmux
+" Project tools
+Plug 'wakatime/vim-wakatime' " Time tracker
+" Colors
+Plug 'chriskempson/base16-vim' " Base 16 themes
 call plug#end()
 
-" Improved paste
-set paste
-set noshowmode " already showing the mode in lightline
+set noshowmode " already showing the mode in status bar
 
-" Color scheme
-colorscheme hydrangea
+" Colors
+set syntax=on
+if exists('$TMUX')
+  " Colors in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
+set background=dark
+colo base16-oceanicnext
 
-" Syntastic settings
-let g:syntastic_js_checkers = ['standard'] " make syntastic to use standard in js files
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!"]
+" YCM settings
+let g:ycm_auto_trigger = 0
+
+" Tern settings
+let g:tern#command = ['tern']
+
+" Ale settings
+let g:ale_fixers = {
+\   'javascript': ['standard']
+\}
+let g:ale_linters = {
+\   'javascript': ['standard']
+\}
+
+let g:ale_fix_on_save = 1 " FIX files on save
+let g:ale_completion_enabled = 1 " Try to complete stuff
+let g:airline#extensions#ale#enabled = 1 " Errors in airline
+
+" Prettier settings
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#tab_width = 2
+let g:prettier#config#trailing_comma = 'none'
+"let g:prettier#config#semi = 'false'
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -80,29 +120,41 @@ let g:NERDTreeIndicatorMapCustom = {
 " JSX syntax in JS files
 let g:jsx_ext_required = 0
 
-" Lightline config
+" Airline config
 set laststatus=2
-let g:lightline = {
-      \ 'colorscheme': 'Dracula',
-      \ }
+let g:airline_theme='behelit'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " allow per project settings
 set exrc
 set secure
 
+" prevent not-working delete key
+set backspace=indent,eol,start
+
 " COMMANDS
-command! MakeTags !ctags -R . --exclude=.git --exclude=*cache* --exclude=*logs* --exclude=node_modules --exclude=cov
+command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
+"" Lint js with xo
+command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
+"" Lint js with standard
+command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 
 " Remap keys
-nnoremap ] <C-]> " ] is gonna do CTRL+] (used to search tags)
-nnoremap <C-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nnoremap <C-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
-nnoremap <C-i> <esc>gg=G`` " Ctrl+i formats file indentation and goes back to where I was
+nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
+nnoremap <c-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
+nnoremap <c-i> <esc>gg=G`` " Ctrl+i formats file indentation
+nnoremap <c-q> :tabedit %<CR> " Move current buffer to a new tab
+inoremap º <esc> " New esc key
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
+
+" AUTOCOMMANDS
+"" Resizing window resets splits
+autocmd VimResized * execute "normal! \<c-w>="
 
 " Indentation
 set expandtab shiftround smartindent autoindent

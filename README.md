@@ -9,7 +9,7 @@ git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 You can install all dotfiles at once:
 
 ```shell
-$ bash install.sh 
+$ bash install.sh
 ~/.bash_profile -> ~/.dotfiles/bash/bashrc
 ~/.inputrc -> ~/.dotfiles/bash/inputrc
 ~/.hyper.js -> ~/.dotfiles/hyper/hyper.js
@@ -34,8 +34,9 @@ $ bash vim/install.sh # install just vimrc
   - really basic config (just one plugin I think)
 - tmux
   - controls to navigate between tmux panes and vim panes
+  - plugin manager
 - vim
   - more plugins than I need
-  - a lot of things I don't wanna talk about-
+  - a lot of things I don't wanna talk about
 - zsh
-  - oh-my-zsh with zeit's prompt
+  - pure prompt

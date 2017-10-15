@@ -19,7 +19,7 @@ alias vi=vim
 alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
 
 # PATH
-export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin
+export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
 
 [ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
 if hash bashy 2>/dev/null; then

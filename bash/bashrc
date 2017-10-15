@@ -21,7 +21,7 @@ alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
 # PATH
 export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
 
-[ "$HOSTNAME" == "raspberrypi" ] && machine='(raspberry) '
+[ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then
   export PS1='${machine}$(bashy) '
 else

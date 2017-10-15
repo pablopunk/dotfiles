@@ -1,20 +1,29 @@
-filetype plugin on
+" file settings
+filetype plugin indent on
 
-" line numbers
+" interface
 set number
+set ttyfast    " faster redrawing
+set lazyredraw " only when necessary
+set noshowmode " already showing the mode in status bar
+
+" search settings
+set incsearch
+set hlsearch
+set path+=** " search files subdirectories
 
 " encoding
+set list " show non-printable characters
 set encoding=utf-8
-
-" search files subdirectories
-set path+=**
 
 " allow tab to autocomplete searching files
 set wildmenu
 set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
+set wildignore+=**/log/**
 set wildignore+=**/cov/**
+set wildignore+=**/coverage/**
 set wildignore+=**/vendor/**
 set wildignore+=**/bower_components/**
 
@@ -33,7 +42,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
 Plug 'terryma/vim-multiple-cursors' " Find all and edit
 Plug 'tpope/vim-commentary' " Comment lines
 " Search tools
-Plug 'haya14busa/incsearch.vim' " Search feedback
 Plug 'mileszs/ack.vim' " Find in all project
 Plug 'kien/ctrlp.vim' " Fuzzy finder
 " Navigation tools
@@ -61,8 +69,6 @@ Plug 'wakatime/vim-wakatime' " Time tracker
 " Colors
 Plug 'chriskempson/base16-vim' " Base 16 themes
 call plug#end()
-
-set noshowmode " already showing the mode in status bar
 
 " Colors
 set syntax=on

@@ -44,7 +44,6 @@ Plug 'moll/vim-node' " Navigate to import files
 Plug 'mattn/emmet-vim' " Emmet
 " Syntax tools
 Plug 'w0rp/ale' " Async syntax checker
-Plug 'Valloric/YouCompleteMe' " Too much autocomplet
 Plug 'editorconfig/editorconfig-vim' " .editorconfig
 Plug 'prettier/vim-prettier' " Prettier JS
 Plug 'digitaltoad/vim-pug' " Pug syntax
@@ -75,9 +74,6 @@ endif
 set termguicolors
 set background=dark
 colo base16-oceanicnext
-
-" YCM settings
-let g:ycm_auto_trigger = 0
 
 " Tern settings
 let g:tern#command = ['tern']

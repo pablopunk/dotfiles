@@ -1,22 +1,22 @@
-" file settings
+" File settings
 filetype plugin indent on
 
-" interface
+" Interface
 set number
-set ttyfast    " faster redrawing
-set lazyredraw " only when necessary
-set noshowmode " already showing the mode in status bar
+set ttyfast    " Faster redrawing
+set lazyredraw " Only when necessary
+set noshowmode " Already showing the mode in status bar
 
-" search settings
+" Search settings
 set incsearch
 set hlsearch
-set path+=** " search files subdirectories
+set path+=**   " Search files subdirectories
 
-" encoding
-set list " show non-printable characters
+" Encoding
+set list       " Show non-printable characters
 set encoding=utf-8
 
-" allow tab to autocomplete searching files
+" Allow tab to autocomplete searching files
 set wildmenu
 set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
@@ -27,7 +27,7 @@ set wildignore+=**/coverage/**
 set wildignore+=**/vendor/**
 set wildignore+=**/bower_components/**
 
-" invisible characters (tab, eol and trailing whitespace)
+" Invisible characters (tab, eol and trailing whitespace)
 set list
 set listchars=tab:▸\ ,eol:¬,trail:▫
 highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
@@ -36,38 +36,34 @@ highlight NonText ctermfg=grey guifg=grey70
 " PLUGINS
 call plug#begin('~/.vim/plugged')
 " Git plugins
-Plug 'airblade/vim-gitgutter' " Git-themes diff
-Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree git
+Plug 'airblade/vim-gitgutter'                   " Show changes on each line
+Plug 'Xuyuanp/nerdtree-git-plugin'              " Git status on NERDTree
 " Editting tools
-Plug 'terryma/vim-multiple-cursors' " Find all and edit
-Plug 'tpope/vim-commentary' " Comment lines
+Plug 'terryma/vim-multiple-cursors'             " Find all and edit
+Plug 'tpope/vim-commentary'                     " Toggle comments
 " Search tools
-Plug 'mileszs/ack.vim' " Find in all project
-Plug 'kien/ctrlp.vim' " Fuzzy finder
+Plug 'mileszs/ack.vim'                          " Find in all files
+Plug 'kien/ctrlp.vim'                           " Open a file
 " Navigation tools
-Plug 'scrooloose/nerdtree' " NERDTree
-Plug 'christoomey/vim-tmux-navigator' " Navigation between vim/tmux panes
-Plug 'moll/vim-node' " Navigate to import files
+Plug 'scrooloose/nerdtree'                      " File navigator
+Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
 " Html tools
-Plug 'mattn/emmet-vim' " Emmet
+Plug 'mattn/emmet-vim'                          " Very cool html snippets
 " Syntax tools
-Plug 'w0rp/ale' " Async syntax checker
-Plug 'editorconfig/editorconfig-vim' " .editorconfig
-Plug 'prettier/vim-prettier' " Prettier JS
-Plug 'digitaltoad/vim-pug' " Pug syntax
-Plug 'leafgarland/typescript-vim' " Typescript syntax
-Plug 'Quramy/tsuquyomi' " Typescript autocomplete and stuff
-Plug 'mxw/vim-jsx' " jsx syntax
-Plug 'othree/javascript-libraries-syntax.vim' " js libraries
-Plug 'marijnh/tern_for_vim' " Autocomplete js
+Plug 'w0rp/ale'                                 " Async syntax checker
+Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconfig
+Plug 'prettier/vim-prettier'                    " Lint js with prettier
+Plug 'leafgarland/typescript-vim'               " Typescript syntax
+Plug 'Quramy/tsuquyomi'                         " Typescript autocomplete and stuff
+Plug 'mxw/vim-jsx'                              " Jsx syntax
 " Dashboard tools
-Plug 'vim-airline/vim-airline' " Status bar
-Plug 'vim-airline/vim-airline-themes' " Status bar themes
-Plug 'edkolev/tmuxline.vim' " Apply airline theme to tmux
+Plug 'vim-airline/vim-airline'                  " Status bar
+Plug 'vim-airline/vim-airline-themes'           " Status bar themes
+Plug 'edkolev/tmuxline.vim'                     " Apply airline theme to tmux
 " Project tools
-Plug 'wakatime/vim-wakatime' " Time tracker
+Plug 'wakatime/vim-wakatime'                    " Time tracker
 " Colors
-Plug 'chriskempson/base16-vim' " Base 16 themes
+Plug 'chriskempson/base16-vim'                  " Collection of colorschemes
 call plug#end()
 
 " Colors
@@ -79,10 +75,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colo base16-oceanicnext
-
-" Tern settings
-let g:tern#command = ['tern']
+colorscheme base16-oceanicnext
 
 " Ale settings
 let g:ale_fixers = {
@@ -128,10 +121,6 @@ let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" allow per project settings
-set exrc
-set secure
-
 " prevent not-working delete key
 set backspace=indent,eol,start
 
@@ -161,5 +150,5 @@ autocmd VimResized * execute "normal! \<c-w>="
 " Indentation
 set expandtab shiftround smartindent autoindent
 
-" hyper.app first line bug
+" Hyper.app first line bug
 set t_RV=

@@ -8,8 +8,10 @@ set lazyredraw " Only when necessary
 set noshowmode " Already showing the mode in status bar
 
 " Search settings
-set incsearch
-set hlsearch
+set incsearch  " Incremental search
+set hlsearch   " Highlight search term
+set ignorecase " Search is case insensitive
+set smartcase  " Unless your search has capital letters
 set path+=**   " Search files subdirectories
 
 " Encoding

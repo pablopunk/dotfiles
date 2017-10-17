@@ -44,6 +44,7 @@ Plug 'tpope/vim-commentary'                     " Toggle comments
 " Search tools
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'kien/ctrlp.vim'                           " Open a file
+Plug 'brooth/far.vim'                           " Find and replace in all files
 " Navigation tools
 Plug 'scrooloose/nerdtree'                      " File navigator
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes

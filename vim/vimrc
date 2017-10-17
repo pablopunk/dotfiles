@@ -2,14 +2,17 @@
 filetype plugin indent on
 
 " Interface
+syntax on
 set number
 set ttyfast    " Faster redrawing
 set lazyredraw " Only when necessary
 set noshowmode " Already showing the mode in status bar
 
 " Search settings
-set incsearch
-set hlsearch
+set incsearch  " Incremental search
+set hlsearch   " Highlight search term
+set ignorecase " Search is case insensitive
+set smartcase  " Unless your search has capital letters
 set path+=**   " Search files subdirectories
 
 " Encoding
@@ -68,7 +71,6 @@ Plug 'chriskempson/base16-vim'                  " Collection of colorschemes
 call plug#end()
 
 " Colors
-set syntax=on
 if exists('$TMUX')
   " Colors in tmux
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"

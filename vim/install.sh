@@ -9,9 +9,7 @@ function preinstall {
 }
 
 # get script directory
-pushd `dirname $0` > /dev/null
-dir=`pwd -P`
-popd > /dev/null
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # link config file
 preinstall && ln -svf $dir/$file_name ~/.$file_name

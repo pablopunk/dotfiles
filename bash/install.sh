@@ -4,11 +4,9 @@ os=`uname`
 file_name='bashrc'
 
 # get script directory
-pushd `dirname $0` > /dev/null
-dir=`pwd -P`
-popd > /dev/null
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ $os == 'Darwin' ]; then 
+if [ $os == 'Darwin' ]; then
   ln -svf $dir/$file_name ~/.bash_profile
 else
   # link config file

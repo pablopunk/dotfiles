@@ -20,7 +20,7 @@ alias vim=nvim
 alias vi=nvim
 
 # PATH
-export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin
+export PATH=$PATH:~/.composer/vendor/bin:$HOME/.yarn/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin
 
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then
@@ -32,4 +32,3 @@ fi
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef
 stty stop undef
-

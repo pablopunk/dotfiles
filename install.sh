@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # get script directory
-pushd `dirname .` > /dev/null
-dir=`pwd -P`
-popd > /dev/null
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # loop in subdirectories
 for D in `ls -d1 "$dir"/*/`

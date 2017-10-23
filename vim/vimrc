@@ -53,6 +53,7 @@ Plug 'scrooloose/nerdtree'                      " File navigator
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
+Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
 " Syntax tools
 Plug 'w0rp/ale'                                 " Async syntax checker
 Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconfig
@@ -78,7 +79,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme base16-grayscale-dark
+colorscheme base16-solarized-dark
 
 " Ale settings
 let g:ale_fixers = {

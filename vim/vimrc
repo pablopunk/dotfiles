@@ -79,7 +79,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme base16-solarized-dark
+colorscheme base16-dracula
 
 " Ale settings
 let g:ale_fixers = {
@@ -134,12 +134,15 @@ command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modul
 command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
 "" Lint js with standard
 command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+"" Disable js linters
+command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 
 " Remap keys
 nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
 nnoremap <c-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
 nnoremap <c-i> <esc>gg=G`` " Ctrl+i formats file indentation
 nnoremap <c-q> :tabedit %<CR> " Move current buffer to a new tab
+nnoremap ] <c-]> " Go to tag
 inoremap º <esc> " New esc key
 "" Disable arrow keys
 nnoremap <Up> <Nop>

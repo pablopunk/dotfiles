@@ -91,13 +91,13 @@ let g:ale_linters = {
 
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
-let g:airline#extensions#ale#enabled = 1 " Errors in airline
+" let g:airline#extensions#ale#enabled = 1 " Errors in airline
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
-"let g:prettier#config#semi = 'false'
+" let g:prettier#config#semi = 'false'
 
 " use ag instead of ack with ack.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -120,10 +120,10 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:jsx_ext_required = 0
 
 " Airline config
-set laststatus=2
+" set laststatus=2
 let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " prevent not-working delete key
 set backspace=indent,eol,start

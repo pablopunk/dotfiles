@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
 " Git plugins
 Plug 'airblade/vim-gitgutter'                   " Show changes on each line
 Plug 'Xuyuanp/nerdtree-git-plugin'              " Git status on NERDTree
+Plug 'tpope/vim-fugitive'                       " A lot of awesome things git related
 " Editting tools
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments

@@ -46,8 +46,8 @@ Plug 'tpope/vim-fugitive'                       " A lot of awesome things git re
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 " Search tools
-Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'kien/ctrlp.vim'                           " Open a file
+Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 " Navigation tools
 Plug 'scrooloose/nerdtree'                      " File navigator
@@ -80,7 +80,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme base16-dracula
+colorscheme base16-material
 
 " Ale settings
 let g:ale_fixers = {

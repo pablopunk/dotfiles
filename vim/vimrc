@@ -129,6 +129,16 @@ let g:airline_powerline_fonts = 1
 " prevent not-working delete key
 set backspace=indent,eol,start
 
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let undo_dir = expand('$HOME/.vim/undo_dir')
+    if !isdirectory(undo_dir)
+        call mkdir(undo_dir, "", 0700)
+    endif
+    set undodir=$HOME/.vim/undo_dir
+    set undofile
+endif
+
 " COMMANDS
 command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
 "" Lint js with xo

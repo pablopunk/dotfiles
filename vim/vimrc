@@ -122,7 +122,7 @@ let g:jsx_ext_required = 0
 
 " Airline config
 " set laststatus=2
-let g:airline_theme='minimalist'
+let g:airline_theme='wombat'
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 
@@ -141,7 +141,7 @@ command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'j
 " Remap keys
 nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
 nnoremap <c-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nnoremap <c-i> <esc>gg=G`` " Ctrl+i formats file indentation
+nnoremap <c-i> <esc>gg=G``zz " Ctrl+i formats file indentation and returns to cursor
 nnoremap <c-q> :tabedit %<CR> " Move current buffer to a new tab
 nnoremap ] <c-]> " Go to tag
 inoremap º <esc> " New esc key

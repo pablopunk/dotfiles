@@ -46,7 +46,7 @@ Plug 'tpope/vim-fugitive'                       " A lot of awesome things git re
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 " Search tools
-Plug 'kien/ctrlp.vim'                           " Open a file
+Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 " Navigation tools
@@ -149,12 +149,20 @@ command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fix
 command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 
 " Remap keys
-nnoremap <c-s> <esc>:w<CR> " Ctrl+s saves file in normal mode
-nnoremap <c-b> :NERDTreeToggle<CR> " Ctrl+b opens NERDTree
-nnoremap <c-i> <esc>gg=G`` " Ctrl+i formats file indentation
-nnoremap <c-q> :tabedit %<CR> " Move current buffer to a new tab
-nnoremap ] <c-]> " Go to tag
-inoremap º <esc> " New esc key
+"" Ctrl+s saves file in normal mode
+nnoremap <c-s> <esc>:w<CR>
+"" Ctrl+b opens NERDTree
+nnoremap <c-b> :NERDTreeToggle<CR>
+"" Ctrl+i formats file indentation
+nnoremap <c-i> <esc>gg=G``
+"" Move current buffer to a new tab
+nnoremap <c-q> :tabedit %<CR>
+"" Open fuzzy finder
+nnoremap <C-p> :FuzzyOpen<CR>
+"" Go to tag
+nnoremap ] <c-]>
+"" New esc key
+inoremap º <esc>
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

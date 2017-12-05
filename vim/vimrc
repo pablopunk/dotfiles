@@ -80,7 +80,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme base16-material
+colorscheme base16-dracula
 
 " Ale settings
 let g:ale_fixers = {

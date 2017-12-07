@@ -45,6 +45,7 @@ Plug 'tpope/vim-fugitive'                       " A lot of awesome things git re
 " Editting tools
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
+Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
@@ -122,7 +123,7 @@ let g:jsx_ext_required = 0
 
 " Airline config
 " set laststatus=2
-let g:airline_theme='base-16'
+let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
 

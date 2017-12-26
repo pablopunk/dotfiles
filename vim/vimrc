@@ -85,10 +85,10 @@ colorscheme base16-dracula
 
 " Ale settings
 let g:ale_fixers = {
-\   'javascript': ['standard']
+\   'javascript': ['xo']
 \}
 let g:ale_linters = {
-\   'javascript': ['standard']
+\   'javascript': []
 \}
 
 let g:ale_fix_on_save = 1 " FIX files on save
@@ -147,7 +147,7 @@ command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = 
 "" Lint js with standard
 command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 "" Disable js linters
-command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
 
 " Remap keys
 "" Ctrl+s saves file in normal mode

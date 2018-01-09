@@ -18,8 +18,15 @@ alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vim=nvim
 alias vi=nvim
+alias todo=todo.sh
 
-# PATH
+# Custom functions
+
+function masl {
+  mas search $1 | head -n1 | awk '{print $1;}' | xargs mas install
+}
+
+# PATH and others
 export PATH=$PATH:$HOME/bin:$HOME/.npm-global/bin
 
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "

@@ -84,13 +84,8 @@ set background=dark
 colorscheme base16-dracula
 
 " Ale settings
-let g:ale_linters = {
-\   'javascript': ['xo']
-\}
-
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
-" let g:airline#extensions#ale#enabled = 1 " Errors in airline
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'

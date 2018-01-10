@@ -84,6 +84,7 @@ set background=dark
 colorscheme base16-dracula
 
 " Ale settings
+let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
 
@@ -134,6 +135,8 @@ endif
 
 " COMMANDS
 command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
+"" Lint js with eslint
+command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 "" Lint js with xo
 command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
 "" Lint js with standard

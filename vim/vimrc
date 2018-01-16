@@ -46,8 +46,6 @@ Plug 'tpope/vim-fugitive'                       " A lot of awesome things git re
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
-Plug 'ternjs/tern_for_vim'                      " Javascript utils
-Plug 'maralla/completor.vim'                    " Autocomplete
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
@@ -88,9 +86,6 @@ colorscheme base16-dracula
 let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
-
-" Completor settings
-let g:completor_node_binary = '/usr/local/bin/node'
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'

@@ -46,6 +46,8 @@ Plug 'tpope/vim-fugitive'                       " A lot of awesome things git re
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
+Plug 'ternjs/tern_for_vim'                      " Javascript utils
+Plug 'maralla/completor.vim'                    " Autocomplete
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
@@ -61,7 +63,6 @@ Plug 'w0rp/ale'                                 " Async syntax checker
 Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconfig
 Plug 'prettier/vim-prettier'                    " Lint js with prettier
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
-Plug 'Quramy/tsuquyomi'                         " Typescript autocomplete and stuff
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 " Dashboard tools
 Plug 'vim-airline/vim-airline'                  " Status bar
@@ -87,6 +88,9 @@ colorscheme base16-dracula
 let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
+
+" Completor settings
+let g:completor_node_binary = '/usr/local/bin/node'
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'
@@ -125,12 +129,12 @@ set backspace=indent,eol,start
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let undo_dir = expand('$HOME/.vim/undo_dir')
-    if !isdirectory(undo_dir)
-        call mkdir(undo_dir, "", 0700)
-    endif
-    set undodir=$HOME/.vim/undo_dir
-    set undofile
+  let undo_dir = expand('$HOME/.vim/undo_dir')
+  if !isdirectory(undo_dir)
+    call mkdir(undo_dir, "", 0700)
+  endif
+  set undodir=$HOME/.vim/undo_dir
+  set undofile
 endif
 
 " COMMANDS
@@ -157,8 +161,10 @@ nnoremap <c-q> :tabedit %<CR>
 nnoremap <C-p> :FuzzyOpen<CR>
 "" Go to tag
 nnoremap ] <c-]>
-"" New esc key
-inoremap º <esc>
+"" Use Tab to select completion
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

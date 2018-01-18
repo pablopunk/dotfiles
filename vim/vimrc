@@ -156,10 +156,8 @@ nnoremap <c-q> :tabedit %<CR>
 nnoremap <C-p> :FuzzyOpen<CR>
 "" Go to tag
 nnoremap ] <c-]>
-"" Use Tab to select completion
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+"" Use Tab for emmet
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 "" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>

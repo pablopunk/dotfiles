@@ -27,7 +27,7 @@ function masl {
 }
 
 # PATH and others
-export PATH=$PATH:$HOME/bin:$HOME/.npm-global/bin
+export PATH="/usr/local/bin:$HOME/bin:$HOME/.npm-global/bin:$PATH"
 
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then

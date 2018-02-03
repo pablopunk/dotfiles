@@ -4,6 +4,7 @@ filetype plugin indent on
 " Interface
 syntax on
 set number
+set relativenumber        " Relative line number
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
 set noshowmode            " Already showing the mode in status bar
@@ -47,7 +48,8 @@ Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
-Plug 'maralla/completor.vim'                    " Autocomplete a lot of stuff
+" Autocomplete (for all) and activate tern (for JS)
+Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm install'}
 Plug 'vim-scripts/ReplaceWithRegister'          " Replace with yanked text (gr)
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
@@ -67,16 +69,13 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 " Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 " Dashboard tools
-Plug 'vim-airline/vim-airline'                  " Status bar
-Plug 'vim-airline/vim-airline-themes'           " Status bar themes
-Plug 'myusuf3/numbers.vim'                      " Intelligent relative line numbers
-" Autocomplete (for all) and activate tern (for JS)
-Plug 'edkolev/tmuxline.vim', {'do': 'cd pythonx/completers/javascript && npm install'}
+Plug 'itchyny/lightline.vim'                    " Lightline statusline
+Plug 'edkolev/tmuxline.vim'                     " Get tmux colors from statusline
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
 " Colors
 Plug 'pablopunk/colors.vim'                     " My colorschemes
-Plug 'chrisbra/Colorizer'                       " Html colors
+Plug 'chrisbra/Colorizer'                       " Html colors (#123456)
 call plug#end()
 
 " Colors
@@ -125,10 +124,11 @@ let g:NERDTreeIndicatorMapCustom = {
 " JSX syntax in JS files
 let g:jsx_ext_required = 0
 
-" Airline config
-let g:airline_theme='dark'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+" Lightline config
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'Dracula',
+      \ }
 
 " prevent not-working delete key
 set backspace=indent,eol,start

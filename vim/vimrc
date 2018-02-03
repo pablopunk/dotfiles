@@ -48,6 +48,7 @@ Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
 Plug 'maralla/completor.vim'                    " Autocomplete a lot of stuff
+Plug 'vim-scripts/ReplaceWithRegister'          " Replace with yanked text (gr)
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
@@ -64,7 +65,7 @@ Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconf
 Plug 'prettier/vim-prettier'                    " Lint js with prettier
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
-Plug 'pangloss/vim-javascript'                  " Improve JS syntax and indentation
+" Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 " Dashboard tools
 Plug 'vim-airline/vim-airline'                  " Status bar
 Plug 'vim-airline/vim-airline-themes'           " Status bar themes
@@ -73,7 +74,8 @@ Plug 'edkolev/tmuxline.vim', {'do': 'cd pythonx/completers/javascript && npm ins
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
 " Colors
-Plug 'chriskempson/base16-vim'                  " Collection of colorschemes
+Plug 'pablopunk/colors.vim'                     " My colorschemes
+Plug 'chrisbra/Colorizer'                       " Html colors
 call plug#end()
 
 " Colors
@@ -84,12 +86,17 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme base16-dracula
+colorscheme neon
 
 " Ale settings
-let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
 let g:ale_fix_on_save = 1 " FIX files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
+let sd = matchstr(getcwd(), 'superdesk')
+if empty(sd) " if it's not superdesk, use standard
+  let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+else " if it's superdesk, use eslint
+  let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+endif
 
 " Prettier settings
 let g:prettier#config#bracket_spacing = 'true'
@@ -118,13 +125,9 @@ let g:NERDTreeIndicatorMapCustom = {
 let g:jsx_ext_required = 0
 
 " Airline config
-let g:airline_theme='cobalt2'
+let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-"" now powerline symbol
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline_left_sep=' '
-let g:airline_right_sep=' '
 
 " prevent not-working delete key
 set backspace=indent,eol,start

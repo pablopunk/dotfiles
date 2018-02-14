@@ -3,8 +3,8 @@ filetype plugin indent on
 
 " Interface
 syntax on
-set number
-set relativenumber        " Relative line number
+" set number                " Line numbers
+" set relativenumber        " Relative line number
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
 set noshowmode            " Already showing the mode in status bar
@@ -58,6 +58,7 @@ Plug 'brooth/far.vim'                           " Find and replace in all files
 " Navigation tools
 Plug 'scrooloose/nerdtree'                      " File navigator
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
+Plug 'danro/rename.vim'                         " Rename the current file with :rename
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
@@ -67,10 +68,7 @@ Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconf
 Plug 'prettier/vim-prettier'                    " Lint js with prettier
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
-" Plug 'pangloss/vim-javascript'                  " Improved JS syntax
-" Dashboard tools
-Plug 'itchyny/lightline.vim'                    " Lightline statusline
-Plug 'edkolev/tmuxline.vim'                     " Get tmux colors from statusline
+Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
 " Colors
@@ -86,7 +84,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme neon
+colorscheme cobalto
 
 " Ale settings
 let g:ale_fix_on_save = 1 " FIX files on save
@@ -174,6 +172,10 @@ nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
+"" Identify the syntax group of the word at the cursor
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " AUTOCOMMANDS
 "" Resizing window resets splits

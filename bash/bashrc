@@ -13,21 +13,24 @@ alias gck='git checkout'
 alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls -a1'
+alias t='tree -L 3'
 # other
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vim=nvim
 alias vi=nvim
 alias todo=todo.sh
+alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 
 # Custom functions
-
 function masl {
   mas search $1 | head -n1 | awk '{print $1;}' | xargs mas install
 }
 
 # PATH and others
-export PATH="/usr/local/bin:$HOME/bin:$HOME/.npm-global/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$PATH"
+
+source $HOME/src/bash-wakatime/bash-wakatime.sh
 
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then

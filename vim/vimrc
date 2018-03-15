@@ -34,8 +34,8 @@ set wildignore+=**/bower_components/**
 " Invisible characters (tab, eol and trailing whitespace)
 set list
 set listchars=tab:▸\ ,eol:¬,trail:▫
-highlight SpecialKey ctermfg=grey guifg=grey70 " Tab characters are gray
-highlight NonText ctermfg=grey guifg=grey70
+highlight SpecialKey guifg=#333355 " Tab characters are gray
+highlight NonText guifg=#333355    " Trailing spaces and LN are gray
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -84,7 +84,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme cobalto
+colorscheme tiza
 
 " Ale settings
 let g:ale_fix_on_save = 1 " FIX files on save

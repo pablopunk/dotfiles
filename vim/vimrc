@@ -84,7 +84,7 @@ if exists('$TMUX')
 endif
 set termguicolors
 set background=dark
-colorscheme tiza
+colorscheme neon
 
 " Ale settings
 let g:ale_fix_on_save = 1 " FIX files on save

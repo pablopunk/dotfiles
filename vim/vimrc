@@ -1,27 +1,25 @@
-" File settings
+"
+" Some general settings
+"
 filetype plugin indent on
-
-" Interface
 syntax on
-" set number                " Line numbers
-" set relativenumber        " Relative line number
+
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
-set noshowmode            " Already showing the mode in status bar
-
-" Search settings
-set incsearch  " Incremental search
-set hlsearch   " Highlight search term
-set ignorecase " Search is case insensitive
-set smartcase  " Unless your search has capital letters
-set path+=**   " Search files subdirectories
-
-" Encoding
-set list       " Show non-printable characters
+set list                  " Show non-printable characters
 set encoding=utf-8
+set incsearch             " Incremental search
+set hlsearch              " Highlight search term
+set ignorecase            " Search is case insensitive
+set smartcase             " Unless your search has capital letters
+set mouse=a               " Allow mouse integration
 
-" Allow tab to autocomplete searching files
-set wildmenu
+
+"
+" Better 'find' command (autocompletion and some ignored folders)
+"
+set path+=**                           " Search files subdirectories
+set wildmenu                           " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
 set wildignore+=**/cache/**
 set wildignore+=**/logs/**
@@ -30,65 +28,100 @@ set wildignore+=**/cov/**
 set wildignore+=**/coverage/**
 set wildignore+=**/vendor/**
 set wildignore+=**/bower_components/**
+set wildignore+=**/po/**
+set wildignore+=**/lang/**
 
-" Invisible characters (tab, eol and trailing whitespace)
-set list
-set listchars=tab:▸\ ,eol:¬,trail:▫
-highlight SpecialKey guifg=#333355 " Tab characters are gray
-highlight NonText guifg=#333355    " Trailing spaces and LN are gray
 
-" PLUGINS
+"
+" PLUGINS. VimPlug will download and install all of them
+"
+
+" Start plugins
 call plug#begin('~/.vim/plugged')
+
 " Git plugins
 Plug 'airblade/vim-gitgutter'                   " Show changes on each line
-Plug 'Xuyuanp/nerdtree-git-plugin'              " Git status on NERDTree
-Plug 'tpope/vim-fugitive'                       " A lot of awesome things git related
+Plug 'tpope/vim-fugitive'                       " A lot of awesome things with git
+
 " Editting tools
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
-" Autocomplete (for all) and activate tern (for JS)
-Plug 'maralla/completor.vim', {'do': 'cd pythonx/completers/javascript && npm install'}
-Plug 'vim-scripts/ReplaceWithRegister'          " Replace with yanked text (gr)
+
 " Search tools
 Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
+
 " Navigation tools
-Plug 'scrooloose/nerdtree'                      " File navigator
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
+
+" File tools
 Plug 'danro/rename.vim'                         " Rename the current file with :rename
+
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
+
 " Syntax tools
 Plug 'w0rp/ale'                                 " Async syntax checker
-Plug 'editorconfig/editorconfig-vim'            " Use lint config in .editorconfig
-Plug 'prettier/vim-prettier'                    " Lint js with prettier
+Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syntax (global/project .editorconfig)
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
+Plug 'Quramy/tsuquyomi'                         " Make vim a Typescript IDE
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
+
+" Completion tools
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs'
+
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
-" Colors
-Plug 'pablopunk/colors.vim'                     " My colorschemes
-Plug 'chrisbra/Colorizer'                       " Html colors (#123456)
-call plug#end()
 
 " Colors
-if exists('$TMUX')
+Plug 'pablopunk/colors.vim'                     " My colorschemes
+Plug 'chrisbra/Colorizer'                       " Html color highlighting (#123456)
+
+" End of plugins
+call plug#end()
+
+"
+" Completion config
+"
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
+
+"
+" Colors configuration
+"
+"
+if exists('$TMUX')                              " Make tmux have the right colors
   " Colors in tmux
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-set background=dark
-colorscheme neon
+colorscheme github
 
-" Ale settings
+
+"
+" Settings for ale syntax checker
+"
 let g:ale_fix_on_save = 1 " FIX files on save
-let g:ale_completion_enabled = 1 " Try to complete stuff
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd) " if it's not superdesk, use standard
   let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
@@ -96,42 +129,27 @@ else " if it's superdesk, use eslint
   let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 endif
 
-" Prettier settings
+
+"" SETTINGS FOR PRETTIER SYNTAX
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#semi = 'false'
+let g:prettier#config#semi = 'true'
 
-" use ag instead of ack with ack.vim
+
+"" ACH USES 'ag' INSTEAD OF 'grep'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" NERDTree Git symbols
-let g:NERDTreeIndicatorMapCustom = {
-      \ "Modified"  : "~",
-      \ "Staged"    : "+",
-      \ "Untracked" : "?",
-      \ "Renamed"   : "r",
-      \ "Unmerged"  : "=",
-      \ "Deleted"   : "✗",
-      \ "Dirty"     : "*",
-      \ "Clean"     : "✓",
-      \ "Ignored"   : "·",
-      \ "Unknown"   : "??"
-      \ }
 
-" JSX syntax in JS files
+"" ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
 
-" Lightline config
-set laststatus=2
-let g:lightline = {
-      \ 'colorscheme': 'Dracula',
-      \ }
 
-" prevent not-working delete key
+"" DELETE KEY SOMETIMES DOES NOT WORK, HERE'S THE FIX
 set backspace=indent,eol,start
 
-" Keep undo history across sessions by storing it in a file
+
+"" KEEP UNDO HISTORY ACROSS SESSIONS BY STORING IT IN A FILE
 if has('persistent_undo')
   let undo_dir = expand('$HOME/.vim/undo_dir')
   if !isdirectory(undo_dir)
@@ -141,48 +159,90 @@ if has('persistent_undo')
   set undofile
 endif
 
-" COMMANDS
+
+"
+" Commands
+"
+"
+" Create tags file
 command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
-"" Lint js with eslint
+
+" Create tags file for JS
+command! MakeTagsJS find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
+
+" Lint js with eslint
 command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-"" Lint js with xo
+"
+" Lint js with xo
 command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
-"" Lint js with standard
+
+" Lint js with standard
 command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
-"" Disable js linters
+
+" Disable js linters
 command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
 
-" Remap keys
-"" Ctrl+s saves file in normal mode
+"
+" Key mapping
+"
+
+" Do not use ESC key (use ctrl+c)
+nnoremap <esc> <nop>
+cnoremap <esc> <nop>
+vnoremap <esc> <nop>
+inoremap <esc> <nop>
+
+" Ctrl+s saves file in normal/insert mode
 nnoremap <c-s> <esc>:w<CR>
-"" Ctrl+b opens NERDTree
-nnoremap <c-b> :NERDTreeToggle<CR>
-"" Ctrl+i formats file indentation
+inoremap <c-s> <esc>:w<CR>
+
+" Ctrl+i formats file indentation
 nnoremap <c-i> <esc>gg=G``zz
-"" Move current buffer to a new tab
-nnoremap <c-q> :tabedit %<CR>
-"" Open fuzzy finder
+
+" Open ACK search tool for current word
+nnoremap <c-f> :Ack <cword><cr>
+
+" Open fuzzy finder
 nnoremap <C-p> :FuzzyOpen<CR>
-"" Go to tag
+
+" Go to tag
 nnoremap ] <c-]>
-"" Use Tab for emmet
+
+" Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-"" Disable arrow keys
+
+" Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
-"" Identify the syntax group of the word at the cursor
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" AUTOCOMMANDS
-"" Resizing window resets splits
+" Easier block indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Identify the syntax group of the word at the cursor
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+
+"
+" Autocommands
+"
+
+" Resizing window resets splits
 autocmd VimResized * execute "normal! \<c-w>="
 
-" Indentation
-set expandtab shiftround smartindent autoindent
+" Reload vimrc file on save
+autocmd! bufwritepost .vimrc source $MYVIMRC
 
-" Hyper.app first line bug
-set t_RV=
+" Restore working directory when opening buffers (good for c-x c-f)
+autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
+
+
+"
+" Indentation settings (let editorconfig handle number of spaces)
+"
+set expandtab shiftround smartindent autoindent

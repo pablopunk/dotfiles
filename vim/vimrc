@@ -21,7 +21,6 @@ set mouse=a               " Allow mouse integration
 set path+=**                           " Search files subdirectories
 set wildmenu                           " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
-set wildignore+=**/cache/**
 set wildignore+=**/logs/**
 set wildignore+=**/log/**
 set wildignore+=**/cov/**
@@ -70,7 +69,9 @@ Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syn
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'Quramy/tsuquyomi'                         " Make vim a Typescript IDE
 Plug 'mxw/vim-jsx'                              " Jsx syntax
+Plug 'jiangmiao/auto-pairs'                     " Type { and it will be {|}
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
+Plug 'prettier/vim-prettier'                    " Prettier JS
 
 " Completion tools
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -115,7 +116,7 @@ if exists('$TMUX')                              " Make tmux have the right color
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-colorscheme github
+colorscheme neon
 
 
 "
@@ -134,7 +135,7 @@ endif
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#semi = 'true'
+let g:prettier#config#semi = 'false'
 
 
 "" ACH USES 'ag' INSTEAD OF 'grep'
@@ -236,10 +237,6 @@ autocmd VimResized * execute "normal! \<c-w>="
 
 " Reload vimrc file on save
 autocmd! bufwritepost .vimrc source $MYVIMRC
-
-" Restore working directory when opening buffers (good for c-x c-f)
-autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
 
 "

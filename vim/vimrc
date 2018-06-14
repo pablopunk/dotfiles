@@ -1,6 +1,7 @@
 "
 " Some general settings
 "
+
 filetype plugin indent on
 syntax on
 
@@ -15,9 +16,7 @@ set smartcase             " Unless your search has capital letters
 set mouse=a               " Allow mouse integration
 
 
-"
 " Better 'find' command (autocompletion and some ignored folders)
-"
 set path+=**                           " Search files subdirectories
 set wildmenu                           " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
@@ -30,6 +29,120 @@ set wildignore+=**/bower_components/**
 set wildignore+=**/po/**
 set wildignore+=**/lang/**
 
+
+
+" Better imports on javascript
+set path=.,src,node_nodules
+set suffixesadd=.js,.jsx
+
+
+" Delete key sometimes does not work, here's the fix
+set backspace=indent,eol,start
+
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+  let undo_dir = expand('$HOME/.vim/undo_dir')
+  if !isdirectory(undo_dir)
+    call mkdir(undo_dir, "", 0700)
+  endif
+  set undodir=$HOME/.vim/undo_dir
+  set undofile
+endif
+
+
+"
+" Commands
+"
+
+" Create tags file
+command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
+
+" Create tags file for JS
+command! MakeTagsJS find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
+
+" Lint js with eslint
+command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+"
+" Lint js with xo
+command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
+
+" Lint js with standard
+command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+
+" Disable js linters
+command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
+
+"
+" Key mapping
+"
+
+" Remap leader key
+let mapleader = ","
+
+" Do not use ESC key (use ctrl+c)
+nnoremap <esc> <nop>
+cnoremap <esc> <nop>
+vnoremap <esc> <nop>
+inoremap <esc> <nop>
+
+" Ctrl+s saves file in normal/insert mode
+nnoremap <c-s> <esc>:w<CR>
+inoremap <c-s> <esc>:w<CR>
+
+" Format file indentation
+nnoremap <Leader><Tab> <esc>gg=G``zz
+
+" Run prettier on file
+nnoremap <Leader>p :Prettier<CR>
+
+" Open ACK search tool for current word
+nnoremap <Leader>f :Ack <cword><cr>
+
+" Autofix imports and go to
+nnoremap <Leader>i :ImportJSFix<CR>
+nnoremap <Leader>j :ImportJSWord<CR>
+nnoremap <Leader>g :ImportJSGoto<CR>
+
+" Open fuzzy finder
+nnoremap <C-p> :FuzzyOpen<CR>
+
+" Go to tag
+nnoremap ] <c-]>
+
+" Use Tab for emmet
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" Disable arrow keys
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+
+" Easier block indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Identify the syntax group of the word at the cursor
+map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+
+"
+" Autocommands
+"
+
+" Resizing window resets splits
+autocmd VimResized * execute "normal! \<c-w>="
+
+" Reload vimrc file on save
+autocmd! bufwritepost .vimrc source $MYVIMRC
+
+"
+" Indentation settings (let editorconfig handle number of spaces)
+"
+set expandtab shiftround smartindent autoindent
 
 "
 " PLUGINS. VimPlug will download and install all of them
@@ -77,6 +190,7 @@ Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'carlitux/deoplete-ternjs'
+Plug 'galooshi/vim-import-js'                   " Auto import in JS
 
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
@@ -89,8 +203,10 @@ Plug 'chrisbra/Colorizer'                       " Html color highlighting (#1234
 call plug#end()
 
 "
-" Completion config
+" Settings after plugins
 "
+
+" Completion config
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
@@ -106,23 +222,20 @@ let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 
 
-"
 " Colors configuration
-"
-"
-if exists('$TMUX')                              " Make tmux have the right colors
+if exists('$TMUX') " Make tmux have the right colors
   " Colors in tmux
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-colorscheme neon
+colorscheme blew
 
 
-"
 " Settings for ale syntax checker
-"
-let g:ale_fix_on_save = 1 " FIX files on save
+let g:ale_completion_enabled = 1 " Try to complete stuff
+let g:ale_completion_max_suggestions = 10
+let g:ale_fix_on_save = 1  " FIX files on save
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd) " if it's not superdesk, use standard
   let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
@@ -131,115 +244,16 @@ else " if it's superdesk, use eslint
 endif
 
 
-"" SETTINGS FOR PRETTIER SYNTAX
+" Settings for prettier syntax
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#tab_width = 2
 let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#semi = 'false'
 
 
-"" ACH USES 'ag' INSTEAD OF 'grep'
+" Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 
-"" ALLOW JSX SYNTAX IN JS
+" ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
-
-
-"" DELETE KEY SOMETIMES DOES NOT WORK, HERE'S THE FIX
-set backspace=indent,eol,start
-
-
-"" KEEP UNDO HISTORY ACROSS SESSIONS BY STORING IT IN A FILE
-if has('persistent_undo')
-  let undo_dir = expand('$HOME/.vim/undo_dir')
-  if !isdirectory(undo_dir)
-    call mkdir(undo_dir, "", 0700)
-  endif
-  set undodir=$HOME/.vim/undo_dir
-  set undofile
-endif
-
-
-"
-" Commands
-"
-"
-" Create tags file
-command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
-
-" Create tags file for JS
-command! MakeTagsJS find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
-
-" Lint js with eslint
-command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-"
-" Lint js with xo
-command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
-
-" Lint js with standard
-command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
-
-" Disable js linters
-command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
-
-"
-" Key mapping
-"
-
-" Do not use ESC key (use ctrl+c)
-nnoremap <esc> <nop>
-cnoremap <esc> <nop>
-vnoremap <esc> <nop>
-inoremap <esc> <nop>
-
-" Ctrl+s saves file in normal/insert mode
-nnoremap <c-s> <esc>:w<CR>
-inoremap <c-s> <esc>:w<CR>
-
-" Ctrl+i formats file indentation
-nnoremap <c-i> <esc>gg=G``zz
-
-" Open ACK search tool for current word
-nnoremap <c-f> :Ack <cword><cr>
-
-" Open fuzzy finder
-nnoremap <C-p> :FuzzyOpen<CR>
-
-" Go to tag
-nnoremap ] <c-]>
-
-" Use Tab for emmet
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
-" Disable arrow keys
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-
-" Easier block indentation
-vnoremap < <gv
-vnoremap > >gv
-
-" Identify the syntax group of the word at the cursor
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-
-"
-" Autocommands
-"
-
-" Resizing window resets splits
-autocmd VimResized * execute "normal! \<c-w>="
-
-" Reload vimrc file on save
-autocmd! bufwritepost .vimrc source $MYVIMRC
-
-
-"
-" Indentation settings (let editorconfig handle number of spaces)
-"
-set expandtab shiftround smartindent autoindent

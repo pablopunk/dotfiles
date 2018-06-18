@@ -32,8 +32,6 @@ function masl {
 # PATH and others
 export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$PATH"
 
-source $HOME/.wakatime/bash-wakatime.sh
-
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then
   export PS1='${machine}$(bashy -r) '

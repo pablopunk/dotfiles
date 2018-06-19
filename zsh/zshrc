@@ -2,6 +2,3 @@ emulate sh -c 'source $HOME/.bash_profile'
 
 autoload -U promptinit; promptinit
 prompt pure
-
-# added by travis gem
-[ -f /Users/pol/.travis/travis.sh ] && source /Users/pol/.travis/travis.sh

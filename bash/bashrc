@@ -19,8 +19,8 @@ alias t='tree -L 3'
 # other
 alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
 alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
-alias vim=nvim
-alias vi=nvim
+# alias vim=nvim
+# alias vi=nvim
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 

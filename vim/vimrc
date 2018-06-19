@@ -7,7 +7,6 @@ syntax on
 
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
-set list                  " Show non-printable characters
 set encoding=utf-8
 set incsearch             " Incremental search
 set hlsearch              " Highlight search term
@@ -30,12 +29,6 @@ set wildignore+=**/po/**
 set wildignore+=**/lang/**
 
 
-
-" Better imports on javascript
-set path=.,src,node_nodules
-set suffixesadd=.js,.jsx
-
-
 " Delete key sometimes does not work, here's the fix
 set backspace=indent,eol,start
 
@@ -55,12 +48,6 @@ endif
 " Commands
 "
 
-" Create tags file
-command! MakeTags !ctags -R . --exclude=.git --exclude=logs --exclude=node_modules --exclude=cov --exclude=app
-
-" Create tags file for JS
-command! MakeTagsJS find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
-
 " Lint js with eslint
 command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 "
@@ -73,18 +60,13 @@ command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fix
 " Disable js linters
 command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
 
+
 "
 " Key mapping
 "
 
 " Remap leader key
 let mapleader = ","
-
-" Do not use ESC key (use ctrl+c)
-nnoremap <esc> <nop>
-cnoremap <esc> <nop>
-vnoremap <esc> <nop>
-inoremap <esc> <nop>
 
 " Ctrl+s saves file in normal/insert mode
 nnoremap <c-s> <esc>:w<CR>
@@ -93,19 +75,11 @@ inoremap <c-s> <esc>:w<CR>
 " Format file indentation
 nnoremap <Leader><Tab> <esc>gg=G``zz
 
-" Run prettier on file
-nnoremap <Leader>p :Prettier<CR>
-
 " Open ACK search tool for current word
 nnoremap <Leader>f :Ack <cword><cr>
 
-" Autofix imports and go to
-nnoremap <Leader>i :ImportJSFix<CR>
-nnoremap <Leader>j :ImportJSWord<CR>
-nnoremap <Leader>g :ImportJSGoto<CR>
-
 " Open fuzzy finder
-nnoremap <C-p> :FuzzyOpen<CR>
+nnoremap <C-p> :FZF<CR>
 
 " Go to tag
 nnoremap ] <c-]>
@@ -127,7 +101,6 @@ vnoremap > >gv
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 
 "
 " Autocommands
@@ -162,9 +135,9 @@ Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
 
 " Search tools
-Plug 'cloudhead/neovim-fuzzy'                   " Fuzzy finder
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Navigation tools
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
@@ -180,24 +153,16 @@ Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
 Plug 'w0rp/ale'                                 " Async syntax checker
 Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syntax (global/project .editorconfig)
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
-Plug 'Quramy/tsuquyomi'                         " Make vim a Typescript IDE
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'jiangmiao/auto-pairs'                     " Type { and it will be {|}
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'prettier/vim-prettier'                    " Prettier JS
-
-" Completion tools
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'galooshi/vim-import-js'                   " Auto import in JS
 
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
 
 " Colors
 Plug 'pablopunk/colors.vim'                     " My colorschemes
-Plug 'chrisbra/Colorizer'                       " Html color highlighting (#123456)
 
 " End of plugins
 call plug#end()
@@ -229,7 +194,7 @@ if exists('$TMUX') " Make tmux have the right colors
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-colorscheme blew
+colorscheme mono
 
 
 " Settings for ale syntax checker
@@ -242,13 +207,6 @@ if empty(sd) " if it's not superdesk, use standard
 else " if it's superdesk, use eslint
   let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 endif
-
-
-" Settings for prettier syntax
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#tab_width = 2
-let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#semi = 'false'
 
 
 " Ack uses 'ag' instead of 'grep'

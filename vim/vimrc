@@ -112,6 +112,9 @@ autocmd VimResized * execute "normal! \<c-w>="
 " Reload vimrc file on save
 autocmd! bufwritepost .vimrc source $MYVIMRC
 
+" Reload gitgutter on save
+autocmd BufWritePost * GitGutter
+
 "
 " Indentation settings (let editorconfig handle number of spaces)
 "
@@ -207,6 +210,10 @@ if empty(sd) " if it's not superdesk, use standard
 else " if it's superdesk, use eslint
   let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 endif
+" Disable for html
+let g:ale_pattern_options = {
+\   '.*\.html$': {'ale_enabled': 0}
+\}
 
 
 " Ack uses 'ag' instead of 'grep'

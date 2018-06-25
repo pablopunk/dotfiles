@@ -11,7 +11,7 @@ module.exports = {
 
     // font family with optional fallbacks
     fontFamily:
-      '"SF Mono", "Operator Mono", "Fira Code", Hack, "OperatorMono-Light", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      '"Fira Code", Hack, "OperatorMono-Light", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',
@@ -111,7 +111,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ['hyperlinks', 'hyper-material-theme'],
+  plugins: ['hyperlinks'],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

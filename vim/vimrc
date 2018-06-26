@@ -3,7 +3,7 @@
 "
 
 filetype plugin indent on
-syntax on
+" syntax on
 
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
@@ -45,23 +45,6 @@ endif
 
 
 "
-" Commands
-"
-
-" Lint js with eslint
-command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-"
-" Lint js with xo
-command! XO :let g:ale_linters = { 'javascript': ['xo'] } | :let g:ale_fixers = { 'javascript': [] }
-
-" Lint js with standard
-command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
-
-" Disable js linters
-command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
-
-
-"
 " Key mapping
 "
 
@@ -79,7 +62,7 @@ nnoremap <Leader><Tab> <esc>gg=G``zz
 nnoremap <Leader>f :Ack <cword><cr>
 
 " Open fuzzy finder
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :tabe<CR>:FZF<CR>
 
 " Go to tag
 nnoremap ] <c-]>
@@ -153,11 +136,9 @@ Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
 
 " Syntax tools
-Plug 'w0rp/ale'                                 " Async syntax checker
 Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syntax (global/project .editorconfig)
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
-Plug 'jiangmiao/auto-pairs'                     " Type { and it will be {|}
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'prettier/vim-prettier'                    " Prettier JS
 
@@ -175,29 +156,13 @@ call plug#end()
 "
 
 " Colors configuration
-if exists('$TMUX') " Make tmux have the right colors
-  " Colors in tmux
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-set termguicolors
-colorscheme mono
-
-
-" Settings for ale syntax checker
-let g:ale_completion_enabled = 1 " Try to complete stuff
-let g:ale_completion_max_suggestions = 10
-let g:ale_fix_on_save = 1  " FIX files on save
-let sd = matchstr(getcwd(), 'superdesk')
-if empty(sd) " if it's not superdesk, use standard
-  let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
-else " if it's superdesk, use eslint
-  let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-endif
-" Disable for html
-let g:ale_pattern_options = {
-\   '.*\.html$': {'ale_enabled': 0}
-\}
+" if exists('$TMUX') " Make tmux have the right colors
+"   " Colors in tmux
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" endif
+" set termguicolors
+" colorscheme mono
 
 
 " Ack uses 'ag' instead of 'grep'
@@ -205,3 +170,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
+
+" Just because
+syntax reset
+syntax off

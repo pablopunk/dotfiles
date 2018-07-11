@@ -13,6 +13,7 @@ set hlsearch              " Highlight search term
 set ignorecase            " Search is case insensitive
 set smartcase             " Unless your search has capital letters
 set mouse=a               " Allow mouse integration
+set switchbuf=newtab      " New buffer always on new tab (useful for :Ack)
 
 
 " Better 'find' command (autocompletion and some ignored folders)
@@ -62,7 +63,7 @@ nnoremap <Leader><Tab> <esc>gg=G``zz
 nnoremap <Leader>f :Ack <cword><cr>
 
 " Open fuzzy finder
-nnoremap <C-p> :tabe<CR>:FZF<CR>
+nnoremap <C-p> :FZF<CR>
 
 " Go to tag
 nnoremap ] <c-]>
@@ -141,6 +142,7 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'prettier/vim-prettier'                    " Prettier JS
+Plug 'w0rp/ale'                                 " Syntax checker
 
 " Project tools
 Plug 'wakatime/vim-wakatime'                    " Time tracker
@@ -164,6 +166,10 @@ call plug#end()
 " set termguicolors
 " colorscheme mono
 
+" Ale syntax config
+let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+let g:ale_fix_on_save = 1 " FIX files on save
+let g:ale_completion_enabled = 1 " Try to complete stuff
 
 " Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --nocolor --column'

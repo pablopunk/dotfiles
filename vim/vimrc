@@ -62,9 +62,6 @@ nnoremap <Leader><Tab> <esc>gg=G``zz
 " Open ACK search tool for current word
 nnoremap <Leader>f :Ack <cword><cr>
 
-" Open fuzzy finder
-nnoremap <C-p> :FZF<CR>
-
 " Go to tag
 nnoremap ] <c-]>
 
@@ -124,7 +121,7 @@ Plug 'tpope/vim-surround'                       " Surround words with brackets/q
 " Search tools
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
 
 " Navigation tools
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes

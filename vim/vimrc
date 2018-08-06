@@ -131,6 +131,7 @@ Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
+Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 
 " Search tools
 Plug 'mileszs/ack.vim'                          " Find in all files

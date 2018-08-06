@@ -13,7 +13,7 @@ set hlsearch              " Highlight search term
 set ignorecase            " Search is case insensitive
 set smartcase             " Unless your search has capital letters
 set mouse=a               " Allow mouse integration
-set switchbuf=newtab      " New buffer always on new tab (useful for :Ack)
+" set switchbuf=newtab      " New buffer always on new tab (useful for :Ack)
 
 
 " Better 'find' command (autocompletion and some ignored folders)
@@ -56,11 +56,25 @@ let mapleader = ","
 nnoremap <c-s> <esc>:w<CR>
 inoremap <c-s> <esc>:w<CR>
 
+" Ctrl+t new tab
+nnoremap <c-t> <esc>:tabe<cr>
+
+" Ctrl+q close file
+nnoremap <c-q> <esc>:q<cr>
+
 " Format file indentation
 nnoremap <Leader><Tab> <esc>gg=G``zz
 
 " Open ACK search tool for current word
 nnoremap <Leader>f :Ack <cword><cr>
+
+" Navigate through git changes on file
+nnoremap <Leader>g :GitGutterNextHunk<cr>
+nnoremap <Leader>G :GitGutterPrevHunk<cr>
+
+" Use ç to insert html tags
+inoremap ç <
+inoremap Ç >
 
 " Go to tag
 nnoremap ] <c-]>

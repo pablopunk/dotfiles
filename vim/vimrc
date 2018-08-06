@@ -3,7 +3,7 @@
 "
 
 filetype plugin indent on
-" syntax on
+syntax on
 
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
@@ -146,6 +146,7 @@ Plug 'wakatime/vim-wakatime'                    " Time tracker
 
 " Colors
 Plug 'pablopunk/colors.vim'                     " My colorschemes
+Plug 'arcticicestudio/nord-vim'                 " Nord colors
 
 " End of plugins
 call plug#end()
@@ -161,7 +162,7 @@ call plug#end()
 "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " endif
 " set termguicolors
-" colorscheme mono
+colorscheme nord
 
 " Ale syntax config
 let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }

@@ -159,7 +159,6 @@ Plug 'w0rp/ale'                                 " Syntax checker
 Plug 'wakatime/vim-wakatime'                    " Time tracker
 
 " Colors
-Plug 'pablopunk/colors.vim'                     " My colorschemes
 Plug 'arcticicestudio/nord-vim'                 " Nord colors
 
 " End of plugins
@@ -190,5 +189,5 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:jsx_ext_required = 0
 
 " Just because
-syntax reset
-syntax off
+" syntax reset
+" syntax off

@@ -29,6 +29,8 @@ function masl {
   mas search $1 | head -n1 | awk '{print $1;}' | xargs mas install
 }
 
+# PATH
+export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 
 [ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
 if hash bashy 2>/dev/null; then
@@ -37,11 +39,8 @@ else
   export PS1='${machine}\W '
 fi
 
-# PATH
-export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
-
 # Use .bash_additional for no backed up configs
-F=$HOME/.bash_additional;[-f $F] && . $F
+F=$HOME/.bash_additional; [ -f $F ] && . $F
 
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef

@@ -178,7 +178,6 @@ colorscheme onedark
 " Ale syntax config
 let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1 " FIX files on save
-let g:ale_completion_enabled = 1 " Try to complete stuff
 
 " Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --nocolor --column'

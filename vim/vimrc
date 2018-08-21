@@ -73,7 +73,7 @@ nnoremap <Leader>g :GitGutterNextHunk<cr>
 nnoremap <Leader>G :GitGutterPrevHunk<cr>
 
 " Go to tag
-nnoremap ] <c-]>
+nnoremap ] :ALEGoToDefinition<CR>
 
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -145,16 +145,12 @@ Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
 
 " Syntax tools
+Plug 'w0rp/ale'                                 " Syntax checker
 Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syntax (global/project .editorconfig)
+Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
-Plug 'prettier/vim-prettier'                    " Prettier JS
-Plug 'w0rp/ale'                                 " Syntax checker
-Plug 'maralla/completor.vim'                    " Autocomplete everything
-
-" Project tools
-Plug 'wakatime/vim-wakatime'                    " Time tracker
 
 " Colors
 Plug 'joshdick/onedark.vim'                     " Atom colorscheme
@@ -176,14 +172,30 @@ call plug#end()
 colorscheme onedark
 
 " Ale syntax config
-let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-let g:ale_fix_on_save = 1 " FIX files on save
+let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tsserver'] }
+let sd = matchstr(getcwd(), 'superdesk')
+if empty(sd)
+  let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+else
+  let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+endif
+let g:ale_fix_on_save = 1 " Fix files on save
+let g:ale_completion_enabled = 1 " Try to complete stuff
+
 
 " Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
+
+"
+" Commands
+"
+command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
+
 
 " Just because
 " syntax reset

@@ -153,7 +153,7 @@ Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
 " Colors
-Plug 'joshdick/onedark.vim'                     " Atom colorscheme
+Plug 'rakr/vim-one'
 
 " End of plugins
 call plug#end()
@@ -169,7 +169,8 @@ call plug#end()
 "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " endif
 " set termguicolors
-colorscheme onedark
+set background=dark
+colorscheme one
 
 " Ale syntax config
 let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tsserver'] }

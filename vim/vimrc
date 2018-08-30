@@ -151,9 +151,10 @@ Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
+Plug 'maralla/completor.vim'
 
 " Colors
-Plug 'rakr/vim-one'
+Plug 'kaicataldo/material.vim'                  " Colorscheme
 
 " End of plugins
 call plug#end()
@@ -163,17 +164,17 @@ call plug#end()
 "
 
 " Colors configuration
-" if exists('$TMUX') " Make tmux have the right colors
-"   " Colors in tmux
-"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" endif
-" set termguicolors
-set background=dark
-colorscheme one
+if exists('$TMUX') " Make tmux have the right colors
+  " Colors in tmux
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
+let g:material_theme_style = 'palenight'
+colorscheme material
 
 " Ale syntax config
-let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tsserver'] }
+let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd)
   let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }

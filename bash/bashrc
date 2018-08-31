@@ -32,7 +32,7 @@ function masl {
 # PATH
 export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 
-[ "$(uname)" == "Linux" ] && machine="($HOSTNAME) "
+# Use bashy if it exist
 if hash bashy 2>/dev/null; then
   export PS1='${machine}$(bashy -r) '
 else

@@ -74,6 +74,9 @@ nnoremap <Leader>G :GitGutterPrevHunk<cr>
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
+" Fuzzy finder with Ctrl+P
+nnoremap <c-p> :CommandT<cr>
+
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
@@ -131,7 +134,9 @@ Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 " Search tools
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
-Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
+Plug 'wincent/command-t', {
+  \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+  \ }
 
 " Navigation tools
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes

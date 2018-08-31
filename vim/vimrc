@@ -20,12 +20,8 @@ set mouse=a               " Allow mouse integration
 set path+=**                           " Search files subdirectories
 set wildmenu                           " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
-set wildignore+=**/logs/**
-set wildignore+=**/log/**
 set wildignore+=**/cov/**
 set wildignore+=**/coverage/**
-set wildignore+=**/vendor/**
-set wildignore+=**/bower_components/**
 set wildignore+=**/po/**
 set wildignore+=**/lang/**
 
@@ -51,6 +47,9 @@ endif
 
 " Remap leader key
 let mapleader = ","
+
+" Disable Ex Mode
+nnoremap Q <Nop>
 
 " Ctrl+s saves file in normal/insert mode
 nnoremap <c-s> <esc>:w<CR>
@@ -154,7 +153,7 @@ Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'maralla/completor.vim'
 
 " Colors
-Plug 'kaicataldo/material.vim'                  " Colorscheme
+Plug 'chriskempson/base16-vim'                  " Base16 colorschemes
 
 " End of plugins
 call plug#end()
@@ -170,8 +169,7 @@ if exists('$TMUX') " Make tmux have the right colors
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-let g:material_theme_style = 'palenight'
-colorscheme material
+colo base16-circus
 
 " Ale syntax config
 let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
@@ -186,7 +184,7 @@ let g:ale_completion_enabled = 1 " Try to complete stuff
 
 
 " Ack uses 'ag' instead of 'grep'
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --nogroup --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0

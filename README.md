@@ -17,7 +17,6 @@ $ bash install.sh
 '~/.config/nvim/init.vim' -> '~/.dotfiles/nvim/config/nvim/init.vim'
 '~/.tmux.conf'            -> '~/.dotfiles/tmux/tmux.conf'
 '~/.vimrc'                -> '~/.dotfiles/vim/vimrc'
-'~/.zshrc'                -> '~/.dotfiles/zsh/zshrc'
 ```
 
 Or just the one you want:
@@ -45,5 +44,3 @@ $ bash vim/install.sh
 - vim
   - more plugins than I need
   - a lot of things I don't wanna talk about
-- zsh
-  - pure prompt

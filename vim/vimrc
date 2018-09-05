@@ -72,6 +72,10 @@ nnoremap <Leader>f :Ack <cword><cr>
 nnoremap <Leader>g :GitGutterNextHunk<cr>
 nnoremap <Leader>G :GitGutterPrevHunk<cr>
 
+" Navigate through ALE's error/warnings
+nnoremap <Leader>a :ALENext<cr>
+nnoremap <Leader>A :ALEPrevious<cr>
+
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
@@ -96,9 +100,6 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 "
 " Autocommands
 "
-
-" Resizing window resets splits
-autocmd VimResized * execute "normal! \<c-w>="
 
 " Reload vimrc file on save
 autocmd! bufwritepost .vimrc source $MYVIMRC
@@ -138,7 +139,7 @@ Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
 Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
 
 " File tools
-Plug 'danro/rename.vim'                         " Rename the current file with :rename
+Plug 'danro/rename.vim'                         " Rename the current file with :Rename
 
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
@@ -151,7 +152,6 @@ Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
-Plug 'maralla/completor.vim'
 
 " Colors
 Plug 'chriskempson/base16-vim'                  " Base16 colorschemes
@@ -173,12 +173,25 @@ set termguicolors
 colo base16-circus
 
 " Ale syntax config
-let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd)
-  let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+  let g:ale_linters = {
+  \  'javascript': ['standard'],
+  \  'typescript': ['tsserver']
+  \}
+  let g:ale_fixers = {
+  \  'javascript': ['standard'],
+  \  'typescript': ['standard']
+  \}
 else
-  let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+  let g:ale_linters = {
+  \  'javascript': ['eslint'],
+  \  'typescript': ['tsserver']
+  \}
+  let g:ale_fixers = {
+  \  'javascript': ['eslint'],
+  \  'typescript': ['eslint']
+  \}
 endif
 let g:ale_fix_on_save = 1 " Fix files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff
@@ -189,15 +202,3 @@ let g:ackprg = 'ag --nogroup --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
-
-"
-" Commands
-"
-command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
-command! ES :let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
-command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
-
-
-" Just because
-" syntax reset
-" syntax off

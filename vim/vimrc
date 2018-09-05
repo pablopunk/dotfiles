@@ -172,12 +172,25 @@ set termguicolors
 colo base16-circus
 
 " Ale syntax config
-let g:ale_linters = { 'typescript': ['tsserver'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd)
-  let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fixers = { 'javascript': ['standard'] }
+  let g:ale_linters = {
+  \  'javascript': ['standard'],
+  \  'typescript': ['tsserver']
+  \}
+  let g:ale_fixers = {
+  \  'javascript': ['standard'],
+  \  'typescript': ['standard']
+  \}
 else
-  let g:ale_linters = { 'javascript': ['eslint'] } | :let g:ale_fixers = { 'javascript': ['eslint'] }
+  let g:ale_linters = {
+  \  'javascript': ['eslint'],
+  \  'typescript': ['tsserver']
+  \}
+  let g:ale_fixers = {
+  \  'javascript': ['eslint'],
+  \  'typescript': ['eslint']
+  \}
 endif
 let g:ale_fix_on_save = 1 " Fix files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff

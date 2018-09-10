@@ -190,7 +190,7 @@ else
   \}
   let g:ale_fixers = {
   \  'javascript': ['eslint'],
-  \  'typescript': ['eslint']
+  \  'typescript': ['tslint']
   \}
 endif
 let g:ale_fix_on_save = 1 " Fix files on save

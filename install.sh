@@ -6,5 +6,12 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # loop in subdirectories
 for D in `ls -d1 "$dir"/*/`
 do
-  bash $D/install.sh
+  if [ -f $D/install.sh ]; then
+    bash $D/install.sh
+  else
+    for F in `ls -1 $D`
+    do
+      ln -svf $dir/$F ~/.$F
+    done
+  fi
 done

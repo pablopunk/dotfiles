@@ -19,13 +19,6 @@ $ bash install.sh
 '~/.vimrc'                -> '~/.dotfiles/vim/vimrc'
 ```
 
-Or just the one you want:
-
-```shell
-$ bash vim/install.sh
-~/.vimrc -> ~/.dotfiles/vim/vimrc
-```
-
 # Contents
 
 - bash

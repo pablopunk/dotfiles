@@ -34,7 +34,7 @@ export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$P
 
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='${machine}$(bashy -r) '
+  export PS1='${machine}$(bashy) '
 else
   export PS1='${machine}\W '
 fi

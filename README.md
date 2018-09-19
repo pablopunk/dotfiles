@@ -10,14 +10,15 @@ You can install all dotfiles at once:
 
 ```shell
 $ bash install.sh
-'~/.bashrc'               -> '~/.dotfiles/bashrc'
-'~/.inputrc'              -> '~/.dotfiles/inputrc'
-'~/.editorconfig'         -> '~/.dotfiles/editorconfig'
-'~/.hyper.js'             -> '~/.dotfiles/hyper.js'
-'~/.config/nvim/init.vim' -> '~/.dotfiles/nvim/config/nvim/init.vim'
-'~/.tern-project'         -> '~/.dotfiles/tern-project'
-'~/.tmux.conf'            -> '~/.dotfiles/tmux.conf'
-'~/.vimrc'                -> '~/.dotfiles/vim/vimrc'
+'~/.bash_profile'              -> '~/.dotfiles/bash/bash_profile'
+'~/.bashrc'                    -> '~/.dotfiles/bash/bashrc'
+'~/.inputrc'                   -> '~/.dotfiles/bash/inputrc'
+'~/.editorconfig/editorconfig' -> '~/.dotfiles/editorconfig/editorconfig'
+'~/.hyper.js'                  -> '~/.dotfiles/hyper/hyper.js'
+'~/.config/nvim/init.vim'      -> '~/.dotfiles/nvim/config/nvim/init.vim'
+'~/.tern-project'              -> '~/.dotfiles/tern/tern-project'
+'~/.tmux.conf'                 -> '~/.dotfiles/tmux/tmux.conf'
+'~/.vimrc'                     -> '~/.dotfiles/vim/vimrc'
 ```
 
 # Contents

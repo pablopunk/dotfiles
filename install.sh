@@ -11,7 +11,7 @@ do
   else
     for F in `ls -1 $D`
     do
-      ln -svf $D/$F ~/.$F
+      ln -svf ${D}${F} ~/.$F
     done
   fi
 done

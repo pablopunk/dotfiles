@@ -171,7 +171,7 @@ if exists('$TMUX') " Make tmux have the right colors
 endif
 set termguicolors
 set background=dark
-colo base16-solarized-dark
+colo base16-solarflare
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

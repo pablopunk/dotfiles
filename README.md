@@ -30,12 +30,11 @@ $ bash install.sh
 - editorconfig
   - basic editorconfig global settings
 - hyper
-  - really basic config (just one plugin I think)
+  - really basic config
 - nvim
   - delegates all configs to `~/.vimrc`
 - tmux
   - controls to navigate between tmux panes and vim panes
-  - plugin manager
 - vim
   - more plugins than I need
   - a lot of things I don't wanna talk about

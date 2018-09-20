@@ -154,7 +154,10 @@ Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
 " Colors
-Plug 'chriskempson/base16-vim'                  " Base16 colorschemes
+Plug 'arcticicestudio/nord-vim'                 " Nord colorscheme
+
+" Interface
+Plug 'itchyny/lightline.vim'                    " Status bar
 
 " End of plugins
 call plug#end()
@@ -171,7 +174,23 @@ if exists('$TMUX') " Make tmux have the right colors
 endif
 set termguicolors
 set background=dark
-colo base16-solarflare
+colo nord
+
+" Lightline config
+set noshowmode
+set showtabline=1
+let g:lightline = {
+  \ 'colorscheme': 'nord',
+  \ 'component': {
+  \   'lineinfo': '%3l:%-2v',
+  \ },
+  \ 'component_function': {
+  \   'readonly': 'LightlineReadonly',
+  \   'fugitive': 'LightlineFugitive'
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

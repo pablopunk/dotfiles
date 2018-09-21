@@ -174,7 +174,13 @@ if exists('$TMUX') " Make tmux have the right colors
 endif
 set termguicolors
 set background=dark
-colo nord
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+colorscheme nord
+hi! Normal ctermbg=NONE guibg=NONE
+hi! LineNr ctermbg=NONE guibg=NONE
+hi! SignColumn ctermbg=NONE guibg=NONE
+
 
 " Lightline config
 set noshowmode
@@ -195,7 +201,11 @@ let g:lightline = {
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
 
-" Ale syntax config
+" Ale config
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd)
   let g:ale_linters = {

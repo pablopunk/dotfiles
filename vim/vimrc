@@ -92,6 +92,9 @@ nnoremap <Right> <Nop>
 vnoremap < <gv
 vnoremap > >gv
 
+" Map ESC key to exit insert mode in NeoVim's :terminal
+tnoremap <Esc> <C-\><C-n>
+
 " Identify the syntax group of the word at the cursor
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -144,6 +147,7 @@ Plug 'danro/rename.vim'                         " Rename the current file with :
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
+Plug 'alvan/vim-closetag'                       " Auto close html tag
 
 " Syntax tools
 Plug 'w0rp/ale'                                 " Syntax checker

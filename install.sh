@@ -7,11 +7,11 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 for D in `ls -d1 "$dir"/*/`
 do
   if [ -f $D/install.sh ]; then
-    bash $D/install.sh
+    bash $D/install.sh            # use install.sh if it exists in subdirectory
   else
     for F in `ls -1 $D`
     do
-      ln -svf ${D}${F} ~/.$F
+      ln -svf ${D}${F} ~/.$F      # just link the file if there's no install.sh
     done
   fi
 done

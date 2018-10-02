@@ -108,7 +108,7 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 "
 
 " Reload vimrc file on save
-autocmd! bufwritepost .vimrc source $MYVIMRC
+autocmd! bufwritepost .vimrc source $MYVIMRC | call lightline#enable()
 
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter

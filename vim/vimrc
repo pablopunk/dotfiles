@@ -52,6 +52,9 @@ let mapleader = ","
 " Disable Ex Mode
 nnoremap Q <Nop>
 
+" Ctrl+c is ESC (it is by default but it won't trigger autocommands)
+inoremap <c-c> <esc>
+
 " Ctrl+s saves file in normal/insert mode
 nnoremap <c-s> <esc>:w<CR>
 inoremap <c-s> <esc>:w<CR>
@@ -109,6 +112,11 @@ autocmd! bufwritepost .vimrc source $MYVIMRC
 
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
+
+" cd to file directory when entering Insert mode
+" so you can get relative files completion with <c-x><c-f>
+autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
 "
 " Indentation settings (let editorconfig handle number of spaces)

@@ -82,6 +82,9 @@ nnoremap <Leader>A :ALEPrevious<cr>
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
+" Use CtrlP to search in buffers with ctrl+l
+nnoremap <c-l> :CtrlPBuffer<cr>
+
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
@@ -108,7 +111,10 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 "
 
 " Reload vimrc file on save
-autocmd! bufwritepost .vimrc source $MYVIMRC | call lightline#enable()
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost .vimrc nested source $MYVIMRC
+augroup END " }
 
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
@@ -145,9 +151,6 @@ Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
-
-" Navigation tools
-Plug 'christoomey/vim-tmux-navigator'           " Navigation between vim/tmux panes
 
 " File tools
 Plug 'danro/rename.vim'                         " Rename the current file with :Rename

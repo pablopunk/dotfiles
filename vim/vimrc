@@ -82,8 +82,8 @@ nnoremap <Leader>A :ALEPrevious<cr>
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
-" Use CtrlP to search in buffers with ctrl+l
-nnoremap <c-l> :CtrlPBuffer<cr>
+" Use CtrlP to search in buffers with ctrl+P
+nnoremap <Leader>p :CtrlPBuffer<cr>
 
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -99,7 +99,9 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Map ESC key to exit insert mode in NeoVim's :terminal
-tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " Identify the syntax group of the word at the cursor
 map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -112,8 +114,8 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 " Reload vimrc file on save
 augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost .vimrc nested source $MYVIMRC
+  autocmd!
+  autocmd BufWritePost .vimrc nested source $MYVIMRC
 augroup END " }
 
 " Reload gitgutter on save
@@ -168,11 +170,12 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
-" Colors
-Plug 'arcticicestudio/nord-vim'                 " Nord colorscheme
+" Navigation tools
+Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim splits
 
-" Interface
-Plug 'itchyny/lightline.vim'                    " Status bar
+" Colors
+" Plug 'arcticicestudio/nord-vim'                 " Nord colorscheme
+Plug 'trevordmiller/nova-vim'                   " Nord colorscheme
 
 " End of plugins
 call plug#end()
@@ -187,32 +190,16 @@ if exists('$TMUX') " Make tmux have the right colors
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-set termguicolors
+if has('nvim')
+  set termguicolors
+endif
 set background=dark
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-let g:nord_comment_brightness = 12
-colorscheme nord
-hi! Normal ctermbg=NONE guibg=NONE
-hi! LineNr ctermbg=NONE guibg=NONE
-hi! SignColumn ctermbg=NONE guibg=NONE
+colorscheme nova
+"" Transparent background
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! LineNr ctermbg=NONE guibg=NONE
+" hi! SignColumn ctermbg=NONE guibg=NONE
 
-
-" Lightline config
-set noshowmode
-set showtabline=1
-let g:lightline = {
-  \ 'colorscheme': 'nord',
-  \ 'component': {
-  \   'lineinfo': '%3l:%-2v',
-  \ },
-  \ 'component_function': {
-  \   'readonly': 'LightlineReadonly',
-  \   'fugitive': 'LightlineFugitive'
-  \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' }
-  \ }
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
@@ -225,22 +212,22 @@ let g:ale_lint_on_save = 1
 let sd = matchstr(getcwd(), 'superdesk')
 if empty(sd)
   let g:ale_linters = {
-  \  'javascript': ['standard'],
-  \  'typescript': ['tsserver']
-  \}
+        \  'javascript': ['standard'],
+        \  'typescript': ['tsserver']
+        \}
   let g:ale_fixers = {
-  \  'javascript': ['standard'],
-  \  'typescript': ['standard']
-  \}
+        \  'javascript': ['standard'],
+        \  'typescript': ['standard']
+        \}
 else
   let g:ale_linters = {
-  \  'javascript': ['eslint'],
-  \  'typescript': ['tsserver']
-  \}
+        \  'javascript': ['eslint'],
+        \  'typescript': ['tsserver']
+        \}
   let g:ale_fixers = {
-  \  'javascript': ['eslint'],
-  \  'typescript': ['tslint']
-  \}
+        \  'javascript': ['eslint'],
+        \  'typescript': ['tslint']
+        \}
 endif
 let g:ale_fix_on_save = 1 " Fix files on save
 let g:ale_completion_enabled = 1 " Try to complete stuff

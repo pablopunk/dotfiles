@@ -7,39 +7,16 @@ syntax on
 
 set ttyfast               " Faster redrawing
 set lazyredraw            " Only when necessary
-set encoding=utf-8
+set encoding=utf-8        " Unicode
 set incsearch             " Incremental search
 set hlsearch              " Highlight search term
 set ignorecase            " Search is case insensitive
 set smartcase             " Unless your search has capital letters
 set mouse=a               " Allow mouse integration
-" set switchbuf=newtab      " New buffer always on new tab (useful for :Ack)
-
-
-" Better 'find' command (autocompletion and some ignored folders)
-set path+=**                           " Search files subdirectories
-set wildmenu                           " Allow autocomplete on 'find' command
-set wildignore+=**/node_modules/**
-set wildignore+=**/dist/**
-set wildignore+=**/cov/**
-set wildignore+=**/coverage/**
-set wildignore+=**/po/**
-set wildignore+=**/lang/**
 
 
 " Delete key sometimes does not work, here's the fix
 set backspace=indent,eol,start
-
-
-" Keep undo history across sessions by storing it in a file
-if has('persistent_undo')
-  let undo_dir = expand('$HOME/.vim/undo_dir')
-  if !isdirectory(undo_dir)
-    call mkdir(undo_dir, "", 0700)
-  endif
-  set undodir=$HOME/.vim/undo_dir
-  set undofile
-endif
 
 
 "
@@ -112,12 +89,6 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 " Autocommands
 "
 
-" Reload vimrc file on save
-augroup reload_vimrc " {
-  autocmd!
-  autocmd BufWritePost .vimrc nested source $MYVIMRC
-augroup END " }
-
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
 
@@ -143,6 +114,9 @@ Plug 'airblade/vim-gitgutter'                   " Show changes on each line
 Plug 'tpope/vim-fugitive'                       " A lot of awesome things with git
 
 " Editting tools
+Plug 'pablopunk/persistent-undo.vim'            " Persistent undo across sessions
+Plug 'pablopunk/hot-reload.vim'                 " Reload vimrc on save
+Plug 'pablopunk/dynamic-file-completion.vim'    " Current directory for <c-x><c-f>
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
@@ -150,6 +124,7 @@ Plug 'tpope/vim-surround'                       " Surround words with brackets/q
 Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 
 " Search tools
+Plug 'pablopunk/better-find.vim'                " Better find command
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder

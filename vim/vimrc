@@ -92,11 +92,6 @@ map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
 
-" cd to file directory when entering Insert mode
-" so you can get relative files completion with <c-x><c-f>
-autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
-
 "
 " Indentation settings (let editorconfig handle number of spaces)
 "

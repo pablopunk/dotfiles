@@ -144,8 +144,7 @@ Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim splits
 
 " Colors
-" Plug 'arcticicestudio/nord-vim'                 " Nord colorscheme
-Plug 'trevordmiller/nova-vim'                   " Nord colorscheme
+Plug 'jdsimcoe/abstract.vim'                    " Abstract colorscheme
 
 " End of plugins
 call plug#end()
@@ -164,11 +163,13 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme nova
-"" Transparent background
-" hi! Normal ctermbg=NONE guibg=NONE
-" hi! LineNr ctermbg=NONE guibg=NONE
-" hi! SignColumn ctermbg=NONE guibg=NONE
+colorscheme abstract
+" Transparent background
+hi Normal guibg=NONE
+hi LineNr guibg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+" Italic comments
+hi Comment gui=italic cterm=italic
 
 
 " CtrlP config

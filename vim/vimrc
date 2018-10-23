@@ -56,11 +56,15 @@ nnoremap <Leader>G :GitGutterPrevHunk<cr>
 nnoremap <Leader>a :ALENext<cr>
 nnoremap <Leader>A :ALEPrevious<cr>
 
+" Open terminal
+nnoremap <Leader>t :terminal<cr>
+inoremap <Leader>t <esc>:terminal<cr>
+
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
-" Use CtrlP to search in buffers with ctrl+P
-nnoremap <Leader>p :CtrlPBuffer<cr>
+" Use CtrlP to search in buffers with leader+,
+nnoremap <Leader>, :CtrlPBuffer<cr>
 
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -143,8 +147,11 @@ Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 " Navigation tools
 Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim splits
 
+" Interface
+Plug 'itchyny/lightline.vim'                    " Status bar
+
 " Colors
-Plug 'jdsimcoe/abstract.vim'                    " Abstract colorscheme
+Plug 'dracula/vim', { 'as': 'dracula' }         " Dracula colors
 
 " End of plugins
 call plug#end()
@@ -163,7 +170,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme abstract
+colorscheme dracula
 " Transparent background
 hi Normal guibg=NONE
 hi LineNr guibg=NONE
@@ -171,6 +178,10 @@ hi SignColumn guibg=NONE ctermbg=NONE
 " Italic comments
 hi Comment gui=italic cterm=italic
 
+" Lightline config
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ }
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

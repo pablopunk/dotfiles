@@ -66,6 +66,9 @@ nnoremap ] :ALEGoToDefinition<CR>
 " Use CtrlP to search in buffers with leader+,
 nnoremap <Leader>, :CtrlPBuffer<cr>
 
+" Use leader+1 to open todo.txt on new tab
+nnoremap <Leader>1 :tabe ~/todo.txt<cr>
+
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 

@@ -185,6 +185,7 @@ hi Comment gui=italic cterm=italic
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ }
+set noshowmode " Hide vim native mode
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

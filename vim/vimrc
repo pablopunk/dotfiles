@@ -159,6 +159,7 @@ Plug 'itchyny/lightline.vim'                    " Status bar
 
 " Colors
 Plug 'dracula/vim', { 'as': 'dracula' }         " Dracula colors
+Plug 'neutaaaaan/iosvkem'                       " Iosvkem colors
 
 " Dev tools
 Plug 'janko-m/vim-test'                         " Test runner
@@ -175,7 +176,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme dracula
+colorscheme Iosvkem
 " Transparent background
 hi Normal guibg=NONE
 hi LineNr guibg=NONE

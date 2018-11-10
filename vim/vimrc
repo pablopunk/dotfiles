@@ -158,7 +158,7 @@ Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim 
 Plug 'itchyny/lightline.vim'                    " Status bar
 
 " Colors
-Plug 'dracula/vim', { 'as': 'dracula' }         " racula colors
+Plug 'dracula/vim', { 'as': 'dracula' }         " dracula colors
 Plug 'neutaaaaan/iosvkem'                       " Iosvkem colors
 Plug 'tjammer/blayu.vim'                        " blayu colors
 

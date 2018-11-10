@@ -158,8 +158,9 @@ Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim 
 Plug 'itchyny/lightline.vim'                    " Status bar
 
 " Colors
-Plug 'dracula/vim', { 'as': 'dracula' }         " Dracula colors
+Plug 'dracula/vim', { 'as': 'dracula' }         " racula colors
 Plug 'neutaaaaan/iosvkem'                       " Iosvkem colors
+Plug 'tjammer/blayu.vim'                        " blayu colors
 
 " Dev tools
 Plug 'janko-m/vim-test'                         " Test runner
@@ -176,7 +177,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme Iosvkem
+colorscheme blayu
 " Transparent background
 hi Normal guibg=NONE
 hi LineNr guibg=NONE

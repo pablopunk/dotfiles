@@ -10,6 +10,13 @@ alias gcm='git commit -m'
 alias gcam='git add -A && git commit -m'
 alias gca='git add -A && git commit'
 alias gck='git checkout'
+function gclone {
+  if [ "$1" = "pablopunk" ]; then
+    git clone git@github.com:pablopunk/$2
+  else
+    git clone https://github.com/$1/$2
+  fi
+}
 # ls aliases
 alias ll='ls -lagh'
 alias la='ls -a1'

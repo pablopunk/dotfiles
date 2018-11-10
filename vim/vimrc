@@ -72,6 +72,9 @@ nnoremap <Leader>1 :tabe ~/todo.txt<cr>
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
+" Use ctrl+F to trigger file completion
+inoremap <c-f> <c-x><c-f>
+
 " Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
@@ -130,6 +133,7 @@ Plug 'pablopunk/better-find.vim'                " Better find command
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
+Plug 'tacahiroy/ctrlp-funky'                    " CtrlP addon to search functions
 
 " File tools
 Plug 'danro/rename.vim'                         " Rename the current file with :Rename
@@ -155,6 +159,9 @@ Plug 'itchyny/lightline.vim'                    " Status bar
 
 " Colors
 Plug 'dracula/vim', { 'as': 'dracula' }         " Dracula colors
+
+" Dev tools
+Plug 'janko-m/vim-test'                         " Test runner
 
 " End of plugins
 call plug#end()

@@ -32,8 +32,6 @@ alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias python=python3
 alias pip=pip3
-
-# Custom functions
 function masl {
   mas search $1 | head -n1 | awk '{print $1;}' | xargs mas install
 }

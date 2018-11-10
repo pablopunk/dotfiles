@@ -2,7 +2,9 @@
 "\e[A":history-search-backward
 # arrow down
 "\e[B":history-search-forward
-# Ignore case
+# zsh like completion on tab
 $if Bash
 set completion-ignore-case on
+set show-all-if-ambiguous on
+TAB:menu-complete
 $endif

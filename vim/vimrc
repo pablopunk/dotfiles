@@ -36,6 +36,12 @@ inoremap <c-c> <esc>
 nnoremap <c-s> <esc>:w<CR>
 inoremap <c-s> <esc>:w<CR>
 
+" Ctrl+hjkl moves split focus
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
 " Ctrl+t new tab
 nnoremap <c-t> <esc>:tabe<cr>
 
@@ -150,9 +156,6 @@ Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
-
-" Navigation tools
-Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim splits
 
 " Interface
 Plug 'itchyny/lightline.vim'                    " Status bar

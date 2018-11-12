@@ -66,6 +66,12 @@ nnoremap <Leader>A :ALEPrevious<cr>
 nnoremap <Leader>t :terminal<cr>
 inoremap <Leader>t <esc>:terminal<cr>
 
+" Open .vimrc
+nnoremap <Leader>v :e ~/.vimrc<cr>
+
+" 0 goes to first indentation
+nnoremap 0 ^
+
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 

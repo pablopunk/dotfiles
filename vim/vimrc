@@ -170,6 +170,8 @@ Plug 'itchyny/lightline.vim'                    " Status bar
 Plug 'dracula/vim', { 'as': 'dracula' }         " dracula colors
 Plug 'neutaaaaan/iosvkem'                       " Iosvkem colors
 Plug 'tjammer/blayu.vim'                        " blayu colors
+Plug 'herrbischoff/cobalt2.vim'                 " cobalt2 colors
+Plug 'Lokaltog/vim-monotone'                    " monotone colors
 
 " Dev tools
 Plug 'janko-m/vim-test'                         " Test runner
@@ -186,7 +188,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme blayu
+colorscheme monotone
 " Transparent background
 hi Normal guibg=NONE
 hi LineNr guibg=NONE

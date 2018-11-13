@@ -174,10 +174,6 @@ Plug 'janko-m/vim-test'                         " Test runner
 Plug 'Lokaltog/neoranger'                       " Ranger file manager
 
 " Colors
-Plug 'dracula/vim', { 'as': 'dracula' }         " dracula colors
-Plug 'neutaaaaan/iosvkem'                       " Iosvkem colors
-Plug 'tjammer/blayu.vim'                        " blayu colors
-Plug 'herrbischoff/cobalt2.vim'                 " cobalt2 colors
 Plug 'Lokaltog/vim-monotone'                    " monotone colors
 
 " End of plugins
@@ -192,7 +188,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme monotone
+colorscheme desert
 " Transparent background
 hi Normal guibg=NONE
 hi LineNr guibg=NONE

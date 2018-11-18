@@ -97,8 +97,8 @@ nnoremap <Right> <Nop>
 vnoremap < <gv
 vnoremap > >gv
 
-" Map ESC key to exit insert mode in NeoVim's :terminal
-if has('nvim')
+" Map ESC key to exit insert mode in :terminal
+if has('terminal')
   tnoremap <Esc> <C-\><C-n>
 endif
 

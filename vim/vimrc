@@ -81,9 +81,6 @@ nnoremap <Leader>, :CtrlPBuffer<cr>
 " Use leader+1 to open todo.txt on new tab
 nnoremap <Leader>1 :tabe ~/todo.txt<cr>
 
-" Use leader+. to open file manager
-nnoremap <Leader>. :Ranger<cr>
-
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
@@ -171,10 +168,11 @@ Plug 'itchyny/lightline.vim'                    " Status bar
 
 " Project tools
 Plug 'janko-m/vim-test'                         " Test runner
-Plug 'Lokaltog/neoranger'                       " Ranger file manager
 
 " Colors
+Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'Lokaltog/vim-monotone'                    " monotone colors
+Plug 'connorholyday/vim-snazzy'                 " snazzy colors
 
 " End of plugins
 call plug#end()
@@ -188,11 +186,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme desert
-" Transparent background
-hi Normal guibg=NONE
-hi LineNr guibg=NONE
-hi SignColumn guibg=NONE ctermbg=NONE
+colorscheme snazzy
 " Italic comments
 hi Comment gui=italic cterm=italic
 " Search terms underlined (no bg)

@@ -148,7 +148,6 @@ Plug 'pablopunk/better-find.vim'                " Better find command
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
-Plug 'tacahiroy/ctrlp-funky'                    " CtrlP addon to search functions
 
 " File tools
 Plug 'danro/rename.vim'                         " Rename the current file with :Rename
@@ -156,7 +155,6 @@ Plug 'danro/rename.vim'                         " Rename the current file with :
 " Html tools
 Plug 'mattn/emmet-vim'                          " Very cool html snippets
 Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
-Plug 'alvan/vim-closetag'                       " Auto close html tag
 
 " Syntax tools
 Plug 'w0rp/ale'                                 " Syntax checker
@@ -166,14 +164,9 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
-" Interface
-Plug 'itchyny/lightline.vim'                    " Status bar
-
-" Project tools
-Plug 'janko-m/vim-test'                         " Test runner
-
 " Colors
-Plug 'Lokaltog/vim-monotone'                    " monotone colors
+Plug 'pablopunk/transparent.vim'                " Make vim transparent
+Plug 'connorholyday/vim-snazzy'                 " snazzy colors
 
 " End of plugins
 call plug#end()
@@ -187,22 +180,11 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme desert
-" Transparent background
-hi Normal guibg=NONE
-hi LineNr guibg=NONE
-hi SignColumn guibg=NONE
-hi NonText guibg=NONE
+colorscheme snazzy
 " Italic comments
 hi Comment gui=italic cterm=italic
 " Search terms underlined (no bg)
 hi Search guifg=orange guibg=NONE gui=underline
-
-" Lightline config
-let g:lightline = {
-  \ 'colorscheme': 'wombat',
-  \ }
-set noshowmode " Hide vim native mode
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
@@ -251,3 +233,5 @@ command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fix
 command! TS :let g:ale_linters = { 'typescript': ['tslint'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
 "" Disable js linters
 command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
+
+syntax off

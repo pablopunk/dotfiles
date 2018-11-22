@@ -40,10 +40,13 @@ function masl {
 export PATH="/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 
 # Use bashy if it exist
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  pre='(ssh) '
+fi
 if hash bashy 2>/dev/null; then
-  export PS1='${machine}$(bashy -r) '
+  export PS1='${pre}$(bashy -r) '
 else
-  export PS1='${machine}\W '
+  export PS1='${pre}\W '
 fi
 
 # Use .bash_additional for no backed up configs

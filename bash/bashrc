@@ -49,6 +49,9 @@ else
   export PS1='${pre}\W '
 fi
 
+# Bash autocompletion
+[[ -f /etc/bash_completion ]] && . /etc/bash_completion
+
 # Use .bash_additional for no backed up configs
 F=$HOME/.bash_additional; [ -f $F ] && . $F
 

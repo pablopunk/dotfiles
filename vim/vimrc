@@ -233,5 +233,3 @@ command! ST :let g:ale_linters = { 'javascript': ['standard'] } | :let g:ale_fix
 command! TS :let g:ale_linters = { 'typescript': ['tslint'] } | :let g:ale_fixers = { 'typescript': ['tslint'] }
 "" Disable js linters
 command! NO :let g:ale_linters = { 'javascript': [] } | :let g:ale_fixers = { 'javascript': [] }
-
-syntax off

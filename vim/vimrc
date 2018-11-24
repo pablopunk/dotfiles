@@ -42,6 +42,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" Space to scroll in normal mode
+nnoremap <space> <c-d>
+
 " Ctrl+t new tab
 nnoremap <c-t> <esc>:tabe<cr>
 
@@ -165,7 +168,6 @@ Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
 " Colors
-Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'connorholyday/vim-snazzy'                 " snazzy colors
 
 " End of plugins

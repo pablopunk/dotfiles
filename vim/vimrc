@@ -168,6 +168,7 @@ Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 
 " Colors
+Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'connorholyday/vim-snazzy'                 " snazzy colors
 
 " End of plugins

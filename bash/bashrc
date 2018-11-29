@@ -58,3 +58,4 @@ F=$HOME/.bash_additional; [ -f $F ] && . $F
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef
 stty stop undef
+export PATH="$HOME/.cargo/bin:$PATH"

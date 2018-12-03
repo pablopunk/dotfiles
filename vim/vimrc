@@ -136,6 +136,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                   " Show changes on each line
 Plug 'tpope/vim-fugitive'                       " A lot of awesome things with git
 
+" Navigation tools
+Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim panes
+
 " Editting tools
 Plug 'pablopunk/persistent-undo.vim'            " Persistent undo across sessions
 Plug 'pablopunk/hot-reload.vim'                 " Reload vimrc on save
@@ -193,7 +196,6 @@ hi Search guifg=orange guibg=NONE gui=underline
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
-let g:ctrlp_working_path_mode = 'ra'
 
 " Ale config
 let g:ale_sign_error = '•'

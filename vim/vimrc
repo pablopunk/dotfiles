@@ -144,6 +144,7 @@ Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
 Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
+Plug 'tpope/vim-repeat'                         " . command does more
 Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 
 " Search tools
@@ -166,6 +167,7 @@ Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
+Plug 'vmchale/ion-vim'                          " Ion shell syntax
 
 " Colors
 Plug 'pablopunk/transparent.vim'                " Make vim transparent
@@ -191,6 +193,7 @@ hi Search guifg=orange guibg=NONE gui=underline
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
+let g:ctrlp_working_path_mode = 'ra'
 
 " Ale config
 let g:ale_sign_error = '•'
@@ -219,6 +222,7 @@ let g:ackprg = 'ag --nogroup --column'
 let g:jsx_ext_required = 0
 
 " Commands
+command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! Eslint
   \ :let g:ale_linters.javascript = ['eslint'] |
   \ :let g:ale_linters.typescript = ['eslint'] |

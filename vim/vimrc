@@ -173,6 +173,7 @@ Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'vmchale/ion-vim'                          " Ion shell syntax
 
 " Colors
+Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'Alvarocz/vim-northpole'                   " northpole colors
 
 " End of plugins

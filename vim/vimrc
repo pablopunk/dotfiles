@@ -173,8 +173,7 @@ Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'vmchale/ion-vim'                          " Ion shell syntax
 
 " Colors
-Plug 'pablopunk/transparent.vim'                " Make vim transparent
-Plug 'connorholyday/vim-snazzy'                 " snazzy colors
+Plug 'Alvarocz/vim-northpole'                   " northpole colors
 
 " End of plugins
 call plug#end()
@@ -188,7 +187,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme snazzy
+colorscheme northpole
 " Italic comments
 hi Comment gui=italic cterm=italic
 " Search terms underlined (no bg)

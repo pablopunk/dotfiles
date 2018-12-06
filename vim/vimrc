@@ -5,18 +5,17 @@
 filetype plugin indent on
 syntax on
 
-set ttyfast               " Faster redrawing
-set lazyredraw            " Only when necessary
-set encoding=utf-8        " Unicode
-set incsearch             " Incremental search
-set hlsearch              " Highlight search term
-set ignorecase            " Search is case insensitive
-set smartcase             " Unless your search has capital letters
-set mouse=a               " Allow mouse integration
-
-
-" Delete key sometimes does not work, here's the fix
-set backspace=indent,eol,start
+set ttyfast                    " Faster redrawing
+set lazyredraw                 " Only when necessary
+set encoding=utf-8             " Unicode
+set incsearch                  " Incremental search
+set hlsearch                   " Highlight search term
+set ignorecase                 " Search is case insensitive
+set smartcase                  " Unless your search has capital letters
+set mouse=a                    " Allow mouse integration
+set backspace=indent,eol,start " Fix delete key
+set showtabline=2              " Always show tabs
+set cursorline                 " Highlight cursor line
 
 
 "
@@ -132,25 +131,26 @@ set expandtab shiftround smartindent autoindent
 " Start plugins
 call plug#begin('~/.vim/plugged')
 
-" Git plugins
+" Project
 Plug 'airblade/vim-gitgutter'                   " Show changes on each line
 Plug 'tpope/vim-fugitive'                       " A lot of awesome things with git
+Plug 'editorconfig/editorconfig-vim'            " Custom indentation and syntax per project
 
-" Navigation tools
+" Keybindings
 Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim panes
+Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 
-" Editting tools
+" Edit
 Plug 'pablopunk/persistent-undo.vim'            " Persistent undo across sessions
 Plug 'pablopunk/hot-reload.vim'                 " Reload vimrc on save
 Plug 'pablopunk/dynamic-file-completion.vim'    " Current directory for <c-x><c-f>
 Plug 'terryma/vim-multiple-cursors'             " Find all and edit
 Plug 'tpope/vim-commentary'                     " Toggle comments
-Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
 Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
 Plug 'tpope/vim-repeat'                         " . command does more
 Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
 
-" Search tools
+" Search
 Plug 'pablopunk/better-find.vim'                " Better find command
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
@@ -165,16 +165,18 @@ Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
 
 " Syntax tools
 Plug 'w0rp/ale'                                 " Syntax checker
-Plug 'editorconfig/editorconfig-vim'            " Use custom indentation and syntax (global/project .editorconfig)
 Plug 'prettier/vim-prettier'                    " Prettier JS
 Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'vmchale/ion-vim'                          " Ion shell syntax
 
+" UI
+Plug 'vim-airline/vim-airline'                  " Airline status bar
+
 " Colors
-Plug 'pablopunk/transparent.vim'                " Make vim transparent
-Plug 'Alvarocz/vim-northpole'                   " northpole colors
+" Plug 'pablopunk/transparent.vim'                " Make vim transparent
+Plug 'morhetz/gruvbox'                          " gruvbox colors
 
 " End of plugins
 call plug#end()
@@ -188,11 +190,17 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme northpole
+colorscheme gruvbox
 " Italic comments
-hi Comment gui=italic cterm=italic
+hi Comment gui=italic
 " Search terms underlined (no bg)
 hi Search guifg=orange guibg=NONE gui=underline
+" Current line color
+hi CursorLine guibg=#3d3d3d
+
+" Airline config
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'jsformatter'
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

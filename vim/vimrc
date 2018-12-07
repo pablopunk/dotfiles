@@ -175,7 +175,7 @@ Plug 'vmchale/ion-vim'                          " Ion shell syntax
 Plug 'vim-airline/vim-airline'                  " Airline status bar
 
 " Colors
-" Plug 'pablopunk/transparent.vim'                " Make vim transparent
+Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'morhetz/gruvbox'                          " gruvbox colors
 
 " End of plugins
@@ -200,7 +200,7 @@ hi CursorLine guibg=#3d3d3d
 
 " Airline config
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'jsformatter'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'

@@ -1,0 +1,14 @@
+function powersave {
+  # linux
+  sudo cpufreq-set -g powersave && \
+    sudo pm-powersave true
+}
+
+function gclone {
+  if [ "$1" = "pablopunk" ]; then
+    git clone git@github.com:pablopunk/$2
+  else
+    git clone https://github.com/$1/$2
+  fi
+}
+

@@ -10,13 +10,6 @@ alias gcm='git commit -m'
 alias gcam='git add -A && git commit -m'
 alias gca='git add -A && git commit'
 alias gck='git checkout'
-function gclone {
-  if [ "$1" = "pablopunk" ]; then
-    git clone git@github.com:pablopunk/$2
-  else
-    git clone https://github.com/$1/$2
-  fi
-}
 # ls aliases
 alias ll='ls -lagh'
 alias la='ls -a1'
@@ -32,9 +25,7 @@ alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias python=python3
 alias pip=pip3
-function masl {
-  mas search $1 | head -n1 | awk '{print $1;}' | xargs mas install
-}
+source ~/.bash_functions
 
 # PATH
 export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"

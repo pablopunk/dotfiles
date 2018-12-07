@@ -4,6 +4,11 @@ function powersave {
     sudo pm-powersave true
 }
 
+function power {
+  sudo cpufreq-set -g performance && \
+    sudo pm-powersave false
+}
+
 function gclone {
   if [ "$1" = "pablopunk" ]; then
     git clone git@github.com:pablopunk/$2

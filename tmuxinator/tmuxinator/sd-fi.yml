@@ -1,0 +1,16 @@
+# ~/.tmuxinator/sd-fi.yml
+
+name: sd-fi
+root: ~/src/superdesk-fi
+
+# Runs before everything. Use it to start daemons etc.
+pre: sudo service elasticsearch restart
+
+windows:
+  - code: nvim
+  - logs:
+      layout: even-horizontal
+      panes:
+        - cd server && honcho start
+        - cd client && npx grunt
+  - bash: git status

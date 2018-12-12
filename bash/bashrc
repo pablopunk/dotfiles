@@ -30,6 +30,9 @@ source ~/.bash_functions
 # PATH
 export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 
+# Vars
+export EDITOR=nvim
+
 # Use bashy if it exist
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   pre='(ssh) '

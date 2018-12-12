@@ -17,3 +17,7 @@ function gclone {
   fi
 }
 
+function grebase {
+  git fetch upstream && \
+    git rebase upstream/master
+}

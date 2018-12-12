@@ -1,0 +1,9 @@
+# ~/.tmuxinator/sd.yml
+
+name: sd
+root: ~/src/superdesk-client-core
+
+windows:
+  - code: nvim
+  - grunt: npx grunt
+  - bash: git status

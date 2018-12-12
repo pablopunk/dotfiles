@@ -44,11 +44,15 @@ nnoremap <c-l> <c-w>l
 " Space to scroll in normal mode
 nnoremap <space> <c-d>
 
-" Ctrl+t new tab
-nnoremap <c-t> <esc>:tabe<cr>
+" Navigate through buffers
+nnoremap gb :bn<cr>
+nnoremap gB :bp<cr>
 
-" Ctrl+q close file
-nnoremap <c-q> <esc>:q<cr>
+" Ctrl+t new tab
+nnoremap <c-t> :tabe<cr>
+
+" Ctrl+q close buffer
+nnoremap <c-q> :bd<cr>
 
 " Format file indentation
 nnoremap <Leader><Tab> <esc>gg=G``zz
@@ -81,7 +85,7 @@ nnoremap ] :ALEGoToDefinition<CR>
 nnoremap <Leader>, :CtrlPBuffer<cr>
 
 " Use CtrlP to search in the current file dir
-nnoremap <c-s-p> :CtrlPCurFile<cr>
+nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 " Use leader+1 to open todo.txt on new tab
 nnoremap <Leader>1 :tabe ~/todo.txt<cr>
@@ -175,7 +179,7 @@ Plug 'vmchale/ion-vim'                          " Ion shell syntax
 Plug 'vim-airline/vim-airline'                  " Airline status bar
 
 " Colors
-Plug 'pablopunk/transparent.vim'                " Make vim transparent
+" Plug 'pablopunk/transparent.vim'                " Make vim transparent
 Plug 'morhetz/gruvbox'                          " gruvbox colors
 
 " End of plugins

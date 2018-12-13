@@ -32,6 +32,7 @@ export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$H
 
 # Vars
 export EDITOR=nvim
+export HISTFILESIZE=999999
 
 # Use bashy if it exist
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then

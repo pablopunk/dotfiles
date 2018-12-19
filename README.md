@@ -20,21 +20,3 @@ $ bash install.sh
 '~/.tmux.conf'            -> '~/.dotfiles/tmux/tmux.conf'
 '~/.vimrc'                -> '~/.dotfiles/vim/vimrc'
 ```
-
-# Contents
-
-- bash
-  - aliases
-  - `.inputrc` to complete bash history with arrow keys
-  - [bashy prompt](https://github.com/pablopunk/bashy)
-- editorconfig
-  - basic editorconfig global settings
-- hyper
-  - really basic config
-- nvim
-  - delegates all configs to `~/.vimrc`
-- tmux
-  - controls to navigate between tmux panes and vim panes
-- vim
-  - more plugins than I need
-  - a lot of things I don't wanna talk about

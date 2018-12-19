@@ -2,6 +2,7 @@
 #!/bin/bash
 
 function preinstall {
+  rm -r ~/.tmuxinator
   mkdir -p ~/.tmuxinator
 }
 
@@ -9,4 +10,4 @@ function preinstall {
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # link config file
-preinstall && ln -svf $dir/tmuxinator ~/.tmuxinator
+preinstall && ln -svf $dir ~/.tmuxinator

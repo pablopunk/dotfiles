@@ -3,7 +3,6 @@
 
 function preinstall {
   rm -r ~/.tmuxinator
-  mkdir -p ~/.tmuxinator
 }
 
 # get script directory

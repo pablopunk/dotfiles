@@ -2,11 +2,11 @@
 #!/bin/bash
 
 function preinstall {
-  mkdir -p ~/.tmuxinator
+  rm -r ~/.tmuxinator
 }
 
 # get script directory
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # link config file
-preinstall && ln -svf $dir/tmuxinator ~/.tmuxinator
+preinstall && ln -svf $dir ~/.tmuxinator

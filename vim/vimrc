@@ -16,6 +16,7 @@ set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
 set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
+set noshowmode                 " Don't show the mode you're in
 
 
 "

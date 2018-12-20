@@ -1,0 +1,26 @@
+alias g=git
+alias gst='git status'
+alias gp='git push'
+alias gl='git pull'
+alias glog='git log --oneline --decorate --graph'
+alias gd='git diff -w'
+alias gds='git diff -w --staged'
+alias gcm='git commit -m'
+alias gcam='git add -A && git commit -m'
+alias gca='git add -A && git commit'
+alias gck='git checkout'
+# ls aliases
+alias ll='ls -lagh'
+alias la='ls -a1'
+alias l='ls -a1'
+alias lr='ls -rt1' # most recent(t) file at the bottom(r) in 1 column(1)
+alias t='tree -L 3'
+# other
+alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
+alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
+alias vim=nvim
+alias vi=nvim
+alias todo=todo.sh
+alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
+alias python=python3
+alias pip=pip3

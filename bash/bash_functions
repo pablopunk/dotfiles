@@ -21,3 +21,8 @@ function grebase {
   git fetch upstream && \
     git rebase upstream/master
 }
+
+function copy {
+  [ "$(uname)" == "Linux" ] && xsel --clipboard --input
+  [ "$(uname)" == "Darwin" ] && pbcopy
+}

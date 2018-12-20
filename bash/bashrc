@@ -1,36 +1,9 @@
-# git aliases
-alias g=git
-alias gst='git status'
-alias gp='git push'
-alias gl='git pull'
-alias glog='git log --oneline --decorate --graph'
-alias gd='git diff -w'
-alias gds='git diff -w --staged'
-alias gcm='git commit -m'
-alias gcam='git add -A && git commit -m'
-alias gca='git add -A && git commit'
-alias gck='git checkout'
-# ls aliases
-alias ll='ls -lagh'
-alias la='ls -a1'
-alias l='ls -a1'
-alias lr='ls -rt1' # most recent(t) file at the bottom(r) in 1 column(1)
-alias t='tree -L 3'
-# other
-alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
-alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
-alias vim=nvim
-alias vi=nvim
-alias todo=todo.sh
-alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
-alias python=python3
-alias pip=pip3
 source ~/.bash_functions
-
-# PATH
-export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
+source ~/.bash_aliases
+F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
 
 # Vars
+export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim
 export HISTFILESIZE=999999
 
@@ -47,9 +20,6 @@ fi
 # Bash completion
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-# Use .bash_additional for no backed up configs
-F=$HOME/.bash_additional; [ -f $F ] && . $F
 
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef

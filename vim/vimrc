@@ -82,6 +82,10 @@ nnoremap 0 ^
 " Go to tag
 nnoremap ] :ALEGoToDefinition<CR>
 
+" Toggle zen mode
+nnoremap <Leader>z :Goyo<cr>
+inoremap <Leader>z :Goyo<cr>
+
 " Use CtrlP to search in buffers with leader+,
 nnoremap <Leader>, :CtrlPBuffer<cr>
 
@@ -178,6 +182,7 @@ Plug 'vmchale/ion-vim'                          " Ion shell syntax
 
 " UI
 Plug 'vim-airline/vim-airline'                  " Airline status bar
+Plug 'junegunn/goyo.vim'                        " Zen mode
 
 " Colors
 " Plug 'pablopunk/transparent.vim'                " Make vim transparent

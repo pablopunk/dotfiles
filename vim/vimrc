@@ -24,7 +24,7 @@ set noshowmode                 " Don't show the mode you're in
 "
 
 " Remap leader key
-let mapleader = ","
+let mapleader = "\<space>"
 
 " Disable Ex Mode
 nnoremap Q <Nop>
@@ -56,25 +56,25 @@ nnoremap <c-t> :tabe<cr>
 nnoremap <c-q> :bd<cr>
 
 " Format file indentation
-nnoremap <Leader><Tab> <esc>gg=G``zz
+nnoremap <leader><Tab> <esc>gg=G``zz
 
 " Open ACK search tool for current word
-nnoremap <Leader>f :Ack <cword><cr>
+nnoremap <leader>f :Ack <cword><cr>
 
 " Navigate through git changes on file
-nnoremap <Leader>g :GitGutterNextHunk<cr>
-nnoremap <Leader>G :GitGutterPrevHunk<cr>
+nnoremap <leader>g :GitGutterNextHunk<cr>
+nnoremap <leader>G :GitGutterPrevHunk<cr>
 
 " Navigate through ALE's error/warnings
-nnoremap <Leader>a :ALENext<cr>
-nnoremap <Leader>A :ALEPrevious<cr>
+nnoremap <leader>a :ALENext<cr>
+nnoremap <leader>A :ALEPrevious<cr>
 
 " Open terminal
-nnoremap <Leader>t :terminal<cr>
-inoremap <Leader>t <esc>:terminal<cr>
+nnoremap <leader>t :terminal<cr>
+inoremap <leader>t <esc>:terminal<cr>
 
 " Open .vimrc
-nnoremap <Leader>v :e ~/.vimrc<cr>
+nnoremap <leader>v :e ~/.vimrc<cr>
 
 " 0 goes to first indentation
 nnoremap 0 ^
@@ -83,17 +83,17 @@ nnoremap 0 ^
 nnoremap ] :ALEGoToDefinition<CR>
 
 " Toggle zen mode
-nnoremap <Leader>z :Goyo<cr>
-inoremap <Leader>z :Goyo<cr>
+nnoremap <leader>z :Goyo<cr>
+inoremap <leader>z :Goyo<cr>
 
-" Use CtrlP to search in buffers with leader+,
-nnoremap <Leader>, :CtrlPBuffer<cr>
+" Use CtrlP to search in buffers with leader+leader
+nnoremap <leader><leader> :CtrlPBuffer<cr>
 
 " Use CtrlP to search in the current file dir
 nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 " Use leader+1 to open todo.txt on new tab
-nnoremap <Leader>1 :tabe ~/todo.txt<cr>
+nnoremap <leader>1 :tabe ~/todo.txt<cr>
 
 " Use Tab for emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -117,7 +117,7 @@ if has('terminal') || has('nvim')
 endif
 
 " Identify the syntax group of the word at the cursor
-map <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 

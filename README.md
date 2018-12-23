@@ -9,6 +9,7 @@ git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 You can install all dotfiles at once:
 
 ```shell
+$ bash install.sh
 '/home/pablopunk/.bash_aliases' -> '/home/pablopunk/.dotfiles/bash/bash_aliases'
 '/home/pablopunk/.bash_functions' -> '/home/pablopunk/.dotfiles/bash/bash_functions'
 '/home/pablopunk/.bash_hello' -> '/home/pablopunk/.dotfiles/bash/bash_hello'

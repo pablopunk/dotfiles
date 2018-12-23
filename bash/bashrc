@@ -1,5 +1,6 @@
 source ~/.bash_functions
 source ~/.bash_aliases
+source ~/.bash_hello
 F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
 
 # Vars
@@ -24,4 +25,3 @@ fi
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef
 stty stop undef
-export PATH="$HOME/.cargo/bin:$PATH"

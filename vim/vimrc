@@ -71,7 +71,6 @@ nnoremap <leader>A :ALEPrevious<cr>
 
 " Open terminal
 nnoremap <leader>t :terminal<cr>
-inoremap <leader>t <esc>:terminal<cr>
 
 " Open .vimrc
 nnoremap <leader>v :e ~/.vimrc<cr>
@@ -84,7 +83,6 @@ nnoremap ] :ALEGoToDefinition<CR>
 
 " Toggle zen mode
 nnoremap <leader>z :Goyo<cr>
-inoremap <leader>z :Goyo<cr>
 
 " Use CtrlP to search in buffers with leader+leader
 nnoremap <leader><leader> :CtrlPBuffer<cr>

@@ -1,3 +1,4 @@
+# run only if `gcalcli` exists and the cache is empty
 if [ ! -f /tmp/bash_hello ] && hash gcalcli 2>/dev/null; then
   bold="\e[1m"
   normal="\e[0m"
@@ -13,9 +14,11 @@ if [ ! -f /tmp/bash_hello ] && hash gcalcli 2>/dev/null; then
   personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1')
   personal="${personal/$tomorrow_words}"
   personal="${personal/$today_words}"
+
   work=$(gcalcli --configFolder ~/.config/gcalcli/work --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1')
   work="${work/$tomorrow_words}"
   work="${work/$today_words}"
+
   rmadrid=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="Real Madrid" --nocolor agenda 12am $one_week_range --military | awk '{$1=$1};1')
   rmadrid="${rmadrid/$tomorrow_words}"
   rmadrid="${rmadrid/$today_words}"
@@ -41,6 +44,7 @@ if [ ! -f /tmp/bash_hello ] && hash gcalcli 2>/dev/null; then
     ) | column -s $'\t' -tn && echo && echo
   )
 
+  # save to cache
   echo "$output" > /tmp/bash_hello
 fi
 

@@ -7,7 +7,7 @@ if [ ! -f /tmp/bash_hello ] && hash gcalcli 2>/dev/null; then
   blue="\e[34m"
 
   tomorrow_range="$(date --date="tomorrow" -I)T23:59"
-  one_week_range="$(date --date="month" -I)T23:59"
+  one_week_range="$(date --date="week" -I)T23:59"
   tomorrow_words=$(date --date="tomorrow" +"%a %b %d")
   today_words=$(date +"%a %b %d")
 

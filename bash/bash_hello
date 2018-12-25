@@ -1,5 +1,10 @@
-# run only if `gcalcli` exists and the cache is empty
-if [ ! -f /tmp/bash_hello ] && hash gcalcli 2>/dev/null; then
+# run only if:
+#   * `gcalcli` exists and it is configured
+#   * cache is empty
+if [ ! -f /tmp/bash_hello ] && \
+  [ "$(ls -A ~/.config/gcalcli/personal)" ] && \
+  [ "$(ls -A ~/.config/gcalcli/work)" ] && \
+  hash gcalcli 2>/dev/null ; then
   bold="\e[1m"
   normal="\e[0m"
   green="\e[32m"

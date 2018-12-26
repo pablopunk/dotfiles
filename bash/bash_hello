@@ -1,12 +1,12 @@
 # run only if:
-#   * internet connection OK
 #   * `gcalcli` exists and it is configured
 #   * cache is empty
-if wget -q --spider http://google.com && \
-  [ ! -f "/tmp/bash_hello" ] && \
+#   * internet connection OK
+if [ ! -f "/tmp/bash_hello" ] && \
   [ -f ~/.config/gcalcli/personal/oauth ] && \
   [ -f ~/.config/gcalcli/work/oauth ] && \
-  hash gcalcli 2>/dev/null; then
+  hash gcalcli 2>/dev/null && \
+  wget -q --spider http://google.com ; then
   bold="\e[1m"
   normal="\e[0m"
   green="\e[32m"

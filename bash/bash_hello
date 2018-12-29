@@ -55,4 +55,6 @@ if [ ! -f "/tmp/bash_hello" ] && \
   echo "$output" > /tmp/bash_hello
 fi
 
+echo
 cat /tmp/bash_hello 2>/dev/null
+echo

@@ -24,3 +24,6 @@ alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias python=python3
 alias pip=pip3
 alias rm=trash
+if [ "$(uname)" == "Linux" ]; then
+  alias open=xdg-open
+fi

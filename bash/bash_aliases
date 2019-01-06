@@ -16,11 +16,11 @@ alias l='ls -a1'
 alias lr='ls -rt1' # most recent(t) file at the bottom(r) in 1 column(1)
 alias t='tree -L 3'
 # other
-alias cacl='php app/console ca:cl -e prod && php app/console ca:cl -e dev'
-alias prof='PS4='"'"'$(gdate "+%s.%N ($LINENO) + ")'"'"' bash -x '
+alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vim=nvim
 alias vi=nvim
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias python=python3
 alias pip=pip3
+alias rm=trash

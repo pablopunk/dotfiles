@@ -37,17 +37,17 @@ if [ ! -f "/tmp/bash_hello" ] && \
       echo
       echo -e ${bold}${green}Personal${normal}
       echo
-      echo -e "$personal" | awk '{$1=$1};1'
+      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=30 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
     ) <(
       echo
       echo -e ${bold}${blue}Work${normal}
       echo
-      echo -e "$work" | awk '{$1=$1};1'
+      echo -e "$work" | awk '{$1=$1};1' | awk -v len=30 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
     ) <(
       echo
       echo -e ${bold}${magenta}Real Madrid${normal}
       echo
-      echo -e "$rmadrid" | awk '{$1=$1};1' | sed 's/ *-* *Real Madrid *-*//g' | cut -d' ' -f-1,3-
+      echo -e "$rmadrid" | awk '{$1=$1};1' | sed 's/ *-* *Real Madrid *-*//g'
     ) | column -s $'\t' -tn && echo && echo
   )
 

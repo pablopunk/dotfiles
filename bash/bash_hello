@@ -1,11 +1,11 @@
 # run only if:
-#   * `gcalcli` exists and it is configured
 #   * cache is empty
+#   * `gcalcli` exists and it is configured
 #   * internet connection OK
-if [ ! -f "/tmp/bash_hello" ] && \
+if [ ! -f "/tmp/bash_hello_calendar" ] && \
+  hash gcalcli 2>/dev/null && \
   [ -f ~/.config/gcalcli/personal/oauth ] && \
   [ -f ~/.config/gcalcli/work/oauth ] && \
-  hash gcalcli 2>/dev/null && \
   wget -q --spider http://google.com ; then
   bold="\e[1m"
   normal="\e[0m"
@@ -37,7 +37,7 @@ if [ ! -f "/tmp/bash_hello" ] && \
       echo
       echo -e ${bold}${green}Personal${normal}
       echo
-      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=30 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
+      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=20 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
     ) <(
       echo
       echo -e ${bold}${blue}Work${normal}
@@ -52,9 +52,33 @@ if [ ! -f "/tmp/bash_hello" ] && \
   )
 
   # save to cache
-  echo "$output" > /tmp/bash_hello
+  echo "$output" > /tmp/bash_hello_calendar
+fi
+
+# run only if:
+#   * shadow exists
+#   * cache is empty
+#   * internet connection OK
+if [ ! -f "/tmp/bash_hello_todo" ] && \
+  hash gcalcli 2>/dev/null && \
+  [ -f ~/.shadow ] && \
+  wget -q --spider http://google.com ; then
+  u="$(cat ~/.shadow | head -n 1)"
+  todo=$(curl -u $u --silent "https://mail.google.com/mail/feed/atom" | sed -e 's_>_&\
+_g' | sed -e 's_</_\
+&_g' | grep 🔴)
+
+  output=$(
+    echo -e ${bold}${green}"  To do"${normal}
+    echo -e "$todo" | sed -e 's/🔴/  >/'
+  )
+
+  # save to cache
+  echo "$output" > /tmp/bash_hello_todo
 fi
 
 echo
-cat /tmp/bash_hello 2>/dev/null
+cat /tmp/bash_hello_calendar 2>/dev/null
+echo
+cat /tmp/bash_hello_todo 2>/dev/null
 echo

@@ -76,6 +76,9 @@ nnoremap <leader>t :terminal<cr>
 " Open .vimrc
 nnoremap <leader>v :e ~/.vimrc<cr>
 
+" Go to def (tern)
+nnoremap <leader>d :TernDef<cr>
+
 " 0 goes to first indentation
 nnoremap 0 ^
 
@@ -100,8 +103,8 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
 
-" Use ctrl+N for omnicompletion
-inoremap <c-n> <c-x><c-o>
+" Use ctrl+O for omnicompletion
+inoremap <c-o> <c-x><c-o>
 
 " Disable arrow keys
 nnoremap <Up> <Nop>

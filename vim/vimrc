@@ -17,6 +17,7 @@ set backspace=indent,eol,start " Fix delete key
 set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
+set omnifunc=                  " Enable omnicompletion
 
 
 "
@@ -99,6 +100,9 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
 
+" Use ctrl+N for omnicompletion
+inoremap <c-n> <c-x><c-o>
+
 " Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
@@ -177,6 +181,7 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'vmchale/ion-vim'                          " Ion shell syntax
+Plug 'ternjs/tern_for_vim'                      " Analize JS to provide autocompletion
 
 " UI
 Plug 'vim-airline/vim-airline'                  " Airline status bar

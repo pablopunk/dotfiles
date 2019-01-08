@@ -81,4 +81,5 @@ echo
 cat /tmp/bash_hello_calendar 2>/dev/null
 echo
 cat /tmp/bash_hello_todo 2>/dev/null
+cat ~/todo.txt 2>/dev/null | sed -e 's/^/  > /g'
 echo

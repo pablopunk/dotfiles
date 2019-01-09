@@ -1,0 +1,17 @@
+# ~/.tmuxinator/sd.yml
+
+name: e2e
+root: ~/src/superdesk-client-core
+
+windows:
+  - tdd:
+      layout: even-horizontal
+      panes:
+        - nvim
+        - sleep 20 && npm run protractor
+  - logs:
+      layout: even-horizontal
+      panes:
+        - npm run start-test-server
+        - npx grunt
+  - bash: git status

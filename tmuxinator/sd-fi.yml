@@ -3,8 +3,7 @@
 name: sd-fi
 root: ~/src/superdesk-fi
 
-# Runs before everything. Use it to start daemons etc.
-pre: sudo service elasticsearch restart
+on_project_start: sudo service elasticsearch start
 
 windows:
   - code: nvim

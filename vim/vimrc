@@ -17,8 +17,15 @@ set backspace=indent,eol,start " Fix delete key
 set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
-set omnifunc=                  " Enable omnicompletion
 
+
+function! g:TryToGoToDef()
+  if exists('TernDef')
+    TernDef
+  else
+    ALEGoToDefinition
+  endif
+endfunction
 
 "
 " Key mapping
@@ -77,7 +84,7 @@ nnoremap <leader>t :terminal<cr>
 nnoremap <leader>v :e ~/.vimrc<cr>
 
 " Go to def (tern)
-nnoremap <leader>d :TernDef<cr>
+nnoremap <leader>d :call TryToGoToDef()<cr>
 
 " 0 goes to first indentation
 nnoremap 0 ^

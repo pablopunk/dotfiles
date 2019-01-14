@@ -17,6 +17,7 @@ set backspace=indent,eol,start " Fix delete key
 set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
+set number                     " Don't worry I'll change this quick
 
 
 function! g:TryToGoToDef()

@@ -1,3 +1,6 @@
+wget -q --spider http://google.com
+internet_ok=$?
+
 # run only if:
 #   * cache is empty
 #   * `gcalcli` exists and it is configured
@@ -6,7 +9,7 @@ if [ ! -f "/tmp/bash_hello_calendar" ] && \
   hash gcalcli 2>/dev/null && \
   [ -f ~/.config/gcalcli/personal/oauth ] && \
   [ -f ~/.config/gcalcli/work/oauth ] && \
-  wget -q --spider http://google.com ; then
+  [ $internet_ok -eq 0 ] ; then
   bold="\e[1m"
   normal="\e[0m"
   green="\e[32m"
@@ -62,7 +65,7 @@ fi
 if [ ! -f "/tmp/bash_hello_todo" ] && \
   hash gcalcli 2>/dev/null && \
   [ -f ~/.shadow ] && \
-  wget -q --spider http://google.com ; then
+  [ $internet_ok -eq 0 ] ; then
   u="$(cat ~/.shadow | head -n 1)"
   todo=$(curl -u $u --silent "https://mail.google.com/mail/feed/atom" | sed -e 's_>_&\
 _g' | sed -e 's_</_\
@@ -82,4 +85,3 @@ cat /tmp/bash_hello_calendar 2>/dev/null
 echo
 cat /tmp/bash_hello_todo 2>/dev/null
 cat ~/todo.txt 2>/dev/null | sed -e 's/^/  > /g'
-echo

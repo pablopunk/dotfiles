@@ -78,6 +78,13 @@ nnoremap <leader>G :GitGutterPrevHunk<cr>
 nnoremap <leader>a :ALENext<cr>
 nnoremap <leader>A :ALEPrevious<cr>
 
+" Toggle bookmark on line
+nnoremap <leader>b :BookmarkToggle<cr>
+
+" Navigate bookmarks
+nnoremap <leader>n :BookmarkNext<cr>
+nnoremap <leader>N :BookmarkPrev<cr>
+
 " Open terminal
 nnoremap <leader>t :terminal<cr>
 
@@ -177,6 +184,7 @@ Plug 'pablopunk/better-find.vim'                " Better find command
 Plug 'mileszs/ack.vim'                          " Find in all files
 Plug 'brooth/far.vim'                           " Find and replace in all files
 Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
+Plug 'MattesGroeger/vim-bookmarks'              " Bookmarks in code
 
 " File tools
 Plug 'danro/rename.vim'                         " Rename the current file with :Rename
@@ -192,6 +200,7 @@ Plug 'leafgarland/typescript-vim'               " Typescript syntax
 Plug 'mxw/vim-jsx'                              " Jsx syntax
 Plug 'pangloss/vim-javascript'                  " Improved JS syntax
 Plug 'vmchale/ion-vim'                          " Ion shell syntax
+Plug 'tkztmk/vim-vala'                          " Vala syntax
 Plug 'ternjs/tern_for_vim'                      " Analize JS to provide autocompletion
 
 " UI
@@ -228,6 +237,10 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
+
+" Bookmarks config
+let g:bookmark_sign = '♥'
+hi BookmarkSign guifg=#ff4920 guibg=#3c3836
 
 " Ale config
 let g:ale_sign_error = '•'

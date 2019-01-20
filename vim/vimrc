@@ -51,9 +51,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" Space to scroll in normal mode
-nnoremap <space> <c-d>
-
 " Navigate through buffers
 nnoremap gb :bn<cr>
 nnoremap gB :bp<cr>
@@ -270,6 +267,7 @@ let g:jsx_ext_required = 0
 
 " Commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
+command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
 command! Eslint
   \ :let g:ale_linters.javascript = ['eslint'] |
   \ :let g:ale_linters.typescript = ['tsserver'] |

@@ -158,55 +158,54 @@ set expandtab shiftround smartindent autoindent
 call plug#begin('~/.vim/plugged')
 
 " Project
-Plug 'airblade/vim-gitgutter'                   " Show changes on each line
-Plug 'tpope/vim-fugitive'                       " A lot of awesome things with git
-Plug 'editorconfig/editorconfig-vim'            " Custom indentation and syntax per project
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
 
 " Keybindings
-Plug 'christoomey/vim-tmux-navigator'           " Navigate between tmux and vim panes
-Plug 'christoomey/vim-system-copy'              " Copy to system clipboard with 'cp'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-system-copy'
 
 " Edit
-Plug 'pablopunk/persistent-undo.vim'            " Persistent undo across sessions
-Plug 'pablopunk/hot-reload.vim'                 " Reload vimrc on save
-Plug 'pablopunk/dynamic-file-completion.vim'    " Current directory for <c-x><c-f>
-Plug 'terryma/vim-multiple-cursors'             " Find all and edit
-Plug 'tpope/vim-commentary'                     " Toggle comments
-Plug 'tpope/vim-surround'                       " Surround words with brackets/quoutes/etc
-Plug 'tpope/vim-repeat'                         " . command does more
-Plug 'jiangmiao/auto-pairs'                     " Autoclose brackets, etc
+Plug 'pablopunk/persistent-undo.vim'
+Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
+Plug 'pablopunk/dynamic-file-completion.vim', { 'for': [ 'javascript', 'typescript' ] }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
 
 " Search
-Plug 'pablopunk/better-find.vim'                " Better find command
-Plug 'mileszs/ack.vim'                          " Find in all files
-Plug 'brooth/far.vim'                           " Find and replace in all files
-Plug 'ctrlpvim/ctrlp.vim'                       " Fuzzy finder
-Plug 'MattesGroeger/vim-bookmarks'              " Bookmarks in code
+Plug 'pablopunk/better-find.vim'
+Plug 'mileszs/ack.vim'
+Plug 'brooth/far.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " File tools
-Plug 'danro/rename.vim'                         " Rename the current file with :Rename
+Plug 'danro/rename.vim', { 'on': 'Rename' }
 
 " Html tools
-Plug 'mattn/emmet-vim'                          " Very cool html snippets
-Plug 'gregsexton/MatchTag'                      " Highlight matching html tag
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'typescript', 'html' ] }
+Plug 'gregsexton/MatchTag'
 
 " Syntax tools
-Plug 'w0rp/ale'                                 " Syntax checker
-Plug 'prettier/vim-prettier'                    " Prettier JS
-Plug 'leafgarland/typescript-vim'               " Typescript syntax
-Plug 'mxw/vim-jsx'                              " Jsx syntax
-Plug 'pangloss/vim-javascript'                  " Improved JS syntax
-Plug 'vmchale/ion-vim'                          " Ion shell syntax
-Plug 'tkztmk/vim-vala'                          " Vala syntax
-Plug 'ternjs/tern_for_vim'                      " Analize JS to provide autocompletion
+Plug 'w0rp/ale'
+Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript' ] }
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'vmchale/ion-vim', { 'for': 'ion' }
+Plug 'tkztmk/vim-vala', { 'for': 'vala' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 
 " UI
-Plug 'vim-airline/vim-airline'                  " Airline status bar
-Plug 'junegunn/goyo.vim'                        " Zen mode
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
-" Plug 'pablopunk/transparent.vim'                " Make vim transparent
-Plug 'morhetz/gruvbox'                          " gruvbox colors
+Plug 'morhetz/gruvbox'
 
 " End of plugins
 call plug#end()

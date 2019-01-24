@@ -11,7 +11,8 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.deno/bin"
 export EDITOR=nvim
-export HISTFILESIZE=999999
+export HISTSIZE=
+export HISTFILESIZE=
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
 

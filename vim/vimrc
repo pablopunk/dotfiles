@@ -81,6 +81,7 @@ nnoremap <leader>b :BookmarkToggle<cr>
 " Navigate bookmarks
 nnoremap <leader>n :BookmarkNext<cr>
 nnoremap <leader>N :BookmarkPrev<cr>
+nnoremap <leader>B :BookmarkShowAll<cr>
 
 " Open terminal
 nnoremap <leader>t :terminal<cr>

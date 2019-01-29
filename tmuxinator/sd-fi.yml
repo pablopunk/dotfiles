@@ -3,7 +3,7 @@
 name: sd-fi
 root: ~/src/superdesk-fi
 
-on_project_start: sudo service elasticsearch start
+pre: sudo service elasticsearch start
 
 windows:
   - code: nvim

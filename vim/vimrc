@@ -95,9 +95,6 @@ nnoremap <leader>d :call TryToGoToDef()<cr>
 " 0 goes to first indentation
 nnoremap 0 ^
 
-" Go to tag
-nnoremap ] :ALEGoToDefinition<CR>
-
 " Toggle zen mode
 nnoremap <leader>z :Goyo<cr>
 
@@ -111,7 +108,7 @@ nnoremap <c-s-p> :CtrlPCurWD<cr>
 nnoremap <leader>1 :tabe ~/todo.txt<cr>
 
 " Use Tab for emmet
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
@@ -145,6 +142,12 @@ map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
+
+" Gruvbox scheme settings
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_strings = 1
+let g:gruvbox_invert_tabline = 1
+let g:gruvbox_contrast_dark = 'hard'
 
 "
 " Indentation settings (let editorconfig handle number of spaces)
@@ -193,13 +196,9 @@ Plug 'gregsexton/MatchTag'
 
 " Syntax tools
 Plug 'w0rp/ale'
-Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript' ] }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'vmchale/ion-vim', { 'for': 'ion' }
-Plug 'tkztmk/vim-vala', { 'for': 'vala' }
+Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'sheerun/vim-polyglot' " It already workds on demand
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -221,12 +220,8 @@ if has('nvim')
 endif
 set background=dark
 colorscheme gruvbox
-" Italic comments
-hi Comment gui=italic
 " Search terms underlined (no bg)
 hi Search guifg=orange guibg=NONE gui=underline
-" Current line color
-hi CursorLine guibg=#3d3d3d
 
 " Airline config
 let g:airline#extensions#tabline#enabled = 1
@@ -240,6 +235,7 @@ let g:bookmark_sign = '♥'
 hi BookmarkSign guifg=#ff4920 guibg=#3c3836
 
 " Ale config
+let g:ale_set_balloons = 1
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
 let g:ale_lint_on_enter = 1

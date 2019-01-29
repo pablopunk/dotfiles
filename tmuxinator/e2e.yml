@@ -3,7 +3,7 @@
 name: e2e
 root: ~/src/superdesk-client-core
 
-on_project_start: sudo service elasticsearch start
+pre: sudo service elasticsearch start
 
 windows:
   - tdd:

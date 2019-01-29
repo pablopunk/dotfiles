@@ -25,37 +25,25 @@ if [ ! -f "/tmp/bash_hello_calendar" ] && \
   tomorrow_words=$(date --date="tomorrow" +"%a %b %d")
   today_words=$(date +"%a %b %d")
 
-  personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1')
+  personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
   personal="${personal/$tomorrow_words}"
   personal="${personal/$today_words}"
 
-  work=$(gcalcli --configFolder ~/.config/gcalcli/work --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1')
+  work=$(gcalcli --configFolder ~/.config/gcalcli/work --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
   work="${work/$tomorrow_words}"
   work="${work/$today_words}"
 
-  rmadrid=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="Real Madrid" --nocolor agenda 12am $one_week_range --military | awk '{$1=$1};1')
+  rmadrid=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="Real Madrid" --nocolor agenda 12am $one_week_range --military | awk '{$1=$1};1' | awk 'NF')
   rmadrid="${rmadrid/$tomorrow_words}"
   rmadrid="${rmadrid/$today_words}"
 
   output=$(
-    paste <(
-      echo
-    ) <(
-      echo
       echo -e ${bold}${green}Personal${normal}
-      echo
-      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=20 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
-    ) <(
-      echo
+      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=50 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
       echo -e ${bold}${blue}Work${normal}
-      echo
-      echo -e "$work" | awk '{$1=$1};1' | awk -v len=30 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
-    ) <(
-      echo
+      echo -e "$work" | awk '{$1=$1};1' | awk -v len=50 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
       echo -e ${bold}${magenta}Real Madrid${normal}
-      echo
       echo -e "$rmadrid" | awk '{$1=$1};1' | sed 's/ *-* *Real Madrid *-*//g'
-    ) | column -s $'\t' -tn && echo && echo
   )
 
   # save to cache
@@ -85,7 +73,10 @@ _g' | sed -e 's_</_\
 fi
 
 echo
-cat /tmp/bash_hello_calendar 2>/dev/null
+paste -d'|' <(
+  cat /tmp/bash_hello_calendar 2>/dev/null | sed -e 's/^/ /g'
+) <(
+  cat /tmp/bash_hello_todo 2>/dev/null
+  cat ~/todo.txt 2>/dev/null | sed -e 's/^/  > /g'
+) | column -s'|' -t
 echo
-cat /tmp/bash_hello_todo 2>/dev/null
-cat ~/todo.txt 2>/dev/null | sed -e 's/^/  > /g'

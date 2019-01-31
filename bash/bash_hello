@@ -25,7 +25,7 @@ if [ ! -f "/tmp/bash_hello_calendar" ] && \
   tomorrow_words=$(date --date="tomorrow" +"%a %b %d")
   today_words=$(date +"%a %b %d")
 
-  personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
+  personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="pablovarela182@gmail.com" --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
   personal="${personal/$tomorrow_words}"
   personal="${personal/$today_words}"
 

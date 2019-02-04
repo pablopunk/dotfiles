@@ -14,6 +14,7 @@ set ignorecase
 set smartcase
 set cursorline
 set expandtab shiftround smartindent autoindent
+set tabstop=4 shiftwidth=4
 
 let mapleader = "\<space>"
 nnoremap Q <Nop>

@@ -108,7 +108,7 @@ nnoremap <c-s-p> :CtrlPCurWD<cr>
 nnoremap <leader>1 :tabe ~/todo.txt<cr>
 
 " Use Tab for emmet
-autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <silent> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
@@ -191,7 +191,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'danro/rename.vim', { 'on': 'Rename' }
 
 " Html tools
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'typescript', 'html' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript', 'html', 'markdown' ] }
 Plug 'gregsexton/MatchTag'
 
 " Syntax tools

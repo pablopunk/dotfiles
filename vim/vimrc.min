@@ -1,10 +1,6 @@
-"
-" Some general settings
-"
-
-set nocompatible " vim not vi
+" General settings
+set nocompatible
 filetype plugin indent on
-syntax on
 set ttyfast
 set lazyredraw
 set encoding=utf-8
@@ -13,10 +9,36 @@ set hlsearch
 set ignorecase
 set smartcase
 set cursorline
+set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
+syntax on
 color desert
+hi Comment ctermfg=blue
+hi Normal ctermfg=gray
+hi CursorLine cterm=NONE ctermbg=black
 
+" Persistent undo
+if has('persistent_undo')
+  let undo_dir = expand('$HOME/.vim/undo_dir')
+  if !isdirectory(undo_dir)
+    call mkdir(undo_dir, "p", 0760)
+  endif
+  set undodir=$HOME/.vim/undo_dir
+  set undofile
+endif
+
+" Better find command
+set path+=**
+set wildmenu
+set wildignore+=**/node_modules/**
+set wildignore+=**/dist/**
+set wildignore+=**/cov/**
+set wildignore+=**/coverage/**
+set wildignore+=**/po/**
+set wildignore+=**/lang/**
+
+" Mappings
 let mapleader = "\<space>"
 nnoremap Q <Nop>
 inoremap <c-c> <esc>

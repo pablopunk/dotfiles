@@ -1,0 +1,42 @@
+"
+" Some general settings
+"
+
+set nocompatible " vim not vi
+filetype plugin indent on
+syntax on
+set ttyfast
+set lazyredraw
+set encoding=utf-8
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set cursorline
+set expandtab shiftround smartindent autoindent
+set tabstop=4 shiftwidth=4
+color desert
+
+let mapleader = "\<space>"
+nnoremap Q <Nop>
+inoremap <c-c> <esc>
+nnoremap <c-s> <esc>:w<CR>
+inoremap <c-s> <esc>:w<CR>
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap gb :bn<cr>
+nnoremap gB :bp<cr>
+nnoremap <c-q> :bd<cr>
+nnoremap <leader><Tab> <esc>gg=G``zz
+nnoremap <leader>f :Ack <cword><cr>
+nnoremap <leader>v :e ~/.vimrc.min<cr>
+nnoremap 0 ^
+nnoremap <leader>1 :tabe ~/todo.txt<cr>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+vnoremap < <gv
+vnoremap > >gv

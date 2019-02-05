@@ -4,7 +4,7 @@
 
 set nocompatible " vim not vi
 filetype plugin indent on
-syntax off
+syntax on
 set ttyfast
 set lazyredraw
 set encoding=utf-8
@@ -15,6 +15,7 @@ set smartcase
 set cursorline
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
+color desert
 
 let mapleader = "\<space>"
 nnoremap Q <Nop>
@@ -30,7 +31,7 @@ nnoremap gB :bp<cr>
 nnoremap <c-q> :bd<cr>
 nnoremap <leader><Tab> <esc>gg=G``zz
 nnoremap <leader>f :Ack <cword><cr>
-nnoremap <leader>v :e ~/.vimrc<cr>
+nnoremap <leader>v :e ~/.vimrc.min<cr>
 nnoremap 0 ^
 nnoremap <leader>1 :tabe ~/todo.txt<cr>
 nnoremap <Up> <Nop>

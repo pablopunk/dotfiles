@@ -1,7 +1,6 @@
 " General settings
 set nocompatible
 filetype plugin indent on
-syntax on
 set ttyfast
 set lazyredraw
 set encoding=utf-8
@@ -13,7 +12,11 @@ set cursorline
 set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
+syntax on
 color desert
+hi Comment ctermfg=blue
+hi Normal ctermfg=gray
+hi CursorLine cterm=NONE ctermbg=black
 
 " Persistent undo
 if has('persistent_undo')

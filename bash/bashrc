@@ -16,10 +16,10 @@ export HISTFILESIZE=
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
 
-# Use bashy if it exist
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-  pre='(ssh) '
+    pre='(ssh:'$(hostname)') '
 fi
+# Use bashy if it exist
 if hash bashy 2>/dev/null; then
   export PS1='${pre}$(bashy -r) '
 else

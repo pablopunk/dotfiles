@@ -143,12 +143,6 @@ map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
 
-" Gruvbox scheme settings
-let g:gruvbox_italic = 1
-let g:gruvbox_italicize_strings = 1
-let g:gruvbox_invert_tabline = 1
-let g:gruvbox_contrast_dark = 'hard'
-
 "
 " Indentation settings (let editorconfig handle number of spaces)
 "
@@ -202,10 +196,11 @@ Plug 'sheerun/vim-polyglot' " It already workds on demand
 
 " UI
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
-Plug 'morhetz/gruvbox'
+Plug 'kristiandupont/shades-of-teal'
 
 " End of plugins
 call plug#end()
@@ -219,11 +214,13 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme gruvbox
-" Search terms underlined (no bg)
+colorscheme shades-of-teal
 hi Search guifg=orange guibg=NONE gui=underline
+hi Comment gui=italic
+hi String gui=italic
 
 " Airline config
+let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 

@@ -1,82 +1,18 @@
-if [ "$(uname)" == "Darwin" ]; then
-  return 0
-fi
+#!/usr/bin/env node
 
-wget -q --spider http://google.com
-internet_ok=$?
+const green = str => `\x1b[32m${str}\x1b[39m`
+const blue = str => `\x1b[34m${str}\x1b[39m`
 
-# run only if:
-#   * cache is empty
-#   * `gcalcli` exists and it is configured
-#   * internet connection OK
-if [ ! -f "/tmp/bash_hello_calendar" ] && \
-  hash gcalcli 2>/dev/null && \
-  [ -f ~/.config/gcalcli/personal/oauth ] && \
-  [ -f ~/.config/gcalcli/work/oauth ] && \
-  [ $internet_ok -eq 0 ] ; then
-  bold="\e[1m"
-  normal="\e[0m"
-  green="\e[32m"
-  magenta="\e[35m"
-  blue="\e[34m"
+require('https').get('https://soccer.now.sh/spain/real-madrid?timezone=Europe/Madrid', res => {
+  let data = ''
 
-  tomorrow_range="$(date --date="tomorrow" -I)T23:59"
-  one_week_range="$(date --date="week" -I)T23:59"
-  tomorrow_words=$(date --date="tomorrow" +"%a %b %d")
-  today_words=$(date +"%a %b %d")
-
-  personal=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="pablovarela182@gmail.com" --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
-  personal="${personal/$tomorrow_words}"
-  personal="${personal/$today_words}"
-
-  work=$(gcalcli --configFolder ~/.config/gcalcli/work --nocolor agenda 12am $tomorrow_range --military | awk '{$1=$1};1' | awk 'NF')
-  work="${work/$tomorrow_words}"
-  work="${work/$today_words}"
-
-  rmadrid=$(gcalcli --configFolder ~/.config/gcalcli/personal --calendar="Real Madrid" --nocolor agenda 12am $one_week_range --military | awk '{$1=$1};1' | awk 'NF')
-  rmadrid="${rmadrid/$tomorrow_words}"
-  rmadrid="${rmadrid/$today_words}"
-
-  output=$(
-      echo -e ${bold}${green}Personal${normal}
-      echo -e "$personal" | awk '{$1=$1};1' | awk -v len=50 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
-      echo -e ${bold}${blue}Work${normal}
-      echo -e "$work" | awk '{$1=$1};1' | awk -v len=50 '{ if (length($0) > len) print substr($0, 1, len-3) "..."; else print; }'
-      echo -e ${bold}${magenta}Real Madrid${normal}
-      echo -e "$rmadrid" | awk '{$1=$1};1' | sed 's/ *-* *Real Madrid *-*//g'
-  )
-
-  # save to cache
-  echo "$output" > /tmp/bash_hello_calendar
-fi
-
-# run only if:
-#   * shadow exists
-#   * cache is empty
-#   * internet connection OK
-if [ ! -f "/tmp/bash_hello_todo" ] && \
-  hash gcalcli 2>/dev/null && \
-  [ -f ~/.shadow ] && \
-  [ $internet_ok -eq 0 ] ; then
-  u="$(cat ~/.shadow | head -n 1)"
-  todo=$(curl -u $u --silent "https://mail.google.com/mail/feed/atom" | sed -e 's_>_&\
-_g' | sed -e 's_</_\
-&_g' | grep 🔴)
-
-  output=$(
-    echo -e ${bold}${green}"  To do"${normal}
-    echo -e "$todo" | sed -e 's/🔴/  >/'
-  )
-
-  # save to cache
-  echo "$output" > /tmp/bash_hello_todo
-fi
-
-echo
-paste -d'|' <(
-  cat /tmp/bash_hello_calendar 2>/dev/null | sed -e 's/^/ /g'
-) <(
-  cat /tmp/bash_hello_todo 2>/dev/null
-  cat ~/todo.txt 2>/dev/null | sed -e 's/^/  > /g'
-) | column -s'|' -t
-echo
+  res.on('data', _ => data += _)
+  res.on('end', _ => {
+    const { matches } = JSON.parse(data)
+    matches
+      .filter(_ => !_.played)
+      .slice(0, 3).map(({ game, date, time, tvs }) => {
+        console.log(`${green(game)}\t${date} (${time})\t${blue(tvs[0])}`)
+      })
+  })
+}).on('error', console.log)

@@ -1,18 +1,31 @@
 #!/usr/bin/env node
 
+const { access, readFile, writeFile, constants } = require('fs')
+const { get } = require('https')
 const green = str => `\x1b[32m${str}\x1b[39m`
 const blue = str => `\x1b[34m${str}\x1b[39m`
+const cache = '/tmp/bash_hello'
 
-require('https').get('https://soccer.now.sh/spain/real-madrid?timezone=Europe/Madrid', res => {
-  let data = ''
+access(cache, constants.R_OK, (err) => {
+  if (!err) {
+    readFile(cache, 'utf-8', (_, data) => console.log(data))
+    return
+  }
 
-  res.on('data', _ => data += _)
-  res.on('end', _ => {
-    const { matches } = JSON.parse(data)
-    matches
-      .filter(_ => !_.played)
-      .slice(0, 3).map(({ game, date, time, tvs }) => {
-        console.log(`${green(game)}\t${date} (${time})\t${blue(tvs[0])}`)
-      })
+  get('https://soccer.now.sh/spain/real-madrid?timezone=Europe/Madrid', res => {
+    let data = ''
+
+    res.on('data', _ => data += _)
+    res.on('end', _ => {
+      const { matches } = JSON.parse(data)
+      let output = ''
+      matches
+        .filter(_ => !_.played)
+        .slice(0, 3).map(({ game, date, time, tvs }) => {
+          output += `${green(game)}\t${date} (${time})\t${blue(tvs[0])}\n`
+        })
+      console.log(output)
+      writeFile(cache, output, 'utf-8', _ => _)
+    })
   })
-}).on('error', console.log)
+})

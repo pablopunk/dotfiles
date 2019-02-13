@@ -218,6 +218,8 @@ colorscheme shades-of-teal
 hi Search guifg=orange guibg=NONE gui=underline
 hi Comment gui=italic
 hi String gui=italic
+" Current line color
+hi CursorLine guibg=#353535
 
 " Airline config
 let g:airline_theme='deus'

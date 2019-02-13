@@ -3,8 +3,6 @@
 name: e2e
 root: ~/src/superdesk-client-core
 
-pre: sudo service elasticsearch start
-
 windows:
   - tdd:
       layout: even-horizontal

@@ -17,14 +17,27 @@ access(cache, constants.R_OK, (err) => {
 
     res.on('data', _ => data += _)
     res.on('end', _ => {
-      const { matches } = JSON.parse(data)
-      let output = ''
-      matches
+      let { matches } = JSON.parse(data)
+      let longestGame = 0
+      let longestDate = 0
+      matches = matches
         .filter(_ => !_.played)
-        .slice(0, 3).map(({ game, date, time, tvs }) => {
-          output += `${green(game)}\t${date} (${time})\t${blue(tvs[0])}\n`
-        })
-      console.log(output)
+        .slice(0, 3)
+      matches.map(m => {
+        if (m.game.length > longestGame) {
+          longestGame = m.game.length
+        }
+        if ((m.date.length + m.time.length + 3) > longestDate) {
+          longestDate = (m.date.length + m.time.length + 3)
+        }
+      })
+      const output = matches
+        .reduce((acc, { game, date, time, tvs }) => {
+          const niceGame = game.padEnd(longestGame)
+          const niceDate = `${date} (${time})`.padEnd(longestDate)
+          return acc + `${green(niceGame)}  ${niceDate}  ${blue(tvs[0])}\n`
+        }, '')
+      console.log(`\n${output}\n`)
       writeFile(cache, output, 'utf-8', _ => _)
     })
   })

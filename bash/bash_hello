@@ -8,7 +8,7 @@ const cache = '/tmp/bash_hello'
 
 access(cache, constants.R_OK, (err) => {
   if (!err) {
-    readFile(cache, 'utf-8', (_, data) => console.log(data))
+    readFile(cache, 'utf-8', (_, data) => console.log('\n' + data))
     return
   }
 

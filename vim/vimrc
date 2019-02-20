@@ -20,14 +20,6 @@ set noshowmode                 " Don't show the mode you're in
 set number                     " Don't worry I'll change this quick
 
 
-function! g:TryToGoToDef()
-  if exists('TernDef')
-    TernDef
-  else
-    ALEGoToDefinition
-  endif
-endfunction
-
 "
 " Key mapping
 "
@@ -89,8 +81,8 @@ nnoremap <leader>t :terminal<cr>
 " Open .vimrc
 nnoremap <leader>v :e ~/.vimrc<cr>
 
-" Go to def (tern)
-nnoremap <leader>d :call TryToGoToDef()<cr>
+" Go to def (ale)
+nnoremap <leader>d :ALEGoToDefinition<cr>
 
 " 0 goes to first indentation
 nnoremap 0 ^
@@ -171,8 +163,7 @@ Plug 'pablopunk/dynamic-file-completion.vim', { 'for': [ 'javascript', 'typescri
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/auto-pairs-gentle'
 
 " Search
 Plug 'pablopunk/better-find.vim'
@@ -191,7 +182,6 @@ Plug 'gregsexton/MatchTag'
 " Syntax tools
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'sheerun/vim-polyglot' " It already workds on demand
 
 " UI
@@ -243,15 +233,8 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_linters = { 'javascript': [], 'typescript': [] }
 let g:ale_fixers = { 'javascript': [], 'typescript': [] }
-let g:ale_linters.javascript = ['standard']
-let g:ale_fixers.javascript = ['standard']
 let g:ale_linters.typescript = ['tsserver', 'standard']
 let g:ale_fixers.typescript = ['tslint']
-let sd = matchstr(getcwd(), 'superdesk')
-if !empty(sd)
-  let g:ale_linters.javascript = ['eslint']
-  let g:ale_fixers.javascript = ['eslint']
-endif
 
 
 " Ack uses 'ag' instead of 'grep'
@@ -263,6 +246,9 @@ let g:jsx_ext_required = 0
 " Commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
+command! Jshint
+  \ :let g:ale_linters.javascript = ['jshint'] |
+  \ :let g:ale_fixers.javascript = [] |
 command! Eslint
   \ :let g:ale_linters.javascript = ['eslint'] |
   \ :let g:ale_linters.typescript = ['tsserver'] |

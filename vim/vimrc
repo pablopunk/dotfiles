@@ -105,9 +105,6 @@ imap <silent> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
 
-" Use ctrl+O for omnicompletion
-inoremap <c-o> <c-x><c-o>
-
 " Disable arrow keys
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
@@ -115,8 +112,10 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 
 " Easier block indentation
-vnoremap < <gv
-vnoremap > >gv
+nnoremap <tab> >>
+nnoremap <s-tab> <<
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')

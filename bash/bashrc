@@ -30,6 +30,8 @@ fi
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+# git completion (branches and stuff) for mac
+[ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 
 # Disable flow control commands (keeps C-s from freezing everything)
 stty start undef

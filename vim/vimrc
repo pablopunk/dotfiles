@@ -2,6 +2,7 @@
 " Some general settings
 "
 
+set nocompatible
 filetype plugin indent on
 syntax on
 
@@ -84,6 +85,9 @@ nnoremap <leader>v :e ~/.vimrc<cr>
 " Go to def (ale)
 nnoremap <leader>d :ALEGoToDefinition<cr>
 
+" Ale hover
+nnoremap <leader>h :ALEHover<cr>
+
 " 0 goes to first indentation
 nnoremap 0 ^
 
@@ -123,7 +127,7 @@ if has('terminal') || has('nvim')
 endif
 
 " Identify the syntax group of the word at the cursor
-map <leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -169,7 +173,7 @@ Plug 'pablopunk/better-find.vim'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
 
 " File tools
 Plug 'danro/rename.vim', { 'on': 'Rename' }
@@ -182,6 +186,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
 Plug 'sheerun/vim-polyglot' " It already workds on demand
+Plug 'Quramy/tsuquyomi' " Typescript server
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -234,6 +239,13 @@ let g:ale_linters = { 'javascript': [], 'typescript': [] }
 let g:ale_fixers = { 'javascript': [], 'typescript': [] }
 let g:ale_linters.typescript = ['tsserver', 'standard']
 let g:ale_fixers.typescript = ['tslint']
+let sdc = matchstr(getcwd(), 'superdesk-client-core')
+if !empty(sdc)
+  let g:ale_linters.javascript = ['eslint', 'tsserver']
+  let g:ale_fixers.javascript = ['eslint']
+  let g:ale_linters.typescript = ['tsserver', 'eslint']
+  let g:ale_fixers.typescript = ['tslint', 'eslint']
+endif
 
 
 " Ack uses 'ag' instead of 'grep'
@@ -248,6 +260,9 @@ command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=devi
 command! Jshint
   \ :let g:ale_linters.javascript = ['jshint'] |
   \ :let g:ale_fixers.javascript = [] |
+command! Tslint
+  \ :let g:ale_linters.typescript = ['tslint'] |
+  \ :let g:ale_fixers.typescript = ['tslint'] |
 command! Eslint
   \ :let g:ale_linters.javascript = ['eslint'] |
   \ :let g:ale_linters.typescript = ['tsserver'] |

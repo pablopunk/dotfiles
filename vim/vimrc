@@ -18,6 +18,7 @@ set backspace=indent,eol,start " Fix delete key
 set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
+set hidden                     " Can navigate through buffers even if they're not saved
 set number                     " Don't worry I'll change this quick
 
 
@@ -37,6 +38,10 @@ inoremap <c-c> <esc>
 " Ctrl+s saves file in normal/insert mode
 nnoremap <c-s> <esc>:w<CR>
 inoremap <c-s> <esc>:w<CR>
+
+" Ctrl+x saves and closes the window
+nnoremap <c-x> <esc>:x<CR>
+inoremap <c-x> <esc>:x<CR>
 
 " Ctrl+hjkl moves split focus
 nnoremap <c-h> <c-w>h
@@ -186,7 +191,8 @@ Plug 'gregsexton/MatchTag'
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
 Plug 'sheerun/vim-polyglot' " It already workds on demand
-Plug 'Quramy/tsuquyomi' " Typescript server
+" Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] } " Typescript server
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -261,7 +267,7 @@ command! Jshint
   \ :let g:ale_linters.javascript = ['jshint'] |
   \ :let g:ale_fixers.javascript = [] |
 command! Tslint
-  \ :let g:ale_linters.typescript = ['tslint'] |
+  \ :let g:ale_linters.typescript = ['tslint', 'tsserver', 'eslint'] |
   \ :let g:ale_fixers.typescript = ['tslint'] |
 command! Eslint
   \ :let g:ale_linters.javascript = ['eslint'] |
@@ -269,8 +275,8 @@ command! Eslint
   \ :let g:ale_fixers.javascript = ['eslint'] |
   \ :let g:ale_fixers.typescript = ['tslint']
 command! Standard
-  \ :let g:ale_linters.javascript = ['standard'] |
-  \ :let g:ale_linters.typescript = ['standard'] |
+  \ :let g:ale_linters.javascript = ['tsserver', 'standard'] |
+  \ :let g:ale_linters.typescript = ['tsserver', 'standard'] |
   \ :let g:ale_fixers.javascript = ['standard'] |
   \ :let g:ale_fixers.typescript = ['standard']
 command! Xo

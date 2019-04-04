@@ -4,7 +4,27 @@ const { access, readFile, writeFile, constants } = require('fs')
 const { get } = require('https')
 const green = str => `\x1b[32m${str}\x1b[39m`
 const blue = str => `\x1b[34m${str}\x1b[39m`
+const bold = str => `\x1b[1m${str}\x1b[39m`
+const magenta = str => `\x1b[95m${str}\x1b[39m`
 const cache = '/tmp/bash_hello'
+
+const getMonthNumber = str => {
+  switch (str) {
+    case 'ene': return 0
+    case 'feb': return 0
+    case 'mar': return 0
+    case 'abr': return 0
+    case 'may': return 0
+    case 'jun': return 0
+    case 'jul': return 0
+    case 'ago': return 0
+    case 'sep': return 0
+    case 'oct': return 0
+    case 'nov': return 0
+    case 'dic': return 0
+    default: throw new Error(`Unknown month ${str}`)
+  }
+}
 
 access(cache, constants.R_OK, (err) => {
   if (!err) {
@@ -31,10 +51,18 @@ access(cache, constants.R_OK, (err) => {
           longestDate = (m.date.length + m.time.length + 3)
         }
       })
+      const now = new Date
       const output = matches
         .reduce((acc, { game, date, time, tvs }) => {
           const niceGame = game.padEnd(longestGame)
           const niceDate = `${date} (${time})`.padEnd(longestDate)
+          const [month, day] = date.split(' ')
+          const monthN = getMonthNumber(month)
+
+          if (monthN === now.getMonth() && day === now.getDay()) {
+            return acc + `${magenta(niceGame)}  ${niceDate}  ${blue(tvs[0])}\n`
+          }
+
           return acc + `${green(niceGame)}  ${niceDate}  ${blue(tvs[0])}\n`
         }, '')
       console.log(`\n${output}\n`)

@@ -50,8 +50,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " Navigate through buffers
-nnoremap gb :bn<cr>
-nnoremap gB :bp<cr>
+nnoremap gn :bn<cr>
+nnoremap gb :bp<cr>
 
 " Ctrl+t new tab
 nnoremap <c-t> :tabe<cr>
@@ -178,7 +178,7 @@ Plug 'pablopunk/better-find.vim'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " File tools
 Plug 'danro/rename.vim', { 'on': 'Rename' }
@@ -200,7 +200,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
-Plug 'kristiandupont/shades-of-teal'
+Plug 'connorholyday/vim-snazzy' " Snazzy colors
+Plug 'pablopunk/transparent.vim' " Transparent background
 
 " End of plugins
 call plug#end()
@@ -214,15 +215,15 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme shades-of-teal
+colorscheme snazzy
 hi Search guifg=orange guibg=NONE gui=underline
 hi Comment gui=italic
 hi String gui=italic
 " Current line color
 hi CursorLine guibg=#353535
 
-" Airline config
-let g:airline_theme='deus'
+" Statusline config
+let g:airline_theme='base16_ashes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 

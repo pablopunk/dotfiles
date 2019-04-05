@@ -51,7 +51,7 @@ access(cache, constants.R_OK, (err) => {
           longestDate = (m.date.length + m.time.length + 3)
         }
       })
-      const now = new Date
+      const now = new Date()
       const output = matches
         .reduce((acc, { game, date, time, tvs }) => {
           const niceGame = game.padEnd(longestGame)
@@ -60,7 +60,7 @@ access(cache, constants.R_OK, (err) => {
           const monthN = getMonthNumber(month)
 
           if (monthN === now.getMonth() && day === now.getDay()) {
-            return acc + `${magenta(niceGame)}  ${niceDate}  ${blue(tvs[0])}\n`
+            return acc + `${bold(magenta(niceGame))}  ${niceDate}  ${blue(tvs[0])}\n`
           }
 
           return acc + `${green(niceGame)}  ${niceDate}  ${blue(tvs[0])}\n`

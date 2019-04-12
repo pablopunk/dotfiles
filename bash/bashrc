@@ -19,11 +19,12 @@ export LANG=es_ES.UTF-8
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     pre='(ssh:'$(hostname)') '
 fi
+time=$(date "+%H:%M:%S")
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='${pre}$(bashy -r) '
+  export PS1='${pre}${time} $(bashy -r) '
 else
-  export PS1='${pre}\W '
+  export PS1='${pre}${time} \W '
 fi
 
 # Bash completion

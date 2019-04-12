@@ -41,7 +41,6 @@ inoremap <c-s> <esc>:w<CR>
 
 " Ctrl+x saves and closes the window
 nnoremap <c-x> <esc>:x<CR>
-inoremap <c-x> <esc>:x<CR>
 
 " Ctrl+hjkl moves split focus
 nnoremap <c-h> <c-w>h
@@ -244,6 +243,7 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_linters = { 'javascript': [], 'typescript': [] }
 let g:ale_fixers = { 'javascript': [], 'typescript': [] }
+let g:ale_linters.javascript = ['tsserver']
 let g:ale_linters.typescript = ['tsserver', 'standard']
 let g:ale_fixers.typescript = ['tslint']
 let sdc = matchstr(getcwd(), 'superdesk-client-core')

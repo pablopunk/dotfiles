@@ -68,10 +68,6 @@ nnoremap <leader>f :Ack <cword><cr>
 nnoremap <leader>g :GitGutterNextHunk<cr>
 nnoremap <leader>G :GitGutterPrevHunk<cr>
 
-" Navigate through ALE's error/warnings
-nnoremap <leader>a :ALENext<cr>
-nnoremap <leader>A :ALEPrevious<cr>
-
 " Toggle bookmark on line
 nnoremap <leader>b :BookmarkToggle<cr>
 
@@ -86,12 +82,6 @@ nnoremap <leader>t :terminal<cr>
 " Open .vimrc
 nnoremap <leader>v :e ~/.vimrc<cr>
 
-" Go to def (ale)
-nnoremap <leader>d :ALEGoToDefinition<cr>
-
-" Ale hover
-nnoremap <leader>h :ALEHover<cr>
-
 " 0 goes to first indentation
 nnoremap 0 ^
 
@@ -99,7 +89,7 @@ nnoremap 0 ^
 nnoremap <leader>z :Goyo<cr>
 
 " Use CtrlP to search in buffers with leader+leader
-nnoremap <leader><leader> :CtrlPBuffer<cr>
+nnoremap <leader><leader> :CocList<cr>
 
 " Use CtrlP to search in the current file dir
 nnoremap <c-s-p> :CtrlPCurWD<cr>
@@ -187,11 +177,14 @@ Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript', 'html', 'mark
 Plug 'gregsexton/MatchTag'
 
 " Syntax tools
-Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
 Plug 'sheerun/vim-polyglot' " It already workds on demand
-" Plug 'Quramy/tsuquyomi', { 'for': [ 'javascript', 'typescript' ] } " Typescript server
+
+" Autocomplete
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -225,6 +218,8 @@ hi CursorLine guibg=#353535
 let g:airline_theme='base16_ashes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " CtrlP config
 let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
@@ -232,28 +227,6 @@ let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
 " Bookmarks config
 let g:bookmark_sign = '♥'
 hi BookmarkSign guifg=#ff4920 guibg=#3c3836
-
-" Ale config
-let g:ale_set_balloons = 1
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_linters = { 'javascript': [], 'typescript': [] }
-let g:ale_fixers = { 'javascript': [], 'typescript': [] }
-let g:ale_linters.javascript = ['tsserver']
-let g:ale_linters.typescript = ['tsserver', 'standard']
-let g:ale_fixers.typescript = ['tslint']
-let sdc = matchstr(getcwd(), 'superdesk-client-core')
-if !empty(sdc)
-  let g:ale_linters.javascript = ['eslint', 'tsserver']
-  let g:ale_fixers.javascript = ['eslint']
-  let g:ale_linters.typescript = ['tsserver', 'eslint']
-  let g:ale_fixers.typescript = ['tslint', 'eslint']
-endif
-
 
 " Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --column'

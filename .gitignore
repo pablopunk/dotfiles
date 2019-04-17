@@ -1,2 +1,8 @@
 *.swp
 .DS_Store
+node_modules
+
+# coc files
+coc/**/db.json
+coc/**/yarn*
+coc/**/history.json

@@ -173,11 +173,11 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'danro/rename.vim', { 'on': 'Rename' }
 
 " Html tools
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript', 'html', 'markdown' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
 Plug 'gregsexton/MatchTag'
 
 " Syntax tools
-Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json' ] }
+Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 Plug 'sheerun/vim-polyglot' " It already workds on demand
 
 " Autocomplete
@@ -233,33 +233,3 @@ let g:ackprg = 'ag --nogroup --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
-
-" Commands
-command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
-command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
-command! Jshint
-  \ :let g:ale_linters.javascript = ['jshint'] |
-  \ :let g:ale_fixers.javascript = [] |
-command! Tslint
-  \ :let g:ale_linters.typescript = ['tslint', 'tsserver', 'eslint'] |
-  \ :let g:ale_fixers.typescript = ['tslint'] |
-command! Eslint
-  \ :let g:ale_linters.javascript = ['eslint'] |
-  \ :let g:ale_linters.typescript = ['tsserver'] |
-  \ :let g:ale_fixers.javascript = ['eslint'] |
-  \ :let g:ale_fixers.typescript = ['tslint']
-command! Standard
-  \ :let g:ale_linters.javascript = ['tsserver', 'standard'] |
-  \ :let g:ale_linters.typescript = ['tsserver', 'standard'] |
-  \ :let g:ale_fixers.javascript = ['standard'] |
-  \ :let g:ale_fixers.typescript = ['standard']
-command! Xo
-  \ :let g:ale_linters.javascript = ['xo'] |
-  \ :let g:ale_linters.typescript = ['xo'] |
-  \ :let g:ale_fixers.javascript = ['xo'] |
-  \ :let g:ale_fixers.typescript = ['xo']
-command! NoLint
-  \ :let g:ale_linters.javascript = [] |
-  \ :let g:ale_linters.typescript = [] |
-  \ :let g:ale_fixers.javascript = [] |
-  \ :let g:ale_fixers.typescript = []

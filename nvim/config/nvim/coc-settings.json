@@ -1,0 +1,14 @@
+{
+  "diagnostic.virtualText": true,
+  "diagnostic.warningSign": "•",
+  "diagnostic.errorSign": "•",
+  "diagnostic.infoSign": "•",
+  "diagnostic.hintSign": "•",
+  "diagnostic.messageTarget": "float",
+  "list.normalMappings": {
+    "<C-c>": "do:exit"
+  },
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  }
+}

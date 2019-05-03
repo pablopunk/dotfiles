@@ -174,7 +174,8 @@ Plug 'danro/rename.vim', { 'on': 'Rename' }
 
 " Html tools
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
-Plug 'gregsexton/MatchTag'
+" Plug 'gregsexton/MatchTag'
+Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'html', 'markdown' ] }
 
 " Syntax tools
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
@@ -183,6 +184,8 @@ Plug 'sheerun/vim-polyglot' " It already workds on demand
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 
@@ -192,8 +195,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
-Plug 'connorholyday/vim-snazzy' " Snazzy colors
+Plug 'liuchengxu/space-vim-dark'
 Plug 'pablopunk/transparent.vim' " Transparent background
+" Plug 'connorholyday/vim-snazzy' " Snazzy colors
 
 " End of plugins
 call plug#end()
@@ -207,7 +211,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme snazzy
+colorscheme space-vim-dark
 hi Search guifg=orange guibg=NONE gui=underline
 hi Comment gui=italic
 hi String gui=italic
@@ -226,10 +230,17 @@ let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
 
 " Bookmarks config
 let g:bookmark_sign = '♥'
-hi BookmarkSign guifg=#ff4920 guibg=#3c3836
+hi BookmarkSign guifg=#ff4920 guibg=NONE
 
 " Ack uses 'ag' instead of 'grep'
 let g:ackprg = 'ag --nogroup --column'
 
 " ALLOW JSX SYNTAX IN JS
 let g:jsx_ext_required = 0
+
+" Tagalong config
+let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
+
+" Commands
+command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
+command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"

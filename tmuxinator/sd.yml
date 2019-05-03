@@ -5,5 +5,9 @@ root: ~/src/superdesk-client-core
 
 windows:
   - code: nvim
-  - grunt: sd remote
+  - logs:
+      layout: even-horizontal
+      panes:
+        - cd ~/src/superdesk/server && . ~/.pyvenv/bin/activate && honcho start
+        - npx grunt
   - bash: git status

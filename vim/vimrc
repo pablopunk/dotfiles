@@ -188,6 +188,7 @@ Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python'
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -196,7 +197,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
 Plug 'liuchengxu/space-vim-dark'
-Plug 'pablopunk/transparent.vim' " Transparent background
+" Plug 'pablopunk/transparent.vim' " Transparent background
 " Plug 'connorholyday/vim-snazzy' " Snazzy colors
 
 " End of plugins

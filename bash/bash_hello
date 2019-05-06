@@ -11,17 +11,17 @@ const cache = '/tmp/bash_hello'
 const getMonthNumber = str => {
   switch (str) {
     case 'ene': return 0
-    case 'feb': return 0
-    case 'mar': return 0
-    case 'abr': return 0
-    case 'may': return 0
-    case 'jun': return 0
-    case 'jul': return 0
-    case 'ago': return 0
-    case 'sep': return 0
-    case 'oct': return 0
-    case 'nov': return 0
-    case 'dic': return 0
+    case 'feb': return 1
+    case 'mar': return 2
+    case 'abr': return 3
+    case 'may': return 4
+    case 'jun': return 5
+    case 'jul': return 6
+    case 'ago': return 7
+    case 'sep': return 8
+    case 'oct': return 9
+    case 'nov': return 10
+    case 'dic': return 11
     default: throw new Error(`Unknown month ${str}`)
   }
 }
@@ -59,7 +59,7 @@ access(cache, constants.R_OK, (err) => {
           const [month, day] = date.split(' ')
           const monthN = getMonthNumber(month)
 
-          if (monthN === now.getMonth() && day === now.getDay()) {
+          if (monthN === now.getMonth() && day === now.getDay() -1 ) {
             return acc + `${bold(magenta(niceGame))}  ${niceDate}  ${blue(tvs[0])}\n`
           }
 

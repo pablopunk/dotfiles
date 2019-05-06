@@ -39,9 +39,6 @@ inoremap <c-c> <esc>
 nnoremap <c-s> <esc>:w<CR>
 inoremap <c-s> <esc>:w<CR>
 
-" Ctrl+x saves and closes the window
-nnoremap <c-x> <esc>:x<CR>
-
 " Ctrl+hjkl moves split focus
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
@@ -96,9 +93,6 @@ nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 " Use leader+1 to open todo.txt on new tab
 nnoremap <leader>1 :tabe ~/todo.txt<cr>
-
-" Use Tab for emmet
-imap <silent> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Use ctrl+F to trigger file completion
 inoremap <c-f> <c-x><c-f>
@@ -197,7 +191,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
 Plug 'liuchengxu/space-vim-dark'
-" Plug 'pablopunk/transparent.vim' " Transparent background
+Plug 'pablopunk/transparent.vim' " Transparent background
 " Plug 'connorholyday/vim-snazzy' " Snazzy colors
 
 " End of plugins

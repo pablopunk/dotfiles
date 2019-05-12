@@ -24,7 +24,8 @@ function weather {
 
 function populate_weather {
   while true; do
-    curl -s wttr.in/pontevedra?format=1 > /tmp/weather
+    curl -s wttr.in/pontevedra?format=1 > /tmp/weather-downloading
+    cat /tmp/weather-downloading > /tmp/weather
     sleep 60
   done
 }
@@ -34,12 +35,16 @@ populate_weather &
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     pre='(ssh:'$(hostname)') '
 fi
-time=$(date "+%H:%M:%S")
+
+function clock {
+  date "+%H:%M:%S"
+}
+
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\] ${pre}${time} $(bashy -r) '
+  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\]\[\e[48;5;17m\] $(clock) \[\e[49m\] ${pre}$(bashy -r) '
 else
-  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\] ${pre}${time} \W '
+  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\]\[\e[48;5;17m\] $(clock) \[\e[49m\] ${pre}\W '
 fi
 
 # Bash completion

@@ -16,15 +16,30 @@ export HISTFILESIZE=
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
 
+function weather {
+  if [ -f /tmp/weather ]; then
+    cat /tmp/weather
+  fi
+}
+
+function populate_weather {
+  while true; do
+    curl -s wttr.in/pontevedra?format=1 > /tmp/weather
+    sleep 60
+  done
+}
+
+populate_weather &
+
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     pre='(ssh:'$(hostname)') '
 fi
 time=$(date "+%H:%M:%S")
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='${pre}${time} $(bashy -r) '
+  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\] ${pre}${time} $(bashy -r) '
 else
-  export PS1='${pre}${time} \W '
+  export PS1='\[\e[48;5;55m\]$(weather)\[\e[49m\] ${pre}${time} \W '
 fi
 
 # Bash completion

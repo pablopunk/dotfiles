@@ -6,7 +6,7 @@ root: ~/src/superdesk-client-core
 windows:
   - code: nvim
   - logs:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - cd ~/src/superdesk/server && . ~/.pyvenv/bin/activate && honcho start
         - npx grunt

@@ -10,5 +10,6 @@
   },
   "list.insertMappings": {
     "<C-c>": "do:exit"
-  }
+  },
+  "tslint.autoFixOnSave": true
 }

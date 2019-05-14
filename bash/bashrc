@@ -18,20 +18,8 @@ export LANG=es_ES.UTF-8
 eval "$(pyenv init -)" # python versions
 
 function weather {
-  if [ -f /tmp/weather ]; then
-    cat /tmp/weather
-  fi
+  curl -s wttr.in/${1-pontevedra}?format=1
 }
-
-function populate_weather {
-  while true; do
-    curl -s wttr.in/pontevedra?format=1 > /tmp/weather-downloading
-    cat /tmp/weather-downloading > /tmp/weather
-    sleep 60
-  done
-}
-
-populate_weather &
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   pre='(ssh:'$(hostname)') '
@@ -43,9 +31,9 @@ function clock {
 
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='\[\e[48;5;55m\] \[$(weather)\] \[\e[49m\]\[\e[48;5;17m\] $(clock) \[\e[49m\]${pre}$(bashy -r) '
+  export PS1='\[\e[48;5;17m\]$(clock)\[\e[49m\] ${pre}$(bashy -r) '
 else
-  export PS1='\[\e[48;5;55m\] $(weather) \[\e[49m\]\[\e[48;5;17m\] $(clock) \[\e[49m\] ${pre}\W '
+  export PS1='\[\e[48;5;17m\]$(clock)\[\e[49m\] ${pre}\W '
 fi
 
 # Bash completion

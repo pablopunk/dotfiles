@@ -6,12 +6,15 @@ module.exports = {
   config: {
     updateChannel: 'stable',
 
+    // better tmux
+    macOptionSelectionMode: 'force',
+
     // default font size in pixels for all tabs
-    fontSize: 15,
+    fontSize: 16,
 
     // font family with optional fallbacks
     fontFamily:
-      '"Dank Mono", Hack, "OperatorMono-Light", "SF Mono", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      'Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(248,28,229,0.8)',

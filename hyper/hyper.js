@@ -50,7 +50,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '0px 9px 0px 9px',
+    padding: '0',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -103,8 +103,9 @@ module.exports = {
 
     // for advanced config flags please refer to https://hyper.is/#cfg
 
-    hyperTabs: {
-      trafficButtons: true
+    verminal: {
+      fontSize: 16,
+      fontFamily: 'Hack'
     }
   },
 
@@ -114,7 +115,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: ['hyperlinks', "hypercwd", "hyper-snazzy"],
+  plugins: ['hyperlinks', "hypercwd", "verminal"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

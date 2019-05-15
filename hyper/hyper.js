@@ -105,7 +105,8 @@ module.exports = {
 
     verminal: {
       fontSize: 16,
-      fontFamily: 'Hack'
+      fontFamily: 'Hack',
+      cursorColor: 'hotpink'
     }
   },
 

@@ -10,6 +10,7 @@ alias gcam='git add -A && git commit -m'
 alias gca='git add -A && git commit'
 alias gck='git checkout'
 # ls aliases
+alias ls='ls -G'
 alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls -a1'

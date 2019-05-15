@@ -14,8 +14,9 @@ function gclone {
 }
 
 function grebase {
+  branch="$(git symbolic-ref --short HEAD)"
   git fetch upstream && \
-    git rebase upstream/master
+    git rebase upstream/$branch
 }
 
 function copy {

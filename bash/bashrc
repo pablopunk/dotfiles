@@ -31,9 +31,9 @@ function clock {
 
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='\[\e[38;5;36m\]$(clock)\[\e[39m\] ${pre}$(bashy -r) '
+  export PS1='\[\e[36m\]$(clock)\[\e[39m\] ${pre}$(bashy -r) '
 else
-  export PS1='\[\e[38;5;36m\]$(clock)\[\e[39m\] ${pre}$ '
+  export PS1='\[\e[36m\]$(clock)\[\e[39m\] ${pre}$ '
 fi
 
 # Bash completion

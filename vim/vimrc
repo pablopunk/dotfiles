@@ -154,7 +154,6 @@ Plug 'christoomey/vim-system-copy'
 " Edit
 Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
-Plug 'pablopunk/dynamic-file-completion.vim', { 'for': [ 'javascript', 'typescript' ] }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -166,18 +165,16 @@ Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'MattesGroeger/vim-bookmarks'
-
-" File tools
-Plug 'danro/rename.vim', { 'on': 'Rename' }
+Plug 'tyru/open-browser.vim'        " this one is required
+Plug 'tyru/open-browser-github.vim' "   by this one
 
 " Html tools
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
-" Plug 'gregsexton/MatchTag'
 Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'html', 'markdown' ] }
 
 " Syntax tools
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
-Plug 'sheerun/vim-polyglot' " It already workds on demand
+Plug 'sheerun/vim-polyglot' " It already works on demand
 
 " Coc
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}

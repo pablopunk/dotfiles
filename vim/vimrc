@@ -193,7 +193,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
 Plug 'liuchengxu/space-vim-dark'
-Plug 'pablopunk/transparent.vim' " Transparent background
+" Plug 'pablopunk/transparent.vim' " Transparent background
 " Plug 'connorholyday/vim-snazzy' " Snazzy colors
 
 " End of plugins

@@ -74,7 +74,7 @@ module.exports = {
     webGLRenderer: true,
   },
 
-  plugins: ['hyperlinks', 'hypercwd', "hyper-native-dark"],
+  plugins: ['hyperlinks', "hyper-native-dark"],
 
   // `~/.hyper_plugins/local/`
   localPlugins: [],

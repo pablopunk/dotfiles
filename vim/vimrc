@@ -175,6 +175,7 @@ Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 
 " Syntax tools
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 Plug 'sheerun/vim-polyglot' " It already works on demand
+Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 
 " Coc
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -192,9 +193,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
-Plug 'liuchengxu/space-vim-dark'
-Plug 'pablopunk/transparent.vim' " Transparent background
-" Plug 'connorholyday/vim-snazzy' " Snazzy colors
+Plug 'pablopunk/sick.vim'
 
 " End of plugins
 call plug#end()
@@ -208,7 +207,7 @@ if has('nvim')
   set termguicolors
 endif
 set background=dark
-colorscheme space-vim-dark
+colorscheme sick
 hi Search guifg=orange guibg=NONE gui=underline
 hi Comment gui=italic
 hi String gui=italic

@@ -11,5 +11,6 @@
   "list.insertMappings": {
     "<C-c>": "do:exit"
   },
-  "tslint.autoFixOnSave": true
+  "tslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": true
 }

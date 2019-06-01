@@ -71,7 +71,7 @@ module.exports = {
 
     bellSoundURL: 'https://freesound.org/data/previews/448/448081_9159316-lq.mp3',
 
-    webGLRenderer: true,
+    webGLRenderer: false,
   },
 
   plugins: ['hyperlinks', "hyper-native-dark"],

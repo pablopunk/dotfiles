@@ -19,5 +19,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+      "react/jsx-uses-vars": 2
     }
 };

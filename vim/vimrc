@@ -22,6 +22,11 @@ set hidden                     " Can navigate through buffers even if they're no
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
+set expandtab shiftround smartindent autoindent
+" Better for coc.nvim
+set cmdheight=2
+set shortmess+=c
+set updatetime=300
 
 
 "
@@ -131,11 +136,6 @@ map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 autocmd BufWritePost * GitGutter
 
 "
-" Indentation settings (let editorconfig handle number of spaces)
-"
-set expandtab shiftround smartindent autoindent
-
-"
 " PLUGINS. VimPlug will download and install all of them
 "
 
@@ -215,14 +215,14 @@ hi String gui=italic
 hi CursorLine guibg=#353535
 
 " Statusline config
-let g:airline_theme='base16_ashes'
+let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 " CtrlP config
-let g:ctrlp_user_command = 'fd --type file --color never "" %s -E po/'
+let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
 
 " Bookmarks config
 let g:bookmark_sign = '♥'

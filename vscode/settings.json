@@ -1,0 +1,11 @@
+{
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "editor.minimap.enabled": false,
+    "window.titleBarStyle": "native",
+    "workbench.colorTheme": "Sick colors",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.confirmSync": false
+}

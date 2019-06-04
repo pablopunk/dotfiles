@@ -12,5 +12,6 @@
     "<C-c>": "do:exit"
   },
   "tslint.autoFixOnSave": true,
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "javascript.jsx", "typescript", "typescript.jsx"]
 }

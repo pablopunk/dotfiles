@@ -24,7 +24,6 @@ set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
 set expandtab shiftround smartindent autoindent
 " Better for coc.nvim
-set cmdheight=2
 set shortmess+=c
 set updatetime=300
 

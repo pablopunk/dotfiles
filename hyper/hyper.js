@@ -2,7 +2,7 @@ module.exports = {
   config: {
     updateChannel: 'canary',
     fontSize: 16,
-    fontFamily: 'Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Menlo, "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,

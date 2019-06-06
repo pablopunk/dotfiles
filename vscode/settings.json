@@ -1,11 +1,48 @@
 {
-    "vim.enableNeovim": true,
-    "vim.neovimPath": "/usr/local/bin/nvim",
-    "editor.minimap.enabled": false,
-    "window.titleBarStyle": "native",
-    "workbench.colorTheme": "Sick colors",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "workbench.settings.editor": "json",
+  "editor.minimap.enabled": false,
+  "window.titleBarStyle": "native",
+  "workbench.colorTheme": "Sick colors",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.confirmSync": false,
+  // vim
+  "vim.easymotion": true,
+  "vim.enableNeovim": true,
+  "vim.neovimPath": "/usr/local/bin/nvim",
+  "vim.sneak": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
     },
-    "git.confirmSync": false
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+  // eslint
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
 }

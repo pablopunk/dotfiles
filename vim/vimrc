@@ -211,7 +211,6 @@ call plug#end()
 if has('nvim')
   set termguicolors
 endif
-set background=dark
 colorscheme sick
 hi Search guifg=orange guibg=NONE gui=underline
 hi Comment gui=italic

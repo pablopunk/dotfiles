@@ -92,7 +92,10 @@ nnoremap 0 ^
 nnoremap <leader>z :Goyo<cr>
 
 " Use CtrlP to search in buffers with leader+leader
-nnoremap <leader><leader> :CocList<cr>
+nnoremap <leader><leader> :CtrlPBuffer<cr>
+
+" Prompt Coc action list
+nnoremap <leader>c :CocList<cr>
 
 " Use CtrlP to search in the current file dir
 nnoremap <c-s-p> :CtrlPCurWD<cr>
@@ -178,13 +181,16 @@ Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', '
 
 " Coc
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python'
-Plug 'chemzqm/vim-jsx-improve'
+let g:coc_global_extensions = [
+        \ 'coc-tsserver',
+        \ 'coc-tslint',
+        \ 'coc-eslint',
+        \ 'coc-html',
+        \ 'coc-json',
+        \ 'coc-github',
+        \ 'coc-python',
+        \ 'coc-marketplace'
+        \]
 
 " UI
 Plug 'vim-airline/vim-airline'
@@ -239,3 +245,11 @@ let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 " Commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
+
+if exists('veonim')
+  let g:vscode_extensions = [
+  \'vscode.typescript-language-features',
+  \'vscode.css-language-features',
+  \'vscode.html-language-features',
+\]
+endif

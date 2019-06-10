@@ -1,1 +1,3 @@
+eval "$(pyenv init -)" # python versions
+
 if [ -f ~/.bashrc ]; then . ~/.bashrc; fi

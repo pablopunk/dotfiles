@@ -34,9 +34,9 @@
   ],
   "vim.leader": "<space>",
   "vim.handleKeys": {
-    "<C-a>": false,
     "<C-f>": false
   },
+  "vim.overrideCopy": false,
   // eslint
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
@@ -45,4 +45,12 @@
     "typescript",
     "typescriptreact"
   ],
+  // other
+  "window.zoomLevel": 1,
+  "terminal.integrated.fontSize": 14,
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.ts": "typescriptreact"
+  },
+  "editor.formatOnSave": true
 }

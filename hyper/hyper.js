@@ -1,5 +1,6 @@
 module.exports = {
   config: {
+    theme: 'light',
     updateChannel: 'canary',
     fontSize: 16,
     fontFamily: 'Menlo, "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',

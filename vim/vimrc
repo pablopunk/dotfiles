@@ -171,7 +171,7 @@ Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
 " Html tools
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
 Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'html', 'markdown' ] }
 
 " Syntax tools
@@ -193,12 +193,11 @@ let g:coc_global_extensions = [
         \]
 
 " UI
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " Colors
 Plug 'pablopunk/sick.vim'
+Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
 
 " End of plugins
 call plug#end()
@@ -211,19 +210,7 @@ call plug#end()
 if has('nvim')
   set termguicolors
 endif
-colorscheme sick
-hi Search guifg=orange guibg=NONE gui=underline
-hi Comment gui=italic
-hi String gui=italic
-" Current line color
-hi CursorLine guibg=#353535
-
-" Statusline config
-let g:airline_theme='minimalist'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+colorscheme sick-light
 
 " CtrlP config
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'

@@ -13,8 +13,6 @@ export PATH="$PATH:$HOME/.deno/bin"
 export EDITOR=nvim
 export HISTSIZE=
 export HISTFILESIZE=
-export LC_ALL=es_ES.UTF-8
-export LANG=es_ES.UTF-8
 
 function weather {
   curl -s wttr.in/${1-pontevedra}?format=1

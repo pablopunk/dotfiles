@@ -2,8 +2,8 @@ module.exports = {
   config: {
     theme: 'light',
     updateChannel: 'canary',
-    fontSize: 16,
-    fontFamily: 'Menlo, "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontSize: 14,
+    fontFamily: '"Roboto Mono", Menlo, "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,
@@ -41,7 +41,7 @@ module.exports = {
       lightBlue: '#6A76FB',
       lightMagenta: '#FD7CFC',
       lightCyan: '#68FDFE',
-      lightWhite: '#FFFFFF',
+      lightWhite: '#FFFFFF'
     },
 
     // Bash on Windows
@@ -72,10 +72,10 @@ module.exports = {
 
     bellSoundURL: 'https://freesound.org/data/previews/448/448081_9159316-lq.mp3',
 
-    webGLRenderer: false,
+    webGLRenderer: true
   },
 
-  plugins: ['hyperlinks', "hyper-native-dark"],
+  plugins: ['hyperlinks', 'hyper-native-dark'],
 
   // `~/.hyper_plugins/local/`
   localPlugins: [],
@@ -83,5 +83,5 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  },
-};
+  }
+}

@@ -193,7 +193,7 @@ let g:coc_global_extensions = [
         \]
 
 " UI
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'ap/vim-buftabline' " buffers in tabs
 
 " Colors
 Plug 'pablopunk/sick.vim'

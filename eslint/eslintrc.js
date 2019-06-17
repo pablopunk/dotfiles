@@ -20,6 +20,11 @@ module.exports = {
     ],
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-      "react/jsx-uses-vars": 2
+      "react/jsx-uses-vars": 2,
+      "react/self-closing-comp": ["error", {
+        "component": true,
+        "html": true
+      }],
+      "jsx-quotes": [2, "prefer-single"]
     }
 };

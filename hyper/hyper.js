@@ -2,8 +2,8 @@ module.exports = {
   config: {
     theme: 'dark',
     updateChannel: 'stable',
-    fontSize: 14,
-    fontFamily: '"Roboto Mono", Menlo, "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontSize: 18,
+    fontFamily: '"Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,
@@ -75,7 +75,7 @@ module.exports = {
     webGLRenderer: true
   },
 
-  plugins: ['hyperlinks', 'hyper-native-dark'],
+  plugins: ['hyperlinks', 'hyper-mac', 'hyper-sick'],
 
   // `~/.hyper_plugins/local/`
   localPlugins: [],

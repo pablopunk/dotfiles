@@ -25,6 +25,7 @@ module.exports = {
         "component": true,
         "html": true
       }],
-      "jsx-quotes": [2, "prefer-single"]
+      "jsx-quotes": [2, "prefer-single"],
+      "space-before-function-paren": 0
     }
 };

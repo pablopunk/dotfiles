@@ -130,12 +130,19 @@ map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" Maps for multple cursors (fix Ctrl+C not quiting correctly on this mode)
+let g:multi_cursor_quit_key=''
+nnoremap :call multiple_cursors#quit()
+
 "
 " Autocommands
 "
 
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
+
+" Use emmet on TAB
+autocmd FileType css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
 
 "
 " PLUGINS. VimPlug will download and install all of them
@@ -210,7 +217,7 @@ call plug#end()
 if has('nvim')
   set termguicolors
 endif
-colorscheme sick-light
+colorscheme sick
 
 " CtrlP config
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'

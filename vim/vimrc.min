@@ -9,14 +9,14 @@ set hlsearch
 set ignorecase
 set smartcase
 set cursorline
+set showtabline=2
 set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
 syntax on
-color desert
 hi Comment ctermfg=blue
 hi Normal ctermfg=gray
-hi CursorLine cterm=NONE ctermbg=black
+hi CursorLine cterm=none term=none ctermbg=black guibg=#000000
 
 " Persistent undo
 if has('persistent_undo')
@@ -62,3 +62,5 @@ nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 vnoremap < <gv
 vnoremap > >gv
+nnoremap gn :bn<cr>
+nnoremap gb :bp<cr>

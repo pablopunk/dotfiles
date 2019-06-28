@@ -196,6 +196,7 @@ let g:coc_global_extensions = [
         \ 'coc-json',
         \ 'coc-github',
         \ 'coc-python',
+        \ 'coc-tabnine',
         \ 'coc-marketplace'
         \]
 

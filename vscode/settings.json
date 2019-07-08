@@ -1,12 +1,15 @@
 {
   "workbench.settings.editor": "json",
   "editor.minimap.enabled": false,
-  "window.titleBarStyle": "native",
+  "window.titleBarStyle": "custom",
   "workbench.colorTheme": "Sick colors",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "git.confirmSync": false,
+  "editor.fontFamily": "'Victor Mono'",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "bold",
   // vim
   "vim.easymotion": true,
   "vim.enableNeovim": true,

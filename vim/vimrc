@@ -138,11 +138,14 @@ nnoremap :call multiple_cursors#quit()
 " Autocommands
 "
 
+" I don't wanna save changes to a directory ¬¬
+autocmd FileType netrw setl bufhidden=delete
+
 " Reload gitgutter on save
 autocmd BufWritePost * GitGutter
 
 " Use emmet on TAB
-autocmd FileType css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
+autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
 
 "
 " PLUGINS. VimPlug will download and install all of them
@@ -155,6 +158,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'pablopunk/native-sidebar.vim'
 
 " Keybindings
 Plug 'christoomey/vim-tmux-navigator'
@@ -166,7 +170,6 @@ Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/auto-pairs-gentle'
 
 " Search
 Plug 'pablopunk/better-find.vim'
@@ -194,10 +197,11 @@ let g:coc_global_extensions = [
         \ 'coc-eslint',
         \ 'coc-html',
         \ 'coc-json',
+        \ 'coc-pairs',
         \ 'coc-github',
         \ 'coc-python',
         \ 'coc-tabnine',
-        \ 'coc-marketplace'
+        \ 'coc-marketplace',
         \]
 
 " UI
@@ -239,12 +243,4 @@ let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 
 " Commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
-command! MetaTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
-
-if exists('veonim')
-  let g:vscode_extensions = [
-  \'vscode.typescript-language-features',
-  \'vscode.css-language-features',
-  \'vscode.html-language-features',
-\]
-endif
+command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"

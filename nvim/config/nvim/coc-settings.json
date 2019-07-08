@@ -13,5 +13,10 @@
   },
   "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "javascript.jsx", "typescript", "typescript.jsx"]
+  "eslint.filetypes": [
+    "javascript",
+    "javascript.jsx",
+    "typescript",
+    "typescript.jsx"
+  ]
 }

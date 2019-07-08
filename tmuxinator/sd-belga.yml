@@ -1,0 +1,14 @@
+# ~/.tmuxinator/sd-belga.yml
+
+name: sd-belga
+root: ~/src/superdesk-belga
+
+windows:
+  - elastic: ~/src/elasticsearch-2.4.6/bin/elasticsearch -Dsecurity.manager.enabled=false
+  - logs:
+      layout: even-vertical
+      panes:
+        - cd ~/src/superdesk-belga/server && honcho start
+        - cd ~/src/superdesk-belga/client && npx grunt
+  - plann: cd ~/src/superdesk-planning
+  - belga: nvim

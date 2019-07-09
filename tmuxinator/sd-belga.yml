@@ -3,7 +3,7 @@
 name: sd-belga
 root: ~/src/superdesk-belga
 
-on_project_start: sd drop_database && sd populate -belga
+on_project_start: sd drop_database && sd prepopulate -belga
 
 windows:
   - logs:

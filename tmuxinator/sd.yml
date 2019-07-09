@@ -3,7 +3,7 @@
 name: sd
 root: ~/src/superdesk-client-core
 
-on_project_start: sd drop_database && sd populate
+on_project_start: sd drop_database && sd prepopulate
 
 windows:
   - code: nvim

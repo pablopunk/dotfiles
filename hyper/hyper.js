@@ -3,7 +3,7 @@ module.exports = {
     theme: 'dark',
     updateChannel: 'stable',
     fontSize: 18,
-    fontFamily: '"Victor Mono", "Dank Mono", "SF Mono", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'bold',
     fontWeightBold: 'bold',
     lineHeight: 1,
@@ -72,7 +72,7 @@ module.exports = {
 
     bellSoundURL: 'https://freesound.org/data/previews/448/448081_9159316-lq.mp3',
 
-    webGLRenderer: true
+    webGLRenderer: false
   },
 
   plugins: ['hyperlinks', 'hyper-mac', 'hyper-sick'],

@@ -4,7 +4,7 @@ module.exports = {
     updateChannel: 'stable',
     fontSize: 18,
     fontFamily: 'Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,
     letterSpacing: 0,

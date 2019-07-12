@@ -1,0 +1,33 @@
+#
+# OH-MY-ZSH
+#
+export ZSH="/Users/pablopunk/.oh-my-zsh"
+ZSH_THEME=""
+plugins=(git osx npm)
+source $ZSH/oh-my-zsh.sh
+
+#
+# PURE PROMPT
+#
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:git:branch color magenta
+prompt pure
+
+#
+# USER CONFIG
+#
+source ~/.bash_functions
+source ~/.bash_aliases
+~/.bash_hello
+F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
+
+# Vars
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/usr/local/opt/ruby/bin"
+export PATH="$PATH:/usr/local/lib/ruby/gems/2.6.0/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.deno/bin"
+export EDITOR=nvim

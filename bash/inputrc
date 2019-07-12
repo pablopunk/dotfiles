@@ -1,9 +1,9 @@
+$if Bash
 # arrow up
 "\e[A":history-search-backward
 # arrow down
 "\e[B":history-search-forward
 # zsh like completion on tab
-$if Bash
 set completion-ignore-case on
 set show-all-if-ambiguous on
 $endif

@@ -26,6 +26,6 @@ alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias rm=trash
 alias mkidr='mkdir -p'
-if [ "$(uname)" == "Linux" ]; then
+if [[ "$(uname)" == "Linux" ]]; then
   alias open=xdg-open
 fi

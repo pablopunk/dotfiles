@@ -197,11 +197,11 @@ Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 
 
 " Syntax tools
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
-Plug 'sheerun/vim-polyglot' " It already works on demand
+Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescript.jsx' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 
-" Coc
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" " Coc
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:coc_global_extensions = [
         \ 'coc-tsserver',
         \ 'coc-tslint',

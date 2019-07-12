@@ -14,10 +14,6 @@ export EDITOR=nvim
 export HISTSIZE=
 export HISTFILESIZE=
 
-function weather {
-  curl -s wttr.in/${1-pontevedra}?format=1
-}
-
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   pre='(ssh:'$(hostname)') '
 fi

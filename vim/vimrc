@@ -215,9 +215,6 @@ let g:coc_global_extensions = [
         \ 'coc-marketplace',
         \]
 
-" UI
-Plug 'ap/vim-buftabline' " buffers in tabs
-
 " Colors
 Plug 'pablopunk/sick.vim'
 Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim

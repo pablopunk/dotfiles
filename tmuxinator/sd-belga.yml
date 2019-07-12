@@ -3,7 +3,7 @@
 name: sd-belga
 root: ~/src/superdesk-belga
 
-on_project_start: sd drop_database && sd prepopulate -belga
+on_project_start: '[[ "$(cat ~/.tmuxinator-last-project)" != "sd-belga" ]] && sd drop_database && sd prepopulate -belga ; echo "sd-belga" > ~/.tmuxinator-last-project'
 
 windows:
   - logs:

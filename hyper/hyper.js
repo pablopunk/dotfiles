@@ -75,7 +75,7 @@ module.exports = {
     webGLRenderer: false
   },
 
-  plugins: ['hyperlinks', 'hyper-mac', 'hyper-sick'],
+  plugins: ['hyperlinks', 'hyper-mac', "hyper-sick"],
 
   // `~/.hyper_plugins/local/`
   localPlugins: [],

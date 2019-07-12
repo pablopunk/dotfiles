@@ -1,6 +1,6 @@
 source ~/.bash_functions
 source ~/.bash_aliases
-# ~/.bash_hello
+~/.bash_hello
 F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
 
 # Vars

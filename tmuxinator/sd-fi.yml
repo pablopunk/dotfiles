@@ -3,7 +3,7 @@
 name: sd-fi
 root: ~/src/superdesk-fi
 
-on_project_start: sd drop_database && sd prepopulate -fi
+on_project_start: '[[ "$(cat ~/.tmuxinator-last-project)" != "sd-fi" ]] && sd drop_database && sd prepopulate -fi ; echo "sd-fi" > ~/.tmuxinator-last-project'
 
 windows:
   - code: nvim

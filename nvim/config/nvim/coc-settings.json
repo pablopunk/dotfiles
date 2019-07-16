@@ -11,7 +11,7 @@
   "list.insertMappings": {
     "<C-c>": "do:exit"
   },
-  "tslint.autoFixOnSave": false,
+  "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",

@@ -31,3 +31,5 @@ export PATH="$PATH:$HOME/.npm-global/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.deno/bin"
 export EDITOR=nvim
+
+eval "$(pyenv init -)" # python versions

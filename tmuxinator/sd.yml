@@ -3,7 +3,7 @@
 name: sd
 root: ~/src/superdesk-client-core
 
-on_project_start: '[[ "$(cat ~/.tmuxinator-last-project)" != "sd" ]] && sd drop_database && sd prepopulate ; echo "sd" > ~/.tmuxinator-last-project'
+on_project_start: '[[ "$(cat ~/.tmuxinator-last-project)" != "sd" ]] && sd deps && sd drop_database && sd prepopulate ; echo "sd" > ~/.tmuxinator-last-project'
 
 windows:
   - code: nvim

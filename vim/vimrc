@@ -165,6 +165,9 @@ autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.js
 " Start plugins
 call plug#begin('~/.vim/plugged')
 
+" UI
+Plug 'ap/vim-buftabline'
+
 " Project
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'

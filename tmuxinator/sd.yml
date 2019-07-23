@@ -12,4 +12,4 @@ windows:
       panes:
         - cd ~/src/superdesk/server && honcho start
         - npx grunt
-  - bash: git status
+  - shell: git status

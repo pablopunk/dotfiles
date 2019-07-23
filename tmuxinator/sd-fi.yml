@@ -12,4 +12,4 @@ windows:
       panes:
         - cd server && honcho start
         - cd client && npx grunt
-  - bash: git status
+  - shell: git status

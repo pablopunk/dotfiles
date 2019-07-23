@@ -14,4 +14,4 @@ windows:
       panes:
         - npm run start-test-server
         - npx grunt
-  - bash: git status
+  - shell: git status

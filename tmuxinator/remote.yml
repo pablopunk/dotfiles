@@ -6,4 +6,4 @@ root: ~/src/superdesk-client-core
 windows:
   - code: nvim
   - grunt: sd remote
-  - bash: git status
+  - shell: git status

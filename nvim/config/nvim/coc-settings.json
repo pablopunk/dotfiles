@@ -19,5 +19,6 @@
     "javascript.jsx",
     "typescript",
     "typescript.jsx"
-  ]
+  ],
+  "pairs.enableBackspace": true
 }

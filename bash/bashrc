@@ -1,7 +1,7 @@
-source ~/.bash_functions
-source ~/.bash_aliases
-~/.bash_hello
-F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
+source ~/.functions
+source ~/.aliases
+~/.hello
+F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars
 export PATH="$PATH:$HOME/.local/bin"

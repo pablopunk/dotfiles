@@ -68,8 +68,8 @@ nnoremap <leader><Tab> <esc>gg=G``zz
 nnoremap <leader>f :Ack <cword><cr>
 
 " Navigate through git changes on file
-nnoremap <leader>g :GitGutterNextHunk<cr>
-nnoremap <leader>G :GitGutterPrevHunk<cr>
+nmap <leader>g <Plug>(coc-git-nextchunk)
+nmap <leader>G <Plug>(coc-git-prevchunk)
 
 " Toggle bookmark on line
 nnoremap <leader>b :BookmarkToggle<cr>
@@ -88,14 +88,12 @@ nnoremap <leader>v :e ~/.vimrc<cr>
 " 0 goes to first indentation
 nnoremap 0 ^
 
-" Toggle zen mode
-nnoremap <leader>z :Goyo<cr>
-
 " Use CtrlP to search in buffers with leader+leader
 nnoremap <leader><leader> :CtrlPBuffer<cr>
 
-" Prompt Coc action list
-nnoremap <leader>c :CocList<cr>
+" Coc commands and stuff
+nnoremap <leader>c :CocCommand<cr>
+nnoremap <leader>e :CocList extensions<cr>
 
 " Use CtrlP to search in the current file dir
 nnoremap <c-s-p> :CtrlPCurWD<cr>
@@ -152,9 +150,6 @@ nnoremap :call multiple_cursors#quit()
 " I don't wanna save changes to a directory ¬¬
 autocmd FileType netrw setl bufhidden=delete
 
-" Reload gitgutter on save
-autocmd BufWritePost * GitGutter
-
 " Use emmet on TAB
 autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
 
@@ -169,7 +164,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'ap/vim-buftabline'
 
 " Project
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pablopunk/native-sidebar.vim'
@@ -203,7 +197,7 @@ Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'ja
 Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 
-" " Coc
+" Coc
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:coc_global_extensions = [
         \ 'coc-tsserver',
@@ -211,6 +205,7 @@ let g:coc_global_extensions = [
         \ 'coc-eslint',
         \ 'coc-html',
         \ 'coc-json',
+        \ 'coc-git',
         \ 'coc-pairs',
         \ 'coc-github',
         \ 'coc-python',

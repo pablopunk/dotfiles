@@ -20,5 +20,6 @@
     "typescript",
     "typescript.jsx"
   ],
-  "pairs.enableBackspace": true
+  "pairs.enableBackspace": true,
+  "git.addGlameToVirtualText": true
 }

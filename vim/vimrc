@@ -23,10 +23,6 @@ set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
 set expandtab shiftround smartindent autoindent
-" Better for coc.nvim
-set shortmess+=c
-set updatetime=300
-
 
 "
 " Key mapping
@@ -64,21 +60,6 @@ nnoremap <c-q> :bd<cr>
 " Format file indentation
 nnoremap <leader><Tab> <esc>gg=G``zz
 
-" Open ACK search tool for current word
-nnoremap <leader>f :Ack <cword><cr>
-
-" Navigate through git changes on file
-nmap <leader>g <Plug>(coc-git-nextchunk)
-nmap <leader>G <Plug>(coc-git-prevchunk)
-
-" Toggle bookmark on line
-nnoremap <leader>b :BookmarkToggle<cr>
-
-" Navigate bookmarks
-nnoremap <leader>n :BookmarkNext<cr>
-nnoremap <leader>N :BookmarkPrev<cr>
-nnoremap <leader>B :BookmarkShowAll<cr>
-
 " Open terminal
 nnoremap <leader>t :terminal<cr>
 
@@ -87,16 +68,6 @@ nnoremap <leader>v :e ~/.vimrc<cr>
 
 " 0 goes to first indentation
 nnoremap 0 ^
-
-" Use CtrlP to search in buffers with leader+leader
-nnoremap <leader><leader> :CtrlPBuffer<cr>
-
-" Coc commands and stuff
-nnoremap <leader>c :CocCommand<cr>
-nnoremap <leader>e :CocList extensions<cr>
-
-" Use CtrlP to search in the current file dir
-nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 " Use leader+1 to open todo.txt on new tab
 nnoremap <leader>1 :tabe ~/todo.txt<cr>
@@ -118,17 +89,6 @@ vnoremap <s-tab> <gv
 nnoremap < <Nop>
 vnoremap < <Nop>
 
-" Use K for documentation including Coc
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
   tnoremap <Esc> <C-\><C-n>
@@ -138,10 +98,6 @@ endif
 map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Maps for multple cursors (fix Ctrl+C not quiting correctly on this mode)
-let g:multi_cursor_quit_key=''
-nnoremap :call multiple_cursors#quit()
 
 "
 " Autocommands
@@ -160,44 +116,80 @@ autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.js
 " Start plugins
 call plug#begin('~/.vim/plugged')
 
+"
 " UI
+"
 Plug 'ap/vim-buftabline'
 
-" Project
+"
+" PROJECT
+"
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pablopunk/native-sidebar.vim'
 
-" Keybindings
+"
+" KEYBINDINGS
+"
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-system-copy'
 
-" Edit
+"
+" EDIT
+"
 Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
 Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_quit_key=''
+nnoremap :call multiple_cursors#quit()
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
-" Search
+"
+" SEARCH
+"
 Plug 'pablopunk/better-find.vim'
 Plug 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --column'
+cnoreabbrev Ack Ack!
+nnoremap <leader>f :Ack! <cword><cr>
+
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
+nnoremap <leader><leader> :CtrlPBuffer<cr>
+nnoremap <c-s-p> :CtrlPCurWD<cr>
+
 Plug 'MattesGroeger/vim-bookmarks'
+let g:bookmark_sign = '♥'
+hi BookmarkSign guifg=#ff4920 guibg=NONE
+nnoremap <leader>n :BookmarkNext<cr>
+nnoremap <leader>N :BookmarkPrev<cr>
+nnoremap <leader>B :BookmarkShowAll<cr>
+nnoremap <leader>b :BookmarkToggle<cr>
+
 Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
-" Html tools
+"
+" HTML TOOLS
+"
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
 Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'html', 'markdown' ] }
+let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 
-" Syntax tools
+"
+" SYNTAX TOOLS
+"
 Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
 Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
+let g:jsx_ext_required = 0
 
-" Coc
+"
+" COC
+"
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:coc_global_extensions = [
         \ 'coc-tsserver',
@@ -212,41 +204,50 @@ let g:coc_global_extensions = [
         \ 'coc-tabnine',
         \ 'coc-marketplace',
         \]
+set shortmess+=c
+set updatetime=300
+" Go to def
+nmap <silent> gd <Plug>(coc-definition)
+" Navigate through git changes on file
+nmap <leader>g <Plug>(coc-git-nextchunk)
+nmap <leader>G <Plug>(coc-git-prevchunk)
+" Use K for documentation including Coc
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" Coc commands and stuff
+nnoremap <leader>c :CocCommand<cr>
+nnoremap <leader>e :CocList extensions<cr>
+nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>A <Plug>(coc-diagnostic-prev)
+nmap <leader>r <Plug>(coc-rename)
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nnoremap <silent> <leader>F :<C-u>CocList -I symbols<cr>
 
-" Colors
+
+"
+" COLORS
+"
 Plug 'pablopunk/sick.vim'
 Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
 Plug 'ap/vim-css-color' " Hex colors highlighting
 
+"
 " End of plugins
+"
 call plug#end()
 
-"
-" Settings after plugins
-"
+" Custom commands
+command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
+command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
 
-" Colors configuration
+" Color config
 if has('nvim')
   set termguicolors
 endif
 colorscheme sick
-
-" CtrlP config
-let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
-
-" Bookmarks config
-let g:bookmark_sign = '♥'
-hi BookmarkSign guifg=#ff4920 guibg=NONE
-
-" Ack uses 'ag' instead of 'grep'
-let g:ackprg = 'ag --nogroup --column'
-
-" ALLOW JSX SYNTAX IN JS
-let g:jsx_ext_required = 0
-
-" Tagalong config
-let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
-
-" Commands
-command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
-command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"

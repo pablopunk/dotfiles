@@ -1,4 +1,4 @@
-"
+
 " Some general settings
 "
 
@@ -88,6 +88,8 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 nnoremap < <Nop>
 vnoremap < <Nop>
+nnoremap > <Nop>
+vnoremap > <Nop>
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
@@ -162,8 +164,6 @@ nnoremap <leader><leader> :CtrlPBuffer<cr>
 nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
-let g:bookmark_sign = '♥'
-hi BookmarkSign guifg=#ff4920 guibg=NONE
 nnoremap <leader>n :BookmarkNext<cr>
 nnoremap <leader>N :BookmarkPrev<cr>
 nnoremap <leader>B :BookmarkShowAll<cr>
@@ -202,6 +202,7 @@ let g:coc_global_extensions = [
         \ 'coc-github',
         \ 'coc-python',
         \ 'coc-tabnine',
+        \ 'coc-highlight',
         \ 'coc-marketplace',
         \]
 set shortmess+=c
@@ -235,7 +236,6 @@ nnoremap <silent> <leader>F :<C-u>CocList -I symbols<cr>
 "
 Plug 'pablopunk/sick.vim'
 Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
-Plug 'ap/vim-css-color' " Hex colors highlighting
 
 "
 " End of plugins
@@ -251,3 +251,5 @@ if has('nvim')
   set termguicolors
 endif
 colorscheme sick
+let g:bookmark_sign = '♥'
+hi BookmarkSign guifg=#ff4920 guibg=NONE

@@ -21,5 +21,6 @@
     "typescript.jsx"
   ],
   "pairs.enableBackspace": true,
-  "git.addGlameToVirtualText": false
+  "git.addGlameToVirtualText": false,
+  "python.jediEnabled": false
 }

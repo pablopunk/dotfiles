@@ -11,15 +11,16 @@ source $ZSH/oh-my-zsh.sh
 #
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:git:branch color magenta
+zstyle :prompt:pure:path color cyan
 prompt pure
 
 #
 # USER CONFIG
 #
-source ~/.bash_functions
-source ~/.bash_aliases
-~/.bash_hello
-F=$HOME/.bash_additional; [ -f $F ] && . $F # aditional local config
+source ~/.functions
+source ~/.aliases
+~/.hello
+F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars
 export PATH="$PATH:/usr/local/bin"

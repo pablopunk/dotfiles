@@ -1,0 +1,15 @@
+# ~/.tmuxinator/sd-ntb.yml
+
+name: sd-ntb
+root: ~/src/superdesk-ntb
+
+on_project_start: '[[ "$(cat ~/.tmuxinator-last-project)" != "sd-ntb" ]] && sd deps -ntb && sd drop_database && sd prepopulate -ntb ; echo "sd-ntb" > ~/.tmuxinator-last-project'
+
+windows:
+  - logs:
+      layout: even-vertical
+      panes:
+        - cd ~/src/superdesk-ntb/server && honcho start
+        - cd ~/src/superdesk-ntb/client && npx grunt
+  - plann: cd ~/src/superdesk-planning
+  - ntb: nvim

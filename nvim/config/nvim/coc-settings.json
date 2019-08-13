@@ -5,6 +5,7 @@
   "diagnostic.infoSign": "•",
   "diagnostic.hintSign": "•",
   "diagnostic.messageTarget": "float",
+  "diagnostic.level": "error",
   "list.normalMappings": {
     "<C-c>": "do:exit"
   },

@@ -1,5 +1,5 @@
 {
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "diagnostic.warningSign": "•",
   "diagnostic.errorSign": "•",
   "diagnostic.infoSign": "•",
@@ -19,5 +19,8 @@
     "javascript.jsx",
     "typescript",
     "typescript.jsx"
-  ]
+  ],
+  "pairs.enableBackspace": true,
+  "git.addGlameToVirtualText": false,
+  "python.jediEnabled": false
 }

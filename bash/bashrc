@@ -1,7 +1,7 @@
 source ~/.functions
 source ~/.aliases
 source ~/.path
-F=$HOME/.hello; [ -f $F ] && . $F
+$HOME/.hello
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars

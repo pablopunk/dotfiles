@@ -16,9 +16,9 @@
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
-    "javascript.jsx",
+    "javascriptreact",
     "typescript",
-    "typescript.jsx"
+    "typescriptreact"
   ],
   "pairs.enableBackspace": true,
   "git.addGlameToVirtualText": false,

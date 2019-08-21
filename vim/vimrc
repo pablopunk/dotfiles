@@ -141,10 +141,6 @@ Plug 'christoomey/vim-system-copy'
 "
 Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_quit_key=''
-nnoremap :call multiple_cursors#quit()
-
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
@@ -209,6 +205,9 @@ set shortmess+=c
 set updatetime=300
 " Go to def
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 " Navigate through git changes on file
 nmap <leader>g <Plug>(coc-git-nextchunk)
 nmap <leader>G <Plug>(coc-git-prevchunk)
@@ -224,11 +223,12 @@ endfunction
 " Coc commands and stuff
 nnoremap <leader>c :CocCommand<cr>
 nnoremap <leader>e :CocList extensions<cr>
+nnoremap <silent> <leader>o :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>A <Plug>(coc-diagnostic-prev)
 nmap <leader>r <Plug>(coc-rename)
 autocmd CursorHold * silent call CocActionAsync('highlight')
-nnoremap <silent> <leader>F :<C-u>CocList -I symbols<cr>
 
 
 "

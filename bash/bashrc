@@ -1,15 +1,10 @@
 source ~/.functions
 source ~/.aliases
-~/.hello
+source ~/.path
+$HOME/.hello
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:/usr/local/bin"
-export PATH="$PATH:$HOME/.bin"
-export PATH="$PATH:$HOME/.npm-global/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/.deno/bin"
 export EDITOR=nvim
 export HISTSIZE=
 export HISTFILESIZE=

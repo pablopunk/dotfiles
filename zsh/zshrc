@@ -7,12 +7,9 @@ plugins=(git osx npm)
 source $ZSH/oh-my-zsh.sh
 
 #
-# PURE PROMPT
+# PROMPT
 #
-autoload -U promptinit; promptinit
-zstyle :prompt:pure:git:branch color magenta
-zstyle :prompt:pure:path color cyan
-prompt pure
+eval "$(starship init zsh)"
 
 #
 # USER CONFIG

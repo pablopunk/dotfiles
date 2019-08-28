@@ -1,0 +1,7 @@
+add_newline = false
+
+[character]
+symbol = '♥'
+
+[nodejs]
+disabled = true

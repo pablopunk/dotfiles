@@ -5,3 +5,9 @@ symbol = '♥'
 
 [nodejs]
 disabled = true
+
+[python]
+disabled = true
+
+[package]
+disabled = true

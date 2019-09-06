@@ -17,7 +17,7 @@ eval "$(starship init zsh)"
 source ~/.functions
 source ~/.aliases
 source ~/.path
-$HOME/.hello
+$HOME/.hello| lolcat
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars

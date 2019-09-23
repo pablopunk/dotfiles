@@ -8,7 +8,7 @@ windows:
       layout: even-horizontal
       panes:
         - nvim
-        - sleep 20 && npm run protractor
+        - sleep 20 && npm run compile-end-to-end-tests && npm run protractor
   - logs:
       layout: even-horizontal
       panes:

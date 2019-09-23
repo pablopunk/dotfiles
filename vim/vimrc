@@ -38,8 +38,8 @@ nnoremap Q <Nop>
 inoremap <c-c> <esc>
 
 " Ctrl+s saves file in normal/insert mode
-nnoremap <c-s> <esc>:w<CR>
-inoremap <c-s> <esc>:w<CR>
+nnoremap <c-s> <esc>:wa<CR>
+inoremap <c-s> <esc>:wa<CR>
 
 " Ctrl+hjkl moves split focus
 nnoremap <c-h> <c-w>h

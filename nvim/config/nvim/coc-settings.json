@@ -22,5 +22,6 @@
   ],
   "pairs.enableBackspace": true,
   "git.addGlameToVirtualText": false,
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "typescript.suggest.autoImports": true
 }

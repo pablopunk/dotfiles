@@ -233,6 +233,7 @@ nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>A <Plug>(coc-diagnostic-prev)
 nmap <leader>r <Plug>(coc-rename)
 autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd BufWritePre *.ts,*.tsx :call CocAction('runCommand', 'tsserver.executeAutofix')
 
 
 "

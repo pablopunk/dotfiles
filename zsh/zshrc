@@ -23,4 +23,4 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 # Vars
 export EDITOR=nvim
 
-eval "$(pyenv init -)" # python versions
+[[ "$(uname)" == "Darwin" ]] && eval "$(pyenv init -)" # python versions

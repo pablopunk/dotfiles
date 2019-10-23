@@ -215,6 +215,7 @@ nmap <silent> gr <Plug>(coc-references)
 " Navigate through git changes on file
 nmap <leader>g <Plug>(coc-git-nextchunk)
 nmap <leader>G <Plug>(coc-git-prevchunk)
+nmap <leader>u :CocCommand git.chunkUndo<cr>
 " Use K for documentation including Coc
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()

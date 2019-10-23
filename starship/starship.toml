@@ -1,7 +1,7 @@
 add_newline = false
 
 [character]
-symbol = '♥'
+# symbol = '♥'
 
 [nodejs]
 disabled = true

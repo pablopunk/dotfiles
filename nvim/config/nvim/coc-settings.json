@@ -21,7 +21,7 @@
     "typescriptreact"
   ],
   "pairs.enableBackspace": true,
-  "git.addGlameToVirtualText": false,
+  "git.addGBlameToVirtualText": false,
   "python.jediEnabled": false,
   "typescript.suggest.autoImports": true
 }

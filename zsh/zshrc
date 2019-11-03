@@ -24,3 +24,5 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 export EDITOR=nvim
 
 [[ "$(uname)" == "Darwin" ]] && eval "$(pyenv init -)" # python versions
+# linuxbrew
+export PATH="/home/linuxbrew/.linuxbrew/opt/node@10/bin:$PATH"

@@ -12,7 +12,7 @@
   "list.insertMappings": {
     "<C-c>": "do:exit"
   },
-  "tslint.autoFixOnSave": true,
+  "tslint.autoFixOnSave": false,
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "javascript",
@@ -20,8 +20,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "pairs.enableBackspace": true,
-  "git.addGBlameToVirtualText": false,
-  "python.jediEnabled": false,
-  "typescript.suggest.autoImports": true
+  "pairs.enableBackspace": true
 }

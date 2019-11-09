@@ -200,11 +200,11 @@ let g:coc_global_extensions = [
         \ 'coc-git',
         \ 'coc-pairs',
         \ 'coc-github',
-        \ 'coc-python',
-        \ 'coc-tabnine',
-        \ 'coc-highlight',
-        \ 'coc-marketplace',
         \]
+        " \ 'coc-python',
+        " \ 'coc-tabnine',
+        " \ 'coc-highlight',
+        " \ 'coc-marketplace',
 set shortmess+=c
 set updatetime=300
 " Go to def

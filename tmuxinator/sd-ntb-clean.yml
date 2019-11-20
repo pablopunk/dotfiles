@@ -3,6 +3,8 @@
 name: sd-ntb
 root: ~/src/superdesk-ntb
 
+on_project_start: 'sd deps -ntb && sd wipe && sd prepopulate -ntb'
+
 windows:
   - logs:
       layout: even-vertical

@@ -3,6 +3,8 @@
 name: sd-belga
 root: ~/src/superdesk-belga
 
+on_project_start: 'sd deps -belga && sd wipe && sd prepopulate -belga'
+
 windows:
   - logs:
       layout: even-vertical

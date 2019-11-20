@@ -164,11 +164,6 @@ nnoremap <leader><leader> :CtrlPBuffer<cr>
 nnoremap <c-s-p> :CtrlPCurWD<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
-nnoremap <leader>n :BookmarkNext<cr>
-nnoremap <leader>N :BookmarkPrev<cr>
-nnoremap <leader>B :BookmarkShowAll<cr>
-nnoremap <leader>b :BookmarkToggle<cr>
-
 Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
@@ -182,9 +177,10 @@ let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 "
 " SYNTAX TOOLS
 "
-Plug 'prettier/vim-prettier', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
-Plug 'sheerun/vim-polyglot'
-Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'typescript', 'json', 'javascript.jsx', 'typescript.jsx' ] }
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
 
 "
@@ -201,10 +197,6 @@ let g:coc_global_extensions = [
         \ 'coc-pairs',
         \ 'coc-github',
         \]
-        " \ 'coc-python',
-        " \ 'coc-tabnine',
-        " \ 'coc-highlight',
-        " \ 'coc-marketplace',
 set shortmess+=c
 set updatetime=300
 " Go to def
@@ -233,8 +225,7 @@ nnoremap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>A <Plug>(coc-diagnostic-prev)
 nmap <leader>r <Plug>(coc-rename)
-autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd BufWritePre *.ts,*.tsx :call CocAction('runCommand', 'tsserver.executeAutofix')
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 "

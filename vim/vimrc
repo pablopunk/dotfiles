@@ -179,23 +179,23 @@ let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 "
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
+Plug 'prettier/vim-prettier'
 
 "
 " COC
 "
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 let g:coc_global_extensions = [
-        \ 'coc-tsserver',
-        \ 'coc-tslint',
         \ 'coc-eslint',
+        \ 'coc-git',
+        \ 'coc-github',
         \ 'coc-html',
         \ 'coc-json',
-        \ 'coc-git',
         \ 'coc-pairs',
-        \ 'coc-github',
+        \ 'coc-tslint',
+        \ 'coc-tsserver',
         \]
 set shortmess+=c
 set updatetime=300
@@ -232,6 +232,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " COLORS
 "
 Plug 'pablopunk/sick.vim'
+Plug 'morhetz/gruvbox'
 Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
 
 "
@@ -250,3 +251,4 @@ endif
 colorscheme sick
 let g:bookmark_sign = '♥'
 hi BookmarkSign guifg=#ff4920 guibg=NONE
+hi SignColumn guibg=NONE

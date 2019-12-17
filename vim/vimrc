@@ -15,7 +15,7 @@ set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
-set showtabline=2              " Always show tabs
+" set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
@@ -45,7 +45,6 @@ inoremap <c-s> <esc>:wa<CR>
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
 
 " Navigate through buffers
 nnoremap gn :bn<cr>
@@ -86,14 +85,16 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
-nnoremap < <Nop>
-vnoremap < <Nop>
-nnoremap > <Nop>
-vnoremap > <Nop>
+" nnoremap < <Nop>
+" vnoremap < <Nop>
+" nnoremap > <Nop>
+" vnoremap > <Nop>
 
 " Search and replace in file (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9//g<left><left>
 nnoremap <c-n> viw"9y:%s/<c-r>9//g<left><left>
+vnoremap <c-l> "9y:s/<c-r>9//g<left><left>
+nnoremap <c-l> viw"9y:s/<c-r>9//g<left><left>
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
@@ -113,7 +114,7 @@ map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 autocmd FileType netrw setl bufhidden=delete
 
 " Use emmet on TAB
-autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
+" autocmd FileType markdown,css,javascript,typescript,javascript.jsx,typescript.jsx,html imap <tab> <plug>(emmet-expand-abbr)
 
 "
 " PLUGINS. VimPlug will download and install all of them
@@ -125,7 +126,7 @@ call plug#begin('~/.vim/plugged')
 "
 " UI
 "
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
 
 "
 " PROJECT
@@ -170,9 +171,12 @@ Plug 'tyru/open-browser-github.vim' "   by this one
 "
 " HTML TOOLS
 "
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'javascript.jsx', 'typescript.jsx', 'typescript', 'html', 'markdown' ] }
-Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.jsx', 'html', 'markdown' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript', 'javascript.jsx', 'typescript.tsx', 'typescript', 'html', 'markdown' ] }
+nmap <c-e> <esc><Plug>(emmet-expand-abbr)
+imap <c-e> <esc><Plug>(emmet-expand-abbr)i
+Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'html', 'markdown' ] }
 let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
+Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 
 "
 " SYNTAX TOOLS

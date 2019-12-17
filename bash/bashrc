@@ -13,15 +13,11 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   pre='(ssh:'$(hostname)') '
 fi
 
-function clock {
-  date "+%H:%M:%S"
-}
-
 # Use bashy if it exist
 if hash bashy 2>/dev/null; then
-  export PS1='\[\e[32m\]$(clock)\[\e[39m\] ${pre}$(bashy -r) '
+  export PS1='${pre}$(bashy -r) '
 else
-  export PS1='\[\e[32m\]$(clock)\[\e[39m\] ${pre}$ '
+  export PS1='{pre}$ '
 fi
 
 # Bash completion

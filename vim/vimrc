@@ -45,10 +45,18 @@ inoremap <c-s> <esc>:wa<CR>
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 " Navigate through buffers
 nnoremap gn :bn<cr>
 nnoremap gb :bp<cr>
+
+" Search with - and _ (emulate US keyboard)
+nmap - /
+nmap _ ;
+
+" Use + to select all word matches
+nmap + *
 
 " Ctrl+t new tab
 nnoremap <c-t> :tabe<cr>
@@ -85,16 +93,16 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
-" nnoremap < <Nop>
-" vnoremap < <Nop>
-" nnoremap > <Nop>
-" vnoremap > <Nop>
+nnoremap < <Nop>
+vnoremap < <Nop>
+nnoremap > <Nop>
+vnoremap > <Nop>
 
 " Search and replace in file (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9//g<left><left>
 nnoremap <c-n> viw"9y:%s/<c-r>9//g<left><left>
-vnoremap <c-l> "9y:s/<c-r>9//g<left><left>
-nnoremap <c-l> viw"9y:s/<c-r>9//g<left><left>
+vnoremap <c-s-l> "9y:s/<c-r>9//g<left><left>
+nnoremap <c-s-l> viw"9y:s/<c-r>9//g<left><left>
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
@@ -133,7 +141,27 @@ call plug#begin('~/.vim/plugged')
 "
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'pablopunk/native-sidebar.vim'
+" Plug 'pablopunk/native-sidebar.vim'
+Plug 'scrooloose/nerdtree'
+imap <c-B> <esc>:NERDTreeFind<cr>
+nmap <c-B> <esc>:NERDTreeFind<cr>
+imap <c-b> <esc>:NERDTreeToggle<cr>
+nmap <c-b> <esc>:NERDTreeToggle<cr>
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" let g:NERDTreeIndicatorMapCustom = {
+"     \ "Modified"  : "✹",
+"     \ "Staged"    : "✚",
+"     \ "Untracked" : "✭",
+"     \ "Renamed"   : "➜",
+"     \ "Unmerged"  : "═",
+"     \ "Deleted"   : "✖",
+"     \ "Dirty"     : "✗",
+"     \ "Clean"     : "✔︎",
+"     \ "Ignored"   : "☒",
+"     \ "Unknown"   : "?"
+"     \ }
+Plug 'ryanoasis/vim-devicons'
 
 "
 " KEYBINDINGS
@@ -181,11 +209,9 @@ Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 "
 " SYNTAX TOOLS
 "
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
-Plug 'prettier/vim-prettier'
 
 "
 " COC
@@ -198,6 +224,8 @@ let g:coc_global_extensions = [
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-pairs',
+        \ 'coc-prettier',
+        \ 'coc-snippets',
         \ 'coc-tslint',
         \ 'coc-tsserver',
         \]
@@ -226,11 +254,10 @@ nnoremap <leader>c :CocCommand<cr>
 nnoremap <leader>e :CocList extensions<cr>
 nnoremap <silent> <leader>o :<C-u>CocList outline<cr>
 nnoremap <silent> <leader>O :<C-u>CocList -I symbols<cr>
-nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>A <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>a <Plug>(coc-diagnostic-next-error)
 nmap <leader>r <Plug>(coc-rename)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "
 " COLORS

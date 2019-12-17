@@ -1,4 +1,4 @@
-
+"
 " Some general settings
 "
 
@@ -32,24 +32,24 @@ set expandtab shiftround smartindent autoindent
 let mapleader = "\<space>"
 
 " Disable Ex Mode
-nnoremap Q <Nop>
+nmap Q <Nop>
 
 " Ctrl+c is ESC (it is by default but it won't trigger autocommands)
-inoremap <c-c> <esc>
+imap <c-c> <esc>
 
 " Ctrl+s saves file in normal/insert mode
-nnoremap <c-s> <esc>:wa<CR>
-inoremap <c-s> <esc>:wa<CR>
+nmap <c-s> <esc>:wa<CR>
+imap <c-s> <esc>:wa<CR>
 
 " Ctrl+hjkl moves split focus
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
 
 " Navigate through buffers
-nnoremap gn :bn<cr>
-nnoremap gb :bp<cr>
+nmap gn :bn<cr>
+nmap gb :bp<cr>
 
 " Search with - and _ (emulate US keyboard)
 nmap - /
@@ -59,54 +59,54 @@ nmap _ ;
 nmap + *
 
 " Ctrl+t new tab
-nnoremap <c-t> :tabe<cr>
+nmap <c-t> :tabe<cr>
 
 " Ctrl+q close buffer
-nnoremap <c-q> :bd<cr>
+nmap <c-q> :bd<cr>
 
 " Format file indentation
-nnoremap <leader><Tab> <esc>gg=G``zz
+nmap <leader><Tab> <esc>gg=G``zz
 
 " Open terminal
-nnoremap <leader>t :terminal<cr>
+nmap <leader>t :terminal<cr>
 
 " Open .vimrc
-nnoremap <leader>v :e ~/.vimrc<cr>
+nmap <leader>v :e ~/.vimrc<cr>
 
 " 0 goes to first indentation
-nnoremap 0 ^
+nmap 0 ^
 
 " Use leader+1 to open todo.txt on new tab
-nnoremap <leader>1 :tabe ~/todo.txt<cr>
+nmap <leader>1 :tabe ~/todo.txt<cr>
 
 " Use ctrl+F to trigger file completion
-inoremap <c-f> <c-x><c-f>
+imap <c-f> <c-x><c-f>
 
 " Disable arrow keys
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+nmap <Left> <Nop>
+nmap <Right> <Nop>
 
 " Easier block indentation
-nnoremap <tab> >>
-nnoremap <s-tab> <<
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
-nnoremap < <Nop>
-vnoremap < <Nop>
-nnoremap > <Nop>
-vnoremap > <Nop>
+nmap <tab> >>
+nmap <s-tab> <<
+vmap <tab> >gv
+vmap <s-tab> <gv
+nmap < <Nop>
+vmap < <Nop>
+nmap > <Nop>
+vmap > <Nop>
 
 " Search and replace in file (selection or word)
-vnoremap <c-n> "9y:%s/<c-r>9//g<left><left>
-nnoremap <c-n> viw"9y:%s/<c-r>9//g<left><left>
-vnoremap <c-s-l> "9y:s/<c-r>9//g<left><left>
-nnoremap <c-s-l> viw"9y:s/<c-r>9//g<left><left>
+vmap <c-n> "9y:%s/<c-r>9//g<left><left>
+nmap <c-n> viw"9y:%s/<c-r>9//g<left><left>
+vmap <c-s-l> "9y:s/<c-r>9//g<left><left>
+nmap <c-s-l> viw"9y:s/<c-r>9//g<left><left>
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
-  tnoremap <Esc> <C-\><C-n>
+  tmap <Esc> <C-\><C-n>
 endif
 
 " Identify the syntax group of the word at the cursor
@@ -158,7 +158,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "     \ "Deleted"   : "✖",
 "     \ "Dirty"     : "✗",
 "     \ "Clean"     : "✔︎",
-"     \ "Ignored"   : "☒",
+"     \ "Igd"   : "☒",
 "     \ "Unknown"   : "?"
 "     \ }
 Plug 'ryanoasis/vim-devicons'
@@ -183,14 +183,14 @@ Plug 'tpope/vim-surround'
 Plug 'pablopunk/better-find.vim'
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --column'
-cnoreabbrev Ack Ack!
-nnoremap <leader>f :Ack! <cword><cr>
+cabbrev Ack Ack!
+nmap <leader>f :Ack! <cword><cr>
 
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
-nnoremap <leader><leader> :CtrlPBuffer<cr>
-nnoremap <c-s-p> :CtrlPCurWD<cr>
+nmap <leader><leader> :CtrlPBuffer<cr>
+nmap <c-s-p> :CtrlPCurWD<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'tyru/open-browser.vim'        " this one is required
@@ -241,7 +241,7 @@ nmap <leader>g <Plug>(coc-git-nextchunk)
 nmap <leader>G <Plug>(coc-git-prevchunk)
 nmap <leader>u :CocCommand git.chunkUndo<cr>
 " Use K for documentation including Coc
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -250,13 +250,13 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nnoremap <leader>c :CocCommand<cr>
-nnoremap <leader>e :CocList extensions<cr>
-nnoremap <silent> <leader>o :<C-u>CocList outline<cr>
-nnoremap <silent> <leader>O :<C-u>CocList -I symbols<cr>
+nmap <leader>c :CocCommand<cr>
+nmap <leader>e :CocList extensions<cr>
+nmap <silent> <leader>o :<C-u>CocList outline<cr>
+nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> <leader>a <Plug>(coc-diagnostic-next-error)
 nmap <leader>r <Plug>(coc-rename)
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "

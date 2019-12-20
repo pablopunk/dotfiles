@@ -24,5 +24,7 @@
     "typescript",
     "typescriptreact"
   ],
-  "pairs.enableBackspace": true
+  "pairs.enableBackspace": true,
+  "emmet.includeLanguages": { "javascript": "javascriptreact", "typescript": "typescriptreact" },
+  "emmet.optimizeStylesheetParsing": true
 }

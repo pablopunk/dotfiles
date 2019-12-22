@@ -14,6 +14,7 @@
   },
   "tslint.autoFixOnSave": false,
   "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
   "suggest.autoTrigger": "always",

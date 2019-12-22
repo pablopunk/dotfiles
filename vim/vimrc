@@ -246,6 +246,8 @@ nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> <leader>a <Plug>(coc-diagnostic-next-error)
 nmap <leader>r <Plug>(coc-rename)
+" Select completion on Enter (useful for autoimport)
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "

@@ -89,14 +89,14 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 
 " Easier block indentation
-nmap <tab> >>
-nmap <s-tab> <<
-vmap <tab> >gv
-vmap <s-tab> <gv
-nmap < <Nop>
-vmap < <Nop>
-nmap > <Nop>
-vmap > <Nop>
+noremap <tab> >>
+nnoremap <s-tab> <<
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
+nnoremap < <Nop>
+vnoremap < <Nop>
+nnoremap > <Nop>
+vnoremap > <Nop>
 
 " Search and replace in file/line (selection or word)
 vmap <c-n> "9y:%s/<c-r>9//g<left><left>
@@ -129,36 +129,31 @@ autocmd FileType netrw setl bufhidden=delete
 call plug#begin('~/.vim/plugged')
 
 "
-" UI
-"
-" Plug 'ap/vim-buftabline'
-
-"
 " PROJECT
 "
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'pablopunk/native-sidebar.vim'
-" Plug 'scrooloose/nerdtree'
-" imap <c-B> <esc>:NERDTreeFind<cr>
-" nmap <c-B> <esc>:NERDTreeFind<cr>
-" imap <c-b> <esc>:NERDTreeToggle<cr>
-" nmap <c-b> <esc>:NERDTreeToggle<cr>
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" let g:NERDTreeIndicatorMapCustom = {
-"     \ "Modified"  : "✹",
-"     \ "Staged"    : "✚",
-"     \ "Untracked" : "✭",
-"     \ "Renamed"   : "➜",
-"     \ "Unmerged"  : "═",
-"     \ "Deleted"   : "✖",
-"     \ "Dirty"     : "✗",
-"     \ "Clean"     : "✔︎",
-"     \ "Igd"   : "☒",
-"     \ "Unknown"   : "?"
-"     \ }
-" Plug 'ryanoasis/vim-devicons'
+Plug 'pablopunk/native-sidebar.vim'
+Plug 'scrooloose/nerdtree'
+imap <c-B> <esc>:NERDTreeFind<cr>
+nmap <c-B> <esc>:NERDTreeFind<cr>
+imap <c-b> <esc>:NERDTreeToggle<cr>
+nmap <c-b> <esc>:NERDTreeToggle<cr>
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Igd"   : "☒",
+    \ "Unknown"   : "?"
+    \ }
+Plug 'ryanoasis/vim-devicons'
 
 "
 " KEYBINDINGS
@@ -181,7 +176,7 @@ Plug 'pablopunk/better-find.vim'
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --column'
 cabbrev Ack Ack!
-nmap <leader>f :Ack! <cword><cr>
+nmap <leader>f :Ack -w <cword><cr>
 
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -251,7 +246,6 @@ nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> <leader>a <Plug>(coc-diagnostic-next-error)
 nmap <leader>r <Plug>(coc-rename)
-imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 "

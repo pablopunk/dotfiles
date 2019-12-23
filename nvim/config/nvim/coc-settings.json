@@ -1,11 +1,12 @@
 {
-  "diagnostic.virtualText": true,
-  "diagnostic.warningSign": "•",
-  "diagnostic.errorSign": "•",
-  "diagnostic.infoSign": "•",
+  "diagnostic.virtualText": false,
+  "diagnostic.warningSign": "!",
+  "diagnostic.errorSign": "x",
+  "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
   "diagnostic.messageTarget": "float",
   "diagnostic.level": "hint",
+  "diagnostic.checkCurrentLine": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"
   },
@@ -27,5 +28,10 @@
   ],
   "pairs.enableBackspace": true,
   "emmet.includeLanguages": { "javascript": "javascriptreact", "typescript": "typescriptreact" },
-  "emmet.optimizeStylesheetParsing": true
+  "emmet.optimizeStylesheetParsing": true,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
 }

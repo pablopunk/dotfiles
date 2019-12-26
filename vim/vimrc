@@ -134,7 +134,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
-inoremap <leader>b <esc>:NERDTreeFind<cr>
 nnoremap <leader>b <esc>:NERDTreeFind<cr>
 inoremap <c-b> <esc>:NERDTreeToggle<cr>
 nnoremap <c-b> <esc>:NERDTreeToggle<cr>
@@ -246,7 +245,8 @@ nmap <leader>c :CocCommand<cr>
 nmap <leader>e :CocList extensions<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
-nmap <silent> <leader>a <Plug>(coc-diagnostic-next-error)
+nmap <silent> ge <Plug>(coc-diagnostic-next-error)
+nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
 " Select completion on Enter (useful for autoimport)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"

@@ -89,8 +89,6 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 
 " Easier block indentation
-noremap <tab> >>
-nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 nnoremap < <Nop>
@@ -140,17 +138,17 @@ nnoremap <c-b> <esc>:NERDTreeToggle<cr>
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Igd"   : "☒",
-    \ "Unknown"   : "?"
-    \ }
+      \ "Modified"  : "✹",
+      \ "Staged"    : "✚",
+      \ "Untracked" : "✭",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "═",
+      \ "Deleted"   : "✖",
+      \ "Dirty"     : "✗",
+      \ "Clean"     : "✔︎",
+      \ "Igd"   : "☒",
+      \ "Unknown"   : "?"
+      \ }
 Plug 'ryanoasis/vim-devicons'
 
 "
@@ -179,10 +177,10 @@ nmap <leader>f :Ack -w <cword><cr>
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
-nmap <leader><leader> :CtrlPBuffer<cr>
-nmap <c-s-p> :CtrlPCurWD<cr>
+nmap <leader>p :CtrlPBuffer<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
+let g:bookmark_sign = '♥'
 Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
@@ -204,22 +202,22 @@ Plug 'jparise/vim-graphql'
 "
 " COC
 "
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-        \ 'coc-emmet',
-        \ 'coc-eslint',
-        \ 'coc-git',
-        \ 'coc-github',
-        \ 'coc-highlight',
-        \ 'coc-html',
-        \ 'coc-json',
-        \ 'coc-pairs',
-        \ 'coc-prettier',
-        \ 'coc-snippets',
-        \ 'coc-tabnine',
-        \ 'coc-tslint',
-        \ 'coc-tsserver',
-        \]
+      \ 'coc-emmet',
+      \ 'coc-eslint',
+      \ 'coc-git',
+      \ 'coc-github',
+      \ 'coc-highlight',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-pairs',
+      \ 'coc-prettier',
+      \ 'coc-snippets',
+      \ 'coc-tabnine',
+      \ 'coc-tslint',
+      \ 'coc-tsserver',
+      \]
 set shortmess+=c
 set updatetime=300
 " Go to def
@@ -241,16 +239,31 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader>c :CocCommand<cr>
-nmap <leader>e :CocList extensions<cr>
+nmap <leader><leader> :CocList<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
+nmap <silent> <Tab> <Plug>(coc-range-select)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command '":verbose imap <tab> to make sure tab is not mapped by other
+" plugin.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+inoremap <silent><expr> <TAB> pumvisible() ? "\<c-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<C-h>"
+set statusline=
+set statusline^=📝\ %m%r%t\ %y%=%{coc#status()}%{get(b:,'coc_current_function','')}\ :%l-%c\|%p%%
+
 " Select completion on Enter (useful for autoimport)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" Highlight word
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -258,7 +271,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 Plug 'pablopunk/sick.vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
-Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
+" Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
 
 "
 " End of plugins
@@ -274,6 +287,3 @@ if has('nvim')
   set termguicolors
 endif
 colorscheme onedark
-let g:bookmark_sign = '♥'
-hi BookmarkSign guifg=#ff4920 guibg=NONE
-" hi SignColumn guibg=NONE

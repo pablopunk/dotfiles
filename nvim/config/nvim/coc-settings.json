@@ -5,7 +5,7 @@
   "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
   "diagnostic.messageTarget": "float",
-  "diagnostic.level": "hint",
+  "diagnostic.level": "error",
   "diagnostic.checkCurrentLine": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"
@@ -33,6 +33,5 @@
   "git.changedSign.hlGroup": "GitGutterChange",
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  "diagnostic.refreshAfterSave": true
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
 }

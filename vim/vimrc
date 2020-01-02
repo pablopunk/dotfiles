@@ -91,14 +91,10 @@ nmap <Right> <Nop>
 " Easier block indentation
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
-nnoremap < <Nop>
-vnoremap < <Nop>
-nnoremap > <Nop>
-vnoremap > <Nop>
 
 " Search and replace in file/line (selection or word)
-vnoremap <c-n> "9y:%s/<c-r>9//g<left><left>
-nnoremap <c-n> viw"9y:%s/<c-r>9//g<left><left>
+vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <c-n> viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
 vmap <leader>d "9y:s/<c-r>9//g<left><left>
 nmap <leader>d viw"9y:s/<c-r>9//g<left><left>
 
@@ -256,14 +252,12 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <TAB> pumvisible() ? "\<c-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<C-h>"
-set statusline=
-set statusline^=📝\ %m%r%t\ %y%=%{coc#status()}%{get(b:,'coc_current_function','')}\ :%l-%c\|%p%%
 
 " Select completion on Enter (useful for autoimport)
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Highlight word
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -287,3 +281,25 @@ if has('nvim')
   set termguicolors
 endif
 colorscheme onedark
+
+" Statusline
+hi StatusLine guibg=NONE
+hi StatusBranch guifg=#dedede guibg=#686de0
+hi StatusBranchReverse guifg=#686de0
+"  
+set statusline=
+set statusline+=%{toupper(mode())}
+set statusline+=\ %#StatusBranchReverse#
+set statusline+=%#StatusBranch#
+set statusline+=%{get(g:,'coc_git_status','')}
+set statusline+=\ %#StatusBranchReverse#
+set statusline+=
+set statusline+=%#LineNr#
+set statusline+=\ %m%r%t
+set statusline+=%=%{get(b:,'coc_current_function','')}
+set statusline+=
+set statusline+=\ %y
+set statusline+=\ 
+set statusline+=\ %l:%c
+set statusline+=\ 
+set statusline+=\ %p%%

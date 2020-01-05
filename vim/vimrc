@@ -15,7 +15,6 @@ set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
-" set showtabline=2              " Always show tabs
 set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
@@ -140,7 +139,7 @@ let g:NERDTreeIndicatorMapCustom = {
       \ "Renamed"   : "➜",
       \ "Unmerged"  : "═",
       \ "Deleted"   : "✖",
-      \ "Dirty"     : "✗",
+      \ "Dirty"     : "✹",
       \ "Clean"     : "✔︎",
       \ "Igd"   : "☒",
       \ "Unknown"   : "?"
@@ -173,7 +172,7 @@ nmap <leader>f :Ack -w <cword><cr>
 Plug 'brooth/far.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
-nmap <leader>p :CtrlPBuffer<cr>
+nmap <leader><leader> :CtrlPBuffer<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_sign = '♥'
@@ -207,6 +206,7 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-json',
+      \ 'coc-marketplace',
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-snippets',
@@ -235,7 +235,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader><leader> :CocList<cr>
+nmap <leader>c :CocList<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
@@ -265,7 +265,8 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 Plug 'pablopunk/sick.vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
-" Plug 'edkolev/tmuxline.vim' " Make tmux match statusline on vim
+Plug 'pablopunk/statusline.vim'
+Plug 'edkolev/tmuxline.vim'
 
 "
 " End of plugins
@@ -275,31 +276,9 @@ call plug#end()
 " Custom commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
-
+"
 " Color config
 if has('nvim')
   set termguicolors
 endif
 colorscheme onedark
-
-" Statusline
-hi StatusLine guibg=NONE
-hi StatusBranch guifg=#dedede guibg=#686de0
-hi StatusBranchReverse guifg=#686de0
-"  
-set statusline=
-set statusline+=%{toupper(mode())}
-set statusline+=\ %#StatusBranchReverse#
-set statusline+=%#StatusBranch#
-set statusline+=%{get(g:,'coc_git_status','')}
-set statusline+=\ %#StatusBranchReverse#
-set statusline+=
-set statusline+=%#LineNr#
-set statusline+=\ %m%r%t
-set statusline+=%=%{get(b:,'coc_current_function','')}
-set statusline+=
-set statusline+=\ %y
-set statusline+=\ 
-set statusline+=\ %l:%c
-set statusline+=\ 
-set statusline+=\ %p%%

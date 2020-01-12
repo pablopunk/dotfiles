@@ -88,6 +88,8 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 
 " Easier block indentation
+nnoremap <tab> >>
+nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
@@ -147,6 +149,17 @@ let g:NERDTreeIndicatorMapCustom = {
       \ "Igd"   : "☒",
       \ "Unknown"   : "?"
       \ }
+" Hide ugly brackets symbols in nerdtree
+augroup nerdtreeconcealbrackets
+      autocmd!
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      autocmd FileType nerdtree setlocal conceallevel=3
+      autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
+" Hide arrow symbol
+let NERDTreeDirArrowExpandable = "\u00a0"
+let NERDTreeDirArrowCollapsible = "\u00a0"
 Plug 'ryanoasis/vim-devicons'
 
 "
@@ -244,7 +257,7 @@ nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
-nmap <silent> <Tab> <Plug>(coc-range-select)
+nmap <silent> gw <Plug>(coc-range-select)
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command '":verbose imap <tab> to make sure tab is not mapped by other

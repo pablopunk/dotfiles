@@ -9,5 +9,4 @@ windows:
       panes:
         - cd ~/src/superdesk-belga/server && honcho start
         - cd ~/src/superdesk-belga/client && npx grunt
-  - plann: cd ~/src/superdesk-planning
   - client: nvim

@@ -55,7 +55,7 @@ nmap - /
 nmap _ ;
 
 " Use + to select all word matches
-nmap + *
+nmap + *N
 
 " Ctrl+t new tab
 nmap <c-t> :tabe<cr>
@@ -96,8 +96,8 @@ vnoremap <s-tab> <gv
 " Search and replace in file/line (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
 nnoremap <c-n> viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
-vnoremap <c-m> "9y:s/<c-r>9/<c-r>9/g<left><left>
-nnoremap <c-m> viw"9y:s/<c-r>9/<c-r>9/g<left><left>
+vnoremap <leader>n "9y:s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <leader>n viw"9y:s/<c-r>9/<c-r>9/g<left><left>
 
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
@@ -205,10 +205,11 @@ Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 "
 " SYNTAX TOOLS
 "
-Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
 Plug 'jparise/vim-graphql'
+Plug 'keith/swift.vim'
 
 "
 " COC
@@ -268,12 +269,12 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <TAB> pumvisible() ? "\<c-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<C-h>"
-
-" Select completion on Enter (useful for autoimport)
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Enable insert line for coc-pairs and also use enter to choose from code
+" completion
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Highlight word
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -281,6 +282,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 Plug 'pablopunk/sick.vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
+Plug 'nickaroot/vim-xcode-dark-theme'
 Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 

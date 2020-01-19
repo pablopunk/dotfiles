@@ -1,7 +1,7 @@
 # ~/.tmuxinator/sd-belga.yml
 
 name: sd-belga
-root: ~/src/superdesk-belga
+root: ~/src/superdesk-client-core
 
 on_project_start: 'sd deps -belga && sd wipe && sd prepopulate -belga'
 
@@ -11,5 +11,4 @@ windows:
       panes:
         - cd ~/src/superdesk-belga/server && honcho start
         - cd ~/src/superdesk-belga/client && npx grunt
-  - plann: cd ~/src/superdesk-planning
-  - belga: nvim
+  - client: nvim

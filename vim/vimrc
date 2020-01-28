@@ -126,6 +126,7 @@ call plug#begin('~/.vim/plugged')
 "
 " PROJECT
 "
+Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>

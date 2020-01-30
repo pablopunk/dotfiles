@@ -28,10 +28,10 @@ alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias rm=trash
 alias mkidr='mkdir -p'
 if [[ "$(uname)" == "Darwin" ]]; then
-  alias python2='pyenv global system && python'
-  alias pip2='pyenv global system && pip'
-  alias python3='pyenv global 3.5.7 && python'
-  alias pip3='pyenv global 3.5.7 && pip'
+  alias python2='eval "$(pyenv init -)" && pyenv global system && python'
+  alias pip2='eval "$(pyenv init -)" && pyenv global system && pip'
+  alias python3='eval "$(pyenv init -)" && pyenv global 3.5.7 && python'
+  alias pip3='eval "$(pyenv init -)" && pyenv global 3.5.7 && pip'
 fi
 if [[ "$(uname)" == "Linux" ]]; then
   alias open=xdg-open

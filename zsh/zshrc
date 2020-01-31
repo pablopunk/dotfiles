@@ -23,6 +23,9 @@ eval "$(starship init zsh)"
 # Vars
 export EDITOR=nvim
 
+# pyenv on macOS
+[[ "$(uname)" == "Darwin" ]] && eval "$(pyenv init -)"
+
 # Load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"

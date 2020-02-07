@@ -21,7 +21,8 @@ set hidden                     " Can navigate through buffers even if they're no
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
-set expandtab shiftround smartindent autoindent
+set scrolloff=3                " Spacing on top and bottom
+set expandtab shiftround smartindent autoindent " Indent stuff
 
 "
 " Key mapping
@@ -37,8 +38,8 @@ nmap Q <Nop>
 imap <c-c> <esc>
 
 " Ctrl+s saves file in normal/insert mode
-nmap <c-s> <esc>:wa<CR>
-imap <c-s> <esc>:wa<CR>
+nmap <c-s> <esc>:w<CR>
+imap <c-s> <esc>:w<CR>
 
 " Ctrl+hjkl moves split focus
 nmap <c-h> <c-w>h
@@ -167,7 +168,6 @@ Plug 'ryanoasis/vim-devicons'
 " KEYBINDINGS
 "
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-system-copy'
 
 "
 " EDIT
@@ -211,6 +211,7 @@ Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
+Plug 'evanleck/vim-svelte'
 
 "
 " COC
@@ -228,6 +229,7 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-snippets',
+      \ 'coc-svelte',
       \ 'coc-tabnine',
       \ 'coc-tslint',
       \ 'coc-tsserver',

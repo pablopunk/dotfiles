@@ -197,21 +197,17 @@ Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
 "
-" HTML TOOLS
-"
-Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'html', 'markdown' ] }
-let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
-Plug 'styled-components/vim-styled-components', {'branch': 'main'}
-
-"
 " SYNTAX TOOLS
 "
-" Plug 'HerringtonDarkholme/yats.vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
+Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'html', 'markdown' ] }
+let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
+Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 
 "
 " COC
@@ -283,9 +279,10 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " COLORS
 "
 Plug 'pablopunk/sick.vim'
+Plug 'pablopunk/transparent.vim'
 Plug 'morhetz/gruvbox'
+Plug 'arzg/vim-colors-xcode'
 Plug 'joshdick/onedark.vim'
-Plug 'nickaroot/vim-xcode-dark-theme'
 Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
@@ -303,4 +300,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme onedark
+colorscheme xcodedark

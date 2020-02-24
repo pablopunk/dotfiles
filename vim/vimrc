@@ -208,6 +208,7 @@ Plug 'evanleck/vim-svelte'
 Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'html', 'markdown' ] }
 let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 Plug 'styled-components/vim-styled-components', {'branch': 'main'}
+Plug 'wellle/context.vim'
 
 "
 " COC
@@ -279,9 +280,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " COLORS
 "
 Plug 'pablopunk/sick.vim'
-Plug 'pablopunk/transparent.vim'
 Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-colors-xcode'
+Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'

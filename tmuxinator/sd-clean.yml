@@ -3,7 +3,7 @@
 name: sd
 root: ~/src/superdesk-client-core
 
-on_project_start: 'sd deps && sd wipe && sd prepopulate'
+on_project_start: 'sd deps && sd wipe && sd populate'
 
 windows:
   - code: nvim

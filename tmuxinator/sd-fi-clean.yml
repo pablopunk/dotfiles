@@ -3,7 +3,7 @@
 name: sd-fi
 root: ~/src/superdesk-fi
 
-on_project_start: 'sd deps -fi && sd wipe && sd prepopulate -fi'
+on_project_start: 'sd deps -fi && sd wipe && sd populate -fi'
 
 windows:
   - code: nvim

@@ -3,7 +3,7 @@
 name: sd-belga
 root: ~/src/superdesk-client-core
 
-on_project_start: 'sd deps -belga && sd wipe && sd prepopulate -belga'
+on_project_start: 'sd deps -belga && sd wipe && sd populate -belga'
 
 windows:
   - logs:

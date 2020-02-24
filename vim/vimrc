@@ -128,6 +128,15 @@ call plug#begin('~/.vim/plugged')
 " PROJECT
 "
 Plug 'psliwka/vim-smoothie'
+Plug 'camspiers/animate.vim'
+let g:ctrlp_buffer_func = {
+  \ 'enter': 'OpenCtrlP'
+  \ }
+function! OpenCtrlP() abort
+  wincmd J
+  resize 1
+  call animate#window_percent_height(0.3)
+endfunction
 Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>

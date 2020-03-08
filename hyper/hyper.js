@@ -1,9 +1,10 @@
 module.exports = {
   config: {
+    opacity: 0.85,
     theme: 'dark',
-    updateChannel: 'stable',
+    updateChannel: 'canary',
     fontSize: 18,
-    fontFamily: 'Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"FuraCode Nerd Font", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,
@@ -15,7 +16,7 @@ module.exports = {
     cursorBlink: true,
 
     foregroundColor: 'white',
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0,0,0,0.75)',
     borderColor: '#212121',
 
     css: '',

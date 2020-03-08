@@ -1,4 +1,6 @@
 {
+  "suggest.autoTrigger": "trigger",
+  "suggest.triggerAfterInsertEnter": true,
   "diagnostic.virtualText": false,
   "diagnostic.warningSign": "!",
   "diagnostic.errorSign": "x",
@@ -19,8 +21,6 @@
   "coc.preferences.formatOnSaveFiletypes": [],
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
-  "suggest.autoTrigger": "always",
-  "suggest.triggerAfterInsertEnter": true,
   "eslint.enable": false,
   "eslint.filetypes": [
     "javascript",

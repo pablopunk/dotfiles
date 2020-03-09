@@ -82,6 +82,12 @@ nmap <leader>1 :tabe ~/todo.txt<cr>
 " Use ctrl+F to trigger file completion
 imap <c-f> <c-x><c-f>
 
+" Use system clipboard (reg *)
+nmap <leader>cp "*y
+vmap <leader>cp "*y
+nmap <leader>p "*p
+vmap <leader>p "*p
+
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>
@@ -127,16 +133,7 @@ call plug#begin('~/.vim/plugged')
 "
 " PROJECT
 "
-Plug 'psliwka/vim-smoothie'
-Plug 'camspiers/animate.vim'
-let g:ctrlp_buffer_func = {
-  \ 'enter': 'OpenCtrlP'
-  \ }
-function! OpenCtrlP() abort
-  wincmd J
-  resize 1
-  call animate#window_percent_height(0.3)
-endfunction
+" Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
@@ -261,7 +258,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader>c :CocList<cr>
+nmap <leader>cc :CocList<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
@@ -283,7 +280,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<C-h>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Highlight word
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -293,7 +290,7 @@ Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-colors-xcode'
 Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'pablopunk/statusline.vim'
+" Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
 "
@@ -310,4 +307,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme xcodedark
+colorscheme onedark

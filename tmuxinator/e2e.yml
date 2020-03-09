@@ -5,10 +5,10 @@ root: ~/src/superdesk-client-core
 
 windows:
   - tdd:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - nvim
-        - sleep 20 && npm run compile-end-to-end-tests && npm run protractor
+        - echo "npm run compile-end-to-end-tests && npm run protractor"
   - logs:
       layout: even-horizontal
       panes:

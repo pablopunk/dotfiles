@@ -13,4 +13,4 @@ windows:
       panes:
         - cd ~/src/superdesk<%= project %>/server && honcho start
         - cd ~/src/superdesk<%= project %>/client && npx grunt
-  - nvim: nvim
+  - nvim: cd ~/src/superdesk-client-core && nvim

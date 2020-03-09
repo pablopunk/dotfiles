@@ -7,7 +7,7 @@
   "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
   "diagnostic.messageTarget": "float",
-  "diagnostic.level": "error",
+  "diagnostic.level": "information",
   "diagnostic.checkCurrentLine": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"

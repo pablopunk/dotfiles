@@ -168,7 +168,6 @@ augroup END
 " Hide arrow symbol
 let NERDTreeDirArrowExpandable = "\u00a0"
 let NERDTreeDirArrowCollapsible = "\u00a0"
-Plug 'ryanoasis/vim-devicons'
 
 "
 " KEYBINDINGS
@@ -258,13 +257,14 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader>cc :CocList<cr>
+nmap <leader>cc :CocCommand<cr>
+nmap <leader>cl :CocList<cr>
+nmap <leader>ca :CocAction<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
-nmap <silent> gw <Plug>(coc-range-select)
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command '":verbose imap <tab> to make sure tab is not mapped by other
@@ -292,6 +292,7 @@ Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
 " Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 "
 " End of plugins
@@ -307,4 +308,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme onedark
+colorscheme nightfly

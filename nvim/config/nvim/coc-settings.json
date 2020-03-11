@@ -1,10 +1,11 @@
 {
   "suggest.autoTrigger": "trigger",
   "suggest.triggerAfterInsertEnter": true,
+  "suggest.maxCompleteItemCount": 9,
   "diagnostic.virtualText": false,
   "diagnostic.level": "warning",
-  "diagnostic.warningSign": "!",
-  "diagnostic.errorSign": "x",
+  "diagnostic.warningSign": "·",
+  "diagnostic.errorSign": "⨯",
   "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
   "diagnostic.messageTarget": "float",

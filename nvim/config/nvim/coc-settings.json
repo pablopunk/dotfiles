@@ -1,7 +1,12 @@
 {
   "suggest.autoTrigger": "trigger",
   "suggest.triggerAfterInsertEnter": true,
-  "suggest.maxCompleteItemCount": 9,
+  "suggest.maxCompleteItemCount": 20,
+  "suggest.timeout": 750,
+  "suggest.enablePreview": true,
+  "suggest.disableMenu": true,
+  "suggest.removeDuplicateItems": true,
+  "diagnostic.refreshAfterSave": true,
   "diagnostic.virtualText": false,
   "diagnostic.level": "warning",
   "diagnostic.warningSign": "·",

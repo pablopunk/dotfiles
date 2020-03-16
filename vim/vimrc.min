@@ -61,3 +61,5 @@ vnoremap < <gv
 vnoremap > >gv
 nnoremap gn :bn<cr>
 nnoremap gb :bp<cr>
+
+autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts set filetype=javascript

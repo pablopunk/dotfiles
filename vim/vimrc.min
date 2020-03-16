@@ -37,29 +37,28 @@ set wildignore+=**/lang/**
 
 " Mappings
 let mapleader = "\<space>"
-nnoremap Q <Nop>
-inoremap <c-c> <esc>
-nnoremap <c-s> <esc>:w<CR>
-inoremap <c-s> <esc>:w<CR>
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-nnoremap gb :bn<cr>
-nnoremap gB :bp<cr>
-nnoremap <c-q> :bd<cr>
-nnoremap <leader><Tab> <esc>gg=G``zz
-nnoremap <leader>f :Ack <cword><cr>
-nnoremap <leader>v :e ~/.vimrc.min<cr>
-nnoremap 0 ^
-nnoremap <leader>1 :tabe ~/todo.txt<cr>
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-vnoremap < <gv
-vnoremap > >gv
-nnoremap gn :bn<cr>
-nnoremap gb :bp<cr>
+nmap Q <Nop>
+imap <c-c> <esc>
+nmap <c-s> <esc>:w<CR>
+imap <c-s> <esc>:w<CR>
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
+nmap gb :bn<cr>
+nmap gB :bp<cr>
+nmap <c-q> :bd<cr>
+nmap <leader><Tab> <esc>gg=G``zz
+nmap <leader>f :Ack <cword><cr>
+nmap <leader>v :e ~/.vimrc.min<cr>
+nmap 0 ^
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+nmap <Left> <Nop>
+nmap <Right> <Nop>
+vmap < <gv
+vmap > >gv
+nmap gn :bn<cr>
+nmap gb :bp<cr>
 
 autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts set filetype=javascript

@@ -308,4 +308,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme nightfly
+colorscheme onedark

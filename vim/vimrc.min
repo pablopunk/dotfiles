@@ -1,15 +1,12 @@
 " General settings
 set nocompatible
 filetype plugin indent on
-set ttyfast
-set lazyredraw
 set encoding=utf-8
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
 set cursorline
-set showtabline=2
 set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4

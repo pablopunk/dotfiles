@@ -238,6 +238,9 @@ let g:coc_global_extensions = [
 set shortmess+=c
 set updatetime=300
 set signcolumn=yes
+" Faster python detection
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 " Go to def
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -290,9 +293,9 @@ Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-colors-xcode'
 Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'bluz71/vim-nightfly-guicolors'
 " Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'bluz71/vim-nightfly-guicolors'
 
 "
 " End of plugins

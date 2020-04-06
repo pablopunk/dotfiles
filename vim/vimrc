@@ -112,9 +112,11 @@ if has('terminal') || has('nvim')
 endif
 
 " Identify the syntax group of the word at the cursor
-map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nmap <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" Remove highlights
+nmap <leader>h :noh<cr>
 
 "
 " Autocommands
@@ -192,6 +194,7 @@ cabbrev Ack Ack!
 nmap <leader>f :Ack -w <cword><cr>
 
 Plug 'brooth/far.vim'
+Plug 'markonm/traces.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
 nmap <leader><leader> :CtrlPBuffer<cr>

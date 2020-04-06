@@ -1,0 +1,13 @@
+# ~/.tmuxinator/newsroom.yml
+
+name: newsroom
+root: ~/src/newsroom
+
+windows:
+  - logs:
+      layout: even-vertical
+      panes:
+        - npm start
+        - export SECRET_KEY=aljsjlasdjkasdjasdfj && honcho start -p 5050
+  - code: nvim
+

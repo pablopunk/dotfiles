@@ -1,14 +1,13 @@
 {
-  "suggest.autoTrigger": "trigger",
+  "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.maxCompleteItemCount": 20,
-  "suggest.timeout": 750,
   "suggest.enablePreview": true,
   "suggest.disableMenu": true,
   "suggest.removeDuplicateItems": true,
   "diagnostic.refreshAfterSave": true,
   "diagnostic.virtualText": false,
-  "diagnostic.level": "warning",
+  "diagnostic.level": "error",
   "diagnostic.warningSign": "·",
   "diagnostic.errorSign": "⨯",
   "diagnostic.infoSign": "¡",
@@ -42,5 +41,6 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  "git.addGBlameToBufferVar": true
+  "git.addGBlameToBufferVar": true,
+  "python.linting.flake8Enabled": true
 }

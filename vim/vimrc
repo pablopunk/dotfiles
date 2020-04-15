@@ -99,6 +99,7 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
+" ctrl+i is mapped to Tab so is not the opposite of ctrl+o anymore
 
 " Search and replace in file/line (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
@@ -207,9 +208,9 @@ Plug 'tyru/open-browser-github.vim' "   by this one
 "
 " SYNTAX
 "
-Plug 'HerringtonDarkholme/yats.vim'
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
@@ -264,8 +265,10 @@ function! s:show_documentation()
 endfunction
 " Coc commands and stuff
 nmap <leader>cc :CocCommand<cr>
+vmap <leader>cc :CocCommand<cr>
 nmap <leader>cl :CocList<cr>
 nmap <leader>ca :CocAction<cr>
+vmap <leader>ca :CocAction<cr>
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
@@ -314,4 +317,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme onedark
+colorscheme sick

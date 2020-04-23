@@ -38,8 +38,8 @@ nmap Q <Nop>
 imap <c-c> <esc>
 
 " Ctrl+s saves file in normal/insert mode
-nmap <c-s> <esc>:w<CR>
-imap <c-s> <esc>:w<CR>
+nmap <c-s> <esc>:w!<CR>
+imap <c-s> <esc>:w!<CR>
 
 " Ctrl+hjkl moves split focus
 nmap <c-h> <c-w>h

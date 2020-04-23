@@ -22,7 +22,7 @@
   },
   "tslint.autoFixOnSave": false,
   "eslint.autoFixOnSave": true,
-  "eslint.enable": true,
+  "eslint.enable": false,
   "eslint.filetypes": [
     "javascript",
     "javascriptreact",
@@ -31,7 +31,6 @@
   ],
   "prettier.eslintIntegration": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html"],
-  "coc.preferences.formatOnSaveFiletypes": [],
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,

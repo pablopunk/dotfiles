@@ -95,10 +95,10 @@ nmap <Left> <Nop>
 nmap <Right> <Nop>
 
 " Easier block indentation
-nnoremap <tab> >>
-nnoremap <s-tab> <<
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
+nnoremap > >>
+nnoremap < <<
+vnoremap > >gv
+vnoremap < <gv
 " ctrl+i is mapped to Tab so is not the opposite of ctrl+o anymore
 
 " Search and replace in file/line (selection or word)
@@ -143,9 +143,36 @@ nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
+" Remove bookmarks shortcuts while using nerdtree
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 nnoremap <leader>b <esc>:NERDTreeFind<cr>
 inoremap <c-b> <esc>:NERDTreeToggle<cr>
 nnoremap <c-b> <esc>:NERDTreeToggle<cr>
+
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 let g:NERDTreeIndicatorMapCustom = {
@@ -214,8 +241,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
-Plug 'AndrewRadev/tagalong.vim', { 'for': [ 'javascript.jsx', 'typescript.tsx', 'html', 'markdown' ] }
-let g:tagalong_filetypes = ['html', 'js', 'jsx', 'ts', 'tsx', 'md']
 Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 
 "

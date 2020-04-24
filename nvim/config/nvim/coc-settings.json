@@ -22,7 +22,7 @@
     "<C-c>": "do:exit"
   },
   "tslint.autoFixOnSave": false,
-  "eslint.autoFixOnSave": false,
+  "eslint.autoFixOnSave": true,
   "eslint.enable": false,
   "eslint.filetypes": [
     "javascript",

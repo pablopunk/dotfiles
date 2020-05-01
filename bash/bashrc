@@ -1,7 +1,7 @@
 source ~/.functions
 source ~/.aliases
 source ~/.path
-$HOME/.hello
+which nods 1>/dev/null 2>&1 && $HOME/.hello
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
 # Vars

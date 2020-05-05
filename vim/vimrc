@@ -136,6 +136,16 @@ augroup templates
     \ exe "normal ggo"
 augroup end
 
+
+"
+" Abbreviations
+"
+iabbr widht width
+iabbr heigth height
+iabbr ireact import React from 'react'
+iabbr fcreact const Component = () =>
+iabbr ccreact class Component extends React.Component
+
 "
 " PLUGINS. VimPlug will download and install all of them
 "

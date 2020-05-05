@@ -131,6 +131,9 @@ augroup templates
   autocmd BufNewFile *.tsx,*.jsx
     \ 0r $HOME/.config/nvim/templates/react.tsx |
     \ exe "normal /template\<cr>diw"
+  autocmd BufNewFile *.json
+    \ 0r $HOME/.config/nvim/templates/empty.json |
+    \ exe "normal ggo"
 augroup end
 
 "

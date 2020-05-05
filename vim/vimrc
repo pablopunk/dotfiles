@@ -126,6 +126,13 @@ nmap <leader>h :noh<cr>
 " I don't wanna save changes to a directory ¬¬
 autocmd FileType netrw setl bufhidden=delete
 
+augroup templates
+  autocmd!
+  autocmd BufNewFile *.tsx,*.jsx
+    \ 0r $HOME/.config/nvim/templates/react.tsx |
+    \ exe "normal /template\<cr>diw"
+augroup end
+
 "
 " PLUGINS. VimPlug will download and install all of them
 "

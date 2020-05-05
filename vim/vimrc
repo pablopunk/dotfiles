@@ -64,8 +64,8 @@ nmap <c-t> :tabe<cr>
 " Ctrl+q close buffer
 nmap <c-q> :bd<cr>
 
-" Format file indentation
-nmap <leader><Tab> <esc>gg=G``zz
+" Format file
+nmap <leader><Tab> <esc>:Prettier<cr>
 
 " Open terminal
 nmap <leader>t :terminal<cr>

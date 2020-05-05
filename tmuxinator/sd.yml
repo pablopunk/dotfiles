@@ -5,7 +5,7 @@
 name: sd
 root: ~/src/superdesk<%= project %>
 
-on_project_start: '[[ "<%= @args[1] or @args[0] %>" == "clean" ]] && sd deps <%= project %> && sd wipe && sd populate <%= project %>'
+on_project_start: '[ "<%= @args[1] or @args[0] %>" = "clean" ] && sd deps <%= project %> && sd wipe && sd populate <%= project %>'
 
 windows:
   - logs:

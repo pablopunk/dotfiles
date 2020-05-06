@@ -269,22 +269,22 @@ Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-      \ 'coc-emmet',
-      \ 'coc-eslint',
-      \ 'coc-git',
-      \ 'coc-github',
-      \ 'coc-highlight',
-      \ 'coc-html',
-      \ 'coc-json',
-      \ 'coc-marketplace',
-      \ 'coc-pairs',
-      \ 'coc-prettier',
-      \ 'coc-snippets',
-      \ 'coc-svelte',
-      \ 'coc-tabnine',
-      \ 'coc-tslint',
-      \ 'coc-tsserver',
-      \]
+  \ 'coc-emmet',
+  \ 'coc-eslint',
+  \ 'coc-git',
+  \ 'coc-github',
+  \ 'coc-highlight',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-marketplace',
+  \ 'coc-pairs',
+  \ 'coc-prettier',
+  \ 'coc-snippets',
+  \ 'coc-styled-components',
+  \ 'coc-tabnine',
+  \ 'coc-tslint',
+  \ 'coc-tsserver',
+  \]
 set shortmess+=c
 set updatetime=300
 set signcolumn=yes

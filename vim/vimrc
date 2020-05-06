@@ -142,6 +142,7 @@ augroup end
 "
 iabbr widht width
 iabbr heigth height
+iabbr lenght length
 iabbr ireact import React from 'react'
 iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
@@ -363,4 +364,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 if has('nvim')
   set termguicolors
 endif
-colorscheme sunset
+colorscheme xcodedark

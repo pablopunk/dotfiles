@@ -289,8 +289,7 @@ set shortmess+=c
 set updatetime=300
 set signcolumn=yes
 " Faster python detection
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = system('which python3')[:-2]
 " Go to def
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

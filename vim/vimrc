@@ -37,23 +37,11 @@ nmap Q <Nop>
 " Ctrl+c is ESC (it is by default but it won't trigger autocommands)
 imap <c-c> <esc>
 
-" Ctrl+s saves file in normal/insert mode
-nmap <c-s> <esc>:w<CR>
-imap <c-s> <esc>:w<CR>
-
 " Ctrl+hjkl moves split focus
 nmap <c-h> <c-w>h
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
 nmap <c-l> <c-w>l
-
-" Navigate through buffers
-nmap gn :bn<cr>
-nmap gb :bp<cr>
-
-" Search with - and _ (emulate US keyboard)
-nmap - /
-nmap _ ;
 
 " Use + to select all word matches
 nmap + *N
@@ -72,15 +60,6 @@ nmap <leader>t :terminal<cr>
 
 " Open .vimrc
 nmap <leader>v :e ~/.vimrc<cr>
-
-" 0 goes to first indentation
-nmap 0 ^
-
-" Use leader+1 to open todo.txt on new tab
-nmap <leader>1 :tabe ~/todo.txt<cr>
-
-" Use ctrl+F to trigger file completion
-imap <c-f> <c-x><c-f>
 
 " Use system clipboard (reg *)
 nmap <leader>cp "*y
@@ -116,6 +95,7 @@ endif
 nmap <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " Remove highlights
 nmap <leader>h :noh<cr>
 
@@ -157,68 +137,12 @@ call plug#begin('~/.vim/plugged')
 "
 " PROJECT
 "
-" Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/nerdtree'
-" Remove bookmarks shortcuts while using nerdtree
-let g:bookmark_no_default_key_mappings = 1
-function! BookmarkMapKeys()
-    nmap mm :BookmarkToggle<CR>
-    nmap mi :BookmarkAnnotate<CR>
-    nmap mn :BookmarkNext<CR>
-    nmap mp :BookmarkPrev<CR>
-    nmap ma :BookmarkShowAll<CR>
-    nmap mc :BookmarkClear<CR>
-    nmap mx :BookmarkClearAll<CR>
-    nmap mkk :BookmarkMoveUp
-    nmap mjj :BookmarkMoveDown
-endfunction
-function! BookmarkUnmapKeys()
-    unmap mm
-    unmap mi
-    unmap mn
-    unmap mp
-    unmap ma
-    unmap mc
-    unmap mx
-    unmap mkk
-    unmap mjj
-endfunction
-autocmd BufEnter * :call BookmarkMapKeys()
-autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
-nnoremap <leader>b <esc>:NERDTreeFind<cr>
-inoremap <c-b> <esc>:NERDTreeToggle<cr>
-nnoremap <c-b> <esc>:NERDTreeToggle<cr>
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-let g:NERDTreeIndicatorMapCustom = {
-      \ "Modified"  : "✹",
-      \ "Staged"    : "✚",
-      \ "Untracked" : "✭",
-      \ "Renamed"   : "➜",
-      \ "Unmerged"  : "═",
-      \ "Deleted"   : "✖",
-      \ "Dirty"     : "✹",
-      \ "Clean"     : "✔︎",
-      \ "Igd"   : "☒",
-      \ "Unknown"   : "?"
-      \ }
-" Hide ugly brackets symbols in nerdtree
-augroup nerdtreeconcealbrackets
-      autocmd!
-      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
-      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
-      autocmd FileType nerdtree setlocal conceallevel=3
-      autocmd FileType nerdtree setlocal concealcursor=nvic
-augroup END
-" Hide arrow symbol
-let NERDTreeDirArrowExpandable = "\u00a0"
-let NERDTreeDirArrowCollapsible = "\u00a0"
+Plug 'pablopunk/native-sidebar.vim'
 
 "
 " KEYBINDINGS
@@ -261,8 +185,6 @@ let g:jsx_ext_required = 0
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
-Plug 'evanleck/vim-svelte'
-Plug 'styled-components/vim-styled-components', {'branch': 'main'}
 
 "
 " COC
@@ -320,21 +242,12 @@ nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command '":verbose imap <tab> to make sure tab is not mapped by other
-" plugin.
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
-inoremap <silent><expr> <TAB> pumvisible() ? "\<c-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "<C-h>"
 " Enable insert line for coc-pairs and also use enter to choose from code
 " completion
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Highlight word
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -346,7 +259,7 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
-" Plug 'pablopunk/statusline.vim'
+Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
 "

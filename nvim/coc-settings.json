@@ -1,11 +1,11 @@
 {
-  "suggest.autoTrigger": "none",
+  "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.maxCompleteItemCount": 20,
   "suggest.enablePreview": true,
   "suggest.disableMenu": true,
   "suggest.removeDuplicateItems": true,
-  "diagnostic.enable": false,
+  "diagnostic.enable": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": true,
   "diagnostic.virtualText": false,

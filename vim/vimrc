@@ -15,13 +15,15 @@ set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
-set cursorline                 " Highlight cursor line
+" set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
-set number                     " Line numbers
+set nonumber                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
+set laststatus=0               " Hide bottom status line
+set signcolumn=no              " Don't show sign column
 set expandtab shiftround smartindent autoindent " Indent stuff
 
 "
@@ -53,7 +55,7 @@ nmap <c-t> :tabe<cr>
 nmap <c-q> :bd<cr>
 
 " Format file
-nmap <leader><Tab> <esc>:Prettier<cr>
+nmap <silent> <leader><Tab> :CocCommand tsserver.executeAutofix \| CocCommand prettier.formatFile<cr>
 
 " Open terminal
 nmap <leader>t :terminal<cr>
@@ -123,6 +125,7 @@ augroup end
 iabbr widht width
 iabbr heigth height
 iabbr lenght length
+iabbr ligth light
 iabbr ireact import React from 'react'
 iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
@@ -209,7 +212,6 @@ let g:coc_global_extensions = [
   \]
 set shortmess+=c
 set updatetime=300
-set signcolumn=yes
 " Faster python detection
 let g:python3_host_prog = system('which python3')[:-2]
 " Go to def
@@ -259,7 +261,9 @@ Plug 'arzg/vim-colors-xcode'
 Plug 'pablopunk/transparent.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'pablopunk/statusline.vim'
+Plug 'jcherven/jummidark.vim'
+Plug 'zefei/simple-dark'
+" Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
 "
@@ -269,6 +273,7 @@ call plug#end()
 
 " Custom commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
+command! ConstImport :execute "normal! 0ciwconst\<esc>/from\<cr>ciw= require(\<esc>lxA)\<esc>"
 command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
 command! HotReload autocmd BufWritePost *.vim source %
 "

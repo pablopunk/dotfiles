@@ -24,9 +24,6 @@ eval "$(starship init zsh)"
 export EDITOR=nvim
 export SHELL="$(which zsh)"
 
-# Load nvm
-alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"; nvm $@"
-
 # Fix for zlib when installing pip Pillow
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"

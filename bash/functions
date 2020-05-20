@@ -34,6 +34,6 @@ function copy {
 }
 
 function weather {
-  curl -s wttr.in/${1-pontevedra}?format=1
+  curl -s "wttr.in/${1-pontevedra}?format=1"
 }
 

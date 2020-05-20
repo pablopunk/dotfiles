@@ -1,5 +1,5 @@
 {
-  "suggest.autoTrigger": "trigger",
+  "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.maxCompleteItemCount": 20,
   "suggest.enablePreview": true,

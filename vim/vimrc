@@ -22,7 +22,7 @@ set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set nonumber                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
-set laststatus=0               " Hide bottom status line
+set laststatus=2               " Hide bottom status line
 set signcolumn=no              " Don't show sign column
 set expandtab shiftround smartindent autoindent " Indent stuff
 
@@ -53,6 +53,9 @@ nmap <c-t> :tabe<cr>
 
 " Ctrl+q close buffer
 nmap <c-q> :bd<cr>
+
+" Ctrl+s to save
+nmap <c-s> :w<cr>
 
 " Format file
 nmap <silent> <leader><Tab> :CocCommand tsserver.executeAutofix \| CocCommand prettier.formatFile<cr>

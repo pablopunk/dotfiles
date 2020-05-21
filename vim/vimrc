@@ -167,16 +167,17 @@ Plug 'tpope/vim-surround'
 " SEARCH
 "
 Plug 'pablopunk/better-find.vim'
-Plug 'mileszs/ack.vim'
-let g:ackprg = 'ag --nogroup --column'
-cabbrev Ack Ack!
-nmap <leader>f :Ack -w <cword><cr>
-
 Plug 'brooth/far.vim'
 Plug 'markonm/traces.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_user_command = '/usr/bin/env fd --type file --color never "" %s -E po/'
-nmap <leader><leader> :CtrlPBuffer<cr>
+Plug 'vn-ki/coc-clap'
+Plug 'liuchengxu/vim-clap'
+let g:clap_layout =  {'relative': 'editor' }
+nmap <c-p> :Clap files<cr>
+nmap <leader><leader> :Clap buffers<cr>
+nmap <leader>f :Clap grep<cr>
+nmap <leader>F :Clap grep ++query=<cword><cr>
+vmap <leader>F :Clap grep ++query=@visual<cr>
+nmap <leader>g :Clap git_diff_files<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_sign = '♥'
@@ -223,8 +224,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Navigate through git changes on file
-nmap <leader>g <Plug>(coc-git-nextchunk)
-nmap <leader>G <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+nmap [g <Plug>(coc-git-prevchunk)
 nmap <leader>u :CocCommand git.chunkUndo<cr>
 " Use K for documentation including Coc
 nmap <silent> K :call <SID>show_documentation()<CR>
@@ -236,13 +237,14 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader>cc :CocCommand<cr>
-vmap <leader>cc :CocCommand<cr>
+nmap <leader>cc :Clap coc_commands<cr>
+vmap <leader>cc :Clap coc_commands<cr>
 nmap <leader>cl :CocList<cr>
-nmap <leader>ca :CocAction<cr>
-vmap <leader>ca :CocAction<cr>
-nmap <silent> <leader>o :<C-u>CocList outline<cr>
-nmap <silent> <leader>O :<C-u>CocList -I symbols<cr>
+nmap <leader>ca :Clap coc_actions<cr>
+vmap <leader>ca :Clap coc_actions<cr>
+nmap <leader>cd :Clap coc_diagnostics<cr>
+nmap <silent> <leader>o :Clap coc_outline<cr>
+nmap <silent> <leader>O :Clap coc_symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)

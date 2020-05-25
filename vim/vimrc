@@ -169,14 +169,15 @@ Plug 'tpope/vim-surround'
 Plug 'pablopunk/better-find.vim'
 Plug 'brooth/far.vim'
 Plug 'markonm/traces.vim'
+Plug 'liuchengxu/vista.vim'
 Plug 'vn-ki/coc-clap'
 Plug 'liuchengxu/vim-clap'
 let g:clap_layout =  {'relative': 'editor' }
 nmap <c-p> :Clap files<cr>
 nmap <leader><leader> :Clap buffers<cr>
-nmap <leader>f :Clap grep<cr>
-nmap <leader>F :Clap grep ++query=<cword><cr>
-vmap <leader>F :Clap grep ++query=@visual<cr>
+nmap <leader>ff :Clap grep<cr>
+nmap <leader>fw :Clap grep ++query=<cword><cr>
+vmap <leader>fw :Clap grep ++query=@visual<cr>
 nmap <leader>g :Clap git_diff_files<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
@@ -243,7 +244,7 @@ nmap <leader>cl :CocList<cr>
 nmap <leader>ca :Clap coc_actions<cr>
 vmap <leader>ca :Clap coc_actions<cr>
 nmap <leader>cd :Clap coc_diagnostics<cr>
-nmap <silent> <leader>o :Clap coc_outline<cr>
+nmap <silent> <leader>o :Clap tags coc<cr>
 nmap <silent> <leader>O :Clap coc_symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)

@@ -149,6 +149,7 @@ nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pablopunk/native-sidebar.vim'
+Plug 'mhinz/vim-startify'
 
 "
 " KEYBINDINGS
@@ -192,6 +193,7 @@ let g:jsx_ext_required = 0
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
+Plug 'evanleck/vim-svelte'
 
 "
 " COC

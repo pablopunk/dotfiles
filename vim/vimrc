@@ -15,15 +15,15 @@ set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
-" set cursorline                 " Highlight cursor line
+set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
-set nonumber                     " Line numbers
+set number                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
-set signcolumn=no              " Don't show sign column
+set signcolumn=yes             " Don't show sign column
 set expandtab shiftround smartindent autoindent " Indent stuff
 
 "
@@ -150,6 +150,7 @@ nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pablopunk/native-sidebar.vim'
 Plug 'mhinz/vim-startify'
+let g:startify_change_to_vcs_root = 1
 
 "
 " KEYBINDINGS
@@ -170,7 +171,6 @@ Plug 'tpope/vim-surround'
 Plug 'pablopunk/better-find.vim'
 Plug 'brooth/far.vim'
 Plug 'markonm/traces.vim'
-Plug 'liuchengxu/vista.vim'
 Plug 'vn-ki/coc-clap'
 Plug 'liuchengxu/vim-clap'
 let g:clap_layout =  {'relative': 'editor' }
@@ -246,7 +246,7 @@ nmap <leader>cl :CocList<cr>
 nmap <leader>ca :Clap coc_actions<cr>
 vmap <leader>ca :Clap coc_actions<cr>
 nmap <leader>cd :Clap coc_diagnostics<cr>
-nmap <silent> <leader>o :Clap tags coc<cr>
+nmap <silent> <leader>o :Clap coc_outline<cr>
 nmap <silent> <leader>O :Clap coc_symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)

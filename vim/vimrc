@@ -72,6 +72,9 @@ vmap <leader>cp "*y
 nmap <leader>p "*p
 vmap <leader>p "*p
 
+" Y should not be the same as yy
+nmap Y y$
+
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>
@@ -149,6 +152,7 @@ nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pablopunk/native-sidebar.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_vcs_root = 1
 

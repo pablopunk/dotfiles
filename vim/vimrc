@@ -23,7 +23,11 @@ set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
-set signcolumn=yes             " Don't show sign column
+if has('patch-8.1.1564')
+  set signcolumn=number        " Show line numbers and signs on the same column"
+else
+  set signcolumn=yes           " Show signcolumn and line numbers column"
+endif
 set expandtab shiftround smartindent autoindent " Indent stuff
 
 "
@@ -178,12 +182,12 @@ Plug 'markonm/traces.vim'
 Plug 'vn-ki/coc-clap'
 Plug 'liuchengxu/vim-clap'
 let g:clap_layout =  {'relative': 'editor' }
-nmap <c-p> :Clap files<cr>
+nmap <silent> <c-p> :Clap files ++finder=rg --files --follow<cr>
 nmap <leader><leader> :Clap buffers<cr>
-nmap <leader>ff :Clap grep<cr>
-nmap <leader>fw :Clap grep ++query=<cword><cr>
-vmap <leader>fw :Clap grep ++query=@visual<cr>
-nmap <leader>g :Clap git_diff_files<cr>
+nmap <silent> <leader>ff :Clap grep<cr>
+nmap <silent> <leader>fw :Clap grep ++query=<cword><cr>
+vmap <silent> <leader>fw :Clap grep ++query=@visual<cr>
+nmap <silent> <leader>g :Clap git_diff_files<cr>
 
 Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_sign = '♥'
@@ -209,7 +213,6 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-github',
-  \ 'coc-highlight',
   \ 'coc-html',
   \ 'coc-json',
   \ 'coc-marketplace',
@@ -250,8 +253,8 @@ nmap <leader>cl :CocList<cr>
 nmap <leader>ca :Clap coc_actions<cr>
 vmap <leader>ca :Clap coc_actions<cr>
 nmap <leader>cd :Clap coc_diagnostics<cr>
-nmap <silent> <leader>o :Clap coc_outline<cr>
-nmap <silent> <leader>O :Clap coc_symbols<cr>
+nmap <silent> <leader>o :<C-u>CocList outline<cr>
+nmap <silent> <leader>O :<C-u>CocList symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
@@ -261,7 +264,7 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Highlight word
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS
@@ -290,7 +293,5 @@ command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"
 command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
-if has('nvim')
-  set termguicolors
-endif
+set termguicolors
 colorscheme xcodedark

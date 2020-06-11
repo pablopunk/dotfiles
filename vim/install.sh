@@ -13,3 +13,4 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 preinstall && \
   ln -svf $dir/vimrc ~/.vimrc && \
   ln -svf $dir/vimrc.min ~/.vimrc.min
+  ln -svf $dir/../nvim/coc-settings.json ~/.vim/coc-settings.json

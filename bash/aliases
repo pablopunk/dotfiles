@@ -21,8 +21,6 @@ alias t='tree -L 3'
 # other
 alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vvi='command vi -u ~/.vimrc.min' # true vim with no plugins
-alias vim=nvim
-alias vi=nvim
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
 alias rm=trash

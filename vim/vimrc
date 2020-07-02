@@ -63,6 +63,8 @@ nmap <c-s> :w<cr>
 
 " Format file
 nmap <silent> <leader><Tab> :CocCommand tsserver.executeAutofix \| CocCommand prettier.formatFile<cr>
+vmap <silent> <leader><Tab> <Plug>(coc-format-selected)
+xmap <silent> <leader><Tab> <Plug>(coc-format-selected)
 
 " Open terminal
 nmap <leader>t :terminal<cr>
@@ -123,6 +125,8 @@ augroup templates
   autocmd BufNewFile *.tsx,*.jsx
     \ 0r $HOME/.config/nvim/templates/react.tsx |
     \ exe "normal /template\<cr>diw"
+  autocmd BufNewFile *_document.*
+    \ 0r $HOME/.config/nvim/templates/_document.tsx
   autocmd BufNewFile *.json
     \ 0r $HOME/.config/nvim/templates/empty.json |
     \ exe "normal ggo"
@@ -199,7 +203,9 @@ Plug 'tyru/open-browser-github.vim' "   by this one
 "
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
+Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
@@ -234,8 +240,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Navigate through git changes on file
-nmap ]g <Plug>(coc-git-nextchunk)
-nmap [g <Plug>(coc-git-prevchunk)
+nmap ) <Plug>(coc-git-nextchunk)
+nmap ( <Plug>(coc-git-prevchunk)
 nmap <leader>u :CocCommand git.chunkUndo<cr>
 " Use K for documentation including Coc
 nmap <silent> K :call <SID>show_documentation()<CR>

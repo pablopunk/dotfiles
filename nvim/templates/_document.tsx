@@ -2,16 +2,22 @@ import Document, { Main, NextScript, Html, Head } from 'next/document'
 
 const darkModeCode = require('dark-mode-code')
 
-export default () => {
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initalProps = await Document.getInitialProps(ctx)
 
-  return (
-    <Html>
-      <body>
-        <script dangerouslySetInnerHTML={{ __html: darkModeCode }}></script>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
+    return {...initalProps}
+  }
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body>
+          <script dangerouslySetInnerHTML={{ __html: darkModeCode }}></script>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
 }
-

@@ -6,14 +6,12 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-set cursorline
 set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
 syntax on
 hi Comment ctermfg=blue
 hi Normal ctermfg=gray
-hi CursorLine cterm=none term=none ctermbg=black guibg=#000000
 
 " Persistent undo
 if has('persistent_undo')
@@ -39,8 +37,6 @@ set wildignore+=**/lang/**
 let mapleader = "\<space>"
 nmap Q <Nop>
 imap <c-c> <esc>
-nmap <c-s> <esc>:w<CR>
-imap <c-s> <esc>:w<CR>
 nmap <c-h> <c-w>h
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
@@ -56,9 +52,15 @@ nmap <Up> <Nop>
 nmap <Down> <Nop>
 nmap <Left> <Nop>
 nmap <Right> <Nop>
-vmap < <gv
-vmap > >gv
+nnoremap > >>
+nnoremap < <<
+vnoremap > >gv
+vnoremap < <gv
 nmap gn :bn<cr>
 nmap gb :bp<cr>
+vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <c-n> viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
+vnoremap <leader>n "9y:s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <leader>n viw"9y:s/<c-r>9/<c-r>9/g<left><left>
 
 autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts set filetype=javascript

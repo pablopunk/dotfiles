@@ -9,7 +9,7 @@ set smartcase
 set backspace=indent,eol,start
 set expandtab shiftround smartindent autoindent
 set tabstop=4 shiftwidth=4
-syntax on
+syntax off
 hi Comment ctermfg=blue
 hi Normal ctermfg=gray
 
@@ -23,7 +23,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-" Better find command
+" Better :find
 set path+=**
 set wildmenu
 set wildignore+=**/node_modules/**
@@ -32,6 +32,20 @@ set wildignore+=**/cov/**
 set wildignore+=**/coverage/**
 set wildignore+=**/po/**
 set wildignore+=**/lang/**
+set wildignore+=**/.git/**
+
+" Better :grep
+set grepprg=ag\ --vimgrep
+function! Grep(...)
+  return system(join([&grepprg] + a:000), ' ')
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+  autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
 
 " Mappings
 let mapleader = "\<space>"
@@ -41,13 +55,9 @@ nmap <c-h> <c-w>h
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
 nmap <c-l> <c-w>l
-nmap gb :bn<cr>
-nmap gB :bp<cr>
 nmap <c-q> :bd<cr>
 nmap <leader><Tab> <esc>gg=G``zz
-nmap <leader>f :Ack <cword><cr>
 nmap <leader>v :e ~/.vimrc.min<cr>
-nmap 0 ^
 nmap <Up> <Nop>
 nmap <Down> <Nop>
 nmap <Left> <Nop>

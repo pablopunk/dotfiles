@@ -81,6 +81,10 @@ vmap <leader>p "*p
 " Y should not be the same as yy
 nmap Y y$
 
+" Navigate buffers
+nmap <leader><leader> :ls<CR>:b<Space>
+nmap <c-space> :b#<CR>
+
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>
@@ -132,6 +136,35 @@ augroup templates
     \ exe "normal ggo"
 augroup end
 
+" Better :find
+set path+=**
+function! FindFiles(filename)
+  let error_file = tempname()
+  echo error_file
+  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.error_file
+  set errorformat=%f:%l:%m
+  exe "cfile ". error_file
+  copen
+  call delete(error_file)
+endfunction
+command! -nargs=1 Find call FindFiles(<q-args>)
+nmap <c-p> :Find<space>
+
+" Better :grep
+set grepprg=ag\ --vimgrep
+function! Grep(...)
+  return system(join([&grepprg] + a:000), ' ')
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep      cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> . ' -w')
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+  autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+nmap <c-f> :Grep<space>
+nmap <leader>f :GrepWord<space><c-r><c-w><cr>
+vmap <leader>f "9y:Grep<space>'<c-r>9'<cr>
 
 "
 " Abbreviations
@@ -140,6 +173,7 @@ iabbr widht width
 iabbr heigth height
 iabbr lenght length
 iabbr ligth light
+iabbr rigth right
 iabbr ireact import React from 'react'
 iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
@@ -159,10 +193,6 @@ command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
-Plug 'pablopunk/native-sidebar.vim'
-Plug 'tpope/vim-vinegar'
-Plug 'mhinz/vim-startify'
-let g:startify_change_to_vcs_root = 1
 
 "
 " KEYBINDINGS
@@ -176,25 +206,13 @@ Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
+imap <c-e> <plug>(emmet-expand-abbr)
 
 "
 " SEARCH
 "
-Plug 'pablopunk/better-find.vim'
-Plug 'brooth/far.vim'
 Plug 'markonm/traces.vim'
-Plug 'vn-ki/coc-clap'
-Plug 'liuchengxu/vim-clap'
-let g:clap_layout =  {'relative': 'editor' }
-nmap <silent> <c-p> :Clap files ++finder=rg --files --follow<cr>
-nmap <leader><leader> :Clap buffers<cr>
-nmap <silent> <leader>ff :Clap grep<cr>
-nmap <silent> <leader>fw :Clap grep ++query=<cword><cr>
-vmap <silent> <leader>fw :Clap grep ++query=@visual<cr>
-nmap <silent> <leader>g :Clap git_diff_files<cr>
-
-Plug 'MattesGroeger/vim-bookmarks'
-let g:bookmark_sign = '♥'
 Plug 'tyru/open-browser.vim'        " this one is required
 Plug 'tyru/open-browser-github.vim' "   by this one
 
@@ -215,18 +233,13 @@ Plug 'evanleck/vim-svelte'
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-github',
-  \ 'coc-html',
-  \ 'coc-json',
-  \ 'coc-marketplace',
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-snippets',
   \ 'coc-styled-components',
-  \ 'coc-tabnine',
   \ 'coc-tslint',
   \ 'coc-tsserver',
   \]
@@ -253,14 +266,6 @@ function! s:show_documentation()
   endif
 endfunction
 " Coc commands and stuff
-nmap <leader>cc :Clap coc_commands<cr>
-vmap <leader>cc :Clap coc_commands<cr>
-nmap <leader>cl :CocList<cr>
-nmap <leader>ca :Clap coc_actions<cr>
-vmap <leader>ca :Clap coc_actions<cr>
-nmap <leader>cd :Clap coc_diagnostics<cr>
-nmap <silent> <leader>o :<C-u>CocList outline<cr>
-nmap <silent> <leader>O :<C-u>CocList symbols<cr>
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
@@ -269,8 +274,6 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " completion
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" Highlight word
-" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 "
 " COLORS

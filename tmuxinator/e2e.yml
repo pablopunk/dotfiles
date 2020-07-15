@@ -4,14 +4,14 @@ name: e2e
 root: ~/src/superdesk-client-core
 
 windows:
-  - tdd:
-      layout: even-vertical
-      panes:
-        - nvim
-        - echo "npm run compile-end-to-end-tests && npm run protractor"
   - logs:
       layout: even-horizontal
       panes:
         - npm run start-test-server
         - npx grunt
-  - shell: git status
+        - npm run watch-end-to-end-tests
+  - tdd:
+      layout: even-vertical
+      panes:
+        - nvim
+        - echo "npm run protractor"

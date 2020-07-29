@@ -17,4 +17,4 @@ windows:
       layout: main-vertical
       panes:
         - cd ~/src/superdesk-client-core && nvim
-        - vtop
+  - vtop: vtop

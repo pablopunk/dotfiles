@@ -15,7 +15,6 @@ set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
 set backspace=indent,eol,start " Fix delete key
-set cursorline                 " Highlight cursor line
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
 set autoread                   " Re-read files if unmodified
@@ -287,7 +286,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'jcherven/jummidark.vim'
 Plug 'zefei/simple-dark'
-" Plug 'pablopunk/statusline.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
 "
@@ -303,4 +303,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme xcodedark
+colorscheme nord

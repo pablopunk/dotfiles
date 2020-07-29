@@ -2,9 +2,10 @@
   "suggest.autoTrigger": "none",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.maxCompleteItemCount": 20,
-  "suggest.enablePreview": true,
   "suggest.disableMenu": true,
   "suggest.removeDuplicateItems": true,
+  "signature.enable": true,
+  "signature.target": "echo",
   "diagnostic.enable": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
@@ -16,7 +17,7 @@
   "diagnostic.errorSign": "⨯",
   "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
-  "diagnostic.messageTarget": "float",
+  "diagnostic.messageTarget": "echo",
   "diagnostic.checkCurrentLine": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"
@@ -36,6 +37,7 @@
   "prettier.eslintIntegration": false,
   "prettier.requireConfig": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html"],
+  "coc.preferences.hoverTarget": "float",
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,

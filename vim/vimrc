@@ -22,6 +22,7 @@ set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
+set shortmess+=I               " Don't show :intro
 if has('patch-8.1.1564')
   set signcolumn=number        " Show line numbers and signs on the same column"
 else
@@ -114,7 +115,7 @@ nmap <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Remove highlights
-nmap <leader>h :noh<cr>
+nmap <silent> <leader>h :noh<cr>
 
 "
 " Autocommands
@@ -192,6 +193,8 @@ command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
 Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-sensible'
+Plug 'pablopunk/native-sidebar.vim'
 
 "
 " KEYBINDINGS
@@ -277,16 +280,16 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "
 " COLORS
 "
-Plug 'pablopunk/sick.vim'
-Plug 'pablopunk/sunset.vim'
-Plug 'morhetz/gruvbox'
-Plug 'arzg/vim-colors-xcode'
-Plug 'pablopunk/transparent.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'jcherven/jummidark.vim'
-Plug 'zefei/simple-dark'
+" Plug 'pablopunk/sick.vim'
+" Plug 'pablopunk/sunset.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'arzg/vim-colors-xcode'
+" Plug 'joshdick/onedark.vim'
+" Plug 'bluz71/vim-nightfly-guicolors'
+" Plug 'jcherven/jummidark.vim'
+" Plug 'zefei/simple-dark'
 Plug 'arcticicestudio/nord-vim'
+Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 

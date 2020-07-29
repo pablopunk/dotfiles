@@ -4,6 +4,6 @@ name: remote
 root: ~/src/superdesk-client-core
 
 windows:
+  - logs: cd ~/src/superdesk/client && sd grunt sd-master
   - code: nvim
-  - grunt: sd remote
-  - shell: git status
+  - vtop: vtop

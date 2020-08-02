@@ -17,7 +17,7 @@
   "diagnostic.errorSign": "⨯",
   "diagnostic.infoSign": "¡",
   "diagnostic.hintSign": "•",
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.messageTarget": "float",
   "diagnostic.checkCurrentLine": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"

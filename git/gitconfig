@@ -1,5 +1,5 @@
 [core]
-	pager = diff-so-fancy | less --tabs=2 -RFX
+	pager = delta
 	editor = nvim
 [push]
 	default = current
@@ -8,6 +8,5 @@
 	name = pablopunk
 [blame]
   date = short
-[diff-so-fancy]
-	changeHunkIndicators = true
-  stripLeadingSymbols = true
+[interactive]
+  diffFilter = delta --color-only

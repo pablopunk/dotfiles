@@ -160,7 +160,6 @@ command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> .
 augroup quickfix
   autocmd!
   autocmd QuickFixCmdPost cgetexpr cwindow
-  autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 nmap <c-f> :Grep<space>
 nmap <leader>f :GrepWord<space><c-r><c-w><cr>

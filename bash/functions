@@ -22,10 +22,30 @@ function grebase {
 function gpr_checkout {
   if [ -z "$1" ]
     then
-      echo "Missing branch name"
+      echo "Missing github PR link"
       return
   fi
-  git fetch upstream pull/$1/head:pr-$1
+
+  html="$(curl -s $1)"
+  matches="$(echo $html | grep -o 'href="/[^/]*/[^/]*/tree/[^"]*')"
+  lines="$(echo $matches | awk 'END{print NR}')"
+
+  if [[ ! "$lines" == 4 ]]
+    then
+      echo "Oops, either the link was wrong or github has changed their html. Check it manually"
+      return
+  fi
+
+  matches="$(echo $matches | sed 's/^\s*$//' | sed -n '2 p' | sed 's/href="//')" # trim and select portion of second line
+  user="$(echo $matches | cut -d'/' -f2)"
+  repo="$(echo $matches | cut -d'/' -f3)"
+  branch="$(echo $matches | cut -d'/' -f5)"
+
+  git remote add $user https://github.com/$user/$repo
+  git fetch $user
+  git checkout $user-$branch
+  git branch --set-upstream-to=$user/$branch
+  git pull
 }
 
 function copy {

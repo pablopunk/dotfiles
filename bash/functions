@@ -26,26 +26,43 @@ function gpr_checkout {
       return
   fi
 
-  html="$(curl -s $1)"
-  matches="$(echo $html | grep -o 'href="/[^/]*/[^/]*/tree/[^"]*')"
-  lines="$(echo $matches | awk 'END{print NR}')"
-
-  if [[ ! "$lines" == 4 ]]
+  if [ ! -z "$(git status --porcelain)" ]
     then
-      echo "Oops, either the link was wrong or github has changed their html. Check it manually"
+      echo "Git status is not clean"
       return
   fi
 
-  matches="$(echo $matches | sed 's/^\s*$//' | sed -n '2 p' | sed 's/href="//')" # trim and select portion of second line
-  user="$(echo $matches | cut -d'/' -f2)"
-  repo="$(echo $matches | cut -d'/' -f3)"
-  branch="$(echo $matches | cut -d'/' -f5)"
+  html="$(curl -s $1)"
+  matches="$(echo $html | grep -o 'title="[^\/]*\/[^:]*:[^"]*' | awk '!x[$0]++')"
+  lines="$(echo $matches | awk 'END{print NR}')"
 
-  git remote add $user https://github.com/$user/$repo
-  git fetch $user
-  git checkout $user-$branch
-  git branch --set-upstream-to=$user/$branch
-  git pull
+  if [[ ! "$lines" == 2 ]]
+    then
+      echo $matches
+      echo
+      echo "Oops, either the link was wrong or github has changed their html. Check it manually above:"
+      return
+  fi
+
+  first_line="$(echo $matches | sed 's/^\s*$//' | sed -n '1 p' | sed 's/title="//')"
+  upstream_user="$(echo $first_line | cut -d'/' -f1)"
+  upstream_repo="$(echo $first_line | egrep -o '/.*:' | tr -d '/:')"
+  upstream_branch="$(echo $first_line | cut -d':' -f2)"
+
+  second_line="$(echo $matches | sed 's/^\s*$//' | sed -n '2 p' | sed 's/title="//')"
+  pr_user="$(echo $second_line | cut -d'/' -f1)"
+  pr_repo="$(echo $second_line | egrep -o '/.*:' | tr -d '/:')"
+  pr_branch="$(echo $second_line | cut -d':' -f2)"
+
+  git fetch upstream
+  git checkout $upstream_branch || return
+  git reset --hard upstream/$upstream_branch
+
+  git remote add $pr_user https://github.com/$pr_user/$pr_repo
+  git fetch $pr_user
+  git checkout $pr_user-$pr_branch || git checkout -b $pr_user-$pr_branch
+  git branch --set-upstream-to=$pr_user/$pr_branch
+  git reset --hard $pr_user/$pr_branch
 }
 
 function copy {

@@ -19,6 +19,12 @@ function grebase {
     git rebase upstream/$branch
 }
 
+function greset_hard {
+  branch="$(git symbolic-ref --short HEAD)"
+  git fetch upstream && \
+    git reset --hard upstream/$branch
+}
+
 function gpr_checkout {
   if [ -z "$1" ]
     then

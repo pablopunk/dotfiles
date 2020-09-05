@@ -151,7 +151,7 @@ command! -nargs=1 Find call FindFiles(<q-args>)
 nmap <c-p> :Find<space>
 
 " Better :grep
-set grepprg=ag\ --vimgrep
+set grepprg=rg\ --vimgrep
 function! Grep(...)
   return system(join([&grepprg] + a:000), ' ')
 endfunction
@@ -191,6 +191,7 @@ Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
+Plug 'tpope/vim-rhubarb'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
 Plug 'pablopunk/native-sidebar.vim'
@@ -214,8 +215,6 @@ imap <c-e> <plug>(emmet-expand-abbr)
 " SEARCH
 "
 Plug 'markonm/traces.vim'
-Plug 'tyru/open-browser.vim'        " this one is required
-Plug 'tyru/open-browser-github.vim' "   by this one
 
 "
 " SYNTAX
@@ -283,13 +282,13 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " Plug 'pablopunk/sunset.vim'
 " Plug 'morhetz/gruvbox'
 " Plug 'arzg/vim-colors-xcode'
-" Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'
 " Plug 'bluz71/vim-nightfly-guicolors'
 " Plug 'jcherven/jummidark.vim'
 " Plug 'zefei/simple-dark'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'pablopunk/transparent.vim'
-Plug 'pablopunk/statusline.vim'
+" Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim'
 
 "
@@ -305,4 +304,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme nord
+colorscheme onedark

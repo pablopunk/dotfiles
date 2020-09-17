@@ -1,73 +1,93 @@
 #!/usr/bin/env node
 
-const { access, readFile, writeFile, constants } = require('fs')
-const { get } = require('https')
-const green = str => `\x1b[32m${str}\x1b[39m`
-const blue = str => `\x1b[34m${str}\x1b[39m`
-const bold = str => `\x1b[1m${str}\x1b[39m`
-const normal = str => `\x1b[0m${str}\x1b[39m`
-const magenta = str => `\x1b[95m${str}\x1b[39m`
-const cache = '/tmp/bash_hello'
+const { access, readFile, writeFile, constants } = require("fs");
+const { get } = require("https");
+const green = (str) => `\x1b[32m${str}\x1b[39m`;
+const blue = (str) => `\x1b[34m${str}\x1b[39m`;
+const bold = (str) => `\x1b[1m${str}\x1b[39m`;
+const normal = (str) => `\x1b[0m${str}\x1b[39m`;
+const magenta = (str) => `\x1b[95m${str}\x1b[39m`;
+const cache = "/tmp/bash_hello";
 
-const getMonthNumber = str => {
+const getMonthNumber = (str) => {
   switch (str) {
-    case 'ene': return 0
-    case 'feb': return 1
-    case 'mar': return 2
-    case 'abr': return 3
-    case 'may': return 4
-    case 'jun': return 5
-    case 'jul': return 6
-    case 'ago': return 7
-    case 'sep': return 8
-    case 'oct': return 9
-    case 'nov': return 10
-    case 'dic': return 11
-    default: throw new Error(`Unknown month ${str}`)
+    case "ene":
+      return 0;
+    case "feb":
+      return 1;
+    case "mar":
+      return 2;
+    case "abr":
+      return 3;
+    case "may":
+      return 4;
+    case "jun":
+      return 5;
+    case "jul":
+      return 6;
+    case "ago":
+      return 7;
+    case "sep":
+      return 8;
+    case "oct":
+      return 9;
+    case "nov":
+      return 10;
+    case "dic":
+      return 11;
+    default:
+      throw new Error(`Unknown month ${str}`);
   }
-}
+};
 
 access(cache, constants.R_OK, (err) => {
   if (!err) {
-    readFile(cache, 'utf-8', (_, data) => console.log('\n' + data))
-    return
+    readFile(cache, "utf-8", (_, data) => console.log("\n" + data));
+    return;
   }
 
-  get('https://soccer.now.sh/spain/real-madrid?timezone=Europe/Madrid', res => {
-    let data = ''
+  get(
+    "https://tvrealmadrid.com/api/spain/real-madrid?timezone=Europe/Madrid",
+    (res) => {
+      let data = "";
 
-    res.on('data', _ => data += _)
-    res.on('end', _ => {
-      let { matches } = JSON.parse(data)
-      let longestGame = 0
-      let longestDate = 0
-      matches = matches
-        .filter(_ => !_.played)
-        .slice(0, 3)
-      matches.map(m => {
-        if (m.game.length > longestGame) {
-          longestGame = m.game.length
-        }
-        if ((m.date.length + m.time.length + 3) > longestDate) {
-          longestDate = (m.date.length + m.time.length + 3)
-        }
-      })
-      const now = new Date()
-      const output = matches
-        .reduce((acc, { game, date, time, tvs }) => {
-          const niceGame = game.padEnd(longestGame)
-          const niceDate = `${date} (${time})`.padEnd(longestDate)
-          const [month, day] = date.split(' ')
-          const monthN = getMonthNumber(month)
+      res.on("data", (_) => (data += _));
+      res.on("end", (_) => {
+        let matches = JSON.parse(data);
+        let longestGame = 0;
+        let longestDate = 0;
+        matches = matches.filter((_) => !_.played).slice(0, 3);
+        matches.map((m) => {
+          if (m.game.length > longestGame) {
+            longestGame = m.game.length;
+          }
+          if (m.date.length + m.time.length + 3 > longestDate) {
+            longestDate = m.date.length + m.time.length + 3;
+          }
+        });
+        const now = new Date();
+        const output = matches.reduce((acc, { game, date, time, tvs }) => {
+          const niceGame = game.padEnd(longestGame);
+          const niceDate = `${date} (${time})`.padEnd(longestDate);
+          const [month, day] = date.split(" ");
+          const monthN = getMonthNumber(month);
 
           if (monthN === now.getMonth() && parseInt(day) === now.getDate()) {
-            return acc + `${bold(magenta(niceGame))}  ${normal(niceDate)}  ${blue(tvs[0])}\n`
+            return (
+              acc +
+              `${bold(magenta(niceGame))}  ${normal(niceDate)}  ${blue(
+                tvs[0]
+              )}\n`
+            );
           }
 
-          return acc + `${green(niceGame)}  ${normal(niceDate)}  ${blue(tvs[0])}\n`
-        }, '')
-      console.log(`\n${output}`)
-      writeFile(cache, output, 'utf-8', _ => _)
-    })
-  })
-})
+          return (
+            acc + `${green(niceGame)}  ${normal(niceDate)}  ${blue(tvs[0])}\n`
+          );
+        }, "");
+        console.log(`\n${output}`);
+        writeFile(cache, output, "utf-8", (_) => _);
+      });
+    }
+  );
+});

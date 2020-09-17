@@ -238,6 +238,7 @@ let g:coc_global_extensions = [
   \ 'coc-github',
   \ 'coc-pairs',
   \ 'coc-prettier',
+  \ 'coc-react-refactor',
   \ 'coc-snippets',
   \ 'coc-styled-components',
   \ 'coc-tslint',
@@ -269,6 +270,9 @@ endfunction
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
+nmap <leader>cl :CocList<cr>
+nmap <leader>ca :CocAction<cr>
+vmap <leader>ca :CocAction<cr>
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Enable insert line for coc-pairs and also use enter to choose from code
 " completion

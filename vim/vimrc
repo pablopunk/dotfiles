@@ -136,6 +136,11 @@ augroup templates
     \ exe "normal ggo"
 augroup end
 
+augroup LuaHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+augroup END
+
 " Better :find
 set path+=**
 function! FindFiles(filename)
@@ -229,7 +234,7 @@ Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
 
 "
-" COC
+" LSP
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
@@ -278,6 +283,11 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " completion
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" Plug 'neovim/nvim-lspconfig'
+" lua <<EOF
+" require'nvim_lsp'.tsserver.setup{}
+" EOF
+
 
 "
 " COLORS

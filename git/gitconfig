@@ -4,7 +4,7 @@
 [push]
 	default = current
 [user]
-	email = yo@pablo.pink
+	email = im@pablo.im
 	name = pablopunk
 	signingkey = 47E80F5E4640D3E00B1E1DE1A7EC766E7E8B94D2
 [blame]

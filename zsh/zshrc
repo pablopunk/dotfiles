@@ -25,11 +25,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 
 # Use bashy if it exist
-if hash bashy 2>/dev/null; then
-  export PS1='${pre}$(bashy) '
-else
-  export PS1='${pre}$ '
-fi
+export PS1='${pre}$(bashy) '
 
 # Vars
 export EDITOR=nvim

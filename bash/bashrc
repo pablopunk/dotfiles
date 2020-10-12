@@ -17,7 +17,7 @@ fi
 if hash bashy 2>/dev/null; then
   export PS1='${pre}$(bashy -r) '
 else
-  export PS1='{pre}$ '
+  export PS1='${pre}$ '
 fi
 
 # Bash completion

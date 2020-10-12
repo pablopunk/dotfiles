@@ -23,11 +23,7 @@ set number                     " Line numbers
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
 set shortmess+=I               " Don't show :intro
-if has('patch-8.1.1564')
-  set signcolumn=number        " Show line numbers and signs on the same column"
-else
-  set signcolumn=yes           " Show signcolumn and line numbers column"
-endif
+set signcolumn=number        " Show line numbers and signs on the same column"
 set expandtab shiftround smartindent autoindent " Indent stuff
 
 "

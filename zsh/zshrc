@@ -20,13 +20,6 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 #
 # eval "$(starship init zsh)"
 
-# Use bashy if it exist
-# Vars
-export EDITOR=nvim
-export SHELL="$(which zsh)"
-
-# Fix for zlib when installing pip Pillow
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 # GPG

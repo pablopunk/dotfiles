@@ -83,7 +83,8 @@ nmap Y y$
 
 " Navigate buffers
 nmap <leader><leader> :ls<CR>:b<Space>
-nmap <c-space> :b#<CR>
+nmap gb :bprev<cr>
+nmap gn :bnext<cr>
 
 " Disable arrow keys
 nmap <Up> <Nop>
@@ -200,6 +201,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
 Plug 'pablopunk/native-sidebar.vim'
+Plug 'ap/vim-buftabline'
+
 
 "
 " KEYBINDINGS

@@ -206,6 +206,7 @@ Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 let g:NERDTreeWinPos = 'right'
+nmap ñ :NERDTreeToggle<cr>
 autocmd VimEnter *
             \   if !argc()
             \ |   Startify

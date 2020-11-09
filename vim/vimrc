@@ -14,6 +14,7 @@ set hlsearch                   " Highlight search term
 set ignorecase                 " Search is case insensitive
 set smartcase                  " Unless your search has capital letters
 set mouse=a                    " Allow mouse integration
+set cursorline                 " Highlight line where the cursor is
 set backspace=indent,eol,start " Fix delete key
 set noshowmode                 " Don't show the mode you're in
 set hidden                     " Can navigate through buffers even if they're not saved
@@ -200,9 +201,17 @@ nnoremap <leader>dl :diffget //3<cr>
 Plug 'tpope/vim-rhubarb'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
-Plug 'pablopunk/native-sidebar.vim'
+" Plug 'pablopunk/native-sidebar.vim'
 Plug 'ap/vim-buftabline'
-
+Plug 'mhinz/vim-startify'
+Plug 'preservim/nerdtree'
+let g:NERDTreeWinPos = 'right'
+autocmd VimEnter *
+            \   if !argc()
+            \ |   Startify
+            \ |   NERDTree
+            \ |   wincmd w
+            \ | endif
 
 "
 " KEYBINDINGS
@@ -297,15 +306,21 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "
 " Plug 'pablopunk/sick.vim'
 " Plug 'pablopunk/sunset.vim'
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 " Plug 'arzg/vim-colors-xcode'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 " Plug 'bluz71/vim-nightfly-guicolors'
 " Plug 'jcherven/jummidark.vim'
 " Plug 'zefei/simple-dark'
 " Plug 'arcticicestudio/nord-vim'
-Plug 'pablopunk/transparent.vim'
+" Plug 'pablopunk/transparent.vim'
 " Plug 'pablopunk/statusline.vim'
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
 Plug 'edkolev/tmuxline.vim'
 
 "
@@ -321,4 +336,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme onedark
+colorscheme gruvbox

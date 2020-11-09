@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function preinstall {
+  rm -rf .vim
+  mkdir -p .vim
   curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
     > /dev/null

@@ -1,18 +1,16 @@
 {
-  "suggest.timeout": 20000,
   "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
-  "suggest.maxCompleteItemCount": 20,
-  "suggest.disableMenu": true,
+  "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
   "signature.enable": true,
-  "signature.target": "echo",
+  "signature.target": "float",
   "diagnostic.enable": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.virtualText": false,
-  "diagnostic.level": "error",
+  "diagnostic.level": "warning",
   "diagnostic.enableSign": false,
   "diagnostic.warningSign": "·",
   "diagnostic.errorSign": "⨯",
@@ -51,6 +49,5 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  "git.addGBlameToBufferVar": true,
-  "python.linting.flake8Enabled": true
+  "git.addGBlameToBufferVar": true
 }

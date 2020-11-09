@@ -21,6 +21,7 @@ set hidden                     " Can navigate through buffers even if they're no
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
+set relativenumber             " I will regret it
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
 set shortmess+=I               " Don't show :intro
@@ -57,7 +58,8 @@ nmap + *N
 nmap <c-t> :tabe<cr>
 
 " Ctrl+q close buffer
-nmap <c-q> :bd<cr>
+nmap <c-q> :bp\|bd #<CR>
+
 
 " Ctrl+s to save
 nmap <c-s> :w<cr>
@@ -213,7 +215,6 @@ autocmd VimEnter *
             \ |   NERDTree
             \ |   wincmd w
             \ | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 "

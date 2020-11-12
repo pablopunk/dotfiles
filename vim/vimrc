@@ -154,6 +154,9 @@ function! FindFiles(filename)
   set errorformat=%f:%l:%m
   exe "cfile ". error_file
   copen
+  if line('$') == 1
+    wincmd w
+  endif
   call delete(error_file)
 endfunction
 command! -nargs=1 Find call FindFiles(<q-args>)
@@ -206,15 +209,19 @@ Plug 'tpope/vim-sensible'
 " Plug 'pablopunk/native-sidebar.vim'
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
+let g:startify_change_to_vcs_root = 1
+let g:startify_change_to_dir = 0
 Plug 'preservim/nerdtree'
 let g:NERDTreeWinPos = 'right'
-nmap ñ :NERDTreeToggle<cr>
+nmap ñ :NERDTreeFind<cr>
 autocmd VimEnter *
             \   if !argc()
             \ |   Startify
             \ |   NERDTree
             \ |   wincmd w
             \ | endif
+let g:NERDTreeMapJumpPrevSibling=""
+let g:NERDTreeMapJumpNextSibling=""
 
 
 "

@@ -7,7 +7,7 @@ windows:
   - logs:
       layout: even-vertical
       panes:
-        - npm start
-        - export SECRET_KEY=aljsjlasdjkasdjasdfj && honcho start -p 5050
+        - npm i && npm start
+        - python3 -m venv .venv && . .venv/bin/activate && pip install -r dev-requirements.txt && export SECRET_KEY=aljsjlasdjkasdjasdfj && honcho start -p 5050
   - code: nvim
 

@@ -11,8 +11,9 @@ windows:
   - logs:
       layout: even-vertical
       panes:
-        - cd ~/src/superdesk<%= project %>/server && honcho start
         - cd ~/src/superdesk<%= project %>/client && npx grunt
+        - cd ~/src/superdesk<%= project %> && docker-compose -f docker-compose-services.yml up
+        - cd ~/src/superdesk<%= project %>/server && honcho start
   - code:
       layout: main-vertical
       panes:

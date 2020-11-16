@@ -3,8 +3,6 @@
 name: e2e
 root: ~/src/superdesk-client-core
 
-on_project_start: 'open /Applications/Docker.app'
-
 windows:
   - logs:
       layout: even-horizontal

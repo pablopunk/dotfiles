@@ -12,6 +12,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
 export PATH="$NVM_DIR/versions/node/v$(<$NVM_DIR/alias/default)/bin:$PATH"
-if grep -qEi "Microsoft|WSL)( /proc/version &>" /dev/null ; then
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   export DOCKER_HOST=tcp://localhost:2375
-if
+fi

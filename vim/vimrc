@@ -58,7 +58,7 @@ nmap + *N
 nmap <c-t> :tabe<cr>
 
 " Ctrl+q close buffer
-nmap <c-q> :bp\|bd #<CR>
+nmap <c-q> :bd<cr>
 
 
 " Ctrl+s to save
@@ -206,23 +206,12 @@ nnoremap <leader>dl :diffget //3<cr>
 Plug 'tpope/vim-rhubarb'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
-" Plug 'pablopunk/native-sidebar.vim'
+Plug 'pablopunk/native-sidebar.vim'
+let g:native_sidebar_shortcut = 'ñ'
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
-Plug 'preservim/nerdtree'
-let g:NERDTreeWinPos = 'right'
-nmap ñ :NERDTreeFind<cr>
-autocmd VimEnter *
-            \   if !argc()
-            \ |   Startify
-            \ |   NERDTree
-            \ |   wincmd w
-            \ | endif
-let g:NERDTreeMapJumpPrevSibling=""
-let g:NERDTreeMapJumpNextSibling=""
-
 
 "
 " KEYBINDINGS

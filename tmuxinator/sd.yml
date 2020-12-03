@@ -12,10 +12,10 @@ windows:
       layout: even-vertical
       panes:
         - cd ~/src/superdesk<%= project %>/client && npx grunt
-        - cd ~/src/newsroom && docker-compose up -d
-        - cd ~/src/superdesk<%= project %>/server && python3 -m venv ./env && . ./env/bin/activate && honcho start
+        - cd ~/src/superdesk<%= project %> &&
+            docker-compose start redis mongodb elastic &&
+            docker-compose start superdesk-server
   - code:
       layout: main-vertical
       panes:
         - cd ~/src/superdesk-client-core && nvim
-  - vtop: vtop

@@ -1,6 +1,5 @@
 import Document, { Main, NextScript, Html, Head } from 'next/document'
-
-const darkModeCode = require('dark-mode-code')
+import darkModeCode from 'dark-mode-code'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {

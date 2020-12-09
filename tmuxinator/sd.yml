@@ -12,9 +12,13 @@ windows:
       layout: even-vertical
       panes:
         - cd ~/src/superdesk<%= project %>/client && npx grunt
-        - cd ~/src/superdesk<%= project %> &&
-            docker-compose start redis mongodb elastic &&
-            docker-compose start superdesk-server
+        - cd ~/src/superdesk<%= project %> && docker-compose start redis mongodb elastic
+        - cd ~/src/superdesk<%= project %>/server &&
+            ~/.pyenv/versions/3.5.9/bin/python -m venv env &&
+            . env/bin/activate &&
+            pip install --upgrade pip &&
+            pip install -r requirements.txt &&
+            honcho start
   - code:
       layout: main-vertical
       panes:

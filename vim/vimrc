@@ -238,6 +238,7 @@ Plug 'markonm/traces.vim'
 "
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
+Plug 'leafgarland/typescript-vim'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'

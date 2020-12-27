@@ -6,21 +6,11 @@ set nocompatible
 filetype plugin indent on
 syntax on
 
-set ttyfast                    " Faster redrawing
-set lazyredraw                 " Only when necessary
-set encoding=utf-8             " Unicode
-set incsearch                  " Incremental search
-set hlsearch                   " Highlight search term
-set ignorecase                 " Search is case insensitive
-set smartcase                  " Unless your search has capital letters
-set mouse=a                    " Allow mouse integration
-set cursorline                 " Highlight line where the cursor is
-set backspace=indent,eol,start " Fix delete key
+""""" I never change these
+set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start
+
+""""" Sometimes I change these
 set noshowmode                 " Don't show the mode you're in
-set hidden                     " Can navigate through buffers even if they're not saved
-set autoread                   " Re-read files if unmodified
-set linebreak                  " Avoid wrapping lines in the middle of a word.
-set number                     " Line numbers
 " set relativenumber             " I will regret it (see...)
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
@@ -164,9 +154,6 @@ iabbr ccreact class Component extends React.Component
 " Start plugins
 call plug#begin('~/.vim/plugged')
 
-"
-" PROJECT
-"
 Plug 'tpope/vim-fugitive'
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
@@ -181,30 +168,14 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
 Plug 'pablopunk/better-find.vim'
 Plug 'pablopunk/better-grep.vim'
-
-"
-" KEYBINDINGS
-"
 Plug 'christoomey/vim-tmux-navigator'
-
-"
-" EDIT
-"
 Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 imap <c-e> <plug>(emmet-expand-abbr)
-
-"
-" SEARCH
-"
 Plug 'markonm/traces.vim'
-
-"
-" SYNTAX
-"
 Plug 'pangloss/vim-javascript'
 let g:jsx_ext_required = 0
 Plug 'leafgarland/typescript-vim'
@@ -212,15 +183,30 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'keith/swift.vim'
 Plug 'evanleck/vim-svelte'
-
-"
-" LSP
-"
+Plug 'pablopunk/sick.vim'
+Plug 'pablopunk/sunset.vim'
+Plug 'morhetz/gruvbox'
+Plug 'arzg/vim-colors-xcode'
+Plug 'joshdick/onedark.vim'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'jcherven/jummidark.vim'
+Plug 'zefei/simple-dark'
+Plug 'arcticicestudio/nord-vim'
+Plug 'pablopunk/transparent.vim'
+Plug 'pablopunk/statusline.vim'
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+Plug 'edkolev/tmuxline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-github',
+  \ 'coc-json',
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-react-refactor',
@@ -261,29 +247,6 @@ nmap <leader>ca :CocAction<cr>
 vmap <leader>ca :CocAction<cr>
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-
-"
-" COLORS
-"
-Plug 'pablopunk/sick.vim'
-" Plug 'pablopunk/sunset.vim'
-" Plug 'morhetz/gruvbox'
-" Plug 'arzg/vim-colors-xcode'
-" Plug 'joshdick/onedark.vim'
-" Plug 'bluz71/vim-nightfly-guicolors'
-" Plug 'jcherven/jummidark.vim'
-" Plug 'zefei/simple-dark'
-" Plug 'arcticicestudio/nord-vim'
-" Plug 'pablopunk/transparent.vim'
-" Plug 'pablopunk/statusline.vim'
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-Plug 'edkolev/tmuxline.vim'
-
 "
 " End of plugins
 "
@@ -298,4 +261,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme sick
+colorscheme onedark

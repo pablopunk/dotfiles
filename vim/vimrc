@@ -302,9 +302,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "
 " COLORS
 "
-" Plug 'pablopunk/sick.vim'
+Plug 'pablopunk/sick.vim'
 " Plug 'pablopunk/sunset.vim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 " Plug 'arzg/vim-colors-xcode'
 " Plug 'joshdick/onedark.vim'
 " Plug 'bluz71/vim-nightfly-guicolors'
@@ -334,4 +334,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme gruvbox
+colorscheme sick

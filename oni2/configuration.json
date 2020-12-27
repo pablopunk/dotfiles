@@ -1,8 +1,8 @@
 
 {
   "editor.detectIndentation": true,
-  "editor.fontFamily": "JetBrainsMono-Regular.ttf",
-  "editor.fontSize": 14,
+  "editor.fontFamily": "Dank Mono",
+  "editor.fontSize": 18,
   "editor.largeFileOptimizations": true,
   "editor.highlightActiveIndentGuide": true,
   "editor.indentSize": 4,
@@ -26,5 +26,5 @@
   "workbench.sideBar.visible": true,
   "workbench.statusBar.visible": true,
   "workbench.tree.indent": 2,
-  "vim.useSystemClipboard": ["yank"]
+  "vim.useSystemClipboard": ["yank"],
 }

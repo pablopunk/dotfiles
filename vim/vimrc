@@ -21,7 +21,7 @@ set hidden                     " Can navigate through buffers even if they're no
 set autoread                   " Re-read files if unmodified
 set linebreak                  " Avoid wrapping lines in the middle of a word.
 set number                     " Line numbers
-set relativenumber             " I will regret it
+" set relativenumber             " I will regret it (see...)
 set scrolloff=3                " Spacing on top and bottom
 set laststatus=2               " Hide bottom status line
 set shortmess+=I               " Don't show :intro
@@ -145,38 +145,6 @@ augroup LuaHighlight
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-" Better :find
-set path+=**
-function! FindFiles(filename)
-  let error_file = tempname()
-  echo error_file
-  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.error_file
-  set errorformat=%f:%l:%m
-  exe "cfile ". error_file
-  copen
-  if line('$') == 1
-    wincmd w
-  endif
-  call delete(error_file)
-endfunction
-command! -nargs=1 Find call FindFiles(<q-args>)
-nmap <c-p> :Find<space>
-
-" Better :grep
-set grepprg=rg\ --vimgrep
-function! Grep(...)
-  return system(join([&grepprg] + a:000), ' ')
-endfunction
-command! -nargs=+ -complete=file_in_path -bar Grep      cgetexpr Grep(<f-args>)
-command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> . ' -w')
-augroup quickfix
-  autocmd!
-  autocmd QuickFixCmdPost cgetexpr cwindow
-augroup END
-nmap <c-f> :Grep<space>
-nmap <leader>f :GrepWord<space><c-r><c-w><cr>
-vmap <leader>f "9y:Grep<space>'<c-r>9'<cr>
-
 "
 " Abbreviations
 "
@@ -211,6 +179,8 @@ Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
+Plug 'pablopunk/better-find.vim'
+Plug 'pablopunk/better-grep.vim'
 
 "
 " KEYBINDINGS
@@ -285,18 +255,11 @@ endfunction
 nmap <silent> ge <Plug>(coc-diagnostic-next-error)
 nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
+nmap <leader>cc :CocCommand<cr>
 nmap <leader>cl :CocList<cr>
 nmap <leader>ca :CocAction<cr>
 vmap <leader>ca :CocAction<cr>
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
-" Enable insert line for coc-pairs and also use enter to choose from code
-" completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" Plug 'neovim/nvim-lspconfig'
-" lua <<EOF
-" require'nvim_lsp'.tsserver.setup{}
-" EOF
 
 
 "
@@ -315,7 +278,7 @@ Plug 'pablopunk/sick.vim'
 " Plug 'pablopunk/statusline.vim'
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'wombat',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
@@ -331,6 +294,7 @@ command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! ConstImport :execute "normal! 0ciwconst\<esc>/from\<cr>ciw= require(\<esc>lxA)\<esc>"
 command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
 command! HotReload autocmd BufWritePost *.vim source %
+
 "
 " Color config
 set termguicolors

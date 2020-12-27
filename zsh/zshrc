@@ -12,13 +12,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.functions
 source ~/.aliases
 source ~/.path
-# $HOME/.hello| lolcat
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
-
-#
-# PROMPT
-#
-# eval "$(starship init zsh)"
 
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
 

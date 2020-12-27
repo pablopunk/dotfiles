@@ -207,7 +207,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-sensible'
 Plug 'pablopunk/native-sidebar.vim'
-let g:native_sidebar_shortcut = 'ñ'
 Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_vcs_root = 1

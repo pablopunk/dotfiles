@@ -75,7 +75,8 @@ vmap <leader>p "*p
 nmap Y y$
 
 " Navigate buffers
-nmap <leader><leader> :ls<CR>:b<Space>
+" nmap <leader><leader> :ls<CR>:b<Space>
+nmap <leader><leader> :CtrlPBuffer<cr>
 nmap gb :bprev<cr>
 nmap gn :bnext<cr>
 
@@ -166,8 +167,14 @@ Plug 'ap/vim-buftabline'
 Plug 'mhinz/vim-startify'
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
-Plug 'pablopunk/better-find.vim'
 Plug 'pablopunk/better-grep.vim'
+" Plug 'pablopunk/better-find.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+" Use fd for ctrlp.
+if executable('fd')
+    let g:ctrlp_user_command = 'fd --type f --color never "" %s'
+    let g:ctrlp_use_caching = 0
+endif
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
@@ -212,8 +219,10 @@ let g:coc_global_extensions = [
   \ 'coc-react-refactor',
   \ 'coc-snippets',
   \ 'coc-styled-components',
+  \ 'coc-tabnine',
   \ 'coc-tslint',
   \ 'coc-tsserver',
+  \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
   \]
 set shortmess+=c
 set updatetime=300
@@ -246,6 +255,10 @@ nmap <leader>cl :CocList<cr>
 nmap <leader>ca :CocAction<cr>
 vmap <leader>ca :CocAction<cr>
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "
 " End of plugins

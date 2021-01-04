@@ -6,3 +6,5 @@ node_modules
 coc/**/db.json
 coc/**/yarn*
 coc/**/history.json
+
+karabiner/automatic_backups

@@ -2,19 +2,24 @@
 # OH-MY-ZSH
 #
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="intheloop"
+ZSH_THEME=""
 plugins=(git osx npm)
 source $ZSH/oh-my-zsh.sh
 
 #
-# USER CONFIG
+# ZSH OPTIONS
+#
+setopt PROMPT_SUBST
+
+#
+# MODULAR
 #
 source ~/.functions
 source ~/.aliases
 source ~/.path
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
-
-# GPG
-export GPG_TTY=$(tty)
+#
+# PROMPT
+#
+PROMPT='🌙 $(bashy) '

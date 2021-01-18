@@ -180,16 +180,8 @@ Plug 'pablopunk/persistent-undo.vim'
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
-imap <c-e> <plug>(emmet-expand-abbr)
 Plug 'markonm/traces.vim'
-Plug 'pangloss/vim-javascript'
-let g:jsx_ext_required = 0
-Plug 'leafgarland/typescript-vim'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
-Plug 'keith/swift.vim'
-Plug 'evanleck/vim-svelte'
+Plug 'sheerun/vim-polyglot'
 Plug 'pablopunk/sick.vim'
 Plug 'pablopunk/sunset.vim'
 Plug 'morhetz/gruvbox'
@@ -210,6 +202,7 @@ let g:lightline = {
 Plug 'edkolev/tmuxline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
+  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-github',

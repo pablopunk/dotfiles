@@ -22,4 +22,5 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 #
 # PROMPT
 #
-PROMPT='🌙 $(bashy) '
+NEWLINE=$'\n'
+PROMPT='$(bashy)${NEWLINE}▲ '

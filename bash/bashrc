@@ -10,7 +10,7 @@ export HISTFILESIZE=
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   pre='(ssh:'$(hostname)') '
-elif
+else
   pre=""
 fi
 

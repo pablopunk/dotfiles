@@ -29,6 +29,7 @@ alias mkidr='mkdir -p'
 if [[ "$(uname)" == "Linux" ]]; then
   alias open=xdg-open
 else
+  echo
   # alias brew='arch -arm64 brew'
   # alias brew='arch -x86_64 brew'
 fi

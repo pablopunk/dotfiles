@@ -267,4 +267,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme onedark
+colorscheme xcodedark

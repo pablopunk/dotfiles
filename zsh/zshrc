@@ -24,3 +24,5 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 #
 NEWLINE=$'\n'
 PROMPT='$(bashy -r)${NEWLINE}▲ '
+
+TERM=xterm-256color

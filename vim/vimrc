@@ -155,19 +155,20 @@ iabbr ccreact class Component extends React.Component
 " Start plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " git tools
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
-Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rhubarb' " for Gbrowse
+Plug 'tpope/vim-repeat' " repeat more things with .
 Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-sensible'
-Plug 'pablopunk/native-sidebar.vim'
-Plug 'ap/vim-buftabline'
-Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-sensible' " nice defaults for vim
+Plug 'pablopunk/native-sidebar.vim' " ctrl+b to open dir drawer
+Plug 'ap/vim-buftabline' " show buffers as tabs
+Plug 'mhinz/vim-startify' " show screen with shortcuts when opening vim
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
-Plug 'pablopunk/better-grep.vim'
+Plug 'pablopunk/better-grep.vim' " ctrl+f to search words
 " Plug 'pablopunk/better-find.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " Use fd for ctrlp.
@@ -175,13 +176,13 @@ if executable('fd')
     let g:ctrlp_user_command = 'fd --type f --color never "" %s'
     let g:ctrlp_use_caching = 0
 endif
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'pablopunk/persistent-undo.vim'
-Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' }
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'markonm/traces.vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'christoomey/vim-tmux-navigator' " enable ctrl+hjkl to navigate on tmux/vim
+Plug 'pablopunk/persistent-undo.vim' " undo works across vim sessions
+Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing vimrc
+Plug 'tpope/vim-commentary' " gcc for commenting
+Plug 'tpope/vim-surround' " new vim action (cs=change surround) (ys=add surround) *requires a motion
+Plug 'markonm/traces.vim' " to show in real time what your :s commands will replace
+Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin
 Plug 'pablopunk/sick.vim'
 Plug 'pablopunk/sunset.vim'
 Plug 'morhetz/gruvbox'
@@ -192,15 +193,15 @@ Plug 'jcherven/jummidark.vim'
 Plug 'zefei/simple-dark'
 Plug 'arcticicestudio/nord-vim'
 Plug 'pablopunk/transparent.vim'
-Plug 'pablopunk/statusline.vim'
+" Plug 'pablopunk/statusline.vim'
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
-Plug 'edkolev/tmuxline.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
 let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-eslint',
@@ -252,6 +253,8 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Trigger coc with c-n
+inoremap <silent><expr> <c-n> coc#refresh()
 
 "
 " End of plugins

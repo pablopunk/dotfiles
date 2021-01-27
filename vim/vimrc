@@ -210,7 +210,6 @@ let g:coc_global_extensions = [
   \ 'coc-react-refactor',
   \ 'coc-snippets',
   \ 'coc-styled-components',
-  \ 'coc-tabnine',
   \ 'coc-tslint',
   \ 'coc-tsserver',
   \ 'https://github.com/rodrigore/coc-tailwind-intellisense',

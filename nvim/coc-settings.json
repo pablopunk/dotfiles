@@ -11,7 +11,7 @@
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": true,
   "diagnostic.enableHighlightLineNumber": true,
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "diagnostic.level": "warning",
   "diagnostic.enableSign": false,
   "diagnostic.messageTarget": "float",

@@ -205,6 +205,7 @@ let g:coc_global_extensions = [
   \ 'coc-git',
   \ 'coc-github',
   \ 'coc-json',
+  \ 'coc-marketplace',
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-react-refactor',

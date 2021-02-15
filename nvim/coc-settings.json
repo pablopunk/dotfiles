@@ -5,11 +5,11 @@
   "suggest.triggerCompletionWait": 200,
   "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
+  "suggest.disableMenu": true, // only show coc suggestions (disable vim suggestions)
   "signature.enable": true,
   "signature.target": "float",
   "diagnostic.enable": true,
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.refreshAfterSave": true,
   "diagnostic.enableHighlightLineNumber": true,
   "diagnostic.virtualText": false,
   "diagnostic.level": "warning",

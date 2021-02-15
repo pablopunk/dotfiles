@@ -7,7 +7,7 @@ filetype plugin indent on
 syntax on
 
 """"" I never change these
-set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start
+set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start nowrap
 
 """"" Sometimes I change these
 set noshowmode                 " Don't show the mode you're in

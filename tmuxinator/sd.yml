@@ -14,7 +14,7 @@ windows:
         - cd ~/src/superdesk<%= project %>/client && npx grunt
         - cd ~/src/superdesk<%= project %> && docker-compose start redis mongodb elastic
         - cd ~/src/superdesk<%= project %>/server &&
-            ~/.pyenv/versions/3.5.9/bin/python -m venv env &&
+            ~/.pyenv/versions/3.9-dev/bin/python -m venv env &&
             . env/bin/activate &&
             honcho start
   - code:

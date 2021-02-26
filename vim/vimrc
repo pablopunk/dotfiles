@@ -55,7 +55,12 @@ nmap <c-q> :bd<cr>
 nmap <c-s> :w<cr>
 
 " Format file
-nmap <silent> <leader><Tab> :CocCommand tsserver.executeAutofix \| CocCommand prettier.formatFile<cr>
+function! FixAndFormat()
+  :CocCommand tsserver.executeAutofix
+  :CocCommand tsserver.organizeImports
+  " :CocCommand prettier.formatFile
+endfunction
+nmap <silent> <leader><Tab> :call FixAndFormat()<cr>
 vmap <silent> <leader><Tab> <Plug>(coc-format-selected)
 xmap <silent> <leader><Tab> <Plug>(coc-format-selected)
 
@@ -192,11 +197,7 @@ Plug 'jcherven/jummidark.vim'
 Plug 'zefei/simple-dark'
 Plug 'arcticicestudio/nord-vim'
 Plug 'pablopunk/transparent.vim'
-" Plug 'pablopunk/statusline.vim'
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+Plug 'pablopunk/statusline.vim'
 Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
 let g:coc_global_extensions = [

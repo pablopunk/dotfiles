@@ -57,7 +57,7 @@ nmap <c-s> :w<cr>
 " Format file
 function! FixAndFormat()
   :CocCommand tsserver.executeAutofix
-  :CocCommand tsserver.organizeImports
+  " :CocCommand tsserver.organizeImports
   " :CocCommand prettier.formatFile
 endfunction
 nmap <silent> <leader><Tab> :call FixAndFormat()<cr>
@@ -120,6 +120,9 @@ nmap <silent> <leader>h :noh<cr>
 "
 " Autocommands
 "
+
+" Close quickfix window after pressing enter
+autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " I don't wanna save changes to a directory ¬¬
 autocmd FileType netrw setl bufhidden=delete
@@ -210,13 +213,14 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-react-refactor',
+  \ 'coc-scssmodules',
   \ 'coc-sh',
   \ 'coc-snippets',
   \ 'coc-styled-components',
   \ 'coc-tslint',
   \ 'coc-tsserver',
-  \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
   \]
+  " \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
 set shortmess+=c
 set updatetime=300
 " Faster python detection

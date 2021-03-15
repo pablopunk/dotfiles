@@ -1,0 +1,14 @@
+# ~/.tmuxinator/neumann.yml
+
+name: neumann
+root: ~/src/prezly/prezly/
+
+windows:
+  - logs:
+      layout: even-vertical
+      panes:
+        - docker-compose up
+        - make mac--backend-assets-watch
+        - cd apps/press && npm run build:watch
+        - cd apps/press/templates/_custom/georgneumann && npm run watch
+        - code-insiders . && exit

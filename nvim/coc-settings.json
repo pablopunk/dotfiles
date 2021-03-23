@@ -2,10 +2,12 @@
   "suggest.autoTrigger": "none",
   "suggest.minTriggerInputLength": 3,
   "suggest.triggerAfterInsertEnter":true,
-  "suggest.triggerCompletionWait": 200,
+  "suggest.triggerCompletionWait": 300,
+  "suggest.timeout": 2000,
   "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
-  "suggest.disableMenu": true, // only show coc suggestions (disable vim suggestions)
+  "suggest.disableMenu": true, // don't show source of completion
+  /* "suggest.disableKind": true, // don't show type of item (f, v...) */
   "signature.enable": true,
   "signature.target": "float",
   "diagnostic.enable": true,
@@ -24,17 +26,11 @@
   },
   "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.enable": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
   "prettier.eslintIntegration": false,
   "prettier.requireConfig": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html"],
   "coc.preferences.hoverTarget": "float",
+  "coc.preferences.highlightTimeout": 400,
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,

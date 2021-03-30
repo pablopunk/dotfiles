@@ -26,7 +26,8 @@
   },
   "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
-  "prettier.eslintIntegration": false,
+  "prettier.eslintIntegration": true,
+  "prettier.printWidth": 120,
   "prettier.requireConfig": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html"],
   "coc.preferences.hoverTarget": "float",
@@ -40,5 +41,10 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  "git.addGBlameToBufferVar": true
+  "git.addGBlameToBufferVar": true,
+  "codeLens.enable": true,
+  "typescript.referencesCodeLens.enable": false,
+  "typescript.implementationsCodeLens.enable": false,
+  "javascript.referencesCodeLens.enable": false,
+  "javascript.implementationsCodeLens.enable": false
 }

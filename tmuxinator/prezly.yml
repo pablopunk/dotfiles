@@ -1,6 +1,6 @@
 # ~/.tmuxinator/neumann.yml
 
-name: neumann
+name: prezly
 root: ~/src/prezly/prezly/
 
 windows:
@@ -10,5 +10,5 @@ windows:
         - docker-compose up
         - make mac--backend-assets-watch
         - cd apps/press && npm run build:watch
-        - cd apps/press/templates/_custom/georgneumann && npm run watch
+        - cd apps/press/templates/_custom/<%= @args[0] %> && npm run watch
         - code-insiders . && exit

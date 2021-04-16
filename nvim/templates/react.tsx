@@ -1,8 +1,9 @@
-import React from 'react'
+import { FunctionComponent } from 'react';
 
-export default function Component () {
+type Props = {};
 
-  return (
-    <div>template</div>
-  )
-}
+const FILENAME: FunctionComponent<Props> = ({ children }) => (
+    <div>{children}</div>
+);
+
+export default FILENAME;

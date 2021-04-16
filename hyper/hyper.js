@@ -1,60 +1,61 @@
 module.exports = {
   config: {
     opacity: 0.85,
-    theme: 'dark',
-    updateChannel: 'canary',
+    theme: "dark",
+    updateChannel: "canary",
     fontSize: 18,
-    fontFamily: '"FuraCode Nerd Font", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-    fontWeight: 'normal',
-    fontWeightBold: 'bold',
+    fontFamily:
+      '"Cascadia Code", "FuraCode Nerd Font", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontWeight: "normal",
+    fontWeightBold: "bold",
     lineHeight: 1,
     letterSpacing: 0,
 
-    cursorColor: 'yellow',
-    cursorAccentColor: '#000',
-    cursorShape: 'UNDERLINE',
+    cursorColor: "yellow",
+    cursorAccentColor: "#000",
+    cursorShape: "UNDERLINE",
     cursorBlink: true,
 
-    foregroundColor: 'white',
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    borderColor: '#212121',
+    foregroundColor: "white",
+    backgroundColor: "rgba(0,0,0,0.75)",
+    borderColor: "#212121",
 
-    css: '',
-    termCSS: '',
+    css: "",
+    termCSS: "",
 
-    showHamburgerMenu: '',
-    showWindowControls: '',
+    showHamburgerMenu: "",
+    showWindowControls: "",
 
-    padding: '12px 14px',
+    padding: "12px 14px",
     colors: {
-      black: 'black',
-      red: 'tomato',
-      green: 'lightgreen',
-      yellow: 'gold',
-      blue: 'royalblue',
-      magenta: 'fuchsia',
-      cyan: 'aquamarine',
-      white: 'white',
-      lightBlack: 'black',
-      lightRed: 'tomato',
-      lightGreen: 'lightgreen',
-      lightYellow: 'gold',
-      lightBlue: 'royalblue',
-      lightMagenta: 'fuchsia',
-      lightCyan: 'aquamarine',
-      lightWhite: 'white'
+      black: "black",
+      red: "tomato",
+      green: "lightgreen",
+      yellow: "gold",
+      blue: "royalblue",
+      magenta: "fuchsia",
+      cyan: "aquamarine",
+      white: "white",
+      lightBlack: "black",
+      lightRed: "tomato",
+      lightGreen: "lightgreen",
+      lightYellow: "gold",
+      lightBlue: "royalblue",
+      lightMagenta: "fuchsia",
+      lightCyan: "aquamarine",
+      lightWhite: "white",
     },
 
     // Bash on Windows
     // - Example: `C:\\Windows\\System32\\bash.exe`
-    shell: '',
-    shellArgs: ['--login'],
+    shell: "",
+    shellArgs: ["--login"],
 
     // for environment variables
     env: {},
 
     // set to `false` for no bell
-    bell: 'SOUND',
+    bell: "SOUND",
 
     // if `true` (without backticks and without quotes), selected text will automatically be copied to the clipboard
     copyOnSelect: false,
@@ -69,14 +70,15 @@ module.exports = {
     // choose either `'vertical'`, if you want the column mode when Option key is hold during selection (Default)
     // or `'force'`, if you want to force selection regardless of whether the terminal is in mouse events mode
     // (inside tmux or vim with mouse mode enabled for example).
-    macOptionSelectionMode: 'force',
+    macOptionSelectionMode: "force",
 
-    bellSoundURL: 'https://freesound.org/data/previews/448/448081_9159316-lq.mp3',
+    bellSoundURL:
+      "https://freesound.org/data/previews/448/448081_9159316-lq.mp3",
 
-    webGLRenderer: false
+    webGLRenderer: false,
   },
 
-  plugins: ['hyperlinks', 'hyper-mac', "hyper-sick", "hyper-sunset"],
+  plugins: ["hyperlinks", "hyper-mac", "hyper-sick"],
 
   // `~/.hyper_plugins/local/`
   localPlugins: [],
@@ -84,5 +86,5 @@ module.exports = {
   keymaps: {
     // Example
     // 'window:devtools': 'cmd+alt+o',
-  }
-}
+  },
+};

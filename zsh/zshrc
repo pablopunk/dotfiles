@@ -23,6 +23,6 @@ F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
 # PROMPT
 #
 NEWLINE=$'\n'
-PROMPT='$(bashy -r)${NEWLINE}ƛ '
+PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
 
 TERM=xterm-256color

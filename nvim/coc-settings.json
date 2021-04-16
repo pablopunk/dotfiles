@@ -29,7 +29,7 @@
   "prettier.eslintIntegration": true,
   "prettier.printWidth": 120,
   "prettier.requireConfig": true,
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html"],
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html", "json", "jsonc", "scss", "css"],
   "coc.preferences.hoverTarget": "float",
   "coc.preferences.highlightTimeout": 400,
   "typescript.suggest.autoImports": true,

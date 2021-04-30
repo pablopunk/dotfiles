@@ -1,5 +1,5 @@
 {
-  "suggest.autoTrigger": "none",
+  "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 3,
   "suggest.triggerAfterInsertEnter":true,
   "suggest.triggerCompletionWait": 300,

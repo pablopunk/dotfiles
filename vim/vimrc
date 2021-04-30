@@ -7,7 +7,7 @@ filetype plugin indent on
 syntax on
 
 """"" I never change these
-set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start nowrap
+set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase infercase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start nowrap
 
 """"" Sometimes I change these
 set noshowmode                 " Don't show the mode you're in
@@ -186,6 +186,8 @@ let g:ackprg = 'rg --vimgrep --smart-case'
 nmap <c-f> :Ack!<space>
 nmap <leader>f :Ack!<space><c-r><c-w><cr>
 vmap <leader>f "9y:Ack!<space>'<c-r>9'<cr>
+Plug 'brooth/far.vim' " Find & Replace
+let g:far#enable_undo=1
 Plug 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_line_prefix = ' '
 if executable('fd')
@@ -202,6 +204,7 @@ Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'
 Plug 'pablopunk/sunset.vim'
+" Plug 'ap/vim-css-color'
 Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-colors-xcode'
 Plug 'joshdick/onedark.vim'
@@ -322,4 +325,4 @@ command! HotReload autocmd BufWritePost *.vim source %
 "
 " Color config
 set termguicolors
-colorscheme onedark
+colorscheme nightfly

@@ -3,9 +3,9 @@ module.exports = {
     opacity: 0.85,
     theme: "dark",
     updateChannel: "canary",
-    fontSize: 18,
+    fontSize: 14,
     fontFamily:
-      '"Cascadia Code", "FuraCode Nerd Font", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+      '"Fira Code", "Dank Mono", "Cascadia Code", "FuraCode Nerd Font", Hack, "Fira code", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: "normal",
     fontWeightBold: "bold",
     lineHeight: 1,

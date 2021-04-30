@@ -5,9 +5,14 @@
 	default = current
 [user]
 	email = pablo@pablopunk.com
-	name = pablopunk
+	name = Pablo P Varela
 	signingkey = 47E80F5E4640D3E00B1E1DE1A7EC766E7E8B94D2
 [blame]
   date = short
 [interactive]
   diffFilter = delta --color-only
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

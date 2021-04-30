@@ -1,0 +1,9 @@
+# /Users/pablopunk/.tmuxinator/starter.yml
+
+name: starter
+root: ~/src/prezly/theme-nextjs-starter
+
+
+windows:
+  - logs: npm run dev
+  - code: nvim

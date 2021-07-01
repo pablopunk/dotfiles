@@ -3,6 +3,8 @@
 	editor = nvim
 [push]
 	default = current
+[pull]
+	rebase = true
 [user]
 	email = pablo@pablopunk.com
 	name = Pablo P Varela

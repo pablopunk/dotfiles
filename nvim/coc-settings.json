@@ -30,7 +30,7 @@
   "prettier.printWidth": 120,
   "prettier.requireConfig": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html", "json", "jsonc", "scss", "css"],
-  "coc.preferences.hoverTarget": "float",
+  "hover.target": "float",
   "coc.preferences.highlightTimeout": 400,
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
@@ -46,5 +46,6 @@
   "typescript.referencesCodeLens.enable": false,
   "typescript.implementationsCodeLens.enable": false,
   "javascript.referencesCodeLens.enable": false,
-  "javascript.implementationsCodeLens.enable": false
+  "javascript.implementationsCodeLens.enable": false,
+  "snippets.priority": 1
 }

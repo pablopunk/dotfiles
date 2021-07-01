@@ -34,3 +34,4 @@ else
   # alias brew='arch -x86_64 brew'
 fi
 alias n='npm run'
+alias code='code-insiders'

@@ -1,7 +1,7 @@
 
 {
   "editor.detectIndentation": true,
-  "editor.fontFamily": "Dank Mono",
+  "editor.fontFamily": "DankMono",
   "editor.fontSize": 18,
   "editor.largeFileOptimizations": true,
   "editor.highlightActiveIndentGuide": true,

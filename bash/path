@@ -11,9 +11,25 @@ export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+function nvm() {
+  unset nvm
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+  nvm $@
+}
 if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   export DOCKER_HOST=tcp://localhost:2375
 fi
 export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
+
+
+# MAZE
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/slss.zsh

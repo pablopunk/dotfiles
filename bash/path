@@ -5,7 +5,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
@@ -22,6 +21,9 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
 fi
 export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
 
+# Cargo
+. "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # MAZE
 # tabtab source for serverless package
@@ -33,3 +35,4 @@ export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/pablopunk/src/maze-monorepo/lambdas/order_testers/node_modules/tabtab/.completions/slss.zsh
+

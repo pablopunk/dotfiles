@@ -325,6 +325,31 @@ command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"
 command! HotReload autocmd BufWritePost *.vim source %
 
 "
+" VSCODE NEOVIM
+"
+if exists('g:vscode')
+  function! VSCodeNotifyVisual(cmd, leaveSelection, ...)
+    let mode = mode()
+    if mode ==# 'V'
+        let startLine = line('v')
+        let endLine = line('.')
+        call VSCodeNotifyRange(a:cmd, startLine, endLine, a:leaveSelection, a:000)
+    elseif mode ==# 'v' || mode ==# "\<C-v>"
+        let startPos = getpos('v')
+        let endPos = getpos('.')
+        call VSCodeNotifyRangePos(a:cmd, startPos[1], endPos[1], startPos[2], endPos[2] + 1, a:leaveSelection, a:000)
+    else
+        call VSCodeNotify(a:cmd, a:000)
+    endif
+  endfunction
+
+  nnoremap gd <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
+  nnoremap <leader>r <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+  nnoremap <leader>u <Cmd>call VSCodeNotify('git.revertSelectedRanges')<CR>
+  vnoremap <leader>u <Cmd>call VSCodeNotifyVisual('git.revertSelectedRanges', 1)<CR>
+endif
+
+"
 " Color config
 set termguicolors
 colorscheme onedark

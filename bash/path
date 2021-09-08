@@ -22,7 +22,7 @@ fi
 export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
 
 # Cargo
-. "$HOME/.cargo/env"
+[[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # MAZE

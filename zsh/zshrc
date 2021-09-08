@@ -28,6 +28,7 @@ PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
 TERM=xterm-256color
 
 #
-# VSCODE ALWAYS ON TMUX
+# VSCODE ALWAYS ON TMUX AND SSH
 #
 [ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && tmux
+[ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && tmux

@@ -28,6 +28,6 @@ PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
 TERM=xterm-256color
 
 #
-# ALWAYS ON TMUX
+# VSCODE ALWAYS ON TMUX
 #
-[ -z "$TMUX" ] && tmux && exit
+[ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && tmux

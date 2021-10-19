@@ -16,6 +16,155 @@
                 },
                 "rules": [
                     {
+                        "description": "CAPS LOCK + qwe to control volume",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "mute"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_decrement"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "volume_increment"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "CAPS LOCK + asd to control media",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "rewind"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "play_or_pause"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "caps_lock pressed",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "consumer_key_code": "fast_forward"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+
+                    },
+                    {
                         "description": "CAPS LOCK + hjkl to arrow keys",
                         "manipulators": [
                             {
@@ -436,11 +585,11 @@
                     "simple_modifications": [
                         {
                             "from": {
-                                "key_code": "left_command"
+                                "key_code": "grave_accent_and_tilde"
                             },
                             "to": [
                                 {
-                                    "key_code": "left_option"
+                                    "key_code": "non_us_backslash"
                                 }
                             ]
                         },
@@ -466,11 +615,11 @@
                         },
                         {
                             "from": {
-                                "key_code": "grave_accent_and_tilde"
+                                "key_code": "left_command"
                             },
                             "to": [
                                 {
-                                    "key_code": "non_us_backslash"
+                                    "key_code": "left_option"
                                 }
                             ]
                         }

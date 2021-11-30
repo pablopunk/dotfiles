@@ -2,6 +2,7 @@ alias g=git
 alias gst='git status'
 alias gp='git push'
 alias gl='git pull'
+alias gf='git fetch'
 alias glog='git log --oneline --decorate --graph'
 alias gd='git diff -w --minimal'
 alias gds='git diff -w --staged --minimal'
@@ -35,3 +36,4 @@ else
 fi
 alias n='npm run'
 alias code='code-insiders'
+alias maze='cd $HOME/src/maze/maze-monorepo'

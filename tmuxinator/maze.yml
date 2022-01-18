@@ -1,0 +1,9 @@
+# ~/.tmuxinator/neumann.yml
+
+name: maze
+root: ~/src/maze/maze-monorepo/
+
+windows:
+  - main: yarn && yarn dev
+  - lambda: cd lambdas/project_service/ && yarn run serve:watch --stage testing
+  - git: code . && git status

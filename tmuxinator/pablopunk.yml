@@ -1,0 +1,8 @@
+# ~/.tmuxinator/pablopunk.com
+
+name: pablopunk
+root: ~/src/pablopunk.com
+
+windows:
+  - logs: npm run dev
+  - code: vi

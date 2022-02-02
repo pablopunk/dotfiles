@@ -184,7 +184,7 @@ let g:startify_change_to_dir = 0
 Plug 'mileszs/ack.vim'
 let g:ack_use_dispatch = 1
 let g:ack_autoclose = 1
-let g:ackprg = 'rg --vimgrep --smart-case'
+let g:ackprg = 'ag --nogroup --nocolor --column'
 nmap <c-f> :Ack!<space>
 nmap <leader>f :Ack!<space><c-r><c-w><cr>
 vmap <leader>f "9y:Ack!<space>'<c-r>9'<cr>

@@ -6,6 +6,7 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
 # nvm
@@ -28,10 +29,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # MAZE
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/serverless.zsh
+[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/sls.zsh
+[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/sls.zsh
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/invalidate_tokens/node_modules/tabtab/.completions/slss.zsh
+[[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/slss.zsh

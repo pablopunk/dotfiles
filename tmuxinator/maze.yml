@@ -4,6 +4,6 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - main: yarn && yarn dev
-  # - lambda: cd lambdas/project_service/ && yarn run serve:watch --stage testing
+  - main: yarn dev
+  - lambda: cd lambdas/project_service/ && yarn run serve:watch # --stage testing
   - zsh: code . && git status

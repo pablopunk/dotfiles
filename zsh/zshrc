@@ -33,3 +33,6 @@ TERM=xterm-256color
 [ "$TERM_PROGRAM" = "vscode" ] && [ ! -z "$TMUX" ] && ( tmux a || tmux )
 [ ! -z "$SSH_CONNECTION" ] && [ ! -z "$TMUX" ] && ( tmux a || tmux )
 
+
+export PNPM_HOME="/Users/pablopunk/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"

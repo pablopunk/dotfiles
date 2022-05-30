@@ -4,4 +4,4 @@ name: pablopunk
 root: ~/src/pablopunk.com
 
 windows:
-  - logs: code . && npm run dev
+  - logs: code . && pnpm run dev

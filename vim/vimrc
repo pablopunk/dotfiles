@@ -181,21 +181,10 @@ Plug 'ap/vim-buftabline' " show buffers as tabs
 Plug 'mhinz/vim-startify' " show screen with shortcuts when opening vim
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
-Plug 'mileszs/ack.vim'
-let g:ack_use_dispatch = 1
-let g:ack_autoclose = 1
-let g:ackprg = 'ag --nogroup --nocolor --column'
-nmap <c-f> :Ack!<space>
-nmap <leader>f :Ack!<space><c-r><c-w><cr>
-vmap <leader>f "9y:Ack!<space>'<c-r>9'<cr>
+Plug 'pablopunk/better-grep.vim'
 Plug 'brooth/far.vim' " Find & Replace
 let g:far#enable_undo=1
-Plug 'ctrlpvim/ctrlp.vim'
-  let g:ctrlp_line_prefix = ' '
-if executable('fd')
-    let g:ctrlp_user_command = 'fd --type f --color never "" %s'
-    let g:ctrlp_use_caching = 0
-endif
+Plug 'pablopunk/better-find.vim'
 Plug 'christoomey/vim-tmux-navigator' " enable ctrl+hjkl to navigate on tmux/vim
 Plug 'markonm/traces.vim' " to show in real time what your :s commands will replace
 Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin

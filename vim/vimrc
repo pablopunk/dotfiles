@@ -184,7 +184,8 @@ let g:startify_change_to_dir = 0
 Plug 'pablopunk/better-grep.vim'
 Plug 'brooth/far.vim' " Find & Replace
 let g:far#enable_undo=1
-Plug 'pablopunk/better-find.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'wakatime/vim-wakatime'
 Plug 'christoomey/vim-tmux-navigator' " enable ctrl+hjkl to navigate on tmux/vim
 Plug 'markonm/traces.vim' " to show in real time what your :s commands will replace
 Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin

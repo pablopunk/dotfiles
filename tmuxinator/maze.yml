@@ -4,6 +4,6 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - main: pnpm install && pnpm dev
+  - main: pnpm bootstrap && pnpm dev
   # - lambda: cd lambdas/project_service/ && pnpm serve:watch -- --stage testing
   - zsh: code . && git status

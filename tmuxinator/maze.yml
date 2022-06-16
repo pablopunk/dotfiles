@@ -4,6 +4,12 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - main: pnpm bootstrap && pnpm dev
-  # - lambda: cd lambdas/project_service/ && pnpm serve:watch -- --stage testing
-  - zsh: code . && git status
+  - nvim: nvim
+  - logs:
+      layout: even-vertical
+      panes:
+        - nvm use && pnpm bootstrap && pnpm dev
+        - nvm use && cd packages/maze-webapp && pnpm dev
+  # - lambda: cd lambdas/project_service/ && localLambdaOn && aws-vault exec testing_developer && pnpm serve:watch -- --stage testing ; localLambdaOff
+  - lambda: nvm use && cd lambdas/project_service && localLambdaOn && aws-vault exec testing_developer ; localLambdaOff
+  - zsh: git status

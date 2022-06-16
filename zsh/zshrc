@@ -3,7 +3,13 @@
 #
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
-plugins=(git macos npm)
+plugins=(
+  git
+  macos
+  npm
+)
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 
 #

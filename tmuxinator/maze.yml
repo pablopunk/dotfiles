@@ -11,5 +11,5 @@ windows:
         - nvm use && pnpm bootstrap && pnpm dev
         - nvm use && cd packages/maze-webapp && pnpm dev
   # - lambda: cd lambdas/project_service/ && localLambdaOn && aws-vault exec testing_developer && pnpm serve:watch -- --stage testing ; localLambdaOff
-  - lambda: nvm use && cd lambdas/project_service && localLambdaOn && aws-vault exec testing_developer ; localLambdaOff
+  - lambda: nvm use && cd lambdas/project_service && aws-vault exec testing_developer
   - zsh: git status

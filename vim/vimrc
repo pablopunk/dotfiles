@@ -84,7 +84,6 @@ nmap Y y$
 
 " Navigate buffers
 " nmap <leader><leader> :ls<CR>:b<Space>
-nmap <leader><leader> :CtrlPBuffer<cr>
 nmap gb :bprev<cr>
 nmap gn :bnext<cr>
 
@@ -181,11 +180,18 @@ Plug 'ap/vim-buftabline' " show buffers as tabs
 Plug 'mhinz/vim-startify' " show screen with shortcuts when opening vim
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
-Plug 'pablopunk/better-grep.vim'
 Plug 'brooth/far.vim' " Find & Replace
 let g:far#enable_undo=1
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+nmap <c-p> :GFiles<cr>
+nmap <c-g> :GFiles?<cr>
+nmap <c-f> :Rg<cr>
+nmap <leader><leader> :Buffers<cr>
+" Plug 'ctrlpvim/ctrlp.vim'
+" nmap <leader><leader> :CtrlPBuffer<cr>
 Plug 'wakatime/vim-wakatime'
+Plug 'github/copilot.vim'
 Plug 'christoomey/vim-tmux-navigator' " enable ctrl+hjkl to navigate on tmux/vim
 Plug 'markonm/traces.vim' " to show in real time what your :s commands will replace
 Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin

@@ -89,3 +89,11 @@ function nvm {
   fi
   nvm $@
 }
+
+function localLambdaOn {
+  sed -i '' "s/AWS.Lambda()/AWS.Lambda({endpoint:'http:\/\/localhost:3002'})/g" $HOME/src/maze/maze-monorepo/packages/maze-api-core/src/utils/aws/Lambda.js
+}
+
+function localLambdaOff {
+  sed -i '' "s/AWS.Lambda(.*)/AWS.Lambda()/g" $HOME/src/maze/maze-monorepo/packages/maze-api-core/src/utils/aws/Lambda.js
+}

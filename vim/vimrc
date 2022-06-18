@@ -184,7 +184,7 @@ Plug 'brooth/far.vim' " Find & Replace
 let g:far#enable_undo=1
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-nmap <c-p> :Files<cr>
+nmap <c-p> :GFiles<cr>
 nmap <c-g> :GFiles?<cr>
 nmap <c-f> :Rg<cr>
 nmap <leader><leader> :Buffers<cr>

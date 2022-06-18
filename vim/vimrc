@@ -187,6 +187,7 @@ Plug 'junegunn/fzf.vim'
 nmap <c-p> :GFiles<cr>
 nmap <c-g> :GFiles?<cr>
 nmap <c-f> :Rg<cr>
+nmap <silent> <leader>f :Rg <c-r><c-w><cr>
 nmap <leader><leader> :Buffers<cr>
 " Plug 'ctrlpvim/ctrlp.vim'
 " nmap <leader><leader> :CtrlPBuffer<cr>

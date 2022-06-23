@@ -23,7 +23,8 @@ endtry
 set expandtab shiftround smartindent autoindent " Indent stuff
 set fcs=eob:\                  " hide ~ on blank lines
 set cursorcolumn
-set guifont=Fira\ Code:h15       " Font for MacVim
+set guifont=Fira\ Code:h15     " Font for MacVim
+set foldmethod=syntax          " Fold by syntax
 
 "
 " Key mapping
@@ -99,6 +100,10 @@ nnoremap < <<
 vnoremap > >gv
 vnoremap < <gv
 " ctrl+i is mapped to Tab so is not the opposite of ctrl+o anymore
+
+" Fold
+nmap <leader>< zM
+nmap <leader>> zR
 
 " Search and replace in file/line (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
@@ -180,6 +185,7 @@ Plug 'ap/vim-buftabline' " show buffers as tabs
 Plug 'mhinz/vim-startify' " show screen with shortcuts when opening vim
 let g:startify_change_to_vcs_root = 1
 let g:startify_change_to_dir = 0
+nmap <leader>s :Startify<cr>
 Plug 'brooth/far.vim' " Find & Replace
 let g:far#enable_undo=1
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -263,7 +269,6 @@ nmap <leader>ca <Plug>(coc-codeaction-selected)
 vmap <leader>ca <Plug>(coc-codeaction-selected)
 nmap <leader>cs :CocList symbols<cr>
 nmap <leader>co :CocList outline<cr>
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()

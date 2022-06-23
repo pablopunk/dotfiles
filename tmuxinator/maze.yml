@@ -4,7 +4,7 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - nvim: nvim
+  - nvim: nvm use 16 && nvim
   - logs:
       layout: even-vertical
       panes:

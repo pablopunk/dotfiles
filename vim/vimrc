@@ -205,6 +205,7 @@ Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin
 Plug 'pablopunk/persistent-undo.vim' " undo works across vim sessions
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing vimrc
 Plug 'pablopunk/native-sidebar.vim' " ctrl+b to open dir drawer
+let g:native_sidebar_shortcut = '<c-a>'
 Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'

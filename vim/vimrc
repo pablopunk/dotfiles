@@ -266,8 +266,8 @@ nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 nmap <leader>r <Plug>(coc-rename)
 nmap <leader>cc :CocCommand<cr>
 nmap <leader>cl :CocList<cr>
-nmap <leader>ca <Plug>(coc-codeaction-selected)
-vmap <leader>ca <Plug>(coc-codeaction-selected)
+nmap <leader>ca <Plug>(coc-codeaction-selected)j
+vmap <leader>ca <Plug>(coc-codeaction-selected)j
 nmap <leader>cs :CocList symbols<cr>
 nmap <leader>co :CocList outline<cr>
 " Use <CR> to confirm completion

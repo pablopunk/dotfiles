@@ -2,12 +2,7 @@
   "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 3,
   "suggest.triggerAfterInsertEnter":true,
-  "suggest.triggerCompletionWait": 300,
-  "suggest.timeout": 2000,
-  "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
-  "suggest.disableMenu": true, // don't show source of completion
-  /* "suggest.disableKind": true, // don't show type of item (f, v...) */
   "signature.enable": true,
   "signature.target": "float",
   "diagnostic.enable": true,
@@ -26,12 +21,10 @@
   },
   "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
-  "prettier.eslintIntegration": true,
   "prettier.printWidth": 120,
   "prettier.requireConfig": true,
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "html", "json", "jsonc", "scss", "css"],
   "hover.target": "float",
-  "coc.preferences.highlightTimeout": 400,
   "typescript.suggest.autoImports": true,
   "javascript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enable": true,
@@ -47,5 +40,10 @@
   "typescript.implementationsCodeLens.enable": false,
   "javascript.referencesCodeLens.enable": false,
   "javascript.implementationsCodeLens.enable": false,
-  "snippets.priority": 1
+  "snippets.priority": 1,
+  "dialog.rounded": true,
+  "hover.floatConfig": {"rounded": true},
+  "suggest.floatConfig": {"rounded": true},
+  "signature.floatConfig": {"rounded": true},
+  "diagnostic.floatConfig": {"rounded": true}
 }

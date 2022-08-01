@@ -48,6 +48,11 @@ nmap <c-l> <c-w>l
 " Use + to select all word matches
 nmap + *N
 
+" Center match when navigating through search results
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+
 " Ctrl+t new tab
 nmap <c-t> :tabe<cr>
 
@@ -174,7 +179,7 @@ Plug 'tpope/vim-fugitive' " git tools
 command! Conflicts Gvdiffsplit!
 nnoremap <leader>dh :diffget //2<cr>
 nnoremap <leader>dl :diffget //3<cr>
-Plug 'tpope/vim-rhubarb' " for Gbrowse
+Plug 'tpope/vim-rhubarb' " for :GBrowse
 Plug 'tpope/vim-repeat' " repeat more things with .
 Plug 'tpope/vim-sensible' " nice defaults for vim
 Plug 'tpope/vim-dispatch' " dispatch async jobs (useful with plugins like ack)
@@ -204,8 +209,11 @@ Plug 'markonm/traces.vim' " to show in real time what your :s commands will repl
 Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin
 Plug 'pablopunk/persistent-undo.vim' " undo works across vim sessions
 Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing vimrc
-Plug 'pablopunk/native-sidebar.vim' " ctrl+b to open dir drawer
-let g:native_sidebar_shortcut = '<c-a>'
+" Plug 'pablopunk/native-sidebar.vim' " ctrl+b to open dir drawer
+" let g:native_sidebar_shortcut = '<c-a>'
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+nmap <c-a> :NvimTreeFindFileToggle<cr>
 Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'
@@ -234,7 +242,6 @@ let g:coc_global_extensions = [
   \ 'coc-sh',
   \ 'coc-snippets',
   \ 'coc-styled-components',
-  \ 'coc-tslint',
   \ 'coc-tsserver',
   \]
   " \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
@@ -287,6 +294,9 @@ command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! ConstImport :execute "normal! 0ciwconst\<esc>/from\<cr>ciw= require(\<esc>lxA)\<esc>"
 command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
 command! HotReload autocmd BufWritePost *.vim source %
+
+" Lua configs
+lua require'nvim-tree'.setup {}
 
 "
 " VSCODE NEOVIM

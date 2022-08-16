@@ -2,6 +2,8 @@
   "suggest.autoTrigger": "always",
   "suggest.minTriggerInputLength": 3,
   "suggest.triggerAfterInsertEnter":true,
+  "suggest.timeout": 1500,
+  "suggest.maxCompleteItemCount": 10,
   "suggest.removeDuplicateItems": true,
   "signature.enable": true,
   "signature.target": "float",
@@ -19,7 +21,6 @@
   "list.insertMappings": {
     "<C-c>": "do:exit"
   },
-  "tslint.autoFixOnSave": true,
   "eslint.autoFixOnSave": true,
   "prettier.printWidth": 120,
   "prettier.requireConfig": true,

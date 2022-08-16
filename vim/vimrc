@@ -22,9 +22,8 @@ catch
 endtry
 set expandtab shiftround smartindent autoindent " Indent stuff
 set fcs=eob:\                  " hide ~ on blank lines
-set cursorcolumn
 set guifont=Fira\ Code:h15     " Font for MacVim
-set foldmethod=syntax          " Fold by syntax
+" set foldmethod=syntax          " Fold by syntax
 
 "
 " Key mapping
@@ -213,7 +212,7 @@ Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing 
 " let g:native_sidebar_shortcut = '<c-a>'
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
-nnoremap <c-v> :NvimTreeFindFileToggle<cr>
+nnoremap <c-v> :NvimTreeFindFile<cr>
 Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'
@@ -229,7 +228,6 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
 let g:coc_global_extensions = [
-  \ 'coc-emmet',
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-github',
@@ -238,10 +236,6 @@ let g:coc_global_extensions = [
   \ 'coc-pairs',
   \ 'coc-prettier',
   \ 'coc-react-refactor',
-  \ 'coc-scssmodules',
-  \ 'coc-sh',
-  \ 'coc-snippets',
-  \ 'coc-styled-components',
   \ 'coc-tsserver',
   \]
   " \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
@@ -249,6 +243,10 @@ set shortmess+=c
 set updatetime=300
 " Faster python detection
 let g:python3_host_prog = system('which python3')[:-2]
+" Fix issue with transparent cursor
+let g:coc_disable_transparent_cursor = 1
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " Go to def
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

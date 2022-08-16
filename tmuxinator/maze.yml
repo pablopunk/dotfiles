@@ -4,11 +4,8 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - nvim: nvm use 16 && nvim
-  - logs:
-      layout: even-vertical
-      panes:
-        - nvm use && pnpm bootstrap && pnpm dev
-        - nvm use && cd packages/maze-webapp && pnpm dev
-  - lambda: cd $HOME/src/maze/maze-monorepo && nvm use && cd lambdas/project_service && localLambdaOn && p serve:watch -- --stage testing ; localLambdaOff
-  - zsh: git status
+  - webapp: cd ~/src/maze/maze-monorepo/packages/maze-webapp && pnpm dev
+  - api: cd ~/src/maze/maze-monorepo/packages/maze-api && pnpm dev
+  - api-core: cd ~/src/maze/maze-monorepo/packages/maze-api-core && pnpm dev
+  - code: code . && exit
+  # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && p serve:watch -- --stage testing ; localLambdaOff

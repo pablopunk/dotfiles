@@ -1,9 +1,7 @@
-import { FunctionComponent } from 'react';
-
 type Props = {};
 
-const FILENAME: FunctionComponent<Props> = ({ children }) => (
-    <div>{children}</div>
-);
-
-export default FILENAME;
+export const FILENAME = ({}: Props) => {
+    return (
+        <div>FILENAME</div>
+    )
+}

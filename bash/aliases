@@ -38,3 +38,4 @@ fi
 alias n='npm run'
 alias p='pnpm'
 alias maze='cd $HOME/src/maze/maze-monorepo'
+alias run='nodemon --exec "bun run"'

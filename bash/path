@@ -26,7 +26,7 @@ export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
 [[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# MAZE
+# MAZE {
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/serverless.zsh
@@ -36,3 +36,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/pablopunk/src/maze/maze-monorepo/lambdas/notifier/node_modules/tabtab/.completions/slss.zsh
+# }
+
+# bun completions
+[ -s "/Users/pablopunk/.bun/_bun" ] && source "/Users/pablopunk/.bun/_bun"
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

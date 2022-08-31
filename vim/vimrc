@@ -212,7 +212,7 @@ Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing 
 " let g:native_sidebar_shortcut = '<c-a>'
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
-nnoremap <c-v> :NvimTreeFindFile<cr>
+nnoremap <c-b> :NvimTreeFindFile<cr>
 Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'
@@ -221,11 +221,12 @@ Plug 'pablopunk/sunset.vim'
 Plug 'morhetz/gruvbox'
 Plug 'arzg/vim-colors-xcode'
 Plug 'joshdick/onedark.vim'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'jcherven/jummidark.vim'
 Plug 'zefei/simple-dark'
 Plug 'arcticicestudio/nord-vim'
-Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
+" Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
 let g:coc_global_extensions = [
   \ 'coc-eslint',
@@ -328,4 +329,9 @@ endif
 " Color config
 "
 set termguicolors
-colorscheme onedark
+" dark mode enabled?
+if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+  colorscheme onedark
+else
+  colorscheme xcodelight
+endif

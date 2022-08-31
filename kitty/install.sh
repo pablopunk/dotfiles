@@ -1,17 +1,13 @@
 #!/bin/bash
 
+function preinstall {
+  rm -rf ~/.config/kitty
+  mkdir -p ~/.config/kitty
+  git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/themes
+}
+
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-mkdir -p ~/.config/kitty
-
-files=( "kitty.conf" )
-
-for file_name in "${files[@]}"
-do
-  rm ~/.config/kitty/$file_name
-  ln -svf $dir/$file_name ~/.config/kitty/$file_name
-done
-
-
-
-
+preinstall && \
+  ln -svf $dir/kitty.conf ~/.config/kitty/kitty.conf
+  cp ~/.config/kitty/themes/themes/* ~/.config/kitty/themes/

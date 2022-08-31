@@ -42,3 +42,12 @@ TERM=xterm-256color
 
 export PNPM_HOME="/Users/pablopunk/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+
+#
+# KITTY DARK/LIGHT MODE
+#
+if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
+  kitty +kitten themes --reload-in=all Rosé Pine Dawn
+else
+  kitty +kitten themes --reload-in=all Kaolin Temple
+fi

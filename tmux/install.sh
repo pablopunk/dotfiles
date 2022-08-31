@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function preinstall {
-  rm -rf .tmux
-  mkdir -p .tmux/plugins
+  rm -rf ~/.tmux
+  mkdir -p ~/.tmux/plugins
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 

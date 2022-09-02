@@ -10,12 +10,12 @@ PATH="/Users/pablopunk/Library/pnpm:/Users/pablopunk/.bun/bin:/Users/pablopunk/.
 
 # Optional parameters:
 # @raycast.icon 🤖
-# @raycast.argument1 { "type": "text", "placeholder": "Placeholder" }
 
 # Documentation:
 # @raycast.author Henry Black
 # @raycast.authorURL https://twitter.com/hajblack
 
-result=$(node "./create-pr-description" "$1")
+linear_url=$(pbpaste)
+result=$(node "./create-pr-description" "$linear_url")
 
 echo "$result" | pbcopy

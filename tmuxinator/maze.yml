@@ -5,6 +5,7 @@ root: ~/src/maze/maze-monorepo/
 
 windows:
   - webapp: cd ~/src/maze/maze-monorepo/packages/maze-webapp && pnpm dev
+  - testing: cd ~/src/maze/maze-monorepo/packages/testing-webapp && pnpm dev
   - api: cd ~/src/maze/maze-monorepo/packages/maze-api && pnpm dev
   - api-core: cd ~/src/maze/maze-monorepo/packages/maze-api-core && pnpm dev
   - code: code . && exit

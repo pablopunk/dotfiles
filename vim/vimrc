@@ -228,6 +228,8 @@ Plug 'zefei/simple-dark'
 Plug 'arcticicestudio/nord-vim'
 " Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
+let b:coc_suggest_disable = 1
+let b:coc_diagnostic_disable = 1
 let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-git',
@@ -276,6 +278,7 @@ nmap <leader>ca <Plug>(coc-codeaction-selected)j
 vmap <leader>ca <Plug>(coc-codeaction-selected)j
 nmap <leader>cs :CocList symbols<cr>
 nmap <leader>co :CocList outline<cr>
+nmap <silent> <leader>p :CocCommand prettier.formatFile<cr>
 " Use <CR> to confirm completion
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
                             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

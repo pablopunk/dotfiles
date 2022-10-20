@@ -13,7 +13,7 @@ keymap.set("n", "<leader>h", ":nohl<cr>")
 keymap.set("n", "<leader>h", ":nohl<cr>")
 
 -- quit/save file
-keymap.set("n", "<c-q>", ":<c-w>q<cr>")
+keymap.set("n", "<c-q>", ":bd<cr>")
 keymap.set("n", "<c-s>", ":w!<cr>")
 
 -- nvim-tree

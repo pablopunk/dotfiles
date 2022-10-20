@@ -212,7 +212,7 @@ Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing 
 " let g:native_sidebar_shortcut = '<c-a>'
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
-nnoremap <c-b> :NvimTreeFindFile<cr>
+nnoremap <c-m> :NvimTreeFindFile<cr>
 Plug 'pablopunk/transparent.vim'
 Plug 'pablopunk/statusline.vim'
 Plug 'pablopunk/sick.vim'

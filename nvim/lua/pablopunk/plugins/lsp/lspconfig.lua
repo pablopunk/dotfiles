@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- enable autocompletion
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 lspconfig["html"].setup({
   capabilities = capabilities,

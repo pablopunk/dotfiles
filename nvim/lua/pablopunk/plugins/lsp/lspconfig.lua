@@ -1,18 +1,18 @@
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
-  print "lspconfig not found"
+  print("lspconfig not found")
   return
 end
 
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
-  print "cmp_nvim_lsp not found"
+  print("cmp_nvim_lsp not found")
   return
 end
 
 local typescript_status, typescript = pcall(require, "typescript")
 if not typescript_status then
-  print "typescript not found"
+  print("typescript not found")
   return
 end
 
@@ -22,8 +22,7 @@ local keymap = vim.keymap
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<cr>", opts)
-  keymap.set("n", "gr", "<cmd>Lspsaga lsp_finder<cr>", opts)
+  keymap.set("n", "gd", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap.set("n", "<leader>r", "<cmd>Lspsaga rename<cr>", opts)
   keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
   keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
@@ -73,6 +72,6 @@ lspconfig["sumneko_lua"].setup({
 typescript.setup({
   server = {
     capabilities = capabilities,
-    on_attach = on_attach
-  }
+    on_attach = on_attach,
+  },
 })

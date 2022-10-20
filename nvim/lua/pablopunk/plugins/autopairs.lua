@@ -1,15 +1,15 @@
 local autopairs_setup, autopairs = pcall(require, "nvim-autopairs")
 if not autopairs_setup then
-	return
+  return
 end
 
 autopairs.setup({
-	check_ts = true, -- enable treesitter
-	ts_config = {
-		lua = { "string" }, -- dont add pairs in lua string treesitter nodes
-		javascript = { "template_string" }, -- dont add pairs in js template_string
-		java = false, -- dont check treesitter in java
-	},
+  check_ts = true, -- enable treesitter
+  ts_config = {
+    lua = { "string" }, -- dont add pairs in lua string treesitter nodes
+    javascript = { "template_string" }, -- dont add pairs in js template_string
+    java = false, -- dont check treesitter in java
+  },
 })
 
 -- make autopairs and autocompletion work together

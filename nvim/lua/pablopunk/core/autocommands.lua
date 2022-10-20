@@ -1,13 +1,13 @@
 -- highlight yanked text
-vim.cmd [[
+vim.cmd([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]]
+]])
 
 -- templates
-vim.cmd [[
+vim.cmd([[
   augroup templates
     autocmd!
     autocmd BufNewFile *.tsx,*.jsx
@@ -19,4 +19,4 @@ vim.cmd [[
       \ 0r $HOME/.config/nvim/templates/empty.json |
       \ exe "normal ggo"
   augroup end
-]]
+]])

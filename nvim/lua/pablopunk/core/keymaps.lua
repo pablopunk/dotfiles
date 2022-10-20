@@ -17,7 +17,7 @@ keymap.set("n", "<c-q>", ":<c-w>q<cr>")
 keymap.set("n", "<c-s>", ":w!<cr>")
 
 -- nvim-tree
-keymap.set("n", "<c-m>", ":NvimTreeFindFile<cr>")
+keymap.set("n", "<c-t>", ":NvimTreeFindFile<cr>")
 
 -- telescope
 keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>")

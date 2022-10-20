@@ -43,4 +43,3 @@ opt.iskeyword:append("-") -- dash is part of the word
 
 -- signs on line numbers
 opt.signcolumn = "number"
-

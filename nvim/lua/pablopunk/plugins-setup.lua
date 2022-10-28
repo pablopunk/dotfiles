@@ -98,6 +98,9 @@ return require("packer").startup(function(use)
   use("jayp0521/mason-null-ls.nvim")
   use("lukas-reineke/lsp-format.nvim") -- nice formatting config
 
+  -- debugging
+  use("mfussenegger/nvim-dap")
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

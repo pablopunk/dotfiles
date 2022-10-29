@@ -9,10 +9,10 @@ keymap.set("i", "<c-c>", "<esc>")
 keymap.set("i", "<c-c>", "<esc>")
 
 -- c-hjlk to move through windows
-keymap.set("n", "<c-h>", "<c-w>h")
-keymap.set("n", "<c-j>", "<c-w>j")
-keymap.set("n", "<c-k>", "<c-w>k")
-keymap.set("n", "<c-l>", "<c-w>l")
+-- keymap.set("n", "<c-h>", "<c-w>h")
+-- keymap.set("n", "<c-j>", "<c-w>j")
+-- keymap.set("n", "<c-k>", "<c-w>k")
+-- keymap.set("n", "<c-l>", "<c-w>l")
 
 -- remove highlights
 keymap.set("n", "<leader>h", ":nohl<cr>")

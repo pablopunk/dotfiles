@@ -1,9 +1,10 @@
+require("pablopunk.plugins-setup")
+
 require("pablopunk.core.abbreviations")
 require("pablopunk.core.autocommands")
 require("pablopunk.core.colorscheme")
 require("pablopunk.core.keymaps")
 require("pablopunk.core.options")
-require("pablopunk.plugins-setup")
 require("pablopunk.plugins.autopairs")
 require("pablopunk.plugins.gitsigns")
 require("pablopunk.plugins.lsp.lspconfig")

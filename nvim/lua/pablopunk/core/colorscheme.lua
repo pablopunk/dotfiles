@@ -9,6 +9,8 @@ handle:close()
 
 if string.match(result, "Dark") then
   vim.cmd("silent! colorscheme onedark")
+elseif string.match(result, "not found") then
+  vim.cmd("silent! colorscheme onedark")
 else
-  vim.cmd("silent! colorscheme xcodelight")
+  vim.cmd("silent! colorscheme onedark")
 end

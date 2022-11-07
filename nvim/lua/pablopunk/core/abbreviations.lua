@@ -1,4 +1,4 @@
-vim.cmd([[
+vim.cmd [[
   iabbr widht width
   iabbr heigth height
   iabbr lenght length
@@ -7,4 +7,4 @@ vim.cmd([[
   iabbr ireact import React from 'react'
   iabbr fcreact const Component = () =>
   iabbr ccreact class Component extends React.Component
-]])
+]]

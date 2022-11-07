@@ -3,7 +3,7 @@ if not saga_status then
   return
 end
 
-saga.init_lsp_saga({
+saga.init_lsp_saga {
   -- move_in_saga = { prev = "c-k", next = "c-j" },
   finder_action_keys = {
     open = "<cr>",
@@ -11,4 +11,4 @@ saga.init_lsp_saga({
   definition_action_keys = {
     edit = "<cr>",
   },
-})
+}

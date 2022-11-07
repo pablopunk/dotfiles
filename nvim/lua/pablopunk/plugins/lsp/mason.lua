@@ -13,9 +13,9 @@ if not null_ls_status then
   return
 end
 
-mason.setup({})
+mason.setup {}
 
-lspconfig.setup({
+lspconfig.setup {
   ensure_installed = {
     "tsserver",
     "html",
@@ -23,12 +23,12 @@ lspconfig.setup({
     "tailwindcss",
     "sumneko_lua",
   },
-})
+}
 
-mason_null_ls.setup({
+mason_null_ls.setup {
   ensure_installed = {
     "prettier",
     "stylua",
     "eslint_d",
   },
-})
+}

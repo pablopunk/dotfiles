@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.configs").setup {
   highlight = {
     enable = true,
   },
@@ -20,4 +20,4 @@ require("nvim-treesitter.configs").setup({
     "gitignore",
   },
   auto_install = true,
-})
+}

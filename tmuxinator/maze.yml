@@ -7,11 +7,6 @@ windows:
   - nvim: nvm use 16 && nvim
   - webapp: cd ~/src/maze/maze-monorepo/packages/maze-webapp && pnpm dev
   - testing: cd ~/src/maze/maze-monorepo/packages/testing-webapp && pnpm dev
-  - signup:
-      layout: even-vertical
-      panes:
-        - cd ~/src/maze/maze-monorepo/apps/signup-webapp && pnpm dev
-        - cd ~/src/maze/maze-monorepo/services/signup-api && pnpm dev
   - api: cd ~/src/maze/maze-monorepo/packages/maze-api && pnpm dev
   - api-core: cd ~/src/maze/maze-monorepo/packages/maze-api-core && pnpm dev
   # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && p serve:watch -- --stage testing ; localLambdaOff

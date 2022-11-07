@@ -1,4 +1,4 @@
-require("gitsigns").setup({
+require("gitsigns").setup {
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -34,4 +34,4 @@ require("gitsigns").setup({
     map({ "n", "v" }, "<leader>gA", ":Gitsigns undo_stage_hunk<CR>")
     map({ "n", "v" }, "<leader>u", ":Gitsigns reset_hunk<CR>")
   end,
-})
+}

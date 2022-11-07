@@ -1,18 +1,18 @@
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
-  print("lspconfig not found")
+  print "lspconfig not found"
   return
 end
 
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
-  print("cmp_nvim_lsp not found")
+  print "cmp_nvim_lsp not found"
   return
 end
 
 local typescript_status, typescript = pcall(require, "typescript")
 if not typescript_status then
-  print("typescript not found")
+  print "typescript not found"
   return
 end
 
@@ -38,19 +38,19 @@ end
 -- enable autocompletion
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
-lspconfig["html"].setup({
+lspconfig["html"].setup {
   capabilities = capabilities,
   on_attach = on_attach,
-})
-lspconfig["cssls"].setup({
+}
+lspconfig["cssls"].setup {
   capabilities = capabilities,
   on_attach = on_attach,
-})
-lspconfig["tailwindcss"].setup({
+}
+lspconfig["tailwindcss"].setup {
   capabilities = capabilities,
   on_attach = on_attach,
-})
-lspconfig["sumneko_lua"].setup({
+}
+lspconfig["sumneko_lua"].setup {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
@@ -61,17 +61,17 @@ lspconfig["sumneko_lua"].setup({
       workspace = {
         -- make server aware of runtime files
         library = {
-          [vim.fn.expand("%VIMRUNTIME/lua")] = true,
-          [vim.fn.stdpath("config") .. "/lua"] = true,
+          [vim.fn.expand "%VIMRUNTIME/lua"] = true,
+          [vim.fn.stdpath "config" .. "/lua"] = true,
         },
       },
     },
   },
-})
+}
 
-typescript.setup({
+typescript.setup {
   server = {
     capabilities = capabilities,
     on_attach = on_attach,
   },
-})
+}

@@ -36,7 +36,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- words
-opt.iskeyword:append("-") -- dash is part of the word
+opt.iskeyword:append "-" -- dash is part of the word
 
 -- blank lines
 -- opt.fcs = "eob:\ " -- hide ~ on blank lines

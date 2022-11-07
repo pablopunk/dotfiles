@@ -8,7 +8,7 @@ if not a_setup then
   return
 end
 
-t.setup({
+t.setup {
   defaults = {
     mappings = {
       i = {
@@ -18,6 +18,6 @@ t.setup({
       },
     },
   },
-})
+}
 
-t.load_extension("fzf")
+t.load_extension "fzf"

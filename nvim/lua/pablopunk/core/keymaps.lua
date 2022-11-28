@@ -27,6 +27,7 @@ keymap.set("n", "<c-t>", ":NvimTreeFindFile<cr>")
 
 -- telescope
 keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>")
+keymap.set("n", "<c-g>", "<cmd>Telescope git_status<cr>")
 keymap.set("n", "<c-f>", "<cmd>Telescope live_grep<cr>")
 keymap.set("n", "<leader>f", "<cmd>Telescope grep_string<cr>")
 keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")

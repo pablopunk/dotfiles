@@ -99,7 +99,19 @@ function localLambdaOff {
 }
 
 function loggerDev {
+  comeback_to="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+  # turn on dev mode for MazeLogger
   cd ~/src/maze/maze-monorepo/packages/logger
   sed -i '' "s/this\.envName\ ===\ 'development';/true;/g" ./src/MazeLogger.ts
   pnpm build && git checkout ./src/MazeLogger.ts
+
+  cd $comeback_to
+
+  # turn off events logging
+  cd ~/src/maze/maze-monorepo/packages/sentry-lambda
+  sed -i '' "s/logger\.log/\/\/logger.log/g" ./src/index.ts
+  pnpm build && git checkout ./src/index.ts
+
+  cd $comeback_to
 }

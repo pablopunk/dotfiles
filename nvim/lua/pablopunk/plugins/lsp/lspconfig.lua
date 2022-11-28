@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 
   if client.name == "tsserver" then
-    keymap.set("n", "<leader>R", ":TypescriptRenameFile<cr>")
+    keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>")
   end
 end
 

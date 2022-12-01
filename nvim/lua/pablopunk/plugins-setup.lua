@@ -92,6 +92,7 @@ return require("packer").startup(function(use)
     tag = "0.1.0",
     requires = { { "nvim-lua/plenary.nvim" } },
   }
+  use "mileszs/ack.vim"
 
   -- format & lint
   use "jose-elias-alvarez/null-ls.nvim"

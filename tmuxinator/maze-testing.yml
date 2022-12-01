@@ -1,0 +1,12 @@
+# ~/.tmuxinator/maze-testing.yml
+
+name: maze
+root: ~/src/maze/maze-monorepo/
+
+windows:
+  - nvim: nvm use 16 && nvim
+  # - webapp: cd ~/src/maze/maze-monorepo/packages/maze-webapp && pnpm dev
+  - testing: cd ~/src/maze/maze-monorepo/packages/testing-webapp && pnpm dev
+  - api: cd ~/src/maze/maze-monorepo/packages/maze-api && pnpm dev
+  - api-core: cd ~/src/maze/maze-monorepo/packages/maze-api-core && pnpm dev
+  # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && pnpm serve:watch --stage testing ; localLambdaOff

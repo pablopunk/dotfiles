@@ -1,22 +1,16 @@
-import Document, { Main, NextScript, Html, Head } from 'next/document'
-import darkModeCode from 'dark-mode-code'
+import darkModeCode from "dark-mode-code";
 
-export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initalProps = await Document.getInitialProps(ctx)
+import { Html, Head, Main, NextScript } from "next/document";
 
-    return {...initalProps}
-  }
-  render() {
-    return (
-      <Html>
-        <Head />
-        <body>
-          <script dangerouslySetInnerHTML={{ __html: darkModeCode }}></script>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+export default function Document() {
+  return (
+    <Html>
+      <Head />
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: darkModeCode }}></script>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }

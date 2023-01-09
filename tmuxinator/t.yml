@@ -1,0 +1,11 @@
+# ~/.tmuxinator/t.yml
+#
+# used to test tmux configs
+
+name: t
+root: ~/
+
+pre_window: nvm use 14
+
+windows:
+  - nvim: node --version

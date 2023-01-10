@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 function powersave {
   # linux
   sudo cpufreq-set -g powersave && \
@@ -114,4 +116,48 @@ function loggerDev {
   pnpm build && git checkout ./src/index.ts
 
   cd $comeback_to
+}
+
+function setup_AWS_cli {
+  curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+  sudo installer -pkg AWSCLIV2.pkg -target / && rm AWSCLIV2.pkg
+  brew install --cask aws-vault
+
+  echo "go to https://console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials"
+  echo "and get your AWS credentials there (or create new ones)"
+
+  aws configure
+  aws-vault add default
+
+  echo "[profile default]
+region=us-east-1
+mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
+
+[profile mazedesign_developer]
+region=us-east-1
+role_arn=arn:aws:iam::184487594157:role/developer
+source_profile=default
+mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
+
+[profile production_developer]
+region=us-east-1
+role_arn=arn:aws:iam::249751880523:role/developer
+source_profile=default
+mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
+
+[profile staging_developer]
+region=us-east-1
+role_arn=arn:aws:iam::027609491582:role/developer
+source_profile=default
+mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
+
+[profile testing_developer]
+region=us-east-1
+role_arn=arn:aws:iam::211773933080:role/developer
+source_profile=default
+mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
+" > ~/.aws/config
+
+  echo
+  echo "now test your config with 'aws-vault exec testing_developer'"
 }

@@ -6,7 +6,7 @@ root: ~/src/maze/maze-monorepo/
 pre_window: nvm use 14
 
 windows:
-  - nvim: nvim
+  - nvim: nvm use 16 && nvim
   # - webapp: cd ~/src/maze/maze-monorepo/packages/maze-webapp && pnpm dev
   - testing: cd ~/src/maze/maze-monorepo/packages/testing-webapp && pnpm dev
   - api: cd ~/src/maze/maze-monorepo/packages/maze-api && pnpm dev

@@ -21,9 +21,9 @@ null_ls.setup {
       extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
     },
     formatting.prettier,
-    diagnostics.eslint_d.with {
-      extra_args = { "--quiet" }, -- show only errors, not warnings
-    },
+    -- diagnostics.eslint_d.with {
+    --   extra_args = { "--quiet" }, -- show only errors, not warnings
+    -- },
   },
   debug = false,
   -- format on save (async)

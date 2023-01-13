@@ -1,9 +1,0 @@
-# ~/.tmuxinator/sd.yml
-
-name: remote
-root: ~/src/superdesk-client-core
-
-windows:
-  - logs: cd ~/src/superdesk/client && sd grunt sd-master
-  - code: nvim
-  - vtop: vtop

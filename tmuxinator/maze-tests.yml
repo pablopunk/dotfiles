@@ -3,7 +3,7 @@
 name: maze-tests
 root: ~/src/maze/maze-monorepo/
 
-pre_window: nvm use 14
+pre_window: nvm use
 
 windows:
   - dev: pnpm dev:acceptance-tests

@@ -161,3 +161,9 @@ mfa_serial=arn:aws:iam::184487594157:mfa/pablo_varela
   echo
   echo "now test your config with 'aws-vault exec testing_developer'"
 }
+
+function add_spacer_to_dock {
+  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+  killall Dock
+}
+

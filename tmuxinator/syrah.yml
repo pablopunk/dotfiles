@@ -1,9 +1,0 @@
-# /Users/pablopunk/.tmuxinator/syrah.yml
-
-name: syrah
-root: ~/src/prezly/theme-nextjs-syrah
-
-
-windows:
-  - logs: npm run dev
-  - code: nvim

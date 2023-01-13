@@ -3,7 +3,7 @@
 name: maze
 root: ~/src/maze/maze-monorepo/
 
-pre_window: nvm use 14
+pre_window: nvm use
 
 windows:
   - nvim: nvm use 16 && nvim

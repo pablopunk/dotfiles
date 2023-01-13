@@ -1,9 +1,0 @@
-# /Users/pablopunk/.tmuxinator/website.yml
-
-name: website
-root: ~/src/prezly/website-nextjs
-
-
-windows:
-  - logs: npm run dev
-  - code: nvim

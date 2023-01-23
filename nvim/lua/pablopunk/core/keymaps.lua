@@ -24,6 +24,7 @@ keymap.set("n", "<c-s>", ":w!<cr>")
 
 -- nvim-tree
 keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>")
+keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>")
 
 -- system clipboard
 keymap.set("n", "<leader>cp", '"*y')
@@ -55,3 +56,9 @@ keymap.set("n", ">", ">>")
 keymap.set("n", "<", "<<")
 keymap.set("v", ">", ">gv")
 keymap.set("v", "<", "<gv")
+
+-- folding
+-- fold all with <leader>z
+keymap.set("n", "<leader>z", "zM")
+-- open all folds with <leader>Z
+keymap.set("n", "<leader>Z", "zR")

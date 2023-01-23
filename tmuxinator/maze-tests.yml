@@ -3,8 +3,6 @@
 name: maze-tests
 root: ~/src/maze/maze-monorepo/
 
-pre_window: nvm use
-
 windows:
   - dev: pnpm dev:acceptance-tests
   - runner: cd packages/maze-test-suite && pnpm start-redis && pnpm debug

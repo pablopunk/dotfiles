@@ -3,9 +3,7 @@
 name: maze
 root: ~/src/maze/maze-monorepo/
 
-pre_window: nvm use
-
 windows:
-  - nvim: nvm use 16 && nvim
-  - tilt: cd ~/src/maze/maze-monorepo/packages/maze-webapp && tilt up
+  - nvim: nvim
+  - tilt: open /Applications/Docker.app && cd ~/src/maze/maze-monorepo && tilt up
   # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && pnpm serve:watch -- --stage testing ; localLambdaOff

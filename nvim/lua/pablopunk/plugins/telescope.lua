@@ -10,6 +10,8 @@ end
 
 t.setup {
   defaults = {
+    path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
+    layout_strategy = "vertical",
     mappings = {
       i = {
         ["<c-k>"] = a.move_selection_previous,

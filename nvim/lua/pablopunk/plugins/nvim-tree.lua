@@ -7,4 +7,9 @@ end
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
-nvimtree.setup {}
+nvimtree.setup {
+  -- reload_on_bufenter = true,
+  update_focused_file = {
+    enable = true,
+  },
+}

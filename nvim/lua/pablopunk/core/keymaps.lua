@@ -58,7 +58,5 @@ keymap.set("v", ">", ">gv")
 keymap.set("v", "<", "<gv")
 
 -- folding
--- fold all with <leader>z
-keymap.set("n", "<leader>z", "zM")
--- open all folds with <leader>Z
-keymap.set("n", "<leader>Z", "zR")
+keymap.set("n", "<leader><", "zM") -- fold all
+keymap.set("n", "<leader>>", "zR") -- open all

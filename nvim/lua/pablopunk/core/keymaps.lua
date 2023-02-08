@@ -60,3 +60,6 @@ keymap.set("v", "<", "<gv")
 -- folding
 keymap.set("n", "<leader><", "zM") -- fold all
 keymap.set("n", "<leader>>", "zR") -- open all
+-- keymap.set("n", "H", "za") -- toggle fold under cursor (depends on fold_method)
+keymap.set("n", "H", "zc") -- close fold under cursor
+keymap.set("n", "L", "zo") -- open fold under cursor

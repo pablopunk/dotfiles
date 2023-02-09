@@ -15,6 +15,7 @@ local function open_nvim_tree(data)
   local is_a_directory = vim.fn.isdirectory(data.file) == 1
 
   if is_a_directory then
+    vim.cmd.cd(data.file) -- change directory to the directory of the file
     require("nvim-tree.api").tree.open()
     return
   end

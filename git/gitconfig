@@ -1,6 +1,12 @@
 [core]
-	pager = delta
+	pager = delta --features "$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo dark-mode || echo light-mode)"
 	editor = nvim
+[delta "light-mode"]
+  light = true
+  syntax-theme = GitHub
+[delta "dark-mode"]
+  light = false
+  syntax-theme = Visual Studio Dark+
 [push]
 	default = current
 [pull]

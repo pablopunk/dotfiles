@@ -1,6 +1,14 @@
+local function dark_mode()
+  vim.cmd "silent! colorscheme onedark"
+end
+
+local function light_mode()
+  vim.cmd "silent! colorscheme xcodelight"
+end
+
 local handle = io.popen "defaults read -g AppleInterfaceStyle"
 if not handle then
-  vim.cmd "silent! colorscheme onedark"
+  dark_mode() -- default to dark mode
   return
 end
 
@@ -8,9 +16,9 @@ local result = handle:read "*a"
 handle:close()
 
 if string.match(result, "Dark") then
-  vim.cmd "silent! colorscheme onedark"
+  dark_mode()
 elseif string.match(result, "not found") then
-  vim.cmd "silent! colorscheme onedark"
+  dark_mode() -- unknown, default to dark mode
 else
-  vim.cmd "silent! colorscheme onedark"
+  light_mode()
 end

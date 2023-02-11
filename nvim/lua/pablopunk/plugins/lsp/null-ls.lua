@@ -11,7 +11,7 @@ if not lsp_format_status then
 end
 
 local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
+-- local diagnostics = null_ls.builtins.diagnostics
 
 lsp_format.setup {} -- async by default, add {sync=true} if needed
 

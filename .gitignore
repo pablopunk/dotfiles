@@ -11,3 +11,5 @@ karabiner/automatic_backups
 
 # generated file
 nvim/plugin/packer_compiled.lua
+
+kitty/kitty.conf.bak

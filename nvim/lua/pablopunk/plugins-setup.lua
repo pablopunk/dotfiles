@@ -37,6 +37,7 @@ return require("packer").startup(function(use)
   use "arzg/vim-colors-xcode"
   use "pablopunk/transparent.vim"
   use "ap/vim-css-color"
+  use "ayu-theme/ayu-vim"
 
   -- syntax
   use "sheerun/vim-polyglot" -- lots of languages in 1 plugin

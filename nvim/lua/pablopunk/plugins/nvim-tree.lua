@@ -10,8 +10,11 @@ vim.opt.termguicolors = true
 
 -- fix for lazy-loading nvim-tree
 local function open_nvim_tree(data)
-  local is_real_file = vim.fn.filereadable(data.file) == 1
-  local is_no_name_file = data.file == "" and vim.bo[data.buf].buftype == ""
+  local is_git_commit = string.match(data.file, ".git/COMMIT_EDITMSG")
+  if is_git_commit then
+    return
+  end
+
   local is_a_directory = vim.fn.isdirectory(data.file) == 1
 
   if is_a_directory then
@@ -19,6 +22,9 @@ local function open_nvim_tree(data)
     require("nvim-tree.api").tree.open()
     return
   end
+
+  local is_real_file = vim.fn.filereadable(data.file) == 1
+  local is_no_name_file = data.file == "" and vim.bo[data.buf].buftype == ""
 
   if is_real_file or is_no_name_file then
     require("nvim-tree.api").tree.toggle { focus = false, find_file = true }

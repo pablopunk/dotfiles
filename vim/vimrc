@@ -58,22 +58,8 @@ nmap <c-t> :tabe<cr>
 " Ctrl+q close buffer
 nmap <c-q> :bd<cr>
 
-
 " Ctrl+s to save
 nmap <c-s> :w<cr>
-
-" Format file
-function! FixAndFormat()
-  :CocCommand tsserver.executeAutofix
-  " :CocCommand tsserver.organizeImports
-  " :CocCommand prettier.formatFile
-endfunction
-nmap <silent> <leader><Tab> :call FixAndFormat()<cr>
-vmap <silent> <leader><Tab> <Plug>(coc-format-selected)
-xmap <silent> <leader><Tab> <Plug>(coc-format-selected)
-
-" Open terminal
-nmap <leader>t :terminal<cr>
 
 " Open .vimrc
 nmap <leader>v :e ~/.vimrc<cr>
@@ -108,6 +94,8 @@ vnoremap < <gv
 " Fold
 nmap <leader>< zM
 nmap <leader>> zR
+nmap H zc
+nmap L zo
 
 " Search and replace in file/line (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
@@ -120,20 +108,12 @@ if has('terminal') || has('nvim')
   tmap <Esc> <C-\><C-n>
 endif
 
-" Identify the syntax group of the word at the cursor
-nmap <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 " Remove highlights
 nmap <silent> <leader>h :noh<cr>
 
 "
 " Autocommands
 "
-
-" Close quickfix window after pressing enter
-autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " I don't wanna save changes to a directory ¬¬
 autocmd FileType netrw setl bufhidden=delete
@@ -167,166 +147,11 @@ iabbr ireact import React from 'react'
 iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
 
-"
-" PLUGINS. VimPlug will download and install all of them
-"
-
-" Start plugins
-call plug#begin('~/.vim/plugged')
-
-Plug 'tpope/vim-fugitive' " git tools
-command! Conflicts Gvdiffsplit!
-nnoremap <leader>dh :diffget //2<cr>
-nnoremap <leader>dl :diffget //3<cr>
-Plug 'tpope/vim-rhubarb' " for :GBrowse
-Plug 'tpope/vim-repeat' " repeat more things with .
-Plug 'tpope/vim-sensible' " nice defaults for vim
-Plug 'tpope/vim-dispatch' " dispatch async jobs (useful with plugins like ack)
-Plug 'tpope/vim-commentary' " gcc for commenting
-Plug 'tpope/vim-surround' " new vim action (cs=change surround) (ys=add surround) *requires a motion
-Plug 'editorconfig/editorconfig-vim'
-Plug 'ap/vim-buftabline' " show buffers as tabs
-Plug 'mhinz/vim-startify' " show screen with shortcuts when opening vim
-let g:startify_change_to_vcs_root = 1
-let g:startify_change_to_dir = 0
-nmap <leader>s :Startify<cr>
-Plug 'brooth/far.vim' " Find & Replace
-let g:far#enable_undo=1
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-nmap <c-p> :GFiles<cr>
-nmap <c-g> :GFiles?<cr>
-nmap <c-f> :Rg<cr>
-nmap <silent> <leader>f :Rg <c-r><c-w><cr>
-nmap <leader><leader> :Buffers<cr>
-" Plug 'ctrlpvim/ctrlp.vim'
-" nmap <leader><leader> :CtrlPBuffer<cr>
-Plug 'wakatime/vim-wakatime'
-Plug 'github/copilot.vim'
-Plug 'christoomey/vim-tmux-navigator' " enable ctrl+hjkl to navigate on tmux/vim
-Plug 'markonm/traces.vim' " to show in real time what your :s commands will replace
-Plug 'sheerun/vim-polyglot' " lots of languages support in 1 plugin
-Plug 'pablopunk/persistent-undo.vim' " undo works across vim sessions
-Plug 'pablopunk/hot-reload.vim', { 'for': 'vim' } " reload config when changing vimrc
-" Plug 'pablopunk/native-sidebar.vim' " ctrl+b to open dir drawer
-" let g:native_sidebar_shortcut = '<c-a>'
-Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
-Plug 'kyazdani42/nvim-tree.lua'
-nnoremap <c-m> :NvimTreeFindFile<cr>
-Plug 'pablopunk/transparent.vim'
-Plug 'pablopunk/statusline.vim'
-Plug 'pablopunk/sick.vim'
-Plug 'pablopunk/sunset.vim'
-" Plug 'ap/vim-css-color'
-Plug 'morhetz/gruvbox'
-Plug 'arzg/vim-colors-xcode'
-Plug 'joshdick/onedark.vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'jcherven/jummidark.vim'
-Plug 'zefei/simple-dark'
-Plug 'arcticicestudio/nord-vim'
-" Plug 'edkolev/tmuxline.vim' " To generate tmux colors from vim statusline
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " basically vscode
-let b:coc_suggest_disable = 1
-let b:coc_diagnostic_disable = 1
-let g:coc_global_extensions = [
-  \ 'coc-eslint',
-  \ 'coc-git',
-  \ 'coc-github',
-  \ 'coc-json',
-  \ 'coc-marketplace',
-  \ 'coc-pairs',
-  \ 'coc-prettier',
-  \ 'coc-react-refactor',
-  \ 'coc-tsserver',
-  \]
-  " \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
-set shortmess+=c
-set updatetime=300
-" Faster python detection
-let g:python3_host_prog = system('which python3')[:-2]
-" Fix issue with transparent cursor
-let g:coc_disable_transparent_cursor = 1
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" Go to def
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Navigate through git changes on file
-nmap ) <Plug>(coc-git-nextchunk)
-nmap ( <Plug>(coc-git-prevchunk)
-nmap <leader>u :CocCommand git.chunkUndo<cr>
-" Use K for documentation including Coc
-nmap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-" Coc commands and stuff
-nmap <silent> ge <Plug>(coc-diagnostic-next-error)
-nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
-nmap <leader>r <Plug>(coc-rename)
-nmap <leader>cc :CocCommand<cr>
-nmap <leader>cl :CocList<cr>
-nmap <leader>ca <Plug>(coc-codeaction-selected)j
-vmap <leader>ca <Plug>(coc-codeaction-selected)j
-nmap <leader>cs :CocList symbols<cr>
-nmap <leader>co :CocList outline<cr>
-nmap <silent> <leader>p :CocCommand prettier.formatFile<cr>
-" Use <CR> to confirm completion
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-                            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" Trigger coc with c-x-c-n
-inoremap <silent><expr> <c-x><c-n> coc#refresh()
-" Plug 'neovim/nvim-lspconfig'
-
-"
-" End of plugins
-"
-call plug#end()
-
 " Custom commands
 command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
 command! ConstImport :execute "normal! 0ciwconst\<esc>/from\<cr>ciw= require(\<esc>lxA)\<esc>"
 command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
-command! HotReload autocmd BufWritePost *.vim source %
-
-" Lua configs
-lua require'nvim-tree'.setup {}
-
-"
-" VSCODE NEOVIM
-"
-if exists('g:vscode')
-  function! VSCodeNotifyVisual(cmd, leaveSelection, ...)
-    let mode = mode()
-    if mode ==# 'V'
-        let startLine = line('v')
-        let endLine = line('.')
-        call VSCodeNotifyRange(a:cmd, startLine, endLine, a:leaveSelection, a:000)
-    elseif mode ==# 'v' || mode ==# "\<C-v>"
-        let startPos = getpos('v')
-        let endPos = getpos('.')
-        call VSCodeNotifyRangePos(a:cmd, startPos[1], endPos[1], startPos[2], endPos[2] + 1, a:leaveSelection, a:000)
-    else
-        call VSCodeNotify(a:cmd, a:000)
-    endif
-  endfunction
-
-  " normal
-  nnoremap gd <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-  nnoremap <leader>r <Cmd>call VSCodeNotify('editor.action.rename')<CR>
-  nnoremap <leader>u <Cmd>call VSCodeNotify('git.revertSelectedRanges')<CR>
-  nnoremap K <Cmd>call VSCodeNotify('editor.action.showHover')<CR>
-  " visual
-  vnoremap <leader>u <Cmd>call VSCodeNotifyVisual('git.revertSelectedRanges', 1)<CR>
-endif
+command! HotReload autocmd BufWritePost % source %
 
 "
 " Color config
@@ -334,7 +159,7 @@ endif
 set termguicolors
 " dark mode enabled?
 if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-  colorscheme onedark
+  colorscheme pablo
 else
-  colorscheme xcodelight
+  colorscheme peachpuff
 endif

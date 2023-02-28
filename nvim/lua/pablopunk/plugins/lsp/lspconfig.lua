@@ -31,6 +31,13 @@ local on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>")
   end
+
+  -- disable folding for lsp finder
+  -- vim.cmd [[augroup lsp_finder]]
+  -- vim.cmd [[autocmd!]]
+  -- vim.cmd [[autocmd FileType lspsagafinder setlocal nofoldenable]]
+  -- vim.cmd [[autocmd FileType markdown setlocal nofoldenable]]
+  -- vim.cmd [[augroup END]]
 end
 
 -- enable autocompletion

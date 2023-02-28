@@ -59,7 +59,7 @@ return require("packer").startup(function(use)
   use "markonm/traces.vim" -- to show in real time what your :s commands will replace
   use "kyazdani42/nvim-tree.lua" -- file browser
   use "kyazdani42/nvim-web-devicons" -- file browser icons
-  use "nvim-lualine/lualine.nvim" -- statusline
+  -- use "nvim-lualine/lualine.nvim" -- statusline
 
   -- git
   use "tpope/vim-fugitive" -- git tools

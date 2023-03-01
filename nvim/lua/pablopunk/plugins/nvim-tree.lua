@@ -10,8 +10,9 @@ vim.opt.termguicolors = true
 
 -- fix for lazy-loading nvim-tree
 local function open_nvim_tree(data)
-  local is_git_commit = string.match(data.file, "COMMIT_EDITMSG")
-  if is_git_commit then
+  local is_git_commit = string.match(data.file, ".git/COMMIT_EDITMSG")
+  local is_git_merge = string.match(data.file, ".git/MERGE_MSG")
+  if is_git_commit or is_git_merge then
     return
   end
 

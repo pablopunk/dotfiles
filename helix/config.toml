@@ -1,0 +1,21 @@
+theme = "tokyonight_storm"
+
+[editor]
+# line-number = "relative"
+mouse = true
+bufferline = "multiple" # buffers as tabs
+
+[editor.cursor-shape]
+insert = "bar"
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+C-c = ["collapse_selection", "keep_primary_selection"]
+C-s = ":w"
+
+[keys.insert]
+C-c = "normal_mode"
+
+[keys.select]
+C-c = "normal_mode"
+

@@ -34,7 +34,7 @@ keymap.set("v", "<leader>cp", '"*y')
 keymap.set("n", "Y", "y$")
 
 -- buffer navigation
-keymap.set("n", "gb", ":bprev<cr>")
+keymap.set("n", "gp", ":bprev<cr>")
 keymap.set("n", "gn", ":bnext<cr>")
 
 -- search & replace in current file/line

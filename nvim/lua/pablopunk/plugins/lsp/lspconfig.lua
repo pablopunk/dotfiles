@@ -22,7 +22,8 @@ local keymap = vim.keymap
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  keymap.set("n", "gd", "<cmd>Lspsaga lsp_finder<cr>", opts)
+  keymap.set("n", "gd", "<cmd>Lspsaga go_to_definition<cr>", opts)
+  keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap.set("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
   keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
   keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)

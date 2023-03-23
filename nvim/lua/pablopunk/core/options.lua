@@ -44,4 +44,4 @@ opt.iskeyword:append "-" -- dash is part of the word
 opt.signcolumn = "number"
 
 -- folding
-opt.foldmethod = "indent"
+-- opt.foldmethod = "indent"

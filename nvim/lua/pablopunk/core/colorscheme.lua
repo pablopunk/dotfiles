@@ -1,10 +1,10 @@
 local function dark_mode()
-  -- vim.cmd "silent! let ayucolor='dark'"
-  vim.cmd "silent! let ayucolor='mirage'"
-  vim.cmd "silent! colorscheme ayu"
+  vim.cmd "silent! set background=dark"
+  vim.cmd "silent! colorscheme xcodedarkhc"
 end
 
 local function light_mode()
+  vim.cmd "silent! set background=light"
   vim.cmd "silent! let ayucolor='light'"
   vim.cmd "silent! colorscheme ayu"
 end

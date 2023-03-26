@@ -77,6 +77,7 @@ return require("packer").startup(function(use)
   use "hrsh7th/cmp-buffer" -- text from current buffer
   use "hrsh7th/cmp-path" -- complete paths
   use "hrsh7th/cmp-nvim-lsp" -- add lsp completions
+  use "folke/which-key.nvim" -- autocomplete commands and stuff
   use {
     "glepnir/lspsaga.nvim",
     branch = "main",

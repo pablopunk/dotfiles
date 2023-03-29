@@ -1,7 +1,6 @@
 theme = "base16_transparent"
 
 [editor]
-# line-number = "relative"
 mouse = true
 bufferline = "multiple" # buffers as tabs
 
@@ -21,12 +20,11 @@ C-l = "jump_view_right"
 K = "hover"
 0 = "goto_first_nonwhitespace"
 "$" = "goto_line_end"
-space = { "c" = "toggle_comments" }
-space = { "space" = "command_palette" }
+space = { "c" = "toggle_comments", "space" = "command_palette" }
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
 [keys.insert]
-C-c = "normal_mode"
+C-c = [ "normal_mode", "normal_mode" ]
 C-s = [ "normal_mode", ":w" ]
 
 [keys.select]

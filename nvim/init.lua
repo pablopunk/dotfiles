@@ -2,6 +2,7 @@ require "pablopunk.plugins-setup"
 
 require "pablopunk.core.abbreviations"
 require "pablopunk.core.autocommands"
+require "pablopunk.core.commands"
 require "pablopunk.core.options"
 require "pablopunk.core.colorscheme"
 require "pablopunk.core.keymaps"

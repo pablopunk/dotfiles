@@ -39,7 +39,7 @@ nvimtree.setup {
   update_focused_file = {
     enable = true,
   },
-  -- view = {
-  --   width = 20,
-  -- },
+  view = {
+    width = 24,
+  },
 }

@@ -49,9 +49,9 @@ export PATH="$PNPM_HOME:$PATH"
 # KITTY DARK/LIGHT MODE
 #
 if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
-  kitty +kitten themes --reload-in=all Rosé Pine Dawn
+  kitty +kitten themes --reload-in=all Pencil Light
 else
-  kitty +kitten themes --reload-in=all Kaolin Temple
+  kitty +kitten themes --reload-in=all Challenger Deep
 fi
 
 # bun completions

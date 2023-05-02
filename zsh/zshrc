@@ -51,7 +51,7 @@ export PATH="$PNPM_HOME:$PATH"
 if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
   kitty +kitten themes --reload-in=all Pencil Light
 else
-  kitty +kitten themes --reload-in=all Challenger Deep
+  kitty +kitten themes --reload-in=all Xcodedark
 fi
 
 # bun completions

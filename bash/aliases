@@ -37,6 +37,7 @@ else
 fi
 alias n='npm run'
 alias p='pnpm'
-alias maze='cd $HOME/src/maze/maze-monorepo'
 alias run='npx tsx'
 alias tx='tmuxinator'
+alias maze='cd $HOME/src/maze/maze-monorepo'
+alias maze-prototypes='cd $HOME/src/maze/maze-monorepo/services/maze-prototypes'

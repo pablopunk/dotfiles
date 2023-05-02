@@ -36,7 +36,7 @@ return require("packer").startup(function(use)
   use "bluz71/vim-nightfly-guicolors"
   use "joshdick/onedark.vim"
   use "arzg/vim-colors-xcode"
-  use "pablopunk/transparent.vim"
+  -- use "pablopunk/transparent.vim"
   use "ap/vim-css-color"
   use "ayu-theme/ayu-vim"
   use { "catppuccin/nvim", as = "catppuccin" }

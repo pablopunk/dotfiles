@@ -40,6 +40,7 @@ return require("packer").startup(function(use)
   use "ap/vim-css-color"
   use "ayu-theme/ayu-vim"
   use { "catppuccin/nvim", as = "catppuccin" }
+  use "edkolev/tmuxline.vim"
 
   -- syntax
   use "sheerun/vim-polyglot" -- lots of languages in 1 plugin

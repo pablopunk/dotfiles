@@ -42,4 +42,18 @@ nvimtree.setup {
   view = {
     width = 24,
   },
+  renderer = {
+    indent_width = 1,
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = false,
+    show_on_open_dirs = true,
+    debounce_delay = 50,
+    severity = {
+      -- :help vim.diagnostic.severity
+      min = vim.diagnostic.severity.WARN,
+      max = vim.diagnostic.severity.ERROR,
+    },
+  },
 }

@@ -101,6 +101,15 @@ function localLambdaOff {
 }
 
 function loggerDev {
+  echo
+  echo "[error]"
+  echo "now the logger package is here:"
+  echo "https://github.com/mazedesignhq/shared-packages/tree/main"
+  echo
+  echo "[fix]"
+  echo "Clone that repo and update this script accordinly"
+  echo
+  return
   comeback_to="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
   # turn on dev mode for MazeLogger

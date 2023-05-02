@@ -1,12 +1,11 @@
 local function dark_mode()
   vim.cmd "silent! set background=dark"
-  vim.cmd "silent! colorscheme xcodedarkhc"
+  vim.cmd "silent! colorscheme catppuccin"
 end
 
 local function light_mode()
   vim.cmd "silent! set background=light"
-  vim.cmd "silent! let ayucolor='light'"
-  vim.cmd "silent! colorscheme ayu"
+  vim.cmd "silent! colorscheme catppuccin-latte"
 end
 
 local handle = io.popen "defaults read -g AppleInterfaceStyle"

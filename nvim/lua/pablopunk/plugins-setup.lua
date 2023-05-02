@@ -30,6 +30,7 @@ return require("packer").startup(function(use)
   use "nvim-lua/plenary.nvim" -- lua functions that many plugins use
   use "pablopunk/hot-reload.vim" -- reload .vimrc and init.lua whenever you save them
   use "pablopunk/persistent-undo.vim" -- undo works across vim sessions
+  use "stefandtw/quickfix-reflector.vim" -- edits to quickfix will be saved to the actual file/line
 
   -- colors
   use "bluz71/vim-nightfly-guicolors"
@@ -38,6 +39,7 @@ return require("packer").startup(function(use)
   use "pablopunk/transparent.vim"
   use "ap/vim-css-color"
   use "ayu-theme/ayu-vim"
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- syntax
   use "sheerun/vim-polyglot" -- lots of languages in 1 plugin

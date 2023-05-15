@@ -9,18 +9,9 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-function nvm() {
-  unset nvm
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm $@
-}
 if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   export DOCKER_HOST=tcp://localhost:2375
 fi
-export PATH="$NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)/bin:$PATH"
 
 # Cargo
 [[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"

@@ -83,13 +83,7 @@ function weather {
 }
 
 function nvm {
-  unset -f nvm
-  if [ "$(uname)" = "Darwin" ]; then
-    [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-  else
-    [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
-  fi
-  nvm $@
+  echo "nvm is deprecated, use asdf instead"
 }
 
 function localLambdaOn {

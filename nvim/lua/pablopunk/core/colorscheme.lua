@@ -8,7 +8,7 @@ local function light_mode()
   vim.cmd "silent! colorscheme catppuccin-latte"
 end
 
-local handle = io.popen "defaults read -g AppleInterfaceStyle"
+local handle = io.popen "cat $HOME/.theme"
 if not handle then
   dark_mode() -- default to dark mode
   return

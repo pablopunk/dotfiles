@@ -11,7 +11,7 @@ if not lsp_format_status then
 end
 
 local formatting = null_ls.builtins.formatting
--- local diagnostics = null_ls.builtins.diagnostics
+local diagnostics = null_ls.builtins.diagnostics
 
 lsp_format.setup {} -- async by default, add {sync=true} if needed
 
@@ -20,10 +20,15 @@ null_ls.setup {
     formatting.stylua.with {
       extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
     },
-    formatting.prettier,
-    -- diagnostics.eslint_d.with {
-    --   extra_args = { "--quiet" }, -- show only errors, not warnings
-    -- },
+    formatting.prettier.with {
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    },
+    formatting.eslint_d.with {
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    },
+    diagnostics.eslint_d.with {
+      extra_args = { "--quiet" }, -- show only errors, not warnings
+    },
   },
   debug = false,
   -- format on save (async)

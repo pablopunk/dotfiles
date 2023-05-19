@@ -72,9 +72,9 @@ vnoremap > >gv
 vnoremap < <gv
 nmap <leader><leader> :ls<CR>:b<Space>
 nmap <c-space> :b#<CR>
-vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
-nnoremap <c-n> viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
-vnoremap <leader>n "9y:s/<c-r>9/<c-r>9/g<left><left>
-nnoremap <leader>n viw"9y:s/<c-r>9/<c-r>9/g<left><left>
+vnoremap <c-n> "9y:%s@<c-r>9@<c-r>9@g<left><left>
+nnoremap <c-n> viw"9y:%s@<c-r>9@<c-r>9@g<left><left>
+vnoremap <leader>n "9y:s@<c-r>9@<c-r>9@g<left><left>
+nnoremap <leader>n viw"9y:s@<c-r>9@<c-r>9@g<left><left>
 
 autocmd BufNewFile,BufRead *.jsx,*.tsx,*.ts set filetype=javascript

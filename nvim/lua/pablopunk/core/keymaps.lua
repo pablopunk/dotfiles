@@ -38,10 +38,10 @@ keymap.set("n", "gp", ":bprev<cr>")
 keymap.set("n", "gn", ":bnext<cr>")
 
 -- search & replace in current file/line
-keymap.set("v", "<c-n>", '"9y:%s/<c-r>9/<c-r>9/g<left><left>')
-keymap.set("n", "<c-n>", 'viw"9y:%s/<c-r>9/<c-r>9/g<left><left>')
-keymap.set("v", "<leader>n", '"9y:s/<c-r>9/<c-r>9/g<left><left>')
-keymap.set("n", "<leader>n", 'viw"9y:s/<c-r>9/<c-r>9/g<left><left>')
+keymap.set("v", "<c-n>", '"9y:%s@<c-r>9@<c-r>9@g<left><left>')
+keymap.set("n", "<c-n>", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>')
+keymap.set("v", "<leader>n", '"9y:s@<c-r>9@<c-r>9@g<left><left>')
+keymap.set("n", "<leader>n", 'viw"9y:s@<c-r>9@<c-r>9@g<left><left>')
 
 -- follow (center) search cursor
 keymap.set("n", "n", "nzz")

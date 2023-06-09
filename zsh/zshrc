@@ -36,8 +36,8 @@ TERM=xterm-256color
 #
 # VSCODE ALWAYS ON TMUX AND SSH
 #
-[ "$TERM_PROGRAM" = "vscode" ] && [ ! -z "$TMUX" ] && ( tmux a || tmux )
-[ ! -z "$SSH_CONNECTION" ] && [ ! -z "$TMUX" ] && ( tmux a || tmux )
+[ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
+[ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
 
 
 export PNPM_HOME="/Users/pablopunk/Library/pnpm"

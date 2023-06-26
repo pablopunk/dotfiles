@@ -1,0 +1,8 @@
+# ~/.tmuxinator/server.yml
+
+name: server
+root: ~/src
+
+windows:
+  - server: cd ~/src/server && docker-compose up -d
+  - notflix: cd ~/src/notflix && docker-compose up -d

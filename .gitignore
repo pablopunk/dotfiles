@@ -13,3 +13,6 @@ karabiner/automatic_backups
 nvim/plugin/packer_compiled.lua
 
 kitty/kitty.conf.bak
+
+# I prefer my conversations to be private
+zed/conversations

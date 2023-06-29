@@ -7,9 +7,16 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "One Light",
+  "terminal": {
+    "dock": "bottom"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "theme": "Ayu Mirage",
+  // "buffer_font_family": "SF Mono",
   "buffer_font_size": 16,
-  "vim_mode": true,
+  // "vim_mode": true,
   "format_on_save": {
     "external": {
       "command": "prettier",

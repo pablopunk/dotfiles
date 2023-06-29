@@ -1,0 +1,10 @@
+[
+  {
+    "bindings": {
+      "cmd-t": "terminal_panel::ToggleFocus",
+      "ctrl-o": "pane::GoBack",
+      "ctrl-i": "pane::GoForward",
+      "cmd-r": "outline::Toggle"
+    }
+  }
+]

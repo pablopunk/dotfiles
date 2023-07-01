@@ -6,3 +6,4 @@ root: ~/src
 windows:
   - server: cd ~/src/server && docker-compose up -d
   - notflix: cd ~/src/notflix && docker-compose up -d
+  - dash: cd ~/src/dash && pnpm start

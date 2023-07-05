@@ -4,11 +4,20 @@ theme = "catppuccin_mocha"
 mouse = true
 bufferline = "multiple" # buffers as tabs
 
+[editor.indent-guides]
+render = true
+skip-levels = 1
+
 [editor.cursor-shape]
 insert = "bar"
 
 [editor.lsp]
-display-inline-hints = true
+display-inlay-hints = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control"]
+center = ["file-base-name", "file-modification-indicator"]
+right = ["diagnostics", "position"]
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]

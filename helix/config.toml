@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "catppuccin_mocha"
 
 [editor]
 mouse = true
@@ -6,6 +6,9 @@ bufferline = "multiple" # buffers as tabs
 
 [editor.cursor-shape]
 insert = "bar"
+
+[editor.lsp]
+display-inline-hints = true
 
 [keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"]
@@ -24,7 +27,7 @@ space = { "c" = "toggle_comments", "space" = "command_palette" }
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
 [keys.insert]
-C-c = [ "normal_mode", "normal_mode" ]
+C-c = [ "normal_mode" ] # https://github.com/helix-editor/helix/issues/822#issuecomment-1622621574
 C-s = [ "normal_mode", ":w" ]
 
 [keys.select]

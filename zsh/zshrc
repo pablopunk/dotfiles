@@ -8,14 +8,6 @@ plugins=(
   macos
   npm
 )
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/oh-my-zsh.sh
-
-#
-# ZSH OPTIONS
-#
-setopt PROMPT_SUBST
 
 #
 # MODULAR
@@ -24,6 +16,14 @@ source ~/.functions
 source ~/.aliases
 source ~/.path
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
+
+#
+# ZSH OPTIONS
+#
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/oh-my-zsh.sh
+setopt PROMPT_SUBST
 
 #
 # PROMPT
@@ -47,21 +47,23 @@ export PATH="$PNPM_HOME:$PATH"
 # KITTY DARK/LIGHT MODE
 #
 current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
-if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
-  new_theme=Light
-  kitty_theme="Pencil Light"
-else
-  new_theme=Dark
-  kitty_theme="Xcodedark"
-fi
-if [[ $current_theme != $new_theme ]]; then
-  kitty +kitten themes --reload-in=all $kitty_theme
-  echo $new_theme > $HOME/.theme
+if [[ $(uname) == "Darwin" ]]; then
+  if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
+    new_theme=Light
+    kitty_theme="Pencil Light"
+  else
+    new_theme=Dark
+    kitty_theme="Xcodedark"
+  fi
+  if [[ $current_theme != $new_theme ]]; then
+    kitty +kitten themes --reload-in=all $kitty_theme
+    echo $new_theme > $HOME/.theme
+  fi
 fi
 
 # bun completions
 [ -s "/Users/pablopunk/.bun/_bun" ] && source "/Users/pablopunk/.bun/_bun"
 
 # asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+. $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash

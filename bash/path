@@ -9,6 +9,8 @@ export PATH="$HOME/.deno/bin:$PATH"
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
+eval $(brew shellenv) # all paths for homebrew
+
 if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   export DOCKER_HOST=tcp://localhost:2375
 fi

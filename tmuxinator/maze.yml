@@ -5,5 +5,5 @@ root: ~/src/maze/maze-monorepo/
 
 windows:
   - nvim: nvim
-  - tilt: open /Applications/Docker.app && cd ~/src/maze/maze-monorepo && tilt up
+  - tilt: wait_for_docker; tilt up
   # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && pnpm serve:watch -- --stage testing ; localLambdaOff

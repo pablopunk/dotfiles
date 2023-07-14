@@ -3,7 +3,7 @@
 function preinstall {
   rm -rf ~/.config/kitty
   mkdir -p ~/.config/kitty
-  git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/themes
+  git clone --depth 1 https://github.com/catppuccin/kitty ~/.config/kitty/themes
 }
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

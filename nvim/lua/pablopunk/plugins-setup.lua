@@ -15,7 +15,6 @@ local plugins = {
   -- should be the default
   "tpope/vim-surround",
   "tpope/vim-commentary",
-  "tpope/vim-sensible", -- nice vim defaults
   "tpope/vim-dispatch", -- some functions that other plugins use
   "editorconfig/editorconfig-vim",
   "nvim-lua/plenary.nvim", -- lua functions that many plugins use
@@ -31,7 +30,7 @@ local plugins = {
   { "catppuccin/nvim", as = "catppuccin" },
   "edkolev/tmuxline.vim",
   -- syntax
-  "sheerun/vim-polyglot", -- lots of languages in 1 plugin
+  -- "sheerun/vim-polyglot", -- lots of languages in 1 plugin
   {
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -77,7 +76,6 @@ local plugins = {
     tag = "0.1.0",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
   },
-  "mileszs/ack.vim",
   -- format & lint
   "jose-elias-alvarez/null-ls.nvim",
   "jayp0521/mason-null-ls.nvim",

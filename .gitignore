@@ -9,8 +9,9 @@ coc/**/history.json
 
 karabiner/automatic_backups
 
-# generated file
+# generated files
 nvim/plugin/packer_compiled.lua
+nvim/lazy-lock.json
 
 kitty/kitty.conf.bak
 

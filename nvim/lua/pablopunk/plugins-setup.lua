@@ -1,127 +1,89 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  }
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
-  augroup end
-]]
-
-local packer_bootstrap = ensure_packer()
-
-return require("packer").startup(function(use)
-  use "wbthomason/packer.nvim"
-
+local plugins = {
   -- should be the default
-  use "tpope/vim-surround"
-  use "tpope/vim-commentary"
-  use "tpope/vim-sensible" -- nice vim defaults
-  use "tpope/vim-dispatch" -- some functions that other plugins use
-  use "editorconfig/editorconfig-vim"
-  use "nvim-lua/plenary.nvim" -- lua functions that many plugins use
-  use "pablopunk/hot-reload.vim" -- reload .vimrc and init.lua whenever you save them
-  use "pablopunk/persistent-undo.vim" -- undo works across vim sessions
-  use "stefandtw/quickfix-reflector.vim" -- edits to quickfix will be saved to the actual file/line
-
+  "tpope/vim-surround",
+  "tpope/vim-commentary",
+  "tpope/vim-sensible", -- nice vim defaults
+  "tpope/vim-dispatch", -- some functions that other plugins use
+  "editorconfig/editorconfig-vim",
+  "nvim-lua/plenary.nvim", -- lua functions that many plugins use
+  "pablopunk/hot-reload.vim", -- reload .vimrc and init.lua whenever you save them
+  "pablopunk/persistent-undo.vim", -- undo works across vim sessions
+  "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
   -- colors
-  use "bluz71/vim-nightfly-guicolors"
-  use "joshdick/onedark.vim"
-  use "arzg/vim-colors-xcode"
-  -- use "pablopunk/transparent.vim"
-  use "ap/vim-css-color"
-  use "ayu-theme/ayu-vim"
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use "edkolev/tmuxline.vim"
-
+  "bluz71/vim-nightfly-guicolors",
+  "joshdick/onedark.vim",
+  "arzg/vim-colors-xcode",
+  "ap/vim-css-color",
+  "ayu-theme/ayu-vim",
+  { "catppuccin/nvim", as = "catppuccin" },
+  "edkolev/tmuxline.vim",
   -- syntax
-  use "sheerun/vim-polyglot" -- lots of languages in 1 plugin
-  use {
+  "sheerun/vim-polyglot", -- lots of languages in 1 plugin
+  {
     "nvim-treesitter/nvim-treesitter",
     run = function()
       require("nvim-treesitter.install").update { with_sync = true }
     end,
-  }
-  use "windwp/nvim-autopairs"
-  use "windwp/nvim-ts-autotag" -- tag auto close
-
+  },
+  "windwp/nvim-autopairs",
+  "windwp/nvim-ts-autotag", -- tag auto close
   -- navigation
-  use "christoomey/vim-tmux-navigator"
-
+  "christoomey/vim-tmux-navigator",
   -- ui
-  use "ap/vim-buftabline" -- show buffers as tabs
-  use "mhinz/vim-startify"
-  use "markonm/traces.vim" -- to show in real time what your :s commands will replace
-  use "kyazdani42/nvim-tree.lua" -- file browser
-  use "kyazdani42/nvim-web-devicons" -- file browser icons
-  -- use "nvim-lualine/lualine.nvim" -- statusline
-
+  "ap/vim-buftabline", -- show buffers as tabs
+  "mhinz/vim-startify",
+  "markonm/traces.vim", -- to show in real time what your :s commands will replace
+  "kyazdani42/nvim-tree.lua", -- file browser
+  "kyazdani42/nvim-web-devicons", -- file browser icons
   -- git
-  use "tpope/vim-fugitive" -- git tools
-  use "tpope/vim-rhubarb" -- :GBrowse
-  use "lewis6991/gitsigns.nvim" -- leftside git status
-
+  "tpope/vim-fugitive", -- git tools
+  "tpope/vim-rhubarb", -- :GBrowse
+  "lewis6991/gitsigns.nvim", -- leftside git status
   -- lsp
-  use "williamboman/mason.nvim"
-  use "williamboman/mason-lspconfig.nvim"
-  use "neovim/nvim-lspconfig"
-
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
   -- autocompletion
-  use "github/copilot.vim"
-  use "hrsh7th/nvim-cmp" -- completion tool
-  use "hrsh7th/cmp-buffer" -- text from current buffer
-  use "hrsh7th/cmp-path" -- complete paths
-  use "hrsh7th/cmp-nvim-lsp" -- add lsp completions
-  use "folke/which-key.nvim" -- autocomplete commands and stuff
-  -- use {
-  --   "glepnir/lspsaga.nvim",
-  --   branch = "main",
-  --   config = function()
-  --     require("lspsaga").setup {
-  --       definition = {
-  --         edit = "<cr>",
-  --       },
-  --     }
-  --   end,
-  --   after = "nvim-treesitter",
-  -- } -- useful functions and UI for lsp
-  use "jose-elias-alvarez/typescript.nvim" -- utils like auto renaming of files & imports
-  use "onsails/lspkind.nvim" -- vscode-like icons for the autocompletion UI
-  use { "L3MON4D3/LuaSnip", branch = "master" } -- snippets
-  use "saadparwaiz1/cmp_luasnip" -- show snippets in completion list
-  use "rafamadriz/friendly-snippets" -- popular snippets
-
+  "github/copilot.vim",
+  "hrsh7th/nvim-cmp", -- completion tool
+  "hrsh7th/cmp-buffer", -- text from current buffer
+  "hrsh7th/cmp-path", -- complete paths
+  "hrsh7th/cmp-nvim-lsp", -- add lsp completions
+  "folke/which-key.nvim", -- autocomplete commands and stuff
+  "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
+  "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
+  { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
+  "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
+  "rafamadriz/friendly-snippets", -- popular snippets
   -- tracking
-  use "wakatime/vim-wakatime"
-
+  "wakatime/vim-wakatime",
   -- fuzzy finder
-  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
-  use {
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
-    requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope-live-grep-args.nvim" } },
-  }
-  use "mileszs/ack.vim"
-
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
+  },
+  "mileszs/ack.vim",
   -- format & lint
-  use "jose-elias-alvarez/null-ls.nvim"
-  use "jayp0521/mason-null-ls.nvim"
-  use "lukas-reineke/lsp-format.nvim" -- nice formatting config
+  "jose-elias-alvarez/null-ls.nvim",
+  "jayp0521/mason-null-ls.nvim",
+  "lukas-reineke/lsp-format.nvim", -- nice formatting config
+}
 
-  -- debugging
-  use "mfussenegger/nvim-dap"
+local opts = {}
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
+require("lazy").setup(plugins, opts)

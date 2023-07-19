@@ -1,3 +1,5 @@
+vim.loader.enable() -- Enables the experimental Lua module loader
+
 require "pablopunk.plugins-setup"
 
 require "pablopunk.core.abbreviations"

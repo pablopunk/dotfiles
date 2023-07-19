@@ -180,3 +180,7 @@ function wait_for_docker {
 function benchmark_neovim_plugins {
   python3 <(curl -sSL https://raw.githubusercontent.com/hyiltiz/vim-plugins-profile/master/vim-plugins-profile.py) nvim
 }
+
+function benchmark_neovim_startuptime {
+  hyperfine "nvim --headless +qa" --warmup 5
+}

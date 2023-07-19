@@ -69,6 +69,18 @@ local plugins = {
       },
     },
   },
+  {
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+      require("lspsaga").setup {
+        definition = {
+          edit = "<cr>",
+        },
+      }
+    end,
+    after = "nvim-treesitter",
+  }, -- useful functions and UI for lsp
   "hrsh7th/nvim-cmp", -- completion tool
   "hrsh7th/cmp-buffer", -- text from current buffer
   "hrsh7th/cmp-path", -- complete paths

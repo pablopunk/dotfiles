@@ -176,3 +176,7 @@ function wait_for_docker {
     sleep 1
   done
 }
+
+function benchmark_neovim_plugins {
+  python3 <(curl -sSL https://raw.githubusercontent.com/hyiltiz/vim-plugins-profile/master/vim-plugins-profile.py) nvim
+}

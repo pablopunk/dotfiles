@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  -- should be the default
+  -- nice defaults & plugin utils
   "tpope/vim-surround",
   "tpope/vim-commentary",
   "tpope/vim-dispatch", -- some functions that other plugins use
@@ -22,11 +22,11 @@ local plugins = {
   "pablopunk/persistent-undo.vim", -- undo works across vim sessions
   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
   -- colors
-  "bluz71/vim-nightfly-guicolors",
-  "joshdick/onedark.vim",
-  "arzg/vim-colors-xcode",
-  "ap/vim-css-color",
-  "ayu-theme/ayu-vim",
+  -- "bluz71/vim-nightfly-guicolors",
+  -- "joshdick/onedark.vim",
+  -- "arzg/vim-colors-xcode",
+  -- "ap/vim-css-color",
+  -- "ayu-theme/ayu-vim",
   { "catppuccin/nvim", as = "catppuccin" },
   "edkolev/tmuxline.vim",
   -- syntax
@@ -56,7 +56,19 @@ local plugins = {
   "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig",
   -- autocompletion
-  "github/copilot.vim",
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+  },
   "hrsh7th/nvim-cmp", -- completion tool
   "hrsh7th/cmp-buffer", -- text from current buffer
   "hrsh7th/cmp-path", -- complete paths

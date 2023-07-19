@@ -61,7 +61,7 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 # bun completions
-[ -s "/Users/pablopunk/.bun/_bun" ] && source "/Users/pablopunk/.bun/_bun"
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
 # asdf
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh

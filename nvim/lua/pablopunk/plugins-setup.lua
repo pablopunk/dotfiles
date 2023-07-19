@@ -61,11 +61,12 @@ local plugins = {
     cmd = "Copilot",
     build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = false },
+      suggestion = { enabled = true, auto_trigger = true, keymap = { accept = "<tab>" } },
       panel = { enabled = false },
       filetypes = {
         markdown = true,
         help = true,
+        yaml = true,
       },
     },
   },

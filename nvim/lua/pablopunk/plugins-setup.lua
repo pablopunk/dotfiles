@@ -45,8 +45,8 @@ local plugins = {
   "ap/vim-buftabline", -- show buffers as tabs
   "mhinz/vim-startify",
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
-  "kyazdani42/nvim-tree.lua", -- file browser
-  "kyazdani42/nvim-web-devicons", -- file browser icons
+  "nvim-tree/nvim-tree.lua", -- file browser
+  "nvim-tree/nvim-web-devicons", -- file browser icons
   -- git
   "tpope/vim-fugitive", -- git tools
   "tpope/vim-rhubarb", -- :GBrowse
@@ -60,6 +60,7 @@ local plugins = {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
+    event = "InsertEnter", -- lazy load copilot when entering insert mode
     opts = {
       suggestion = { enabled = true, auto_trigger = true, keymap = { accept = "<tab>" } },
       panel = { enabled = false },
@@ -71,16 +72,26 @@ local plugins = {
     },
   },
   {
-    "glepnir/lspsaga.nvim",
-    branch = "main",
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach", -- lazy load: needs latest lazy.nvim 2023-July-9
     config = function()
       require("lspsaga").setup {
         definition = {
           edit = "<cr>",
         },
+        finder = {
+          keys = {
+            toggle_or_open = "<cr>",
+            split = "s",
+            vsplit = "v",
+          },
+        },
       }
     end,
-    after = "nvim-treesitter",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
   }, -- useful functions and UI for lsp
   "hrsh7th/nvim-cmp", -- completion tool
   "hrsh7th/cmp-buffer", -- text from current buffer

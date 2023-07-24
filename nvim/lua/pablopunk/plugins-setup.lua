@@ -74,20 +74,6 @@ local plugins = {
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach", -- lazy load: needs latest lazy.nvim 2023-July-9
-    config = function()
-      require("lspsaga").setup {
-        definition = {
-          edit = "<cr>",
-        },
-        finder = {
-          keys = {
-            toggle_or_open = "<cr>",
-            split = "s",
-            vsplit = "v",
-          },
-        },
-      }
-    end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",

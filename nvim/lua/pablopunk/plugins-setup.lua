@@ -43,7 +43,21 @@ local plugins = {
   "christoomey/vim-tmux-navigator",
   -- ui
   "ap/vim-buftabline", -- show buffers as tabs
-  "mhinz/vim-startify",
+  {
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require("dashboard").setup {
+        theme = "hyper",
+        config = {
+          week_header = {
+            enable = true,
+          },
+        },
+      }
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   "nvim-tree/nvim-tree.lua", -- file browser
   "nvim-tree/nvim-web-devicons", -- file browser icons

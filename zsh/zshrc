@@ -47,14 +47,17 @@ export PATH="$PNPM_HOME:$PATH"
 #
 current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
 if [[ $(uname) == "Darwin" ]]; then
-  if [[ ! ( $(2>/dev/null defaults read -g AppleInterfaceStyle) =~ 'Dark' ) ]]; then
+  defaults read -g AppleInterfaceStyle 2>&- >&-
+  if [[ $? == 1 ]]
+  then
     new_theme=Light
     kitty_theme="Catppuccin-Latte"
   else
     new_theme=Dark
     kitty_theme="Catppuccin-Mocha"
   fi
-  if [[ $current_theme != $new_theme ]]; then
+  if [[ $current_theme != $new_theme ]]
+  then
     kitty +kitten themes --reload-in=all $kitty_theme
     echo $new_theme > $HOME/.theme
   fi

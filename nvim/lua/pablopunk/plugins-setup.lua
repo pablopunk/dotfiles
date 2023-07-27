@@ -71,19 +71,8 @@ local plugins = {
   "neovim/nvim-lspconfig",
   -- autocompletion
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter", -- lazy load copilot when entering insert mode
-    opts = {
-      suggestion = { enabled = true, auto_trigger = true, keymap = { accept = "<tab>" } },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-        yaml = true,
-      },
-    },
+    "github/copilot.vim",
+    event = "InsertEnter",
   },
   {
     "nvimdev/lspsaga.nvim",

@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  -- nice defaults & plugin utils
+  -- nice defaults & plugin helpers
   "tpope/vim-surround",
   "tpope/vim-commentary",
   "tpope/vim-dispatch", -- some functions that other plugins use
@@ -22,22 +22,16 @@ local plugins = {
   "pablopunk/persistent-undo.vim", -- undo works across vim sessions
   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
   -- colors
-  -- "bluz71/vim-nightfly-guicolors",
-  -- "joshdick/onedark.vim",
-  -- "arzg/vim-colors-xcode",
-  -- "ap/vim-css-color",
-  -- "ayu-theme/ayu-vim",
   { "catppuccin/nvim", as = "catppuccin" },
   "edkolev/tmuxline.vim",
   -- syntax
-  -- "sheerun/vim-polyglot", -- lots of languages in 1 plugin
   {
     "nvim-treesitter/nvim-treesitter",
     run = function()
       require("nvim-treesitter.install").update { with_sync = true }
     end,
   },
-  "windwp/nvim-autopairs",
+  "windwp/nvim-autopairs", -- auto close () {} [] "" ''
   "windwp/nvim-ts-autotag", -- tag auto close
   -- navigation
   "christoomey/vim-tmux-navigator",
@@ -55,15 +49,8 @@ local plugins = {
   "tpope/vim-fugitive", -- git tools
   "tpope/vim-rhubarb", -- :GBrowse
   "lewis6991/gitsigns.nvim", -- leftside git status
-  -- lsp
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
   -- autocompletion
-  {
-    "github/copilot.vim",
-    event = "InsertEnter",
-  },
+  { "github/copilot.vim", event = "InsertEnter" },
   {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach", -- lazy load: needs latest lazy.nvim 2023-July-9
@@ -71,7 +58,12 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-  }, -- useful functions and UI for lsp
+  },
+  -- LSP
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
+  -- LSP helpers & UI
   "hrsh7th/nvim-cmp", -- completion tool
   "hrsh7th/cmp-buffer", -- text from current buffer
   "hrsh7th/cmp-path", -- complete paths

@@ -49,6 +49,13 @@ local plugins = {
   "tpope/vim-fugitive", -- git tools
   "tpope/vim-rhubarb", -- :GBrowse
   "lewis6991/gitsigns.nvim", -- leftside git status
+  {
+    "kdheepak/lazygit.nvim", -- git UI
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
   -- autocompletion
   { "github/copilot.vim", event = "InsertEnter" },
   {

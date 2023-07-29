@@ -4,4 +4,4 @@ name: server
 root: ~/server
 
 windows:
-  - server: docker ps
+  - server: docker-compose ps

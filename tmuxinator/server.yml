@@ -4,5 +4,5 @@ name: server
 root: ~/
 
 windows:
-  - server: cd ~/server && docker-compose up -d
-  - notflix: cd ~/notflix && docker-compose up -d
+  - server: cd ~/server
+  - notflix: cd ~/notflix

@@ -1,7 +1,7 @@
 # ~/.tmuxinator/server.yml
 
 name: server
-root: ~/
+root: ~/server
 
 windows:
-  - server: cd ~/server
+  - server: docker ps

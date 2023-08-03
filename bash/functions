@@ -184,3 +184,15 @@ function benchmark_neovim_plugins {
 function benchmark_neovim_startuptime {
   hyperfine "nvim --headless +qa" --warmup 5
 }
+
+function benchmark_disk {
+  tempfile="tempfile"
+  echo "Benchmarking disk speed in $PWD"
+  echo
+  echo "WRITING..."
+  sudo dd if=/dev/zero of=$tempfile bs=1G count=1 oflag=dsync > /dev/null
+  echo
+  echo "READING..."
+  sudo dd if=$tempfile of=/dev/zero bs=8k > /dev/null | grep bytes
+  sudo rm -f $tempfile
+}

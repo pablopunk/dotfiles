@@ -37,11 +37,11 @@ local plugins = {
   "christoomey/vim-tmux-navigator",
   -- ui
   "ap/vim-buftabline", -- show buffers as tabs
-  -- {
-  --   "glepnir/dashboard-nvim",
-  --   event = "VimEnter",
-  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
-  -- },
+  {
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   "nvim-tree/nvim-tree.lua", -- file browser
   "nvim-tree/nvim-web-devicons", -- file browser icons

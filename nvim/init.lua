@@ -10,6 +10,7 @@ require "pablopunk.core.keymaps"
 require "pablopunk.core.options"
 
 require "pablopunk.plugins.autopairs"
+require "pablopunk.plugins.copilot"
 require "pablopunk.plugins.dashboard"
 require "pablopunk.plugins.gitsigns"
 require "pablopunk.plugins.lazygit"

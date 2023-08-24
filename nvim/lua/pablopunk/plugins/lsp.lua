@@ -1,7 +1,116 @@
 return {
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  "neovim/nvim-lspconfig",
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      local mason = require "mason"
+      mason.setup {}
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      local lspconfig = require "mason-lspconfig"
+      lspconfig.setup {
+        ensure_installed = {
+          "tsserver",
+          "html",
+          "cssls",
+          "tailwindcss",
+          "lua_ls",
+        },
+      }
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require "lspconfig"
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
+      local typescript = require "typescript"
+
+      local keymap = vim.keymap
+
+      -- enable keybinds for available lsp server
+      local on_attach = function(client, bufnr)
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+
+        keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+        keymap.set("n", "gt", "<cmd>Lspsaga peek_definition<cr>", opts)
+        keymap.set("n", "gv", "<cmd>Lspsaga finder<cr>", opts)
+        keymap.set("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
+        keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+        keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+        keymap.set("n", "E", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+
+        if client.name == "tsserver" then
+          keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>")
+        end
+      end
+
+      -- enable autocompletion
+      local capabilities = cmp_nvim_lsp.default_capabilities()
+
+      lspconfig["html"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+      lspconfig["cssls"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+      lspconfig["tailwindcss"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+      lspconfig["lua_ls"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              -- make server aware of runtime files
+              library = {
+                [vim.fn.expand "%VIMRUNTIME/lua"] = true,
+                [vim.fn.stdpath "config" .. "/lua"] = true,
+              },
+            },
+          },
+        },
+      }
+
+      typescript.setup {
+        server = {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        },
+      }
+    end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach", -- lazy load: needs latest lazy.nvim 2023-July-9
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("lspsaga").setup {
+        definition = {
+          edit = "<cr>",
+        },
+        finder = {
+          keys = {
+            toggle_or_open = "<cr>",
+            split = "s",
+            vsplit = "v",
+          },
+        },
+      }
+    end,
+  },
   -- LSP helpers & UI
   {
     "hrsh7th/nvim-cmp", -- completion tool

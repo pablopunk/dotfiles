@@ -15,7 +15,7 @@ return {
       }
     end,
   },
-    "markonm/traces.vim", -- to show in real time what your :s commands will replace
+  "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
     "nvim-tree/nvim-tree.lua", -- file browser
     config = function()

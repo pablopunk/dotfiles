@@ -6,42 +6,28 @@ return {
   {
     "hrsh7th/nvim-cmp", -- completion tool
     config = function()
-      local c_status, cmp = pcall(require, "cmp")
-      if not c_status then
-        print "cmp not found"
-        return
-      end
-
-      -- local l_status, luasnip = pcall(require, "luasnip")
-      -- if not l_status then
-      --   print "luasnip not found"
-      --   return
-      -- end
-
-      local lspkind_status, lspkind = pcall(require, "lspkind") -- icons for the autocompletion
-      if not lspkind_status then
-        print "lspkind not found"
-        return
-      end
+      local cmp = require "cmp"
+      local luasnip = require "luasnip"
+      local lspkind = require "lspkind"
 
       -- load friendly-snippets
-      -- require("luasnip/loaders/from_vscode").lazy_load()
+      require("luasnip/loaders/from_vscode").lazy_load()
 
       vim.opt.completeopt = "menu,menuone,noselect"
 
       cmp.setup {
-        -- snippet = {
-        --   expand = function(args)
-        --     luasnip.lsp_expand(args.body)
-        --   end,
-        -- },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert {
           -- ["<c-n>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
         },
         sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- lsp
-          -- { name = "luasnip" }, -- snippets
+          { name = "luasnip" }, -- snippets
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
         },
@@ -90,6 +76,6 @@ return {
   },
   "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
   "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
-  -- { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
-  -- "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
+  { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
+  "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
 }

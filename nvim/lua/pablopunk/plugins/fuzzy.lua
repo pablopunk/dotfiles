@@ -31,15 +31,14 @@ return {
 
       local opts = { noremap = true, silent = true }
       local keymap = vim.keymap
-      keymap.set("n", "ge", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts)
       keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>")
       keymap.set("n", "<c-g>", "<cmd>Telescope git_status<cr>")
       keymap.set("n", "<c-f>", "<cmd>Telescope live_grep<cr>")
-      keymap.set("n", "<leader>f", "<cmd>Telescope grep_string<cr>")
-      keymap.set("v", "<leader>f", [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]])
-      -- keymap.set("n", "<leader>g", [[:lua require('telescope.builtin').grep_string{search=''}<cr>]])
+      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>")
+      keymap.set("v", "<leader>fw", [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]])
+      keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts)
       keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")
-      keymap.set("n", "<leader>v", "<cmd>lua require('telescope.builtin').registers()<cr>")
+      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>")
       keymap.set("n", "<leader>o", "<cmd>lua require('telescope.builtin').jumplist()<cr>")
 
       t.load_extension "fzf"

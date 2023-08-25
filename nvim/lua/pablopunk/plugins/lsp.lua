@@ -43,7 +43,7 @@ return {
         keymap.set("n", "E", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
 
         if client.name == "tsserver" then
-          keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>")
+          keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>", { silent = true })
         end
       end
 

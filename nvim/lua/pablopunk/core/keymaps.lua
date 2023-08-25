@@ -59,3 +59,21 @@ keymap.set("n", "<leader>>", "zR") -- open all
 -- keymap.set("n", "H", "za") -- toggle fold under cursor (depends on fold_method)
 keymap.set("n", "H", "zc") -- close fold under cursor
 keymap.set("n", "L", "zo") -- open fold under cursor
+
+-- project-based todo list OMG MAKE THIS A PLUGIN
+local function get_todo_folder()
+  local function get_closest_git_folder(path)
+    if path == nil or path == "/" then
+      return "~/"
+    end
+    local git_path = path .. "/.git"
+    local f = io.open(git_path, "r")
+    if f ~= nil then
+      io.close(f)
+      return path .. "/.git"
+    end
+    return get_closest_git_folder(vim.fn.fnamemodify(path, ":h"))
+  end
+  return get_closest_git_folder(vim.fn.expand "%:p:h")
+end
+keymap.set("n", "<leader>t", ":e " .. get_todo_folder() .. "/TODO.md<cr>") -- closes repo/.git/TODO.md or ~/TODO.md

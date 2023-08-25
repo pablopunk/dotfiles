@@ -111,44 +111,6 @@ return {
       }
     end,
   },
-  -- LSP helpers & UI
-  {
-    "hrsh7th/nvim-cmp", -- completion tool
-    config = function()
-      local cmp = require "cmp"
-      local luasnip = require "luasnip"
-      local lspkind = require "lspkind"
-
-      -- load friendly-snippets
-      require("luasnip/loaders/from_vscode").lazy_load()
-
-      vim.opt.completeopt = "menu,menuone,noselect"
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert {
-          -- ["<c-n>"] = cmp.mapping.complete(), -- show suggestions window
-          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
-        },
-        sources = cmp.config.sources {
-          { name = "nvim_lsp" }, -- lsp
-          { name = "luasnip" }, -- snippets
-          { name = "buffer" }, -- text in buffer
-          { name = "path" }, -- file system paths
-        },
-        formatting = {
-          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
-        },
-      }
-    end,
-  },
-  "hrsh7th/cmp-buffer", -- text from current buffer
-  "hrsh7th/cmp-path", -- complete paths
-  "hrsh7th/cmp-nvim-lsp", -- add lsp completions
   {
     "folke/which-key.nvim", -- autocomplete commands and stuff
     config = function()
@@ -184,7 +146,4 @@ return {
     end,
   },
   "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
-  "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
-  { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
-  "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
 }

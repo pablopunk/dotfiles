@@ -45,6 +45,7 @@ return {
   },
   {
     "kdheepak/lazygit.nvim", -- git UI
+    event = { "BufReadPre", "BufNewFile" },
     -- optional for floating window border decoration
     dependencies = {
       "nvim-lua/plenary.nvim",

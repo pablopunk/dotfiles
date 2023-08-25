@@ -12,12 +12,18 @@ return {
       },
     },
   },
+  {
+    "szw/vim-maximizer", -- maximize the current buffer (toggle)
+    config = function()
+      vim.keymap.set("n", "<leader>m", ":MaximizerToggle<cr>", { silent = true })
+    end,
+  },
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
     "nvim-tree/nvim-tree.lua", -- file browser
     config = function()
-      vim.keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>")
-      vim.keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>")
+      vim.keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>", { silent = true })
+      vim.keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>", { silent = true })
 
       local nvimtree = require "nvim-tree"
 

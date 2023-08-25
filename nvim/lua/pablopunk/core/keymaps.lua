@@ -15,8 +15,7 @@ keymap.set("i", "<c-c>", "<esc>")
 -- keymap.set("n", "<c-l>", "<c-w>l")
 
 -- remove highlights
-keymap.set("n", "<leader>h", ":nohl<cr>")
-keymap.set("n", "<leader>h", ":nohl<cr>")
+keymap.set("n", "<leader>h", ":nohl<cr>", { silent = true })
 
 -- quit/save file
 keymap.set("n", "<c-q>", ":bd<cr>")
@@ -76,4 +75,4 @@ local function get_todo_folder()
   end
   return get_closest_git_folder(vim.fn.expand "%:p:h")
 end
-keymap.set("n", "<leader>t", ":e " .. get_todo_folder() .. "/TODO.md<cr>") -- closes repo/.git/TODO.md or ~/TODO.md
+keymap.set("n", "<leader>t", ":e " .. get_todo_folder() .. "/TODO.md<cr>", { silent = true }) -- closes repo/.git/TODO.md or ~/TODO.md

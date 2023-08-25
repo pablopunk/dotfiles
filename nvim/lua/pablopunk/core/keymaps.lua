@@ -22,10 +22,6 @@ keymap.set("n", "<leader>h", ":nohl<cr>")
 keymap.set("n", "<c-q>", ":bd<cr>")
 keymap.set("n", "<c-s>", ":w!<cr>")
 
--- nvim-tree
-keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>")
-keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>")
-
 -- system clipboard
 keymap.set("n", "<leader>cp", '"*y')
 keymap.set("v", "<leader>cp", '"*y')

@@ -19,10 +19,10 @@ return {
   {
     "nvim-tree/nvim-tree.lua", -- file browser
     config = function()
-      local setup, nvimtree = pcall(require, "nvim-tree")
-      if not setup then
-        return
-      end
+      vim.keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>")
+      vim.keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>")
+
+      local nvimtree = require "nvim-tree"
 
       -- recommended settings from nvim-tree docs
       vim.g.loaded_netrw = 1
@@ -81,5 +81,9 @@ return {
       }
     end,
   },
-  "nvim-tree/nvim-web-devicons", -- file browser icons
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = true,
+  },
 }

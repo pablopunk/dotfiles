@@ -64,7 +64,7 @@ keymap.set("n", "L", "zo") -- open fold under cursor
 local function get_todo_folder()
   local function get_closest_git_folder(path)
     if path == nil or path == "/" then
-      return "~/"
+      return "~"
     end
     local git_path = path .. "/.git"
     local f = io.open(git_path, "r")

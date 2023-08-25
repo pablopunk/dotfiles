@@ -39,7 +39,7 @@ return {
       keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts)
       keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")
       keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>")
-      keymap.set("n", "<leader>o", "<cmd>Telescope old_files<cr>", opts)
+      keymap.set("n", "<leader>o", "<cmd>Telescope oldfiles<cr>", opts)
 
       t.load_extension "fzf"
     end,

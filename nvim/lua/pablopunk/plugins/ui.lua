@@ -1,16 +1,11 @@
 return {
   "ap/vim-buftabline", -- show buffers as tabs
   {
-    "glepnir/dashboard-nvim",
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    opts = {
-      theme = "hyper",
-      config = {
-        week_header = {
-          enable = true,
-        },
-      },
-    },
+    "goolord/alpha-nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("alpha").setup(require("alpha.themes.startify").config)
+    end,
   },
   {
     "szw/vim-maximizer", -- maximize the current buffer (toggle)

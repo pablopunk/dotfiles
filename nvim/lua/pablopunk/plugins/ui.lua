@@ -1,6 +1,14 @@
 return {
   "ap/vim-buftabline", -- show buffers as tabs
   {
+    "pablopunk/todo.nvim",
+    dev = true, -- use local version if exists
+    config = function()
+      require("todo").setup {}
+      vim.keymap.set("n", "<leader>t", "<cmd>TodoToggle<cr>", { silent = true })
+    end,
+  },
+  {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()

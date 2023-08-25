@@ -19,4 +19,10 @@ require("lazy").setup("pablopunk.plugins", {
   change_detection = {
     notify = false,
   },
+  dev = {
+    path = "~/src", -- local plugins for development
+    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+    patterns = {},
+    fallback = true, -- fallback to git when local plugin does not exist
+  },
 })

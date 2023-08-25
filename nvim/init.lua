@@ -7,4 +7,3 @@ require "pablopunk.core.keymaps"
 require "pablopunk.core.options"
 
 require "pablopunk.lazy" -- plugins
-

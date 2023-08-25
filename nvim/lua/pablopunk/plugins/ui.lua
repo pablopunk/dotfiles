@@ -29,8 +29,9 @@ return {
 
       -- Set menu
       dashboard.section.buttons.val = {
-        dashboard.button("e", " New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("r", " Recent", ":Telescope oldfiles<CR>"),
+        dashboard.button("e", " New file", ":ene <BAR> startinsert <cr>"),
+        dashboard.button("g", " Git files", ":Telescope git_status <cr>"),
+        dashboard.button("r", " Recent", ":Telescope oldfiles <cr>"),
       }
       alpha.setup(dashboard.opts)
     end,

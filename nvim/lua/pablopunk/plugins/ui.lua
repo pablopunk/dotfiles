@@ -2,18 +2,15 @@ return {
   "ap/vim-buftabline", -- show buffers as tabs
   {
     "glepnir/dashboard-nvim",
-    event = "VimEnter",
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    config = function()
-      require("dashboard").setup {
-        theme = "hyper",
-        config = {
-          week_header = {
-            enable = true,
-          },
+    opts = {
+      theme = "hyper",
+      config = {
+        week_header = {
+          enable = true,
         },
-      }
-    end,
+      },
+    },
   },
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
@@ -84,6 +81,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
 }

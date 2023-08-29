@@ -4,6 +4,6 @@ name: maze
 root: ~/src/maze/maze-monorepo/
 
 windows:
-  - nvim: nvim
   - tilt: wait_for_docker; tilt up
+  - monorepo: nvim
   # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && pnpm serve:watch -- --stage testing ; localLambdaOff

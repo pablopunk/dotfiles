@@ -25,7 +25,7 @@ alias vi=nvim
 alias vvi='nvim -u ~/.vimrc'
 alias viu='nvim -u NONE'
 alias todo=todo.sh
-alias rm-nvim-history='rm ~/.local/share/nvim/swap/*.swp'
+alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
 alias rm=trash
 alias mkidr='mkdir -p'
 if [[ "$(uname)" == "Linux" ]]; then

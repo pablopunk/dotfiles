@@ -1,14 +1,48 @@
 return {
+  -- {
+  --   "github/copilot.vim",
+  --   -- event = "InsertEnter", -- it's useful, but it messes up Telescope mappings for some reason https://github.com/nvim-telescope/telescope.nvim/issues/1975#issuecomment-1177945953
+  --   config = function()
+  --     vim.cmd [[
+  --       let g:copilot_filetypes = {
+  --         \ 'yaml': v:true,
+  --         \ '*': v:true,
+  --         \ }
+  --     ]]
+  --   end,
+  -- },
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     config = function()
-      vim.cmd [[
-        let g:copilot_filetypes = {
-          \ 'yaml': v:true,
-          \ '*': v:true,
-          \ }
-      ]]
+      -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
+      vim.keymap.set("i", "<Tab>", function()
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+      end, { desc = "Super Tab. Accept Copilot suggestion or insert a tab character if there's none" })
+
+      require("copilot").setup {
+        panel = {
+          enabled = false,
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          -- keymap = {
+          --   accept = "<Tab>", -- workaround above
+          -- },
+        },
+        filetypes = {
+          yaml = true,
+          markdown = true,
+          help = true,
+          gitcommit = true,
+          ["."] = true,
+        },
+      }
     end,
   },
   {
@@ -17,7 +51,6 @@ return {
     dependencies = {
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-path", -- complete paths
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
@@ -44,7 +77,7 @@ return {
         },
         sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- lsp
-          { name = "luasnip" }, -- snippets
+          { name = "luasnip" }, -- lua snippets
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
         },
@@ -100,6 +133,10 @@ return {
   },
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
+    dependencies = {
+      "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+    },
     config = function()
       local lspconfig = require "lspconfig"
       local cmp_nvim_lsp = require "cmp_nvim_lsp"
@@ -222,7 +259,6 @@ return {
       }
     end,
   },
-  "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
   {
     "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     config = function()

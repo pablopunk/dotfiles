@@ -6,7 +6,8 @@ root: ~/src/maze/maze-monorepo/
 windows:
   - tilt: wait_for_docker; tilt up
   - monorepo: nvim
-  - maze-webapp: cd ~/src/maze/maze-monorepo/apps/maze-webapp
-  - maze-prototypes: cd ~/src/maze/maze-monorepo/services/maze-prototypes
-  - project-service: cd ~/src/maze/maze-monorepo/lambdas/project_service
-  # - lambda: cd ~/src/maze/maze-monorepo/lambdas/project_service && localLambdaOn && pnpm serve:watch -- --stage testing ; localLambdaOff
+<% directories = `echo "$(nvim --headless +oldfiles +qa 2>&1)" | grep -E "maze-monorepo/(apps|packages|services)" | head -10 | awk -F'/' '{print $7"/"$8}' | sort | uniq | head -3`.split("\n") %>
+<% directories.each do |directory| %>
+  - <%= directory.split("/")[1] %>: cd <%= directory %>
+<% end %>
+

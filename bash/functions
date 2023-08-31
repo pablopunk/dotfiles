@@ -196,3 +196,15 @@ function benchmark_disk {
   sudo dd if=$tempfile of=/dev/zero bs=8k > /dev/null | grep bytes
   sudo rm -f $tempfile
 }
+
+function mru_monorepo {
+  nvim_latest_files=$(nvim --headless +oldfiles +qa 2>&1)
+  unique_paths=$(echo "$nvim_latest_files" | grep "maze-monorepo" | head -10 | awk -F'/' '{print $7"/"$8}' | sort | uniq | head -5)
+  echo
+  echo -n "\033[36m" # start blue
+  echo "[Recent packages in maze-monorepo]"
+  echo -n "\033[0m" # end blue
+  echo
+  echo $unique_paths
+  echo
+}

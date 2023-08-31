@@ -1,16 +1,4 @@
 return {
-  -- {
-  --   "github/copilot.vim",
-  --   -- event = "InsertEnter", -- it's useful, but it messes up Telescope mappings for some reason https://github.com/nvim-telescope/telescope.nvim/issues/1975#issuecomment-1177945953
-  --   config = function()
-  --     vim.cmd [[
-  --       let g:copilot_filetypes = {
-  --         \ 'yaml': v:true,
-  --         \ '*': v:true,
-  --         \ }
-  --     ]]
-  --   end,
-  -- },
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
@@ -113,36 +101,89 @@ return {
     event = "InsertEnter",
   },
   {
-    "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
-    config = true,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+    "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+      "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+      "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+      "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
+      "lukas-reineke/lsp-format.nvim", -- nice formatting config
+      "nvimdev/lspsaga.nvim", -- improve neovim lsp experience
+      "nvim-treesitter/nvim-treesitter", -- needed for lspsaga
+      "nvim-tree/nvim-web-devicons", -- needed for lspsaga
+    },
     config = function()
-      local lspconfig = require "mason-lspconfig"
-      lspconfig.setup {
+      local lspconfig = require "lspconfig"
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
+      local typescript = require "typescript"
+      local mason = require "mason"
+      local mason_lspconfig = require "mason-lspconfig"
+      local null_ls = require "null-ls"
+      local mason_null_ls = require "mason-null-ls"
+      local lsp_format = require "lsp-format"
+      local lspsaga = require "lspsaga"
+
+      mason.setup {}
+      mason_lspconfig.setup {
         ensure_installed = {
           "tsserver",
           "html",
           "cssls",
           "tailwindcss",
           "lua_ls",
+          "bashls",
+          "jsonls",
         },
       }
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-    },
-    config = function()
-      local lspconfig = require "lspconfig"
-      local cmp_nvim_lsp = require "cmp_nvim_lsp"
-      local typescript = require "typescript"
+      mason_null_ls.setup {
+        ensure_installed = {
+          "prettier",
+          "stylua",
+          "eslint_d",
+        },
+      }
+
+      lspsaga.setup {
+        definition = {
+          edit = "<cr>",
+        },
+        finder = {
+          keys = {
+            toggle_or_open = "<cr>",
+            split = "s",
+            vsplit = "v",
+          },
+        },
+      }
 
       local keymap = vim.keymap
+      local formatting = null_ls.builtins.formatting
+      local diagnostics = null_ls.builtins.diagnostics
+
+      lsp_format.setup {} -- async by default, add {sync=true} if needed
+
+      null_ls.setup {
+        sources = {
+          formatting.stylua.with {
+            extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
+          },
+          formatting.prettier.with {
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          },
+          formatting.eslint_d.with {
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          },
+          diagnostics.eslint_d.with {
+            extra_args = { "--quiet" }, -- show only errors, not warnings
+          },
+        },
+        debug = false,
+        -- format on save (async)
+        on_attach = lsp_format.on_attach,
+      }
 
       -- enable keybinds for available lsp server
       local on_attach = function(client, bufnr)
@@ -194,33 +235,20 @@ return {
           },
         },
       }
+      lspconfig["bashls"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          bash = {
+            filetypes = { "sh", "zsh", "bash" },
+          },
+        },
+      }
 
       typescript.setup {
         server = {
           capabilities = capabilities,
           on_attach = on_attach,
-        },
-      }
-    end,
-  },
-  {
-    "nvimdev/lspsaga.nvim", -- improve neovim lsp experience
-    event = "LspAttach", -- lazy load: needs latest lazy.nvim 2023-July-9
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("lspsaga").setup {
-        definition = {
-          edit = "<cr>",
-        },
-        finder = {
-          keys = {
-            toggle_or_open = "<cr>",
-            split = "s",
-            vsplit = "v",
-          },
         },
       }
     end,
@@ -259,52 +287,4 @@ return {
       }
     end,
   },
-  {
-    "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-    config = function()
-      local null_ls = require "null-ls"
-      local lsp_format = require "lsp-format"
-
-      local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
-
-      lsp_format.setup {} -- async by default, add {sync=true} if needed
-
-      null_ls.setup {
-        sources = {
-          formatting.stylua.with {
-            extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
-          },
-          formatting.prettier.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          formatting.eslint_d.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          diagnostics.eslint_d.with {
-            extra_args = { "--quiet" }, -- show only errors, not warnings
-          },
-        },
-        debug = false,
-        -- format on save (async)
-        on_attach = lsp_format.on_attach,
-      }
-    end,
-  },
-  {
-    "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local mason_null_ls = require "mason-null-ls"
-
-      mason_null_ls.setup {
-        ensure_installed = {
-          "prettier",
-          "stylua",
-          "eslint_d",
-        },
-      }
-    end,
-  },
-  "lukas-reineke/lsp-format.nvim", -- nice formatting config
 }

@@ -1,6 +1,6 @@
 return {
   {
-    "wakatime/vim-wakatime",
+    "wakatime/vim-wakatime", -- track time spent on projects
     event = { "BufReadPre", "BufNewFile" },
   },
 }

@@ -16,7 +16,7 @@ return {
     end,
   },
   {
-    "nvim-lualine/lualine.nvim",
+    "nvim-lualine/lualine.nvim", -- statusline
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = { "BufReadPre", "BufNewFile" },
     config = true,

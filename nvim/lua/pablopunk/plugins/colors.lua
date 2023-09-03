@@ -31,5 +31,5 @@ return {
       end
     end,
   },
-  "edkolev/tmuxline.vim",
+  "edkolev/tmuxline.vim", -- Generate tmux colors based on vim colors
 }

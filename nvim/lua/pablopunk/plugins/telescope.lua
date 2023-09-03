@@ -1,47 +1,56 @@
 return {
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     config = function()
-      local t_setup, t = pcall(require, "telescope")
-      if not t_setup then
-        return
-      end
+      local telescope = require "telescope"
+      local actions = require "telescope.actions"
 
-      local a_setup, a = pcall(require, "telescope.actions")
-      if not a_setup then
-        return
-      end
-
-      t.setup {
+      telescope.setup {
         defaults = {
           path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
           layout_strategy = "vertical",
           mappings = {
             i = {
-              ["<c-k>"] = a.move_selection_previous,
-              ["<c-j>"] = a.move_selection_next,
-              -- ["<c-q>"] = a.send_selected_to_qflist + a.open_qflist,
+              ["<c-k>"] = actions.move_selection_previous,
+              ["<c-j>"] = actions.move_selection_next,
             },
           },
         },
       }
 
-      local opts = { noremap = true, silent = true }
       local keymap = vim.keymap
-      keymap.set("n", "<c-p>", "<cmd>Telescope find_files<cr>")
-      keymap.set("n", "<c-g>", "<cmd>Telescope git_status<cr>")
-      keymap.set("n", "<c-f>", "<cmd>Telescope live_grep<cr>")
-      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>")
-      keymap.set("v", "<leader>fw", [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]])
+      local opts = { noremap = true, silent = true }
+      opts.desc = "Find files"
+      keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+      opts.desc = "Find modified files in git"
+      keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<cr>", opts)
+      opts.desc = "Find recent files"
+      keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", opts)
+      opts.desc = "Search string"
+      keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", opts)
+      opts.desc = "Search word under cursor"
+      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts)
+      opts.desc = "Search selected string"
+      keymap.set(
+        "v",
+        "<leader>fw",
+        [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]],
+        opts
+      )
+      opts.desc = "Find diagnostics"
       keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts)
-      keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")
-      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>")
-      keymap.set("n", "<leader>o", "<cmd>Telescope oldfiles<cr>", opts)
+      opts.desc = "Open buffers"
+      keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", opts)
+      opts.desc = "Open registers"
+      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts)
 
-      t.load_extension "fzf"
+      telescope.load_extension "fzf"
     end,
   },
 }

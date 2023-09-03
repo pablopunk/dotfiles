@@ -1,9 +1,4 @@
 vim.loader.enable() -- Enables the experimental Lua module loader
 
-require "pablopunk.core.abbreviations"
-require "pablopunk.core.autocommands"
-require "pablopunk.core.commands"
-require "pablopunk.core.keymaps"
-require "pablopunk.core.options"
-
+require "pablopunk.core"
 require "pablopunk.lazy" -- plugins

@@ -1,6 +1,6 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
     config = function()
       require("nvim-treesitter.configs").setup {
         highlight = {

@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local alpha = require "alpha"
-    local dashboard = require "alpha.themes.dashboard"
+    local dashboard = require "alpha.themes.startify"
 
     -- Set header
     dashboard.section.header.val = {
@@ -17,13 +17,6 @@ return {
       [[                                       @pablopunk]],
     }
 
-    -- Set menu
-    dashboard.section.buttons.val = {
-      dashboard.button("e", " New file", ":ene <BAR> startinsert <cr>"),
-      dashboard.button("g", " Git files", ":Telescope git_status <cr>"),
-      dashboard.button("f", " Find files", ":Telescope find_files <cr>"),
-      dashboard.button("o", " Recent", ":Telescope oldfiles <cr>"),
-    }
     alpha.setup(dashboard.opts)
   end,
 }

@@ -9,4 +9,8 @@ return {
   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
   "rafamadriz/friendly-snippets", -- popular snippets
   "christoomey/vim-tmux-navigator", -- move through vim splits & tmux with <C-hjkl>
+  {
+    "stevearc/dressing.nvim", -- improve the default vim.ui interfaces
+    event = "VeryLazy",
+  },
 }

@@ -42,6 +42,7 @@ return {
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
+      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
     },
     config = function()
       local cmp = require "cmp"
@@ -60,7 +61,7 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert {
-          -- ["<c-n>"] = cmp.mapping.complete(), -- show suggestions window
+          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
         },
         sources = cmp.config.sources {
@@ -104,27 +105,25 @@ return {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "jose-elias-alvarez/typescript.nvim", -- utils like auto renaming of files & imports
       "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
       "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
       "lukas-reineke/lsp-format.nvim", -- nice formatting config
-      "nvimdev/lspsaga.nvim", -- improve neovim lsp experience
-      "nvim-treesitter/nvim-treesitter", -- needed for lspsaga
-      "nvim-tree/nvim-web-devicons", -- needed for lspsaga
+      {
+        "antosha417/nvim-lsp-file-operations", -- rename files in nvim tree and update imports with LSP
+        config = true,
+      },
     },
     config = function()
       local lspconfig = require "lspconfig"
       local cmp_nvim_lsp = require "cmp_nvim_lsp"
-      local typescript = require "typescript"
       local mason = require "mason"
       local mason_lspconfig = require "mason-lspconfig"
       local null_ls = require "null-ls"
       local mason_null_ls = require "mason-null-ls"
       local lsp_format = require "lsp-format"
-      local lspsaga = require "lspsaga"
 
       mason.setup {}
       mason_lspconfig.setup {
@@ -136,6 +135,7 @@ return {
           "lua_ls",
           "bashls",
           "jsonls",
+          "emmet_ls",
         },
       }
       mason_null_ls.setup {
@@ -143,19 +143,6 @@ return {
           "prettier",
           "stylua",
           "eslint_d",
-        },
-      }
-
-      lspsaga.setup {
-        definition = {
-          edit = "<cr>",
-        },
-        finder = {
-          keys = {
-            toggle_or_open = "<cr>",
-            split = "s",
-            vsplit = "v",
-          },
         },
       }
 
@@ -186,25 +173,34 @@ return {
       }
 
       -- enable keybinds for available lsp server
-      local on_attach = function(client, bufnr)
+      local on_attach = function(_client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
-        keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
-        keymap.set("n", "gt", "<cmd>Lspsaga peek_definition<cr>", opts)
-        keymap.set("n", "gv", "<cmd>Lspsaga finder<cr>", opts)
-        keymap.set("n", "gr", "<cmd>Lspsaga rename<cr>", opts)
-        keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
-        keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
-        keymap.set("n", "E", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
-
-        if client.name == "tsserver" then
-          keymap.set("n", "<leader>r", ":TypescriptRenameFile<cr>", { silent = true })
-        end
+        opts.desc = "Go to definition"
+        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+        opts.desc = "Go to references"
+        keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+        opts.desc = "Rename variable"
+        keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+        opts.desc = "Show code actions"
+        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        opts.desc = "Show line diagnostics"
+        keymap.set("n", "E", vim.diagnostic.open_float, opts)
+        opts.desc = "Go to next diagnostic"
+        keymap.set("n", "ge", vim.diagnostic.goto_next, opts)
+        opts.desc = "Go to previous diagnostic"
+        keymap.set("n", "gE", vim.diagnostic.goto_prev, opts)
+        opts.desc = "Hover"
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
       end
 
       -- enable autocompletion
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
+      lspconfig["tsserver"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
       lspconfig["html"].setup {
         capabilities = capabilities,
         on_attach = on_attach,
@@ -244,12 +240,14 @@ return {
           },
         },
       }
-
-      typescript.setup {
-        server = {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        },
+      lspconfig["jsonls"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+      lspconfig["emmet_ls"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
       }
     end,
   },

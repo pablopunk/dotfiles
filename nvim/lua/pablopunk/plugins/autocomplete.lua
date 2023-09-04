@@ -219,12 +219,12 @@ return {
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim" },
+              globals = { "vim" }, -- make the language server recognize "vim" global
             },
             workspace = {
               -- make server aware of runtime files
               library = {
-                [vim.fn.expand "%VIMRUNTIME/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                 [vim.fn.stdpath "config" .. "/lua"] = true,
               },
             },

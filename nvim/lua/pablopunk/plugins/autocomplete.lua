@@ -224,7 +224,7 @@ return {
               globals = { "vim" }, -- make the language server recognize "vim" global
             },
             workspace = {
-              { checkThirdParty = false }, -- remove the warning "Do you need to configure your work environment as `luv`"
+              checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"
               -- make server aware of runtime files
               library = {
                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,

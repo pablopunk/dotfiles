@@ -115,6 +115,7 @@ return {
         "antosha417/nvim-lsp-file-operations", -- rename files in nvim tree and update imports with LSP
         config = true,
       },
+      { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
     },
     config = function()
       local lspconfig = require "lspconfig"
@@ -139,6 +140,7 @@ return {
         },
       }
       mason_null_ls.setup {
+        automatic_installation = true,
         ensure_installed = {
           "prettier",
           "stylua",
@@ -222,6 +224,7 @@ return {
               globals = { "vim" }, -- make the language server recognize "vim" global
             },
             workspace = {
+              { checkThirdParty = false }, -- remove the warning "Do you need to configure your work environment as `luv`"
               -- make server aware of runtime files
               library = {
                 [vim.fn.expand "$VIMRUNTIME/lua"] = true,

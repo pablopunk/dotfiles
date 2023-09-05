@@ -1,7 +1,8 @@
 return {
   {
     "catppuccin/nvim",
-    as = "catppuccin",
+    name = "catppuccin",
+    priority = 1000,
     config = function()
       local function dark_mode()
         vim.cmd "silent! set background=dark"

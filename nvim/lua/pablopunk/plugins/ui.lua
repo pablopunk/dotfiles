@@ -19,6 +19,12 @@ return {
     "nvim-lualine/lualine.nvim", -- statusline
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = { "BufReadPre", "BufNewFile" },
-    config = true,
+    opts = {
+      options = {
+        -- use empty char as separators
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+      },
+    },
   },
 }

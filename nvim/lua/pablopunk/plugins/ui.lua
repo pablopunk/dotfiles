@@ -5,7 +5,7 @@ return {
     "pablopunk/todo.nvim",
     dev = true, -- use local version if exists
     config = function()
-      require("todo").setup {}
+      require("todo").setup()
       vim.keymap.set("n", "<leader>t", "<cmd>TodoToggle<cr>", { silent = true })
     end,
   },

@@ -1,9 +1,0 @@
-# ~/.tmuxinator/t.yml
-#
-# used to test tmux configs
-
-name: t
-root: ~/
-
-windows:
-  - nvim: node --version

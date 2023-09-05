@@ -1,50 +1,43 @@
-#
-# OH-MY-ZSH
-#
+# vim:fileencoding=utf-8:ft=zsh:foldmethod=marker
+
+# oh-my-zsh {{{
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 plugins=(
   git
   macos
 )
+# }}}
 
-#
-# MODULAR
-#
+# modular config {{{
 source ~/.functions
 source ~/.aliases
 source ~/.path
 F=$HOME/.additional; [ -f $F ] && . $F # aditional local config
+# }}}
 
-#
-# ZSH OPTIONS
-#
+# oh-my-zsh config {{{
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 setopt PROMPT_SUBST
+# }}}
 
-#
-# PROMPT
-#
+# prompt {{{
 NEWLINE=$'\n'
 PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
+# }}}
 
+# TERM {{{
 TERM=xterm-256color
+# }}}
 
-#
-# VSCODE ALWAYS ON TMUX AND SSH
-#
+# auto tmux on vscode and ssh {{{
 [ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
 [ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
+# }}}
 
-
-export PNPM_HOME="/Users/pablopunk/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-#
-# KITTY DARK/LIGHT MODE
-#
+# kitty theme (dark/light) {{{
 current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
 if [[ $(uname) == "Darwin" ]]; then
   defaults read -g AppleInterfaceStyle 2>&- >&-
@@ -62,10 +55,13 @@ if [[ $(uname) == "Darwin" ]]; then
     echo $new_theme > $HOME/.theme
   fi
 fi
+# }}}
 
-# bun completions
+# bun completions {{{
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+# }}}
 
-# asdf
+# asdf {{{
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 . $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash
+# }}}

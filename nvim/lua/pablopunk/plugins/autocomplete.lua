@@ -54,6 +54,7 @@ return {
 
       vim.opt.completeopt = "menu,menuone,noselect"
 
+      ---@diagnostic disable-next-line: missing-fields
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -70,6 +71,7 @@ return {
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
         },
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
         },

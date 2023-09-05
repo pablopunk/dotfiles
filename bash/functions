@@ -1,4 +1,4 @@
-#!/bin/zsh
+# vim: set ft=zsh:
 
 function powersave {
   # linux

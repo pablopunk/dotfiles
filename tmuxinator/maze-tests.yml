@@ -1,8 +1,0 @@
-# ~/.tmuxinator/maze.yml
-
-name: maze-tests
-root: ~/src/maze/maze-monorepo/
-
-windows:
-  - dev: pnpm dev:acceptance-tests
-  - runner: cd packages/maze-test-suite && pnpm start-redis && pnpm debug

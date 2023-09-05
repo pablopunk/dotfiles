@@ -1,3 +1,4 @@
+#vim: ft=gitconfig
 [core]
 	pager = delta --features "$(defaults read -globalDomain AppleInterfaceStyle > /dev/null 2>&1 && echo dark-mode || echo light-mode)"
 	editor = nvim

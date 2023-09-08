@@ -6,7 +6,7 @@ return {
     config = function()
       local function dark_mode()
         vim.cmd "silent! set background=dark"
-        vim.cmd "silent! colorscheme catppuccin"
+        vim.cmd "silent! colorscheme catppuccin-frappe"
       end
 
       local function light_mode()

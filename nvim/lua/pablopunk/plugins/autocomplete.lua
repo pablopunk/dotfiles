@@ -180,10 +180,6 @@ return {
       local on_attach = function(_client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
-        opts.desc = "Go to definition"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-        opts.desc = "Go to references"
-        keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
         opts.desc = "Rename variable"
         keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
         opts.desc = "Show code actions"
@@ -259,33 +255,15 @@ return {
   {
     "folke/which-key.nvim", -- displays a popup with possible keybindings of the command you started typing
     config = function()
-      local whichkey_setup, whichkey = pcall(require, "which-key")
-      if not whichkey_setup then
-        return
-      end
-
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-
-      whichkey.setup {
-        plugins = {
-          marks = true, -- shows a list of your marks on ' and `
-          registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-          -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-          -- No actual key bindings are created
-          spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 20, -- how many suggestions should be shown in the list?
-          },
-          presets = {
-            operators = true, -- adds help for operators like d, y, ...
-            motions = true, -- adds help for motions
-            text_objects = true, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true, -- bindings for prefixed with g
-          },
+      local wk = require "which-key"
+      wk.register {
+        g = { name = "Go to (LSP)" },
+        ["<leader>"] = {
+          name = "Leader",
+          f = { "Files" },
+          s = { "Search" },
+          d = { "Diagnostics" },
+          ["<leader>"] = { "Command palette" },
         },
       }
     end,

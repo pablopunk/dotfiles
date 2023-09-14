@@ -40,9 +40,13 @@ alias n='npm run'
 alias p='pnpm'
 alias run='npx tsx'
 alias tx='tmuxinator'
+# maze directories
 alias maze='cd $HOME/src/maze/maze-monorepo'
 alias maze-prototypes='cd $HOME/src/maze/maze-monorepo/services/maze-prototypes'
+# not in vim but who cares
 alias :q='exit'
 alias :qa='exit'
 alias :x='exit'
 alias :xa='exit'
+# tilt
+alias tilt='wait_for_docker; tilt --stream=true'

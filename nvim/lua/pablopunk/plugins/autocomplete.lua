@@ -178,20 +178,16 @@ return {
 
       -- enable keybinds for available lsp server
       local on_attach = function(_client, bufnr)
-        local opts = { noremap = true, silent = true, buffer = bufnr }
+        local function opts(desc)
+          return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+        end
 
-        opts.desc = "Rename variable"
-        keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
-        opts.desc = "Show code actions"
-        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        opts.desc = "Show line diagnostics"
-        keymap.set("n", "E", vim.diagnostic.open_float, opts)
-        opts.desc = "Go to next diagnostic"
-        keymap.set("n", "ge", vim.diagnostic.goto_next, opts)
-        opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "gE", vim.diagnostic.goto_prev, opts)
-        opts.desc = "Hover"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts "Rename variable")
+        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts "Show code actions")
+        keymap.set("n", "E", vim.diagnostic.open_float, opts "Show line diagnostics")
+        keymap.set("n", "ge", vim.diagnostic.goto_next, opts "Go to next diagnostic")
+        keymap.set("n", "gE", vim.diagnostic.goto_prev, opts "Go to previous diagnostic")
+        keymap.set("n", "K", vim.lsp.buf.hover, opts "Hover")
       end
 
       -- enable autocompletion

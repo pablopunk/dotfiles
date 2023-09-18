@@ -33,46 +33,36 @@ return {
       }
 
       local keymap = vim.keymap
-      local opts = { noremap = true, silent = true }
+      local function opts(desc)
+        return { noremap = true, silent = true, desc = desc }
+      end
 
       -- Files
-      opts.desc = "Find files"
-      keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
-      opts.desc = "Find modified files in git"
-      keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<cr>", opts)
-      opts.desc = "Find recent files"
-      keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opts)
-      opts.desc = "Open buffers"
-      keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
+      keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts "Find files")
+      keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<cr>", opts "Find modified files in git")
+      keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opts "Find recent files")
+      keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts "Open buffers")
 
       -- Search
-      opts.desc = "Search string"
-      keymap.set("n", "<leader>ss", "<cmd>Telescope live_grep<cr>", opts)
-      opts.desc = "Search word under cursor"
-      keymap.set("n", "<leader>sw", "<cmd>Telescope grep_string<cr>", opts)
-      opts.desc = "Search selected string"
+      keymap.set("n", "<leader>ss", "<cmd>Telescope live_grep<cr>", opts "Search string")
+      keymap.set("n", "<leader>sw", "<cmd>Telescope grep_string<cr>", opts "Search word under cursor")
       keymap.set(
         "v",
         "<leader>fw",
         [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]],
-        opts
+        opts "Search selected string"
       )
 
       -- Diagnostics
-      opts.desc = "Find diagnostics"
-      keymap.set("n", "<leader>dd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts)
-      opts.desc = "Open registers"
-      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts)
+      keymap.set("n", "<leader>dd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts "Find diagnostics")
+      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts "Open registers")
 
       -- LSP (go-to)
-      opts.desc = "Go to definition"
-      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-      opts.desc = "Go to references"
-      keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts "Go to definition")
+      keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts "Go to references")
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
-      opts.desc = "Command palette (kinda)"
-      keymap.set("n", "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts)
+      keymap.set("n", "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")
 
       telescope.load_extension "fzf"
     end,

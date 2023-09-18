@@ -15,7 +15,6 @@ return {
     vim.opt.termguicolors = true
 
     nvimtree.setup {
-      -- reload_on_bufenter = true,
       update_focused_file = {
         enable = true,
       },
@@ -24,6 +23,24 @@ return {
       },
       renderer = {
         indent_width = 1,
+        icons = {
+          glyphs = {
+            folder = {
+              default = "",
+              open = "",
+              symlink = "",
+            },
+            git = {
+              unstaged = "",
+              staged = "",
+              unmerged = "",
+              renamed = "",
+              untracked = "",
+              deleted = "",
+              ignored = "",
+            },
+          },
+        },
       },
       diagnostics = {
         enable = true,

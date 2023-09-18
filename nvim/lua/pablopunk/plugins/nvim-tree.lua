@@ -1,5 +1,8 @@
 return {
   "nvim-tree/nvim-tree.lua", -- file browser
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
     vim.keymap.set("n", "<c-t>", ":NvimTreeToggle<cr>", { silent = true })
     vim.keymap.set("n", "<c-y>", ":NvimTreeFindFile<cr>", { silent = true })

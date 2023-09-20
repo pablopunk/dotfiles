@@ -6,7 +6,6 @@ ZSH_THEME=""
 plugins=(
   git
   macos
-  dotenv
 )
 # }}}
 

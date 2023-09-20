@@ -1,5 +1,14 @@
 return {
-  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", config = true },
+  {
+    "stevearc/dressing.nvim", -- improve the default vim.ui interfaces
+    event = "VeryLazy",
+  },
+  {
+    "folke/flash.nvim", -- Navigate your code with search labels, enhanced character motions and Treesitter integration
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+  },
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
     "pablopunk/todo.nvim",

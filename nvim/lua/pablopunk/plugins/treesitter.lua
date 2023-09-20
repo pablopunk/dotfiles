@@ -1,5 +1,9 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+  },
+  {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -26,6 +30,19 @@ return {
           "gitignore",
         },
         auto_install = true,
+        textobjects = { -- Be prepared to witness the power of treesitter. `cif` = "change inner function"
+          select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            keymaps = {
+              ["af"] = { query = "@function.outer", desc = "Select outer part of a function" },
+              ["if"] = { query = "@function.inner", desc = "Select inner part of a function" },
+              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+              ["is"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+            },
+          },
+        },
       }
     end,
     run = function()

@@ -62,7 +62,7 @@ return {
       keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts "Go to references")
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
-      keymap.set("n", "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")
+      keymap.set({ "n", "v" }, "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")
 
       telescope.load_extension "fzf"
     end,

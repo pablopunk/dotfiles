@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.nvim",
+    "echasnovski/mini.nvim", -- see plugins below for more info
     version = "*",
     config = function()
       require("mini.splitjoin").setup {} -- `gS` split or join array elements
@@ -9,7 +9,6 @@ return {
       require("mini.comment").setup {} -- surround motion
     end,
   },
-  "tpope/vim-dispatch", -- some functions that other plugins use
   "editorconfig/editorconfig-vim", -- editorconfig support
   "nvim-lua/plenary.nvim", -- lua functions that many plugins use
   "pablopunk/persistent-undo.vim", -- undo works across vim sessions

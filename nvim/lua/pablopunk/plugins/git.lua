@@ -1,5 +1,10 @@
 return {
-  "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
+  {
+    "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
+    config = function()
+      vim.keymap.set("n", "<leader>gb", "<cmd>ToggleBlame<cr>")
+    end,
+  },
   {
     "almo7aya/openingh.nvim",
     config = function()

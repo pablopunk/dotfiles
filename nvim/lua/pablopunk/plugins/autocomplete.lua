@@ -1,4 +1,5 @@
 return {
+  "rafamadriz/friendly-snippets", -- popular snippets
   {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
@@ -76,27 +77,6 @@ return {
           format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
         },
       }
-    end,
-  },
-  {
-    "windwp/nvim-autopairs", -- auto close () {} [] "" ''
-    event = "InsertEnter",
-    config = function()
-      local autopairs = require "nvim-autopairs"
-
-      autopairs.setup {
-        check_ts = true, -- enable treesitter
-        ts_config = {
-          lua = { "string" }, -- dont add pairs in lua string treesitter nodes
-          javascript = { "template_string" }, -- dont add pairs in js template_string
-          java = false, -- dont check treesitter in java
-        },
-      }
-
-      -- make autopairs and autocompletion work together
-      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-      local cmp = require "cmp"
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
   {

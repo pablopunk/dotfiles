@@ -1,10 +1,27 @@
 return {
-  "tpope/vim-fugitive", -- git tools
+  "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
   {
-    "tpope/vim-rhubarb", -- :GBrowse
+    "almo7aya/openingh.nvim",
     config = function()
-      -- I disabled netrw so I need Browse to use GBrowse
-      vim.cmd [[ command! -nargs=1 Browse silent execute '!open' shellescape(<q-args>,1) ]]
+      vim.keymap.set(
+        { "n", "v" },
+        "<leader>go",
+        "<cmd>OpenInGHFile<cr>",
+        { noremap = true, silent = true, desc = "Open file in github" }
+      )
+    end,
+  },
+  {
+    "NeogitOrg/neogit", -- magit for neovim (git client)
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
+      "ibhagwan/fzf-lua",
+    },
+    config = function()
+      require("neogit").setup {}
+      vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>")
     end,
   },
   {
@@ -47,17 +64,6 @@ return {
           map({ "n", "v" }, "<leader>u", ":Gitsigns reset_hunk<CR>")
         end,
       }
-    end,
-  },
-  {
-    "kdheepak/lazygit.nvim", -- git UI
-    event = { "BufReadPre", "BufNewFile" },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      vim.keymap.set("n", "<leader>g", "<cmd>LazyGitCurrentFile<cr>")
     end,
   },
 }

@@ -44,8 +44,8 @@ return {
       keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts "Open buffers")
 
       -- Search
-      keymap.set("n", "<leader>ss", "<cmd>Telescope live_grep<cr>", opts "Search string")
-      keymap.set("n", "<leader>sw", "<cmd>Telescope grep_string<cr>", opts "Search word under cursor")
+      keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", opts "Find string")
+      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts "Find word under cursor")
       keymap.set(
         "v",
         "<leader>fw",

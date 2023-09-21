@@ -16,6 +16,12 @@ return {
         path_display = { "shorten" },
       }
       require("telescope").load_extension "session-lens"
+
+      local function opts(desc)
+        return { noremap = true, silent = true, desc = desc }
+      end
+      vim.keymap.set("n", "<leader>ss", "<cmd>Autosession search<cr>", opts "List sessions")
+      vim.keymap.set("n", "<leader>sd", "<cmd>Autosession delete<cr>", opts "Delete session")
     end,
   },
 }

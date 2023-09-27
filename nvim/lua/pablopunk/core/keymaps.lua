@@ -26,7 +26,8 @@ keymap.set("n", "<leader>h", ":nohl<cr>", opts "Remove highlights")
 -- Quit/Save file {{{
 keymap.set({ "n", "v" }, "<c-q>", function()
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
-  if number_of_buffers == 1 then
+  local number_of_tabs = #(vim.fn.gettabinfo())
+  if number_of_buffers == 1 and number_of_tabs == 1 then
     vim.cmd "qa" -- quit vim if it's the last buffer
   else
     vim.cmd "bd" -- close buffer if there are more

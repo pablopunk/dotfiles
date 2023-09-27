@@ -15,8 +15,8 @@ keymap.set("i", "<c-c>", "<esc>", opts "ESC")
 -- }}}
 
 -- Disable q: and Q because they are so f**king annoying {{{
-keymap.set("n", "q:", "<nop>", opts "Noop")
-keymap.set("n", "Q", "<nop>", opts "Noop")
+keymap.set({ "n", "v", "x", "o", "c" }, "q:", "<nop>", opts "Noop")
+keymap.set({ "n", "v", "x", "o", "c" }, "Q", "<nop>", opts "Noop")
 -- }}}
 
 -- Remove highlights {{{

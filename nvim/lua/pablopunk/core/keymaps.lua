@@ -24,8 +24,15 @@ keymap.set("n", "<leader>h", ":nohl<cr>", opts "Remove highlights")
 -- }}}
 
 -- Quit/Save file {{{
-keymap.set("n", "<c-q>", ":bd<cr>", opts "Close buffer")
-keymap.set("n", "<c-s>", ":w!<cr>", opts "Save file")
+keymap.set({ "n", "v" }, "<c-q>", function()
+  local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
+  if number_of_buffers == 1 then
+    vim.cmd "qa" -- quit vim if it's the last buffer
+  else
+    vim.cmd "bd" -- close buffer if there are more
+  end
+end, opts "Close file")
+keymap.set({ "n", "v" }, "<c-s>", ":w!<cr>", opts "Save file")
 -- }}}
 
 -- System clipboard {{{

@@ -9,6 +9,7 @@ return {
       require("mini.comment").setup {} -- surround motion
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.starter").setup {} -- start screen
+      require("mini.statusline").setup {} -- what do u think this is?
     end,
   },
   "editorconfig/editorconfig-vim", -- editorconfig support

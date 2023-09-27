@@ -25,18 +25,6 @@ return {
     end,
   },
   {
-    "nvim-lualine/lualine.nvim", -- statusline
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      options = {
-        -- use empty char as separators
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
-      },
-    },
-  },
-  {
     "folke/noice.nvim", -- wow this feels wrong. Gets rid of the command line and replaces it with a floating window and notifications
     event = "VeryLazy",
     dependencies = {

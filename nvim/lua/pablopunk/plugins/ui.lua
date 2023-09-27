@@ -19,12 +19,6 @@ return {
     end,
   },
   {
-    "szw/vim-maximizer", -- maximize the current buffer (toggle)
-    config = function()
-      vim.keymap.set("n", "<leader>m", ":MaximizerToggle<cr>", { silent = true, desc = "Maximize current buffer" })
-    end,
-  },
-  {
     "folke/noice.nvim", -- wow this feels wrong. Gets rid of the command line and replaces it with a floating window and notifications
     event = "VeryLazy",
     dependencies = {

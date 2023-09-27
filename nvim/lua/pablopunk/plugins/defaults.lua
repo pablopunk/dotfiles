@@ -10,6 +10,8 @@ return {
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.starter").setup {} -- start screen
       require("mini.statusline").setup {} -- what do u think this is?
+      require("mini.misc").setup {} -- useful functions (like zoom() below)
+      vim.keymap.set("n", "<leader>m", require("mini.misc").zoom, { silent = true, desc = "Maximize current buffer" })
     end,
   },
   "editorconfig/editorconfig-vim", -- editorconfig support

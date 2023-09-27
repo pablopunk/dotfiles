@@ -44,6 +44,7 @@ return {
       "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- function signature completion
     },
     config = function()
       local cmp = require "cmp"
@@ -71,6 +72,7 @@ return {
           { name = "luasnip" }, -- lua snippets
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
+          { name = "nvim_lsp_signature_help" }, -- function signature completions
         },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {

@@ -4,6 +4,17 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
+      require("catppuccin").setup {
+        dim_inactive = {
+          enabled = true,
+          shade = "light",
+          percentage = 0.3,
+        },
+        integrations = {
+          mini = true,
+        },
+      }
+
       local function dark_mode()
         vim.cmd "silent! set background=dark"
         vim.cmd "silent! colorscheme catppuccin-frappe"

@@ -1,22 +1,15 @@
 return {
-  {
-    "stevearc/dressing.nvim", -- improve the default vim.ui interfaces
-    event = "VeryLazy",
-  },
+  "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
     "folke/flash.nvim", -- Navigate your code with search labels, enhanced character motions and Treesitter integration
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {},
   },
-  "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
     "pablopunk/todo.nvim",
     dev = true, -- use local version if exists
-    config = function()
-      require("todo").setup()
-      vim.keymap.set("n", "<leader>t", "<cmd>TodoToggle<cr>", { silent = true, desc = "Open todo.nvim" })
-    end,
+    opts = { map = "<leader>t" },
   },
   {
     "folke/noice.nvim", -- wow this feels wrong. Gets rid of the command line and replaces it with a floating window and notifications

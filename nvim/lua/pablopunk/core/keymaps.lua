@@ -20,7 +20,11 @@ keymap.set({ "n", "v", "x", "o", "c" }, "Q", "<nop>", opts "Noop")
 -- }}}
 
 -- Remove highlights {{{
-keymap.set("n", "<leader>h", ":nohl<cr>", opts "Remove highlights")
+local function dismiss_highlights_and_noice()
+  vim.cmd "silent! nohl"
+  vim.cmd "silent! Noice dismiss"
+end
+keymap.set("n", "<leader>h", dismiss_highlights_and_noice, opts "Remove highlights & Noice UI")
 -- }}}
 
 -- Quit/Save file {{{
@@ -82,6 +86,4 @@ keymap.set("v", "<", "<gv", opts "Indent selection left")
 -- Folds {{{
 keymap.set("n", "<leader><", "zM", opts "Fold all")
 keymap.set("n", "<leader>>", "zR", opts "Open all folds")
-keymap.set("n", "H", "zc", opts "Close fold under cursor")
-keymap.set("n", "L", "zo", opts "Open fold under cursor")
 -- }}}

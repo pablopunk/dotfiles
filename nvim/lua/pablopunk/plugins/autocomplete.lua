@@ -243,7 +243,7 @@ return {
         ["<leader>"] = {
           name = "Leader",
           f = { "Files" },
-          s = { "Search" },
+          s = { "Sessions" },
           d = { "Diagnostics" },
           ["<leader>"] = { "Command palette" },
         },

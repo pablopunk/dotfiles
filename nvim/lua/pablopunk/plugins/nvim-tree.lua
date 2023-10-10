@@ -15,6 +15,8 @@ return {
     vim.opt.termguicolors = true
 
     nvimtree.setup {
+      sync_root_with_cwd = true,
+
       update_focused_file = {
         enable = true,
       },

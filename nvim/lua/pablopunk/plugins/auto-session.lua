@@ -16,7 +16,7 @@ return {
         return { noremap = true, silent = true, desc = desc }
       end
       vim.keymap.set("n", "<leader>ss", "<cmd>Telescope session-lens<cr>", opts "List sessions")
-      vim.keymap.set("n", "<leader>sd", "<cmd>Autosession delete<cr>", opts "Delete session")
+      vim.keymap.set("n", "<leader>sd", "<cmd>SessionDelete<cr>", opts "Delete session")
     end,
   },
 }

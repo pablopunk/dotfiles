@@ -1,12 +1,6 @@
 return {
   "markonm/traces.vim", -- to show in real time what your :s commands will replace
   {
-    "folke/flash.nvim", -- Navigate your code with search labels, enhanced character motions and Treesitter integration
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-  },
-  {
     "pablopunk/todo.nvim",
     dev = true, -- use local version if exists
     opts = { map = "<leader>t" },
@@ -19,55 +13,22 @@ return {
       "rcarriga/nvim-notify",
     },
     opts = {
-      views = { -- display the cmdline and popupmenu together https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#display-the-cmdline-and-popupmenu-together
-        cmdline_popup = {
-          position = {
-            row = 5,
-            col = "50%",
-          },
-          size = {
-            width = 60,
-            height = "auto",
-          },
-        },
-        popupmenu = {
-          relative = "editor",
-          position = {
-            row = 8,
-            col = "50%",
-          },
-          size = {
-            width = 60,
-            height = 10,
-          },
-          border = {
-            style = "rounded",
-            padding = { 0, 1 },
-          },
-          win_options = {
-            winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
-          },
-        },
-      },
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-        hover = {
-          enabled = true,
-          silent = true, -- don't show message if not available
-        },
-      },
-      -- you can enable a preset for easier configuration
       presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
         command_palette = true, -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
+      routes = {
+        {
+          filter = { -- don't show a message every time you save a file
+            event = "msg_show",
+            kind = "",
+            find = "escrit", -- (spanish only) this depends on the language
+          },
+          opts = { skip = true },
+        },
       },
     },
   },

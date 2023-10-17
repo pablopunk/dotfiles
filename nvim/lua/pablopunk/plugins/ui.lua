@@ -25,7 +25,15 @@ return {
           filter = { -- don't show a message every time you save a file
             event = "msg_show",
             kind = "",
-            find = "escrit", -- (spanish only) this depends on the language
+            find = "written", -- (spanish only) this depends on the language
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = { -- don't show a message every time you save a file (spanish)
+            event = "msg_show",
+            kind = "",
+            find = "escrit",
           },
           opts = { skip = true },
         },

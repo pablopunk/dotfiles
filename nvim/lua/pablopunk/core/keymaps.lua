@@ -57,7 +57,7 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set("n", "gp", ":bprev<cr>", opts "Previous buffer")
+keymap.set("n", "gb", ":bprev<cr>", opts "Previous buffer")
 keymap.set("n", "gn", ":bnext<cr>", opts "Next buffer")
 -- }}}
 

@@ -20,9 +20,6 @@ return {
         suggestion = {
           enabled = true,
           auto_trigger = true,
-          -- keymap = {
-          --   accept = "<Tab>", -- workaround above
-          -- },
         },
         filetypes = {
           yaml = true,

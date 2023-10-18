@@ -29,14 +29,17 @@ keymap.set("n", "<leader>h", dismiss_highlights_and_noice, opts "Remove highligh
 
 -- Quit/Save file {{{
 keymap.set({ "n", "v" }, "<c-q>", function()
-  local irrelevant_buffers = { "NvimTree", "", "*" }
+  local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "", "*" }
   local name_of_buffer = vim.fn.expand "%"
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())
-  if vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
-    vim.cmd "bd!" -- quit vim if it's a new file
-  elseif number_of_buffers == 1 and number_of_tabs == 1 then
-    vim.cmd "qa" -- quit vim if it's the last buffer
+  local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
+
+  if is_last_buffer then
+    vim.cmd "SessionDelete" -- delete auto-session
+    vim.cmd "q!" -- quit vim if it's the last buffer
+  elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
+    vim.cmd "bd!"
   else
     vim.cmd "bd" -- close buffer if there are more
   end

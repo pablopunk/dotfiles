@@ -1,6 +1,6 @@
 return {
   {
-    "catppuccin/nvim",
+    "catppuccin/nvim", -- The best colorscheme
     name = "catppuccin",
     priority = 1000,
     config = function()
@@ -14,34 +14,21 @@ return {
           mini = true,
         },
       }
-
-      local function dark_mode()
-        vim.cmd "silent! set background=dark"
-        vim.cmd "silent! colorscheme catppuccin-frappe"
-      end
-
-      local function light_mode()
-        vim.cmd "silent! set background=light"
-        vim.cmd "silent! colorscheme catppuccin-latte"
-      end
-
-      local handle = io.popen "cat $HOME/.theme"
-      if not handle then
-        dark_mode() -- default to dark mode
-        return
-      end
-
-      local result = handle:read "*a"
-      handle:close()
-
-      if string.match(result, "Dark") then
-        dark_mode()
-      elseif string.match(result, "not found") then
-        dark_mode() -- unknown, default to dark mode
-      else
-        light_mode()
-      end
     end,
+  },
+  {
+    "f-person/auto-dark-mode.nvim", -- Auto dark mode (macOS)
+    config = {
+      update_interval = 1000,
+      set_dark_mode = function()
+        vim.api.nvim_set_option("background", "dark")
+        vim.cmd "colorscheme catppuccin-frappe"
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option("background", "light")
+        vim.cmd "colorscheme catppuccin-latte"
+      end,
+    },
   },
   "edkolev/tmuxline.vim", -- Generate tmux colors based on vim colors
 }

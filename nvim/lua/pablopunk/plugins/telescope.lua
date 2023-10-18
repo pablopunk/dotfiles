@@ -54,7 +54,7 @@ return {
       )
 
       -- Diagnostics
-      keymap.set("n", "<leader>dd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts "Find diagnostics")
+      keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts "Find diagnostics")
       keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts "Open registers")
 
       -- LSP (go-to)

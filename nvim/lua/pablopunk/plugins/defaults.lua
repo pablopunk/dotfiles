@@ -8,4 +8,11 @@ return {
     "editorconfig/editorconfig-vim", -- editorconfig support
     event = { "BufReadPre", "BufNewFile" },
   },
+  {
+    "chrisgrieser/nvim-early-retirement", -- auto-close buffers after x minutes of inactivity.
+    opts = {
+      retirementAgeMins = 2, -- 2 minutes
+    },
+    event = "VeryLazy",
+  },
 }

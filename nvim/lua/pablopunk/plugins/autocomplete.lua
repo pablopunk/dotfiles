@@ -1,6 +1,10 @@
 return {
   "rafamadriz/friendly-snippets", -- popular snippets
   {
+    "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
+    event = "InsertEnter",
+  },
+  {
     "zbirenbaum/copilot.lua",
     event = "InsertEnter",
     config = function()
@@ -77,10 +81,6 @@ return {
         },
       }
     end,
-  },
-  {
-    "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
-    event = "InsertEnter",
   },
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
@@ -224,26 +224,6 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-      }
-    end,
-  },
-  {
-    "folke/which-key.nvim", -- displays a popup with possible keybindings of the command you started typing
-    config = function()
-      local wk = require "which-key"
-
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300 -- triggers which-key faster
-
-      wk.register {
-        g = { name = "Go to (LSP)" },
-        ["<leader>"] = {
-          name = "Leader",
-          f = { "Files" },
-          s = { "Sessions" },
-          d = { "Diagnostics" },
-          ["<leader>"] = { "Command palette" },
-        },
       }
     end,
   },

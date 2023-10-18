@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 -- line numbers
--- opt.relativenumber = true
 opt.number = true
 
 -- tabs & indentation
@@ -27,9 +26,6 @@ opt.signcolumn = "yes"
 -- backspace
 opt.backspace = "indent,eol,start"
 
--- copy everything to system clipboard
--- opt.clipboard:append("unnamedplus")
-
 -- split windows
 opt.splitright = true
 opt.splitbelow = true
@@ -42,6 +38,3 @@ opt.iskeyword:append "-" -- dash is part of the word
 
 -- signs on line numbers
 opt.signcolumn = "number"
-
--- folding
--- opt.foldmethod = "indent"

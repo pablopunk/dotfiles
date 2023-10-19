@@ -3,17 +3,17 @@ return {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
-      "hrsh7th/cmp-buffer", -- text from current buffer
-      "hrsh7th/cmp-path", -- complete paths
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
-      "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
+      "hrsh7th/cmp-buffer", -- text from current buffer
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- function signature completion
+      "hrsh7th/cmp-path", -- complete paths
+      "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
-      "hrsh7th/cmp-nvim-lsp-signature-help", -- function signature completion
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+      "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       {
         "antosha417/nvim-lsp-file-operations", -- rename files in nvim tree and update imports with LSP
         config = true,
@@ -75,7 +75,8 @@ return {
       local keymap = vim.keymap
 
       -- enable keybinds for available lsp server
-      local on_attach = function(_client, bufnr)
+      ---@diagnostic disable-next-line: unused-local
+      local on_attach = function(client, bufnr)
         local function opts(desc)
           return { noremap = true, silent = true, buffer = bufnr, desc = desc }
         end

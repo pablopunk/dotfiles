@@ -11,9 +11,8 @@ return {
         g = { name = "Go to (LSP)" },
         ["<leader>"] = {
           name = "Leader",
-          f = { "Files" },
+          f = { "Find" },
           s = { "Sessions" },
-          d = { "Diagnostics" },
           ["<leader>"] = { "Command palette" },
         },
       }

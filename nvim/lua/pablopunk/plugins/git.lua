@@ -51,7 +51,7 @@ return {
               gs.next_hunk()
             end)
             return "<Ignore>"
-          end, { expr = true })
+          end, { expr = true, desc = ") or Go to next git hunk" })
 
           map("n", "(", function()
             if vim.wo.diff then
@@ -61,9 +61,14 @@ return {
               gs.prev_hunk()
             end)
             return "<Ignore>"
-          end, { expr = true })
+          end, { expr = true, desc = ") or Go to previous git hunk" })
 
-          map({ "n", "v" }, "<leader>u", ":Gitsigns reset_hunk<CR>")
+          map(
+            { "n", "v" },
+            "<leader>u",
+            ":Gitsigns reset_hunk<CR>",
+            { noremap = true, silent = true, desc = "Undo git hunk" }
+          )
         end,
       }
     end,

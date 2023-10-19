@@ -1,44 +1,9 @@
 return {
-  "rafamadriz/friendly-snippets", -- popular snippets
   {
-    "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
-    event = "InsertEnter",
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    config = function()
-      -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
-      vim.keymap.set("i", "<Tab>", function()
-        if require("copilot.suggestion").is_visible() then
-          require("copilot.suggestion").accept()
-        else
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-        end
-      end, { desc = "Super Tab. Accept Copilot suggestion or insert a tab character if there's none" })
-
-      require("copilot").setup {
-        panel = {
-          enabled = false,
-        },
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-        },
-        filetypes = {
-          yaml = true,
-          markdown = true,
-          help = true,
-          gitcommit = true,
-          ["."] = true,
-        },
-      }
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
-    event = "InsertEnter",
+    "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-path", -- complete paths
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
@@ -46,11 +11,23 @@ return {
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
       "hrsh7th/cmp-nvim-lsp-signature-help", -- function signature completion
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+      "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+      {
+        "antosha417/nvim-lsp-file-operations", -- rename files in nvim tree and update imports with LSP
+        config = true,
+      },
+      { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
     },
     config = function()
       local cmp = require "cmp"
       local luasnip = require "luasnip"
       local lspkind = require "lspkind"
+      local lspconfig = require "lspconfig"
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
+      local mason = require "mason"
+      local mason_lspconfig = require "mason-lspconfig"
 
       -- load friendly-snippets
       require("luasnip/loaders/from_vscode").lazy_load()
@@ -80,32 +57,6 @@ return {
           format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
         },
       }
-    end,
-  },
-  {
-    "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
-      "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
-      "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-      "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
-      "lukas-reineke/lsp-format.nvim", -- nice formatting config
-      {
-        "antosha417/nvim-lsp-file-operations", -- rename files in nvim tree and update imports with LSP
-        config = true,
-      },
-      { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
-    },
-    config = function()
-      local lspconfig = require "lspconfig"
-      local cmp_nvim_lsp = require "cmp_nvim_lsp"
-      local mason = require "mason"
-      local mason_lspconfig = require "mason-lspconfig"
-      local null_ls = require "null-ls"
-      local mason_null_ls = require "mason-null-ls"
-      local lsp_format = require "lsp-format"
 
       mason.setup {}
       mason_lspconfig.setup {
@@ -120,40 +71,8 @@ return {
           "emmet_ls",
         },
       }
-      mason_null_ls.setup {
-        automatic_installation = true,
-        ensure_installed = {
-          "prettier",
-          "stylua",
-          "eslint_d",
-        },
-      }
 
       local keymap = vim.keymap
-      local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
-
-      lsp_format.setup {} -- async by default, add {sync=true} if needed
-
-      null_ls.setup {
-        sources = {
-          formatting.stylua.with {
-            extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
-          },
-          formatting.prettier.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          formatting.eslint_d.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          diagnostics.eslint_d.with {
-            extra_args = { "--quiet" }, -- show only errors, not warnings
-          },
-        },
-        debug = false,
-        -- format on save (async)
-        on_attach = lsp_format.on_attach,
-      }
 
       -- enable keybinds for available lsp server
       local on_attach = function(_client, bufnr)

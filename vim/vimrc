@@ -159,7 +159,7 @@ command! HotReload autocmd BufWritePost % source %
 set termguicolors
 " dark mode enabled?
 if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-  colorscheme pablo
+  colorscheme habamax
 else
   colorscheme peachpuff
 endif

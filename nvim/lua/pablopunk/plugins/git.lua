@@ -1,8 +1,10 @@
+local git_prefix = "<leader>g"
+
 return {
   {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
     config = function()
-      vim.keymap.set("n", "<leader>gb", "<cmd>ToggleBlame<cr>")
+      vim.keymap.set("n", git_prefix .. "b", "<cmd>ToggleBlame<cr>")
     end,
   },
   {
@@ -10,7 +12,7 @@ return {
     config = function()
       vim.keymap.set(
         { "n", "v" },
-        "<leader>go",
+        git_prefix .. "o",
         "<cmd>OpenInGHFile<cr>",
         { noremap = true, silent = true, desc = "Open file in github" }
       )
@@ -26,7 +28,7 @@ return {
     },
     config = function()
       require("neogit").setup {}
-      vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>")
+      vim.keymap.set("n", git_prefix .. "g", "<cmd>Neogit<cr>")
     end,
   },
   {
@@ -65,7 +67,7 @@ return {
 
           map(
             { "n", "v" },
-            "<leader>u",
+            git_prefix .. "u",
             ":Gitsigns reset_hunk<CR>",
             { noremap = true, silent = true, desc = "Undo git hunk" }
           )

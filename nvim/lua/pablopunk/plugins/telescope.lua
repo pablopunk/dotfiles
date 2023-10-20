@@ -37,24 +37,31 @@ return {
         return { noremap = true, silent = true, desc = desc }
       end
 
+      local find_prefix = "<leader>f"
+
       -- Files
-      keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts "Find files")
-      keymap.set("n", "<leader>fg", "<cmd>Telescope git_status<cr>", opts "Find modified files in git")
-      keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opts "Find recent files")
-      keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts "Open buffers")
+      keymap.set("n", find_prefix .. "f", "<cmd>Telescope find_files<cr>", opts "Find files")
+      keymap.set("n", find_prefix .. "g", "<cmd>Telescope git_status<cr>", opts "Find modified files in git")
+      keymap.set("n", find_prefix .. "r", "<cmd>Telescope oldfiles<cr>", opts "Find recent files")
+      keymap.set("n", find_prefix .. "b", "<cmd>Telescope buffers<cr>", opts "Open buffers")
 
       -- Search
-      keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", opts "Find string")
-      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts "Find word under cursor")
+      keymap.set("n", find_prefix .. "s", "<cmd>Telescope live_grep<cr>", opts "Find string")
+      keymap.set("n", find_prefix .. "w", "<cmd>Telescope grep_string<cr>", opts "Find word under cursor")
       keymap.set(
         "v",
-        "<leader>fw",
+        find_prefix .. "w",
         [["9y:lua require('telescope.builtin').grep_string{search=vim.fn.getreg('9')}<cr>]],
-        opts "Search selected string"
+        opts "Find selected string"
       )
 
       -- Diagnostics
-      keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>", opts "Find diagnostics")
+      keymap.set(
+        "n",
+        find_prefix .. "d",
+        "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
+        opts "Find diagnostics"
+      )
       keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts "Open registers")
 
       -- LSP (go-to)

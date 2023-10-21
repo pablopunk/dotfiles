@@ -17,3 +17,4 @@ kitty/kitty.conf.bak
 
 # I prefer my conversations to be private
 zed/conversations
+zed/embeddings

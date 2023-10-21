@@ -5,7 +5,8 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
-    event = "BufRead",
+    event = { "BufReadPre", "BufNewFile" },
+    build = ":TSUpdate",
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup {
@@ -29,6 +30,15 @@ return {
           "lua",
           "vim",
           "gitignore",
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "<Enter>",
+            node_incremental = "<Enter>",
+            node_decremental = "<bs>",
+            scope_incremental = false,
+          },
         },
         auto_install = true,
         textobjects = { -- Be prepared to witness the power of treesitter. `cif` = "change inner function"

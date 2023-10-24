@@ -1,3 +1,7 @@
+local function add(a, b)
+  return a + b
+end
+
 return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
@@ -6,7 +10,6 @@ return {
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-      "hrsh7th/cmp-nvim-lsp-signature-help", -- function signature completion
       "hrsh7th/cmp-path", -- complete paths
       "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
@@ -50,7 +53,6 @@ return {
           { name = "luasnip" }, -- lua snippets
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
-          { name = "nvim_lsp_signature_help" }, -- function signature completions
           { name = "copilot" }, -- copilot.lua as a cmp source
         },
         ---@diagnostic disable-next-line: missing-fields
@@ -99,7 +101,6 @@ return {
         on_attach = on_attach,
       }
       lspconfig["html"].setup {
-        capabilities = capabilities,
         on_attach = on_attach,
       }
       lspconfig["cssls"].setup {

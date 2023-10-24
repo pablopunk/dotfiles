@@ -30,6 +30,7 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim", -- leftside git status
+    event = "VeryLazy",
     config = function()
       require("gitsigns").setup {
         on_attach = function(bufnr)

@@ -14,11 +14,12 @@ return {
           mini = true,
         },
       }
+      vim.cmd "colorscheme catppuccin"
     end,
   },
   {
     "f-person/auto-dark-mode.nvim", -- Auto dark mode (macOS, linux, windows)
-    config = {
+    opts = {
       update_interval = 1000,
       set_dark_mode = function()
         vim.opt.background = "dark"

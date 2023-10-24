@@ -3,23 +3,21 @@ local git_prefix = "<leader>g"
 return {
   {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
-    config = function()
-      vim.keymap.set("n", git_prefix .. "b", "<cmd>ToggleBlame<cr>")
-    end,
+    keys = {
+      { git_prefix .. "b", "<cmd>ToggleBlame<cr>", desc = "Toggle git blame" },
+    },
   },
   {
     "almo7aya/openingh.nvim",
-    config = function()
-      vim.keymap.set(
-        { "n", "v" },
-        git_prefix .. "o",
-        "<cmd>OpenInGHFile<cr>",
-        { noremap = true, silent = true, desc = "Open file in github" }
-      )
-    end,
+    keys = {
+      { git_prefix .. "o", "<cmd>OpenInGHFile<cr>", desc = "Open file in github" },
+    },
   },
   {
     "NeogitOrg/neogit", -- magit for neovim (git client)
+    keys = {
+      { git_prefix .. "g", "<cmd>Neogit<cr>", desc = "Git client" },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
@@ -28,7 +26,6 @@ return {
     },
     config = function()
       require("neogit").setup {}
-      vim.keymap.set("n", git_prefix .. "g", "<cmd>Neogit<cr>")
     end,
   },
   {

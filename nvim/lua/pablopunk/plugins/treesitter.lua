@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     after = "nvim-treesitter",
+    event = { "BufReadPre", "BufNewFile" },
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that

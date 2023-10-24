@@ -69,6 +69,7 @@ return {
           "bashls",
           "jsonls",
           "emmet_ls",
+          "mdx_analyzer",
         },
       }
 
@@ -144,6 +145,10 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+      }
+      lspconfig["mdx_analyzer"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
       }
     end,
   },

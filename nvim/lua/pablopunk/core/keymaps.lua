@@ -36,11 +36,12 @@ keymap.set({ "n", "v" }, "<c-q>", function()
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
 
   if is_last_buffer then
-    vim.cmd "q!" -- quit vim if it's the last buffer
+    vim.cmd "silent! SessionDelete"
+    vim.cmd "q!"
   elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
     vim.cmd "bd!"
   else
-    vim.cmd "bd" -- close buffer if there are more
+    vim.cmd "bd"
   end
 end, opts "Close file")
 keymap.set({ "n", "v" }, "<c-s>", ":w!<cr>", opts "Save file")

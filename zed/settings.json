@@ -16,11 +16,5 @@
   "theme": "One Dark",
   // "buffer_font_family": "SF Mono",
   "buffer_font_size": 16,
-  "vim_mode": true,
-  "format_on_save": {
-    "external": {
-      "command": "prettier",
-      "arguments": ["--stdin-filepath", "{buffer_path}"]
-    }
-  }
+  "vim_mode": true
 }

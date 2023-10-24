@@ -36,7 +36,6 @@ keymap.set({ "n", "v" }, "<c-q>", function()
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
 
   if is_last_buffer then
-    vim.cmd "SessionDelete" -- delete auto-session
     vim.cmd "q!" -- quit vim if it's the last buffer
   elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
     vim.cmd "bd!"

@@ -12,7 +12,6 @@ return {
         ["<leader>"] = {
           name = "Leader",
           f = { "Find" },
-          s = { "Sessions" },
           ["<leader>"] = { "Command palette" },
         },
       }

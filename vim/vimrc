@@ -6,8 +6,8 @@ set nocompatible
 filetype plugin indent on
 syntax on
 
-""""" I never change these
-set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase infercase cursorline hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start nowrap
+""""" I almost never change these
+set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase infercase hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start wrap
 
 """"" Sometimes I change these
 set noshowmode                 " Don't show the mode you're in
@@ -157,9 +157,5 @@ command! HotReload autocmd BufWritePost % source %
 " Color config
 "
 set termguicolors
-" dark mode enabled?
-if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-  colorscheme habamax
-else
-  colorscheme peachpuff
-endif
+set background=dark
+colorscheme habamax

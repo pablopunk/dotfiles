@@ -51,6 +51,7 @@ return {
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
           { name = "nvim_lsp_signature_help" }, -- function signature completions
+          { name = "copilot" }, -- copilot.lua as a cmp source
         },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {

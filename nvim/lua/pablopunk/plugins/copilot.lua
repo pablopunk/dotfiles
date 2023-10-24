@@ -1,7 +1,7 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
+    event = "VeryLazy",
     config = function()
       -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
       -- vim.keymap.set("i", "<Tab>", function()

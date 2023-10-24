@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     dependencies = {
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "hrsh7th/cmp-buffer", -- text from current buffer

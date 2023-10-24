@@ -7,7 +7,7 @@ return {
       require("mini.misc").setup {} -- useful functions (like zoom() below)
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.splitjoin").setup {} -- `gS` split or join function arguments
-      require("mini.starter").setup {} -- start screen
+      -- require("mini.starter").setup {} -- start screen
       require("mini.statusline").setup {} -- what do u think this is?
       require("mini.surround").setup {} -- surround motion
       require("mini.tabline").setup {} -- buffers as tabs

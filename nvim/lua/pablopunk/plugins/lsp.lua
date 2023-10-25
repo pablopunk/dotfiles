@@ -1,11 +1,7 @@
-local function add(a, b)
-  return a + b
-end
-
 return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "hrsh7th/cmp-buffer", -- text from current buffer
@@ -85,20 +81,46 @@ return {
           return { noremap = true, silent = true, buffer = bufnr, desc = desc }
         end
 
-        keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts "Rename variable")
-        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts "Show code actions")
+        -- diagnostics (errors)
         keymap.set("n", "E", vim.diagnostic.open_float, opts "Show line diagnostics")
         keymap.set("n", "ge", vim.diagnostic.goto_next, opts "Go to next diagnostic")
         keymap.set("n", "gE", vim.diagnostic.goto_prev, opts "Go to previous diagnostic")
+
+        -- lsp actions
+        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts "Show code actions")
         keymap.set("n", "K", vim.lsp.buf.hover, opts "Hover")
+        keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts "Rename variable")
+        if vim.lsp.inlay_hint then
+          keymap.set("n", "<leader>lh", function()
+            vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
+          end, opts "Toggle inlay hints")
+        end
       end
 
       -- enable autocompletion
       local capabilities = cmp_nvim_lsp.default_capabilities()
+      local js_inlayhints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
 
       lspconfig["tsserver"].setup {
         capabilities = capabilities,
         on_attach = on_attach,
+        settings = {
+          javascript = {
+            inlayHints = js_inlayhints,
+          },
+          typescript = {
+            inlayHints = js_inlayhints,
+          },
+        },
       }
       lspconfig["html"].setup {
         on_attach = on_attach,
@@ -118,6 +140,9 @@ return {
           Lua = {
             diagnostics = {
               globals = { "vim" }, -- make the language server recognize "vim" global
+            },
+            hint = {
+              enable = true,
             },
             workspace = {
               checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"

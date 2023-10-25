@@ -1,7 +1,28 @@
+local function opts(desc)
+  return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+end
+
 return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    event = { "BufReadPre", "BufNewFile" },
+    -- event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      { "E", vim.diagnostic.open_float, desc = "Show line diagnostics" },
+      { "ge", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
+      { "gE", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Show code actions" },
+      { "K", vim.lsp.buf.hover, desc = "Hover" },
+      { "<leader>lr", vim.lsp.buf.rename, desc = "Rename variable" },
+      {
+        "<leader>lh",
+        function()
+          if vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
+          end
+        end,
+        desc = "Toggle inlay hints",
+      },
+    },
     dependencies = {
       { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       "hrsh7th/cmp-buffer", -- text from current buffer
@@ -74,29 +95,6 @@ return {
 
       local keymap = vim.keymap
 
-      -- enable keybinds for available lsp server
-      ---@diagnostic disable-next-line: unused-local
-      local on_attach = function(client, bufnr)
-        local function opts(desc)
-          return { noremap = true, silent = true, buffer = bufnr, desc = desc }
-        end
-
-        -- diagnostics (errors)
-        keymap.set("n", "E", vim.diagnostic.open_float, opts "Show line diagnostics")
-        keymap.set("n", "ge", vim.diagnostic.goto_next, opts "Go to next diagnostic")
-        keymap.set("n", "gE", vim.diagnostic.goto_prev, opts "Go to previous diagnostic")
-
-        -- lsp actions
-        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts "Show code actions")
-        keymap.set("n", "K", vim.lsp.buf.hover, opts "Hover")
-        keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts "Rename variable")
-        if vim.lsp.inlay_hint then
-          keymap.set("n", "<leader>lh", function()
-            vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
-          end, opts "Toggle inlay hints")
-        end
-      end
-
       -- enable autocompletion
       local capabilities = cmp_nvim_lsp.default_capabilities()
       local js_inlayhints = {
@@ -112,7 +110,6 @@ return {
 
       lspconfig["tsserver"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = {
           javascript = {
             inlayHints = js_inlayhints,
@@ -122,20 +119,15 @@ return {
           },
         },
       }
-      lspconfig["html"].setup {
-        on_attach = on_attach,
-      }
+      lspconfig["html"].setup {}
       lspconfig["cssls"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
       }
       lspconfig["tailwindcss"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
       }
       lspconfig["lua_ls"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = {
           Lua = {
             diagnostics = {
@@ -157,7 +149,6 @@ return {
       }
       lspconfig["bashls"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = {
           bash = {
             filetypes = { "sh", "zsh", "bash" },
@@ -166,16 +157,13 @@ return {
       }
       lspconfig["jsonls"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
       }
       lspconfig["emmet_ls"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
       }
       lspconfig["mdx_analyzer"].setup {
         capabilities = capabilities,
-        on_attach = on_attach,
       }
     end,
   },

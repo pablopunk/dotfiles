@@ -1,7 +1,7 @@
 return {
   {
     "echasnovski/mini.nvim", -- see plugins below for more info
-    version = "*",
+    branch = "main",
     config = function()
       require("mini.comment").setup {} -- surround motion
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...

@@ -14,6 +14,8 @@ return {
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
 
+      require("mason").setup {} -- needed now that I'm not loading LSP at start
+
       lsp_format.setup {} -- async by default, add {sync=true} if needed
 
       mason_null_ls.setup {

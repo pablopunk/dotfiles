@@ -72,7 +72,7 @@ return {
           "bashls",
           "jsonls",
           "emmet_ls",
-          "mdx_analyzer",
+          "mdx-analyzer",
         },
       }
 

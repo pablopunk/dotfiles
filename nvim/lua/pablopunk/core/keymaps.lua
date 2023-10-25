@@ -6,6 +6,9 @@ local keymap = vim.keymap
 local function opts(desc)
   return { noremap = true, silent = true, desc = desc }
 end
+local function opts_nosilent(desc)
+  return { noremap = true, silent = false, desc = desc }
+end
 
 -- ^c is ESC {{{
 keymap.set("n", "<c-c>", "<esc>", opts "ESC")
@@ -62,14 +65,29 @@ keymap.set("n", "gn", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{
-keymap.set("v", "<c-n>", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', opts "Search & replace selection in current file")
-keymap.set("n", "<c-n>", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', opts "Search & replace current word in current file")
-keymap.set("v", "<leader>n", '"9y:s@<c-r>9@<c-r>9@g<left><left>', opts "Search & replace selection in current line")
+keymap.set(
+  "v",
+  "<c-n>",
+  '"9y:%s@<c-r>9@<c-r>9@g<left><left>',
+  opts_nosilent "Search & replace selection in current file"
+)
+keymap.set(
+  "n",
+  "<c-n>",
+  'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>',
+  opts_nosilent "Search & replace current word in current file"
+)
+keymap.set(
+  "v",
+  "<leader>n",
+  '"9y:s@<c-r>9@<c-r>9@g<left><left>',
+  opts_nosilent "Search & replace selection in current line"
+)
 keymap.set(
   "n",
   "<leader>n",
   'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
-  opts "Search & replace current word in current line"
+  opts_nosilent "Search & replace current word in current line"
 )
 -- }}}
 

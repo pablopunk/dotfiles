@@ -8,10 +8,11 @@ return {
       vim.o.timeoutlen = 300 -- triggers which-key faster
 
       wk.register {
-        g = { name = "Go to (LSP)" },
+        g = { name = "Go to" },
         ["<leader>"] = {
           name = "Leader",
           f = { "Find" },
+          l = { "LSP" },
           ["<leader>"] = { "Command palette" },
         },
       }

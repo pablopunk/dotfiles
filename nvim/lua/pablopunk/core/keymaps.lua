@@ -29,7 +29,7 @@ keymap.set("n", "<leader>h", dismiss_highlights_and_noice, opts "Remove highligh
 
 -- Quit/Save file {{{
 keymap.set({ "n", "v" }, "<c-q>", function()
-  local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "", "*" }
+  local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "Starter", "",false "*" }
   local name_of_buffer = vim.fn.expand "%"
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())

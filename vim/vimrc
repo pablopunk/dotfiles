@@ -7,23 +7,12 @@ filetype plugin indent on
 syntax on
 
 """"" I almost never change these
-set ttyfast lazyredraw incsearch hlsearch ignorecase smartcase infercase hidden autoread linebreak number mouse=a encoding=utf-8 backspace=indent,eol,start wrap
-
-""""" Sometimes I change these
-set noshowmode                 " Don't show the mode you're in
-" set relativenumber             " I will regret it (see...)
-set scrolloff=3                " Spacing on top and bottom
-set laststatus=2               " Hide bottom status line
-set shortmess+=I               " Don't show :intro
+set ttyfast lazyredraw incsearch hlsearch infercase encoding=utf-8 mouse=a hidden autoread number tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab autoindent shiftround wrap ignorecase smartcase cursorline termguicolors backspace=indent,eol,start splitright splitbelow iskeyword+=-
 try
   set signcolumn=number        " Show line numbers and signs on the same column"
 catch
   set signcolumn=yes           " Fallback for older versions
 endtry
-set expandtab shiftround smartindent autoindent " Indent stuff
-set fcs=eob:\                  " hide ~ on blank lines
-set guifont=Fira\ Code:h15     " Font for MacVim
-" set foldmethod=syntax          " Fold by syntax
 
 "
 " Key mapping
@@ -61,9 +50,6 @@ nmap <c-q> :bd<cr>
 " Ctrl+s to save
 nmap <c-s> :w<cr>
 
-" Open .vimrc
-nmap <leader>v :e ~/.vimrc<cr>
-
 " Use system clipboard (reg *)
 nmap <leader>cp "*y
 vmap <leader>cp "*y
@@ -89,13 +75,6 @@ nnoremap > >>
 nnoremap < <<
 vnoremap > >gv
 vnoremap < <gv
-" ctrl+i is mapped to Tab so is not the opposite of ctrl+o anymore
-
-" Fold
-nmap <leader>< zM
-nmap <leader>> zR
-nmap H zc
-nmap L zo
 
 " Search and replace in file/line (selection or word)
 vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
@@ -130,11 +109,6 @@ augroup templates
     \ exe "normal ggo"
 augroup end
 
-augroup LuaHighlight
-  autocmd!
-  autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
-augroup END
-
 "
 " Abbreviations
 "
@@ -147,15 +121,48 @@ iabbr ireact import React from 'react'
 iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
 
-" Custom commands
-command! ImportES6 :execute "normal! 0ciwimport\<esc>f=hdt'i from \<esc>f)xj0"
-command! ConstImport :execute "normal! 0ciwconst\<esc>/from\<cr>ciw= require(\<esc>lxA)\<esc>"
-command! MetaResponsiveTag :execute "normal! i<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\<esc>"
-command! HotReload autocmd BufWritePost % source %
+"
+" File finder and project search
+"
+" Better :find
+set path+=** " Search files subdirectories
+set wildmenu " Allow autocomplete on 'find' command
+set wildignore+=**/node_modules/**
+set wildignore+=**/dist/**
+function! FindFiles(filename)
+  let error_file = tempname()
+  echo error_file
+  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.error_file
+  set errorformat=%f:%l:%m
+  exe "cfile ". error_file
+  copen
+  if line('$') == 1
+    wincmd w
+  endif
+  call delete(error_file)
+endfunction
+command! -nargs=1 Find call FindFiles(<q-args>)
+nmap <leader>ff :Find<space>
+" Better :grep
+set grepprg=rg\ --vimgrep\ --follow\ --max-columns=1000\ --case-sensitive
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+function! Grep(...)
+  return system(join([&grepprg] + a:000), ' ')
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep      cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> . ' -w')
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+augroup END
+nmap <leader>fs :Grep<space><space>.<left><left>
+nmap <leader>fw :GrepWord<space><c-r><c-w><space>.<cr>
+vmap <leader>fw "9y:Grep<space>'<c-r>9'<space>.<cr>
 
 "
 " Color config
 "
-set termguicolors
 set background=dark
 colorscheme habamax
+" Fix for kitty terminal colors after scrolling
+hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE 

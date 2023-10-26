@@ -21,7 +21,6 @@ opt.cursorline = true
 
 -- appearance
 opt.termguicolors = true
-opt.signcolumn = "yes"
 
 -- backspace
 opt.backspace = "indent,eol,start"

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-function preinstall {
-  rm -rf ~/.config/kitty
-  mkdir -p ~/.config/kitty
-  git clone --depth 1 https://github.com/catppuccin/kitty ~/.config/kitty/themes
-}
+mkdir -p ~/.config/kitty
+ln -svf "$(dirname $(realpath $0))"/kitty.conf ~/.config/kitty/kitty.conf
 
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+themes_dir=~/.config/kitty/themes
+tmp_themes_dir=/tmp/kitty-catppuccin
 
-preinstall && \
-  ln -svf $dir/kitty.conf ~/.config/kitty/kitty.conf
-  cp ~/.config/kitty/themes/themes/* ~/.config/kitty/themes/
+[ -f $themes_dir/frappe.conf ] && exit
+
+mkdir -p $themes_dir
+git clone --depth 1 https://github.com/catppuccin/kitty $tmp_themes_dir
+cp $tmp_themes_dir/themes/* $themes_dir

@@ -1,16 +1,9 @@
 #!/bin/bash
 
-function preinstall {
-  rm -rf ~/.tmux*
-  mkdir -p ~/.tmux/plugins
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-}
+ln -svf $(dirname $(realpath $0))/tmux.conf ~/.tmux.conf
 
-# get script directory
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+plugins_dir=~/.tmux/plugins
+[ -d $plugins_dir/tpm ] && exit
 
-# link config file
-preinstall && \
-  ln -svf $dir/tmux.conf ~/.tmux.conf
-  ln -svf $dir/tmux-light.conf ~/.tmux-light.conf
-  ln -svf $dir/tmux-dark.conf ~/.tmux-dark.conf
+mkdir -p $plugins_dir
+git clone https://github.com/tmux-plugins/tpm $plugins_dir/tpm

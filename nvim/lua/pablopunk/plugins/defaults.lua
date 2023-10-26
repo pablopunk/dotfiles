@@ -12,7 +12,7 @@ return {
   {
     "chrisgrieser/nvim-early-retirement", -- auto-close buffers after x minutes of inactivity.
     opts = {
-      retirementAgeMins = 2, -- 2 minutes
+      retirementAgeMins = 10, -- 10 minutes
     },
     event = "VeryLazy",
   },

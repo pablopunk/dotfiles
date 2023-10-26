@@ -10,5 +10,6 @@ elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 fi
 
 mkdir -p "$target_dir"
+rm -rf "$target_dir/User"
 ln -svf "$dir/User" "$target_dir/User"
 

@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
-		"Catppuccin color schemes"
+		"Catppuccin color schemes",
+		"Package Control",
 	],
 }

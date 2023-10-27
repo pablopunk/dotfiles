@@ -19,7 +19,12 @@ return {
       }
       local minifiles_toggle = function(...)
         if not MiniFiles.close() then
-          MiniFiles.open(vim.api.nvim_buf_get_name(0))
+          local is_buffer_a_file = (vim.api.nvim_buf_get_option(0, "buftype") == "")
+          if is_buffer_a_file then
+            MiniFiles.open(vim.api.nvim_buf_get_name(0))
+          else
+            MiniFiles.open()
+          end
         end
       end
       vim.keymap.set("n", "<c-t>", minifiles_toggle, { desc = "Toggle file explorer" })

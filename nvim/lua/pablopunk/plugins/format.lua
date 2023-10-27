@@ -1,6 +1,7 @@
 return {
   {
     "jose-elias-alvarez/null-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+    event = "VeryLazy",
     dependencies = {
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.

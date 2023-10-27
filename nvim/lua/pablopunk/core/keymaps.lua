@@ -50,6 +50,11 @@ end, opts "Close file")
 keymap.set({ "n", "v" }, "<c-s>", ":w!<cr>", opts "Save file")
 -- }}}
 
+-- File path utils {{{
+keymap.set("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", opts "Copy file path (absolute)")
+keymap.set("n", "<leader>fpr", ":let @+ = expand('%:p:r')<cr>", opts "Copy file path (relative)")
+-- }}}
+
 -- System clipboard {{{
 keymap.set("n", "<leader>cp", '"*y', opts "Copy to system clipboard")
 keymap.set("v", "<leader>cp", '"*y', opts "Copy to system clipboard")

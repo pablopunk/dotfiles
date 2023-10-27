@@ -126,9 +126,9 @@ return {
         { "gE", vim.diagnostic.goto_prev, "Go to previous diagnostic" },
         { "<leader>ca", vim.lsp.buf.code_action, "Show code actions" },
         { "K", vim.lsp.buf.hover, "Hover" },
+        { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
         { "<leader>ll", lsp_start, "Start LSP" },
         { "<leader>lx", lsp_stop, "Stop LSP" },
-        { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
         {
           "<leader>lh",
           function()
@@ -143,7 +143,7 @@ return {
       ---@diagnostic disable-next-line: unused-local
       local function on_attach(client, buf)
         for _, key in ipairs(keys) do
-          vim.keymap.set("n", key[1], key[2], { noremap = true, expr = true, desc = key[3] })
+          vim.keymap.set("n", key[1], key[2], { noremap = true, desc = key[3] })
         end
       end
 

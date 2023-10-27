@@ -6,6 +6,10 @@ opt.number = true
 -- don't show which mode you're in in the cmdline
 opt.showmode = false
 
+-- show only filename in the statusline
+opt.laststatus = 2
+opt.statusline = "%t"
+
 -- tabs & indentation
 opt.tabstop = 2
 opt.shiftwidth = 2

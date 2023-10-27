@@ -124,7 +124,6 @@ return {
 
       lspconfig["tsserver"].setup {
         capabilities = capabilities,
-        autostart = false,
         settings = {
           javascript = {
             inlayHints = js_inlayhints,

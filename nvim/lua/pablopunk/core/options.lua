@@ -3,6 +3,9 @@ local opt = vim.opt
 -- line numbers
 opt.number = true
 
+-- don't show which mode you're in in the cmdline
+opt.showmode = false
+
 -- tabs & indentation
 opt.tabstop = 2
 opt.shiftwidth = 2

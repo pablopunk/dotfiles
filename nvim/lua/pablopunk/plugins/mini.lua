@@ -3,21 +3,20 @@ return {
     "echasnovski/mini.nvim", -- see plugins below for more info
     branch = "main",
     config = function()
-      require("mini.comment").setup {} -- surround motion
+      require("mini.comment").setup {} -- comments with gcc
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.splitjoin").setup {} -- `gS` split or join function arguments
       require("mini.starter").setup {} -- start screen
-      require("mini.surround").setup {} -- surround motion
       require("mini.tabline").setup {} -- buffers as tabs
 
       -- file tree
       require("mini.files").setup {
         mappings = {
-          go_in_plus = "<CR>", -- <Enter> will open the file and close the explorer
+          go_in_plus = "<cr>", -- <Enter> will open the file and close the explorer
           synchronize = "<c-s>", -- <c-s> will write the changes you make in the explorer
         },
       }
-      local minifiles_toggle = function(...)
+      local minifiles_toggle = function()
         if not MiniFiles.close() then
           local is_buffer_a_file = (vim.api.nvim_buf_get_option(0, "buftype") == "")
           if is_buffer_a_file then

@@ -17,8 +17,7 @@ return {
     event = "VeryLazy",
   },
   {
-    "kylechui/nvim-surround", -- surround motion
+    "tpope/vim-surround", -- surround motion
     event = "VeryLazy",
-    config = true,
   },
 }

@@ -39,7 +39,7 @@ return {
           filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         },
         diagnostics.eslint_d.with {
-          extra_args = { "--quiet" }, -- show only errors, not warnings
+          -- extra_args = { "--quiet" }, -- show only errors, not warnings
         },
       }
 

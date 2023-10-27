@@ -70,29 +70,14 @@ keymap.set("n", "gn", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{
-keymap.set(
-  "v",
-  "<c-n>",
-  '"9y:%s@<c-r>9@<c-r>9@g<left><left>',
-  opts_nosilent "Search & replace selection in current file"
-)
+keymap.set("v", "<leader>rw", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', opts_nosilent "Search & replace selection")
+keymap.set("n", "<leader>rw", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', opts_nosilent "Search & replace word")
+keymap.set("v", "<leader>rl", '"9y:s@<c-r>9@<c-r>9@g<left><left>', opts_nosilent "Search & replace in current line")
 keymap.set(
   "n",
-  "<c-n>",
-  'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>',
-  opts_nosilent "Search & replace current word in current file"
-)
-keymap.set(
-  "v",
-  "<leader>n",
-  '"9y:s@<c-r>9@<c-r>9@g<left><left>',
-  opts_nosilent "Search & replace selection in current line"
-)
-keymap.set(
-  "n",
-  "<leader>n",
+  "<leader>rl",
   'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
-  opts_nosilent "Search & replace current word in current line"
+  opts_nosilent "Search & replace word in current line"
 )
 -- }}}
 

@@ -29,7 +29,28 @@ return {
       local mason = require "mason"
       local mason_lspconfig = require "mason-lspconfig"
 
-      -- require("toggle-lsp-diagnostics").init()
+      local servers = {
+        "tsserver",
+        "html",
+        "cssls",
+        "tailwindcss",
+        "lua_ls",
+        "bashls",
+        "jsonls",
+        "emmet_ls",
+        "mdx_analyzer",
+      }
+
+      local js_inlayhints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      }
 
       -- load friendly-snippets
       require("luasnip/loaders/from_vscode").lazy_load()
@@ -60,19 +81,40 @@ return {
         },
       }
 
+      -- load friendly-snippets
+      require("luasnip/loaders/from_vscode").lazy_load()
+      vim.opt.completeopt = "menu,menuone,noselect"
+      local settings = {
+        javascript = {
+          inlayHints = js_inlayhints,
+        },
+        typescript = {
+          inlayHints = js_inlayhints,
+        },
+        Lua = {
+          diagnostics = {
+            globals = { "vim" }, -- make the language server recognize "vim" global
+          },
+          hint = {
+            enable = true,
+          },
+          workspace = {
+            checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"
+            -- make server aware of runtime files
+            library = {
+              [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+              [vim.fn.stdpath "config" .. "/lua"] = true,
+            },
+          },
+        },
+        bash = {
+          filetypes = { "sh", "zsh", "bash" },
+        },
+      }
+
       mason.setup {}
       mason_lspconfig.setup {
-        ensure_installed = {
-          "tsserver",
-          "html",
-          "cssls",
-          "tailwindcss",
-          "lua_ls",
-          "bashls",
-          "jsonls",
-          "emmet_ls",
-          "mdx_analyzer",
-        },
+        ensure_installed = servers,
       }
 
       local function lsp_start()
@@ -90,8 +132,7 @@ return {
         { "K", vim.lsp.buf.hover, "Hover" },
         { "<leader>ll", lsp_start, "Start LSP" },
         { "<leader>lx", lsp_stop, "Stop LSP" },
-        { "<leader>lr", vim.lsp.buf.rename, "Rename variable" },
-        -- { "<leader>ld", "<cmd>ToggleDiag<cr>", "Toggle LSP diagnostics" },
+        { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
         {
           "<leader>lh",
           function()
@@ -103,92 +144,29 @@ return {
         },
       }
 
-      local function on_attach()
+      ---@diagnostic disable-next-line: unused-local
+      local function on_attach(client, buf)
         for _, key in ipairs(keys) do
           vim.keymap.set("n", key[1], key[2], { noremap = true, expr = true, desc = key[3] })
         end
       end
 
-      -- enable autocompletion
+      -- Setup servers
       local capabilities = cmp_nvim_lsp.default_capabilities()
-      local js_inlayhints = {
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      }
-
-      lspconfig["tsserver"].setup {
-        capabilities = capabilities,
-        settings = {
-          javascript = {
-            inlayHints = js_inlayhints,
-          },
-          typescript = {
-            inlayHints = js_inlayhints,
-          },
-        },
-      }
-      lspconfig["html"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-      lspconfig["cssls"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-      lspconfig["tailwindcss"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-      lspconfig["lua_ls"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" }, -- make the language server recognize "vim" global
-            },
-            hint = {
-              enable = true,
-            },
-            workspace = {
-              checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"
-              -- make server aware of runtime files
-              library = {
-                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                [vim.fn.stdpath "config" .. "/lua"] = true,
-              },
-            },
-          },
-        },
-      }
-      lspconfig["bashls"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          bash = {
-            filetypes = { "sh", "zsh", "bash" },
-          },
-        },
-      }
-      lspconfig["jsonls"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-      lspconfig["emmet_ls"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "html", "css", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-      }
-      lspconfig["mdx_analyzer"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
+      for _, lsp in ipairs(servers) do
+        if lsp == "emmet_ls" then -- emmet_ls doesn't have specific config (global filetypes)
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          }
+        else
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = settings,
+          }
+        end
+      end
     end,
   },
 }

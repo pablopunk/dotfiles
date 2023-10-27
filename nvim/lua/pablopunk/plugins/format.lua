@@ -28,25 +28,38 @@ return {
         },
       }
 
-      null_ls.setup {
-        sources = {
-          formatting.stylua.with {
-            extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
-          },
-          formatting.prettier.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          formatting.eslint_d.with {
-            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          },
-          diagnostics.eslint_d.with {
-            extra_args = { "--quiet" }, -- show only errors, not warnings
-          },
+      local sources = {
+        formatting.stylua.with {
+          extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
         },
+        formatting.prettier.with {
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        },
+        formatting.eslint_d.with {
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        },
+        diagnostics.eslint_d.with {
+          extra_args = { "--quiet" }, -- show only errors, not warnings
+        },
+      }
+
+      null_ls.setup {
+        sources = sources,
         debug = false,
-        -- format on save (async)
         on_attach = lsp_format.on_attach,
       }
+
+      local function toggle_diagnostics()
+        null_ls.toggle "eslint_d"
+      end
+
+      toggle_diagnostics() -- start with eslint disabled
+      vim.keymap.set(
+        "n",
+        "<leader>d",
+        toggle_diagnostics,
+        { noremap = true, silent = true, desc = "Toggle diagnostics" }
+      )
     end,
   },
 }

@@ -5,7 +5,9 @@
 	],
 	"installed_packages":
 	[
+		"ActualVim",
 		"Catppuccin color schemes",
 		"Package Control",
+		"SublimeCodeIntel",
 	],
 }

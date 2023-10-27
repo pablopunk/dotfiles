@@ -24,7 +24,6 @@ esc = ["collapse_selection", "keep_primary_selection"]
 C-c = ["collapse_selection", "keep_primary_selection"]
 C-s = ":w"
 C-q = ":buffer-close"
-C-p = "file_picker"
 C-h = "jump_view_left"
 C-j = "jump_view_down"
 C-k = "jump_view_up"
@@ -32,7 +31,10 @@ C-l = "jump_view_right"
 K = "hover"
 0 = "goto_first_nonwhitespace"
 "$" = "goto_line_end"
-space = { "c" = "toggle_comments", "space" = "command_palette" }
+space.c = "toggle_comments"
+space.space = "command_palette"
+space.f.f = "file_picker"
+space.f.s = "global_search"
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
 [keys.insert]

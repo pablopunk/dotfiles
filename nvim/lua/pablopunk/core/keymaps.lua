@@ -56,8 +56,7 @@ keymap.set("n", "<leader>fpr", ":let @+ = expand('%:p:r')<cr>", opts "Copy file 
 -- }}}
 
 -- System clipboard {{{
-keymap.set("n", "<leader>cp", '"*y', opts "Copy to system clipboard")
-keymap.set("v", "<leader>cp", '"*y', opts "Copy to system clipboard")
+keymap.set({ "n", "v" }, "<leader>y", '"*y', opts "Copy to system clipboard")
 -- }}}
 
 -- Y should not be the same as yy {{{
@@ -65,7 +64,7 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set("n", "gb", ":bprev<cr>", opts "Previous buffer")
+keymap.set("n", "gp", ":bprev<cr>", opts "Previous buffer")
 keymap.set("n", "gn", ":bnext<cr>", opts "Next buffer")
 -- }}}
 

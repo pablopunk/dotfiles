@@ -20,16 +20,11 @@ return {
       }
       local minifiles_toggle = function(...)
         if not MiniFiles.close() then
-          MiniFiles.open(...)
+          MiniFiles.open(vim.api.nvim_buf_get_name(0))
         end
       end
       vim.keymap.set("n", "<c-t>", minifiles_toggle, { desc = "Toggle file explorer" })
-      vim.keymap.set(
-        "n",
-        "<c-y>",
-        "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>",
-        { desc = "Open current file in explorer" }
-      )
+      vim.keymap.set("n", "<c-y>", ":lua MiniFiles.open()<cr>", { desc = "Toggle file explorer (root)" })
     end,
   },
 }

@@ -10,11 +10,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
   {
-    "chrisgrieser/nvim-early-retirement", -- auto-close buffers after x minutes of inactivity.
+    "axkirillov/hbac.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      retirementAgeMins = 10, -- 10 minutes
+      threshold = 6, -- hbac will start closing unedited buffers once that number is reached
     },
-    event = "VeryLazy",
   },
   {
     "tpope/vim-surround", -- surround motion

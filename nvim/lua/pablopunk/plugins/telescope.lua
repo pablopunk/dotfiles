@@ -9,6 +9,7 @@ return {
     },
     config = function()
       local telescope = require "telescope"
+      local builtin = require "telescope.builtin"
       local actions = require "telescope.actions"
 
       telescope.setup {
@@ -56,17 +57,10 @@ return {
       )
 
       -- Diagnostics
-      keymap.set(
-        "n",
-        find_prefix .. "d",
-        "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
-        opts "Find diagnostics"
-      )
-      keymap.set("n", "<leader>p", "<cmd>lua require('telescope.builtin').registers()<cr>", opts "Open registers")
+      keymap.set("n", find_prefix .. "d", builtin.diagnostics, opts "Find diagnostics")
 
-      -- LSP (go-to)
-      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts "Go to definition")
-      keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", opts "Go to references")
+      -- Yank registers
+      keymap.set("n", "<leader>p", builtin.registers, opts "Yank registers")
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
       keymap.set({ "n", "v" }, "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")

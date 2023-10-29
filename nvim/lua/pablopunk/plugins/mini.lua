@@ -14,6 +14,7 @@ return {
         mappings = {
           go_in_plus = "<cr>", -- <Enter> will open the file and close the explorer
           synchronize = "<c-s>", -- <c-s> will write the changes you make in the explorer
+          reveal_cwd = "r", -- reveal rooreveal root
         },
       }
       local minifiles_toggle = function()

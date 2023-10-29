@@ -31,7 +31,7 @@ keymap.set("n", "<leader>h", dismiss_highlights_and_noice, opts "Remove highligh
 -- }}}
 
 -- Quit/Save file {{{
-keymap.set({ "n", "v" }, "<c-q>", function()
+local function quit_file()
   local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "Starter", "", "*" }
   local name_of_buffer = vim.fn.expand "%"
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
@@ -44,10 +44,22 @@ keymap.set({ "n", "v" }, "<c-q>", function()
   elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
     vim.cmd "bd!"
   else
+    local ok, harpoon_mark = pcall(require, "harpoon.mark")
+    if ok then
+      harpoon_mark.rm_file()
+    end
     vim.cmd "bd"
   end
-end, opts "Close file")
-keymap.set({ "n", "v" }, "<c-s>", ":w!<cr>", opts "Save file")
+end
+local function save_file()
+  local ok, harpoon_mark = pcall(require, "harpoon.mark")
+  if ok then
+    harpoon_mark.add_file()
+  end
+  vim.cmd "w!"
+end
+keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
+keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")
 -- }}}
 
 -- File path utils {{{

@@ -7,7 +7,7 @@ return {
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.splitjoin").setup {} -- `gS` split or join function arguments
       require("mini.starter").setup {} -- start screen
-      require("mini.tabline").setup {} -- buffers as tabs
+      -- require("mini.tabline").setup {} -- buffers as tabs
 
       -- file tree
       require("mini.files").setup {

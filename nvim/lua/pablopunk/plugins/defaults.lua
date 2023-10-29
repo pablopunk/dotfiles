@@ -11,7 +11,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
   {
-    "axkirillov/hbac.nvim",
+    "axkirillov/hbac.nvim", -- close unedited buffers automagically
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {

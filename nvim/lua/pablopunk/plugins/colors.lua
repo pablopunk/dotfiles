@@ -26,6 +26,9 @@ return {
         vim.cmd "colorscheme catppuccin-frappe"
       end,
       set_light_mode = function()
+        if vim.fn.has "mac" == 0 then
+          return -- Don't change colors on linux
+        end
         vim.opt.background = "light"
         vim.cmd "colorscheme catppuccin-latte"
       end,

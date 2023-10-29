@@ -2,6 +2,7 @@ return {
   {
     "echasnovski/mini.nvim", -- see plugins below for more info
     branch = "main",
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- for tabline icons
     config = function()
       require("mini.comment").setup {} -- comments with gcc
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...

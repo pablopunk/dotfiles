@@ -44,10 +44,6 @@ local function quit_file()
   elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
     vim.cmd "bd!"
   else
-    local ok, harpoon_mark = pcall(require, "harpoon.mark")
-    if ok then
-      harpoon_mark.rm_file()
-    end
     vim.cmd "bd"
   end
 end
@@ -77,8 +73,8 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set("n", "gp", ":bprev<cr>", opts "Previous buffer")
-keymap.set("n", "gn", ":bnext<cr>", opts "Next buffer")
+keymap.set("n", "<c-b>", ":bprev<cr>", opts "Previous buffer")
+keymap.set("n", "<c-n>", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{

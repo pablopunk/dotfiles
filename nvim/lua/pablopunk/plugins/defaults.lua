@@ -10,16 +10,16 @@ return {
     "editorconfig/editorconfig-vim", -- editorconfig support
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "axkirillov/hbac.nvim", -- close unedited buffers automagically
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      threshold = 6, -- hbac will start closing unedited buffers once that number is reached
-    },
-  },
   -- {
-  --   "unclutter.nvim",
-  --   dev = true,
+  --   "axkirillov/hbac.nvim", -- close unedited buffers automagically
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     threshold = 6, -- hbac will start closing unedited buffers once that number is reached
+  --   },
   -- },
+  {
+    "unclutter.nvim",
+    dev = true,
+  },
 }

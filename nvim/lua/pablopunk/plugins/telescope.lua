@@ -44,7 +44,7 @@ return {
       keymap.set("n", find_prefix .. "f", "<cmd>Telescope find_files<cr>", opts "Find files")
       keymap.set("n", find_prefix .. "g", "<cmd>Telescope git_status<cr>", opts "Find modified files in git")
       keymap.set("n", find_prefix .. "r", "<cmd>Telescope oldfiles<cr>", opts "Find recent files")
-      keymap.set("n", find_prefix .. "b", "<cmd>Telescope buffers<cr>", opts "Open buffers")
+      keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts "Open buffers")
 
       -- Search
       keymap.set("n", find_prefix .. "s", "<cmd>Telescope live_grep<cr>", opts "Find string")

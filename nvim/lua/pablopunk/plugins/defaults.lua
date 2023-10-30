@@ -18,4 +18,8 @@ return {
       threshold = 6, -- hbac will start closing unedited buffers once that number is reached
     },
   },
+  -- {
+  --   "unclutter.nvim",
+  --   dev = true,
+  -- },
 }

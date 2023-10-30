@@ -73,8 +73,8 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set("n", "<c-b>", ":bprev<cr>", opts "Previous buffer")
-keymap.set("n", "<c-n>", ":bnext<cr>", opts "Next buffer")
+keymap.set({ "n", "v" }, "<c-b>", ":bprev<cr>", opts "Previous buffer")
+keymap.set({ "n", "v" }, "<c-n>", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{

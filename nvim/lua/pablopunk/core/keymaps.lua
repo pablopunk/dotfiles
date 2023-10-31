@@ -48,10 +48,6 @@ local function quit_file()
   end
 end
 local function save_file()
-  local ok, harpoon_mark = pcall(require, "harpoon.mark")
-  if ok then
-    harpoon_mark.add_file()
-  end
   vim.cmd "w!"
 end
 keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
@@ -73,8 +69,8 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set({ "n", "v" }, "<c-p>", ":bprev<cr>", opts "Previous buffer")
-keymap.set({ "n", "v" }, "<c-n>", ":bnext<cr>", opts "Next buffer")
+keymap.set({ "n", "v" }, "<c-f>", ":bprev<cr>", opts "Previous buffer")
+keymap.set({ "n", "v" }, "<c-g>", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{

@@ -61,8 +61,8 @@ return {
       require("nvim-treesitter.install").update { with_sync = true }
     end,
   },
-  {
-    event = "VeryLazy",
-    "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
-  },
+  -- {
+  --   event = "VeryLazy",
+  --   "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
+  -- },
 }

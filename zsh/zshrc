@@ -24,8 +24,9 @@ setopt PROMPT_SUBST
 # }}}
 
 # prompt {{{
-NEWLINE=$'\n'
-PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
+eval "$(starship init zsh)"
+# NEWLINE=$'\n'
+# PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
 # }}}
 
 # TERM {{{

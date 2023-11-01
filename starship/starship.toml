@@ -5,7 +5,7 @@
 add_newline = true
 
 [character]
-success_symbol = '[ƛ](green)'
+success_symbol = '[ƛ](yellow)'
 
 # Disable the package module, hiding it from the prompt completely
 # [package]

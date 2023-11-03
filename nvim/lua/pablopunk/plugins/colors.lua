@@ -14,7 +14,7 @@ return {
           mini = true,
         },
       }
-      vim.cmd "colorscheme catppuccin-frappe"
+      vim.cmd "colorscheme catppuccin-mocha"
     end,
   },
   {
@@ -23,7 +23,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.opt.background = "dark"
-        vim.cmd "colorscheme catppuccin-frappe"
+        vim.cmd "colorscheme catppuccin-mocha"
       end,
       set_light_mode = function()
         if vim.fn.has "mac" == 0 then

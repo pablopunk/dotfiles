@@ -48,7 +48,7 @@ local function quit_file()
   end
 end
 local function save_file()
-  vim.cmd "w!"
+  vim.cmd "w"
 end
 keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
 keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")

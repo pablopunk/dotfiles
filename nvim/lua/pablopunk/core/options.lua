@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- no command line
+opt.cmdheight = 0 -- it's been 6 long years https://www.reddit.com/r/vim/comments/75h0oz/can_i_move_the_command_line_up_so_airline_and/
+
 -- line numbers
 opt.number = true
 

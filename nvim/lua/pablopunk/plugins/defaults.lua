@@ -19,7 +19,7 @@ return {
   --   },
   -- },
   {
-    "unclutter.nvim",
+    "pablopunk/unclutter.nvim",
     dev = true,
   },
 }

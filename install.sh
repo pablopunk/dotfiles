@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # get script directory
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+dir="$(dirname $(realpath $0))"
 
 # loop in subdirectories
 for D in `ls -d1 "$dir"/*/`

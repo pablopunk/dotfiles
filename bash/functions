@@ -104,7 +104,7 @@ function loggerDev {
   echo "Clone that repo and update this script accordinly"
   echo
   return
-  comeback_to="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  comeback_to="$(dirname $(realpath $0))"
 
   # turn on dev mode for MazeLogger
   cd ~/src/maze/maze-monorepo/packages/logger

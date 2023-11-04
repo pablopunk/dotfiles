@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+dir="$(dirname $(realpath $0))"
 
 mkdir -p ~/.config
 rm -rf ~/.config/helix

@@ -45,5 +45,5 @@ opt.iskeyword:append "-" -- dash is part of the word
 -- blank lines
 -- opt.fcs = "eob:\ " -- hide ~ on blank lines
 
--- signs on line numbers
-opt.signcolumn = "number"
+-- where to show the signs (git changes and more)
+opt.signcolumn = "yes"

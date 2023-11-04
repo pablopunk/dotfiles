@@ -60,7 +60,7 @@ return {
       keymap.set("n", find_prefix .. "d", builtin.diagnostics, opts "Find diagnostics")
 
       -- Yank registers
-      keymap.set("n", "<leader>p", builtin.registers, opts "Yank registers")
+      keymap.set({ "n", "v" }, "<leader>p", builtin.registers, opts "List yank registers")
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
       keymap.set({ "n", "v" }, "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")

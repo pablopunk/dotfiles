@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+dir="$(dirname $(realpath $0))"
 
 rm -rf ~/.config/zed
 ln -svf $dir ~/.config/zed

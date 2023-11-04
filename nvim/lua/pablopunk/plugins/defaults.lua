@@ -21,5 +21,6 @@ return {
   {
     "pablopunk/unclutter.nvim",
     dev = true,
+    config = true,
   },
 }

@@ -43,6 +43,10 @@ alias tx='tmuxinator'
 # maze directories
 alias maze='cd $HOME/src/maze/maze-monorepo'
 alias maze-prototypes='cd $HOME/src/maze/maze-monorepo/services/maze-prototypes'
+# other directories
+alias dotfiles='cd $HOME/.dotfiles'
+alias unclutter='cd $HOME/src/unclutter.nvim'
+alias pablopunk='cd $HOME/src/pablopunk.com'
 # not in vim but who cares
 alias :q='exit'
 alias :qa='exit'

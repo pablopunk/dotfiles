@@ -1,12 +1,33 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Inserts a blank line between shell prompts
 add_newline = false
 
 [character]
 success_symbol = '[ƛ](yellow)'
 
-# Disable the package module, hiding it from the prompt completely
-# [package]
-# disabled = true
+[package]
+disabled = true
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = '[☠️](red)'
+ahead = '[⇡](green)'
+behind = '[⇣](yellow)'
+diverged = '[⇕](purple)'
+up_to_date = ''
+untracked = '[?](blue)'
+stashed = ''
+modified = '[±](orange)'
+renamed = '[±](orange)'
+staged = '[→](green)'
+deleted = '[✖](red)'
+
+[git_branch]
+truncation_length = 16
+
+[docker_context]
+disabled = true
+
+[nodejs]
+disabled = true

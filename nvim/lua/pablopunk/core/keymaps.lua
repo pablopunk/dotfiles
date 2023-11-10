@@ -36,10 +36,11 @@ local function quit_file()
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
+  local is_last_unclutter_tab = #require("unclutter").list() == 1
 
-  if is_last_buffer then
+  if is_last_buffer or is_last_unclutter_tab then
     vim.cmd "silent! SessionDelete"
-    vim.cmd "q!"
+    vim.cmd "qa"
   elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
     vim.cmd "bd!"
   else

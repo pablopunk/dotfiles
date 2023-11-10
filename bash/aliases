@@ -54,3 +54,6 @@ alias :x='exit'
 alias :xa='exit'
 # tilt
 alias tilt='wait_for_docker; tilt --stream=true'
+# github copilot
+alias "??"="gh copilot suggest -t shell"
+alias "git\?"="gh copilot suggest -t git"

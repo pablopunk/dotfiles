@@ -10,17 +10,15 @@ return {
     "editorconfig/editorconfig-vim", -- editorconfig support
     event = { "BufReadPre", "BufNewFile" },
   },
-  -- {
-  --   "axkirillov/hbac.nvim", -- close unedited buffers automagically
-  --   event = "VeryLazy",
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   opts = {
-  --     threshold = 6, -- hbac will start closing unedited buffers once that number is reached
-  --   },
-  -- },
   {
     "pablopunk/unclutter.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     dev = true,
-    config = true,
+    config = function()
+      local unclutter = require "unclutter"
+      unclutter.setup {}
+      vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, { noremap = true })
+      vim.keymap.set({ "n", "v" }, "<c-p>", unclutter.prev, { noremap = true })
+    end,
   },
 }

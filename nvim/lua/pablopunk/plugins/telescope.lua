@@ -65,6 +65,10 @@ return {
       -- Opening keymaps looks like a command palette (can search for descriptions)
       keymap.set({ "n", "v" }, "<leader><leader>", "<cmd>Telescope keymaps<cr>", opts "Command palette (kinda)")
 
+      -- LSP
+      keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts "Go to definition")
+      keymap.set("n", "<leader>lo", "<cmd>Telescope lsp_document_symbols<cr>", opts "Document symbols")
+
       telescope.load_extension "fzf"
     end,
   },

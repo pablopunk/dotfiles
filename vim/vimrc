@@ -45,8 +45,8 @@ vmap <leader>p "*p
 nmap Y y$
 " Navigate buffers
 " nmap <leader><leader> :ls<CR>:b<Space>
-nmap gb :bprev<cr>
-nmap gn :bnext<cr>
+nmap <c-p> :bprev<cr>
+nmap <c-n> :bnext<cr>
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>

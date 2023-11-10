@@ -68,6 +68,7 @@ return {
       -- LSP
       keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts "Go to definition")
       keymap.set("n", "<leader>lo", "<cmd>Telescope lsp_document_symbols<cr>", opts "Document symbols")
+      keymap.set("n", "<leader>lO", "<cmd>Telescope lsp_workspace_symbols<cr>", opts "Workspace symbols (dynamic)")
 
       telescope.load_extension "fzf"
     end,

@@ -16,7 +16,6 @@ return {
     dev = true,
     config = function()
       local unclutter = require "unclutter"
-      unclutter.setup {}
       vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, { noremap = true })
       vim.keymap.set({ "n", "v" }, "<c-p>", unclutter.prev, { noremap = true })
     end,

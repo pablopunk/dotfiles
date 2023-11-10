@@ -7,7 +7,6 @@ return {
       require("mini.comment").setup {} -- comments with gcc
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.splitjoin").setup {} -- `gS` split or join function arguments
-      require("mini.tabline").setup {} -- buffers as tabs
 
       -- Start screen
       local starter = require "mini.starter"

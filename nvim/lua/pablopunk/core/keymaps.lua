@@ -53,6 +53,10 @@ keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
 keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")
 -- }}}
 
+-- Vim Messages {{{
+keymap.set("n", "<leader>m", ":messages<cr>", opts "Show messages")
+-- }}}
+
 -- File path utils {{{
 keymap.set("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", opts "Copy file path (absolute)")
 keymap.set("n", "<leader>fpr", ":let @+ = expand('%:p:~:.')<cr>", opts "Copy file path (relative)")
@@ -68,8 +72,8 @@ keymap.set("n", "Y", "y$", opts "Yank til end of line")
 -- }}}
 
 -- Buffer navigation {{{
-keymap.set({ "n", "v" }, "<c-f>", ":bprev<cr>", opts "Previous buffer")
-keymap.set({ "n", "v" }, "<c-g>", ":bnext<cr>", opts "Next buffer")
+-- keymap.set({ "n", "v" }, "<c-f>", ":bprev<cr>", opts "Previous buffer")
+-- keymap.set({ "n", "v" }, "<c-g>", ":bnext<cr>", opts "Next buffer")
 -- }}}
 
 -- Search & replace in current file/line {{{

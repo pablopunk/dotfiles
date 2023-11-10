@@ -118,6 +118,9 @@ return {
       local function lsp_stop()
         vim.cmd "LspStop"
       end
+      local function lsp_restart()
+        vim.cmd "LspRestart"
+      end
 
       local keys = {
         { "E", vim.diagnostic.open_float, "Show line diagnostics" },
@@ -129,6 +132,7 @@ return {
         { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
         { "<leader>ll", lsp_start, "Start LSP" },
         { "<leader>lx", lsp_stop, "Stop LSP" },
+        { "<leader>lr", lsp_restart, "Restart LSP" },
         {
           "<leader>lh",
           function()

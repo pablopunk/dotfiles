@@ -26,7 +26,7 @@ keymap.set({ "n", "v", "x", "o", "c" }, "Q", "<nop>", opts "Noop")
 local function leader_h()
   vim.cmd "silent! nohl"
 end
-keymap.set("n", "<leader>h", leader_h, opts "Remove highlights & Noice UI")
+keymap.set("n", "<leader>h", leader_h, opts "Remove highlights")
 -- }}}
 
 -- Quit/Save file {{{

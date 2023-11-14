@@ -30,8 +30,6 @@ nmap + *N
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
-" Ctrl+t new tab
-nmap <c-t> :tabe<cr>
 " Ctrl+q close buffer
 nmap <c-q> :bd<cr>
 " Ctrl+s to save
@@ -135,10 +133,10 @@ vmap <leader>fw "9y:Grep<space>'<c-r>9'<space>.<cr>
 " }}}
 
 " File tree {{{
-let g:native_sidebar_shortcut = '<c-t>'
-exe 'nnoremap <silent> ' g:native_sidebar_shortcut ' :Lexplore %:p:h<cr>'
-exe 'vnoremap <silent> ' g:native_sidebar_shortcut ' :Lexplore %:p:h<cr>'
-exe 'inoremap <silent> ' g:native_sidebar_shortcut ' <esc>:Lexplore %:p:h<cr>'
+let g:file_tree_shortcut = '<c-t>'
+exe 'nnoremap <silent> ' g:file_tree_shortcut ' :Lexplore %:p:h<cr>'
+exe 'vnoremap <silent> ' g:file_tree_shortcut ' :Lexplore %:p:h<cr>'
+exe 'inoremap <silent> ' g:file_tree_shortcut ' <esc>:Lexplore %:p:h<cr>'
 
 augroup netrw_mapping
   autocmd!

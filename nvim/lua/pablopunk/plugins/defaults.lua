@@ -11,7 +11,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
   {
-    "pablopunk/unclutter.nvim",
+    "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
     dependencies = { "nvim-tree/nvim-web-devicons" },
     dev = true,
     config = function()

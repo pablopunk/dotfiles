@@ -12,7 +12,7 @@ skip-levels = 1
 insert = "bar"
 
 [editor.lsp]
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.statusline]
 left = ["mode", "spinner", "version-control"]

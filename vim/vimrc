@@ -35,8 +35,8 @@ nmap <c-q> :bd<cr>
 " Ctrl+s to save
 nmap <c-s> :w<cr>
 " Use system clipboard (reg *)
-nmap <leader>cp "*y
-vmap <leader>cp "*y
+nmap <leader>y "*y
+vmap <leader>y "*y
 nmap <leader>p "*p
 vmap <leader>p "*p
 " Y should not be the same as yy
@@ -55,11 +55,11 @@ nnoremap > >>
 nnoremap < <<
 vnoremap > >gv
 vnoremap < <gv
-" Search and replace in file/line (selection or word)
-vnoremap <c-n> "9y:%s/<c-r>9/<c-r>9/g<left><left>
-nnoremap <c-n> viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
-vnoremap <leader>n "9y:s/<c-r>9/<c-r>9/g<left><left>
-nnoremap <leader>n viw"9y:s/<c-r>9/<c-r>9/g<left><left>
+" Search and replace
+vnoremap <leader>rw "9y:%s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <leader>rw viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
+vnoremap <leader>rl "9y:s/<c-r>9/<c-r>9/g<left><left>
+nnoremap <leader>rl viw"9y:s/<c-r>9/<c-r>9/g<left><left>
 " Map ESC key to exit insert mode in :terminal (vim8 or neovim)
 if has('terminal') || has('nvim')
   tmap <Esc> <C-\><C-n>
@@ -95,27 +95,35 @@ iabbr fcreact const Component = () =>
 iabbr ccreact class Component extends React.Component
 " }}}
 
-" File finder and project search {{{
-" Better :find
+" File finder {{{
 set path+=** " Search files subdirectories
 set wildmenu " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
 set wildignore+=**/dist/**
+
 function! FindFiles(filename)
-  let error_file = tempname()
-  echo error_file
-  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.error_file
+  let l:error_file = tempname()
+  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.l:error_file
   set errorformat=%f:%l:%m
-  exe "cfile ". error_file
+  execute "cfile ".l:error_file
   copen
-  if line('$') == 1
-    wincmd w
-  endif
-  call delete(error_file)
+  if line('$') == 1 | wincmd w | endif
+  call delete(l:error_file)
 endfunction
+
+function! GitModifiedFiles()
+  call setqflist(map(split(system("git ls-files -m"), "\n"), '{"filename": v:val, "lnum": 1, "col": 1, "text": "modified"}'))
+  copen
+endfunction
+
 command! -nargs=1 Find call FindFiles(<q-args>)
 nmap <leader>ff :Find<space>
-" Better :grep
+command! GitModifiedFiles call GitModifiedFiles()
+nmap <leader>fg :GitModifiedFiles<cr>
+
+" }}}
+
+" Project search (strings) {{{
 set grepprg=rg\ --vimgrep\ --follow\ --max-columns=1000\ --case-sensitive
 set grepformat=%f:%l:%c:%m,%f:%l:%m
 function! Grep(...)
@@ -153,6 +161,9 @@ let g:netrw_winsize=20
 let g:netrw_liststyle=0
 let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
+" }}}
+
+" Git modified files {{{
 " }}}
 
 " Color config {{{

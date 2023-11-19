@@ -1,4 +1,5 @@
 return {
+  "dstein64/vim-startuptime",
   "nvim-lua/plenary.nvim", -- lua functions that many plugins use
   "pablopunk/persistent-undo.vim", -- undo works across vim sessions
   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line

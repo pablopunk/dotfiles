@@ -50,17 +50,12 @@ end
 local function save_file()
   vim.cmd "w"
 end
-local function save_and_quit_file()
-  save_file()
-  quit_file()
-end
 keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
 keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")
-keymap.set({ "n", "v" }, "<c-x>", save_and_quit_file, opts "Save & close file buffer")
 -- }}}
 
 -- Vim Messages {{{
-keymap.set("n", "<leader>m", ":messages<cr>", opts "Show messages")
+keymap.set("n", "<leader>ms", ":messages<cr>", opts "Show messages")
 -- }}}
 
 -- File path utils {{{

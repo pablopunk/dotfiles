@@ -25,6 +25,10 @@ return {
           synchronize = "<c-s>", -- <c-s> will write the changes you make in the explorer
           reveal_cwd = "r", -- reveal rooreveal root
         },
+        windows = {
+          preview = true, -- preview file under cursor
+          width_preview = 60, -- width of the preview window
+        },
       }
       local minifiles_toggle = function()
         if not MiniFiles.close() then

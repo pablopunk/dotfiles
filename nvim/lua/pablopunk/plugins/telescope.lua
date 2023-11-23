@@ -44,6 +44,7 @@ return {
       keymap.set("n", find_prefix .. "f", ":Telescope find_files<cr>", opts "Find files")
       keymap.set("n", find_prefix .. "g", ":Telescope git_status<cr>", opts "Find modified files in git")
       keymap.set("n", find_prefix .. "r", ":Telescope oldfiles<cr>", opts "Find recent files")
+      keymap.set("n", find_prefix .. "q", ":Telescope quickfix<cr>", opts "Send quickfix list to telescope")
       keymap.set("n", "<leader>b", ":Telescope buffers<cr>", opts "Open buffers")
 
       -- Search

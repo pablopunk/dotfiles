@@ -33,7 +33,7 @@ return {
         "lua_ls",
         "bashls",
         "jsonls",
-        "emmet_ls",
+        -- "emmet_ls",
       }
 
       local js_inlayhints = {

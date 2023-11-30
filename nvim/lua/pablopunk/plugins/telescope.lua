@@ -6,6 +6,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "nvim-telescope/telescope-ui-select.nvim", -- It sets vim.ui.select to telescope
     },
     config = function()
       local telescope = require "telescope"
@@ -75,6 +76,7 @@ return {
       keymap.set("n", "<leader>mm", ":Telescope marks<cr>", opts "Show marks")
 
       telescope.load_extension "fzf"
+      telescope.load_extension "ui-select"
     end,
   },
 }

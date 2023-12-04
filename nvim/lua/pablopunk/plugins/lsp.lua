@@ -126,7 +126,6 @@ return {
         { "E", vim.diagnostic.open_float, "Show line diagnostics" },
         { "ge", vim.diagnostic.goto_next, "Go to next diagnostic" },
         { "gE", vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-        { "gr", vim.lsp.buf.references, "Go to references" },
         { "<leader>ca", vim.lsp.buf.code_action, "Show code actions" },
         { "K", vim.lsp.buf.hover, "Hover" },
         { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },

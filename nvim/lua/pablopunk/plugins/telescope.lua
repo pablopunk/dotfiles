@@ -69,6 +69,7 @@ return {
 
       -- LSP
       keymap.set("n", "gd", ":Telescope lsp_definitions<cr>", opts "Go to definition")
+      keymap.set("n", "gr", ":Telescope lsp_references<cr>", opts "Go to references")
       keymap.set("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", opts "Document symbols")
       keymap.set("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", opts "Workspace symbols (dynamic)")
 

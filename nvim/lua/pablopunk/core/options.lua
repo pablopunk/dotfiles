@@ -47,3 +47,9 @@ opt.iskeyword:append "-" -- dash is part of the word
 
 -- where to show the signs (git changes and more)
 opt.signcolumn = "yes"
+
+-- better :find
+opt.path:append '**'
+opt.wildmenu = true
+opt.wildignore = opt.wildignore + "**/node_modules/**"
+opt.wildignore = opt.wildignore + "**/dist/**"

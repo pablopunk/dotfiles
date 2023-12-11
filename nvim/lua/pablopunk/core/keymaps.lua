@@ -37,14 +37,30 @@ local function quit_file()
   local number_of_tabs = #(vim.fn.gettabinfo())
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
   local is_last_unclutter_tab = #require("unclutter").list() == 1
+  local buffer_is_irrelevant = vim.tbl_contains(irrelevant_buffers, name_of_buffer)
 
   if is_last_buffer or is_last_unclutter_tab then
     vim.cmd "silent! SessionDelete"
-    vim.cmd "qa"
-  elseif vim.tbl_contains(irrelevant_buffers, name_of_buffer) then
+    if buffer_is_irrelevant then
+      vim.cmd "qa!"
+    else
+      vim.cmd "qa"
+    end
+  elseif buffer_is_irrelevant then
     vim.cmd "bd!"
   else
-    vim.cmd "bd"
+    local unsaved_changes = vim.fn.getbufvar(vim.fn.bufnr "%", "&mod") == 1
+    if unsaved_changes then
+      local result = vim.fn.input("Save changes? (y/n) ", "", "customlist,Save changes?,y,n")
+      if result == "y" then
+        vim.cmd "w"
+        vim.cmd "bd"
+      else
+        vim.cmd "bd!"
+      end
+    else
+      vim.cmd "bd"
+    end
   end
 end
 local function save_file()
@@ -110,3 +126,8 @@ keymap.set("v", "<", "<gv", opts "Indent selection left")
 keymap.set("n", "<leader><", "zM", opts "Fold all")
 keymap.set("n", "<leader>>", "zR", opts "Open all folds")
 -- }}}
+
+-- Quickfix {{{
+keymap.set("n", "<leader>qn", ":cnext<cr>", opts "Next quickfix file")
+keymap.set("n", "<leader>qp", ":cprev<cr>", opts "Previous quickfix file")
+--- }}}

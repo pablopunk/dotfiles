@@ -6,6 +6,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       require("auto-session").setup {
         log_level = "error",
+        auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
       }
       require("session-lens").setup {
         path_display = { "shorten" },

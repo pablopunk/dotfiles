@@ -4,19 +4,19 @@ return {
   {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
     keys = {
-      { git_prefix .. "b", "<cmd>ToggleBlame<cr>", desc = "Toggle git blame" },
+      { git_prefix .. "b", "<cmd>ToggleBlame<cr>", desc = "Toggle git blame", mode = { "n", "v" } },
     },
   },
   {
     "almo7aya/openingh.nvim",
     keys = {
-      { git_prefix .. "o", "<cmd>OpenInGHFile<cr>", desc = "Open file in github" },
+      { git_prefix .. "o", "<cmd>OpenInGHFile<cr>", desc = "Open file in github", mode = { "n", "v" } },
     },
   },
   {
     "NeogitOrg/neogit", -- magit for neovim (git client)
     keys = {
-      { git_prefix .. "g", "<cmd>Neogit<cr>", desc = "Git client" },
+      { git_prefix .. "g", "<cmd>Neogit<cr>", desc = "Git client", mode = { "n", "v" } },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",

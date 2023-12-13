@@ -123,7 +123,11 @@ keymap.set("v", "<", "<gv", opts "Indent selection left")
 -- }}}
 
 -- Folds {{{
-keymap.set("n", "<leader><", "zM", opts "Fold all")
+local function fold_all()
+  vim.opt.foldmethod = "indent"
+  vim.cmd "normal! zM"
+end
+keymap.set("n", "<leader><", fold_all, opts "Fold all")
 keymap.set("n", "<leader>>", "zR", opts "Open all folds")
 -- }}}
 

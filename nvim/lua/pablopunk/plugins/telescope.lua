@@ -43,6 +43,12 @@ return {
 
       -- Files
       keymap.set("n", find_prefix .. "f", ":Telescope find_files<cr>", opts "Find files")
+      keymap.set(
+        "v",
+        find_prefix .. "f",
+        [["9y:lua require('telescope.builtin').find_files{search_file=vim.fn.getreg('9')}<cr>]],
+        opts "Find file from visual selection"
+      )
       keymap.set("n", find_prefix .. "g", ":Telescope git_status<cr>", opts "Find modified files in git")
       keymap.set("n", find_prefix .. "r", ":Telescope oldfiles<cr>", opts "Find recent files")
       keymap.set("n", find_prefix .. "q", ":Telescope quickfix<cr>", opts "Send quickfix list to telescope")
@@ -66,12 +72,6 @@ return {
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
       keymap.set({ "n", "v" }, "<leader><leader>", ":Telescope keymaps<cr>", opts "Command palette (kinda)")
-
-      -- LSP
-      keymap.set("n", "gd", ":Telescope lsp_definitions<cr>", opts "Go to definition")
-      keymap.set("n", "gr", ":Telescope lsp_references<cr>", opts "Go to references")
-      keymap.set("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", opts "Document symbols")
-      keymap.set("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", opts "Workspace symbols (dynamic)")
 
       -- Marks
       keymap.set("n", "<leader>mm", ":Telescope marks<cr>", opts "Show marks")

@@ -68,6 +68,7 @@ local function save_file()
 end
 keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
 keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")
+keymap.set("n", "<leader>wca", ":silent %bd|e#|bd#<cr>", opts "Close all buffers except the current one")
 -- }}}
 
 -- Vim Messages {{{

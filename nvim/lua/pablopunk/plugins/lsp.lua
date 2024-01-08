@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -128,6 +129,10 @@ return {
         { "gE", vim.diagnostic.goto_prev, "Go to previous diagnostic" },
         { "<leader>ca", vim.lsp.buf.code_action, "Show code actions" },
         { "K", vim.lsp.buf.hover, "Hover" },
+        { "gd", ":Telescope lsp_definitions<cr>", "Go to definition" },
+        { "gr", ":Telescope lsp_references<cr>", "Go to references" },
+        { "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols" },
+        { "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)" },
         { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
         { "<leader>ll", lsp_start, "Start LSP" },
         { "<leader>lx", lsp_stop, "Stop LSP" },

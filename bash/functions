@@ -83,7 +83,11 @@ function weather {
 }
 
 function nvm {
-  echo "nvm is deprecated, use asdf instead"
+  echo "nvm is deprecated, use mise instead"
+}
+
+function asdf {
+  echo "asdf is deprecated, use mise instead"
 }
 
 function localLambdaOn {

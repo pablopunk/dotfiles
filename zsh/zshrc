@@ -67,7 +67,7 @@ bindkey "^[[1;3D" backward-word
 bindkey "^[[1;3C" forward-word
 # }}}
 
-# asdf {{{
-. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
-. $HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash
+# mise {{{
+eval "$(~/.local/bin/mise activate zsh)"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 # }}}

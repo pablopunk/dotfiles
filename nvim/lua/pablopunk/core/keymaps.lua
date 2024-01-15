@@ -44,7 +44,7 @@ local function quit_file()
     if buffer_is_irrelevant then
       vim.cmd "qa!"
     else
-      vim.cmd "qa"
+      vim.cmd "bd"
     end
   elseif buffer_is_irrelevant then
     vim.cmd "bd!"

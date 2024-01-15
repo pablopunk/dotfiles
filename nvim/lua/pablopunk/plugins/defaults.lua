@@ -8,7 +8,7 @@ return {
     "Lilja/zellij.nvim", -- like vim-tmux-navigator but for zellij
     opts = {
       vimTmuxNavigatorKeybinds = true,
-      replaceVimWindowNavigationKeybinds = true
+      replaceVimWindowNavigationKeybinds = true,
     },
   },
   -- "romainl/vim-cool", -- disables search highlighting when you are done searching and re-enables it when you search again
@@ -26,6 +26,9 @@ return {
       local unclutter = require "unclutter"
       vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, { noremap = true })
       vim.keymap.set({ "n", "v" }, "<c-p>", unclutter.prev, { noremap = true })
+      unclutter.setup {
+        clean_after = 1,
+      }
     end,
   },
 }

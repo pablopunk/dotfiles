@@ -128,8 +128,12 @@ local function fold_all()
   vim.opt.foldmethod = "indent"
   vim.cmd "normal! zM"
 end
+local function unfold_all()
+  vim.cmd "set nofoldenable"
+  vim.cmd "normal! zR"
+end
 keymap.set("n", "<leader><", fold_all, opts "Fold all")
-keymap.set("n", "<leader>>", "zR", opts "Open all folds")
+keymap.set("n", "<leader>>", unfold_all, opts "Open all folds")
 -- }}}
 
 -- Quickfix {{{

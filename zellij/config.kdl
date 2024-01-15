@@ -9,7 +9,7 @@ keybinds clear-defaults=true {
         bind "Ctrl l" "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
     }
     locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
+        bind "Ctrl b" { SwitchToMode "Normal"; }
         bind "Ctrl h" "Left" { MoveFocus "Left"; }
         bind "Ctrl j" "Down" { MoveFocus "Down"; }
         bind "Ctrl k" "Up" { MoveFocus "Up"; }
@@ -30,11 +30,11 @@ keybinds clear-defaults=true {
     }
     pane {
         bind "Ctrl p" { SwitchToMode "Normal"; }
-        bind "h" "Left" { MoveFocus "Left"; }
-        bind "l" "Right" { MoveFocus "Right"; }
-        bind "j" "Down" { MoveFocus "Down"; }
-        bind "k" "Up" { MoveFocus "Up"; }
-        bind "p" { SwitchFocus; }
+        bind "h" "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "l" "Right" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "j" "Down" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "k" "Up" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "p" { SwitchFocus; SwitchToMode "Normal"; }
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
@@ -153,7 +153,7 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Ctrl b" { SwitchToMode "Locked"; }
         bind "Ctrl q" { Quit; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
@@ -186,9 +186,9 @@ keybinds clear-defaults=true {
     shared_except "move" "locked" {
         bind "Ctrl h" { SwitchToMode "Move"; }
     }
-    shared_except "tmux" "locked" {
-        bind "Ctrl b" { SwitchToMode "Tmux"; }
-    }
+    //  shared_except "tmux" "locked" {
+    //      bind "Ctrl b" { SwitchToMode "Tmux"; }
+    //  }
 }
 
 plugins {

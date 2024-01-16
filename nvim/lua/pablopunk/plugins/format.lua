@@ -53,7 +53,7 @@ return {
         null_ls.toggle "eslint_d"
       end
 
-      toggle_diagnostics() -- start with eslint disabled
+      -- toggle_diagnostics() -- start with eslint disabled
       vim.keymap.set(
         "n",
         "<leader>d",

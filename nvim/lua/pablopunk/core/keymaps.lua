@@ -75,6 +75,11 @@ keymap.set("n", "<leader>wca", ":silent %bd|e#|bd#<cr>", opts "Close all buffers
 keymap.set("n", "<leader>ms", ":messages<cr>", opts "Show messages")
 -- }}}
 
+-- Move lines {{{
+keymap.set("v", "J", ":m '>+1<cr>gv=gv", opts "Move line down")
+keymap.set("v", "K", ":m '<-2<cr>gv=gv", opts "Move line up")
+-- }}}
+
 -- File path utils {{{
 keymap.set("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", opts "Copy file path (absolute)")
 keymap.set("n", "<leader>fpr", ":let @+ = expand('%:p:~:.')<cr>", opts "Copy file path (relative)")

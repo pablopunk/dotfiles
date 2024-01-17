@@ -13,7 +13,6 @@ return {
       local lsp_format = require "lsp-format"
 
       local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
 
       require("mason").setup {} -- needed now that I'm not loading LSP at start
 
@@ -38,9 +37,6 @@ return {
         formatting.eslint_d.with {
           filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         },
-        diagnostics.eslint_d.with {
-          -- extra_args = { "--quiet" }, -- show only errors, not warnings
-        },
       }
 
       null_ls.setup {
@@ -48,18 +44,6 @@ return {
         debug = false,
         on_attach = lsp_format.on_attach,
       }
-
-      local function toggle_diagnostics()
-        null_ls.toggle "eslint_d"
-      end
-
-      -- toggle_diagnostics() -- start with eslint disabled
-      vim.keymap.set(
-        "n",
-        "<leader>d",
-        toggle_diagnostics,
-        { noremap = true, silent = true, desc = "Toggle diagnostics" }
-      )
     end,
   },
 }

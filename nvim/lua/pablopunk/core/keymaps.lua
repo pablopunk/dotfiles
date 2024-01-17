@@ -81,6 +81,9 @@ keymap.set("v", "K", ":m '<-2<cr>gv=gv", opts "Move line up")
 -- }}}
 
 -- File path utils {{{
+keymap.set("n", "<leader>fpp", function()
+  print(vim.fn.expand "%:p")
+end, opts "Print file path")
 keymap.set("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", opts "Copy file path (absolute)")
 keymap.set("n", "<leader>fpr", ":let @+ = expand('%:p:~:.')<cr>", opts "Copy file path (relative)")
 keymap.set("n", "<leader>fni", ":let @0 = expand('%:p:t')<cr>\"0p", opts "Insert file name")

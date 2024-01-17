@@ -57,6 +57,9 @@ return {
       -- Search
       keymap.set("n", find_prefix .. "s", ":Telescope live_grep<cr>", opts "Find string")
       keymap.set("n", find_prefix .. "w", ":Telescope grep_string<cr>", opts "Find word under cursor")
+      keymap.set("n", find_prefix .. "W", function()
+        builtin.grep_string { search = vim.fn.expand "<cWORD>" }
+      end, opts "Find Word under cursor")
       keymap.set(
         "v",
         find_prefix .. "w",

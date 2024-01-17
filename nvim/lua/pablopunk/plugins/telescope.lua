@@ -75,6 +75,7 @@ return {
 
       -- Opening keymaps looks like a command palette (can search for descriptions)
       keymap.set({ "n", "v" }, "<leader><leader>", ":Telescope keymaps<cr>", opts "Command palette (kinda)")
+      keymap.set({ "t" }, "<leader><leader>", "<C-\\><C-n>:Telescope keymaps<cr>", opts "Command palette (kinda)")
 
       -- Marks
       keymap.set("n", "<leader>mm", ":Telescope marks<cr>", opts "Show marks")

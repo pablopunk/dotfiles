@@ -31,3 +31,6 @@ disabled = true
 
 [nodejs]
 disabled = true
+
+[aws]
+disabled = true

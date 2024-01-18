@@ -5,7 +5,7 @@ root: ~/src/maze/maze-monorepo/
 
 windows:
   - tilt: wait_for_docker; tilt up --stream=true
-  - monorepo: open -a Google\ Chrome http://localhost:8000 http://localhost:10350/ && clear && git status
+  - monorepo: open -a Firefox http://localhost:8000 http://localhost:10350/ && clear && git status
 <% directories = `echo "$(nvim --headless +oldfiles +qa 2>&1)" | grep -E "maze-monorepo/(apps|packages|services)" | awk -F'/' '{print $7"/"$8}' | sort | uniq -c | sort -rn | awk '{ $1=""; print $0 }' | head -1 | sed 's/^ //'`.split("\n") %>
 <% directories.each do |directory| %>
   - <%= directory.split("/")[1] %>: cd <%= directory %>

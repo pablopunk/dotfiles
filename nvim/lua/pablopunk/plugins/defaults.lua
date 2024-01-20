@@ -24,8 +24,22 @@ return {
     dev = true,
     config = function()
       local unclutter = require "unclutter"
-      vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, { noremap = true })
-      vim.keymap.set({ "n", "v" }, "<c-p>", unclutter.prev, { noremap = true })
+      vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, {
+        noremap = true,
+        desc = "uncutter.nvim: Next buffer",
+      })
+      vim.keymap.set(
+        { "n", "v" },
+        "<c-p>",
+        unclutter.prev,
+        { noremap = true, desc = "unclutter.nvim: Previous buffer" }
+      )
+      vim.keymap.set(
+        { "n", "v" },
+        "<c-f>",
+        unclutter.telescope,
+        { noremap = true, desc = "unclutter.nvim: List all buffers" }
+      )
       unclutter.setup {
         clean_after = 1,
       }

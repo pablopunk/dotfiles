@@ -17,6 +17,8 @@ return {
         defaults = {
           path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
           layout_strategy = "vertical",
+          selection_caret = "◦ ",
+          prompt_prefix = " → ",
           mappings = {
             i = {
               ["<c-k>"] = actions.cycle_history_prev,

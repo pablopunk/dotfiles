@@ -41,7 +41,8 @@ return {
         { noremap = true, desc = "unclutter.nvim: List all buffers" }
       )
       unclutter.setup {
-        clean_after = 1,
+        clean_after = 0,
+        tabline = false,
       }
     end,
   },

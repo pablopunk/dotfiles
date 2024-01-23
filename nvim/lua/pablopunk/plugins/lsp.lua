@@ -1,6 +1,6 @@
 return {
   {
-    enabled = true,
+    enabled = false,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {

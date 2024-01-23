@@ -66,6 +66,16 @@ if has('terminal') || has('nvim')
 endif
 " Remove highlights
 nmap <silent> <leader>h :noh<cr>
+function! FoldAll()
+  set foldmethod=indent
+  normal! zM
+endfunction
+function! UnfoldAll()
+  set nofoldenable
+  normal! zR
+endfunction
+nnoremap <leader>< :call FoldAll()<cr>
+nnoremap <silent> <leader>> :call UnfoldAll()<cr>
 " }}}
 
 " Autocommands {{{
@@ -120,7 +130,6 @@ command! -nargs=1 Find call FindFiles(<q-args>)
 nmap <leader>ff :Find<space>
 command! GitModifiedFiles call GitModifiedFiles()
 nmap <leader>fg :GitModifiedFiles<cr>
-
 " }}}
 
 " Project search (strings) {{{
@@ -161,9 +170,6 @@ let g:netrw_winsize=20
 let g:netrw_liststyle=0
 let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
-" }}}
-
-" Git modified files {{{
 " }}}
 
 " Color config {{{

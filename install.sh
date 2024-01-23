@@ -15,3 +15,7 @@ do
     done
   fi
 done
+
+# set up git hooks
+echo "bash install.sh" > .git/hooks/post-merge
+chmod +x .git/hooks/post-merge

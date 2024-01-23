@@ -1,6 +1,6 @@
 return {
   {
-    enabled = false,
+    enabled = true,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -16,6 +16,7 @@ return {
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
+      "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
     },
     config = function()
       local cmp = require "cmp"
@@ -25,6 +26,8 @@ return {
       local cmp_nvim_lsp = require "cmp_nvim_lsp"
       local mason = require "mason"
       local mason_lspconfig = require "mason-lspconfig"
+
+      require("neoconf").setup {} -- needed before lspconfig setup
 
       local servers = {
         "tsserver",

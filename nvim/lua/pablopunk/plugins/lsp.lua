@@ -15,7 +15,6 @@ return {
       "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
-      { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
     },
     config = function()

@@ -76,6 +76,23 @@ function! UnfoldAll()
 endfunction
 nnoremap <leader>< :call FoldAll()<cr>
 nnoremap <silent> <leader>> :call UnfoldAll()<cr>
+" Comments
+function! ToggleCommentRange(startline, endline)
+  let l:commentString = (&filetype == 'lua' ? '--' : (&filetype == 'sh' ? '#' : (&filetype == 'vim' ? '"' : '//')))
+  let l:allCommented = 1
+  for l:line in range(a:startline, a:endline)
+      if getline(l:line) !~ '^\s*' . l:commentString . '\s*'
+          let l:allCommented = 0
+          break
+      endif
+  endfor
+  for l:line in range(a:startline, a:endline)
+      execute l:line . (l:allCommented ? 's/^\s*' . l:commentString . '\s*//' : 's/^/' . l:commentString . ' /')
+  endfor
+endfunction
+
+nnoremap gcc :call ToggleCommentRange(line('.'), line('.'))<CR>
+vnoremap gc :<C-u>call ToggleCommentRange(line("'<"), line("'>"))<CR>
 " }}}
 
 " Autocommands {{{

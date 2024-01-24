@@ -20,7 +20,7 @@ return {
   },
   {
     "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "vim-telescope/telescope.nvim" },
     dev = true,
     config = function()
       local unclutter = require "unclutter"

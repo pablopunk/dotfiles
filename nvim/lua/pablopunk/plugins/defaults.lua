@@ -18,32 +18,4 @@ return {
     "editorconfig/editorconfig-vim", -- editorconfig support
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
-    dependencies = { "nvim-tree/nvim-web-devicons", "vim-telescope/telescope.nvim" },
-    dev = true,
-    config = function()
-      local unclutter = require "unclutter"
-      vim.keymap.set({ "n", "v" }, "<c-n>", unclutter.next, {
-        noremap = true,
-        desc = "uncutter.nvim: Next buffer",
-      })
-      vim.keymap.set(
-        { "n", "v" },
-        "<c-p>",
-        unclutter.prev,
-        { noremap = true, desc = "unclutter.nvim: Previous buffer" }
-      )
-      vim.keymap.set(
-        { "n", "v" },
-        "<c-f>",
-        unclutter.telescope,
-        { noremap = true, desc = "unclutter.nvim: List all buffers" }
-      )
-      unclutter.setup {
-        clean_after = 0,
-        tabline = false,
-      }
-    end,
-  },
 }

@@ -36,7 +36,7 @@ local function quit_file()
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
-  local is_last_unclutter_tab = #require("unclutter").list() == 1
+  local is_last_unclutter_tab = #require("unclutter.tabline").list() == 1
   local buffer_is_irrelevant = vim.tbl_contains(irrelevant_buffers, name_of_buffer)
 
   if is_last_buffer or is_last_unclutter_tab then

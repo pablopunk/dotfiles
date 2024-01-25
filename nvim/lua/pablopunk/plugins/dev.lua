@@ -1,8 +1,11 @@
 -- Plugins to develop plugins in Lua
 return {
+  {
+    "nvim-lua/plenary.nvim", -- lua utils
+  },
   { "folke/neodev.nvim", config = true }, -- lsp for developing neovim plugins
   {
-    "tjdevries/tree-sitter-lua",
-    build = "make build_parser && rsync -u ./build/parser.so ./parser/lua.so", -- fix while this is not merged https://github.com/tjdevries/tree-sitter-lua/pull/53
-  }, -- to generate docs in plugins
+    "tjdevries/tree-sitter-lua", -- to generate docs in plugins
+    build = "make dist",
+  },
 }

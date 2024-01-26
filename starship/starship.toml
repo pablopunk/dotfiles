@@ -5,6 +5,7 @@ add_newline = false
 
 [character]
 success_symbol = '[ƛ](yellow)'
+error_symbol = '[✖](red)'
 
 [package]
 disabled = true

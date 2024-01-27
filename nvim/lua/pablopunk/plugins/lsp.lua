@@ -4,7 +4,7 @@ return {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
+      -- { "L3MON4D3/LuaSnip", branch = "master" }, -- snippets
       -- "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim", -- toggle LSP hover diagnostics
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
@@ -12,7 +12,7 @@ return {
       "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
       "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
-      "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
+      -- "saadparwaiz1/cmp_luasnip", -- show snippets in completion list
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
@@ -20,7 +20,7 @@ return {
     },
     config = function()
       local cmp = require "cmp"
-      local luasnip = require "luasnip"
+      -- local luasnip = require "luasnip"
       local lspkind = require "lspkind"
       local lspconfig = require "lspconfig"
       local cmp_nvim_lsp = require "cmp_nvim_lsp"
@@ -51,25 +51,22 @@ return {
         includeInlayEnumMemberValueHints = true,
       }
 
-      -- load friendly-snippets
-      require("luasnip/loaders/from_vscode").lazy_load()
-
       vim.opt.completeopt = "menu,menuone,noselect"
 
       ---@diagnostic disable-next-line: missing-fields
       cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
+        -- snippet = {
+        --   expand = function(args)
+        --     luasnip.lsp_expand(args.body)
+        --   end,
+        -- },
         mapping = cmp.mapping.preset.insert {
           ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
         },
         sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- lsp
-          { name = "luasnip" }, -- lua snippets
+          -- { name = "luasnip" }, -- lua snippets
           { name = "buffer" }, -- text in buffer
           { name = "path" }, -- file system paths
           { name = "copilot" }, -- copilot.lua as a cmp source
@@ -81,7 +78,7 @@ return {
       }
 
       -- load friendly-snippets
-      require("luasnip/loaders/from_vscode").lazy_load()
+      -- require("luasnip/loaders/from_vscode").lazy_load()
       vim.opt.completeopt = "menu,menuone,noselect"
       local settings = {
         javascript = {

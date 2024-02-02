@@ -8,8 +8,13 @@ alias glog='git log --oneline --decorate --graph'
 alias gd='git diff -w --minimal'
 alias gds='git diff -w --staged --minimal'
 alias gc='git commit'
-alias gcm='git commit -m'
-alias gcam='git add -A && git commit -m'
+function gcm {
+  git commit -m "$*"
+}
+function gcam {
+  git add -A
+  git commit -m "$*"
+}
 alias gca='git add -A && git commit'
 alias gck='git checkout'
 alias gpr='git fetch upstream && git diff -w --minimal upstream/master'

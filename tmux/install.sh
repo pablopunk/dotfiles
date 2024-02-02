@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ln -svf $(dirname $(realpath $0))/tmux.conf ~/.tmux.conf
+ln -sf $(dirname $(realpath $0))/tmux.conf ~/.tmux.conf
 
 plugins_dir=~/.tmux/plugins
 [ -d $plugins_dir/tpm ] && exit

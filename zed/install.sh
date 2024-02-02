@@ -3,4 +3,4 @@
 dir="$(dirname $(realpath $0))"
 
 rm -rf ~/.config/zed
-ln -svf $dir ~/.config/zed
+ln -sf $dir ~/.config/zed

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p ~/.config/kitty
-ln -svf "$(dirname $(realpath $0))"/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf "$(dirname $(realpath $0))"/kitty.conf ~/.config/kitty/kitty.conf
 
 themes_dir=~/.config/kitty/themes
 tmp_themes_dir=/tmp/kitty-catppuccin

@@ -11,9 +11,10 @@ do
   else
     for F in `ls -1 $D`
     do
-      ln -svf ${D}${F} ~/.$F      # just link the file if there's no install.sh
+      ln -sf ${D}${F} ~/.$F      # just link the file if there's no install.sh
     done
   fi
+  echo ✔︎ $(basename $D)
 done
 
 # set up git hooks

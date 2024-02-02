@@ -11,5 +11,5 @@ fi
 
 mkdir -p "$target_dir"
 rm -rf "$target_dir/User"
-ln -svf "$dir/User" "$target_dir/User"
+ln -sf "$dir/User" "$target_dir/User"
 

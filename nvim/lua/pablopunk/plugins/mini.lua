@@ -38,6 +38,7 @@ return {
         },
       }
       local minifiles_toggle = function()
+        local MiniFiles = require "mini.files"
         if not MiniFiles.close() then
           local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
           if is_buffer_a_file then

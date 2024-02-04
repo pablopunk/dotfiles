@@ -54,6 +54,11 @@ return {
               ["is"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
             },
           },
+          swap = {
+            enable = true,
+            swap_next = { ["<leader>a"] = "@parameter.inner", desc = "Swap with next parameter" },
+            swap_previous = { ["<leader>A"] = "@parameter.inner", desc = "Swap with previous parameter" },
+          },
         },
       }
     end,

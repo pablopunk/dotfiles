@@ -23,6 +23,12 @@ return {
           starter.sections.recent_files(5, true, false),
           starter.sections.recent_files(4, false, false),
         },
+        content_hooks = {
+          -- bullet
+          starter.gen_hook.adding_bullet "◦ ",
+          -- file name
+          starter.gen_hook.aligning("center", "center"),
+        },
       }
 
       -- file tree

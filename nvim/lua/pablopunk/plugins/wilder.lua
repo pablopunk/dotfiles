@@ -6,6 +6,7 @@ return {
       "roxma/vim-hug-neovim-rpc", -- to use python search
       "nvim-tree/nvim-web-devicons", -- to display icons in file completion
     },
+    event = "CmdlineEnter",
     build = function()
       vim.cmd "UpdateRemotePlugins"
     end,

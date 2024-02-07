@@ -1,10 +1,26 @@
 return {
   "jackMort/ChatGPT.nvim",
-  event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
+  },
+  keys = {
+    {
+      "<leader>cg",
+      function()
+        require("chatgpt").openChat()
+      end,
+      desc = "ChatGPT",
+    },
+    {
+      mode = "v",
+      "<leader>cg",
+      function()
+        require("chatgpt").edit_with_instructions()
+      end,
+      desc = "Edit with ChatGPT",
+    },
   },
   config = function()
     require("chatgpt").setup {
@@ -24,12 +40,5 @@ return {
         submit = "<CR>",
       },
     }
-    vim.keymap.set("n", "<leader>cg", ":ChatGPT<cr>", { silent = true, noremap = true, desc = "Edit with ChatGPT" })
-    vim.keymap.set(
-      "v",
-      "<leader>cg",
-      ":ChatGPTEditWithInstructions<cr>",
-      { silent = true, noremap = true, desc = "ChatGPT" }
-    )
   end,
 }

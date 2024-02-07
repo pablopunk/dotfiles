@@ -6,7 +6,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
-    event = { "BufWinEnter" },
+    event = "BufWinEnter",
     build = ":TSUpdate",
     config = function()
       ---@diagnostic disable-next-line: missing-fields

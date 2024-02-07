@@ -1,22 +1,20 @@
-local git_prefix = "<leader>g"
-
 return {
   {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
     keys = {
-      { git_prefix .. "b", "<cmd>ToggleBlame<cr>", desc = "Toggle git blame", mode = { "n", "v" } },
+      { "<leader>gb", "<cmd>ToggleBlame<cr>", desc = "Toggle git blame", mode = { "n", "v" } },
     },
   },
   {
     "almo7aya/openingh.nvim",
     keys = {
-      { git_prefix .. "o", "<cmd>OpenInGHFile<cr>", desc = "Open file in github", mode = { "n", "v" } },
+      { "<leader>go", "<cmd>OpenInGHFile<cr>", desc = "Open file in github", mode = { "n", "v" } },
     },
   },
   {
     "NeogitOrg/neogit", -- magit for neovim (git client)
     keys = {
-      { git_prefix .. "g", "<cmd>Neogit<cr>", desc = "Git client", mode = { "n", "v" } },
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git client", mode = { "n", "v" } },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -30,7 +28,7 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim", -- leftside git status
-    event = "VeryLazy",
+    event = { "CmdlineEnter", "InsertEnter", "CursorHold", "CursorMoved" },
     config = function()
       require("gitsigns").setup {
         on_attach = function(bufnr)
@@ -65,7 +63,7 @@ return {
 
           map(
             { "n", "v" },
-            git_prefix .. "u",
+            "<leader>gu",
             ":Gitsigns reset_hunk<CR>",
             { noremap = true, silent = true, desc = "Undo git hunk" }
           )
@@ -75,7 +73,9 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
+    keys = {
+      { "<leader>gc", "<cmd>GitConflict<cr>", desc = "Git conflict marks", mode = { "n", "v" } },
+    },
     config = true,
   },
 }

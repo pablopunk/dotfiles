@@ -1,19 +1,42 @@
 return {
   {
-    "echasnovski/mini.nvim", -- see plugins below for more info
-    branch = "main",
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- for tabline icons
+    "echasnovski/mini.comment", -- comments with gcc
+    config = true,
+  },
+  {
+    "echasnovski/mini.pairs", -- autopairs for (), {}, [], '', ""...
+    config = true,
+    event = "InsertEnter",
+  },
+  {
+    "echasnovski/mini.splitjoin", -- `gS` split or join function arguments
+    config = true,
+    event = "VeryLazy",
+  },
+  {
+    "echasnovski/mini.cursorword", -- highlight word under cursor
+    config = true,
+  },
+  {
+    "echasnovski/mini.notify", -- notifications ui
+    config = true,
+    event = "VeryLazy",
+  },
+  -- {
+  --   "echasnovski/mini.statusline", -- statusline
+  --   config = true,
+  -- },
+  -- {
+  --   "echasnovski/mini.doc", -- generate Lua docs
+  --   config = true,
+  -- }
+  -- {
+  --   "echasnovski/mini.test", -- testing for Lua
+  --   config = true,
+  -- }
+  {
+    "echasnovski/mini.starter", -- starter screen
     config = function()
-      require("mini.comment").setup {} -- comments with gcc
-      require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
-      require("mini.splitjoin").setup {} -- `gS` split or join function arguments
-      require("mini.cursorword").setup {} -- highlight word under cursor
-      require("mini.notify").setup {} -- notifications ui
-      -- require("mini.statusline").setup {} -- statusline
-      -- require("mini.doc").setup {} -- generate Lua docs
-      -- require("mini.test").setup {} -- testing for Lua
-
-      -- Start screen
       local starter = require "mini.starter"
       starter.setup {
         items = {
@@ -28,8 +51,29 @@ return {
           starter.gen_hook.aligning("center", "center"),
         },
       }
-
-      -- file tree
+    end,
+  },
+  {
+    "echasnovski/mini.files", -- file tree
+    keys = {
+      {
+        "<c-t>",
+        function()
+          local MiniFiles = require "mini.files"
+          if not MiniFiles.close() then
+            local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
+            if is_buffer_a_file then
+              MiniFiles.open(vim.api.nvim_buf_get_name(0))
+            else
+              MiniFiles.open()
+            end
+          end
+        end,
+        desc = "Toggle file explorer",
+      },
+      { "<c-y>", ":lua require('mini.files').open()<cr>", desc = "Toggle file explorer (root)" },
+    },
+    config = function()
       require("mini.files").setup {
         mappings = {
           go_in_plus = "<cr>", -- <Enter> will open the file and close the explorer
@@ -41,19 +85,6 @@ return {
           width_preview = 60, -- width of the preview window
         },
       }
-      local minifiles_toggle = function()
-        local MiniFiles = require "mini.files"
-        if not MiniFiles.close() then
-          local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
-          if is_buffer_a_file then
-            MiniFiles.open(vim.api.nvim_buf_get_name(0))
-          else
-            MiniFiles.open()
-          end
-        end
-      end
-      vim.keymap.set("n", "<c-t>", minifiles_toggle, { desc = "Toggle file explorer" })
-      vim.keymap.set("n", "<c-y>", ":lua MiniFiles.open()<cr>", { desc = "Toggle file explorer (root)" })
     end,
   },
 }

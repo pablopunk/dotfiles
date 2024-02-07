@@ -8,10 +8,8 @@ return {
       require("mini.pairs").setup {} -- autopairs for (), {}, [], '', ""...
       require("mini.splitjoin").setup {} -- `gS` split or join function arguments
       require("mini.cursorword").setup {} -- highlight word under cursor
-
-      -- require("mini.notify").setup {} -- notifications ui
+      require("mini.notify").setup {} -- notifications ui
       -- require("mini.statusline").setup {} -- statusline
-
       -- require("mini.doc").setup {} -- generate Lua docs
       -- require("mini.test").setup {} -- testing for Lua
 

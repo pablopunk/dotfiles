@@ -2,11 +2,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     after = "nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "CursorHold", "CursorMoved", "InsertEnter" },
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufWinEnter" },
     build = ":TSUpdate",
     config = function()
       ---@diagnostic disable-next-line: missing-fields

@@ -1,28 +1,13 @@
 return {
   {
     "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-telescope/telescope.nvim",
+    },
     dev = true,
-    event = "BufWinEnter",
-    config = function()
-      local tabline = require "unclutter.tabline"
-
-      -- keymaps
-      vim.keymap.set({ "n", "v" }, "<c-n>", tabline.next, {
-        noremap = true,
-        desc = "uncutter.nvim: Next buffer",
-      })
-      vim.keymap.set({ "n", "v" }, "<c-p>", tabline.prev, { noremap = true, desc = "unclutter.nvim: Previous buffer" })
-
-      require("unclutter").setup {
-        clean_after = 0,
-        tabline = false,
-      }
-    end,
-  },
-  {
-    "nvim-telescope/telescope.nvim", -- lazy load telescope only if needed by unclutter
-    keys = {
+    -- event = "BufWinEnter", -- use this for tabline
+    keys = { -- use these without a tabline
       {
         "<c-f>",
         function()
@@ -30,6 +15,26 @@ return {
         end,
         desc = "unclutter.nvim: List all buffers",
       },
+      {
+        "<c-n>",
+        function()
+          require("unclutter.tabline").next()
+        end,
+        desc = "unclutter.nvim: Next buffer",
+        noremap = true,
+      },
+      {
+        "<c-p>",
+        function()
+          require("unclutter.tabline").prev()
+        end,
+        desc = "unclutter.nvim: Previous buffer",
+        noremap = true,
+      },
+    },
+    opts = {
+      clean_after = 0,
+      tabline = false,
     },
   },
 }

@@ -212,3 +212,17 @@ function mru_monorepo {
   echo $unique_paths
   echo
 }
+
+function tilt_playwright {
+  tilt enable signup-api localstack panel-core graph-gateway maze-api maze-video-recording-api maze-webapp report-webapp testing-webapp signup-webapp
+  tilt trigger signup-api
+  tilt trigger localstack
+  tilt trigger panel-core
+  tilt trigger graph-gateway
+  tilt trigger maze-api
+  tilt trigger maze-video-recording-api
+  tilt trigger maze-webapp
+  tilt trigger report-webapp
+  tilt trigger testing-webapp
+  tilt trigger signup-webapp
+}

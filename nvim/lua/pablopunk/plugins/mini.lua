@@ -2,6 +2,7 @@ return {
   {
     "echasnovski/mini.comment", -- comments with gcc
     config = true,
+    event = "CursorMoved",
   },
   {
     "echasnovski/mini.pairs", -- autopairs for (), {}, [], '', ""...
@@ -11,11 +12,12 @@ return {
   {
     "echasnovski/mini.splitjoin", -- `gS` split or join function arguments
     config = true,
-    event = "VeryLazy",
+    event = "CursorMoved",
   },
   {
     "echasnovski/mini.cursorword", -- highlight word under cursor
     config = true,
+    event = "CursorHold",
   },
   {
     "echasnovski/mini.notify", -- notifications ui

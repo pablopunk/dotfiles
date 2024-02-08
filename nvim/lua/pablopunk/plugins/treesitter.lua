@@ -6,6 +6,9 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
+    dependencies = {
+      "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
+    },
     event = "BufWinEnter",
     build = ":TSUpdate",
     config = function()

@@ -44,7 +44,6 @@ return {
         items = {
           starter.sections.builtin_actions(),
           starter.sections.recent_files(5, true, false),
-          starter.sections.recent_files(4, false, false),
         },
         content_hooks = {
           -- bullet
@@ -52,6 +51,7 @@ return {
           -- file name
           starter.gen_hook.aligning("center", "center"),
         },
+        footer = "", -- to hide instructions
       }
     end,
   },

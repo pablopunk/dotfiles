@@ -15,3 +15,8 @@ auto-format = true
 
 [[language]]
 name = "lua"
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+config.hostInfo = "helix"

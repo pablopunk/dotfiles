@@ -29,13 +29,14 @@ return {
       require("neoconf").setup {} -- needed before lspconfig setup
 
       local servers = {
-        "tsserver",
-        "html",
-        "cssls",
-        "tailwindcss",
-        "lua_ls",
         "bashls",
+        "cssls",
+        "html",
+        "vimls",
         "jsonls",
+        "lua_ls",
+        "tailwindcss",
+        "tsserver",
         -- "emmet_ls",
       }
 

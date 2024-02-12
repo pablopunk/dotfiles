@@ -20,7 +20,7 @@ opt.expandtab = true
 opt.autoindent = true
 
 -- line wrapping
-opt.wrap = true
+opt.wrap = false
 
 -- search settings
 opt.ignorecase = true
@@ -49,7 +49,7 @@ opt.iskeyword:append "-" -- dash is part of the word
 opt.signcolumn = "yes"
 
 -- better :find
-opt.path:append '**'
+opt.path:append "**"
 opt.wildmenu = true
 opt.wildignore = opt.wildignore + "**/node_modules/**"
 opt.wildignore = opt.wildignore + "**/dist/**"

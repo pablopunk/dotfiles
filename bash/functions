@@ -226,3 +226,11 @@ function tilt_playwright {
   tilt trigger testing-webapp
   tilt trigger signup-webapp
 }
+
+function ssh {
+  if [[ -z $(which kitten) ]]; then
+    command ssh $@
+  else
+    kitten ssh $@
+  fi
+}

@@ -97,8 +97,9 @@ return {
             checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"
             -- make server aware of runtime files
             library = {
-              [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-              [vim.fn.stdpath "config" .. "/lua"] = true,
+              -- TODO: enable this when the error msg is fixed → "Invalid 'data': Cannot convert given Lua table"
+              -- [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+              -- [vim.fn.stdpath "config" .. "/lua"] = true,
             },
           },
         },

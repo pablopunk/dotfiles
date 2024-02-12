@@ -71,11 +71,4 @@ return {
       }
     end,
   },
-  {
-    "akinsho/git-conflict.nvim",
-    keys = {
-      { "<leader>gc", "<cmd>GitConflict<cr>", desc = "Git conflict marks", mode = { "n", "v" } },
-    },
-    config = true,
-  },
 }

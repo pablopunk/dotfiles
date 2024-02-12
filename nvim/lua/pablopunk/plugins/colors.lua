@@ -43,5 +43,8 @@ return {
     },
   },
   "edkolev/tmuxline.vim", -- Generate tmux colors based on vim colors
-  "pablopunk/transparent.vim", -- Transparent background
+  {
+    "pablopunk/transparent.vim", -- Transparent background
+    dev = true,
+  },
 }

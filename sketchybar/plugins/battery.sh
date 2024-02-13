@@ -20,7 +20,7 @@ case "${PERCENTAGE}" in
 esac
 
 if [[ "$CHARGING" != "" ]]; then
-  ICON=""
+  ICON="􀢋"
 fi
 
 # The item invoking this script (name $NAME) will get its icon and label

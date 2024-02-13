@@ -60,6 +60,7 @@ return {
     keys = {
       {
         "<c-t>",
+        mode = { "n", "v" },
         function()
           local MiniFiles = require "mini.files"
           if not MiniFiles.close() then

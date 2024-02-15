@@ -18,3 +18,22 @@ The first time you clone the repo, you should install all dependencies:
 ```shell
 bash bootsrap.sh
 ```
+
+## Add a new dotfile
+
+### Example: `~/.vimrc`
+
+```bash
+cd ~/.dotfiles
+mkdir vim
+mv ~/.vimrc vim/.vimrc
+bash link.sh
+```
+### Example: `~/.config/mise`
+
+```bash
+cd ~/.dotfiles
+mkdir -p mise/.config/mise
+mv ~/.config/mise/* mise/.config/mise/
+bash link.sh
+```

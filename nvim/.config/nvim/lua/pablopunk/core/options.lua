@@ -6,6 +6,9 @@ opt.cmdheight = 0 -- it's been 6 long years https://www.reddit.com/r/vim/comment
 -- line numbers
 opt.number = true
 
+-- sign column
+opt.signcolumn = "no"
+
 -- don't show which mode you're in in the cmdline
 opt.showmode = false
 
@@ -44,9 +47,6 @@ opt.iskeyword:append "-" -- dash is part of the word
 
 -- blank lines
 -- opt.fcs = "eob:\ " -- hide ~ on blank lines
-
--- where to show the signs (git changes and more)
-opt.signcolumn = "yes"
 
 -- better :find
 opt.path:append "**"

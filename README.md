@@ -25,7 +25,7 @@ The first time you clone the repo, you should install all dependencies:
 bash bootsrap.sh
 ```
 
-## Add a new config
+## ✅ Add a new config to the repo
 
 Specify a name and a path to the config:
 
@@ -34,7 +34,7 @@ bash add.sh alacritty ~/.config/alacritty
 bash add.sh vim ~/.vimrc
 ```
 
-## Remove a config from the repo
+## ❌ Remove a config from the repo
 
 This will move it back to the original location and remove the folder from the repo (be careful if you have a `bootsrap.sh` inside the folder, it will be removed):
 

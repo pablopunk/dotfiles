@@ -2,11 +2,6 @@
 .DS_Store
 node_modules
 
-# coc files
-coc/**/db.json
-coc/**/yarn*
-coc/**/history.json
-
 karabiner/automatic_backups
 
 # generated files
@@ -16,6 +11,10 @@ nvim/lazy-lock.json
 kitty/kitty.conf.bak
 
 # I prefer my conversations to be private
-zed/conversations
-zed/embeddings
-zed/.tmp*
+zed/.config/**/conversations
+zed/.config/**/embeddings
+zed/.config/**/.tmp*
+.tmp*
+
+# Don't save lock files
+lazy-lock.json

@@ -36,7 +36,7 @@ bash add.sh vim ~/.vimrc
 
 ## Remove a config from the repo
 
-This will move it back to the original location and remove the folder from the repo (be careful if you have a bootsrap.sh inside the repo, it will be removed):
+This will move it back to the original location and remove the folder from the repo (be careful if you have a `bootsrap.sh` inside the repo, it will be removed):
 
 ```bash
 bash remove.sh alacritty ~/.config/alacritty

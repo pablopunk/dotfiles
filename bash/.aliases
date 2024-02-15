@@ -62,5 +62,5 @@ alias :xa='exit'
 # github copilot
 alias "??"="gh copilot suggest -t shell"
 alias "git\?"="gh copilot suggest -t git"
-# zellij
-alias z='zellij'
+# zoxide
+alias z='zoxide'

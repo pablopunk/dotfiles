@@ -12,12 +12,9 @@ return {
       {
         "<leader>ff",
         function()
-          -- check if git repo
-          local git_dir = vim.fn.finddir(".git/.", vim.fn.expand "%:p:h")
-          if git_dir == "" then
-            require("telescope.builtin").find_files()
-          else
-            require("telescope.builtin").git_files()
+          local ok = pcall(require("telescope.builtin").git_files, opts)
+          if not ok then
+            require("telescope.builtin").find_files(opts)
           end
         end,
         desc = "Find files",

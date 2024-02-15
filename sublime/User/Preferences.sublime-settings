@@ -1,9 +1,0 @@
-{
-	"font_size": 16,
-	"color_scheme": "Catppuccin Mocha.sublime-color-scheme",
-	"ignored_packages":
-	[
-		"Vintage",
-	],
-	"theme": "auto",
-}

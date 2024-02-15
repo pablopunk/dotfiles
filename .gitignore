@@ -16,5 +16,5 @@ zed/.config/**/embeddings
 zed/.config/**/.tmp*
 .tmp*
 
-# Don't save lock files
-lazy-lock.json
+# Lock files
+nvim/.config/nvim/lazy-lock.json

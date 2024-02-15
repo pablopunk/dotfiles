@@ -4,6 +4,8 @@
 dir="$(dirname $(realpath $0))"
 pushd "$dir" > /dev/null
 
+single_app=$1
+
 # Function to safely remove symlink if it exists
 remove_symlink_if_exists() {
   local symlink_path="$1"
@@ -13,8 +15,8 @@ remove_symlink_if_exists() {
   fi
 }
 
-for app in `ls -d1 */`
-do
+safely_stow() {
+  app=$1
   # Before stowing, check and remove any existing symlinks that would cause conflicts
   while read -r line; do
     if [[ "$line" == *"existing target is not owned by stow:"* ]]; then
@@ -34,7 +36,16 @@ do
     bash "$app/post-stow.sh"
   fi
   echo -e "\033[32m✔︎\033[0m $(basename "$app")"
-done
+}
+
+if [ -n "$single_app" ]; then
+  safely_stow "$single_app"
+else
+  for app in `ls -d1 */`
+  do
+    safely_stow "$app"
+  done
+fi
 
 popd > /dev/null
 

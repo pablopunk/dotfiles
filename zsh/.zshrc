@@ -67,6 +67,7 @@ bindkey "^[[1;3C" forward-word
 # }}}
 
 # mise {{{
-[[ -f ~/.local/bin/mise ]] && eval "$(~/.local/bin/mise activate zsh)"
-export PATH="$HOME/.local/share/mise/shims:$PATH"
+if [ hash mise 2>/dev/null ]; then
+  eval "$(mise activate zsh)"
+fi
 # }}}

@@ -65,7 +65,7 @@ return {
 
           map(
             { "n", "v" },
-            "<leader>gu",
+            "<leader>gr",
             ":Gitsigns reset_hunk<CR>",
             { noremap = true, silent = true, desc = "Undo git hunk" }
           )
@@ -79,9 +79,9 @@ return {
 
           map(
             { "n", "v" },
-            "<leader>gr",
+            "<leader>gu",
             ":Gitsigns undo_stage_hunk<CR>",
-            { noremap = true, silent = true, desc = "Stage git hunk" }
+            { noremap = true, silent = true, desc = "Undo stage git hunk" }
           )
 
           map(

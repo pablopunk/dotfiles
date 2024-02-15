@@ -12,7 +12,13 @@ return {
       {
         "<leader>ff",
         function()
-          require("telescope.builtin").find_files()
+          -- check if git repo
+          local git_dir = vim.fn.finddir(".git/.", vim.fn.expand "%:p:h")
+          if git_dir == "" then
+            require("telescope.builtin").find_files()
+          else
+            require("telescope.builtin").git_files()
+          end
         end,
         desc = "Find files",
       },
@@ -25,7 +31,7 @@ return {
       {
         "<leader>fg",
         function()
-          require("telescope.builtin").git_files()
+          require("telescope.builtin").git_status()
         end,
         desc = "Find modified files (git)",
       },

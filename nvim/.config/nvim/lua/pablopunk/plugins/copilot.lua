@@ -2,6 +2,9 @@ return {
   {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
+    build = function()
+      vim.cmd ":Copilot auth signin"
+    end,
     config = function()
       -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
       vim.keymap.set("i", "<Tab>", function()

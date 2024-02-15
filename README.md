@@ -10,11 +10,11 @@ cd ~/.dotfiles
 You can link all dotfiles at once:
 
 ```shell
-$ bash link.sh
+bash link.sh
 ```
 
 The first time you clone the repo, you should install all dependencies:
 
 ```shell
-$ bash bootsrap.sh
+bash bootsrap.sh
 ```

@@ -31,6 +31,8 @@ return {
     event = { "CmdlineEnter", "InsertEnter", "CursorHold", "CursorMoved" },
     config = function()
       require("gitsigns").setup {
+        signcolumn = false,
+        numhl = true,
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
 
@@ -66,6 +68,33 @@ return {
             "<leader>gu",
             ":Gitsigns reset_hunk<CR>",
             { noremap = true, silent = true, desc = "Undo git hunk" }
+          )
+
+          map(
+            { "n", "v" },
+            "<leader>gs",
+            ":Gitsigns stage_hunk<CR>",
+            { noremap = true, silent = true, desc = "Stage git hunk" }
+          )
+
+          map(
+            { "n", "v" },
+            "<leader>gr",
+            ":Gitsigns undo_stage_hunk<CR>",
+            { noremap = true, silent = true, desc = "Stage git hunk" }
+          )
+
+          map(
+            { "n", "v" },
+            "<leader>gh",
+            ":Gitsigns toggle_linehl<CR>",
+            { noremap = true, silent = true, desc = "Show diff colors" }
+          )
+          map(
+            { "n", "v" },
+            "<leader>gp",
+            ":Gitsigns preview_hunk_inline<CR>",
+            { noremap = true, silent = true, desc = "Show diff colors" }
           )
         end,
       }

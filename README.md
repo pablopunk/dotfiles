@@ -2,38 +2,43 @@
 
 I usually keep the repo in `~/.dotfiles`:
 
-```shell
+```bash
 git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
 You can link all dotfiles at once:
 
-```shell
+```bash
 bash link.sh
+```
+
+Or just link the one you want:
+
+```bash
+bash link.sh nvim
 ```
 
 The first time you clone the repo, you should install all dependencies:
 
-```shell
+```bash
 bash bootsrap.sh
 ```
 
-## Add a new dotfile
+## Add a new config
 
-### Example: `~/.vimrc`
+Specify a name and a path to the config:
 
 ```bash
-cd ~/.dotfiles
-mkdir vim
-mv ~/.vimrc vim/.vimrc
-bash link.sh
+bash add.sh alacritty ~/.config/alacritty
+bash add.sh vim ~/.vimrc
 ```
-### Example: `~/.config/mise`
+
+## Remove a config from the repo
+
+This will move it back to the original location, and remove the symlink:
 
 ```bash
-cd ~/.dotfiles
-mkdir -p mise/.config/mise
-mv ~/.config/mise/* mise/.config/mise/
-bash link.sh
+bash remove.sh alacritty ~/.config/alacritty
+bash remove.sh vim ~/.vimrc
 ```

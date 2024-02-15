@@ -47,5 +47,7 @@ else
   done
 fi
 
+echo "bash link.sh" > .git/hooks/post-merge
+
 popd > /dev/null
 

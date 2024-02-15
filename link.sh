@@ -2,13 +2,39 @@
 
 # get script directory, cd into it
 dir="$(dirname $(realpath $0))"
-pushd $dir > /dev/null
+pushd "$dir" > /dev/null
+
+# Function to safely remove symlink if it exists
+remove_symlink_if_exists() {
+  local symlink_path="$1"
+  if [ -L "$symlink_path" ]; then # Check if it's a symlink
+    echo "Removing existing symlink: $symlink_path"
+    mv "$symlink_path" "$symlink_path.backup"
+  fi
+}
 
 for app in `ls -d1 */`
 do
-  stow "$app" --adopt --restow --ignore=bootstrap.sh --ignore=post-stow.sh
-  [[ -f "$app/post-stow.sh" ]] && bash "$app/post-stow.sh"
+  # Before stowing, check and remove any existing symlinks that would cause conflicts
+  while read -r line; do
+    if [[ "$line" == *"existing target is not owned by stow:"* ]]; then
+      # Extract the path of the conflicting file
+      conflict_file="${line#*: }"
+      # Check if this path is relative to the home directory
+      if [[ "$conflict_file" == .* ]]; then
+        conflict_file="$HOME/$conflict_file"
+      fi
+      remove_symlink_if_exists "$conflict_file"
+    fi
+  done < <(stow "$app" --adopt --no --ignore=bootstrap.sh --ignore=post-stow.sh 2>&1)
+
+  # Now attempt to stow again after removing any problematic symlinks
+  stow "$app" --adopt --ignore=bootstrap.sh --ignore=post-stow.sh
+  if [[ -f "$app/post-stow.sh" ]]; then
+    bash "$app/post-stow.sh"
+  fi
   echo -e "\033[32m✔︎\033[0m $(basename "$app")"
 done
 
 popd > /dev/null
+

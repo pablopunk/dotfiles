@@ -6,7 +6,7 @@ fi
 
 # get the directory of this script
 dir="$(dirname $(realpath $0))"
-pushd $dir > /dev/null
+pushd "$dir" > /dev/null
 
 # loop in subdirectories
 for script in `ls -1 */bootstrap.sh`

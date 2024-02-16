@@ -63,4 +63,4 @@ alias :xa='exit'
 alias "??"="gh copilot suggest -t shell"
 alias "git\?"="gh copilot suggest -t git"
 # zoxide
-alias z='zoxide'
+alias cd='z'

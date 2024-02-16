@@ -133,6 +133,21 @@ return {
             case_mode = "smart_case",
           },
         },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+          grep_string = {
+            additional_args = function(opts)
+              return { "--hidden" }
+            end,
+          },
+          live_grep = {
+            additional_args = function(opts)
+              return { "--hidden" }
+            end,
+          },
+        },
       }
 
       telescope.load_extension "fzf"

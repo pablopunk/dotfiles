@@ -12,9 +12,9 @@ return {
       {
         "<leader>ff",
         function()
-          local ok = pcall(require("telescope.builtin").git_files, opts)
+          local ok = pcall(require("telescope.builtin").git_files)
           if not ok then
-            require("telescope.builtin").find_files(opts)
+            require("telescope.builtin").find_files()
           end
         end,
         desc = "Find files",
@@ -138,12 +138,12 @@ return {
             hidden = true,
           },
           grep_string = {
-            additional_args = function(opts)
+            additional_args = function()
               return { "--hidden" }
             end,
           },
           live_grep = {
-            additional_args = function(opts)
+            additional_args = function()
               return { "--hidden" }
             end,
           },

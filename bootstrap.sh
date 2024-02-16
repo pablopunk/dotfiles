@@ -15,9 +15,9 @@ function brew_install {
   brew_list=$(cat /tmp/brew_list 2>/dev/null)
   [[ -z $brew_list ]] && brew_list="$(brew list)"
   echo $brew_list > /tmp/brew_list # cache brew list
-  if [[ -z "$(echo $brew_list | grep -w $package)" ]]; then 
+  if [[ -z "$(echo $brew_list | grep -w $package)" ]]; then
     brew install $@ > /dev/null # install only if it's not installed
-    echo -e "\033[94m✔︎\033[0m $1"
+    echo -e "\033[94m✔︎\033[0m installed $1 (brew)"
   fi
 }
 

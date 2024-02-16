@@ -9,6 +9,8 @@ nvim/plugin/packer_compiled.lua
 nvim/lazy-lock.json
 
 kitty/kitty.conf.bak
+kitty/.config/kitty/current-theme.conf
+kitty/.config/kitty/kitty.conf.bak
 
 # I prefer my conversations to be private
 zed/.config/**/conversations
@@ -18,3 +20,4 @@ zed/.config/**/.tmp*
 
 # Lock files
 nvim/.config/nvim/lazy-lock.json
+

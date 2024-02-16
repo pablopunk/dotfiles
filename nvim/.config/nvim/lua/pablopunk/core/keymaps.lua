@@ -72,7 +72,14 @@ local function save_file()
 end
 keymap.set({ "n", "v" }, "<c-q>", quit_file, opts "Close file buffer")
 keymap.set({ "n", "v" }, "<c-s>", save_file, opts "Save file")
-keymap.set("n", "<leader>wca", ":silent %bd|e#|bd#<cr>", opts "Close all buffers except the current one")
+keymap.set("n", "<leader>wca", function()
+  vim.cmd "silent! %bd"
+  local ok, starter = pcall(require, "mini.starter")
+  if ok then
+    starter.open()
+  end
+end, opts "Close all buffers")
+keymap.set("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", opts "Close all buffers except the current one")
 -- }}}
 
 -- Vim Messages {{{

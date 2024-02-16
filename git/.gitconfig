@@ -9,7 +9,8 @@
   light = false
   syntax-theme = Visual Studio Dark+
 [push]
-	default = current
+  default = current
+  autoSetupRemote = true
 [pull]
 	rebase = false
 	default = current

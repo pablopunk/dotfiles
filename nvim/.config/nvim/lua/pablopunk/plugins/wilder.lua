@@ -7,7 +7,8 @@ return {
       "nvim-tree/nvim-web-devicons", -- to display icons in file completion
       "romgrk/fzy-lua-native", -- fuzzy completion
     },
-    event = "CmdlineEnter",
+    -- event = "CmdlineEnter",
+    event = "VeryLazy",
     build = function()
       vim.cmd "UpdateRemotePlugins"
     end,

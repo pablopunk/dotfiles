@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if ! hash tmux 2>/dev/null; then
-  brew install tmux
-fi
+brew_install tmux
 
 plugins_dir=~/.tmux/plugins
 if [[ ! -d $plugins_dir/tpm ]]; then

@@ -1,9 +1,7 @@
 #!/bin/bash
 
-if ! hash git 2>/dev/null; then
-  brew install git
+if ! hash git 2>/dev/null; then # might be installed outside of brew
+  brew_install git
 fi
 
-if ! hash delta 2>/dev/null; then
-  brew install git-delta
-fi
+brew_install git-delta

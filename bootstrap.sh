@@ -35,4 +35,6 @@ done
 
 rm /tmp/brew_list
 
+brew link.sh > /dev/null
+
 popd > /dev/null

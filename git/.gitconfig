@@ -11,7 +11,8 @@
 [push]
 	default = current
 [pull]
-	rebase = true
+	rebase = false
+	default = current
 [user]
 	email = pablo@pablopunk.com
 	name = Pablo P Varela

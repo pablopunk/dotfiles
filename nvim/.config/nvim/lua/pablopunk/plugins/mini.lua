@@ -57,6 +57,7 @@ return {
   },
   {
     "echasnovski/mini.files", -- file tree
+    event = "BufEnter",
     keys = {
       {
         "<c-t>",

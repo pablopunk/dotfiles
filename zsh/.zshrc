@@ -51,7 +51,7 @@ if [[ $(uname) == "Darwin" ]]; then
   fi
   if [[ $current_theme != $new_theme ]]
   then
-    kitty +kitten themes --reload-in=all $kitty_theme
+    kitty +kitten themes $kitty_theme
     echo $new_theme > $HOME/.theme
   fi
 fi

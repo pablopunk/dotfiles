@@ -1,7 +1,11 @@
 #!/bin/bash
 
-if [[ -z $(brew list | grep kitty) ]]; then
+brew_list="$(cat /tmp/brew_list.txt)" # cached list
+[[ -z $brew_list ]] && brew_list="$(brew list)"
+
+if [[ -z "$(echo $brew_list | grep -w kitty)" ]]; then
   brew install kitty
-  kitty +kitten themes --reload-in=all "Catppuccin-Mocha"
   brew install homebrew/cask-fonts/font-sf-mono-for-powerline
+  kitty +kitten themes --reload-in=all "Catppuccin-Mocha"
 fi
+

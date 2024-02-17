@@ -1,3 +1,6 @@
 #!/bin/bash
 
-brew_install zed
+if [[ "$(uname)" == "Darwin" ]]; then
+  brew_install zed
+fi
+

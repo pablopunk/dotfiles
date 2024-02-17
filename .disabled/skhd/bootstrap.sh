@@ -1,3 +1,5 @@
 #!/bin/bash
 
-brew_install skhd
+if [[ $(uname) == "Darwin" ]]; then
+  brew_install skhd
+fi

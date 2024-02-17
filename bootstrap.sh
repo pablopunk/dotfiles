@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [[ ! -f /opt/homebrew/bin/brew ]]; then
+if [[ ! -d "$HOMEBREW_PREFIX" ]]; then
   hash brew 2>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 # get the directory of this script
 dir="$(dirname $(realpath $0))"
@@ -21,10 +21,13 @@ function brew_install {
   fi
 }
 
-# export the function so it can be used in subscripts
-export -f brew_install
+echo
+echo -e "\033[94mRunning bootstrap\033[0m"
 
 brew_install stow
+
+# export the function so it can be used in subscripts
+export -f brew_install
 
 # loop in subdirectories
 for script in `ls -1 */bootstrap.sh`
@@ -35,6 +38,6 @@ done
 
 rm /tmp/brew_list
 
-brew link.sh > /dev/null
+bash link.sh
 
 popd > /dev/null

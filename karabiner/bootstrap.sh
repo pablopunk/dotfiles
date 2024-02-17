@@ -1,4 +1,6 @@
 #!/bin/bash
 
-brew_install karabiner-elements
+if [[ "$(uname)" == "Darwin" ]]; then
+  brew_install karabiner-elements
+fi
 

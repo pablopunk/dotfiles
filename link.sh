@@ -41,6 +41,9 @@ safely_stow() {
 if [ -n "$single_app" ]; then
   safely_stow "$single_app"
 else
+  echo
+  echo -e "\033[94mLinking dotfiles\033[0m"
+
   for app in `ls -d1 */`
   do
     safely_stow "$app"

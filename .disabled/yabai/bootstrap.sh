@@ -1,3 +1,5 @@
 #!/bin/bash
 
-brew_install yabai
+if [[ $(uname) == "Darwin" ]]; then
+  brew_install yabai
+fi

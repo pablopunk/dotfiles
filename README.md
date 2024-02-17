@@ -7,7 +7,18 @@ git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-You can link all dotfiles at once:
+If it's the first time you clone the repo, run bootsrap:
+
+```bash
+bash bootsrap.sh
+```
+
+This will:
+
+* Install all dependencies by calling every `*/bootstrap.sh` file in the repo
+* Link all dotfiles by calling `link.sh`
+
+If you only want to link files:
 
 ```bash
 bash link.sh

@@ -16,6 +16,7 @@ return {
       local wilder = require "wilder"
       wilder.setup { modes = { ":", "/", "?" } }
 
+      -- NOTE: If wilder becomes slow, remove the fzy filter
       wilder.set_option("pipeline", {
         wilder.branch(wilder.cmdline_pipeline {
           fuzzy = 2,

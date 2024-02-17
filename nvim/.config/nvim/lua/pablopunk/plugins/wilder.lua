@@ -7,7 +7,7 @@ return {
       "nvim-tree/nvim-web-devicons", -- to display icons in file completion
       "romgrk/fzy-lua-native", -- fuzzy completion
     },
-    -- event = "CmdlineEnter",
+    -- event = "CmdlineEnter", -- this makes sense but it makes it feel slow
     event = "VeryLazy",
     build = function()
       vim.cmd "UpdateRemotePlugins"
@@ -17,31 +17,10 @@ return {
       wilder.setup { modes = { ":", "/", "?" } }
 
       wilder.set_option("pipeline", {
-        wilder.branch(
-          wilder.substitute_pipeline {
-            pipeline = wilder.python_search_pipeline {
-              skip_cmdtype_check = 1,
-              pattern = wilder.python_fuzzy_pattern {
-                start_at_boundary = 0,
-              },
-            },
-          },
-          wilder.cmdline_pipeline {
-            fuzzy = 2,
-            fuzzy_filter = wilder.lua_fzy_filter(),
-          },
-          {
-            wilder.check(function(ctx, x)
-              return x == ""
-            end),
-            wilder.history(),
-          },
-          wilder.python_search_pipeline {
-            pattern = wilder.python_fuzzy_pattern {
-              start_at_boundary = 0,
-            },
-          }
-        ),
+        wilder.branch(wilder.cmdline_pipeline {
+          fuzzy = 2,
+          fuzzy_filter = wilder.lua_fzy_filter(), -- fuzzy completion for cmdline. IT'S AMAZING. Slow. BUT AMAZING
+        }),
       })
 
       local highlighters = {
@@ -63,13 +42,6 @@ return {
           wilder.popupmenu_scrollbar(),
         },
       })
-
-      -- local wildmenu_renderer = wilder.wildmenu_renderer {
-      --   highlighter = highlighters,
-      --   separator = " · ",
-      --   left = { " ", wilder.wildmenu_spinner(), " " },
-      --   right = { " ", wilder.wildmenu_index() },
-      -- }
 
       wilder.set_option(
         "renderer",

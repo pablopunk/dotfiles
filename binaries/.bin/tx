@@ -23,7 +23,7 @@ go_to_session() {
 
 if [[ $# -eq 1 ]]; then
   # Attempt to find an existing tmux session that matches the provided name
-  selected_name=$(tmux ls | cut -d: -f1 | grep "$1")
+  selected_name=$(tmux ls 2>/dev/null | cut -d: -f1 | grep "$1")
   # If multiple sessions are found, use fzf to allow the user to select one
   if [[ $(echo "$selected_name" | wc -l) -gt 1 ]]; then
     selected_name=$(echo "$selected_name" | fzf_short)

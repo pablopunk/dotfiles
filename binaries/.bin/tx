@@ -10,11 +10,12 @@ fzf_short() {
 
 go_to_session() {
   local session_name=$1
-  if [[ -z $TMUX ]]; then
-    tmux attach -t "$session_name" || tmux new-session -s "$session_name" -c "$selected"
-  else
-    tmux switch-client -t "$session_name"
+  # Attempt to attach or switch to the session if it exists, otherwise create it in detached mode
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux new-session -d -s "$session_name" -c "$selected"
   fi
+  # Attach or switch to the session based on whether we're inside TMUX
+  [[ -z $TMUX ]] && tmux attach-session -t "$session_name" || tmux switch-client -t "$session_name"
   exit 0
 }
 
@@ -53,17 +54,5 @@ fi
 selected=$(echo "$selected" | sed "s|~|$HOME|g")
 # Session name is the last folder name of the selected path
 selected_name=$(basename "$selected")
-tmux_running=$(pgrep tmux)
 
-# If not in a TMUX session and TMUX is running, try to go to or create the session
-if [[ -z $TMUX ]] && [[ -n $tmux_running ]]; then
-  go_to_session "$selected_name"
-fi
-
-# If the session does not exist, create it in detached mode; otherwise, go to the session
-if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-  tmux new-session -s "$selected_name" -c "$selected"
-else
-  go_to_session "$selected_name"
-fi
-
+go_to_session "$selected_name"

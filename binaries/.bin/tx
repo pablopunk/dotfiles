@@ -10,12 +10,14 @@ fzf_short() {
 
 go_to_session() {
   local session_name=$1
+  # replace . with _
+  session_name=$(echo "$session_name" | tr . _)
   # Attempt to attach or switch to the session if it exists, otherwise create it in detached mode
   if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -d -s "$session_name" -c "$selected"
   fi
   # Attach or switch to the session based on whether we're inside TMUX
-  [[ -z $TMUX ]] && tmux attach-session -t "$session_name" || tmux switch-client -t "$session_name"
+  [[ -z $TMUX ]] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
   exit 0
 }
 

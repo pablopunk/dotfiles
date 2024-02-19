@@ -44,7 +44,6 @@ fi
 alias n='npm run'
 alias p='pnpm'
 alias run='npx tsx'
-alias tx='tmuxinator'
 # not in vim but who cares
 alias :q='exit'
 alias :qa='exit'

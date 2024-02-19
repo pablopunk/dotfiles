@@ -1,8 +1,0 @@
-# ~/.tmuxinator/plugin.yml
-
-name: plugin
-root: ~/src/maze/figma-plugin
-
-windows:
-  - nvim: nvim
-  - logs: yarn watch

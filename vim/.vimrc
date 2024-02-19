@@ -191,7 +191,7 @@ let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 
 " Color config {{{
 set background=dark
-colorscheme habamax
+colorscheme zaibatsu
 " Fix for kitty terminal colors after scrolling
 hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 " }}}

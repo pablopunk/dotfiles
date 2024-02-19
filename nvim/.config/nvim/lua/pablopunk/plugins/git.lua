@@ -28,7 +28,7 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim", -- leftside git status
-    event = { "CmdlineEnter", "InsertEnter", "CursorHold", "CursorMoved" },
+    event = "VeryLazy",
     config = function()
       require("gitsigns").setup {
         signcolumn = false,

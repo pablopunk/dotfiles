@@ -1,7 +1,7 @@
 #vim: ft=gitconfig
 [core]
   pager = delta --features "$( [[ \"`cat ~/.theme`\" == \"Dark\" ]] && echo dark-mode || echo light-mode)"
-	editor = nvim -u ~/.vimrc
+	editor = nvim
 [delta "light-mode"]
   light = true
   syntax-theme = GitHub

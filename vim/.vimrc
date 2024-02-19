@@ -42,9 +42,12 @@ vmap <leader>p "*p
 " Y should not be the same as yy
 nmap Y y$
 " Navigate buffers
-" nmap <leader><leader> :ls<CR>:b<Space>
 nmap <c-p> :bprev<cr>
 nmap <c-n> :bnext<cr>
+nmap <c-g> :b#<cr>
+nmap <c-f> :ls<CR>:b<Space>
+nmap <leader>qn :cnext<cr>
+nmap <leader>qp :cprev<cr>
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>
@@ -137,7 +140,7 @@ set wildignore+=**/dist/**
 
 function! FindFiles(filename)
   let l:error_file = tempname()
-  silent exe '!fd -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.l:error_file
+  silent exe '!fd -H -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.l:error_file
   set errorformat=%f:%l:%m
   execute "cfile ".l:error_file
   copen

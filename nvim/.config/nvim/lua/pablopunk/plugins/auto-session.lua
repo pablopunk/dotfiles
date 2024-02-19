@@ -9,12 +9,14 @@ return {
         log_level = "error",
         auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
       }
-      vim.keymap.set(
-        "n",
-        "<leader>sd",
-        "<cmd>SessionDelete<cr>",
-        { desc = "Delete session", noremap = true, silent = true }
-      )
+      vim.keymap.set("n", "<leader>sd", function()
+        vim.cmd "silent! SessionDelete" -- delete session
+        vim.cmd "silent! %bd" -- close all buffers
+        local ok, starter = pcall(require, "mini.starter")
+        if ok then
+          starter.open()
+        end
+      end, { desc = "Delete session", noremap = true, silent = true })
     end,
   },
   {

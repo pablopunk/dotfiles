@@ -34,7 +34,7 @@ return {
         signcolumn = false,
         numhl = true,
         on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
+          local gs = require "gitsigns"
 
           local function map(mode, l, r, opts)
             opts = opts or {}
@@ -43,25 +43,25 @@ return {
           end
 
           -- Navigation
-          map("n", ")", function()
+          map("n", "]c", function()
             if vim.wo.diff then
-              return ")"
+              return "]"
             end
             vim.schedule(function()
               gs.next_hunk()
             end)
             return "<Ignore>"
-          end, { expr = true, desc = ") or Go to next git hunk" })
+          end, { expr = true, desc = "Go to next git hunk" })
 
-          map("n", "(", function()
+          map("n", "[c", function()
             if vim.wo.diff then
-              return "("
+              return "["
             end
             vim.schedule(function()
               gs.prev_hunk()
             end)
             return "<Ignore>"
-          end, { expr = true, desc = ") or Go to previous git hunk" })
+          end, { expr = true, desc = "Go to previous git hunk" })
 
           map(
             { "n", "v" },
@@ -90,11 +90,12 @@ return {
             ":Gitsigns toggle_linehl<CR>",
             { noremap = true, silent = true, desc = "Show diff colors" }
           )
+
           map(
             { "n", "v" },
-            "<leader>gp",
+            "<leader>gd",
             ":Gitsigns preview_hunk_inline<CR>",
-            { noremap = true, silent = true, desc = "Show diff colors" }
+            { noremap = true, silent = true, desc = "Show diff inline" }
           )
         end,
       }

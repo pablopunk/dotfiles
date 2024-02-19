@@ -22,6 +22,17 @@ keymap.set({ "n", "v", "x", "o", "c" }, "q:", "<nop>", opts "Noop")
 -- keymap.set({ "n", "v", "x", "o", "c" }, "Q", "<nop>", opts "Noop")
 -- }}}
 
+-- I use () instead of [] to navigate {{{
+vim.cmd [[
+nmap ( [
+nmap ) ]
+omap ( [
+omap ) ]
+xmap ( [
+xmap ) ]
+]]
+-- }}}
+
 -- Remove highlights {{{
 local function leader_h()
   vim.cmd "silent! nohl"

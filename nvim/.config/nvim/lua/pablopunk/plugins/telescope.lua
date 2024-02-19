@@ -111,6 +111,7 @@ return {
 
       telescope.setup {
         defaults = {
+          file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
           path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
           layout_strategy = "vertical",
           selection_caret = "◦ ",

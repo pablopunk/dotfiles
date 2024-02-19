@@ -2,7 +2,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     after = "nvim-treesitter",
-    event = "VeryLazy",
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
@@ -62,6 +61,18 @@ return {
             swap_next = { ["<leader>a"] = "@parameter.inner", desc = "Swap with next parameter" },
             swap_previous = { ["<leader>A"] = "@parameter.inner", desc = "Swap with previous parameter" },
           },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next = {
+              ["]f"] = { query = "@function.outer", desc = "Next function" },
+              -- ["]s"] = { query = "@scope.outer", desc = "Next scope" },
+            },
+            goto_previous = {
+              ["[f"] = { query = "@function.outer", desc = "Previous function" },
+              -- ["[s"] = { query = "@scope.outer", desc = "Previous scope" },
+            },
+          },
         },
       }
     end,
@@ -69,8 +80,11 @@ return {
       require("nvim-treesitter.install").update { with_sync = true }
     end,
   },
-  -- {
-  --   event = "VeryLazy",
-  --   "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
-  -- },
+  {
+    event = "VeryLazy",
+    "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
+    opts = {
+      max_lines = 2,
+    },
+  },
 }

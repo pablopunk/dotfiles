@@ -4,45 +4,44 @@ all_directories() {
   find ~/src ~/src/maze ~/Desktop ~/Downloads ~/ -mindepth 1 -maxdepth 1 -type d | sed "s|$HOME|~|g" | sed 's|//|/|g'
 }
 
-if [[ $# -eq 1 ]]; then
-  selected_name=$(tmux ls | cut -d: -f1 | grep $1)
-  if [[ -z $selected_name ]]; then
-    selected=$(all_directories | fzf -q $1)
+# Function to manage tmux sessions
+go_to_session() {
+  local session_name=$1
+  if [[ -z $TMUX ]]; then
+    tmux attach -t "$session_name" || tmux new-session -s "$session_name" -c "$selected"
   else
-    if [[ -z $TMUX ]]; then
-      tmux attach -t $selected_name
-      exit 0
-    else
-      tmux switch-client -t $selected_name
-      exit 0
-    fi
+    tmux switch-client -t "$session_name"
   fi
+  exit 0
+}
+
+if [[ $# -eq 1 ]]; then
+  selected_name=$(tmux ls | cut -d: -f1 | grep "$1")
+  # if there are multiple lines in selected_name, open fzf to select one
+  if [[ $(echo "$selected_name" | wc -l) -gt 1 ]]; then
+    selected_name=$(echo "$selected_name" | fzf)
+  fi
+  if [[ -n $selected_name ]]; then
+    go_to_session "$selected_name"
+  fi
+  selected=$(all_directories | fzf -q "$1")
 else
   selected=$(all_directories | fzf)
 fi
 
-if [[ -z $selected ]]; then
-  exit 0
-fi
+[[ -z $selected ]] && exit 0
 
-selected=$(echo $selected | sed "s|~|$HOME|g")
+selected=$(echo "$selected" | sed "s|~|$HOME|g")
 selected_name=$(basename "$selected")
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-  cd $selected
-  tmux new-session -s $selected_name -c $selected
-  exit 0
+if [[ -z $TMUX ]] && [[ -n $tmux_running ]]; then
+  go_to_session "$selected_name"
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-  cd $selected
-  tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+  tmux new-session -s "$selected_name" -c "$selected"
+else
+  go_to_session "$selected_name"
 fi
 
-if [[ -z $TMUX ]]; then
-  tmux attach -t $selected_name
-  exit 0
-fi
-
-tmux switch-client -t $selected_name

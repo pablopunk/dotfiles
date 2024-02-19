@@ -55,6 +55,13 @@ nnoremap > >>
 nnoremap < <<
 vnoremap > >gv
 vnoremap < <gv
+" I use () to navigate instead of []
+nmap ( [
+nmap ) ]
+omap ( [
+omap ) ]
+xmap ( [
+xmap ) ]
 " Search and replace
 vnoremap <leader>rw "9y:%s/<c-r>9/<c-r>9/g<left><left>
 nnoremap <leader>rw viw"9y:%s/<c-r>9/<c-r>9/g<left><left>
@@ -192,6 +199,17 @@ let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " Color config {{{
 set background=dark
 colorscheme zaibatsu
-" Fix for kitty terminal colors after scrolling
-hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+" Transparent.vim
+let g:higroups = [
+  \ 'Normal',
+  \ 'NormalSB',
+  \ 'NormalNC',
+  \ 'LineNr',
+  \ 'SignColumn',
+  \ 'NonText',
+  \ 'EndOfBuffer',
+  \ ]
+for g:color in g:higroups
+  execute 'silent! hi ' . g:color . ' guibg=NONE'
+endfor
 " }}}

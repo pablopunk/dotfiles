@@ -35,25 +35,25 @@ require("lazy").setup("pablopunk.plugins", {
     reset_packpath = true,
     rtp = {
       disabled_plugins = {
-        "netrwPlugin", -- Plugin for browsing files and directories
-        "netrwSettings", -- Settings for netrw plugin
-        "netrwFileHandlers", -- File handlers for netrw plugin
-        "netrw", -- Network-oriented reading, writing, and browsing
         "2html_plugin", -- Plugin for converting Vim syntax files to HTML
+        "bugreport", -- Plugin for generating bug reports
         "getscript", -- Plugin for downloading Vim scripts
         "getscriptPlugin", -- Plugin for managing Vim scripts
         "gzip", -- Plugin for handling gzip files
         "logipat", -- Plugin for searching for IP addresses in log files
+        "netrw", -- Network-oriented reading, writing, and browsing
+        "netrwFileHandlers", -- File handlers for netrw plugin
+        "netrwPlugin", -- Plugin for browsing files and directories
+        "netrwSettings", -- Settings for netrw plugin
+        "rrhelper", -- Plugin for helping with remote debugging
         "tar", -- Plugin for handling tar files
         "tarPlugin", -- Plugin for handling tar files
-        "rrhelper", -- Plugin for helping with remote debugging
+        "tutor", -- Plugin for the Vim tutor
+        "tutor_mode_plugin", -- Plugin for the Vim tutor mode
         "vimball", -- Plugin for creating and using Vimball archives
         "vimballPlugin", -- Plugin for handling Vimball archives
         "zip", -- Plugin for handling zip files
         "zipPlugin", -- Plugin for handling zip files
-        "tutor", -- Plugin for the Vim tutor
-        "bugreport", -- Plugin for generating bug reports
-        "tutor_mode_plugin", -- Plugin for the Vim tutor mode
       },
     },
   },

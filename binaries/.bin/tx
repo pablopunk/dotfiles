@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+all_directories() {
+  find ~/src ~/src/maze ~/Desktop ~/Downloads ~/ -mindepth 1 -maxdepth 1 -type d | sed "s|$HOME|~|g" | sed 's|//|/|g'
+}
+
+if [[ $# -eq 1 ]]; then
+  selected_name=$(tmux ls | cut -d: -f1 | grep $1)
+  if [[ -z $selected_name ]]; then
+    selected=$(all_directories | fzf -q $1)
+  else
+    if [[ -z $TMUX ]]; then
+      tmux attach -t $selected_name
+      exit 0
+    else
+      tmux switch-client -t $selected_name
+      exit 0
+    fi
+  fi
+else
+  selected=$(all_directories | fzf)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+selected=$(echo $selected | sed "s|~|$HOME|g")
+selected_name=$(basename "$selected")
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  cd $selected
+  tmux new-session -s $selected_name -c $selected
+  exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+  cd $selected
+  tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+  tmux attach -t $selected_name
+  exit 0
+fi
+
+tmux switch-client -t $selected_name

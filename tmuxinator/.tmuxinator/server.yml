@@ -1,7 +1,0 @@
-# ~/.tmuxinator/server.yml
-
-name: server
-root: ~/server
-
-windows:
-  - server: docker-compose ps

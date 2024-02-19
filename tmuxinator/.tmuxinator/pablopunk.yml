@@ -1,8 +1,0 @@
-# ~/.tmuxinator/pablopunk.com
-
-name: pablopunk
-root: ~/src/pablopunk.com
-
-windows:
-  - nvim: nvim
-  - logs: pnpm run dev

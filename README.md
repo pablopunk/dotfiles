@@ -12,7 +12,7 @@ cd ~/.dotfiles
 If it's the first time you clone the repo, run bootsrap:
 
 ```bash
-bash bootsrap.sh
+./bootsrap.sh
 ```
 
 This will:
@@ -23,19 +23,19 @@ This will:
 If you only want to link files:
 
 ```bash
-bash link.sh
+./link.sh
 ```
 
 Or just link the one you want:
 
 ```bash
-bash link.sh nvim
+./link.sh nvim
 ```
 
 The first time you clone the repo, you should install all dependencies:
 
 ```bash
-bash bootsrap.sh
+./bootsrap.sh
 ```
 
 ## ✅ Add a new config to the repo
@@ -43,8 +43,8 @@ bash bootsrap.sh
 Specify a name and a path to the config:
 
 ```bash
-bash add.sh alacritty ~/.config/alacritty
-bash add.sh vim ~/.vimrc
+./add.sh alacritty ~/.config/alacritty
+./add.sh vim ~/.vimrc
 ```
 
 ## ❌ Remove a config from the repo
@@ -52,6 +52,6 @@ bash add.sh vim ~/.vimrc
 This will move it back to the original location and remove the folder from the repo (be careful if you have a `bootsrap.sh` inside the folder, it will be removed):
 
 ```bash
-bash remove.sh alacritty ~/.config/alacritty
-bash remove.sh vim ~/.vimrc
+./remove.sh alacritty ~/.config/alacritty
+./remove.sh vim ~/.vimrc
 ```

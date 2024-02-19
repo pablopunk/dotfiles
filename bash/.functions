@@ -227,6 +227,14 @@ function tilt_playwright {
   tilt trigger signup-webapp
 }
 
+function tilt {
+  if [[ "$#" -eq 1 ]] && [[ "$1" == "up" ]]; then
+    wait_for_docker; command tilt up
+  else
+    command tilt $@
+  fi
+}
+
 function ssh {
   if [[ -z $(which kitten) ]]; then
     command ssh $@

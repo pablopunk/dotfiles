@@ -46,8 +46,9 @@ nmap <c-p> :bprev<cr>
 nmap <c-n> :bnext<cr>
 nmap <c-g> :b#<cr>
 nmap <c-f> :ls<CR>:b<Space>
-nmap <leader>qn :cnext<cr>
-nmap <leader>qp :cprev<cr>
+" Navigate quickfix window
+nmap <leader>]q :cnext<cr>
+nmap <leader>[q :cprev<cr>
 " Disable arrow keys
 nmap <Up> <Nop>
 nmap <Down> <Nop>

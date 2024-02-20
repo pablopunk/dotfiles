@@ -96,7 +96,7 @@ keymap.set("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", opts "Close all buffers
 --- Floating windows {{{
 keymap.set("n", "<leader>wf", function()
   local win = vim.api.nvim_get_current_win()
-  if vim.api.nvim_win_get_config(win).relative ~= "editor" then
+  if vim.api.nvim_win_get_config(win).relative == "" then
     -- not a floating window
     return
   end

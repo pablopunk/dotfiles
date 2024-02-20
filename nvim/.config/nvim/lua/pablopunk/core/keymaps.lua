@@ -93,6 +93,25 @@ end, opts "Close all buffers")
 keymap.set("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", opts "Close all buffers except the current one")
 -- }}}
 
+--- Floating windows {{{
+keymap.set("n", "<leader>wf", function()
+  local win = vim.api.nvim_get_current_win()
+  if vim.api.nvim_win_get_config(win).relative ~= "editor" then
+    -- not a floating window
+    return
+  end
+  local width = vim.api.nvim_get_option "columns" - 10
+  local height = vim.api.nvim_get_option "lines" - 10
+  local new_width, new_height, new_row, new_col = width, height, 5, 5
+  vim.api.nvim_win_set_config(win, {
+    relative = "editor",
+    width = new_width,
+    height = new_height,
+    row = new_row,
+    col = new_col,
+  })
+end, opts "Maximize floating window")
+
 -- Vim Messages {{{
 keymap.set("n", "<leader>ms", ":messages<cr>", opts "Show messages")
 -- }}}

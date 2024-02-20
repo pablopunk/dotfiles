@@ -6,9 +6,9 @@ syntax on
 set nocompatible ttyfast lazyredraw incsearch hlsearch infercase encoding=utf-8 mouse=a hidden autoread number tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab autoindent shiftround wrap ignorecase smartcase cursorline termguicolors backspace=indent,eol,start splitright splitbelow iskeyword+=-
 set re=0 " fix error: 'redrawtime' exceeded, syntax highlighting disabled
 try
-  set signcolumn=number        " Show line numbers and signs on the same column"
+  set signcolumn=number " Show line numbers and signs on the same column"
 catch
-  set signcolumn=yes           " Fallback for older versions
+  set signcolumn=yes    " Fallback for older versions
 endtry
 " }}}
 
@@ -202,7 +202,7 @@ let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " Color config {{{
 set background=dark
 colorscheme zaibatsu
-" Transparent.vim
+" Groups to be transparent
 let g:higroups = [
   \ 'Normal',
   \ 'NormalSB',

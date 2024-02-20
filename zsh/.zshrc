@@ -44,10 +44,10 @@ if [[ $(uname) == "Darwin" ]]; then
   if [[ $? == 1 ]]
   then
     new_theme=Light
-    kitty_theme="Catppuccin-Latte"
+    kitty_theme="Tokyo Night Day"
   else
     new_theme=Dark
-    kitty_theme="Catppuccin-Mocha"
+    kitty_theme="Tokyo Night Moon"
   fi
   if [[ $current_theme != $new_theme ]]
   then

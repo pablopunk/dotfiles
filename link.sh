@@ -51,6 +51,7 @@ else
 fi
 
 echo "bash link.sh" > .git/hooks/post-merge
+chmod +x .git/hooks/post-merge
 
 popd > /dev/null
 

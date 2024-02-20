@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    after = "nvim-treesitter",
+    event = "VeryLazy",
   },
   {
     "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that

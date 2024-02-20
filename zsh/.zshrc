@@ -47,7 +47,7 @@ if [[ $(uname) == "Darwin" ]]; then
     kitty_theme="Tokyo Night Day"
   else
     new_theme=Dark
-    kitty_theme="Tokyo Night Moon"
+    kitty_theme="Tokyo Night Storm"
   fi
   if [[ $current_theme != $new_theme ]]
   then

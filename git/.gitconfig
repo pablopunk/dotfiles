@@ -4,10 +4,32 @@
 	editor = nvim
 [delta "light-mode"]
   light = true
-  syntax-theme = GitHub
+  # Tokyo Night Light (https://github.com/folke/tokyonight.nvim/blob/main/extras/delta/tokyonight_day.gitconfig)
+  minus-style                   = syntax "#dfccd4"
+  minus-non-emph-style          = syntax "#dfccd4"
+  minus-emph-style              = syntax "#d99ea2"
+  minus-empty-line-marker-style = syntax "#dfccd4"
+  line-numbers-minus-style      = "#c25d64"
+  plus-style                    = syntax "#aecde6"
+  plus-non-emph-style           = syntax "#aecde6"
+  plus-emph-style               = syntax "#57a7bc"
+  plus-empty-line-marker-style  = syntax "#aecde6"
+  line-numbers-plus-style       = "#399a96"
+  line-numbers-zero-style       = "#a8aecb"
 [delta "dark-mode"]
   light = false
-  syntax-theme = Visual Studio Dark+
+  # Tokyo Night Storm (https://github.com/folke/tokyonight.nvim/blob/main/extras/delta/tokyonight_storm.gitconfig)
+  minus-style                   = syntax "#3f2d3d"
+  minus-non-emph-style          = syntax "#3f2d3d"
+  minus-emph-style              = syntax "#763842"
+  minus-empty-line-marker-style = syntax "#3f2d3d"
+  line-numbers-minus-style      = "#b2555b"
+  plus-style                    = syntax "#283b4d"
+  plus-non-emph-style           = syntax "#283b4d"
+  plus-emph-style               = syntax "#316172"
+  plus-empty-line-marker-style  = syntax "#283b4d"
+  line-numbers-plus-style       = "#266d6a"
+  line-numbers-zero-style       = "#3b4261"
 [push]
   default = current
   autoSetupRemote = true

@@ -54,3 +54,6 @@ alias "??"="gh copilot suggest -t shell"
 alias "git\?"="gh copilot suggest -t git"
 # zoxide
 alias cd='z'
+# source entry file
+alias zs='source ~/.zshrc'
+alias bs='source ~/.bashrc'

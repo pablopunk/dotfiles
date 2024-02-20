@@ -185,6 +185,6 @@ keymap.set("n", "<leader>>", unfold_all, opts "Open all folds")
 -- }}}
 
 -- Quickfix {{{
-keymap.set("n", "<leader>qn", ":cnext<cr>", opts "Next quickfix file")
-keymap.set("n", "<leader>qp", ":cprev<cr>", opts "Previous quickfix file")
+keymap.set("n", "]q", ":cnext<cr>", opts "Next quickfix file")
+keymap.set("n", "[q", ":cprev<cr>", opts "Previous quickfix file")
 --- }}}

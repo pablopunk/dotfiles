@@ -21,6 +21,19 @@ go_to_session() {
   exit 0
 }
 
+if [[ $# -eq 0 ]]; then
+  # List tmux sessions for selection if any exist
+  # You can ctrl+c to skip selecting a tmux session (and just select a directory instead)
+  tmux_sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
+  if [[ -n $tmux_sessions ]]; then
+    selected_session=$(echo "$tmux_sessions" | fzf_short --prompt="tmux sessions: ")
+    if [[ -n $selected_session ]]; then
+      go_to_session "$selected_session"
+      exit 0
+    fi
+  fi
+fi
+
 if [[ $# -eq 1 ]]; then
   # Attempt to find an existing tmux session that matches the provided name
   selected_name=$(tmux ls 2>/dev/null | cut -d: -f1 | grep "$1")

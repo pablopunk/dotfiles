@@ -43,7 +43,7 @@ return {
           end
 
           -- Navigation
-          map("n", "]c", function()
+          map("n", "]g", function()
             if vim.wo.diff then
               return "]"
             end
@@ -53,7 +53,7 @@ return {
             return "<Ignore>"
           end, { expr = true, desc = "Go to next git hunk" })
 
-          map("n", "[c", function()
+          map("n", "[g", function()
             if vim.wo.diff then
               return "["
             end

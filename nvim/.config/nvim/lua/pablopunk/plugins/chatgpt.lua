@@ -5,6 +5,13 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
   },
+  cmd = {
+    "ChatGPT",
+    "ChatGPTRun",
+    "ChatGPTActAs",
+    "ChatGPTCompleteCode",
+    "ChatGPTEditWithInstructions",
+  },
   keys = {
     {
       "<leader>cg",

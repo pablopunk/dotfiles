@@ -7,6 +7,7 @@ return {
       "nvim-telescope/telescope-live-grep-args.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "nvim-telescope/telescope-ui-select.nvim", -- It sets vim.ui.select to telescope
+      "camgraff/telescope-tmux.nvim", -- tmux sessions in telescope
     },
     keys = {
       {
@@ -104,6 +105,12 @@ return {
         end,
         desc = "Show marks",
       },
+      {
+        "<leader>tx",
+        function()
+          require("telescope").extensions.tmux.sessions {}
+        end,
+      },
     },
     config = function()
       local telescope = require "telescope"
@@ -150,6 +157,7 @@ return {
 
       telescope.load_extension "fzf"
       telescope.load_extension "ui-select"
+      telescope.load_extension "tmux"
     end,
   },
 }

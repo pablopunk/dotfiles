@@ -22,7 +22,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd "colorscheme tokyonight-moon"
+      vim.cmd "colorscheme tokyonight-storm"
     end,
   },
   {
@@ -31,7 +31,7 @@ return {
       update_interval = 1000,
       set_dark_mode = function()
         vim.opt.background = "dark"
-        vim.cmd "colorscheme tokyonight-moon"
+        vim.cmd "colorscheme tokyonight-storm"
       end,
       set_light_mode = function()
         if vim.fn.has "mac" == 0 then

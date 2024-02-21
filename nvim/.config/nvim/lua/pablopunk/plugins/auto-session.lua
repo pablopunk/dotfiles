@@ -21,7 +21,6 @@ return {
   },
   {
     "rmagatti/session-lens", -- session managing through telescope
-    requires = { "nvim-telescope/telescope.nvim" },
     keys = {
       {
         "<leader>ss",

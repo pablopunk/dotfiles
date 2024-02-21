@@ -27,77 +27,27 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim", -- leftside git status
-    event = "VeryLazy",
-    config = function()
-      require("gitsigns").setup {
-        signcolumn = false,
-        numhl = true,
-        on_attach = function(bufnr)
-          local gs = require "gitsigns"
+    event = "User FilePost",
+    opts = {
+      signcolumn = false,
+      numhl = true,
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+        end
 
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
-
-          -- Navigation
-          map("n", "]g", function()
-            if vim.wo.diff then
-              return "]"
-            end
-            vim.schedule(function()
-              gs.next_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true, desc = "Go to next git hunk" })
-
-          map("n", "[g", function()
-            if vim.wo.diff then
-              return "["
-            end
-            vim.schedule(function()
-              gs.prev_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true, desc = "Go to previous git hunk" })
-
-          map(
-            { "n", "v" },
-            "<leader>gr",
-            ":Gitsigns reset_hunk<CR>",
-            { noremap = true, silent = true, desc = "Undo git hunk" }
-          )
-
-          map(
-            { "n", "v" },
-            "<leader>gs",
-            ":Gitsigns stage_hunk<CR>",
-            { noremap = true, silent = true, desc = "Stage git hunk" }
-          )
-
-          map(
-            { "n", "v" },
-            "<leader>gu",
-            ":Gitsigns undo_stage_hunk<CR>",
-            { noremap = true, silent = true, desc = "Undo stage git hunk" }
-          )
-
-          map(
-            { "n", "v" },
-            "<leader>gh",
-            ":Gitsigns toggle_linehl<CR>",
-            { noremap = true, silent = true, desc = "Show diff colors" }
-          )
-
-          map(
-            { "n", "v" },
-            "<leader>gd",
-            ":Gitsigns preview_hunk_inline<CR>",
-            { noremap = true, silent = true, desc = "Show diff inline" }
-          )
-        end,
-      }
-    end,
+        -- stylua: ignore start
+        map("n", "]g", gs.next_hunk, "Next Hunk")
+        map("n", "[g", gs.prev_hunk, "Prev Hunk")
+        map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", "<leader>gh", ":Gitsigns toggle_linehl<CR>", "Show diff colors")
+        map("n", "<leader>ghS", gs.stage_hunk, "Stage Hunk")
+        map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", "<leader>gd", gs.diffthis, "Show git diff for this file")
+        map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
+      end,
+    },
   },
 }

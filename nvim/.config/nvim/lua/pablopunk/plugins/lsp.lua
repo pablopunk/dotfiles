@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
+    event = "User FilePost",
     keys = {
       { "<leader>ll", ":LspStart<cr>", desc = "Start LSP" },
     },
@@ -21,7 +22,6 @@ return {
       local luasnip = require "luasnip"
       local lspkind = require "lspkind"
       local lspconfig = require "lspconfig"
-      local cmp_nvim_lsp = require "cmp_nvim_lsp"
       local mason = require "mason"
       local mason_lspconfig = require "mason-lspconfig"
 

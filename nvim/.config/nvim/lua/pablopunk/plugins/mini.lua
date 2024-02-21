@@ -2,22 +2,22 @@ return {
   {
     "echasnovski/mini.comment", -- comments with gcc
     config = true,
-    event = "CursorMoved",
+    event = "VeryLazy",
   },
   {
     "echasnovski/mini.pairs", -- autopairs for (), {}, [], '', ""...
     config = true,
-    event = "InsertEnter",
+    event = "VeryLazy",
   },
   {
     "echasnovski/mini.splitjoin", -- `gS` split or join function arguments
     config = true,
-    event = "CursorMoved",
+    event = "VeryLazy",
   },
   {
     "echasnovski/mini.cursorword", -- highlight word under cursor
     config = true,
-    event = "CursorHold",
+    event = "VeryLazy",
   },
   {
     "echasnovski/mini.notify", -- notifications ui
@@ -57,7 +57,14 @@ return {
   },
   {
     "echasnovski/mini.files", -- file tree
-    event = "BufEnter",
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require "mini.files"
+        end
+      end
+    end,
     keys = {
       {
         "<c-t>",

@@ -202,7 +202,7 @@ let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 
 " Color config {{{
 set background=dark
-colorscheme zaibatsu
+colorscheme habamax
 " Groups to be transparent
 let g:higroups = [
   \ 'Normal',

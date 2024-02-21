@@ -3,7 +3,6 @@ return {
     "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "nvim-telescope/telescope.nvim",
     },
     dev = true,
     event = "BufWinEnter", -- use this for tabline

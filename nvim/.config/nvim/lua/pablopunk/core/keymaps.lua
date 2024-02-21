@@ -2,6 +2,7 @@
 
 vim.g.mapleader = " " -- space
 
+-- mapping function {{{
 local keymap = vim.keymap
 local function opts(desc)
   return { noremap = true, silent = true, desc = desc }
@@ -9,6 +10,7 @@ end
 local function opts_nosilent(desc)
   return { noremap = true, silent = false, desc = desc }
 end
+--- }}}
 
 -- ^c is ESC {{{
 keymap.set("n", "<c-c>", "<esc>", opts "ESC")

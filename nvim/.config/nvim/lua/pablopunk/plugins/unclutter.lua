@@ -6,7 +6,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     dev = true,
-    -- event = "BufWinEnter", -- use this for tabline
+    event = "BufWinEnter", -- use this for tabline
     keys = { -- use these without a tabline
       {
         "<c-f>",
@@ -16,7 +16,7 @@ return {
         desc = "unclutter.nvim: List all buffers",
       },
       {
-        "<c-n>",
+        "L",
         function()
           require("unclutter.tabline").next()
         end,
@@ -24,7 +24,7 @@ return {
         noremap = true,
       },
       {
-        "<c-p>",
+        "H",
         function()
           require("unclutter.tabline").prev()
         end,

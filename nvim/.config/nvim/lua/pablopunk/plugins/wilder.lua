@@ -14,7 +14,7 @@ return {
     end,
     config = function()
       local wilder = require "wilder"
-      wilder.setup { modes = { ":", "/", "?" } }
+      wilder.setup { modes = { ":", "/", "?" }, next_key = "<c-n>", previous_key = "<c-p>" }
 
       -- NOTE: If wilder becomes slow, remove the fzy filter
       wilder.set_option("pipeline", {

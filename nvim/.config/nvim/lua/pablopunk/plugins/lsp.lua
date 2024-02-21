@@ -156,8 +156,11 @@ return {
         end
       end
 
-      -- Setup servers
-      local capabilities = cmp_nvim_lsp.default_capabilities()
+      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+      -- setup servers
       for _, lsp in ipairs(servers) do
         if lsp == "emmet_ls" then -- emmet_ls doesn't have specific config (global filetypes)
           lspconfig[lsp].setup {

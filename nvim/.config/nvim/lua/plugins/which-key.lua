@@ -1,6 +1,7 @@
 return {
   {
     "folke/which-key.nvim", -- displays a popup with possible keybindings of the command you started typing
+    event = "VeryLazy",
     config = function()
       local wk = require "which-key"
 

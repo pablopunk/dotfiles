@@ -2,6 +2,7 @@ return {
   {
     enabled = false,
     "zbirenbaum/copilot.lua",
+    event = "VeryLazy",
     build = function()
       vim.cmd ":Copilot auth signin"
     end,

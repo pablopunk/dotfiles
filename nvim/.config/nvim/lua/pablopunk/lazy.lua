@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
-
 require("lazy").setup("pablopunk.plugins", {
   checker = {
     enabled = true,

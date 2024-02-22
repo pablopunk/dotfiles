@@ -39,10 +39,13 @@ sketchybar --default icon.font="SF Pro:Semibold:14.0"  \
                      icon.padding_left=10                  \
                      icon.padding_right=4
 
+# Let side
 # source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/front_app.sh
 # source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/media.sh
+
+# Right side
 source $ITEM_DIR/calendar.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh

@@ -27,7 +27,7 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim", -- leftside git status
-    event = "User FilePost",
+    event = "VeryLazy",
     opts = {
       signcolumn = false,
       numhl = true,

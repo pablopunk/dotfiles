@@ -57,9 +57,6 @@ return {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     event = { "BufReadPost", "BufNewFile" },
-    keys = {
-      { "<leader>ll", ":LspStart<cr>", desc = "Start LSP" },
-    },
     dependencies = {
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
@@ -118,16 +115,6 @@ return {
         },
       }
 
-      local function lsp_start()
-        vim.cmd "LspStart"
-      end
-      local function lsp_stop()
-        vim.cmd "LspStop"
-      end
-      local function lsp_restart()
-        vim.cmd "LspRestart"
-      end
-
       local keys = {
         { "E", vim.diagnostic.open_float, "Show line diagnostics" },
         { "ge", vim.diagnostic.goto_next, "Go to next diagnostic" },
@@ -139,9 +126,9 @@ return {
         { "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols" },
         { "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)" },
         { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
-        { "<leader>ll", lsp_start, "Start LSP" },
-        { "<leader>lx", lsp_stop, "Stop LSP" },
-        { "<leader>lr", lsp_restart, "Restart LSP" },
+        { "<leader>ll", ":LSPStart<cr>", "Start LSP" },
+        { "<leader>lx", ":LSPStop<cr>", "Stop LSP" },
+        { "<leader>lr", ":LSPRestart<cr>", "Restart LSP" },
         {
           "<leader>lh",
           function()

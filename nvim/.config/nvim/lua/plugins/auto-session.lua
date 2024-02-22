@@ -1,5 +1,6 @@
 return {
   {
+    lazy = false,
     "rmagatti/auto-session", -- auto save and restore sessions
     config = function()
       require("auto-session").setup {

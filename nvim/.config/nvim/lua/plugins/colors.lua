@@ -27,6 +27,7 @@ return {
   },
   {
     "f-person/auto-dark-mode.nvim", -- Auto dark mode (macOS, linux, windows)
+    event = "VeryLazy",
     opts = {
       update_interval = 1000,
       set_dark_mode = function()
@@ -43,6 +44,7 @@ return {
     },
   },
   {
+    lazy = false,
     "pablopunk/transparent.vim", -- Transparent background
     dev = true,
   },

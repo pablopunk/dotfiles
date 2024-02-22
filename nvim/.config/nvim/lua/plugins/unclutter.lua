@@ -1,11 +1,8 @@
 return {
   {
     "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
     dev = true,
-    event = "BufWinEnter", -- use this for tabline
+    -- event = "BufWinEnter", -- use this for tabline
     keys = { -- use these without a tabline
       {
         "<c-f>",

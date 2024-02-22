@@ -11,6 +11,64 @@ local plugins = {
     end,
   },
 
+   {
+    "f-person/auto-dark-mode.nvim", -- Auto dark mode (macOS, linux, windows)
+    event = "VeryLazy",
+    opts = function ()
+      return require("plugins.configs.auto-dark-mode")("tokyonight-storm", "tokyonight-day")
+    end
+  },
+  {
+    lazy = false,
+    "pablopunk/transparent.vim", -- Transparent background
+    dev = true,
+  },
+
+  {
+    lazy = false,
+    "pablopunk/persistent-undo.vim", -- undo works across vim sessions
+  },
+
+    {
+    "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
+    event = "VeryLazy",
+  },
+
+   {
+    lazy = false,
+    "christoomey/vim-tmux-navigator", -- move through vim splits & tmux with <C-hjkl>
+  },
+
+   {
+    event = "VeryLazy",
+    "markonm/traces.vim", -- to show in real time what your :s commands will replace
+  },
+  {
+    "tpope/vim-surround", -- surround motion
+    event = "VeryLazy",
+  },
+
+    {
+    lazy = false,
+    "rmagatti/auto-session", -- auto save and restore sessions
+    config = function()
+      require("auto-session").setup(require("plugins.configs.session").auto_session)
+    end,
+  },
+
+    {
+    enabled = true,
+    "zbirenbaum/copilot.lua",
+    event = "VeryLazy",
+    build = function()
+      vim.cmd ":Copilot auth signin"
+    end,
+    config = function()
+      require("copilot").setup(require("plugins.configs.copilot-config"))
+      require("core.keymaps").copilot()
+    end,
+  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -53,38 +111,65 @@ local plugins = {
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require "plugins.configs.lsp"
-      -- require("core.keymaps").lsp()
+      require("core.keymaps").lsp()
     end,
   },
 
-  {
-    "lewis6991/gitsigns.nvim",
-    ft = { "gitcommit", "diff" },
-    init = function()
-      -- load gitsigns only when a git file is opened
-      vim.api.nvim_create_autocmd({ "BufRead" }, {
-        group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-        callback = function()
-          vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
-            on_exit = function(_, return_code)
-              if return_code == 0 then
-                vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
-                vim.schedule(function()
-                  lazy.load { plugins = { "gitsigns.nvim" } }
-                end)
-              end
-            end,
-          })
-        end,
-      })
-    end,
-    opts = function()
-      return require("plugins.configs.git").gitsigns
-    end,
-    config = function(_, opts)
-      require("gitsigns").setup(opts)
-    end,
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   ft = { "gitcommit", "diff" },
+  --   init = function()
+  --     -- load gitsigns only when a git file is opened
+  --     vim.api.nvim_create_autocmd({ "BufRead" }, {
+  --       group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+  --       callback = function()
+  --         vim.fn.jobstart({ "git", "-C", vim.loop.cwd(), "rev-parse" }, {
+  --           on_exit = function(_, return_code)
+  --             if return_code == 0 then
+  --               vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
+  --               vim.schedule(function()
+  --                 lazy.load { plugins = { "gitsigns.nvim" } }
+  --               end)
+  --             end
+  --           end,
+  --         })
+  --       end,
+  --     })
+  --   end,
+  --   config = function()
+  --     local opts = require("plugins.configs.git").gitsigns
+  --     require("gitsigns").setup(opts)
+  --   end,
+  -- },
+
+ --  {
+ --   "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
+ --   cmd = "ToggleBlame",
+ --   config = function()
+ --     require("core.keymaps").blame()
+ --   end,
+ -- },
+ -- {
+ --   "almo7aya/openingh.nvim",
+ --   cmd = "OpenInGHFile",
+ --   config = function()
+ --     require("core.keymaps").openingh()
+ --   end,
+ -- },
+ -- {
+ --   "NeogitOrg/neogit", -- magit for neovim (git client)
+ --   keys = {
+ --     { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git client", mode = { "n", "v" } },
+ --   },
+ --   dependencies = {
+ --     "nvim-lua/plenary.nvim",
+ --     "sindrets/diffview.nvim",
+ --     "ibhagwan/fzf-lua",
+ --   },
+ --   config = function()
+ --     require("neogit").setup {}
+ --   end,
+ -- },
 
   {
     "nvim-telescope/telescope.nvim",
@@ -106,6 +191,7 @@ local plugins = {
       telescope.load_extension "fzf"
       telescope.load_extension "ui-select"
       telescope.load_extension "tmux"
+      telescope.load_extension "session-lens"
 
       require("core.keymaps").telescope()
     end

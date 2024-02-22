@@ -1,5 +1,3 @@
-local icons = require "utils.icons"
-
 local servers = {
   "bashls",
   "cssls",
@@ -14,21 +12,6 @@ local servers = {
 
 return {
   {
-    "hrsh7th/nvim-cmp",
-    name = "cmp",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "L3MON4D3/LuaSnip",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-    },
-    event = { "LspAttach", "InsertCharPre" },
-    config = function()
-      require "plugins.configs.cmp"
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp", -- completion engine
     name = "cmp",
     dependencies = {
@@ -38,11 +21,13 @@ return {
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-path", -- complete paths
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
+      "onsails/lspkind.nvim", -- vscode-like icons for cmp items
     },
     event = { "LspAttach", "InsertCharPre" },
     config = function()
       local cmp = require "cmp"
       local luasnip = require "luasnip"
+      local lspkind = require "lspkind"
 
       -- necessary for rafamadriz/friendly-snippets
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -53,46 +38,17 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        experimental = {
-          ghost_text = true,
-        },
         mapping = cmp.mapping.preset.insert {
           ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
         },
-        window = {
-          completion = {
-            scrolloff = vim.go.scrolloff,
-            border = "rounded",
-          },
-          documentation = {
-            border = "rounded",
-          },
-        },
         sources = cmp.config.sources {
-          { name = "nvim_lsp", max_item_count = 20 }, -- lsp
-          {
-            name = "buffer",
-            max_item_count = 20,
-            option = {
-              get_bufnrs = function()
-                return vim.tbl_map(function(win)
-                  return vim.api.nvim_win_get_buf(win)
-                end, vim.api.nvim_list_wins())
-              end,
-            },
-          }, -- text in buffer
-          { name = "path", max_item_count = 20 }, -- file system paths
+          { name = "nvim_lsp" }, -- lsp
+          { name = "buffer" }, -- text in buffer
+          { name = "path" }, -- file system paths
         },
         formatting = {
-          fields = { "kind", "abbr", "menu" },
-          format = function(_, item)
-            local kind = item.kind
-            item.kind = icons.kind[kind]
-            item.menu = kind:gsub("(%l)(%u)", "%1 %2"):lower()
-
-            return item
-          end,
+          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
         },
       }
     end,
@@ -133,7 +89,6 @@ return {
 
       vim.opt.completeopt = "menu,menuone,noselect"
 
-      vim.opt.completeopt = "menu,menuone,noselect"
       local settings = {
         javascript = {
           inlayHints = js_inlayhints,

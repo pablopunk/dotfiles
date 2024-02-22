@@ -20,22 +20,39 @@ return {
     event = "VeryLazy",
   },
   {
-    "echasnovski/mini.notify", -- notifications ui
-    config = true,
-    event = "VeryLazy",
+    "echasnovski/mini.statusline", -- statusline
+    lazy = false,
+    config = function()
+      local mini_statusline = require "mini.statusline"
+      mini_statusline.setup {
+        content = {
+          active = function()
+            local mode, mode_hl = mini_statusline.section_mode { trunc_width = 120 }
+            local filename = mini_statusline.section_filename { trunc_width = 140 }
+            local fileinfo = mini_statusline.section_fileinfo {
+              trunc_width = 300 --[[ large value to always truncate ]],
+            }
+            local search = mini_statusline.section_searchcount { trunc_width = 75 }
+            local clients = {}
+            for _, client in ipairs(vim.lsp.buf_get_clients()) do
+              table.insert(clients, client.name)
+            end
+            local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
+
+            return mini_statusline.combine_groups {
+              { hl = mode_hl, strings = { mode } },
+              "%<", -- Mark general truncate point
+              { hl = "MiniStatuslineFilename", strings = { filename } },
+              "%=", -- End left alignment
+              { hl = "MiniStatuslineModeOther", strings = { lsp_clients } },
+              { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+              { hl = mode_hl, strings = { search } },
+            }
+          end,
+        },
+      }
+    end,
   },
-  -- {
-  --   "echasnovski/mini.statusline", -- statusline
-  --   config = true,
-  -- },
-  -- {
-  --   "echasnovski/mini.doc", -- generate Lua docs
-  --   config = true,
-  -- }
-  -- {
-  --   "echasnovski/mini.test", -- testing for Lua
-  --   config = true,
-  -- }
   {
     "echasnovski/mini.starter", -- starter screen
     lazy = false,

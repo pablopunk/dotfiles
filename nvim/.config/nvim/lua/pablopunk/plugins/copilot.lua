@@ -1,7 +1,7 @@
 return {
   {
+    enabled = false,
     "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
     build = function()
       vim.cmd ":Copilot auth signin"
     end,
@@ -35,16 +35,4 @@ return {
       }
     end,
   },
-  -- {
-  --   "zbirenbaum/copilot-cmp", -- Turn copilot into a cmp source. Config in ./lsp.lua
-  --   dependencies = { "onsails/lspkind.nvim" },
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --     require("lspkind").init {
-  --       symbol_map = {
-  --         Copilot = "", -- copilot icon
-  --       },
-  --     }
-  --   end,
-  -- },
 }

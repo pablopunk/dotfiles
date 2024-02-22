@@ -21,7 +21,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
+    init = function()
       vim.cmd "colorscheme tokyonight-storm"
     end,
   },
@@ -42,7 +42,6 @@ return {
       end,
     },
   },
-  "edkolev/tmuxline.vim", -- Generate tmux colors based on vim colors
   {
     "pablopunk/transparent.vim", -- Transparent background
     dev = true,

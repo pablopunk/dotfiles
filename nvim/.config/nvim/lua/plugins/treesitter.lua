@@ -4,12 +4,16 @@ return {
     event = "VeryLazy",
   },
   {
-    "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
-    dependencies = {
-      "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
-    },
-    event = "BufWinEnter",
+    "nvim-treesitter/nvim-treesitter",
+    -- dependencies = {
+    --   "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
+    -- },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
+    event = {
+      "BufReadPost",
+      "BufNewFile",
+    },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup {
@@ -17,7 +21,7 @@ return {
           enable = true,
         },
         indent = { enable = true },
-        autotag = { enable = true }, -- requires nvim-ts-autotag
+        -- autotag = { enable = true }, -- requires nvim-ts-autotag
         ensure_installed = { -- if these are not installed, it will install them
           "json",
           "javascript",
@@ -76,9 +80,9 @@ return {
         },
       }
     end,
-    run = function()
-      require("nvim-treesitter.install").update { with_sync = true }
-    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
   },
   {
     event = "VeryLazy",

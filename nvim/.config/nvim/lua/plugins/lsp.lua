@@ -1,42 +1,122 @@
+local icons = require "utils.icons"
+
+local servers = {
+  "bashls",
+  "cssls",
+  "html",
+  "vimls",
+  "jsonls",
+  "lua_ls",
+  "tailwindcss",
+  "tsserver",
+  -- "emmet_ls",
+}
+
 return {
   {
+    "hrsh7th/nvim-cmp",
+    name = "cmp",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "L3MON4D3/LuaSnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+    },
+    event = { "LspAttach", "InsertCharPre" },
+    config = function()
+      require "plugins.configs.cmp"
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp", -- completion engine
+    name = "cmp",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- A collection of common lua functions and libraries
+      "L3MON4D3/LuaSnip", -- Snippets engine
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "hrsh7th/cmp-buffer", -- text from current buffer
+      "hrsh7th/cmp-path", -- complete paths
+      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
+    },
+    event = { "LspAttach", "InsertCharPre" },
+    config = function()
+      local cmp = require "cmp"
+      local luasnip = require "luasnip"
+
+      -- necessary for rafamadriz/friendly-snippets
+      require("luasnip.loaders.from_vscode").lazy_load()
+
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        experimental = {
+          ghost_text = true,
+        },
+        mapping = cmp.mapping.preset.insert {
+          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
+          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
+        },
+        window = {
+          completion = {
+            scrolloff = vim.go.scrolloff,
+            border = "rounded",
+          },
+          documentation = {
+            border = "rounded",
+          },
+        },
+        sources = cmp.config.sources {
+          { name = "nvim_lsp", max_item_count = 20 }, -- lsp
+          {
+            name = "buffer",
+            max_item_count = 20,
+            option = {
+              get_bufnrs = function()
+                return vim.tbl_map(function(win)
+                  return vim.api.nvim_win_get_buf(win)
+                end, vim.api.nvim_list_wins())
+              end,
+            },
+          }, -- text in buffer
+          { name = "path", max_item_count = 20 }, -- file system paths
+        },
+        formatting = {
+          fields = { "kind", "abbr", "menu" },
+          format = function(_, item)
+            local kind = item.kind
+            item.kind = icons.kind[kind]
+            item.menu = kind:gsub("(%l)(%u)", "%1 %2"):lower()
+
+            return item
+          end,
+        },
+      }
+    end,
+  },
+  {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    event = "User FilePost",
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+    event = { "BufReadPost", "BufNewFile" },
     keys = {
       { "<leader>ll", ":LspStart<cr>", desc = "Start LSP" },
     },
     dependencies = {
-      "hrsh7th/cmp-buffer", -- text from current buffer
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-      "hrsh7th/cmp-path", -- complete paths
-      "hrsh7th/nvim-cmp", -- A completion engine plugin for neovim written in Lua. Completion sources are installed from external repositories and "sourced"
-      "onsails/lspkind.nvim", -- vscode-like icons for the autocompletion UI
-      "L3MON4D3/LuaSnip", -- Snippets engine
-      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
-      "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
-      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
+      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+      "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
     },
     config = function()
-      local cmp = require "cmp"
-      local luasnip = require "luasnip"
-      local lspkind = require "lspkind"
       local lspconfig = require "lspconfig"
-      local mason = require "mason"
-      local mason_lspconfig = require "mason-lspconfig"
 
-      require("neoconf").setup {} -- needed before lspconfig setup
-
-      local servers = {
-        "bashls",
-        "cssls",
-        "html",
-        "vimls",
-        "jsonls",
-        "lua_ls",
-        "tailwindcss",
-        "tsserver",
-        -- "emmet_ls",
+      -- needed before lspconfig setup
+      require("neoconf").setup {}
+      require("mason").setup {}
+      require("mason-lspconfig").setup {
+        ensure_installed = servers,
       }
 
       local js_inlayhints = {
@@ -53,32 +133,6 @@ return {
 
       vim.opt.completeopt = "menu,menuone,noselect"
 
-      ---@diagnostic disable-next-line: missing-fields
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert {
-          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
-          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
-        },
-        sources = cmp.config.sources {
-          { name = "nvim_lsp" }, -- lsp
-          { name = "luasnip" }, -- snippet engine
-          { name = "buffer" }, -- text in buffer
-          { name = "path" }, -- file system paths
-          { name = "copilot" }, -- copilot.lua as a cmp source
-        },
-        ---@diagnostic disable-next-line: missing-fields
-        formatting = {
-          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
-        },
-      }
-
-      -- necessary for rafamadriz/friendly-snippets
-      require("luasnip.loaders.from_vscode").lazy_load()
       vim.opt.completeopt = "menu,menuone,noselect"
       local settings = {
         javascript = {
@@ -107,11 +161,6 @@ return {
         bash = {
           filetypes = { "sh", "zsh", "bash" },
         },
-      }
-
-      mason.setup {}
-      mason_lspconfig.setup {
-        ensure_installed = servers,
       }
 
       local function lsp_start()

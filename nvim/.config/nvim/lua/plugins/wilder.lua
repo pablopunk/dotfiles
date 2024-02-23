@@ -17,12 +17,32 @@ return {
 
       vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
 
-      -- NOTE: If wilder becomes slow, remove the fzy filter
       wilder.set_option("pipeline", {
-        wilder.branch(wilder.cmdline_pipeline {
-          fuzzy = 2,
-          fuzzy_filter = wilder.lua_fzy_filter(), -- fuzzy completion for cmdline. IT'S AMAZING. Slow. BUT AMAZING
-        }),
+        wilder.branch(
+          wilder.substitute_pipeline {
+            pipeline = wilder.python_search_pipeline {
+              skip_cmdtype_check = 1,
+              pattern = wilder.python_fuzzy_pattern {
+                start_at_boundary = 0,
+              },
+            },
+          },
+          wilder.cmdline_pipeline {
+            fuzzy = 2,
+            fuzzy_filter = wilder.lua_fzy_filter(),
+          },
+          {
+            wilder.check(function(_, x)
+              return x == ""
+            end),
+            wilder.history(),
+          },
+          wilder.python_search_pipeline {
+            pattern = wilder.python_fuzzy_pattern {
+              start_at_boundary = 0,
+            },
+          }
+        ),
       })
 
       local highlighters = {

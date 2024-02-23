@@ -40,7 +40,7 @@ return {
           markdown = prettier_formatters,
         },
         format_on_save = {
-          lsp_fallback = true, -- if no formatter is found for currrent lang, use lsp to format
+          lsp_fallback = true, -- if no formatter is found for lang, use lsp to format
           async = true,
         },
       })

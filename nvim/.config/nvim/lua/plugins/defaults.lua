@@ -23,4 +23,12 @@ return {
     "tpope/vim-surround", -- surround motion
     event = "VeryLazy",
   },
+  {
+    "keymaps", -- my keymaps
+    event = "VeryLazy",
+    dir = vim.fn.stdpath "config",
+    config = function()
+      require("core.keymaps").general()
+    end,
+  },
 }

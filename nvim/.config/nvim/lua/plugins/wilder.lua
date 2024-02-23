@@ -1,11 +1,10 @@
 return {
   {
-    enabled = false,
     "gelguy/wilder.nvim", -- autocomplete for command line (:) and search (/)
     dependencies = {
-      -- "roxma/nvim-yarp", -- to use python search
-      -- "roxma/vim-hug-neovim-rpc", -- to use python search
-      -- "romgrk/fzy-lua-native", -- fuzzy completion
+      "roxma/nvim-yarp", -- to use python search
+      "roxma/vim-hug-neovim-rpc", -- to use python search
+      "romgrk/fzy-lua-native", -- fuzzy completion
     },
     -- event = "CmdlineEnter", -- this makes sense but it makes it feel slow
     event = "VeryLazy",

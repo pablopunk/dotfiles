@@ -44,7 +44,14 @@ return {
         },
         sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- lsp
-          { name = "buffer" }, -- text in buffer
+          {
+            name = "buffer", -- text in buffer
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end,
+            },
+          },
           { name = "path" }, -- file system paths
         },
         formatting = {
@@ -115,56 +122,17 @@ return {
         },
       }
 
-      local keys = {
-        { "E", vim.diagnostic.open_float, "Show line diagnostics" },
-        { "ge", vim.diagnostic.goto_next, "Go to next diagnostic" },
-        { "gE", vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-        { "<leader>ca", vim.lsp.buf.code_action, "Show code actions" },
-        { "K", vim.lsp.buf.hover, "Hover" },
-        { "gd", ":Telescope lsp_definitions<cr>", "Go to definition" },
-        { "gr", ":Telescope lsp_references<cr>", "Go to references" },
-        { "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols" },
-        { "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)" },
-        { "<leader>rn", vim.lsp.buf.rename, "Rename variable" },
-        { "<leader>ll", ":LSPStart<cr>", "Start LSP" },
-        { "<leader>lx", ":LSPStop<cr>", "Stop LSP" },
-        { "<leader>lr", ":LSPRestart<cr>", "Restart LSP" },
-        {
-          "<leader>lh",
-          function()
-            if vim.lsp.inlay_hint then
-              vim.lsp.inlay_hint(vim.api.nvim_get_current_buf(), nil)
-            end
-          end,
-          "Toggle inlay hints",
-        },
-      }
-
-      ---@diagnostic disable-next-line: unused-local
-      local function on_attach(client, buf)
-        for _, key in ipairs(keys) do
-          vim.keymap.set("n", key[1], key[2], { noremap = true, desc = key[3] })
-        end
-      end
-
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
       -- setup servers
       for _, lsp in ipairs(servers) do
-        if lsp == "emmet_ls" then -- emmet_ls doesn't have specific config (global filetypes)
-          lspconfig[lsp].setup {
-            on_attach = on_attach,
-            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-          }
-        else
-          lspconfig[lsp].setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = settings,
-          }
-        end
+        lspconfig[lsp].setup {
+          on_attach = require("core.keymaps").lsp,
+          capabilities = capabilities,
+          settings = settings,
+        }
       end
     end,
   },

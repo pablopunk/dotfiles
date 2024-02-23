@@ -54,6 +54,7 @@ return {
           },
           { name = "path" }, -- file system paths
         },
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
         },
@@ -68,12 +69,14 @@ return {
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+      "folke/neodev.nvim", -- lsp for nvim's Lua API
     },
     config = function()
       local lspconfig = require "lspconfig"
 
       -- needed before lspconfig setup
       require("neoconf").setup {}
+      require("neodev").setup {}
       require("mason").setup {}
       require("mason-lspconfig").setup {
         ensure_installed = servers,

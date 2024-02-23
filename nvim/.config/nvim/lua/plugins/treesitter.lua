@@ -1,13 +1,6 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
-    -- dependencies = {
-    --   "windwp/nvim-ts-autotag", -- Use treesitter to auto close and auto rename html tag
-    -- },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     event = {
@@ -21,7 +14,6 @@ return {
           enable = true,
         },
         indent = { enable = true },
-        -- autotag = { enable = true }, -- requires nvim-ts-autotag
         ensure_installed = { -- if these are not installed, it will install them
           "json",
           "javascript",
@@ -48,41 +40,8 @@ return {
           },
         },
         auto_install = true,
-        textobjects = { -- Be prepared to witness the power of treesitter. `cif` = "change inner function"
-          select = {
-            enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-            keymaps = {
-              ["af"] = { query = "@function.outer", desc = "Select outer part of a function" },
-              ["if"] = { query = "@function.inner", desc = "Select inner part of a function" },
-              ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-              ["is"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = { ["<leader>a"] = "@parameter.inner", desc = "Swap with next parameter" },
-            swap_previous = { ["<leader>A"] = "@parameter.inner", desc = "Swap with previous parameter" },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next = {
-              ["]f"] = { query = "@function.outer", desc = "Next function" },
-              -- ["]s"] = { query = "@scope.outer", desc = "Next scope" },
-            },
-            goto_previous = {
-              ["[f"] = { query = "@function.outer", desc = "Previous function" },
-              -- ["[s"] = { query = "@scope.outer", desc = "Previous scope" },
-            },
-          },
-        },
       }
     end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter", -- syntax highlighting but complex or something like that
   },
   {
     event = "VeryLazy",

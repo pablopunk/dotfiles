@@ -3,7 +3,6 @@
 local utils = require "core.utils"
 
 local M = {}
-vim.g.mapleader = " " -- space
 
 local map = function(mode, key, action, desc)
   vim.keymap.set(mode, key, action, { noremap = true, silent = true, desc = desc or "" })

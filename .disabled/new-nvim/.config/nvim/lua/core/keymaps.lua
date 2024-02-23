@@ -1,7 +1,5 @@
 local utils = require "core.utils"
 
-vim.g.mapleader = " " -- space
-
 local function map(mode, keys, action, desc)
   desc = desc or ""
   local opts = { noremap = true, silent = true, desc = desc }
@@ -50,12 +48,7 @@ M.general = function()
   map_no_silent("v", "<leader>rw", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', "Search & replace selection")
   map_no_silent("n", "<leader>rw", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', "Search & replace word")
   map_no_silent("v", "<leader>rl", '"9y:s@<c-r>9@<c-r>9@g<left><left>', "Search & replace in current line")
-  map_no_silent(
-    "n",
-    "<leader>rl",
-    'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
-    "Search & replace word in current line"
-  )
+  map_no_silent("n", "<leader>rl", 'viw"9y:s@<c-r>9@<c-r>9@g<left><left>', "Search & replace word in current line")
   map("n", "n", "nzz", "Next match and center")
   map("n", "N", "Nzz", "Previous match and center")
   map("n", "*", "*zz", "All matches and center")
@@ -78,13 +71,20 @@ M.telescope = function()
   map("", "<leader>fb", builtin.buffers, "Find buffers")
   map("", "<leader>fs", builtin.live_grep, "Find string")
   map("", "<leader>fw", builtin.grep_string, "Find word under cursor")
-  map("", "<leader>fW", function() builtin.grep_string({ search = vim.fn.expand("<cWORD>") }) end, "Find Word under cursor")
-  map("v", "<leader>fw", function() local search = vim.fn.getreg('9') builtin.grep_string({ search = search }) end, "Find selected string")
+  map("", "<leader>fW", function()
+    builtin.grep_string { search = vim.fn.expand "<cWORD>" }
+  end, "Find Word under cursor")
+  map("v", "<leader>fw", function()
+    local search = vim.fn.getreg "9"
+    builtin.grep_string { search = search }
+  end, "Find selected string")
   map("", "<leader>fd", builtin.diagnostics, "Find diagnostics")
   map("", "<leader>p", builtin.registers, "List yank registers")
   map("", "<leader><leader>", builtin.keymaps, "Command palette (kinda)")
   map("", "<leader>mm", builtin.marks, "Show marks")
-  map("", "<leader>tx", function() require("telescope").extensions.tmux.sessions({}) end)
+  map("", "<leader>tx", function()
+    require("telescope").extensions.tmux.sessions {}
+  end)
 end
 
 M.session = function()
@@ -98,7 +98,7 @@ M.session = function()
   end, "Delete session")
 end
 
-M.copilot = function ()
+M.copilot = function()
   -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
   map("i", "<Tab>", function()
     if require("copilot.suggestion").is_visible() then
@@ -139,11 +139,11 @@ M.gitsigns = function()
 end
 
 M.blame = function()
-  map({"n", "v"}, "<leader>gb", "<cmd>ToggleBlame<cr>", "Toggle git blame");
+  map({ "n", "v" }, "<leader>gb", "<cmd>ToggleBlame<cr>", "Toggle git blame")
 end
 
 M.openingh = function()
-  map({"n", "v"}, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
+  map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
 end
 
 return M

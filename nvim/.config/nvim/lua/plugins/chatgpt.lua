@@ -7,6 +7,13 @@ return {
   init = function()
     require("core.keymaps").chatgpt()
   end,
+  cmd = {
+    "ChatGPT",
+    "ChatGPTRun",
+    "ChatGPTActAs",
+    "ChatGPTCompleteCode",
+    "ChatGPTEditWithInstructions",
+  },
   config = function()
     require("chatgpt").setup {
       api_key_cmd = "echo -n $OPENAI_API_KEY",

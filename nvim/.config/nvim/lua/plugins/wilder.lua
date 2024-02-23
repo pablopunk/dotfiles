@@ -15,6 +15,8 @@ return {
       local wilder = require "wilder"
       wilder.setup { modes = { ":", "/", "?" }, next_key = "<c-n>", previous_key = "<c-p>" }
 
+      vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
+
       -- NOTE: If wilder becomes slow, remove the fzy filter
       wilder.set_option("pipeline", {
         wilder.branch(wilder.cmdline_pipeline {

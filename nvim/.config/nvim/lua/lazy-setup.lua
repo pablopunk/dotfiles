@@ -13,8 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = {
-    --- plugins are only loaded when their Lua modules are required,
-    --- or when one of the lazy-loading handlers triggers (e.g evet, cmd, keys...)
+    --- plugins are only loaded when their Lua modules are required, or when
+    --- one of the lazy-loading handlers triggers _(e.g event, cmd, keys...)_
     lazy = true,
   },
   checker = {

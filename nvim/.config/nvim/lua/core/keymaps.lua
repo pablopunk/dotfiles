@@ -192,4 +192,13 @@ M.unclutter = function()
   map("n", "H", ":lua require('unclutter.tabline').prev()<cr>", "Previous buffer")
 end
 
+M.conform = function()
+  map({"n", "v"}, "<leader>lf", function()
+    require("conform").format({
+      ls_fallback = true,
+      async = false
+    })
+  end, "Format file or range (sync)")
+end
+
 return M

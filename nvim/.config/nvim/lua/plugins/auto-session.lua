@@ -10,31 +10,7 @@ return {
         log_level = "error",
         auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
       }
-      vim.keymap.set("n", "<leader>sd", function()
-        vim.cmd "silent! SessionDelete" -- delete session
-        vim.cmd "silent! %bd" -- close all buffers
-        local ok, starter = pcall(require, "mini.starter")
-        if ok then
-          starter.open()
-        end
-      end, { desc = "Delete session", noremap = true, silent = true })
-    end,
-  },
-  {
-    "rmagatti/session-lens", -- session managing through telescope
-    keys = {
-      {
-        "<leader>ss",
-        function()
-          require("telescope").extensions["session-lens"].search_session()
-        end,
-      },
-    },
-    config = function()
-      require("session-lens").setup {
-        path_display = { "shorten" },
-      }
-      require("telescope").load_extension "session-lens"
+      require("core.keymaps").auto_session()
     end,
   },
 }

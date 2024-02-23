@@ -4,30 +4,9 @@ return {
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim",
   },
-  cmd = {
-    "ChatGPT",
-    "ChatGPTRun",
-    "ChatGPTActAs",
-    "ChatGPTCompleteCode",
-    "ChatGPTEditWithInstructions",
-  },
-  keys = {
-    {
-      "<leader>cg",
-      function()
-        require("chatgpt").openChat()
-      end,
-      desc = "ChatGPT",
-    },
-    {
-      mode = "v",
-      "<leader>cg",
-      function()
-        require("chatgpt").edit_with_instructions()
-      end,
-      desc = "Edit with ChatGPT",
-    },
-  },
+  init = function()
+    require("core.keymaps").chatgpt()
+  end,
   config = function()
     require("chatgpt").setup {
       api_key_cmd = "echo -n $OPENAI_API_KEY",

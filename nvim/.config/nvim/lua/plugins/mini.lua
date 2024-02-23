@@ -75,6 +75,7 @@ return {
   },
   {
     "echasnovski/mini.files", -- file tree
+    event = "VeryLazy",
     init = function()
       if vim.fn.argc(-1) == 1 then
         local stat = vim.loop.fs_stat(vim.fn.argv(0))
@@ -83,25 +84,6 @@ return {
         end
       end
     end,
-    keys = {
-      {
-        "<c-t>",
-        mode = { "n", "v" },
-        function()
-          local MiniFiles = require "mini.files"
-          if not MiniFiles.close() then
-            local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
-            if is_buffer_a_file then
-              MiniFiles.open(vim.api.nvim_buf_get_name(0))
-            else
-              MiniFiles.open()
-            end
-          end
-        end,
-        desc = "Toggle file explorer",
-      },
-      { "<c-y>", ":lua require('mini.files').open()<cr>", desc = "Toggle file explorer (root)" },
-    },
     config = function()
       require("mini.files").setup {
         mappings = {
@@ -114,6 +96,7 @@ return {
           width_preview = 60, -- width of the preview window
         },
       }
+      require("core.keymaps").minifiles()
     end,
   },
 }

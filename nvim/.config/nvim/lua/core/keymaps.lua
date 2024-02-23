@@ -90,12 +90,8 @@ M.auto_session = function()
 end
 
 M.chatgpt = function()
-  map("n", "<leader>cg", function()
-    require("chatgpt").openChat()
-  end, "ChatGPT")
-  map("v", "<leader>cg", function()
-    require("chatgpt").edit_with_instructions()
-  end, "Edit with ChatGPT")
+  map("n", "<leader>cg", ":ChatGPT<cr>", "ChatGPT")
+  map("v", "<leader>cg", ":ChatGPTEditWithInstructions<cr>", "ChatGPT edit selection")
 end
 
 M.copilot = function()

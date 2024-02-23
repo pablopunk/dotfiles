@@ -228,11 +228,9 @@ function tilt_playwright {
 }
 
 function tilt {
-  if [[ "$#" -eq 1 ]] && [[ "$1" == "up" ]]; then
-    wait_for_docker; command tilt up
-  else
-    command tilt $@
-  fi
+  [[ "$#" -eq 1 && "$1" == "up" ]] && { wait_for_docker; command tilt up; return; }
+  [[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
+  command tilt $@
 }
 
 function ssh {

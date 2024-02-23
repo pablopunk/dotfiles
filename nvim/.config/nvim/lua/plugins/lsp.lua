@@ -7,70 +7,24 @@ local servers = {
   "lua_ls",
   "tailwindcss",
   "tsserver",
+  -- "swift_mesonls",
   -- "emmet_ls",
 }
 
 return {
   {
-    "hrsh7th/nvim-cmp", -- completion engine
-    name = "cmp",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- A collection of common lua functions and libraries
-      "L3MON4D3/LuaSnip", -- Snippets engine
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
-      "hrsh7th/cmp-buffer", -- text from current buffer
-      "hrsh7th/cmp-path", -- complete paths
-      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
-      "onsails/lspkind.nvim", -- vscode-like icons for cmp items
-    },
-    event = { "LspAttach", "InsertCharPre" },
-    config = function()
-      local cmp = require "cmp"
-      local luasnip = require "luasnip"
-      local lspkind = require "lspkind"
-
-      -- necessary for rafamadriz/friendly-snippets
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert {
-          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
-          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
-        },
-        sources = cmp.config.sources {
-          { name = "nvim_lsp" }, -- lsp
-          {
-            name = "buffer", -- text in buffer
-            option = {
-              get_bufnrs = function()
-                return vim.api.nvim_list_bufs()
-              end,
-            },
-          },
-          { name = "path" }, -- file system paths
-        },
-        ---@diagnostic disable-next-line: missing-fields
-        formatting = {
-          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
-        },
-      }
-    end,
-  },
-  {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
-    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
+    -- event = { "BufEnter" },
     dependencies = {
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "folke/neodev.nvim", -- lsp for nvim's Lua API
     },
+    init = function()
+      require("core.keymaps").lsp()
+    end,
     config = function()
       local lspconfig = require "lspconfig"
 
@@ -125,15 +79,11 @@ return {
         },
       }
 
-      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
       -- setup servers
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
           on_attach = require("core.keymaps").lsp,
-          capabilities = capabilities,
+          capabilities = vim.lsp.protocol.make_client_capabilities(),
           settings = settings,
         }
       end

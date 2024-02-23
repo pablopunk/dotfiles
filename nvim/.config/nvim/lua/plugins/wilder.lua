@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     "gelguy/wilder.nvim", -- autocomplete for command line (:) and search (/)
     dependencies = {
       "roxma/nvim-yarp", -- to use python search

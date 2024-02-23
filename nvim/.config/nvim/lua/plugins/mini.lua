@@ -20,6 +20,44 @@ return {
     event = "VeryLazy",
   },
   {
+    "echasnovski/mini.indentscope", -- show indentation levels and introduces `i` to select the current scope (ai, ii...)
+    event = "VeryLazy",
+    config = function()
+      require("mini.indentscope").setup { symbol = "│" }
+      -- vim.cmd "hi! link MiniIndentscopeSymbol Whitespace"
+      vim.cmd [[
+        augroup MiniIndentscopeFixHighlight
+          autocmd!
+          autocmd CursorMoved * hi! link MiniIndentscopeSymbol Whitespace
+        augroup END
+      ]]
+    end,
+  },
+  {
+    "echasnovski/mini.notify", -- notifications ui
+    event = "VeryLazy",
+    opts = true,
+  },
+  {
+    "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
+    lazy = false,
+    opts = {
+      fallback_action = "<c-n>",
+      lsp_completion = {
+        auto_setup = false,
+      },
+    },
+  },
+  {
+    "echasnovski/mini.pick", -- a mini telescope but I use it to wrap vim.ui.select
+    event = "VeryLazy",
+    config = function()
+      local minipick = require "mini.pick"
+      minipick.setup()
+      vim.ui.select = minipick.ui_select
+    end,
+  },
+  {
     "echasnovski/mini.statusline", -- statusline
     lazy = false,
     config = function()
@@ -38,7 +76,6 @@ return {
               table.insert(clients, client.name)
             end
             local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
-
             return mini_statusline.combine_groups {
               { hl = mode_hl, strings = { mode } },
               "%<", -- Mark general truncate point

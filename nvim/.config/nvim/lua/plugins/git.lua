@@ -2,14 +2,14 @@ return {
   {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
     cmd = "ToggleBlame",
-    config = function()
+    init = function()
       require("core.keymaps").blame()
     end,
   },
   {
     "almo7aya/openingh.nvim",
     cmd = "OpenInGHFile",
-    config = function()
+    init = function()
       require("core.keymaps").openingh()
     end,
   },
@@ -21,9 +21,11 @@ return {
       "sindrets/diffview.nvim",
       "ibhagwan/fzf-lua",
     },
+    init = function()
+      require("core.keymaps").neogit()
+    end,
     config = function()
       require("neogit").setup {}
-      require("core.keymaps").neogit()
     end,
   },
   {

@@ -143,6 +143,7 @@ M.lsp = function()
   map("n", "<leader>ll", ":LspStart<cr>", "Start LSP")
   map("n", "<leader>lx", ":LspStop<cr>", "Stop LSP")
   map("n", "<leader>lr", ":LspRestart<cr>", "Restart LSP")
+  map("n", "<leader>li", ":LspInfo<cr>", "Info LSP")
 end
 
 M.minifiles = function()
@@ -173,7 +174,7 @@ M.telescope = function()
   map("n", "<leader>d", ":Telescope diagnostics<cr>", "Document diagnostics")
   map("n", "<leader>p", ":Telescope registers<cr>", "List yank registers")
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", "Command palette (kinda)")
-  map("n", "<leader>tx", ":lua require('telescope').extensions.tmux.sessions {}", "Tmux sessions")
+  map("n", "<leader>tx", ":lua require('telescope').extensions.tmux.sessions {}<cr>", "Tmux sessions")
 end
 
 M.todo = function()

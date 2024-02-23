@@ -7,7 +7,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-ui-select.nvim", -- It sets vim.ui.select to telescope
       "camgraff/telescope-tmux.nvim", -- tmux sessions in telescope
     },
     init = function()
@@ -60,7 +59,6 @@ return {
       }
 
       telescope.load_extension "fzf"
-      telescope.load_extension "ui-select"
       telescope.load_extension "tmux"
     end,
   },

@@ -15,7 +15,7 @@ return {
   {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
-    -- event = { "BufEnter" },
+    event = { "BufReadPost" },
     dependencies = {
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters

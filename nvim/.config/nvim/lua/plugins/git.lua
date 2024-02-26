@@ -3,14 +3,14 @@ return {
     "FabijanZulj/blame.nvim", --  a fugitive.vim style git blame visualizer for Neovim
     cmd = "ToggleBlame",
     init = function()
-      require("core.keymaps").blame()
+      require("core.mappings").blame()
     end,
   },
   {
     "almo7aya/openingh.nvim",
     cmd = "OpenInGHFile",
     init = function()
-      require("core.keymaps").openingh()
+      require("core.mappings").openingh()
     end,
   },
   {
@@ -22,7 +22,7 @@ return {
       "ibhagwan/fzf-lua",
     },
     init = function()
-      require("core.keymaps").neogit()
+      require("core.mappings").neogit()
     end,
     config = function()
       require("neogit").setup {}
@@ -36,7 +36,7 @@ return {
       signcolumn = false,
       numhl = true,
       on_attach = function()
-        require("core.keymaps").gitsigns()
+        require("core.mappings").gitsigns()
       end,
     },
   },

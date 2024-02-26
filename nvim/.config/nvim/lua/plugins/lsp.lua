@@ -23,7 +23,7 @@ return {
       "folke/neodev.nvim", -- lsp for nvim's Lua API
     },
     init = function()
-      require("core.keymaps").lsp()
+      require("core.mappings").lsp()
     end,
     config = function()
       local lspconfig = require "lspconfig"
@@ -82,7 +82,7 @@ return {
       -- setup servers
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
-          on_attach = require("core.keymaps").lsp,
+          on_attach = require("core.mappings").lsp,
           capabilities = vim.lsp.protocol.make_client_capabilities(),
           settings = settings,
         }

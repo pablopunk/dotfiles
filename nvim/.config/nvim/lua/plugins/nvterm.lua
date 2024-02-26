@@ -1,7 +1,7 @@
 return {
   "NvChad/nvterm",
   init = function()
-    require("core.keymaps").nvterm()
+    require("core.mappings").nvterm()
   end,
   config = true,
 }

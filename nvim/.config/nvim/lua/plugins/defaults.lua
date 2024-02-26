@@ -28,7 +28,7 @@ return {
     event = "VeryLazy",
     dir = vim.fn.stdpath "config",
     config = function()
-      require("core.keymaps").general()
+      require("core.mappings").general()
     end,
   },
 }

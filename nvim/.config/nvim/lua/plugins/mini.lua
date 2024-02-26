@@ -127,7 +127,7 @@ return {
           width_preview = 60, -- width of the preview window
         },
       }
-      require("core.keymaps").minifiles()
+      require("core.mappings").minifiles()
     end,
   },
 }

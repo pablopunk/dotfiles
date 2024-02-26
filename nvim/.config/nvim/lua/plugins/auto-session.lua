@@ -11,7 +11,7 @@ return {
         log_level = "error",
         auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
       }
-      require("core.keymaps").auto_session()
+      require("core.mappings").auto_session()
     end,
   },
 }

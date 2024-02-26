@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = "TroubleToggle",
   init = function()
-    require("core.keymaps").trouble()
+    require("core.mappings").trouble()
   end,
   opts = {},
 }

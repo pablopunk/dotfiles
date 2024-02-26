@@ -50,7 +50,7 @@ return {
           async = true,
         },
       }
-      require("core.keymaps").conform()
+      require("core.mappings").conform()
     end,
   },
   {

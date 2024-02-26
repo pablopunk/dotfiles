@@ -10,7 +10,7 @@ return {
       "camgraff/telescope-tmux.nvim", -- tmux sessions in telescope
     },
     init = function()
-      require("core.keymaps").telescope()
+      require("core.mappings").telescope()
     end,
     config = function()
       local telescope = require "telescope"

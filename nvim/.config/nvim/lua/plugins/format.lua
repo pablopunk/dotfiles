@@ -6,27 +6,27 @@ return {
       "WhoIsSethDaniel/mason-tool-installer", -- Install stuff with mason automatically
     },
     config = function()
-      require("mason").setup({})
-      require("mason-tool-installer").setup({
+      require("mason").setup {}
+      require("mason-tool-installer").setup {
         ensure_installed = {
           "prettier",
           "eslint_d",
           "stylua",
           "luacheck",
         },
-      })
+      }
     end,
   },
   {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
-      local conform = require("conform")
+      local conform = require "conform"
       local prettier_formatters = {
         "prettier",
         "prettierd",
       }
-      conform.setup({
+      conform.setup {
         formatters_by_ft = {
           lua = { "stylua" },
           javascript = prettier_formatters,
@@ -39,11 +39,16 @@ return {
           yaml = prettier_formatters,
           markdown = prettier_formatters,
         },
+        formatters = {
+          stylua = {
+            prepend_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
+          },
+        },
         format_on_save = {
           lsp_fallback = true, -- if no formatter is found for lang, use lsp to format
           async = true,
         },
-      })
+      }
       require("core.keymaps").conform()
     end,
   },
@@ -51,7 +56,7 @@ return {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
     config = function()
-      local lint = require("lint")
+      local lint = require "lint"
 
       lint.linters_by_ft = {
         javascript = { "eslint_d" },

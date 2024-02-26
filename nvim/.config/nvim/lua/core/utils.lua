@@ -102,4 +102,23 @@ M.toggle_explorer = function()
   end
 end
 
+-- Isn't there a better way to do this? https://github.com/echasnovski/mini.nvim/issues/704
+--- Create a statusline separator
+--- @param before_hl string
+--- @param after_hl string
+--- @param char string
+--- @return string
+M.create_statusline_separator = function(before_hl, after_hl, char)
+  local hl_name = string.format("Statusline%s%s", before_hl, after_hl)
+  vim.cmd(
+    string.format(
+      [[ hi! %s guifg=%s guibg=%s ]],
+      hl_name,
+      string.format("#%06x", vim.api.nvim_get_hl_by_name(before_hl, true).background),
+      string.format("#%06x", vim.api.nvim_get_hl_by_name(after_hl, true).background)
+    )
+  )
+  return "%#" .. hl_name .. "#" .. char
+end
+
 return M

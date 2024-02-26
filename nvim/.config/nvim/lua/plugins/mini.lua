@@ -1,3 +1,5 @@
+local utils = require "core.utils"
+
 return {
   {
     "echasnovski/mini.comment", -- comments with gcc
@@ -66,16 +68,20 @@ return {
             }
             local search = mini_statusline.section_searchcount { trunc_width = 75 }
             local clients = {}
-            for _, client in ipairs(vim.lsp.buf_get_clients()) do
-              table.insert(clients, client.name)
+            for _, client in ipairs(vim.lsp.get_clients()) do
+              table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
             end
             local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
+
             return mini_statusline.combine_groups {
               { hl = mode_hl, strings = { mode } },
               "%<", -- Mark general truncate point
+              utils.create_statusline_separator(mode_hl, "MiniStatuslineFilename", ""),
               { hl = "MiniStatuslineFilename", strings = { filename } },
               "%=", -- End left alignment
+              utils.create_statusline_separator("MiniStatuslineFilename", "MiniStatuslineModeOther", ""),
               { hl = "MiniStatuslineModeOther", strings = { lsp_clients } },
+              utils.create_statusline_separator("MiniStatuslineModeOther", "MiniStatuslineFileinfo", ""),
               { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
               { hl = mode_hl, strings = { search } },
             }

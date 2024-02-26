@@ -5,7 +5,7 @@ return {
     "nvim-lua/plenary.nvim",
   },
   init = function()
-    require("core.keymaps").chatgpt()
+    require("core.mappings").chatgpt()
   end,
   cmd = {
     "ChatGPT",

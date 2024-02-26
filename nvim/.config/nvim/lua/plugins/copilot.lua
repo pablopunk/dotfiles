@@ -26,7 +26,7 @@ return {
         },
       }
 
-      require("core.keymaps").copilot()
+      require("core.mappings").copilot()
     end,
   },
 }

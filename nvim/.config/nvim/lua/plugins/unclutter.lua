@@ -4,7 +4,7 @@ return {
     dev = true,
     -- event = "BufWinEnter", -- use this for tabline
     init = function()
-      require("core.keymaps").unclutter()
+      require("core.mappings").unclutter()
     end,
     opts = {
       clean_after = 0,

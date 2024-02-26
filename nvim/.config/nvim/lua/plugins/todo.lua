@@ -4,7 +4,7 @@ return {
     dev = true, -- use local version if exists
     cmd = "TodoToggle",
     init = function()
-      require("core.keymaps").todo()
+      require("core.mappings").todo()
     end,
     config = true,
   },

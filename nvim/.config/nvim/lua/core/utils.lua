@@ -102,7 +102,6 @@ M.toggle_explorer = function()
   end
 end
 
--- Isn't there a better way to do this? https://github.com/echasnovski/mini.nvim/issues/704
 --- Create a statusline separator
 --- @param before_hl string
 --- @param after_hl string

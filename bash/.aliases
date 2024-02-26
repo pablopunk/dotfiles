@@ -16,7 +16,6 @@ function gcam {
   git commit -m "$*"
 }
 alias gca='git add -A && git commit'
-alias gck='git checkout'
 alias gpr='git fetch upstream && git diff -w --minimal upstream/master'
 # ls aliases
 alias ls='ls -G'

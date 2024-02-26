@@ -101,6 +101,7 @@ return {
           starter.gen_hook.aligning("center", "center"),
         },
         footer = "", -- to hide instructions
+        query_updaters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-.",
       }
     end,
   },

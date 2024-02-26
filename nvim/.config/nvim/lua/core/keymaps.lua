@@ -171,7 +171,6 @@ M.telescope = function()
   map("n", "<leader>fs", ":Telescope live_grep<cr>", "Find string")
   map("n", "<leader>fw", ":Telescope grep_string<cr>", "Find word")
   map("n", "<leader>fW", ":Telescope grep_string search=" .. vim.fn.expand "<cWORD>" .. "<cr>", "Find WORD")
-  map("n", "<leader>d", ":Telescope diagnostics<cr>", "Document diagnostics")
   map("n", "<leader>p", ":Telescope registers<cr>", "List yank registers")
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", "Command palette (kinda)")
   map("n", "<leader>tx", ":lua require('telescope').extensions.tmux.sessions {}<cr>", "Tmux sessions")
@@ -193,11 +192,11 @@ M.unclutter = function()
 end
 
 M.conform = function()
-  map({"n", "v"}, "<leader>lf", function()
-    require("conform").format({
+  map({ "n", "v" }, "<leader>lf", function()
+    require("conform").format {
       ls_fallback = true,
-      async = false
-    })
+      async = false,
+    }
   end, "Format file or range (sync)")
 end
 

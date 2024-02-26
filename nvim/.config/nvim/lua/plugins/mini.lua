@@ -40,7 +40,9 @@ return {
     opts = {
       fallback_action = "<c-n>",
       lsp_completion = {
-        auto_setup = false,
+        -- `auto_setup` should be boolean indicating if LSP completion is set up
+        -- on every `BufEnter` event.
+        auto_setup = true,
       },
     },
   },

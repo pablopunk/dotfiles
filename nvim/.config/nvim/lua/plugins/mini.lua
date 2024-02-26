@@ -79,9 +79,9 @@ return {
               utils.create_statusline_separator(mode_hl, "MiniStatuslineFilename", ""),
               { hl = "MiniStatuslineFilename", strings = { filename } },
               "%=", -- End left alignment
-              utils.create_statusline_separator("MiniStatuslineFilename", "MiniStatuslineModeOther", ""),
+              utils.create_statusline_separator("MiniStatuslineFilename", "MiniStatuslineModeOther", ""),
               { hl = "MiniStatuslineModeOther", strings = { lsp_clients } },
-              utils.create_statusline_separator("MiniStatuslineModeOther", "MiniStatuslineFileinfo", ""),
+              utils.create_statusline_separator("MiniStatuslineModeOther", "MiniStatuslineFileinfo", ""),
               { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
               { hl = mode_hl, strings = { search } },
             }

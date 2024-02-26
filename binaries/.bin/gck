@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+fzf_short() {
+  fzf --height=10 --reverse "$@"
+}
+
+if [[ $# -eq 0 ]]; then
+  git branch | sed 's/\*//g' | fzf_short | xargs -I {} git checkout {}
+else
+  git checkout "$@"
+fi
+
+

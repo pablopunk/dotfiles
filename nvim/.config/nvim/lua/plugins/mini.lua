@@ -34,18 +34,18 @@ return {
     event = "VeryLazy",
     opts = true,
   },
-  {
-    "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
-    lazy = false,
-    opts = {
-      fallback_action = "<c-n>",
-      lsp_completion = {
-        -- `auto_setup` should be boolean indicating if LSP completion is set up
-        -- on every `BufEnter` event.
-        auto_setup = true,
-      },
-    },
-  },
+  -- {
+  --   "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
+  --   lazy = false,
+  --   opts = {
+  --     fallback_action = "<c-n>",
+  --     lsp_completion = {
+  --       -- `auto_setup` should be boolean indicating if LSP completion is set up
+  --       -- on every `BufEnter` event.
+  --       auto_setup = true,
+  --     },
+  --   },
+  -- },
   {
     "echasnovski/mini.pick", -- a mini telescope but I use it to wrap vim.ui.select
     event = "VeryLazy",

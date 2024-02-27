@@ -21,13 +21,24 @@ return {
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-path", -- complete paths
       "onsails/lspkind.nvim", -- vscode-link icons for cmp items
+      "L3MON4D3/LuaSnip", -- Snippets engine
+      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
     },
     event = { "LspAttach", "InsertCharPre" },
     config = function()
       local cmp = require "cmp"
       local lspkind = require "lspkind"
+      local luasnip = require "luasnip"
+
+      -- necessary for rafamadriz/friendly-snippets
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert {
           ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
@@ -36,13 +47,17 @@ return {
           { name = "nvim_lsp" }, -- lsp
           { name = "path" }, -- file system paths
           {
-            name = "buffer", -- text in buffer
+            name = "buffer", -- text in buffers
             option = { get_bufnrs = vim.api.nvim_list_bufs },
           },
         },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
-          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
+          format = lspkind.cmp_format {
+            ellipsis_char = "...",
+            maxwidth = 30,
+            mode = "symbol", -- show only symbol annotations
+          },
         },
       }
     end,

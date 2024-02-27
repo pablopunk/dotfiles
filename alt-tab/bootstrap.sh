@@ -1,3 +1,5 @@
 #!/bin/bash
 
-brew_install alt-tab
+if [["$(uname)" == "Darwin" ]]; then
+  brew install alt-tab
+fi

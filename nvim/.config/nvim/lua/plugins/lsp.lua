@@ -13,6 +13,41 @@ local servers = {
 
 return {
   {
+    "hrsh7th/nvim-cmp", -- completion engine
+    name = "cmp",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- A collection of common lua functions and libraries
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "hrsh7th/cmp-buffer", -- text from current buffer
+      "hrsh7th/cmp-path", -- complete paths
+      "onsails/lspkind.nvim", -- vscode-link icons for cmp items
+    },
+    event = { "LspAttach", "InsertCharPre" },
+    config = function()
+      local cmp = require "cmp"
+      local lspkind = require "lspkind"
+
+      cmp.setup {
+        mapping = cmp.mapping.preset.insert {
+          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
+          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
+        },
+        sources = cmp.config.sources {
+          { name = "nvim_lsp" }, -- lsp
+          { name = "path" }, -- file system paths
+          {
+            name = "buffer", -- text in buffer
+            option = { get_bufnrs = vim.api.nvim_list_bufs },
+          },
+        },
+        ---@diagnostic disable-next-line: missing-fields
+        formatting = {
+          format = lspkind.cmp_format { ellipsis_char = "...", maxwidth = 50 },
+        },
+      }
+    end,
+  },
+  {
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
     event = { "BufReadPost" },

@@ -50,6 +50,7 @@ source $ITEM_DIR/calendar.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/cpu.sh
+source $ITEM_DIR/ram.sh
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

@@ -1,6 +1,8 @@
 return {
   {
-    enabled = true,
+    enabled = function()
+      return jit.os ~= "Linux" -- do not load on linux
+    end,
     "gelguy/wilder.nvim", -- autocomplete for command line (:) and search (/)
     keys = {
       ":",

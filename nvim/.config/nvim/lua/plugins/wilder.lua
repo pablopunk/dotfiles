@@ -2,8 +2,6 @@ return {
   {
     enabled = true,
     "gelguy/wilder.nvim", -- autocomplete for command line (:) and search (/)
-    -- event = "CmdlineEnter", -- this makes sense but it makes it feel slow
-    -- event = "VeryLazy",
     keys = {
       ":",
       "/",
@@ -29,8 +27,7 @@ return {
         ),
       })
 
-      local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
-        border = "rounded",
+      local popupmenu_renderer = wilder.popupmenu_renderer {
         highlighter = wilder.basic_highlighter(),
         empty_message = wilder.popupmenu_empty_message_with_spinner(),
         left = {
@@ -42,7 +39,7 @@ return {
           " ",
           wilder.popupmenu_scrollbar(),
         },
-      })
+      }
 
       wilder.set_option(
         "renderer",

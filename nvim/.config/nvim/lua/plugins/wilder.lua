@@ -1,14 +1,14 @@
 return {
   {
-    enabled = false,
+    enabled = true,
     "gelguy/wilder.nvim", -- autocomplete for command line (:) and search (/)
-    dependencies = {
-      "roxma/nvim-yarp", -- to use python search
-      "roxma/vim-hug-neovim-rpc", -- to use python search
-      "romgrk/fzy-lua-native", -- fuzzy completion
-    },
     -- event = "CmdlineEnter", -- this makes sense but it makes it feel slow
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    keys = {
+      ":",
+      "/",
+      "?",
+    },
     build = function()
       vim.cmd "UpdateRemotePlugins"
     end,
@@ -20,41 +20,19 @@ return {
 
       wilder.set_option("pipeline", {
         wilder.branch(
-          wilder.substitute_pipeline {
-            pipeline = wilder.python_search_pipeline {
-              skip_cmdtype_check = 1,
-              pattern = wilder.python_fuzzy_pattern {
-                start_at_boundary = 0,
-              },
-            },
-          },
           wilder.cmdline_pipeline {
-            fuzzy = 2,
-            fuzzy_filter = wilder.lua_fzy_filter(),
+            fuzzy = 1,
           },
-          {
-            wilder.check(function(_, x)
-              return x == ""
-            end),
-            wilder.history(),
-          },
-          wilder.python_search_pipeline {
-            pattern = wilder.python_fuzzy_pattern {
-              start_at_boundary = 0,
-            },
+          wilder.vim_search_pipeline {
+            fuzzy = 1,
           }
         ),
       })
 
-      local highlighters = {
-        wilder.pcre2_highlighter(),
-        wilder.lua_fzy_highlighter(),
-      }
-
       local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
         border = "rounded",
+        highlighter = wilder.basic_highlighter(),
         empty_message = wilder.popupmenu_empty_message_with_spinner(),
-        highlighter = highlighters,
         left = {
           " ",
           wilder.popupmenu_devicons(),

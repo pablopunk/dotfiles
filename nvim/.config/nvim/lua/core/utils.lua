@@ -1,5 +1,12 @@
 local M = {}
 
+M.map = function(mode, key, action, desc)
+  vim.keymap.set(mode, key, action, { noremap = true, silent = true, desc = desc or "" })
+end
+M.verbose_map = function(mode, key, action, desc)
+  vim.keymap.set(mode, key, action, { noremap = true, silent = false, desc = desc or "" })
+end
+
 M.quit_file = function()
   local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "Starter", "", "*" }
   local name_of_buffer = vim.fn.expand "%"

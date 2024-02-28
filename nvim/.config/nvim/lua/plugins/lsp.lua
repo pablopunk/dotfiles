@@ -20,7 +20,6 @@ return {
     name = "cmp",
     dependencies = {
       "nvim-lua/plenary.nvim", -- A collection of common lua functions and libraries
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
       "hrsh7th/cmp-buffer", -- text from current buffer
       "hrsh7th/cmp-path", -- complete paths
       "onsails/lspkind.nvim", -- vscode-link icons for cmp items
@@ -28,6 +27,9 @@ return {
       "rafamadriz/friendly-snippets", -- collection of snippets for different languages
     },
     event = { "LspAttach", "InsertCharPre" },
+    init = function()
+      require("core.mappings").luasnip()
+    end,
     config = function()
       local cmp = require "cmp"
       local lspkind = require "lspkind"
@@ -74,6 +76,7 @@ return {
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "folke/neodev.nvim", -- lsp for nvim's Lua API
+      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
     },
     init = function()
       require("core.mappings").lsp()
@@ -132,11 +135,13 @@ return {
         },
       }
 
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
       -- setup servers
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup {
           on_attach = require("core.mappings").lsp,
-          capabilities = vim.lsp.protocol.make_client_capabilities(),
+          capabilities = capabilities,
           settings = settings,
         }
       end

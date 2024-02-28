@@ -8,6 +8,7 @@ return {
       "BufNewFile",
     },
     config = function()
+      require("nvim-treesitter.install").prefer_git = true -- fix issues installing parsers form http
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup {
         highlight = {

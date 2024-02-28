@@ -16,11 +16,7 @@ return {
   {
     "NeogitOrg/neogit", -- magit for neovim (git client)
     cmd = "Neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "ibhagwan/fzf-lua",
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
     init = function()
       require("core.mappings").neogit()
     end,

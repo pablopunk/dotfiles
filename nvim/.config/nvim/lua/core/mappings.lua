@@ -194,4 +194,13 @@ M.conform = function()
   end, "Format file or range (sync)")
 end
 
+M.luasnip = function()
+  map({ "i", "s" }, "<Tab>", function()
+    require("luasnip").jump(1)
+  end, "Jump forward (luasnip)")
+  map({ "i", "s" }, "<S-Tab>", function()
+    require("luasnip").jump(-1)
+  end, "Jump backwards (luasnip)")
+end
+
 return M

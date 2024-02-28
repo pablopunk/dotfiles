@@ -26,7 +26,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup { symbol = "│" }
-      vim.cmd "au Colorscheme * hi! link MiniIndentscopeSymbol Whitespace"
+      vim.cmd "au CursorMoved * hi! link MiniIndentscopeSymbol Whitespace"
     end,
   },
   {
@@ -34,18 +34,16 @@ return {
     event = "VeryLazy",
     opts = true,
   },
-  -- {
-  --   "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
-  --   lazy = false,
-  --   opts = {
-  --     fallback_action = "<c-n>",
-  --     lsp_completion = {
-  --       -- `auto_setup` should be boolean indicating if LSP completion is set up
-  --       -- on every `BufEnter` event.
-  --       auto_setup = true,
-  --     },
-  --   },
-  -- },
+  {
+    "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
+    enabled = function()
+      return jit.os == "Linux" -- only load on linux
+    end,
+    lazy = false,
+    opts = {
+      fallback_action = "<c-n>",
+    },
+  },
   {
     "echasnovski/mini.pick", -- a mini telescope but I use it to wrap vim.ui.select
     event = "VeryLazy",
@@ -66,7 +64,7 @@ return {
             local mode, mode_hl = mini_statusline.section_mode { trunc_width = 120 }
             local filename = mini_statusline.section_filename { trunc_width = 140 }
             local fileinfo = mini_statusline.section_fileinfo {
-              trunc_width = 300 --[[ large value to always truncate ]],
+              trunc_width = 300,--[[ large value to always truncate ]]
             }
             local search = mini_statusline.section_searchcount { trunc_width = 75 }
             local clients = {}

@@ -2,7 +2,7 @@ return {
   {
     "pablopunk/unclutter.nvim", -- tabline plugin that helps you focus
     dev = true,
-    -- event = "BufWinEnter", -- use this for tabline
+    event = "BufWinEnter",
     init = function()
       require("core.mappings").unclutter()
     end,

@@ -1,15 +1,8 @@
--- vim:fileencoding=utf-8:ft=lua:foldmethod=marker
-
 local utils = require "core.utils"
+local map = utils.map
+local verbose_map = utils.verbose_map
 
 local M = {}
-
-local map = function(mode, key, action, desc)
-  vim.keymap.set(mode, key, action, { noremap = true, silent = true, desc = desc or "" })
-end
-local verbose_map = function(mode, key, action, desc)
-  vim.keymap.set(mode, key, action, { noremap = true, silent = false, desc = desc or "" })
-end
 
 M.general = function()
   -- ^c is ESC
@@ -125,14 +118,15 @@ M.gitsigns = function()
   map("n", "<leader>gh", ":Gitsigns toggle_linehl<CR>", "Show diff colors")
   map("n", "<leader>ghS", gs.stage_hunk, "Stage Hunk")
   map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-  map("n", "<leader>gd", gs.diffthis, "Show git diff for this file")
+  -- map("n", "<leader>gd", gs.diffthis, "Show git diff for this file")
+  map("n", "<leader>gd", gs.preview_hunk, "Show diff for hunk")
   map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
 end
 
 M.lsp = function()
   map("n", "E", vim.diagnostic.open_float, "Show line diagnostics")
-  map("n", "ge", vim.diagnostic.goto_next, "Go to next diagnostic")
-  map("n", "gE", vim.diagnostic.goto_prev, "Go to previous diagnostic")
+  map("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic")
+  map("n", "]D", vim.diagnostic.goto_prev, "Go to previous diagnostic")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "Show code actions")
   map("n", "K", vim.lsp.buf.hover, "Hover")
   map("n", "gd", ":Telescope lsp_definitions<cr>", "Go to definition")

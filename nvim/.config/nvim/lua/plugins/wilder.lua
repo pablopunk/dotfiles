@@ -7,6 +7,7 @@ return {
       "/",
       "?",
     },
+    event = "VeryLazy",
     build = function()
       vim.cmd "UpdateRemotePlugins"
     end,

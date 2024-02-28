@@ -1,79 +1,50 @@
 return {
   {
-    "WhoIsSethDaniel/mason-tool-installer", -- Install stuff with mason automatically
+    "nvimtools/none-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     event = "VeryLazy",
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim", -- Additional sources for none-ls
+      "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+      "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
+      "lukas-reineke/lsp-format.nvim", -- nice formatting config
+    },
     config = function()
-      require("mason").setup {}
-      require("mason-tool-installer").setup {
+      local null_ls = require "null-ls"
+      local mason_null_ls = require "mason-null-ls"
+      local lsp_format = require "lsp-format"
+
+      local formatting = null_ls.builtins.formatting
+
+      require("mason").setup {} -- needed now that I'm not loading LSP at start
+
+      lsp_format.setup {} -- async by default, add {sync=true} if needed
+
+      mason_null_ls.setup {
+        automatic_installation = true,
         ensure_installed = {
           "prettier",
-          "eslint",
-          "eslint_d",
           "stylua",
-          "luacheck",
+          "eslint-language-server",
         },
-      }
-    end,
-  },
-  {
-    "stevearc/conform.nvim",
-    event = "VeryLazy",
-    config = function()
-      local conform = require "conform"
-      local prettier_formatters = {
-        "prettier",
-        "prettierd",
-      }
-      conform.setup {
-        formatters_by_ft = {
-          lua = { "stylua" },
-          javascript = prettier_formatters,
-          typescript = prettier_formatters,
-          javascriptreact = prettier_formatters,
-          typescriptreact = prettier_formatters,
-          json = prettier_formatters,
-          html = prettier_formatters,
-          css = prettier_formatters,
-          yaml = prettier_formatters,
-          markdown = prettier_formatters,
-        },
-        formatters = {
-          stylua = {
-            prepend_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
-          },
-        },
-        format_on_save = {
-          lsp_fallback = true, -- if no formatter is found for lang, use lsp to format
-          async = true,
-        },
-      }
-      require("core.mappings").conform()
-    end,
-  },
-  {
-    "mfussenegger/nvim-lint",
-    event = "VeryLazy",
-    config = function()
-      local lint = require "lint"
-
-      lint.linters_by_ft = {
-        javascript = { "eslint_d", "eslint" },
-        typescript = { "eslint_d", "eslint" },
-        javascriptreact = { "eslint_d", "eslint" },
-        typescriptreact = { "eslint_d", "eslint" },
-        lua = { "luacheck" },
       }
 
-      lint.linters.luacheck.args = { "" }
+      local sources = {
+        formatting.stylua.with {
+          extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
+        },
+        formatting.prettier.with {
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        },
+        require("none-ls.formatting.eslint").with {
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        },
+      }
 
-      -- when to trigger lint
-      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-        group = lint_augroup,
-        callback = function()
-          lint.try_lint()
-        end,
-      })
+      null_ls.setup {
+        sources = sources,
+        debug = false,
+        on_attach = lsp_format.on_attach,
+      }
     end,
   },
 }

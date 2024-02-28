@@ -44,8 +44,11 @@ return {
     },
   },
   {
-    lazy = false,
     "pablopunk/transparent.vim", -- Transparent background
+    enabled = function()
+      return not vim.g.neovide
+    end,
+    lazy = false,
     dev = true,
   },
 }

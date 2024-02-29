@@ -2,7 +2,12 @@
 
 > I use neovim BTW. My setup is blazing fast BTW.
 
-![CleanShot 2024-02-17 at 16 17 32@2x-squashed](https://github.com/pablopunk/dotfiles/assets/4324982/55cf222d-4f13-45f0-8571-22064c71ca0f)
+<img
+  src="https://github.com/pablopunk/dotfiles/assets/4324982/fc32e5a7-52f4-4045-b199-4ae1486225d0"
+  alt="neovim"
+  width="80%" />
+
+## 🚀 Install
 
 I usually keep the repo in `~/.dotfiles`:
 
@@ -14,6 +19,11 @@ cd ~/.dotfiles
 ```bash
 ./install.sh
 ```
+
+<img
+  src="https://github.com/pablopunk/dotfiles/assets/4324982/55cf222d-4f13-45f0-8571-22064c71ca0f"
+  alt="link"
+  width="80%" />
 
 This will:
 

@@ -7,6 +7,7 @@ return {
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "jayp0521/mason-null-ls.nvim", -- closes some gaps that exist between mason.nvim and null-ls.
       "lukas-reineke/lsp-format.nvim", -- nice formatting config
+      "gbprod/none-ls-luacheck.nvim", -- luacheck source for none-ls"
     },
     config = function()
       local null_ls = require "null-ls"
@@ -23,8 +24,9 @@ return {
         automatic_installation = true,
         ensure_installed = {
           "prettier",
-          "stylua",
           "eslint-language-server",
+          "stylua",
+          "luacheck",
         },
       }
 
@@ -38,6 +40,7 @@ return {
         require("none-ls.formatting.eslint").with {
           filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         },
+        require "none-ls-luacheck.diagnostics.luacheck",
       }
 
       null_ls.setup {

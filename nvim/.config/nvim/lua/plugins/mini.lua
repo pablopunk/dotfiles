@@ -2,6 +2,24 @@ local utils = require "core.utils"
 
 return {
   {
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
+    config = function()
+      local animate = require "mini.animate"
+
+      animate.setup {
+        cursor = { enable = false },
+        scroll = {
+          enable = true,
+          timing = animate.gen_timing.cubic { duration = 150, unit = "total", easing = "out" },
+        },
+        resize = { enable = false },
+        open = { enable = false },
+        close = { enable = false },
+      }
+    end,
+  },
+  {
     "echasnovski/mini.comment", -- comments with gcc
     config = true,
     event = "VeryLazy",

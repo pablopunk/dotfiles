@@ -8,7 +8,7 @@ return {
     end,
     opts = {
       clean_after = 0,
-      tabline = true,
+      tabline = false,
     },
   },
 }

@@ -69,7 +69,10 @@ return {
             local search = mini_statusline.section_searchcount { trunc_width = 75 }
             local clients = {}
             for _, client in ipairs(vim.lsp.get_clients()) do
-              table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
+              local short_name = client.name:sub(1, 3)
+              if not vim.tbl_contains(clients, short_name) then
+                table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
+              end
             end
             local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
 

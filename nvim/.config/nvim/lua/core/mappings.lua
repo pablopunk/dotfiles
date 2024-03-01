@@ -181,8 +181,8 @@ end
 
 M.unclutter = function()
   map("n", "<c-f>", ":lua require('unclutter.telescope').open()<cr>", "List all buffers")
-  map("n", "L", ":lua require('unclutter.tabline').next()<cr>", "Next buffer")
-  map("n", "H", ":lua require('unclutter.tabline').prev()<cr>", "Previous buffer")
+  map("n", "<c-n>", ":lua require('unclutter.tabline').next()<cr>", "Next buffer")
+  map("n", "<c-p>", ":lua require('unclutter.tabline').prev()<cr>", "Previous buffer")
 end
 
 M.conform = function()

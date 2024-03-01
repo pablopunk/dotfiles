@@ -11,26 +11,25 @@ return {
       require("nvim-treesitter.install").prefer_git = true -- fix issues installing parsers form http
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup {
-        highlight = {
-          enable = true,
-        },
+        highlight = { enable = true },
         indent = { enable = true },
-        ensure_installed = { -- if these are not installed, it will install them
-          "json",
-          "javascript",
-          "typescript",
-          "tsx",
-          "yaml",
-          "html",
-          "css",
-          "markdown",
-          "markdown_inline",
-          "graphql",
-          "bash",
-          "lua",
-          "vim",
-          "gitignore",
-        },
+        -- This makes it have a terrible startuptime. YOU'RE FIRED!
+        -- ensure_installed = {
+        --   "json",
+        --   "javascript",
+        --   "typescript",
+        --   "tsx",
+        --   "yaml",
+        --   "html",
+        --   "css",
+        --   "markdown",
+        --   "markdown_inline",
+        --   "graphql",
+        --   "bash",
+        --   "lua",
+        --   "vim",
+        --   "gitignore",
+        -- },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -40,7 +39,7 @@ return {
             scope_incremental = false,
           },
         },
-        auto_install = true,
+        -- auto_install = true,
       }
     end,
   },

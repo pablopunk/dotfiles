@@ -42,8 +42,8 @@ vmap <leader>p "*p
 " Y should not be the same as yy
 nmap Y y$
 " Navigate buffers
-nmap H :bprev<cr>
-nmap L :bnext<cr>
+nmap <c-p> :bprev<cr>
+nmap <c-n> :bnext<cr>
 nmap <c-g> :b#<cr>
 nmap <c-f> :ls<CR>:b<Space>
 " Navigate quickfix window

@@ -134,6 +134,7 @@ iabbr ccreact class Component extends React.Component
 " }}}
 
 " File finder {{{
+runtime! plugin/**/*.vim " load plugins even if -u NONE (e.g netrw)
 set path+=** " Search files subdirectories
 set wildmenu " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**

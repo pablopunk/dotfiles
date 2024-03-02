@@ -73,6 +73,11 @@ M.general = function()
   map("n", "[q", ":cprev<cr>", "Previous quickfix file")
 end
 
+M.lazy = function()
+  map("n", "<leader>lz", ":Lazy<cr>", "Lazy.nvim")
+  map("n", "<leader>lp", ":Lazy profile<cr>", "Lazy.nvim")
+end
+
 M.auto_session = function()
   map("n", "<leader>sd", function()
     vim.cmd "silent! SessionDelete" -- delete session

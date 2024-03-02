@@ -19,9 +19,9 @@ return {
   },
   {
     "pablounk/fixquick.nvim",
-    lazy = false,
     dev = true,
     config = true,
+    event = "BufEnter",
   },
   {
     lazy = false,
@@ -48,6 +48,7 @@ return {
     dir = vim.fn.stdpath "config",
     config = function()
       require("core.mappings").general()
+      require("core.mappings").lazy()
     end,
   },
 }

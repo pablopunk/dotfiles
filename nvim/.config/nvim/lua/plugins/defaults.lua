@@ -21,6 +21,7 @@ return {
     "pablounk/fixquick.nvim",
     lazy = false,
     dev = true,
+    config = true,
   },
   {
     lazy = false,

@@ -7,9 +7,20 @@ return {
     "pablopunk/persistent-undo.vim", -- undo works across vim sessions
     lazy = false,
   },
+  -- {
+  --   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
+  --   event = "VeryLazy",
+  -- },
   {
-    "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
-    event = "VeryLazy",
+    "gabrielpoca/replacer.nvim", -- same as quickfix-reflector honestly
+    init = function()
+      require("core.mappings").replacer()
+    end,
+  },
+  {
+    "pablounk/fixquick.nvim",
+    lazy = false,
+    dev = true,
   },
   {
     lazy = false,

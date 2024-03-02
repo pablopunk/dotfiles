@@ -8,13 +8,19 @@ M.verbose_map = function(mode, key, action, desc)
 end
 
 M.quit_file = function()
-  local irrelevant_buffers = { "NvimTree", "NvimTree_1", "NvimTree_2", "Starter", "", "*" }
+  local irrelevant_buffers = { "NvimTree", "Starter", "Neogit", "quickfix", "", "*" }
   local name_of_buffer = vim.fn.expand "%"
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
   local is_last_unclutter_tab = #require("unclutter.tabline").list() == 1
-  local buffer_is_irrelevant = vim.tbl_contains(irrelevant_buffers, name_of_buffer)
+  local buffer_is_irrelevant = false
+  for _, irrelevant_buffer in ipairs(irrelevant_buffers) do
+    if string.find(name_of_buffer, irrelevant_buffer) then
+      buffer_is_irrelevant = true
+      break
+    end
+  end
   if is_last_buffer or is_last_unclutter_tab then
     vim.cmd "silent! SessionDelete"
     if buffer_is_irrelevant then

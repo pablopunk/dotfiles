@@ -12,7 +12,7 @@ M.general = function()
   map("i", "<c-c>", "<esc>", "ESC")
   -- Disable q: and Q because they are so f**king annoying
   map({ "n", "v", "x", "o", "c" }, "q:", "<nop>", "Noop")
-  map({ "n", "v", "x", "o", "c" }, "Q", "<nop>", "Noop")
+  map({ "n", "v", "x", "o" }, "Q", "<nop>", "Noop")
   -- I use () instead of [] to navigate
   vim.cmd [[
     nmap ( [
@@ -26,7 +26,7 @@ M.general = function()
   map("n", "<leader>h", utils.remove_highlights, "Remove highlights")
   -- Quit/Save file
   map({ "n", "v" }, "<c-q>", utils.quit_file, "Close file buffer")
-  map({ "n", "v" }, "<c-s>", utils.save_file, "Save file")
+  map({ "n", "v" }, "<c-s>", ":w<cr>", "Save file")
   map("n", "<leader>wca", utils.close_all_buffers, "Close all buffers")
   map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", "Close all buffers except the current one")
   --- Floating windows
@@ -134,7 +134,7 @@ M.lsp = function()
   map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols")
   map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)")
   map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>", "Rename variable")
-  map("n", "<leader>ll", ":LspStart<cr>", "Start LSP")
+  map("n", "<leader>ls", ":LspStart<cr>", "Start LSP")
   map("n", "<leader>lx", ":LspStop<cr>", "Stop LSP")
   map("n", "<leader>lr", ":LspRestart<cr>", "Restart LSP")
   map("n", "<leader>li", ":LspInfo<cr>", "Info LSP")
@@ -201,6 +201,12 @@ M.luasnip = function()
   map({ "i", "s" }, "<S-Tab>", function()
     require("luasnip").jump(-1)
   end, "Jump backwards (luasnip)")
+end
+
+M.replacer = function()
+  map("n", "<leader>rq", function()
+    require("replacer").run()
+  end, "Run Replacer")
 end
 
 return M

@@ -72,6 +72,7 @@ return {
     end,
   },
   {
+    enabled = false,
     "echasnovski/mini.statusline", -- statusline
     lazy = false,
     config = function()

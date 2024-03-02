@@ -35,6 +35,13 @@ return {
     event = "VeryLazy",
   },
   {
+    "statusline",
+    dir = vim.fn.stdpath "config",
+    init = function()
+      require "core.statusline"
+    end,
+  },
+  {
     "keymaps", -- my keymaps
     event = "VeryLazy",
     dir = vim.fn.stdpath "config",

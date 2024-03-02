@@ -127,4 +127,17 @@ M.create_statusline_separator = function(before_hl, after_hl, char)
   return "%#" .. hl_name .. "#" .. char
 end
 
+M.get_lsp_clients_string = function()
+  local clients = {}
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    local short_name = client.name:sub(1, 3)
+    if not vim.tbl_contains(clients, short_name) then
+      table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
+    end
+  end
+  local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
+
+  return string.format(" %s ", lsp_clients)
+end
+
 return M

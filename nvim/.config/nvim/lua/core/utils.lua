@@ -44,10 +44,6 @@ M.quit_file = function()
   end
 end
 
-M.save_file = function()
-  vim.cmd "w"
-end
-
 M.close_all_buffers = function()
   vim.cmd "silent! %bd"
   local ok, starter = pcall(require, "mini.starter")

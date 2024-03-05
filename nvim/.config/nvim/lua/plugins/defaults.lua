@@ -18,7 +18,7 @@ return {
     end,
   },
   {
-    "pablounk/fixquick.nvim",
+    "pablopunk/fixquick.nvim",
     dev = true,
     config = true,
     event = "BufEnter",

@@ -141,9 +141,9 @@ M.get_lsp_clients_string = function()
       table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
     end
   end
-  local lsp_clients = #clients == 1 and ("↯ " .. clients[1]) or table.concat(clients, " ↯ ")
+  local lsp_clients = table.concat(clients, "/")
 
-  return string.format(" %s ", lsp_clients)
+  return string.format("↯ %s ", lsp_clients)
 end
 
 return M

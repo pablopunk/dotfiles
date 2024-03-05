@@ -143,6 +143,10 @@ M.get_lsp_clients_string = function()
   end
   local lsp_clients = table.concat(clients, "/")
 
+  if #lsp_clients == 0 then
+    return ""
+  end
+
   return string.format("↯ %s ", lsp_clients)
 end
 

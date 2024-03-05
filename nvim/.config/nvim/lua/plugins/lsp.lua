@@ -68,6 +68,9 @@ return {
     end,
   },
   {
+    enabled = function()
+      return jit.os ~= "Linux" -- do not load on linux
+    end,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
     -- event = { "BufReadPost" },

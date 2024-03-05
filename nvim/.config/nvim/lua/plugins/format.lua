@@ -1,5 +1,8 @@
 return {
   {
+    enabled = function()
+      return jit.os ~= "Linux" -- do not load on linux
+    end,
     "nvimtools/none-ls.nvim", -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
     event = "VeryLazy",
     dependencies = {

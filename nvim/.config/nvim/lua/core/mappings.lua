@@ -131,7 +131,7 @@ end
 M.lsp = function()
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
   map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>", "Go to next diagnostic")
-  map("n", "]D", ":lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic")
+  map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic")
   map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<cr>", "Show code actions")
   map("n", "K", ":lua vim.lsp.buf.hover()<cr>", "Hover")
   map("n", "gd", ":Telescope lsp_definitions<cr>", "Go to definition")

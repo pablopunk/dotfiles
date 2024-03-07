@@ -36,4 +36,9 @@ return {
       end,
     },
   },
+  {
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    config = true,
+  },
 }

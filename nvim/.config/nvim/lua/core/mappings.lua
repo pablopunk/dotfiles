@@ -171,6 +171,7 @@ M.telescope = function()
   map("n", "<leader>p", ":Telescope registers<cr>", "List yank registers")
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", "Command palette (kinda)")
   map("n", "<leader>tx", ":lua require('telescope').extensions.tmux.sessions {}<cr>", "Tmux sessions")
+  map("n", "<leader>fh", ":Telescope help_tags<cr>", "Search help tags")
 end
 
 M.todo = function()

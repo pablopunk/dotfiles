@@ -3,7 +3,8 @@ local utils = require "core.utils"
 return {
   {
     "echasnovski/mini.animate",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    lazy = false,
     config = function()
       local animate = require "mini.animate"
 

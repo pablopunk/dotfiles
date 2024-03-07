@@ -11,6 +11,7 @@ return {
         log_level = "error",
         auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
         auto_session_use_git_branch = true,
+        bypass_session_save_file_types = { "NvimTree", "Lazy", "Starter" },
       }
       require("core.mappings").auto_session()
     end,

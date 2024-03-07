@@ -31,8 +31,6 @@ M.general = function()
   map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", "Close all buffers except the current one")
   --- Floating windows
   map("n", "<leader>wf", utils.maximize_floating_window, "Maximize floating window")
-  -- Vim Messages
-  map("n", "<leader>ms", ":messages<cr>", "Show messages")
   -- Move lines
   map("v", "J", ":m '>+1<cr>gv=gv", "Move line down")
   map("v", "K", ":m '<-2<cr>gv=gv", "Move line up")
@@ -212,6 +210,10 @@ M.replacer = function()
   map("n", "<leader>rq", function()
     require("replacer").run()
   end, "Run Replacer")
+end
+
+M.bmessages = function()
+  map("n", "<leader>ms", ":Bmessages<cr>", "Show bmessages")
 end
 
 return M

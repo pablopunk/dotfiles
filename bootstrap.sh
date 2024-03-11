@@ -8,7 +8,8 @@ fi
 if [[ ! -f "$HOMEBREW_PREFIX"/bin/brew ]]; then
   hash brew 2>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+eval "$(brew shellenv)"
 
 # get the directory of this script
 dir="$(dirname $(realpath $0))"

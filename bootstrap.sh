@@ -1,6 +1,11 @@
 #!/bin/bash
 
-if [[ ! -d "$HOMEBREW_PREFIX" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
+  HOMEBREW_PREFIX="/opt/homebrew"
+else
+  HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+fi
+if [[ ! -f "$HOMEBREW_PREFIX"/bin/brew ]]; then
   hash brew 2>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"

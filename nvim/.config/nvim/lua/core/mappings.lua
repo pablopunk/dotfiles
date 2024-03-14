@@ -218,4 +218,8 @@ M.bmessages = function()
   map("n", "<leader>ms", ":Bmessages<cr>", "Show bmessages")
 end
 
+M.hardtime = function()
+  map("n", "<leader>,hard", ":Hardtime toggle<cr>", "Toggle hardtime")
+end
+
 return M

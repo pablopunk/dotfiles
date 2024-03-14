@@ -110,6 +110,7 @@ end
 
 M.openingh = function()
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
+  map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
 end
 
 M.gitsigns = function()

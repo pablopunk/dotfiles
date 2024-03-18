@@ -129,8 +129,8 @@ end
 
 M.lsp = function()
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
-  map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>", "Go to next diagnostic")
-  map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic")
+  map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>zz", "Go to next diagnostic")
+  map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>zz", "Go to previous diagnostic")
   map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<cr>", "Show code actions")
   map("n", "K", ":lua vim.lsp.buf.hover()<cr>", "Hover")
   map("n", "gd", ":Telescope lsp_definitions<cr>", "Go to definition")
@@ -173,6 +173,7 @@ M.telescope = function()
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", "Command palette (kinda)")
   map("n", "<leader>tx", ":lua require('telescope').extensions.tmux.sessions {}<cr>", "Tmux sessions")
   map("n", "<leader>fh", ":Telescope help_tags<cr>", "Search help tags")
+  map("n", "<leader>ma", ":Telescope marks<cr>", "List marks")
 end
 
 M.todo = function()

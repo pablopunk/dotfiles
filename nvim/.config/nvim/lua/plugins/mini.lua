@@ -45,7 +45,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup { symbol = "│" }
-      vim.cmd "au Colorscheme * hi! link MiniIndentscopeSymbol Whitespace"
+      vim.cmd "au CursorMoved * hi! link MiniIndentscopeSymbol Whitespace"
     end,
   },
   {

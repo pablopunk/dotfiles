@@ -44,8 +44,12 @@ return {
     end,
   },
   {
-    event = "VeryLazy",
     "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = {
+      "BufReadPost",
+      "BufNewFile",
+    },
     opts = {
       max_lines = 2,
     },

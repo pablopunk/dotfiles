@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+input=$1
+
+if [ -z $input ]; then
+  cmd=$(basename $0)
+  echo "Usage: $cmd <input-file.mp4>"
+  exit 1
+fi
+
+extension=$(basename $input | awk -F . '{print $NF}')
+
+# if output is video.mp4, then output is video (compressed).mp4
+output=$(echo $input | sed "s/\.$extension/ (compressed).$extension/")
+
+ffmpeg -i "$input" -vcodec libx264 -crf 30 "$output"

@@ -45,7 +45,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    after = "nvim-treesitter/nvim-treesitter",
     event = {
       "BufReadPost",
       "BufNewFile",

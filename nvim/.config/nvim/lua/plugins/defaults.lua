@@ -43,7 +43,7 @@ return {
     end,
   },
   {
-    "lazy-config", -- my config that's gonna be lazy loaded
+    "lazy-config", -- some config that's gonna be lazy loaded
     event = "VeryLazy",
     dir = vim.fn.stdpath "config",
     config = function()

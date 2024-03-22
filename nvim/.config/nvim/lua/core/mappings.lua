@@ -1,6 +1,6 @@
-local utils = require "core.utils"
-local map = utils.map
-local verbose_map = utils.verbose_map
+local shared = require "core.shared"
+local map = shared.map
+local verbose_map = shared.verbose_map
 
 local M = {}
 
@@ -23,18 +23,18 @@ M.general = function()
     xmap ) ]
   ]]
   -- Remove highlights
-  map("n", "<leader>h", utils.remove_highlights, "Remove highlights")
+  map("n", "<leader>h", shared.remove_highlights, "Remove highlights")
   -- Quit/Save file
-  map({ "n", "v" }, "<c-q>", utils.quit_file, "Close file buffer")
+  map({ "n", "v" }, "<c-q>", shared.quit_file, "Close file buffer")
   map({ "n", "v" }, "<c-s>", ":w<cr>", "Save file")
-  map("n", "<leader>wca", utils.close_all_buffers, "Close all buffers")
+  map("n", "<leader>wca", shared.close_all_buffers, "Close all buffers")
   map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", "Close all buffers except the current one")
   --- Floating windows
-  map("n", "<leader>wf", utils.maximize_floating_window, "Maximize floating window")
+  map("n", "<leader>wf", shared.maximize_floating_window, "Maximize floating window")
   -- Move lines
   map("v", "J", ":m '>+1<cr>gv=gv", "Move line down")
   map("v", "K", ":m '<-2<cr>gv=gv", "Move line up")
-  -- File path utils
+  -- File path shared
   map("n", "<leader>fpp", ":file<cr>", "Print file path")
   map("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", "Copy file path (absolute)")
   map("n", "<leader>fpr", ":let @+ = expand('%:p:~:.')<cr>", "Copy file path (relative)")
@@ -64,8 +64,8 @@ M.general = function()
   map("v", ">", ">gv", "Indent selection right")
   map("v", "<", "<gv", "Indent selection left")
   -- Folds
-  map("n", "<leader><", utils.fold_all, "Fold all")
-  map("n", "<leader>>", utils.unfold_all, "Open all folds")
+  map("n", "<leader><", shared.fold_all, "Fold all")
+  map("n", "<leader>>", shared.unfold_all, "Open all folds")
   -- Quickfix
   map("n", "]q", ":cnext<cr>", "Next quickfix file")
   map("n", "[q", ":cprev<cr>", "Previous quickfix file")
@@ -80,7 +80,7 @@ M.auto_session = function()
   map("n", "<leader>sd", function()
     vim.cmd "silent! SessionDelete" -- delete session
     vim.cmd "silent! %bd" -- close all buffers
-    utils.open_starter()
+    shared.open_starter()
   end, "Delete session")
 end
 
@@ -145,7 +145,7 @@ M.lsp = function()
 end
 
 M.minifiles = function()
-  map({ "n", "v" }, "<c-t>", utils.toggle_explorer, "Toggle file explorer")
+  map({ "n", "v" }, "<c-t>", shared.toggle_explorer, "Toggle file explorer")
   map("n", "<c-y>", ":lua require('mini.files').open()<cr>", "Toggle file explorer (root)")
 end
 

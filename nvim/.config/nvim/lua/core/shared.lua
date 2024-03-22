@@ -168,4 +168,32 @@ M.hi = function(highlight_group)
   end
 end
 
+M.dark = function()
+  vim.opt.background = "dark"
+  vim.cmd "colorscheme tokyonight-storm"
+end
+
+M.light = function()
+  vim.opt.background = "light"
+  vim.cmd "colorscheme tokyonight-day"
+end
+
+M.auto_theme = function()
+  if vim.fn.has "mac" == 0 then
+    return -- Don't change colors on linux
+  end
+
+  local theme_file_lines = vim.fn.readfile(vim.fn.expand "~/.theme")
+  if theme_file_lines and #theme_file_lines == 1 then
+    local theme = theme_file_lines[1]
+    if theme == "Light" then
+      M.light()
+      return
+    elseif theme == "Dark" then
+      M.dark()
+      return
+    end
+  end
+end
+
 return M

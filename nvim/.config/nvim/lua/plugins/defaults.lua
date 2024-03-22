@@ -43,12 +43,13 @@ return {
     end,
   },
   {
-    "keymaps", -- my keymaps
+    "lazy-config", -- my config that's gonna be lazy loaded
     event = "VeryLazy",
     dir = vim.fn.stdpath "config",
     config = function()
       require("core.mappings").general()
       require("core.mappings").lazy()
+      require("core.shared").auto_theme()
     end,
   },
 }

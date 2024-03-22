@@ -1,5 +1,5 @@
-local utils = require "core.utils"
-local hi = utils.hi
+local shared = require "core.shared"
+local hi = shared.hi
 
 Statusline = {}
 
@@ -24,8 +24,8 @@ local function color_highlights()
 end
 
 Statusline.active = function()
-  local filename = utils.get_filename_compact()
-  local clients = utils.get_lsp_clients_string()
+  local filename = shared.get_filename_compact()
+  local clients = shared.get_lsp_clients_string()
 
   color_highlights()
 

@@ -1,4 +1,4 @@
-local utils = require "core.utils"
+local shared = require "core.shared"
 
 return {
   {
@@ -45,7 +45,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup { symbol = "│" }
-      vim.cmd "au Colorscheme * hi! link MiniIndentscopeSymbol Whitespace"
+      vim.cmd "au CursorMoved * hi! link MiniIndentscopeSymbol Whitespace"
     end,
   },
   {
@@ -92,12 +92,12 @@ return {
             return mini_statusline.combine_groups {
               { hl = mode_hl, strings = { mode } },
               "%<", -- Mark general truncate point
-              utils.create_statusline_separator(mode_hl, "MiniStatuslineFilename", ""),
+              shared.create_statusline_separator(mode_hl, "MiniStatuslineFilename", ""),
               { hl = "MiniStatuslineFilename", strings = { filename } },
               "%=", -- End left alignment
-              utils.create_statusline_separator("MiniStatuslineFilename", "MiniStatuslineModeOther", ""),
-              { hl = "MiniStatuslineModeOther", strings = { utils.get_lsp_clients_string() } },
-              utils.create_statusline_separator("MiniStatuslineModeOther", "MiniStatuslineFileinfo", ""),
+              shared.create_statusline_separator("MiniStatuslineFilename", "MiniStatuslineModeOther", ""),
+              { hl = "MiniStatuslineModeOther", strings = { shared.get_lsp_clients_string() } },
+              shared.create_statusline_separator("MiniStatuslineModeOther", "MiniStatuslineFileinfo", ""),
               { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
               { hl = mode_hl, strings = { search } },
             }

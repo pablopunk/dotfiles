@@ -15,6 +15,7 @@ function gcam {
   git add -A
   git commit -m "$*"
 }
+alias amend='git commit --amend'
 alias gca='git add -A && git commit'
 alias gpr='git fetch upstream && git diff -w --minimal upstream/master'
 # ls aliases

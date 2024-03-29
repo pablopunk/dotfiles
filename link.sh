@@ -6,6 +6,14 @@ pushd "$dir" > /dev/null
 
 single_app=$1
 
+if [[ "$(uname)" == "Darwin" ]]; then
+  HOMEBREW_PREFIX="/opt/homebrew"
+else
+  HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+fi
+export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+eval "$(brew shellenv)"
+
 # Function to safely remove symlink if it exists
 remove_symlink_if_exists() {
   local symlink_path="$1"

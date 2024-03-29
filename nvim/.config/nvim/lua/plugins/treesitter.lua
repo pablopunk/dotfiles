@@ -7,6 +7,7 @@ return {
       "BufReadPost",
       "BufNewFile",
     },
+    dependencies = { "nvim-treesitter/nvim-treesitter-context" }, -- keep function/scope context on the first line
     config = function()
       require("nvim-treesitter.install").prefer_git = true -- fix issues installing parsers form http
       ---@diagnostic disable-next-line: missing-fields
@@ -41,13 +42,9 @@ return {
         },
         -- auto_install = true,
       }
+      require("treesitter-context").setup {
+        max_lines = 2,
+      }
     end,
-  },
-  {
-    event = "VeryLazy",
-    "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
-    opts = {
-      max_lines = 2,
-    },
   },
 }

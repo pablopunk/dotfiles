@@ -134,20 +134,66 @@ M.create_statusline_separator = function(before_hl, after_hl, char)
 end
 
 M.get_lsp_clients_string = function()
+  local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients -- get_clients will be the next fn
   local clients = {}
-  for _, client in ipairs(vim.lsp.get_clients()) do
+  for _, client in ipairs(get_clients()) do
     local short_name = client.name:sub(1, 3)
     if not vim.tbl_contains(clients, short_name) then
       table.insert(clients, client.name:sub(1, 3)) -- 3 first letters
     end
   end
-  local lsp_clients = table.concat(clients, "/")
+  local clients_string = table.concat(clients, "/")
 
-  if #lsp_clients == 0 then
+  if #clients_string == 0 then
     return ""
   end
 
-  return string.format("↯ %s ", lsp_clients)
+  return string.format("↯ %s ", clients_string)
+end
+
+M.get_filename_compact = function()
+  local filename = vim.fn.expand "%:p"
+  local path_segments = vim.split(filename, "/")
+  if #path_segments > 1 then
+    filename = path_segments[#path_segments - 1] .. "/" .. path_segments[#path_segments]
+  else
+    filename = path_segments[#path_segments]
+  end
+  return filename
+end
+
+M.hi = function(highlight_group)
+  return function(text)
+    return "%#" .. highlight_group .. "#" .. text .. "%*"
+  end
+end
+
+M.dark = function()
+  vim.opt.background = "dark"
+  vim.cmd "colorscheme tokyonight-storm"
+end
+
+M.light = function()
+  vim.opt.background = "light"
+  vim.cmd "colorscheme tokyonight-day"
+end
+
+M.auto_theme = function()
+  if vim.fn.has "mac" == 0 then
+    return -- Don't change colors on linux
+  end
+
+  local theme_file_lines = vim.fn.readfile(vim.fn.expand "~/.theme")
+  if theme_file_lines and #theme_file_lines == 1 then
+    local theme = theme_file_lines[1]
+    if theme == "Light" then
+      M.light()
+      return
+    elseif theme == "Dark" then
+      M.dark()
+      return
+    end
+  end
 end
 
 return M

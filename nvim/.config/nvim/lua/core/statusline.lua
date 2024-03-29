@@ -1,30 +1,45 @@
-local utils = require "core.utils"
+local shared = require "core.shared"
+local hi = shared.hi
 
-local M = {}
+Statusline = {}
 
 local align_right = "%="
 
-local hi = function(highlight_group)
-  return function(text)
-    return "%#" .. highlight_group .. "#" .. text .. "%*"
+local _color_highlights = false -- run fn only once
+local function color_highlights()
+  if _color_highlights then
+    return
   end
-end
 
-M.create_statusline_string = function()
-  local filename = vim.fn.expand "%:p"
-  local path_segments = vim.split(filename, "/")
-  if #path_segments > 1 then
-    filename = path_segments[#path_segments - 1] .. "/" .. path_segments[#path_segments]
+  ---@type 'dark' | 'light'
+  local theme = vim.api.nvim_get_option "background"
+
+  if theme == "dark" then
+    vim.cmd [[ hi StatusLineClients guifg=#29a4bd guibg=#1f2335 ]]
   else
-    filename = path_segments[#path_segments]
+    vim.cmd [[ hi StatusLineClients guifg=#29a4bd guibg=#e9e9ec ]]
   end
-  local clients = utils.get_lsp_clients_string()
 
-  vim.cmd [[ hi StatusLineClients guifg=#29a4bd guibg=#1f2335 ]]
-
-  return filename .. align_right .. hi "StatusLineClients"(clients)
+  _color_highlights = true
 end
 
-vim.o.statusline = "%!v:lua.require('core.statusline').create_statusline_string()"
+Statusline.active = function()
+  local filename = shared.get_filename_compact()
+  local clients = shared.get_lsp_clients_string()
 
-return M
+  color_highlights()
+
+  return string.format("%s %s %s", filename, align_right, hi "StatusLineClients"(clients))
+end
+
+Statusline.inactive = function()
+  return "%t" -- just the file name
+end
+
+vim.cmd [[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+  augroup END
+]]

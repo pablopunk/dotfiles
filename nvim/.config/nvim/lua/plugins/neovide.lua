@@ -1,5 +1,5 @@
-local utils = require "core.utils"
-local map = utils.map
+local shared = require "core.shared"
+local map = shared.map
 
 if vim.g.neovide then
   map({ "n", "v" }, "<D-v>", '"+P', "Paste (neovide)") -- Paste normal and visual mode

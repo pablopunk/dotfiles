@@ -58,22 +58,36 @@ fi
 # }}}
 
 # bun completions {{{
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+if [ -s "~/.bun/_bun" ]; then
+  function bun { # lazy load
+    unfunction $0
+    source ~/.bun/_bun
+    $0 "$@"
+  }
+fi
 # }}}
 
-# movements {{{
+# movements (alt+arrows) {{{
 bindkey "^[[1;3D" backward-word
 bindkey "^[[1;3C" forward-word
 # }}}
 
 # mise {{{
 if hash mise 2>/dev/null; then
-  eval "$(mise activate zsh)"
+  function node { # lazy load
+    unfunction $0
+    eval "$(mise activate zsh)"
+    $0 "$@"
+  }
 fi
 # }}}
 
 # zoxide {{{
 if hash zoxide 2>/dev/null; then
-  eval "$(zoxide init zsh)"
+  function cd { # lazy load
+    unfunction $0
+    eval "$(zoxide init zsh)"
+    $0 "$@"
+  }
 fi
 # }}}

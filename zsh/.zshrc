@@ -84,10 +84,6 @@ fi
 
 # zoxide {{{
 if hash zoxide 2>/dev/null; then
-  function cd { # lazy load
-    unfunction $0
-    eval "$(zoxide init zsh)"
-    $0 "$@"
-  }
+  eval "$(zoxide init zsh)"
 fi
 # }}}

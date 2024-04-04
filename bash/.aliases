@@ -12,8 +12,12 @@ function gcm {
   git commit -m "$*"
 }
 function gcam {
-  git add -A
-  git commit -m "$*"
+  if [[ "$*" == *--amend* ]]; then
+    git commit "$@"
+  else
+    git add -A
+    git commit -m "$*"
+  fi
 }
 alias amend='git commit --amend'
 alias gca='git add -A && git commit'

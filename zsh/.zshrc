@@ -58,13 +58,7 @@ fi
 # }}}
 
 # bun completions {{{
-if [ -s "~/.bun/_bun" ]; then
-  function bun { # lazy load
-    unfunction $0
-    source ~/.bun/_bun
-    $0 "$@"
-  }
-fi
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 # }}}
 
 # movements (alt+arrows) {{{
@@ -87,3 +81,4 @@ if hash zoxide 2>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
 # }}}
+

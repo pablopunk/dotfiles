@@ -13,7 +13,7 @@ function gcm {
 }
 function gcam {
   if [[ "$*" == *--amend* ]]; then
-    git commit "$@"
+    git commit -m "$@"
   else
     git add -A
     git commit -m "$*"

@@ -143,11 +143,15 @@ return {
 
       -- setup servers
       for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup {
+        local setup_options = {
           on_attach = require("core.mappings").lsp,
           capabilities = capabilities,
           settings = settings,
         }
+        if lsp == "tsserver" then
+          setup_options.cmd = { "bunx", "--bun", "typescript-language-server", "--stdio" } -- try to use bun
+        end
+        lspconfig[lsp].setup(setup_options)
       end
     end,
   },

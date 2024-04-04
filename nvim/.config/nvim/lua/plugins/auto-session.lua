@@ -1,7 +1,7 @@
 return {
   {
-    lazy = false,
     "rmagatti/auto-session", -- auto save and restore sessions
+    lazy = false,
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("auto-session").setup {

@@ -49,7 +49,7 @@ return {
     end,
   },
   {
-    enabled = false,
+    enabled = true,
     "echasnovski/mini.notify", -- notifications ui
     event = "VeryLazy",
     opts = true,

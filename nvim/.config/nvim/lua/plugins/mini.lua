@@ -108,7 +108,7 @@ return {
   },
   {
     "echasnovski/mini.starter", -- starter screen
-    lazy = false,
+    event = "VimEnter",
     config = function()
       local starter = require "mini.starter"
       starter.setup {

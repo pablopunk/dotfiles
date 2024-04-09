@@ -1,16 +1,31 @@
 #!/usr/bin/env bash
 
-input=$1
-
-if [ -z $input ]; then
+if [ $# -eq 0 ]; then
   cmd=$(basename $0)
   echo "Usage: $cmd <input-file.mp4>"
   exit 1
 fi
 
+input=$@
+
 extension=$(basename "$input" | awk -F . '{print $NF}')
 
 # if output is video.mp4, then output is 'video (compressed).mp4'
-output=$(echo $input | sed "s/\.$extension/ (compressed).$extension/")
+output=$(echo "$input" | sed "s/\.$extension/ (compressed).$extension/")
 
 ffmpeg -i "$input" -vcodec libx264 -crf 30 "$output"
+
+file_to_clipboard() {
+  osascript \
+    -e 'on run args' \
+    -e 'set the clipboard to POSIX file (first item of args)' \
+    -e end \
+    "$@"
+}
+
+if [ "$(uname)" == "Darwin" ]; then
+  file_to_clipboard "$output"
+  echo "✔︎ Compressed video copied to clipboard"
+fi
+
+echo "✔︎ Compressed video saved to $output"

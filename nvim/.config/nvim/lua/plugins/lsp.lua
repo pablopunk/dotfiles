@@ -148,9 +148,6 @@ return {
           capabilities = capabilities,
           settings = settings,
         }
-        if lsp == "tsserver" then
-          setup_options.cmd = { "bunx", "--bun", "typescript-language-server", "--stdio" } -- try to use bun
-        end
         lspconfig[lsp].setup(setup_options)
       end
     end,

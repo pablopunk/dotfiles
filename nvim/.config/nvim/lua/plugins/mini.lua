@@ -20,6 +20,10 @@ return {
       }
     end,
   },
+  -- {
+  --   "echasnovski/mini.doc", -- I only need to keep it install, in case I need to generate docs for my plugins
+  --   config = true,
+  -- },
   {
     "echasnovski/mini.comment", -- comments with gcc
     config = true,

@@ -30,6 +30,9 @@ nmap + *N
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
+" Use <c-g> to change ocurrences of a word/selection one by one (similar to Sublime Text and VSCode)
+nnoremap <c-g> *`'cgn
+vnoremap <c-g> y<cmd>let @/=escape(@", '/')<cr>"_cgn
 " Ctrl+q close buffer
 nmap <c-q> :bd<cr>
 " Ctrl+s to save
@@ -44,7 +47,6 @@ nmap Y y$
 " Navigate buffers
 nmap <c-p> :bprev<cr>
 nmap <c-n> :bnext<cr>
-nmap <c-g> :b#<cr>
 nmap <c-f> :ls<CR>:b<Space>
 " Navigate quickfix window
 nmap <leader>]q :cnext<cr>

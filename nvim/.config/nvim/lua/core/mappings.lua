@@ -43,10 +43,6 @@ M.general = function()
   map({ "n", "v" }, "<leader>y", '"*y', "Copy to system clipboard")
   -- Y should not be the same as yy
   map("n", "Y", "y$", "Yank til end of line")
-  -- Buffer navigation
-  -- map({ "n", "v" }, "<c-f>", ":bprev<cr>", "Previous buffer")
-  -- map({ "n", "v" }, "<c-g>", ":bnext<cr>", "Next buffer")
-  map({ "n", "v" }, "<c-g>", ":b#<cr>", "Toggle most recent buffer")
   -- Search & replace in current file/line
   verbose_map("v", "<leader>rw", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', "Search & replace selection")
   verbose_map("n", "<leader>rw", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', "Search & replace word")
@@ -58,6 +54,9 @@ M.general = function()
   map("n", "*", "*zz", "All matches and center")
   -- Highlight matches with +
   map("n", "+", "*N", "Highlight all matches")
+  -- Use <c-g> to change ocurrences of a word/selection one by one (similar to Sublime Text and VSCode)
+  map("n", "<c-g>", "*`'cgn", "Change next ocurrence")
+  map("v", "<c-g>", "y<cmd>let @/=escape(@\", '/')<cr>\"_cgn", "Change next ocurrence (visual)")
   -- Block indentation (easier)
   map("n", ">", ">>", "Indent right")
   map("n", "<", "<<", "Indent left")

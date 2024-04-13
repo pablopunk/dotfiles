@@ -25,11 +25,11 @@ return {
     config = true,
     event = "VeryLazy",
   },
-  {
-    "echasnovski/mini.pairs", -- autopairs for (), {}, [], '', ""...
-    config = true,
-    event = "VeryLazy",
-  },
+  -- {
+  --   "echasnovski/mini.pairs", -- autopairs for (), {}, [], '', ""...
+  --   config = true,
+  --   event = "VeryLazy",
+  -- },
   {
     "echasnovski/mini.splitjoin", -- `gS` split or join function arguments
     config = true,

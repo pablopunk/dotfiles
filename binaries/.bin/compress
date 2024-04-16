@@ -20,12 +20,29 @@ file_to_clipboard() {
     -e 'on run args' \
     -e 'set the clipboard to POSIX file (first item of args)' \
     -e end \
-    "$@"
+    "$@" 2> /dev/null
 }
+
+normalize_number() {
+  echo $1 | sed 's/,/./'
+}
+before_kbytes=$(du -k "$input" | awk '{print $1}')
+after_kbytes=$(du -k "$output" | awk '{print $1}')
+before_kbytes=$(normalize_number $before_kbytes)
+after_kbytes=$(normalize_number $after_kbytes)
+if [ "$before_kbytes" -eq 0 ]; then
+  echo -e "\033[31mError: Input size is zero, cannot calculate savings.\033[0m"
+  exit 1
+fi
+percentage=$(echo "scale=2; 100 * ($before_kbytes - $after_kbytes) / $before_kbytes" | bc)
+before_human=$(du -h "$input" | awk '{print $1}')
+after_human=$(du -h "$output" | awk '{print $1}')
+
+echo
+echo -e "\033[32m✔︎ Savings: $before_human -> $after_human (↓$percentage%)\033[0m"
+echo -e "\033[36m▶︎ Compressed video saved to $output\033[0m"
 
 if [ "$(uname)" == "Darwin" ]; then
   file_to_clipboard "$output"
-  echo "✔︎ Compressed video copied to clipboard"
+  echo -e "\033[32m[Copied to clipboard]\033[0m"
 fi
-
-echo "✔︎ Compressed video saved to $output"

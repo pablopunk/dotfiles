@@ -97,6 +97,7 @@ M.copilot = function()
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
     end
   end, "Super Tab. Accept Copilot suggestion or insert a tab character if there's none")
+  map("n", "<leader>ce", ":Copilot enable<cr>", "Enable Copilot")
 end
 
 M.neogit = function()

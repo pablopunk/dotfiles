@@ -68,11 +68,7 @@ bindkey "^[[1;3C" forward-word
 
 # mise {{{
 if hash mise 2>/dev/null; then
-  function node { # lazy load
-    unfunction $0
-    eval "$(mise activate zsh)"
-    $0 "$@"
-  }
+  eval "$(mise activate zsh)"
 fi
 # }}}
 

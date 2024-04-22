@@ -46,7 +46,6 @@ else
   # alias brew='arch -x86_64 brew'
 fi
 alias n='npm run'
-alias p='pnpm'
 alias run='npx tsx'
 # not in vim but who cares
 alias :q='exit'

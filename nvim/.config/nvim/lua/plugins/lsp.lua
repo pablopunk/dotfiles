@@ -7,6 +7,8 @@ local servers = {
   "lua_ls",
   "tailwindcss",
   "tsserver",
+  "jedi_language_server",
+  "astro",
   -- "swift_mesonls",
   -- "emmet_ls",
 }

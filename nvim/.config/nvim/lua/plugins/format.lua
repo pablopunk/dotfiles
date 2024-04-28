@@ -32,10 +32,10 @@ return {
           extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
         },
         formatting.prettier.with {
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
         },
         formatting.eslint_d.with {
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
         },
       }
 

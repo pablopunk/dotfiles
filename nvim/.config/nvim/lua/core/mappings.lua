@@ -146,7 +146,7 @@ end
 
 M.minifiles = function()
   map({ "n", "v" }, "<c-t>", shared.toggle_explorer, "Toggle file explorer")
-  map("n", "<c-y>", ":lua require('mini.files').open()<cr>", "Toggle file explorer (root)")
+  -- map("n", "<c-y>", ":lua require('mini.files').open()<cr>", "Toggle file explorer (root)")
 end
 
 M.nvterm = function()

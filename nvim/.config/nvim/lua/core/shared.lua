@@ -26,7 +26,11 @@ M.quit_file = function()
     if buffer_is_irrelevant then
       vim.cmd "qa!"
     else
-      vim.cmd "<c-w>q"
+      vim.cmd "bd"
+      local ok, starter = pcall(require, "mini.starter")
+      if ok then
+        starter.open() -- open starter if there are no more buffers
+      end
     end
   elseif buffer_is_irrelevant then
     vim.cmd "bd!"

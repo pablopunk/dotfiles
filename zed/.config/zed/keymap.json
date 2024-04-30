@@ -1,11 +1,35 @@
 [
   {
+    "context": "Terminal",
     "bindings": {
-      "cmd-t": "terminal_panel::ToggleFocus",
+      // vim navigation in terminal too
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    // Only when Vim is active
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
       "ctrl-o": "pane::GoBack",
       "ctrl-i": "pane::GoForward",
+      "g r": "editor::FindAllReferences",
+      "g d": "editor::GoToDefinition",
+      "K": "editor::Hover",
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    // General bindings
+    "bindings": {
       "cmd-r": "outline::Toggle",
-      "cmd+g": "workspace::ToggleRightDock"
+      "cmd-t": "workspace::ToggleBottomDock",
+      "cmd-j": "workspace::ToggleRightDock"
     }
   }
 ]

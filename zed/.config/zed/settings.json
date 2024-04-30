@@ -13,9 +13,15 @@
   "project_panel": {
     "dock": "left"
   },
-  "theme": "Tokyo Night Storm",
-  // "buffer_font_family": "SF Mono",
+  "theme": "Tokyo Night",
+  "buffer_font_family": "SF Mono Powerline",
   "buffer_font_size": 16,
   "vim_mode": true,
-  "lsp": {}
+  "vim": {
+    "use_system_clipboard": "on_yank"
+  },
+  "lsp": {},
+  "format_on_save": "on",
+  "hard_tabs": false,
+  "tab_size": 2
 }

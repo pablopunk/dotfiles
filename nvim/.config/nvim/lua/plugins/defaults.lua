@@ -18,9 +18,10 @@ return {
     end,
   },
   {
-    "pablopunk/fixquick.nvim",
-    dev = true,
-    config = true,
+    "itchyny/vim-qfedit",
+    -- "pablopunk/fixquick.nvim",
+    -- dev = true,
+    -- config = true,
     event = "BufEnter",
   },
   {

@@ -170,7 +170,7 @@ end
 
 M.dark = function()
   vim.opt.background = "dark"
-  vim.cmd "colorscheme tokyonight-storm"
+  vim.cmd "colorscheme tokyonight-night"
 end
 
 M.light = function()

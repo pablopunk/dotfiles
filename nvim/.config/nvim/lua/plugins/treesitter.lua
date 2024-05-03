@@ -9,7 +9,7 @@ return {
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context", -- keep function/scope context on the first line
-      "HiPhish/nvim-ts-rainbow2", -- rainbow brackets and stuff
+      -- "HiPhish/nvim-ts-rainbow2", -- rainbow brackets and stuff
     },
     config = function()
       require("nvim-treesitter.install").prefer_git = true -- fix issues installing parsers form http
@@ -44,15 +44,15 @@ return {
             scope_incremental = false,
           },
         },
-        rainbow = {
-          enable = true,
-          -- list of languages you want to disable the plugin for
-          disable = { "jsx", "cpp" },
-          -- Which query to use for finding delimiters
-          query = "rainbow-parens",
-          -- Highlight the entire buffer all at once
-          strategy = require("ts-rainbow").strategy.global,
-        },
+        -- rainbow = {
+        --   enable = true,
+        --   -- list of languages you want to disable the plugin for
+        --   disable = { "jsx", "cpp" },
+        --   -- Which query to use for finding delimiters
+        --   query = "rainbow-parens",
+        --   -- Highlight the entire buffer all at once
+        --   strategy = require("ts-rainbow").strategy.global,
+        -- },
       }
       require("treesitter-context").setup {
         max_lines = 2,

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_directories() {
-  find ~/src ~/src/maze ~/src/raycast ~/desktop ~/downloads ~/ -mindepth 1 -maxdepth 1 -type d | sed "s|$HOME|~|g" | sed 's|//|/|g'
+  find ~/src ~/src/maze ~/desktop ~/downloads ~/ -mindepth 1 -maxdepth 1 -type d | sed "s|$HOME|~|g" | sed 's|//|/|g'
 }
 
 fzf_short() {

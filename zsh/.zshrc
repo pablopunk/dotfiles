@@ -5,7 +5,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 plugins=(
   macos
+  zsh-github-copilot # Requires `gh auth login --web -h github.com`
 )
+bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
 # }}}
 
 # modular config {{{

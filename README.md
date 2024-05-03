@@ -3,7 +3,7 @@
 > I use neovim BTW. My setup is blazing fast BTW.
 
 <img
-  src="https://github.com/pablopunk/dotfiles/assets/4324982/25dbb1b6-8369-4648-a223-4a9972d6d0ee"
+  src="https://github.com/pablopunk/dotfiles/assets/4324982/6b094bdc-7ad0-415d-9809-1db8cb25c106"
   alt="neovim"
   width="80%" />
 

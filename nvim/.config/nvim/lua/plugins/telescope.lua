@@ -27,6 +27,7 @@ return {
             i = {
               ["<c-k>"] = actions.cycle_history_prev,
               ["<c-j>"] = actions.cycle_history_next,
+              ["<c-f>"] = actions.move_selection_previous, -- useful when i use c-f to open telescope
             },
           },
         },

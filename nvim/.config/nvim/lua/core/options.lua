@@ -5,6 +5,7 @@ opt.cmdheight = 0 -- it's been 6 long years https://www.reddit.com/r/vim/comment
 
 -- line numbers
 opt.number = true
+opt.relativenumber = true -- let's see how quickly I get rid of this
 
 -- sign column
 opt.signcolumn = "no"

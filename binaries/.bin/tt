@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+fzf_short() {
+  fzf --height=10 --reverse "$@"
+}
+
+all_items=""
+
+while IFS=: read -r key value; do
+  if [[ $key =~ ^[[:space:]]{6}[a-zA-Z_-]+ ]]; then
+    all_items+=("${key##*[[:space:]]}")
+  fi
+done < ~/src/maze/maze-monorepo/.maze-runtime.yaml
+
+if [[ $# -gt 0 ]]; then
+  for arg in "$@"; do
+    # arg matches an item, enable and trigger it
+    if [[ " ${all_items[@]} " =~ " $arg " ]]; then
+      tilt enable "$arg"
+      tilt trigger "$arg"
+    # arg does not match an item, it's a search term
+    else
+      printf '%s\n' "${all_items[@]}" | fzf_short -q $arg | xargs -I {} tilt trigger {}
+    fi
+  done
+  exit 0
+fi
+
+# otherwise, list all items and let the user select one
+printf '%s\n' "${all_items[@]}" | fzf_short | xargs -I {} tilt trigger {}

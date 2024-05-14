@@ -12,6 +12,7 @@ while IFS=: read -r key value; do
   fi
 done < ~/src/maze/maze-monorepo/.maze-runtime.yaml
 
+
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
     # arg matches an item, enable and trigger it
@@ -20,11 +21,13 @@ if [[ $# -gt 0 ]]; then
       tilt trigger "$arg"
     # arg does not match an item, it's a search term
     else
-      printf '%s\n' "${all_items[@]}" | fzf_short -q $arg | xargs -I {} tilt trigger {}
+      printf '%s\n' "${all_items[@]}" | fzf_short -q $arg | xargs -I {} sh -c "tilt enable {} && tilt trigger {}"
     fi
   done
   exit 0
 fi
 
 # otherwise, list all items and let the user select one
-printf '%s\n' "${all_items[@]}" | fzf_short | xargs -I {} tilt trigger {}
+tilt enable
+printf '%s\n' "${all_items[@]}" | fzf_short | xargs -I {} sh -c "tilt enable {} && tilt trigger {}"
+

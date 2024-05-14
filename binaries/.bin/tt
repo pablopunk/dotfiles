@@ -28,6 +28,5 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # otherwise, list all items and let the user select one
-tilt enable
 printf '%s\n' "${all_items[@]}" | fzf_short | xargs -I {} sh -c "tilt enable {} && tilt trigger {}"
 

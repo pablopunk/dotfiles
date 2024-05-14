@@ -60,5 +60,3 @@ alias cd='z'
 # source entry file
 alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'
-# tilt
-alias tt='tilt trigger'

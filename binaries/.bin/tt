@@ -6,6 +6,7 @@ MAZE_RUNTIME_PATH=~/src/maze/maze-monorepo/.maze-runtime.yaml
 # Usage: tt [search]
 # Examples:
 #   tt shared-components # trigger exact match
+#   tt shared webapp     # trigger fuzzy match (multiple services) (select before triggering)
 #   tt shard             # trigger fuzzy match (select before triggering)
 #   tt                   # select from all items
 

@@ -184,6 +184,8 @@ export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 export PATH="$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 
+# }}}
+
 # # `brew shellenv` {{{
 # I used to run `eval $(brew shellenv)` but it was too slow
 if [ -f /proc/sys/kernel/osrelease ]; then
@@ -226,7 +228,6 @@ function bunx { # lazy load bunx
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # }}}
-
 
 # Local config (not tracked) {{{
 F=$HOME/.additional; [ -f $F ] && . $F
@@ -290,7 +291,6 @@ if hash zoxide 2>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
 # }}}
-
 
 # End profiling {{{
 if [ -n "${ZSH_DEBUGRC+1}" ]; then

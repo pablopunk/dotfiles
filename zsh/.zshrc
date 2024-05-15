@@ -13,7 +13,6 @@ plugins=(
   macos
   zsh-github-copilot # Requires `gh auth login --web -h github.com`
 )
-bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
 # }}}
 
 # Functions {{{
@@ -237,6 +236,7 @@ F=$HOME/.additional; [ -f $F ] && . $F
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
+bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
 setopt PROMPT_SUBST
 # }}}
 

@@ -3,6 +3,12 @@
 # Configurable path
 MAZE_RUNTIME_PATH=~/src/maze/maze-monorepo/.maze-runtime.yaml
 
+# Usage: tt [search]
+# Examples:
+#   tt shared-components # trigger exact match
+#   tt shard             # trigger fuzzy match (select before triggering)
+#   tt                   # select from all items
+
 fzf_short() {
   fzf --height=10 --reverse "$@"
 }
@@ -13,8 +19,7 @@ trigger_item() {
   tilt enable "$1" && tilt trigger "$1"
 }
 
-# so it can be used in xargs
-export -f trigger_item
+export -f trigger_item # so it can be used in xargs
 
 select_and_trigger() {
   printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}

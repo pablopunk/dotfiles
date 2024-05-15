@@ -1,32 +1,33 @@
 #!/usr/bin/env bash
 
+# Configurable path
+MAZE_RUNTIME_PATH=~/src/maze/maze-monorepo/.maze-runtime.yaml
+
 fzf_short() {
   fzf --height=10 --reverse "$@"
 }
 
-all_items=""
+all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PATH" | sed 's/^[[:space:]]*//'))
 
-while IFS=: read -r key value; do
-  if [[ $key =~ ^[[:space:]]{6}[a-zA-Z_-]+ ]]; then
-    all_items+=("${key##*[[:space:]]}")
-  fi
-done < ~/src/maze/maze-monorepo/.maze-runtime.yaml
+trigger_item() {
+  tilt enable "$1" && tilt trigger "$1"
+}
 
+# so it can be used in xargs
+export -f trigger_item
+
+select_and_trigger() {
+  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}
+}
 
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
-    # arg matches an item, enable and trigger it
-    if [[ " ${all_items[@]} " =~ " $arg " ]]; then
-      tilt enable "$arg"
-      tilt trigger "$arg"
-    # arg does not match an item, it's a search term
+    if [[ " ${all_items[*]} " =~ " $arg " ]]; then
+      trigger_item "$arg"
     else
-      printf '%s\n' "${all_items[@]}" | fzf_short -q $arg | xargs -I {} sh -c "tilt enable {} && tilt trigger {}"
+      select_and_trigger -q "$arg"
     fi
   done
-  exit 0
+else
+  select_and_trigger
 fi
-
-# otherwise, list all items and let the user select one
-printf '%s\n' "${all_items[@]}" | fzf_short | xargs -I {} sh -c "tilt enable {} && tilt trigger {}"
-

@@ -35,9 +35,9 @@ return {
             model = { model = "gpt-4o", temperature = 0.8, top_p = 1 },
             system_prompt = "You are an AI working as a code editor.\n\n"
               .. "Please AVOID COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE.\n"
-              .. "START AND END YOUR ANSWER WITH:\n\n```",
+              .. "Please don't use markdown, just plain text.\n\n",
           },
-          { name = "ChatGPT4" }, -- this just removes the default agent
+          { name = "ChatGPT4" },
         },
       }
     end,
@@ -45,10 +45,7 @@ return {
   {
     enabled = false,
     "jackMort/ChatGPT.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-    },
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     init = function()
       require("core.mappings").chatgpt()
     end,
@@ -90,9 +87,7 @@ return {
           top_p = 1,
           n = 1,
         },
-        popup_input = {
-          submit = "<CR>",
-        },
+        popup_input = { submit = "<CR>" },
       }
     end,
   },

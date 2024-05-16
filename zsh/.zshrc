@@ -256,23 +256,27 @@ TERM=xterm-256color
 # }}}
 
 # kitty theme (dark/light) {{{
-current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
-if [ ! -f /proc/sys/kernel/osrelease ]; then
-  defaults read -g AppleInterfaceStyle 2>&- >&-
-  if [[ $? == 1 ]]
-  then
-    new_theme=Light
-    kitty_theme="Tokyo Night Day"
-  else
-    new_theme=Dark
-    kitty_theme="Tokyo Night"
+change_colorscheme() {
+  current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
+
+  if [ ! -f /proc/sys/kernel/osrelease ]; then
+    defaults read -g AppleInterfaceStyle 2>&- >&-
+    if [[ $? == 1 ]]; then
+      new_theme=Light
+      kitty_theme="Tokyo Night Day"
+    else
+      new_theme=Dark
+      kitty_theme="Tokyo Night"
+    fi
+
+    if [[ $current_theme != $new_theme ]]; then
+      kitty +kitten themes $kitty_theme >/dev/null 2>&1
+      echo $new_theme > $HOME/.theme
+    fi
   fi
-  if [[ $current_theme != $new_theme ]]
-  then
-    kitty +kitten themes $kitty_theme
-    echo $new_theme > $HOME/.theme
-  fi
-fi
+}
+# Run the colorscheme change function in the background without output
+(change_colorscheme >/dev/null 2>&1 &)
 # }}}
 
 # movements (alt+arrows) {{{

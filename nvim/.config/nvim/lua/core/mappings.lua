@@ -127,8 +127,8 @@ M.gitsigns = function()
   map("n", "<leader>gh", ":Gitsigns toggle_linehl<CR>", "Show diff colors")
   map("n", "<leader>ghS", gs.stage_hunk, "Stage Hunk")
   map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-  -- map("n", "<leader>gd", gs.diffthis, "Show git diff for this file")
-  map("n", "<leader>gd", gs.preview_hunk, "Show diff for hunk")
+  map("n", "<leader>gdf", gs.diffthis, "Show git diff for this file")
+  map("n", "<leader>gdh", gs.preview_hunk, "Show diff for hunk")
   map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
 end
 

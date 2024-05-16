@@ -88,6 +88,11 @@ M.chatgpt = function()
   map("v", "<leader>cg", ":ChatGPTEditWithInstructions<cr>", "ChatGPT edit selection")
 end
 
+M.gp = function()
+  map({ "n", "v" }, "<leader>gpr", ":GpRewrite<cr>", "Rewrite with ChatGPT")
+  map({ "n", "v" }, "<leader>gpa", ":GpAdd<cr>", "Append code with ChatGPT")
+end
+
 M.copilot = function()
   -- workaround for Tab not inserting a tab character https://github.com/zbirenbaum/copilot.lua/discussions/153#discussioncomment-5701223
   map("i", "<Tab>", function()

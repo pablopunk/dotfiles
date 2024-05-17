@@ -89,7 +89,8 @@ M.chatgpt = function()
 end
 
 M.gp = function()
-  map({ "n", "v" }, "<leader>gpr", ":GpRewrite<cr>", "Rewrite with ChatGPT")
+  map({ "n", "v" }, "<leader>gpr", ":GpRewrite<cr>", "Refactor selection with ChatGPT")
+  map({ "n", "v" }, "<leader>gpf", ":%GpRewrite<cr>", "Refactor file with ChatGPT")
   map({ "n", "v" }, "<leader>gpa", ":GpAdd<cr>", "Append code with ChatGPT")
 end
 

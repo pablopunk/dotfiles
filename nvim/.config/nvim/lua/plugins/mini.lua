@@ -128,6 +128,25 @@ return {
     end,
   },
   {
+    "echasnovski/mini.map", -- minimap
+    init = function()
+      require("core.mappings").minimap()
+    end,
+    config = function()
+      local minimap = require "mini.map"
+      minimap.setup {
+        integrations = {
+          minimap.gen_integration.gitsigns(),
+          minimap.gen_integration.diagnostic(),
+          minimap.gen_integration.builtin_search()
+        },
+        window = {
+          show_integration_count = false,
+        },
+      }
+    end,
+  },
+  {
     "echasnovski/mini.files", -- file tree
     event = "VeryLazy",
     init = function()

@@ -229,4 +229,10 @@ M.hardtime = function()
   map("n", "<leader>,hard", ":Hardtime toggle<cr>", "Toggle hardtime")
 end
 
+M.minimap = function()
+  map("n", "<leader>mm", function()
+    require("mini.map").toggle()
+  end, "Toggle minimap")
+end
+
 return M

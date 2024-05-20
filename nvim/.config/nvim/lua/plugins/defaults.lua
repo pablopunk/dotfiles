@@ -7,10 +7,6 @@ return {
     "pablopunk/persistent-undo.vim", -- undo works across vim sessions
     lazy = false,
   },
-  -- {
-  --   "stefandtw/quickfix-reflector.vim", -- edits to quickfix will be saved to the actual file/line
-  --   event = "VeryLazy",
-  -- },
   {
     "gabrielpoca/replacer.nvim", -- same as quickfix-reflector honestly
     init = function()
@@ -18,7 +14,8 @@ return {
     end,
   },
   {
-    "itchyny/vim-qfedit",
+    "stefandtw/quickfix-reflector.vim",
+    -- "itchyny/vim-qfedit",
     -- "pablopunk/fixquick.nvim",
     -- dev = true,
     -- config = true,

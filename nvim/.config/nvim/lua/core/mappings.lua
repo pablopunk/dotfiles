@@ -218,15 +218,15 @@ end
 M.minimap = function()
   map("n", "<leader>mm", function()
     require("mini.map").toggle()
-  end, "Toggle minimap")
+  end
 end
 
 M.minidiff = function()
   map("n", "<leader>gd", function()
     require("mini.diff").toggle_overlay()
-  end, "Toggle minidiff")
-  map("n", ")d", "]h", "Next hunk")
-  map("n", "(d", "[h", "Previous hunk")
+  end, "Toggle overlay diff in the whole file")
+  map("n", "<leader>gr", "gHgh", "Reset hunk")
+  map("n", "<leader>gs", "ghgh", "Stage hunk")
 end
 
 M.gitsigns = function()

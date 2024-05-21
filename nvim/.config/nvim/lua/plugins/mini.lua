@@ -136,9 +136,10 @@ return {
       local minimap = require "mini.map"
       minimap.setup {
         integrations = {
-          minimap.gen_integration.gitsigns(),
+          -- minimap.gen_integration.gitsigns(),
           minimap.gen_integration.diagnostic(),
           minimap.gen_integration.builtin_search(),
+          minimap.gen_integration.diff(),
         },
         window = {
           show_integration_count = false,
@@ -186,7 +187,21 @@ return {
       require("core.mappings").minidiff()
     end,
     config = function()
-      require("mini.diff").setup()
+      require("mini.diff").setup {
+        mappings = {
+          -- Apply hunks inside a visual/operator region
+          apply = "gh",
+          -- Reset hunks inside a visual/operator region
+          reset = "gH",
+          -- Hunk range textobject to be used inside operator
+          textobject = "gh",
+          -- Go to hunk range in corresponding direction
+          goto_first = "[G",
+          goto_prev = "[g",
+          goto_next = "]g",
+          goto_last = "]G",
+        },
+      }
     end,
   },
 }

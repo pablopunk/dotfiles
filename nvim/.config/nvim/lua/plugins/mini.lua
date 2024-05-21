@@ -176,6 +176,9 @@ return {
   {
     "echasnovski/mini-git", -- git client
     cmd = "Git",
+    init = function()
+      require("core.mappings").minigit()
+    end,
     config = function()
       require("mini.git").setup()
     end,

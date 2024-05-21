@@ -229,6 +229,15 @@ M.minidiff = function()
   map("n", "<leader>gs", "ghgh", "Stage hunk")
 end
 
+M.minigit = function()
+  map(
+    { "n", "v", "x" },
+    "<leader>gl",
+    ":lua MiniGit.show_at_cursor()<cr>",
+    "Show git info about selection/line (git log-ish)"
+  )
+end
+
 M.gitsigns = function()
   local gs = package.loaded.gitsigns
   map("n", "]g", gs.next_hunk, "Next Hunk")

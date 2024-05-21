@@ -24,21 +24,16 @@ return {
       require("neogit").setup {}
     end,
   },
-  {
-    "lewis6991/gitsigns.nvim",
-    ft = { "gitcommit", "diff" },
-    event = "VeryLazy",
-    opts = {
-      signcolumn = false,
-      numhl = true,
-      on_attach = function()
-        require("core.mappings").gitsigns()
-      end,
-    },
-  },
-  {
-    "pwntester/octo.nvim",
-    cmd = "Octo",
-    config = true,
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   ft = { "gitcommit", "diff" },
+  --   event = "VeryLazy",
+  --   opts = {
+  --     signcolumn = false,
+  --     numhl = true,
+  --     on_attach = function()
+  --       require("core.mappings").gitsigns()
+  --     end,
+  --   },
+  -- },
 }

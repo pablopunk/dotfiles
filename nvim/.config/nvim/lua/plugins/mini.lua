@@ -138,7 +138,7 @@ return {
         integrations = {
           minimap.gen_integration.gitsigns(),
           minimap.gen_integration.diagnostic(),
-          minimap.gen_integration.builtin_search()
+          minimap.gen_integration.builtin_search(),
         },
         window = {
           show_integration_count = false,
@@ -170,6 +170,23 @@ return {
         },
       }
       require("core.mappings").minifiles()
+    end,
+  },
+  {
+    "echasnovski/mini-git", -- git client
+    cmd = "Git",
+    config = function()
+      require("mini.git").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.diff", -- like git signs but mini
+    event = "VeryLazy",
+    init = function()
+      require("core.mappings").minidiff()
+    end,
+    config = function()
+      require("mini.diff").setup()
     end,
   },
 }

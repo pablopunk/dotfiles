@@ -119,20 +119,6 @@ M.openingh = function()
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
 end
 
-M.gitsigns = function()
-  local gs = package.loaded.gitsigns
-  map("n", "]g", gs.next_hunk, "Next Hunk")
-  map("n", "[g", gs.prev_hunk, "Prev Hunk")
-  map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-  map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-  map("n", "<leader>gh", ":Gitsigns toggle_linehl<CR>", "Show diff colors")
-  map("n", "<leader>ghS", gs.stage_hunk, "Stage Hunk")
-  map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
-  map("n", "<leader>gdf", gs.diffthis, "Show git diff for this file")
-  map("n", "<leader>gdh", gs.preview_hunk, "Show diff for hunk")
-  map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
-end
-
 M.lsp = function()
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
   map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>zz", "Go to next diagnostic")
@@ -233,6 +219,28 @@ M.minimap = function()
   map("n", "<leader>mm", function()
     require("mini.map").toggle()
   end, "Toggle minimap")
+end
+
+M.minidiff = function()
+  map("n", "<leader>gd", function()
+    require("mini.diff").toggle_overlay()
+  end, "Toggle minidiff")
+  map("n", ")d", "]h", "Next hunk")
+  map("n", "(d", "[h", "Previous hunk")
+end
+
+M.gitsigns = function()
+  local gs = package.loaded.gitsigns
+  map("n", "]g", gs.next_hunk, "Next Hunk")
+  map("n", "[g", gs.prev_hunk, "Prev Hunk")
+  map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+  map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+  map("n", "<leader>gh", ":Gitsigns toggle_linehl<CR>", "Show diff colors")
+  map("n", "<leader>ghS", gs.stage_hunk, "Stage Hunk")
+  map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
+  map("n", "<leader>gdf", gs.diffthis, "Show git diff for this file")
+  map("n", "<leader>gdh", gs.preview_hunk, "Show diff for hunk")
+  map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
 end
 
 return M

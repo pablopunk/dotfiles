@@ -218,7 +218,7 @@ end
 M.minimap = function()
   map("n", "<leader>mm", function()
     require("mini.map").toggle()
-  end
+  end, "Toggle minimap")
 end
 
 M.minidiff = function()

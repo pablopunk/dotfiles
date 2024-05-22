@@ -154,4 +154,8 @@ return {
       end
     end,
   },
+  {
+    "hinell/lsp-timeout.nvim", -- Stop/Start LSP servers based on window focus (after a timeout)
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
 }

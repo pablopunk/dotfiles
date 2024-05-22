@@ -226,7 +226,9 @@ M.minidiff = function()
     require("mini.diff").toggle_overlay()
   end, "Toggle overlay diff in the whole file")
   map("n", "<leader>gr", "gHgh", "Reset hunk")
+  map("v", "<leader>gr", "gH", "Reset visual selection")
   map("n", "<leader>gs", "ghgh", "Stage hunk")
+  map("v", "<leader>gs", "gh", "Stage visual selection")
 end
 
 M.minigit = function()

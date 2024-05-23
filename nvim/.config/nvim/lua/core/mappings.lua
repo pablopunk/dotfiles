@@ -232,12 +232,9 @@ M.minidiff = function()
 end
 
 M.minigit = function()
-  map(
-    { "n", "v", "x" },
-    "<leader>gl",
-    ":lua MiniGit.show_at_cursor()<cr>",
-    "Show git info about selection/line (git log-ish)"
-  )
+  map({ "n", "v", "x" }, "<leader>gl", function()
+    require("mini.git").show_at_cursor()
+  end, "Show git info about selection/line (git log-ish)")
 end
 
 M.gitsigns = function()

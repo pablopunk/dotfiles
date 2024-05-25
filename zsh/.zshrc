@@ -263,10 +263,10 @@ change_colorscheme() {
     defaults read -g AppleInterfaceStyle 2>&- >&-
     if [[ $? == 1 ]]; then
       new_theme=Light
-      kitty_theme="Tokyo Night Day"
+      kitty_theme="Catppuccin-Latte"
     else
       new_theme=Dark
-      kitty_theme="Tokyo Night"
+      kitty_theme="Catppuccin-Macchiato"
     fi
 
     if [[ $current_theme != $new_theme ]]; then

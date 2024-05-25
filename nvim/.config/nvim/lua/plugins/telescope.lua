@@ -6,8 +6,19 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "camgraff/telescope-tmux.nvim", -- tmux sessions in telescope
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        config = function()
+          require("telescope").load_extension "fzf"
+        end,
+      },
+      {
+        "camgraff/telescope-tmux.nvim", -- tmux sessions in telescope
+        config = function()
+          require("telescope").load_extension "tmux"
+        end,
+      },
     },
     init = function()
       require("core.mappings").telescope()
@@ -58,9 +69,6 @@ return {
           },
         },
       }
-
-      telescope.load_extension "fzf"
-      telescope.load_extension "tmux"
     end,
   },
 }

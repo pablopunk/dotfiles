@@ -170,12 +170,14 @@ end
 
 M.dark = function()
   vim.opt.background = "dark"
-  vim.cmd "colorscheme tokyonight-night"
+  -- vim.cmd "colorscheme tokyonight-night"
+  vim.cmd "colorscheme catppuccin-macchiato"
 end
 
 M.light = function()
   vim.opt.background = "light"
-  vim.cmd "colorscheme tokyonight-day"
+  -- vim.cmd "colorscheme tokyonight-day"
+  vim.cmd "colorscheme catppuccin-latte"
 end
 
 M.auto_theme = function()

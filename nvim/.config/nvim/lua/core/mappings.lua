@@ -125,7 +125,7 @@ M.lsp = function()
   map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>zz", "Go to previous diagnostic")
   map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<cr>", "Show code actions")
   map("n", "K", ":lua vim.lsp.buf.hover()<cr>", "Hover")
-  map("n", "gd", ":Telescope lsp_definitions<cr>", "Go to definition")
+  map("n", "gd", ":Telescope lsp_definitions<cr>zz", "Go to definition")
   map("n", "gr", ":Telescope lsp_references<cr>", "Go to references")
   map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols")
   map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)")
@@ -225,10 +225,19 @@ M.minidiff = function()
   map("n", "<leader>gd", function()
     require("mini.diff").toggle_overlay()
   end, "Toggle overlay diff in the whole file")
-  map("n", "<leader>gr", "gHgh", "Reset hunk")
-  map("v", "<leader>gr", "gH", "Reset visual selection")
-  map("n", "<leader>gs", "ghgh", "Stage hunk")
-  map("v", "<leader>gs", "gh", "Stage visual selection")
+  -- for some reason the following mappings fail to work if i just map them lik so "gHgh"
+  map("n", "<leader>gr", function()
+    vim.cmd "normal gHgh"
+  end, "Reset hunk")
+  map("v", "<leader>gr", function()
+    vim.cmd "normal gH"
+  end, "Reset visual selection")
+  map("n", "<leader>gs", function()
+    vim.cmd "normal ghgh"
+  end, "Stage hunk")
+  map("v", "<leader>gs", function()
+    vim.cmd "normal gh"
+  end, "Stage visual selection")
 end
 
 M.minigit = function()

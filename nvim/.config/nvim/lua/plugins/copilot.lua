@@ -1,6 +1,6 @@
 return {
   {
-    enabled = true,
+    enabled = false,
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
     build = function()
@@ -27,6 +27,16 @@ return {
       }
 
       require("core.mappings").copilot()
+    end,
+  },
+  {
+    "supermaven-inc/supermaven-nvim",
+    event = "VeryLazy",
+    build = function()
+      vim.cmd ":SupermavenUsePro" -- change this to :SupermavenUseFree to use the free version
+    end,
+    config = function()
+      require("supermaven-nvim").setup {}
     end,
   },
 }

@@ -24,6 +24,7 @@ return {
           "prettier",
           "stylua",
           "eslint_d",
+          "biome",
         },
       }
 
@@ -31,12 +32,7 @@ return {
         formatting.stylua.with {
           extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--call-parentheses", "None" },
         },
-        formatting.prettier.with {
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
-        },
-        formatting.eslint_d.with {
-          filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "astro" },
-        },
+        formatting.rome.with { command = "biome" },
       }
 
       null_ls.setup {

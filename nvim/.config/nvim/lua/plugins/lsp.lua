@@ -9,6 +9,7 @@ local servers = {
   "tsserver",
   "jedi_language_server",
   "astro",
+  "biome",
   -- "swift_mesonls",
   -- "emmet_ls",
 }

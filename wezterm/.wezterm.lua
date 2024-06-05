@@ -32,7 +32,7 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 
 --- Fonts {{{
 config.font = wezterm.font_with_fallback {
-  -- "Geist",
+  "GeistMono Nerd Font Mono",
   "SF Mono Powerline",
   "Nova",
   "Dank Mono",

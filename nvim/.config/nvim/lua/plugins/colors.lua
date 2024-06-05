@@ -9,11 +9,7 @@ return {
     lazy = false,
     config = function()
       require("catppuccin").setup {
-        dim_inactive = {
-          enabled = true,
-          shade = "light",
-          percentage = 0.3,
-        },
+        transparent_background = true,
         integrations = {
           mini = true,
         },

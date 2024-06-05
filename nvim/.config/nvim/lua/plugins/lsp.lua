@@ -84,6 +84,7 @@ return {
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "folke/neodev.nvim", -- lsp for nvim's Lua API
       "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      "dmmulroy/ts-error-translator.nvim", -- translates ts errors to readable messages
     },
     init = function()
       require("core.mappings").lsp()
@@ -98,6 +99,7 @@ return {
       require("mason-lspconfig").setup {
         ensure_installed = servers,
       }
+      require("ts-error-translator").setup {}
 
       local js_inlayhints = {
         includeInlayParameterNameHints = "all",

@@ -9,7 +9,7 @@ local function get_appearance()
   return "Dark"
 end
 
-function scheme_for_appearance(appearance)
+local function scheme_for_appearance(appearance)
   if appearance:find "Dark" then
     return "Catppuccin Macchiato"
   else
@@ -17,7 +17,7 @@ function scheme_for_appearance(appearance)
   end
 end
 
-wezterm.on("window-config-reloaded", function(window, pane)
+wezterm.on("window-config-reloaded", function(window)
   local overrides = window:get_config_overrides() or {}
   local appearance = window:get_appearance()
   local scheme = scheme_for_appearance(appearance)
@@ -62,6 +62,33 @@ config.window_padding = {
   right = 16,
   top = 16,
   bottom = 0, -- for some reason there's already a gap at the bottom
+}
+--- }}}
+
+--- Keys {{{
+config.keys = {
+  -- I use tmux instead of wezterm's panes, and their keybindings are messing with my config
+  { key = '"', mods = "ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = '"', mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "%", mods = "ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "%", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "'", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "5", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "T", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "T", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "Z", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "Z", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "t", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "t", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
+  { key = "z", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "LeftArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "LeftArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "RightArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "RightArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "UpArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "UpArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "DownArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "DownArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },
 }
 --- }}}
 

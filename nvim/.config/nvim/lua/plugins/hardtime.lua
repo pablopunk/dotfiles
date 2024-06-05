@@ -9,6 +9,7 @@ return {
     lazy = false,
     opts = {
       disable_mouse = false,
+      max_count = 5, -- Maximum count of repeated key presses allowed within the max_time period.
     },
   },
 }

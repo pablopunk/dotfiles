@@ -51,11 +51,18 @@ config.line_height = 1.2
 --- }}}
 
 --- Window {{{
-config.enable_tab_bar = false
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
+config.window_padding = {
+  left = 16,
+  right = 16,
+  top = 16,
+  bottom = 0, -- for some reason there's already a gap at the bottom
+}
 --- }}}
 
 return config

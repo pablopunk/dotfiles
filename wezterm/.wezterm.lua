@@ -1,7 +1,7 @@
 local wezterm = require "wezterm"
-
 local config = wezterm.config_builder()
 
+--- Colors {{{
 local function get_appearance()
   if wezterm.gui then
     return wezterm.gui.get_appearance()
@@ -28,10 +28,9 @@ wezterm.on("window-config-reloaded", function(window, pane)
 end)
 
 config.color_scheme = scheme_for_appearance(get_appearance())
-config.xcursor_theme = "Adwaita"
+--- }}}
 
-config.enable_tab_bar = false
-
+--- Fonts {{{
 config.font = wezterm.font_with_fallback {
   -- "Geist",
   "SF Mono Powerline",
@@ -49,10 +48,14 @@ config.font = wezterm.font_with_fallback {
 }
 config.font_size = 16.0
 config.line_height = 1.2
-config.window_close_confirmation = "NeverPrompt"
+--- }}}
 
+--- Window {{{
+config.enable_tab_bar = false
+config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
+--- }}}
 
 return config

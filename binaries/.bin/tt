@@ -28,8 +28,9 @@ select_and_trigger() {
 
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
-    if [[ " ${all_items[*]} " =~ " $arg " ]]; then
-      trigger_item "$arg"
+    matches=($(printf '%s\n' "${all_items[@]}" | grep -i "$arg"))
+    if [[ ${#matches[@]} -eq 1 ]]; then
+      trigger_item "${matches[0]}"
     else
       select_and_trigger -q "$arg"
     fi
@@ -37,3 +38,4 @@ if [[ $# -gt 0 ]]; then
 else
   select_and_trigger
 fi
+

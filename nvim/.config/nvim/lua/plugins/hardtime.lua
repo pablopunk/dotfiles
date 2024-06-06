@@ -10,6 +10,12 @@ return {
     opts = {
       disable_mouse = false,
       max_count = 5, -- Maximum count of repeated key presses allowed within the max_time period.
+      disabled_keys = { -- Disable arrow keys in normal mode but not in insert mode
+        ["<Up>"] = { "", "n" },
+        ["<Down>"] = { "", "n" },
+        ["<Left>"] = { "", "n" },
+        ["<Right>"] = { "", "n" },
+      },
     },
   },
 }

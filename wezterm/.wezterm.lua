@@ -79,7 +79,7 @@ config.keys = {
   { key = "Z", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
   { key = "Z", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
   { key = "t", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
-  { key = "t", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
+  -- { key = "t", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
   { key = "z", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
   { key = "LeftArrow", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
   { key = "LeftArrow", mods = "SHIFT|ALT|CTRL", action = wezterm.action.DisableDefaultAssignment },

@@ -118,15 +118,6 @@ function tilt {
   command tilt $@
 }
 
-function ssh {
-  if [[ -z $(which kitten) ]]; then
-    command ssh $@
-  else
-    kitten ssh $@
-  fi
-}
-# }}}
-
 # Aliases {{{
 alias g=git
 alias gst='git status'

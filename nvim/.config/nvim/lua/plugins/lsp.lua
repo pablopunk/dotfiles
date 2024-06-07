@@ -51,6 +51,11 @@ return {
           ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
           ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
         },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+          diagnostics = cmp.config.window.bordered(),
+        },
         sources = cmp.config.sources {
           { name = "nvim_lsp" }, -- lsp
           { name = "path" }, -- file system paths

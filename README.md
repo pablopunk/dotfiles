@@ -1,11 +1,9 @@
 # dotfiles
 
-> I use neovim BTW. My setup is blazing fast BTW.
-
 <img
-  src="https://github.com/pablopunk/dotfiles/assets/4324982/6b094bdc-7ad0-415d-9809-1db8cb25c106"
+  src="https://github.com/pablopunk/dotfiles/assets/4324982/d5badddc-5bc7-48dc-aaa4-061d4755826b"
   alt="neovim"
-  width="80%" />
+  width="700px" />
 
 ## 🚀 Install
 

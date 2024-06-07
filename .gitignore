@@ -16,6 +16,7 @@ kitty/.config/kitty/kitty.conf.bak
 zed/.config/**/conversations
 zed/.config/**/embeddings
 zed/.config/**/.tmp*
+zed/.config/**/prompts
 .tmp*
 
 # Lock files

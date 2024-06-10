@@ -246,7 +246,7 @@ TERM=xterm-256color
 [ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
 # }}}
 
-# kitty theme (dark/light) {{{
+# theme (dark/light) {{{
 change_colorscheme() {
   current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
 
@@ -254,14 +254,10 @@ change_colorscheme() {
     defaults read -g AppleInterfaceStyle 2>&- >&-
     if [[ $? == 1 ]]; then
       new_theme=Light
-      kitty_theme="Catppuccin-Latte"
     else
       new_theme=Dark
-      kitty_theme="Catppuccin-Macchiato"
     fi
-
     if [[ $current_theme != $new_theme ]]; then
-      kitty +kitten themes $kitty_theme >/dev/null 2>&1
       echo $new_theme > $HOME/.theme
     fi
   fi

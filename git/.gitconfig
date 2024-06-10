@@ -5,7 +5,6 @@
 [delta]
   line-numbers = true
   side-by-side = true
-  theme = one-dark
 [push]
   default = current
   autoSetupRemote = true

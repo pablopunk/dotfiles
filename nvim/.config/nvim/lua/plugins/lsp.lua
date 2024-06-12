@@ -10,7 +10,6 @@ local servers = {
   "jedi_language_server",
   "astro",
   "biome",
-  -- "swift_mesonls",
   -- "emmet_ls",
 }
 
@@ -159,6 +158,8 @@ return {
         }
         lspconfig[lsp].setup(setup_options)
       end
+
+      lspconfig.sourcekit.setup {} -- swift LSP not available on Mason but it's builtin in macOS
     end,
   },
 }

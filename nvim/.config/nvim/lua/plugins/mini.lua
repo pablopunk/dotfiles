@@ -149,14 +149,8 @@ return {
   },
   {
     "echasnovski/mini.files", -- file tree
-    event = "VeryLazy",
     init = function()
-      if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require "mini.files"
-        end
-      end
+      require("core.mappings").minifiles()
     end,
     config = function()
       require("mini.files").setup {
@@ -170,7 +164,6 @@ return {
           width_preview = 60, -- width of the preview window
         },
       }
-      require("core.mappings").minifiles()
     end,
   },
   {

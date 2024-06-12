@@ -260,4 +260,8 @@ M.gitsigns = function()
   map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select Hunk")
 end
 
+M.oil = function()
+  -- map("n", "<c-t>", ":Oil<cr>", "Open file explorer")
+end
+
 return M

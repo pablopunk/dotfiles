@@ -2,6 +2,7 @@ local shared = require "core.shared"
 
 return {
   {
+    enabled = false,
     "echasnovski/mini.animate",
     -- event = "VeryLazy",
     lazy = false,

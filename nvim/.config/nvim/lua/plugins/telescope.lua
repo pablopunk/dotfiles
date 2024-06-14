@@ -32,6 +32,11 @@ return {
           file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
           path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
           layout_strategy = "vertical",
+          layout_config = {
+            vertical = {
+              preview_cutoff = 0,
+            },
+          },
           selection_caret = "◦ ",
           prompt_prefix = " → ",
           mappings = {

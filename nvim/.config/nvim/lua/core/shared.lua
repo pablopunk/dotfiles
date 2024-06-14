@@ -198,4 +198,28 @@ M.auto_theme = function()
   end
 end
 
+M.treesitter_langs = {
+  "json",
+  "javascript",
+  "typescript",
+  "tsx",
+  "yaml",
+  "html",
+  "css",
+  "markdown",
+  "markdown_inline",
+  "graphql",
+  "bash",
+  "lua",
+  "vim",
+  "vimdoc",
+  "gitignore",
+}
+
+M.install_treesitter_langs = function()
+  for _, lang in ipairs(M.treesitter_langs) do
+    vim.cmd("TSInstall! " .. lang)
+  end
+end
+
 return M

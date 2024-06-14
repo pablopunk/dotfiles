@@ -1,3 +1,5 @@
+local shared = require "core.shared"
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -18,22 +20,7 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         -- This makes it have a terrible startuptime. YOU'RE FIRED!
-        -- ensure_installed = {
-        --   "json",
-        --   "javascript",
-        --   "typescript",
-        --   "tsx",
-        --   "yaml",
-        --   "html",
-        --   "css",
-        --   "markdown",
-        --   "markdown_inline",
-        --   "graphql",
-        --   "bash",
-        --   "lua",
-        --   "vim",
-        --   "gitignore",
-        -- },
+        -- ensure_installed = shared.treesitter_langs,
         -- auto_install = true,
         incremental_selection = {
           enable = true,

@@ -190,7 +190,6 @@ lua << EOF
       i = {
         ["<c-k>"] = require("telescope.actions").cycle_history_prev,
         ["<c-j>"] = require("telescope.actions").cycle_history_next,
-        ["<c-f>"] = require("telescope.actions").move_selection_previous, -- useful when i use c-f to open telescope
       },
     },
     pickers = {
@@ -217,6 +216,7 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fw <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>fW <cmd>lua require('telescope.builtin').grep_string({ hidden = true })<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles()<cr>
 " }}}
 
 " File tree {{{

@@ -50,19 +50,24 @@ return {
     end,
   },
   {
-    enabled = true,
+    enabled = false,
     "echasnovski/mini.notify", -- notifications ui
     event = "VeryLazy",
     opts = true,
   },
   {
+    after = "neovim/nvim-lspconfig",
     "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
-    enabled = function()
-      return jit.os == "Linux" -- only load on linux
-    end,
-    lazy = false,
+    enable = true,
+    -- enabled = function()
+    --   return jit.os == "Linux" -- only load on linux
+    -- end,
+    event = "VeryLazy",
     opts = {
-      fallback_action = "<c-n>",
+      window = {
+        info = { border = "rounded" },
+        signature = { border = "rounded" },
+      },
     },
   },
   {

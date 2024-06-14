@@ -15,9 +15,10 @@ local servers = {
 
 return {
   {
-    enabled = function()
-      return jit.os ~= "Linux" -- do not load on linux
-    end,
+    enabled = false,
+    -- enabled = function()
+    --   return jit.os ~= "Linux" -- do not load on linux
+    -- end,
     "hrsh7th/nvim-cmp", -- completion engine
     name = "cmp",
     dependencies = {
@@ -79,14 +80,13 @@ return {
     end,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
-    -- event = { "BufReadPost" },
-    event = "VeryLazy",
+    event = "BufEnter",
     dependencies = {
       "folke/neoconf.nvim", -- to declare globals in Lua (like in tests: it,describe,etc) so LSP doesn't complain
       "williamboman/mason.nvim", -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
       "williamboman/mason-lspconfig.nvim", -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
       "folke/neodev.nvim", -- lsp for nvim's Lua API
-      "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
+      -- "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
       "dmmulroy/ts-error-translator.nvim", -- translates ts errors to readable messages
     },
     init = function()
@@ -147,7 +147,8 @@ return {
         },
       }
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      -- local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
 
       -- setup servers
       for _, lsp in ipairs(servers) do
@@ -159,7 +160,9 @@ return {
         lspconfig[lsp].setup(setup_options)
       end
 
-      lspconfig.sourcekit.setup {} -- swift LSP not available on Mason but it's builtin in macOS
+      lspconfig.sourcekit.setup {
+        settings = {},
+      } -- swift LSP not available on Mason but it's builtin in macOS
     end,
   },
 }

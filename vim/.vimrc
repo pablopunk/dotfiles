@@ -163,21 +163,60 @@ command! GitModifiedFiles call GitModifiedFiles()
 nmap <leader>fg :GitModifiedFiles<cr>
 " }}}
 
-" Project search (strings) {{{
-set grepprg=rg\ --vimgrep\ --follow\ --max-columns=1000\ --case-sensitive
-set grepformat=%f:%l:%c:%m,%f:%l:%m
-function! Grep(...)
-  return system(join([&grepprg] + a:000), ' ')
-endfunction
-command! -nargs=+ -complete=file_in_path -bar Grep      cgetexpr Grep(<f-args>)
-command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> . ' -w')
-augroup quickfix
-  autocmd!
-  autocmd QuickFixCmdPost cgetexpr cwindow
-augroup END
-nmap <leader>fs :Grep<space><space>.<left><left>
-nmap <leader>fw :GrepWord<space><c-r><c-w><space>.<cr>
-vmap <leader>fw "9y:Grep<space>'<c-r>9'<space>.<cr>
+" Install telescope.nvim without any plugin manager
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/telescope.nvim'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/nvim-telescope/telescope.nvim ~/.local/share/nvim/site/pack/packer/start/telescope.nvim
+endif
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/plenary.nvim'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/nvim-lua/plenary.nvim ~/.local/share/nvim/site/pack/packer/start/plenary.nvim
+endif
+packadd plenary.nvim
+packadd telescope.nvim
+lua << EOF
+  require('telescope').setup{
+    file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
+    path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = {
+        preview_cutoff = 0,
+      },
+    },
+    selection_caret = "◦ ",
+    prompt_prefix = " → ",
+    mappings = {
+      i = {
+        ["<c-k>"] = require("telescope.actions").cycle_history_prev,
+        ["<c-j>"] = require("telescope.actions").cycle_history_next,
+        ["<c-f>"] = require("telescope.actions").move_selection_previous, -- useful when i use c-f to open telescope
+      },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      grep_string = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
+      },
+      live_grep = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
+      },
+    },
+  }
+EOF
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <c-f> <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fw <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>fW <cmd>lua require('telescope.builtin').grep_string({ hidden = true })<cr>
 " }}}
 
 " File tree {{{

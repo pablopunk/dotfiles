@@ -13,71 +13,25 @@ local servers = {
   -- "emmet_ls",
 }
 
+local function mini_completion_on_attach(client, bufnr)
+  local function buf_set_option(name, value)
+    vim.api.nvim_set_option_value(name, value, { buf = bufnr })
+  end
+
+  buf_set_option("omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
+
+  -- Currently all formatting is handled with 'null-ls' plugin
+  if vim.fn.has "nvim-0.8" == 1 then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  else
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+end
+
 return {
   {
-    enabled = false,
-    -- enabled = function()
-    --   return jit.os ~= "Linux" -- do not load on linux
-    -- end,
-    "hrsh7th/nvim-cmp", -- completion engine
-    name = "cmp",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- A collection of common lua functions and libraries
-      "hrsh7th/cmp-buffer", -- text from current buffer
-      "hrsh7th/cmp-path", -- complete paths
-      "onsails/lspkind.nvim", -- vscode-link icons for cmp items
-      "L3MON4D3/LuaSnip", -- Snippets engine
-      "rafamadriz/friendly-snippets", -- collection of snippets for different languages
-    },
-    event = { "LspAttach", "InsertCharPre" },
-    init = function()
-      require("core.mappings").luasnip()
-    end,
-    config = function()
-      local cmp = require "cmp"
-      local lspkind = require "lspkind"
-      local luasnip = require "luasnip"
-
-      -- necessary for rafamadriz/friendly-snippets
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert {
-          ["<c-space>"] = cmp.mapping.complete(), -- show suggestions window
-          ["<cr>"] = cmp.mapping.confirm { select = false }, -- choose suggestion
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        sources = cmp.config.sources {
-          { name = "nvim_lsp" }, -- lsp
-          { name = "path" }, -- file system paths
-          {
-            name = "buffer", -- text in buffers
-            option = { get_bufnrs = vim.api.nvim_list_bufs },
-          },
-        },
-        ---@diagnostic disable-next-line: missing-fields
-        formatting = {
-          format = lspkind.cmp_format {
-            ellipsis_char = "...",
-            maxwidth = 30,
-            mode = "symbol", -- show only symbol annotations
-          },
-        },
-      }
-    end,
-  },
-  {
-    enabled = function()
-      return jit.os ~= "Linux" -- do not load on linux
-    end,
     "neovim/nvim-lspconfig", -- Quickstart configs for Nvim LSP
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "LspStart" },
     event = "BufEnter",
@@ -88,6 +42,19 @@ return {
       "folke/neodev.nvim", -- lsp for nvim's Lua API
       -- "hrsh7th/cmp-nvim-lsp", -- add lsp completions to cmp
       "dmmulroy/ts-error-translator.nvim", -- translates ts errors to readable messages
+      {
+        "echasnovskihasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
+        opts = {
+          window = {
+            info = { border = "rounded" },
+            signature = { border = "rounded" },
+          },
+          lsp_completion = {
+            source_func = "omnifunc",
+            auto_setup = false, -- auto_setup false means you need to configure omnifunc on_attach on every server
+          },
+        },
+      },
     },
     init = function()
       require("core.mappings").lsp()
@@ -153,7 +120,10 @@ return {
       -- setup servers
       for _, lsp in ipairs(servers) do
         local setup_options = {
-          on_attach = require("core.mappings").lsp,
+          on_attach = function(clientt, bufnr)
+            require("core.mappings").lsp()
+            mini_completion_on_attach(clientt, bufnr)
+          end,
           capabilities = capabilities,
           settings = settings,
         }

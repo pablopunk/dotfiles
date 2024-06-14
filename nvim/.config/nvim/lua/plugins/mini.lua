@@ -56,12 +56,8 @@ return {
     opts = true,
   },
   {
-    after = "neovim/nvim-lspconfig",
     "echasnovski/mini.completion", -- like cmp but fast as fucking fuck (and 0 config)
     enable = true,
-    -- enabled = function()
-    --   return jit.os == "Linux" -- only load on linux
-    -- end,
     event = "VeryLazy",
     opts = {
       window = {

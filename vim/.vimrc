@@ -142,27 +142,6 @@ set wildmenu " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
 set wildignore+=**/dist/**
 
-function! FindFiles(filename)
-  let l:error_file = tempname()
-  silent exe '!fd -H -t f '.a:filename.' | xargs file | sed "s/:/:1:/" > '.l:error_file
-  set errorformat=%f:%l:%m
-  execute "cfile ".l:error_file
-  copen
-  if line('$') == 1 | wincmd w | endif
-  call delete(l:error_file)
-endfunction
-
-function! GitModifiedFiles()
-  call setqflist(map(split(system("git ls-files -m"), "\n"), '{"filename": v:val, "lnum": 1, "col": 1, "text": "modified"}'))
-  copen
-endfunction
-
-command! -nargs=1 Find call FindFiles(<q-args>)
-nmap <leader>ff :Find<space>
-command! GitModifiedFiles call GitModifiedFiles()
-nmap <leader>fg :GitModifiedFiles<cr>
-" }}}
-
 " Install telescope.nvim without any plugin manager
 if empty(glob('~/.local/share/nvim/site/pack/packer/start/telescope.nvim'))
   silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
@@ -219,6 +198,21 @@ nnoremap <leader>fW <cmd>lua require('telescope.builtin').grep_string({ hidden =
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles()<cr>
 " }}}
 
+" Copilot {{{
+" install supermaven-inc/supermaven-nvim without any plugin manager
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/supermaven-nvim'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/supermaven-inc/supermaven-nvim ~/.local/share/nvim/site/pack/packer/start/supermaven-nvim
+endif
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/copilot.lua'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/zbirenbaum/copilot.lua ~/.local/share/nvim/site/pack/packer/start/copilot.lua
+endif
+lua << EOF
+  require('supermaven-nvim').setup {}
+EOF
+" }}}
+
 " File tree {{{
 let g:file_tree_shortcut = '<c-t>'
 exe 'nnoremap <silent> ' g:file_tree_shortcut ' :Lexplore %:p:h<cr>'
@@ -242,20 +236,20 @@ let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " }}}
 
-" Color config {{{
-set background=dark
-colorscheme habamax
-" Groups to be transparent
-let g:higroups = [
-  \ 'Normal',
-  \ 'NormalSB',
-  \ 'NormalNC',
-  \ 'LineNr',
-  \ 'SignColumn',
-  \ 'NonText',
-  \ 'EndOfBuffer',
-  \ ]
-for g:color in g:higroups
-  execute 'silent! hi ' . g:color . ' guibg=NONE'
-endfor
-" }}}
+  " Color config {{{
+  set background=dark
+  colorscheme habamax
+  " Groups to be transparent
+  let g:higroups = [
+    \ 'Normal',
+    \ 'NormalSB',
+    \ 'NormalNC',
+    \ 'LineNr',
+    \ 'SignColumn',
+    \ 'NonText',
+    \ 'EndOfBuffer',
+    \ ]
+  for g:color in g:higroups
+    execute 'silent! hi ' . g:color . ' guibg=NONE'
+  endfor
+  " }}}

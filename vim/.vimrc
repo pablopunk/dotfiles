@@ -141,8 +141,6 @@ set path+=** " Search files subdirectories
 set wildmenu " Allow autocomplete on 'find' command
 set wildignore+=**/node_modules/**
 set wildignore+=**/dist/**
-
-" Install telescope.nvim without any plugin manager
 if empty(glob('~/.local/share/nvim/site/pack/packer/start/telescope.nvim'))
   silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
   silent !git clone --depth 1 https://github.com/nvim-telescope/telescope.nvim ~/.local/share/nvim/site/pack/packer/start/telescope.nvim
@@ -199,7 +197,6 @@ nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles()<cr>
 " }}}
 
 " Copilot {{{
-" install supermaven-inc/supermaven-nvim without any plugin manager
 if empty(glob('~/.local/share/nvim/site/pack/packer/start/supermaven-nvim'))
   silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
   silent !git clone --depth 1 https://github.com/supermaven-inc/supermaven-nvim ~/.local/share/nvim/site/pack/packer/start/supermaven-nvim
@@ -208,6 +205,7 @@ if empty(glob('~/.local/share/nvim/site/pack/packer/start/copilot.lua'))
   silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
   silent !git clone --depth 1 https://github.com/zbirenbaum/copilot.lua ~/.local/share/nvim/site/pack/packer/start/copilot.lua
 endif
+packadd supermaven-nvim
 lua << EOF
   require('supermaven-nvim').setup {}
 EOF

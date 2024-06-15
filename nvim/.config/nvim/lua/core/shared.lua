@@ -10,45 +10,19 @@ end
 M.quit_file = function()
   local irrelevant_buffers = { "NvimTree", "Starter", "Neogit", "quickfix", "", "*" }
   local name_of_buffer = vim.fn.expand "%"
+  local buffer_is_irrelevant = vim.tbl_contains(irrelevant_buffers, name_of_buffer)
   local number_of_buffers = #(vim.fn.getbufinfo { buflisted = 1 })
   local number_of_tabs = #(vim.fn.gettabinfo())
   local is_last_buffer = number_of_buffers == 1 and number_of_tabs == 1
   local is_last_unclutter_tab = #require("unclutter.tabline").list() == 1
-  local buffer_is_irrelevant = false
-  vim.cmd "bd!"
-  -- for _, irrelevant_buffer in ipairs(irrelevant_buffers) do
-  --   if string.find(name_of_buffer, irrelevant_buffer) then
-  --     buffer_is_irrelevant = true
-  --     break
-  --   end
-  -- end
-  -- if is_last_buffer or is_last_unclutter_tab then
-  --   vim.cmd "silent! SessionDelete"
-  --   if buffer_is_irrelevant then
-  --     vim.cmd "qa!"
-  --   else
-  --     vim.cmd "bd"
-  --     local ok, starter = pcall(require, "mini.starter")
-  --     if ok then
-  --       starter.open() -- open starter if there are no more buffers
-  --     end
-  --   end
-  -- elseif buffer_is_irrelevant then
-  --   vim.cmd "bd!"
-  -- else
-  --   local unsaved_changes = vim.fn.getbufvar(vim.fn.bufnr "%", "&mod") == 1
-  --   if unsaved_changes then
-  --     local result = vim.fn.input("Save changes? (y/n) ", "", "customlist,Save changes?,y,n")
-  --     if result == "y" then
-  --       vim.cmd "w"
-  --       vim.cmd "bd"
-  --     else
-  --       vim.cmd "bd!"
-  --     end
-  --   else
-  --     vim.cmd "bd"
-  --   end
-  -- end
+  if is_last_buffer or is_last_unclutter_tab then
+    vim.cmd "silent! SessionDelete"
+    vim.cmd "qa"
+  elseif buffer_is_irrelevant then
+    vim.cmd "bd!"
+  else
+    vim.cmd "bd"
+  end
 end
 
 M.close_all_buffers = function()

@@ -89,6 +89,23 @@ function! UnfoldAll()
 endfunction
 nnoremap <leader>< :call FoldAll()<cr>
 nnoremap <silent> <leader>> :call UnfoldAll()<cr>
+" Comments
+function! ToggleCommentRange(startline, endline)
+  let l:commentString = (&filetype == 'lua' ? '--' : (&filetype == 'sh' ? '#' : (&filetype == 'vim' ? '"' : '//')))
+  let l:allCommented = 1
+  for l:line in range(a:startline, a:endline)
+      if getline(l:line) !~ '^\s*' . l:commentString . '\s*'
+          let l:allCommented = 0
+          break
+      endif
+  endfor
+  for l:line in range(a:startline, a:endline)
+      execute l:line . (l:allCommented ? 's/^\s*' . l:commentString . '\s*//' : 's/^/' . l:commentString . ' /')
+  endfor
+endfunction
+
+nnoremap gcc :call ToggleCommentRange(line('.'), line('.'))<CR>
+vnoremap gc :<C-u>call ToggleCommentRange(line("'<"), line("'>"))<CR>
 " }}}
 
 " Autocommands {{{
@@ -146,75 +163,21 @@ command! GitModifiedFiles call GitModifiedFiles()
 nmap <leader>fg :GitModifiedFiles<cr>
 " }}}
 
-" Telescope {{{
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/telescope.nvim'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/nvim-telescope/telescope.nvim ~/.local/share/nvim/site/pack/packer/start/telescope.nvim
-endif
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/plenary.nvim'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/nvim-lua/plenary.nvim ~/.local/share/nvim/site/pack/packer/start/plenary.nvim
-endif
-packadd plenary.nvim
-packadd telescope.nvim
-lua << EOF
-  require('telescope').setup{
-    file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
-    path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
-    layout_strategy = "vertical",
-    layout_config = {
-      vertical = {
-        preview_cutoff = 0,
-      },
-    },
-    selection_caret = "◦ ",
-    prompt_prefix = " → ",
-    mappings = {
-      i = {
-        ["<c-k>"] = require("telescope.actions").cycle_history_prev,
-        ["<c-j>"] = require("telescope.actions").cycle_history_next,
-      },
-    },
-    pickers = {
-      find_files = {
-        hidden = true,
-      },
-      grep_string = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
-      },
-      live_grep = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
-      },
-    },
-  }
-EOF
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <c-f> <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>fw <cmd>lua require('telescope.builtin').grep_string()<cr>
-nnoremap <leader>fW <cmd>lua require('telescope.builtin').grep_string({ hidden = true })<cr>
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles()<cr>
-" }}}
-
-" Copilot {{{
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/supermaven-nvim'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/supermaven-inc/supermaven-nvim ~/.local/share/nvim/site/pack/packer/start/supermaven-nvim
-endif
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/copilot.lua'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/zbirenbaum/copilot.lua ~/.local/share/nvim/site/pack/packer/start/copilot.lua
-endif
-packadd supermaven-nvim
-lua << EOF
-  require('supermaven-nvim').setup {}
-EOF
+" Project search (strings) {{{
+set grepprg=rg\ --vimgrep\ --follow\ --max-columns=1000\ --case-sensitive
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+function! Grep(...)
+  return system(join([&grepprg] + a:000), ' ')
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep      cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar GrepWord  cgetexpr Grep(<f-args> . ' -w')
+augroup quickfix
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+augroup END
+nmap <leader>fs :Grep<space><space>.<left><left>
+nmap <leader>fw :GrepWord<space><c-r><c-w><space>.<cr>
+vmap <leader>fw "9y:Grep<space>'<c-r>9'<space>.<cr>
 " }}}
 
 " File tree {{{
@@ -240,35 +203,6 @@ let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " }}}
 
-" mini.nvim {{{
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/mini.nvim'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/echasnovski/mini.nvim ~/.local/share/nvim/site/pack/packer/start/mini.nvim
-endif
-packadd mini.nvim
-lua << EOF
-  require("mini.completion").setup {}
-  require("mini.comment").setup {}
-  require("mini.indentscope").setup { symbol = "│" }
-  require("mini.diff").setup {}
-
-EOF
-" }}}
-
-" Treesitter {{{
-if empty(glob('~/.local/share/nvim/site/pack/packer/start/nvim-treesitter'))
-  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
-  silent !git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter ~/.local/share/nvim/site/pack/packer/start/nvim-treesitter
-endif
-packadd nvim-treesitter
-lua << EOF
-  require("nvim-treesitter.configs").setup {
-    highlight = { enable = true },
-    indent = { enable = true },
-  }
-EOF
-" }}}
-
 " Color config {{{
 set background=dark
 colorscheme habamax
@@ -285,3 +219,4 @@ let g:higroups = [
 for g:color in g:higroups
   execute 'silent! hi ' . g:color . ' guibg=NONE'
 endfor
+" }}}

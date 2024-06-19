@@ -36,7 +36,9 @@ return {
       vim.cmd ":SupermavenUsePro" -- change this to :SupermavenUseFree to use the free version
     end,
     config = function()
-      require("supermaven-nvim").setup {}
+      require("supermaven-nvim").setup {
+        log_level = "off",
+      }
     end,
   },
 }

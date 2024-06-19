@@ -117,6 +117,7 @@ function tilt {
   [[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
   command tilt $@
 }
+# }}}
 
 # Aliases {{{
 alias g=git
@@ -141,8 +142,9 @@ alias t='tree -L 3'
 # other
 alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vi=nvim
-alias vvi='nvim -u ~/.vimrc'
+alias vvi='command vi'
 alias viu='nvim -u NONE'
+alias mvim='NVIM_APPNAME=mvim nvim'
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
 alias rm=trash

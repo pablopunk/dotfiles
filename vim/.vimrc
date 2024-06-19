@@ -163,7 +163,7 @@ command! GitModifiedFiles call GitModifiedFiles()
 nmap <leader>fg :GitModifiedFiles<cr>
 " }}}
 
-" Install telescope.nvim without any plugin manager
+" Telescope {{{
 if empty(glob('~/.local/share/nvim/site/pack/packer/start/telescope.nvim'))
   silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
   silent !git clone --depth 1 https://github.com/nvim-telescope/telescope.nvim ~/.local/share/nvim/site/pack/packer/start/telescope.nvim
@@ -241,6 +241,8 @@ let g:netrw_liststyle=0
 let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " }}}
+
+"
 
 " Color config {{{
 set background=dark

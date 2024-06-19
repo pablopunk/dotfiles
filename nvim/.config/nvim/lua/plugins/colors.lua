@@ -3,20 +3,31 @@ local dark = shared.dark
 
 return {
   {
-    "catppuccin/nvim", -- The best colorscheme
-    name = "catppuccin",
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
     lazy = false,
     config = function()
-      require("catppuccin").setup {
-        transparent_background = true,
-        integrations = {
-          mini = true,
-        },
+      require("gruvbox").setup {
+        transparent_mode = true,
       }
       dark()
     end,
   },
+  -- {
+  --   "catppuccin/nvim", -- The best colorscheme
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   lazy = false,
+  --   config = function()
+  --     require("catppuccin").setup {
+  --       transparent_background = true,
+  --       integrations = {
+  --         mini = true,
+  --       },
+  --     }
+  --     dark()
+  --   end,
+  -- },
   -- {
   --   "folke/tokyonight.nvim",
   --   lazy = false,

@@ -11,9 +11,11 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find "Dark" then
-    return "Catppuccin Macchiato"
+    -- return "Catppuccin Macchiato"
+    return "Gruvbox dark, hard (base16)"
   else
-    return "Catppuccin Latte"
+    -- return "Catppuccin Latte"
+    return "Gruvbox dark, hard (base16)"
   end
 end
 

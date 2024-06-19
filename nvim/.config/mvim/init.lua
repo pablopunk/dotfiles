@@ -16,14 +16,14 @@ map("i", "<c-c>", "<esc>", "ESC")
 map({ "n", "v", "x", "o", "c" }, "q:", "<nop>", "Noop")
 map({ "n", "v", "x", "o" }, "Q", "<nop>", "Noop")
 -- I use () instead of [] to navigate
-vim.cmd [[
+vim.cmd([[
   nmap ( [
   nmap ) ]
   omap ( [
   omap ) ]
   xmap ( [
   xmap ) ]
-]]
+]])
 -- Remove highlights
 map("n", "<leader>h", ":silent! nohlsearch<cr>", "Remove highlights")
 -- Quit/Save file
@@ -65,11 +65,11 @@ map("v", "<", "<gv", "Indent selection left")
 -- Folds
 map("n", "<leader><", function()
   vim.opt.foldmethod = "indent"
-  vim.cmd "normal! zM"
+  vim.cmd("normal! zM")
 end, "Fold all")
 map("n", "<leader>>", function()
-  vim.cmd "set nofoldenable"
-  vim.cmd "normal! zR"
+  vim.cmd("set nofoldenable")
+  vim.cmd("normal! zR")
 end, "Open all folds")
 -- Quickfix
 map("n", "]q", ":cnext<cr>", "Next quickfix file")
@@ -123,20 +123,20 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- words
-opt.iskeyword:append "-" -- dash is part of the word
+opt.iskeyword:append("-") -- dash is part of the word
 
 -- blank lines
 -- opt.fcs = "eob:\ " -- hide ~ on blank lines
 
 -- better :find
-opt.path:append "**"
+opt.path:append("**")
 opt.wildmenu = true
 opt.wildignore = opt.wildignore + "**/node_modules/**"
 opt.wildignore = opt.wildignore + "**/dist/**"
 -- }}}
 
 -- Abbreviations {{{
-vim.cmd [[
+vim.cmd([[
   iabbr widht width
   iabbr heigth height
   iabbr lenght length
@@ -145,55 +145,53 @@ vim.cmd [[
   iabbr ireact import React from 'react'
   iabbr fcreact const Component = () =>
   iabbr ccreact class Component extends React.Component
-  ]]
--- }}}
-
+  ]])
 -- }}}
 
 -- Plugin manager {{{
-local plugin_manager_folder = vim.fn.stdpath "data" .. "/site/pack/plugins/start"
-vim.opt.rtp:prepend(plugin_manager_folder)
-local function plugin(repo)
-  local repo_name = repo:match "^.*/(.*)$"
-  local install_path = plugin_manager_folder .. "/" .. repo_name
-
-  if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/" .. repo, install_path }
-    print("✔️ Installed " .. repo_name)
-  end
-
-  vim.cmd("packadd " .. repo_name)
+local path_package = vim.fn.stdpath("data") .. "/site/"
+local mini_path = path_package .. "pack/deps/start/mini.nvim"
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/echasnovski/mini.nvim",
+    mini_path,
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd("packadd mini.nvim | helptags ALL")
+  vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
-local function lazy_load(event, config_fn)
-  vim.api.nvim_create_autocmd(event, {
-    callback = config_fn,
-  })
-end
+require("mini.deps").setup({ path = { package = path_package } })
+local MiniDeps = require("mini.deps")
+local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- }}}
 
 -- Copilot {{{
-plugin "supermaven-inc/supermaven-nvim"
-lazy_load("UIEnter", function()
-  require("supermaven-nvim").setup { log_level = "off" }
+add("supermaven-inc/supermaven-nvim")
+later(function()
+  require("supermaven-nvim").setup({ log_level = "off" })
 end)
 -- }}}
 
 -- mini.nvim {{{
-plugin "echasnovski/mini.nvim"
-lazy_load("UIEnter", function()
-  require("mini.completion").setup {}
-  require("mini.comment").setup {}
-  require("mini.indentscope").setup { symbol = "│" }
-  require("mini.diff").setup {}
-  require("mini.splitjoin").setup {}
+add("echasnovski/mini.nvim")
+later(function()
+  require("mini.completion").setup({})
+  require("mini.comment").setup({})
+  require("mini.indentscope").setup({ symbol = "│" })
+  require("mini.diff").setup({})
+  require("mini.splitjoin").setup({})
 end)
 -- }}}
 
 -- Treesitter {{{
-plugin "nvim-treesitter/nvim-treesitter"
-lazy_load("BufEnter", function()
-  require("nvim-treesitter.configs").setup { highlight = { enable = true }, indent = { enable = true } }
-  vim.cmd [[
+add("nvim-treesitter/nvim-treesitter")
+later(function()
+  require("nvim-treesitter.configs").setup({ highlight = { enable = true }, indent = { enable = true } })
+  vim.cmd([[
   command! -nargs=0 InstallTreesitterParsers
     \ TSInstall! json |
     \ TSInstall! javascript |
@@ -210,13 +208,15 @@ lazy_load("BufEnter", function()
     \ TSInstall! vim |
     \ TSInstall! vimdoc |
     \ TSInstall! gitignore
-]]
+]])
 end)
+--- }}}
+
 -- Telescope {{{
-plugin "nvim-lua/plenary.nvim"
-plugin "nvim-telescope/telescope.nvim"
-lazy_load("UIEnter", function()
-  require("telescope").setup {
+add("nvim-lua/plenary.nvim")
+add("nvim-telescope/telescope.nvim")
+later(function()
+  require("telescope").setup({
     file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
     path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
     layout_strategy = "vertical",
@@ -248,7 +248,7 @@ lazy_load("UIEnter", function()
         end,
       },
     },
-  }
+  })
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', "Find files")
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', "Live grep")
   map("n", "<c-f>", '<cmd>lua require("telescope.builtin").buffers()<cr>', "Buffers")
@@ -260,9 +260,90 @@ lazy_load("UIEnter", function()
 end)
 -- }}}
 
+-- vim-tmux-navigator {{{
+add("christoomey/vim-tmux-navigator")
+-- }}}
+
+-- LSP {{{
+add("neovim/nvim-lspconfig")
+add("folke/neodev.nvim") -- lsp for nvim's Lua API
+local function mini_completion_on_attach(client, bufnr)
+  local function buf_set_option(name, value)
+    vim.api.nvim_set_option_value(name, value, { buf = bufnr })
+  end
+  buf_set_option("omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+end
+later(function()
+  require("neodev").setup({})
+  map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
+  map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>zz", "Go to next diagnostic")
+  map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>zz", "Go to previous diagnostic")
+  map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<cr>", "Show code actions")
+  map("n", "K", ":lua vim.lsp.buf.hover()<cr>", "Hover")
+  map("n", "gd", ":Telescope lsp_definitions<cr>zz", "Go to definition")
+  map("n", "gr", ":Telescope lsp_references<cr>", "Go to references")
+  map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", "Document symbols")
+  map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", "Workspace symbols (dynamic)")
+  map("n", "<leader>rn", ":lua vim.lsp.buf.rename()<cr>", "Rename variable")
+  map("n", "<leader>ls", ":LspStart<cr>", "Start LSP")
+  map("n", "<leader>lx", ":LspStop<cr>", "Stop LSP")
+  map("n", "<leader>lr", ":LspRestart<cr>", "Restart LSP")
+  map("n", "<leader>li", ":LspInfo<cr>", "Info LSP")
+  local lspconfig = require("lspconfig")
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local on_attach = function(client, bufnr)
+    mini_completion_on_attach(client, bufnr)
+  end
+  local function setup_lsp(lsp, settings)
+    lspconfig[lsp].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = settings,
+    })
+  end
+
+  setup_lsp("tsserver")
+  setup_lsp("vimls")
+  setup_lsp("bashls")
+  setup_lsp("jsonls")
+  setup_lsp("html")
+  setup_lsp("astro")
+  setup_lsp("biome")
+  setup_lsp("lua_ls", {
+    Lua = {
+      diagnostics = { globals = { "vim" } }, -- make the language server recognize "vim" global
+      hint = { enable = true },
+      workspace = {
+        checkThirdParty = false, -- remove the warning "Do you need to configure your work environment as `luv`"
+      },
+    },
+  })
+end)
+-- }}}
+
+-- Formatter {{{
+add("stevearc/conform.nvim")
+later(function()
+  require("conform").setup({
+    format_after_save = {
+      lsp_format = "fallback",
+    },
+    formatters_by_ft = {
+      lua = { "stylua" },
+      javascript = { { "biome" } },
+      typescript = { { "biome" } },
+      typescriptreactt = { { "biome" } },
+      javascriptreact = { { "biome" } },
+    },
+  })
+end)
+-- }}}
+
 -- Color config {{{
 opt.background = "dark"
-vim.cmd [[colorscheme habamax]]
+vim.cmd([[colorscheme habamax]])
 local transparent_groups = { "Normal", "NormalSB", "NormalNC", "LineNr", "SignColumn", "NonText", "EndOfBuffer" }
 for _, color in ipairs(transparent_groups) do
   vim.cmd("silent! hi " .. color .. " guibg=NONE")

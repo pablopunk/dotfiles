@@ -1,7 +1,7 @@
 #vim: ft=gitconfig
 [core]
   pager = delta
-	editor = nvim
+	editor = nvim -u ~/.vimrc
 [delta]
   line-numbers = true
   side-by-side = true

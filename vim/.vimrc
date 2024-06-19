@@ -89,23 +89,6 @@ function! UnfoldAll()
 endfunction
 nnoremap <leader>< :call FoldAll()<cr>
 nnoremap <silent> <leader>> :call UnfoldAll()<cr>
-" Comments
-function! ToggleCommentRange(startline, endline)
-  let l:commentString = (&filetype == 'lua' ? '--' : (&filetype == 'sh' ? '#' : (&filetype == 'vim' ? '"' : '//')))
-  let l:allCommented = 1
-  for l:line in range(a:startline, a:endline)
-      if getline(l:line) !~ '^\s*' . l:commentString . '\s*'
-          let l:allCommented = 0
-          break
-      endif
-  endfor
-  for l:line in range(a:startline, a:endline)
-      execute l:line . (l:allCommented ? 's/^\s*' . l:commentString . '\s*//' : 's/^/' . l:commentString . ' /')
-  endfor
-endfunction
-
-nnoremap gcc :call ToggleCommentRange(line('.'), line('.'))<CR>
-vnoremap gc :<C-u>call ToggleCommentRange(line("'<"), line("'>"))<CR>
 " }}}
 
 " Autocommands {{{
@@ -255,6 +238,21 @@ let g:netrw_winsize=20
 let g:netrw_liststyle=0
 let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
+" }}}
+
+" mini.nvim {{{
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/mini.nvim'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/echasnovski/mini.nvim ~/.local/share/nvim/site/pack/packer/start/mini.nvim
+endif
+packadd mini.nvim
+lua << EOF
+  require("mini.completion").setup {}
+  require("mini.comment").setup {}
+  require("mini.indentscope").setup { symbol = "│" }
+  require("mini.diff").setup {}
+
+EOF
 " }}}
 
 " Color config {{{

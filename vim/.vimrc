@@ -255,6 +255,20 @@ lua << EOF
 EOF
 " }}}
 
+" Treesitter {{{
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/nvim-treesitter'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter ~/.local/share/nvim/site/pack/packer/start/nvim-treesitter
+endif
+packadd nvim-treesitter
+lua << EOF
+  require("nvim-treesitter.configs").setup {
+    highlight = { enable = true },
+    indent = { enable = true },
+  }
+EOF
+" }}}
+
 " Color config {{{
 set background=dark
 colorscheme habamax

@@ -38,8 +38,11 @@ return {
   },
   {
     "echasnovski/mini.cursorword", -- highlight word under cursor
-    config = true,
     event = "VeryLazy",
+    config = function()
+      require("mini.cursorword").setup {}
+      vim.cmd "hi! link MiniCursorWord CursorLine"
+    end,
   },
   {
     "echasnovski/mini.indentscope", -- show indentation levels and introduces `i` to select the current scope (ai, ii...)

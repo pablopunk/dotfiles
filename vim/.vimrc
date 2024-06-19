@@ -219,6 +219,21 @@ nnoremap <leader>fW <cmd>lua require('telescope.builtin').grep_string({ hidden =
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles()<cr>
 " }}}
 
+" Copilot {{{
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/supermaven-nvim'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/supermaven-inc/supermaven-nvim ~/.local/share/nvim/site/pack/packer/start/supermaven-nvim
+endif
+if empty(glob('~/.local/share/nvim/site/pack/packer/start/copilot.lua'))
+  silent !mkdir -p ~/.local/share/nvim/site/pack/packer/start
+  silent !git clone --depth 1 https://github.com/zbirenbaum/copilot.lua ~/.local/share/nvim/site/pack/packer/start/copilot.lua
+endif
+packadd supermaven-nvim
+lua << EOF
+  require('supermaven-nvim').setup {}
+EOF
+" }}}
+
 " File tree {{{
 let g:file_tree_shortcut = '<c-t>'
 exe 'nnoremap <silent> ' g:file_tree_shortcut ' :Lexplore %:p:h<cr>'
@@ -242,8 +257,6 @@ let g:netrw_browse_split=0
 let g:netrw_list_hide='.*\.git/$,'.netrw_gitignore#Hide()
 " }}}
 
-"
-
 " Color config {{{
 set background=dark
 colorscheme habamax
@@ -260,4 +273,3 @@ let g:higroups = [
 for g:color in g:higroups
   execute 'silent! hi ' . g:color . ' guibg=NONE'
 endfor
-" }}}

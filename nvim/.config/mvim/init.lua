@@ -166,7 +166,6 @@ local function plugin(repo)
 end
 local function lazy_load(event, config_fn)
   vim.api.nvim_create_autocmd(event, {
-    group = vim.api.nvim_create_augroup("lazy_load", { clear = true }),
     callback = config_fn,
   })
 end

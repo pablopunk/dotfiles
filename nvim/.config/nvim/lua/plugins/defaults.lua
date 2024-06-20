@@ -8,12 +8,6 @@ return {
     lazy = false,
   },
   {
-    "gabrielpoca/replacer.nvim", -- same as quickfix-reflector honestly
-    init = function()
-      require("core.mappings").replacer()
-    end,
-  },
-  {
     "stefandtw/quickfix-reflector.vim",
     -- "itchyny/vim-qfedit",
     -- "pablopunk/fixquick.nvim",

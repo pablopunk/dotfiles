@@ -197,6 +197,9 @@ later(function()
   require("mini.completion").setup {}
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
+  require("mini.cursorword").setup {}
+  vim.cmd "hi! link MiniCursorWord CursorLine"
+  vim.cmd "hi! link MiniCursorWordCurrent CursorLine"
   require("mini.diff").setup {
     mappings = {
       -- Apply hunks inside a visual/operator region
@@ -300,20 +303,20 @@ later(function()
           ["<c-j>"] = require("telescope.actions").cycle_history_next,
         },
       },
-      pickers = {
-        find_files = {
-          hidden = true,
-        },
-        grep_string = {
-          additional_args = function()
-            return { "--hidden" }
-          end,
-        },
-        live_grep = {
-          additional_args = function()
-            return { "--hidden" }
-          end,
-        },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      grep_string = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
+      },
+      live_grep = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
       },
     },
   }
@@ -332,6 +335,8 @@ end)
 -- LSP {{{
 add "neovim/nvim-lspconfig"
 add "folke/neodev.nvim" -- lsp for nvim's Lua API
+add "williamboman/mason.nvim" -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+add "williamboman/mason-lspconfig.nvim" -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
 local function mini_completion_on_attach(client, bufnr)
   local function buf_set_option(name, value)
     vim.api.nvim_set_option_value(name, value, { buf = bufnr })
@@ -342,6 +347,19 @@ local function mini_completion_on_attach(client, bufnr)
 end
 later(function()
   require("neodev").setup {}
+  require("mason").setup {}
+  require("mason-lspconfig").setup {
+    ensure_installed = {
+      "bashls",
+      "jsonls",
+      "html",
+      "vimls",
+      "lua_ls",
+      "astro",
+      "biome",
+      "eslint",
+    },
+  }
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
   map("n", "]d", ":lua vim.diagnostic.goto_next()<cr>zz", "Go to next diagnostic")
   map("n", "[d", ":lua vim.diagnostic.goto_prev()<cr>zz", "Go to previous diagnostic")
@@ -376,6 +394,7 @@ later(function()
   setup_lsp "html"
   setup_lsp "astro"
   setup_lsp "biome"
+  setup_lsp "eslint"
   setup_lsp("lua_ls", {
     Lua = {
       diagnostics = { globals = { "vim" } }, -- make the language server recognize "vim" global
@@ -385,6 +404,15 @@ later(function()
       },
     },
   })
+end)
+-- }}}
+
+-- Diagnostics {{{
+add "nvim-tree/nvim-web-devicons"
+add "folke/trouble.nvim"
+later(function()
+  require("trouble").setup {}
+  map("n", "<leader>d", ":Trouble diagnostics toggle<cr>", "Toggle trouble diagnostics")
 end)
 -- }}}
 

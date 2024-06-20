@@ -54,8 +54,8 @@ function greset_hard {
 }
 
 function copy {
-  [ "$(uname)" == "Linux" ] && xsel --clipboard --input
-  [ "$(uname)" == "Darwin" ] && pbcopy
+  [[ "$(uname)" == "Linux" ]] && xsel --clipboard --input
+  [[ "$(uname)" == "Darwin" ]] && pbcopy
 }
 
 function weather {

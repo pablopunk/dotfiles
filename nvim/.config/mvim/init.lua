@@ -283,35 +283,37 @@ add "nvim-lua/plenary.nvim"
 add "nvim-telescope/telescope.nvim"
 later(function()
   require("telescope").setup {
-    file_ignore_patterns = { ".git/", "node_modules/", "vendor/" },
-    path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
-    layout_strategy = "vertical",
-    layout_config = {
-      vertical = {
-        preview_cutoff = 0,
+    defaults = {
+      file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
+      path_display = { "truncate" }, -- if it doesn't fit, show the end (.../foo/bar.js)
+      layout_strategy = "vertical",
+      layout_config = {
+        vertical = {
+          preview_cutoff = 0,
+        },
       },
-    },
-    selection_caret = "◦ ",
-    prompt_prefix = " → ",
-    mappings = {
-      i = {
-        ["<c-k>"] = require("telescope.actions").cycle_history_prev,
-        ["<c-j>"] = require("telescope.actions").cycle_history_next,
+      selection_caret = "◦ ",
+      prompt_prefix = " → ",
+      mappings = {
+        i = {
+          ["<c-k>"] = require("telescope.actions").cycle_history_prev,
+          ["<c-j>"] = require("telescope.actions").cycle_history_next,
+        },
       },
-    },
-    pickers = {
-      find_files = {
-        hidden = true,
-      },
-      grep_string = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
-      },
-      live_grep = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+        grep_string = {
+          additional_args = function()
+            return { "--hidden" }
+          end,
+        },
+        live_grep = {
+          additional_args = function()
+            return { "--hidden" }
+          end,
+        },
       },
     },
   }
@@ -322,7 +324,7 @@ later(function()
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', "Help tags")
   map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', "Grep word")
   map("n", "<leader>fW", '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>', "Grep Word")
-  map("n", "<leader>fr", '<cmd>lua require("telescope.builtin").oldfiles()<cr>', "Old files")
+  map("n", "<leader>fr", '<cmd>lua require("telescope.builtin").oldfiles({ only_cwd = true })<cr>', "Old files")
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", "Command palette (kinda)")
 end)
 -- }}}

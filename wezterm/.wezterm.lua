@@ -15,7 +15,7 @@ local function scheme_for_appearance(appearance)
     return "Gruvbox dark, hard (base16)"
   else
     -- return "Catppuccin Latte"
-    return "Gruvbox dark, hard (base16)"
+    return "Gruvbox light, hard (base16)"
   end
 end
 

@@ -1,4 +1,4 @@
---vim:fileencoding=utf-8:ft=lua:foldmethod=marker
+-- # vim:fileencoding=utf-8:ft=lua:foldmethod=marker
 
 -- Mappings {{{
 vim.g.mapleader = " "
@@ -72,7 +72,9 @@ map("v", ">", ">gv", "Indent selection right")
 map("v", "<", "<gv", "Indent selection left")
 -- Folds
 map("n", "<leader><", function()
-  vim.opt.foldmethod = "indent"
+  if not vim.opt.foldmethod then
+    vim.opt.foldmethod = "indent"
+  end
   vim.cmd "normal! zM"
 end, "Fold all")
 map("n", "<leader>>", function()
@@ -177,13 +179,6 @@ local MiniDeps = require "mini.deps"
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- }}}
 
--- Copilot {{{
-later(function()
-  add "supermaven-inc/supermaven-nvim"
-  require("supermaven-nvim").setup { log_level = "off" }
-end)
--- }}}
-
 -- Some plugins that should be default behavior {{{
 later(function()
   add "pablopunk/persistent-undo.vim"
@@ -196,6 +191,13 @@ later(function()
   vim.o.timeout = true
   vim.o.timeoutlen = 300
   require("which-key").setup {}
+end)
+-- }}}
+
+-- Copilot {{{
+later(function()
+  add "supermaven-inc/supermaven-nvim"
+  require("supermaven-nvim").setup { log_level = "off" }
 end)
 -- }}}
 

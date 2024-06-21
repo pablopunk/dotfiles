@@ -314,7 +314,19 @@ end)
 add "nvim-treesitter/nvim-treesitter"
 later(function()
   ---@diagnostic disable-next-line: missing-fields
-  require("nvim-treesitter.configs").setup { highlight = { enable = true }, indent = { enable = true } }
+  require("nvim-treesitter.configs").setup {
+    highlight = { enable = true },
+    indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<Enter>",
+        node_incremental = "<Enter>",
+        node_decremental = "<bs>",
+        scope_incremental = false,
+      },
+    },
+  }
   vim.cmd [[
   command! -nargs=0 InstallTreesitterParsers
     \ TSInstall! json |

@@ -445,6 +445,7 @@ later(function()
       "astro",
       "biome",
       "eslint",
+      "eslint_d",
     },
   }
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")
@@ -506,7 +507,7 @@ end)
 -- Formatter {{{
 later(function()
   add "stevearc/conform.nvim"
-  local js_formatters = { { "biome" } }
+  local js_formatters = { { "biome", "eslint_d" } }
   require("conform").setup {
     format_after_save = {
       lsp_format = "fallback",
@@ -515,7 +516,7 @@ later(function()
       lua = { "stylua" },
       javascript = js_formatters,
       typescript = js_formatters,
-      typescriptreactt = js_formatters,
+      typescriptreact = js_formatters,
       javascriptreact = js_formatters,
     },
   }

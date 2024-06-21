@@ -225,7 +225,7 @@ add "pablopunk/unclutter.nvim"
 later(function()
   require("unclutter").setup {
     clean_after = 0,
-    tabline = true,
+    tabline = false,
   }
   map("n", "<c-f>", require("unclutter.telescope").open, "Show unclutter buffers in Telescope")
 end)

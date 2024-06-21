@@ -447,7 +447,6 @@ later(function()
       "astro",
       "biome",
       "eslint",
-      "eslint_d",
     },
   }
   map("n", "E", ":lua vim.diagnostic.open_float()<cr>", "Show line diagnostics")

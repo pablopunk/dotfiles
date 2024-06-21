@@ -191,6 +191,23 @@ later(function()
 end)
 -- }}}
 
+-- Auto session {{{
+add "rmagatti/auto-session"
+later(function()
+  require("auto-session").setup {
+    log_level = "error",
+    auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
+    auto_session_use_git_branch = true,
+    bypass_session_save_file_types = { "NvimTree", "Lazy", "Starter" },
+  }
+  map("n", "<leader>sd", function()
+    vim.cmd "silent! SessionDelete" -- delete session
+    vim.cmd "silent! %bd" -- close all buffers
+  end, "Delete session")
+  map("n", "<leader>sr", ":SessionRestore<cr>", "Restore session")
+end)
+-- }}}
+
 -- mini.nvim {{{
 add "echasnovski/mini.nvim"
 later(function()

@@ -147,14 +147,15 @@ M.dark = function()
   vim.opt.background = "dark"
   -- vim.cmd "colorscheme tokyonight-night"
   -- vim.cmd "colorscheme catppuccin-macchiato"
-  vim.cmd "colorscheme gruvbox"
+  -- vim.cmd "colorscheme randomhue"
+  -- require("mini.hues").setup { background = "#202131", foreground = "#c5c6cd" }
 end
 
 M.light = function()
   vim.opt.background = "light"
   -- vim.cmd "colorscheme tokyonight-day"
   -- vim.cmd "colorscheme catppuccin-latte"
-  vim.cmd "colorscheme gruvbox"
+  vim.cmd "colorscheme randomhue"
 end
 
 M.auto_theme = function()

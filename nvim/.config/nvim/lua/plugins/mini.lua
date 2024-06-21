@@ -205,12 +205,12 @@ return {
       }
     end,
   },
-  -- {
-  --   "echasnovski/mini.hues", -- colorizer
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("mini.hues").setup { background = "#202131", foreground = "#c5c6cd" }
-  --   end,
-  -- },
+  {
+    "echasnovski/mini.hues", -- colorizer
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("mini.hues").setup { background = "#202131", foreground = "#c5c6cd" }
+    end,
+  },
 }

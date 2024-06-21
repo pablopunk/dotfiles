@@ -2,17 +2,17 @@ local shared = require "core.shared"
 local dark = shared.dark
 
 return {
-  {
-    "ellisonleao/gruvbox.nvim",
-    priority = 1000,
-    lazy = false,
-    config = function()
-      require("gruvbox").setup {
-        transparent_mode = true,
-      }
-      dark()
-    end,
-  },
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   priority = 1000,
+  --   lazy = false,
+  --   config = function()
+  --     require("gruvbox").setup {
+  --       transparent_mode = true,
+  --     }
+  --     dark()
+  --   end,
+  -- },
   -- {
   --   "catppuccin/nvim", -- The best colorscheme
   --   name = "catppuccin",
@@ -54,12 +54,12 @@ return {
   --     end,
   --   },
   -- },
-  -- {
-  --   "pablopunk/transparent.vim", -- Transparent background
-  --   enabled = function()
-  --     return not vim.g.neovide
-  --   end,
-  --   lazy = false,
-  --   dev = true,
-  -- },
+  {
+    "pablopunk/transparent.vim", -- Transparent background
+    enabled = function()
+      return not vim.g.neovide
+    end,
+    lazy = false,
+    dev = true,
+  },
 }

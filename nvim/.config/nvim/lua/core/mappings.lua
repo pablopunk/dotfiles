@@ -81,6 +81,7 @@ M.auto_session = function()
     vim.cmd "silent! %bd" -- close all buffers
     shared.open_starter()
   end, "Delete session")
+  map("n", "<leader>sr", ":SessionRestore<cr>", "Restore session")
 end
 
 M.chatgpt = function()

@@ -31,9 +31,9 @@ map({ "n", "v" }, "<c-q>", function()
   local more_than_one_window = vim.fn.winnr "$" > 1
   local is_last_buffer = vim.fn.buflisted(0) == 0
   if more_than_one_window or is_last_buffer then
-    vim.cmd "q!"
+    vim.cmd "silent q!"
   else
-    vim.cmd "bd!"
+    vim.cmd "silent wq"
   end
 end, "Close file buffer")
 map({ "n", "v" }, "<c-s>", ":w!<cr>", "Save file")

@@ -198,8 +198,28 @@ later(function()
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}
+  require("mini.ai").setup {}
   vim.cmd "hi! link MiniCursorWord CursorLine"
   vim.cmd "hi! link MiniCursorWordCurrent CursorLine"
+  -- require("mini.extra").setup {}
+  local MiniPick = require "mini.pick"
+  MiniPick.setup {
+    mappings = {
+      to_quickfix = {
+        char = "<c-q>",
+        func = function()
+          local items = MiniPick.get_picker_items() or {}
+          MiniPick.default_choose_marked(items)
+          MiniPick.stop()
+        end,
+      },
+    },
+  }
+  vim.ui.select = MiniPick.ui_select
+  -- map("n", "<leader>ff", ":lua MiniPick.builtin.files()<cr>", "Find files")
+  -- map("n", "<leader>fg", ":lua MiniExtra.pickers.git_files({ scope = 'modified' })<cr>", "Find modified files (git)")
+  -- map("n", "<leader>b", ":lua MiniPick.builtin.buffers()<cr>", "Find buffers")
+  -- map("n", "<leader>fs", ":lua MiniPick.builtin.grep_live()<cr>", "Grep string (live)")
   require("mini.diff").setup {
     mappings = {
       -- Apply hunks inside a visual/operator region
@@ -259,6 +279,7 @@ end)
 -- Treesitter {{{
 add "nvim-treesitter/nvim-treesitter"
 later(function()
+  ---@diagnostic disable-next-line: missing-fields
   require("nvim-treesitter.configs").setup { highlight = { enable = true }, indent = { enable = true } }
   vim.cmd [[
   command! -nargs=0 InstallTreesitterParsers
@@ -323,7 +344,7 @@ later(function()
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', "Find files")
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', "Live grep")
   map("n", "<c-f>", '<cmd>lua require("telescope.builtin").buffers()<cr>', "Buffers")
-  map("n", "<leader>fg", '<cmd>lua require("telescope.builtin").git_files()<cr>', "Git files")
+  map("n", "<leader>fg", ":Telescope git_status<cr>", "Find modified files (git)")
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', "Help tags")
   map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', "Grep word")
   map("n", "<leader>fW", '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>', "Grep Word")

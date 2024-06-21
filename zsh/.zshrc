@@ -178,6 +178,10 @@ export PATH="$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 
 # }}}
 
+# Ripgrep config {{{
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+# }}}
+
 # # `brew shellenv` {{{
 # I used to run `eval $(brew shellenv)` but it was too slow
 if [ -f /proc/sys/kernel/osrelease ]; then

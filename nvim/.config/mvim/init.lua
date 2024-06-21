@@ -191,6 +191,18 @@ later(function()
 end)
 -- }}}
 
+-- Git blame and open in GitHub {{{
+add "FabijanZulj/blame.nvim"
+add "almo7aya/openingh.nvim"
+later(function()
+  require("blame").setup {}
+  require("openingh").setup {}
+  map({ "n", "v" }, "<leader>gb", "<cmd>ToggleBlame<cr>", "Toggle git blame")
+  map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
+  map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
+end)
+-- }}}
+
 -- Auto session {{{
 add "rmagatti/auto-session"
 later(function()
@@ -215,6 +227,11 @@ later(function()
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}
+  -- require("mini.hipatterns").setup {
+  --   highlighters = {
+  --     hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
+  --   },
+  -- }
   require("mini.ai").setup {}
   vim.cmd "hi! link MiniCursorWord CursorLine"
   vim.cmd "hi! link MiniCursorWordCurrent CursorLine"
@@ -476,7 +493,11 @@ end)
 -- Color config {{{
 now(function()
   opt.background = "dark"
-  require("mini.hues").setup { background = "#202131", foreground = "#c5c6cd" }
+  require("mini.hues").setup {
+    background = "#202131",
+    foreground = "#c5c6cd",
+    saturation = "high",
+  }
   local transparent_groups = { "Normal", "NormalSB", "NormalNC", "LineNr", "SignColumn", "NonText", "EndOfBuffer" }
   for _, color in ipairs(transparent_groups) do
     vim.cmd("silent! hi " .. color .. " guibg=NONE")

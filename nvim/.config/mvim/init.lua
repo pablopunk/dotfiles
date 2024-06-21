@@ -27,7 +27,15 @@ vim.cmd [[
 -- Remove highlights
 map("n", "<leader>h", ":silent! nohlsearch<cr>", "Remove highlights")
 -- Quit/Save file
-map({ "n", "v" }, "<c-q>", ":bd!<cr>", "Close file buffer")
+map({ "n", "v" }, "<c-q>", function()
+  local more_than_one_window = vim.fn.winnr "$" > 1
+  local is_last_buffer = vim.fn.buflisted(0) == 0
+  if more_than_one_window or is_last_buffer then
+    vim.cmd "q!"
+  else
+    vim.cmd "bd!"
+  end
+end, "Close file buffer")
 map({ "n", "v" }, "<c-s>", ":w!<cr>", "Save file")
 map("n", "<leader>wca", ":silent! %bd<cr>", "Close all buffers")
 map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", "Close all buffers except the current one")

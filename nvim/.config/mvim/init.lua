@@ -178,21 +178,21 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- }}}
 
 -- Copilot {{{
-add "supermaven-inc/supermaven-nvim"
 later(function()
+  add "supermaven-inc/supermaven-nvim"
   require("supermaven-nvim").setup { log_level = "off" }
 end)
 -- }}}
 
 -- Some plugins that should be default behavior {{{
-add "pablopunk/persistent-undo.vim"
-add "stefandtw/quickfix-reflector.vim"
-add "christoomey/vim-tmux-navigator"
-add "markonm/traces.vim"
-add "tpope/vim-surround"
-add "dstein64/vim-startuptime"
-add "folke/which-key.nvim"
 later(function()
+  add "pablopunk/persistent-undo.vim"
+  add "stefandtw/quickfix-reflector.vim"
+  add "christoomey/vim-tmux-navigator"
+  add "markonm/traces.vim"
+  add "tpope/vim-surround"
+  add "dstein64/vim-startuptime"
+  add "folke/which-key.nvim"
   vim.o.timeout = true
   vim.o.timeoutlen = 300
   require("which-key").setup {}
@@ -200,9 +200,9 @@ end)
 -- }}}
 
 -- Git blame and open in GitHub {{{
-add "FabijanZulj/blame.nvim"
-add "almo7aya/openingh.nvim"
 later(function()
+  add "FabijanZulj/blame.nvim"
+  add "almo7aya/openingh.nvim"
   require("blame").setup {}
   require("openingh").setup {}
   map({ "n", "v" }, "<leader>gb", "<cmd>ToggleBlame<cr>", "Toggle git blame")
@@ -212,8 +212,8 @@ end)
 -- }}}
 
 -- Auto session {{{
-add "rmagatti/auto-session"
 later(function()
+  add "rmagatti/auto-session"
   require("auto-session").setup {
     log_level = "error",
     auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
@@ -229,8 +229,8 @@ end)
 -- }}}
 
 -- Tabline {{{
-add "pablopunk/unclutter.nvim"
 later(function()
+  add "pablopunk/unclutter.nvim"
   require("unclutter").setup {
     clean_after = 0,
     tabline = false,
@@ -240,10 +240,11 @@ end)
 -- }}}
 
 -- mini.nvim {{{
-add "echasnovski/mini.nvim"
 later(function()
+  add "echasnovski/mini.nvim"
   require("mini.completion").setup {}
   require("mini.comment").setup {}
+  require("mini.jump2d").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}
   -- require("mini.hipatterns").setup {
@@ -330,8 +331,8 @@ end)
 -- }}}
 
 -- Treesitter {{{
-add "nvim-treesitter/nvim-treesitter"
 later(function()
+  add "nvim-treesitter/nvim-treesitter"
   ---@diagnostic disable-next-line: missing-fields
   require("nvim-treesitter.configs").setup {
     highlight = { enable = true },
@@ -339,8 +340,8 @@ later(function()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "<Enter>",
-        node_incremental = "<Enter>",
+        -- init_selection = "<Enter>",
+        -- node_incremental = "<Enter>",
         node_decremental = "<bs>",
         scope_incremental = false,
       },
@@ -368,9 +369,9 @@ end)
 --- }}}
 
 -- Telescope {{{
-add "nvim-lua/plenary.nvim"
-add "nvim-telescope/telescope.nvim"
 later(function()
+  add "nvim-lua/plenary.nvim"
+  add "nvim-telescope/telescope.nvim"
   require("telescope").setup {
     defaults = {
       file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
@@ -419,19 +420,19 @@ end)
 -- }}}
 
 -- LSP {{{
-add "neovim/nvim-lspconfig"
-add "folke/neodev.nvim" -- lsp for nvim's Lua API
-add "williamboman/mason.nvim" -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
-add "williamboman/mason-lspconfig.nvim" -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
-local function mini_completion_on_attach(client, bufnr)
-  local function buf_set_option(name, value)
-    vim.api.nvim_set_option_value(name, value, { buf = bufnr })
-  end
-  buf_set_option("omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
-end
 later(function()
+  add "neovim/nvim-lspconfig"
+  add "folke/neodev.nvim" -- lsp for nvim's Lua API
+  add "williamboman/mason.nvim" -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+  add "williamboman/mason-lspconfig.nvim" -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+  local function mini_completion_on_attach(client, bufnr)
+    local function buf_set_option(name, value)
+      vim.api.nvim_set_option_value(name, value, { buf = bufnr })
+    end
+    buf_set_option("omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end
   require("neodev").setup {}
   require("mason").setup {}
   require("mason-lspconfig").setup {
@@ -494,17 +495,17 @@ end)
 -- }}}
 
 -- Diagnostics {{{
-add "nvim-tree/nvim-web-devicons"
-add "folke/trouble.nvim"
 later(function()
+  add "nvim-tree/nvim-web-devicons"
+  add "folke/trouble.nvim"
   require("trouble").setup {}
   map("n", "<leader>d", ":Trouble diagnostics toggle<cr>", "Toggle trouble diagnostics")
 end)
 -- }}}
 
 -- Formatter {{{
-add "stevearc/conform.nvim"
 later(function()
+  add "stevearc/conform.nvim"
   local js_formatters = { { "biome" } }
   require("conform").setup {
     format_after_save = {

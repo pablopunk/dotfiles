@@ -220,6 +220,17 @@ later(function()
 end)
 -- }}}
 
+-- Tabline {{{
+add "pablopunk/unclutter.nvim"
+later(function()
+  require("unclutter").setup {
+    clean_after = 0,
+    tabline = true,
+  }
+  map("n", "<c-f>", require("unclutter.telescope").open, "Show unclutter buffers in Telescope")
+end)
+-- }}}
+
 -- mini.nvim {{{
 add "echasnovski/mini.nvim"
 later(function()
@@ -389,7 +400,7 @@ later(function()
   }
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', "Find files")
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', "Live grep")
-  map("n", "<c-f>", '<cmd>lua require("telescope.builtin").buffers()<cr>', "Buffers")
+  -- map("n", "<c-f>", '<cmd>lua require("telescope.builtin").buffers()<cr>', "Buffers")
   map("n", "<leader>fg", ":Telescope git_status<cr>", "Find modified files (git)")
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', "Help tags")
   map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', "Grep word")

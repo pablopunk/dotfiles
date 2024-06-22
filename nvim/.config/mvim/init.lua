@@ -519,6 +519,7 @@ later(function()
       typescript = js_formatters,
       typescriptreact = js_formatters,
       javascriptreact = js_formatters,
+      astro = js_formatters,
     },
   }
 end)

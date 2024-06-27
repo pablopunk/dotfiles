@@ -421,6 +421,21 @@ later(function()
 end)
 -- }}}
 
+-- Wilder {{{
+later(function()
+  add {
+    source = "gelguy/wilder.nvim",
+    hooks = {
+      post_checkout = function()
+        vim.cmd "UpdateRemotePlugins"
+      end,
+    },
+  }
+  require("wilder").setup { modes = { ":", "/", "?" } }
+  vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
+end)
+-- }}}
+
 -- LSP {{{
 later(function()
   add "neovim/nvim-lspconfig"

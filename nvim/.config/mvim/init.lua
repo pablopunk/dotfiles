@@ -546,6 +546,10 @@ now(function()
   add "pablopunk/transparent.vim"
   add "AlexvZyl/nordic.nvim"
   require("nordic").load()
+  vim.cmd [[ " nordic has a terrible cursorline if you use a transparent bg
+    hi! CursorLine guibg=#2e3440
+    hi! link Visual CursorLine
+  ]]
   require("mini.statusline").setup()
 end)
 later(function()

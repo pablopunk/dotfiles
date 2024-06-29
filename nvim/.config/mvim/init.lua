@@ -544,17 +544,17 @@ end)
 -- Color config {{{
 now(function()
   opt.background = "dark"
-  require("mini.hues").setup {
-    background = "#202131",
-    foreground = "#c5c6cd",
-    saturation = "high",
-  }
-  local transparent_groups = { "Normal", "NormalSB", "NormalNC", "LineNr", "SignColumn", "NonText", "EndOfBuffer" }
-  for _, color in ipairs(transparent_groups) do
-    vim.cmd("silent! hi " .. color .. " guibg=NONE")
-  end
-end)
-now(function()
+  add "pablopunk/transparent.vim"
+  add "AlexvZyl/nordic.nvim"
+  require("nordic").load()
+  vim.cmd [[ " nordic has a terrible cursorline if you use a transparent bg
+    hi! CursorLine guibg=#2e3440
+    hi! link Visual CursorLine
+  ]]
   require("mini.statusline").setup()
+end)
+later(function()
+  add "folke/tokyonight.nvim"
+  vim.cmd [[ command! Light setlocal background=light | colorscheme tokyonight-day ]]
 end)
 -- }}}

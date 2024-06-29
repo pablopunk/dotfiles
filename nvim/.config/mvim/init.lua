@@ -187,6 +187,7 @@ later(function()
   add "markonm/traces.vim"
   add "tpope/vim-surround"
   add "dstein64/vim-startuptime"
+  add "wakatime/vim-wakatime"
   add "folke/which-key.nvim"
   vim.o.timeout = true
   vim.o.timeoutlen = 300
@@ -207,7 +208,7 @@ later(function()
   add "almo7aya/openingh.nvim"
   require("blame").setup {}
   require("openingh").setup {}
-  map({ "n", "v" }, "<leader>gb", "<cmd>ToggleBlame<cr>", "Toggle git blame")
+  map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", "Toggle git blame")
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
 end)

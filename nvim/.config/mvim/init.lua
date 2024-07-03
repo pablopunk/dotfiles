@@ -259,8 +259,7 @@ later(function()
   vim.cmd "hi! link MiniCursorWord CursorLine"
   vim.cmd "hi! link MiniCursorWordCurrent CursorLine"
   -- require("mini.extra").setup {}
-  local MiniPick = require "mini.pick"
-  MiniPick.setup {
+  require("mini.pick").setup {
     mappings = {
       to_quickfix = {
         char = "<c-q>",
@@ -330,6 +329,8 @@ later(function()
       end
     end
   end, "Toggle file explorer")
+  require("mini.icons").setup {}
+  MiniIcons.mock_nvim_web_devicons()
 end)
 -- }}}
 
@@ -514,7 +515,6 @@ end)
 
 -- Diagnostics {{{
 later(function()
-  add "nvim-tree/nvim-web-devicons"
   add "folke/trouble.nvim"
   require("trouble").setup {}
   map("n", "<leader>d", ":Trouble diagnostics toggle<cr>", "Toggle trouble diagnostics")

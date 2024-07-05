@@ -144,7 +144,6 @@ alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vi=nvim
 alias vvi='command vi'
 alias viu='nvim -u NONE'
-alias mvim='NVIM_APPNAME=mvim nvim'
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
 alias rm=trash

@@ -247,7 +247,7 @@ later(function()
   add "echasnovski/mini.nvim"
   require("mini.completion").setup {}
   require("mini.comment").setup {}
-  require("mini.jump2d").setup {}
+  -- require("mini.jump2d").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}
   -- require("mini.hipatterns").setup {
@@ -551,7 +551,7 @@ now(function()
     hi! CursorLine guibg=#2e3440
     hi! link Visual CursorLine
   ]]
-  require("mini.statusline").setup()
+  -- require("mini.statusline").setup()
 end)
 later(function()
   add "folke/tokyonight.nvim"

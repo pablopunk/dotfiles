@@ -239,6 +239,8 @@ later(function()
     tabline = false,
   }
   map("n", "<c-f>", require("unclutter.telescope").open, "Show unclutter buffers in Telescope")
+  map("n", "<c-n>", require("unclutter.tabline").next, "Next buffer (unclutter)")
+  map("n", "<c-p>", require("unclutter.tabline").prev, "Previous buffer (unclutter)")
 end)
 -- }}}
 

@@ -25,6 +25,9 @@ remove_symlink_if_exists() {
 
 safely_stow() {
   app=$1
+  if [ "$app" == "mackup" ]; then
+    return
+  fi
   # Before stowing, check and remove any existing symlinks that would cause conflicts
   while read -r line; do
     if [[ "$line" == *"existing target is not owned by stow:"* ]]; then

@@ -244,6 +244,13 @@ later(function()
 end)
 -- }}}
 
+-- Oil.nvim {{{
+later(function()
+  add "stevearc/oil.nvim"
+  require("oil").setup {}
+end)
+-- }}}
+
 -- mini.nvim {{{
 later(function()
   add "echasnovski/mini.nvim"

@@ -1,1 +1,0 @@
-mackup backup -f

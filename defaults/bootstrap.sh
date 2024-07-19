@@ -16,4 +16,12 @@ if [[ $(uname) == "Darwin" ]]; then
   defaults write com.apple.dock magnification -bool true
   defaults write com.apple.dock largesize -float 52
   killall Dock
+
+  defaults write com.apple.AppleMultitouchTrackpad HIDScrollZoomModifierMask -int 262144
+  sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool yes
+  sudo defaults write com.apple.universalaccess closeViewSplitScreenRatio -float 0.2
+  sudo defaults write com.apple.universalaccess closeViewZoomFactorBeforeTermination -bool yes
+
+  defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 fi

@@ -23,5 +23,7 @@ if [[ $(uname) == "Darwin" ]]; then
   sudo defaults write com.apple.universalaccess closeViewZoomFactorBeforeTermination -bool yes
 
   defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+  defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
 fi

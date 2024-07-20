@@ -36,3 +36,6 @@ path = Library/Preferences/me.guillaumeb.MonitorControl.plist
 
 ## AltTab
 path = Library/Preferences/com.lwouis.alt-tab-macos.plist
+
+## Scroll Reverser
+path = ~/Library/Preferences/com.pilotmoon.scroll-reverser.plist

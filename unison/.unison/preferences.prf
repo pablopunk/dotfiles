@@ -4,7 +4,7 @@ ignore = Name {.DS_Store}
 
 # Keep a backup copy of every file in a central location
 backuplocation = central
-backupdir = $HOME/.cache/unison
+backupdir = /tmp/unison
 backup = Name *
 backupprefix = $VERSION.
 backupsuffix =

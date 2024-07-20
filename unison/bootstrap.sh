@@ -1,4 +1,4 @@
 #!/bin/bash
 
 brew_install unison
-unison preferences $HOME $HOME/.dotfiles/.unison -auto
+unison preferences $HOME $HOME/.dotfiles/.unison -auto -silent -terse -i

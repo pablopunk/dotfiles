@@ -5,7 +5,7 @@ if [[ $(uname) == "Darwin" ]]; then
   # Finder
   defaults write com.apple.finder ShowPathbar -bool yes
   defaults write com.apple.finder ShowStatusBar -bool true
-  killall Finder
+  # killall Finder
 
   # Dock
   defaults write com.apple.dock autohide -bool true
@@ -15,7 +15,7 @@ if [[ $(uname) == "Darwin" ]]; then
   defaults write com.apple.dock orientation -string right
   defaults write com.apple.dock magnification -bool true
   defaults write com.apple.dock largesize -float 52
-  killall Dock
+  # killall Dock
 
   defaults write com.apple.AppleMultitouchTrackpad HIDScrollZoomModifierMask -int 262144
   sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool yes

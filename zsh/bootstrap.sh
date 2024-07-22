@@ -6,3 +6,5 @@ fi
 
 brew_install zsh-autosuggestions
 brew_install zsh-syntax-highlighting
+brew_install zoxide
+brew_install eza

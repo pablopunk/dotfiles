@@ -1,0 +1,41 @@
+prefer = newer
+atomic = Name .git*
+ignore = Name {.DS_Store}
+
+# Keep a backup copy of every file in a central location
+backuplocation = central
+backupdir = /tmp/unison
+backup = Name *
+backupprefix = $VERSION.
+backupsuffix =
+
+# Treat a symbolic link transparently
+# Use case: Create a subdirectory called shared (or current, or whatever) in your home directory on each host,
+#   and put links to all the files you want to synchronize into this directory.
+follow = Name *
+
+# Log actions to the terminal
+log = true
+
+## macOS
+# to find paths to sync, you can use `mackup show <app_name>`
+
+## CleanShot X
+path = Library/Preferences/pl.maketheweb.cleanshotx.plist
+path = Library/Preferences/com.getcleanshot.app-setapp.plist
+
+## iina
+path = Library/Application Support/com.colliderli.iina/input_conf
+path = Library/Preferences/com.colliderli.iina.plist
+
+## Spotify
+path = Library/Preferences/com.spotify.client.plist
+
+## MonitorControl
+path = Library/Preferences/me.guillaumeb.MonitorControl.plist
+
+## AltTab
+path = Library/Preferences/com.lwouis.alt-tab-macos.plist
+
+## Scroll Reverser
+path = ~/Library/Preferences/com.pilotmoon.scroll-reverser.plist

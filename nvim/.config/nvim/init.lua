@@ -239,6 +239,15 @@ later(function()
     tabline = false,
   }
   map("n", "<c-f>", require("unclutter.telescope").open, "Show unclutter buffers in Telescope")
+  map("n", "<c-n>", require("unclutter.tabline").next, "Next buffer (unclutter)")
+  map("n", "<c-p>", require("unclutter.tabline").prev, "Previous buffer (unclutter)")
+end)
+-- }}}
+
+-- Oil.nvim {{{
+later(function()
+  add "stevearc/oil.nvim"
+  require("oil").setup {}
 end)
 -- }}}
 
@@ -247,7 +256,7 @@ later(function()
   add "echasnovski/mini.nvim"
   require("mini.completion").setup {}
   require("mini.comment").setup {}
-  require("mini.jump2d").setup {}
+  -- require("mini.jump2d").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}
   -- require("mini.hipatterns").setup {
@@ -551,7 +560,7 @@ now(function()
     hi! CursorLine guibg=#2e3440
     hi! link Visual CursorLine
   ]]
-  require("mini.statusline").setup()
+  -- require("mini.statusline").setup()
 end)
 later(function()
   add "folke/tokyonight.nvim"

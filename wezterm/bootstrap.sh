@@ -2,7 +2,7 @@
 
 if [[ "$(uname)" == "Darwin" ]]; then
   brew_install wezterm
-  brew_install font-geist-mono-nerd-font
+  brew_install homebrew/cask/font-geist-mono-nerd-font
 fi
 
 

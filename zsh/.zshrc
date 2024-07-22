@@ -6,13 +6,50 @@ if [ -n "${ZSH_DEBUGRC+1}" ]; then
 fi
 # }}}
 
-# oh-my-zsh {{{
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
-plugins=(
-  macos
-  zsh-github-copilot # Requires `gh auth login --web -h github.com`
-)
+# # `brew shellenv` {{{
+# I used to run `eval $(brew shellenv)` but it was too slow
+if [ -f /proc/sys/kernel/osrelease ]; then
+  # Linuxbrew
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+  export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+  export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+  export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+  export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+  export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+else
+  # macOS Homebrew
+  export HOMEBREW_PREFIX="/opt/homebrew";
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+  export HOMEBREW_REPOSITORY="/opt/homebrew";
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+  export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+fi
+# }}}
+
+# zsh config {{{
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+setopt PROMPT_SUBST
+# }}}
+
+# Zsh plugin manager (zpm) {{{
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
+fi
+source ~/.zpm/zpm.zsh
+# Plugins
+## Copilot suggestions on CLI
+zpm load loiccoyle/zsh-github-copilot
+bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
+# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
+## Search history with substring
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 # }}}
 
 # Functions {{{
@@ -133,11 +170,10 @@ alias amend='git commit --amend'
 alias gca='git add -A && git commit'
 alias gpr='git fetch upstream && git diff -w --minimal upstream/master'
 # ls aliases
-alias ls='ls -G'
-alias ll='ls -lagh'
-alias la='ls -a1'
-alias l='ls -a1'
-alias lr='ls -rt1' # most recent(t) file at the bottom(r) in 1 column(1)
+alias ls='eza -G --icons=always'
+alias ll='eza -lagh --icons=always'
+alias la='eza -a1 --icons=always'
+alias l='eza -a1 --icons=always'
 alias t='tree -L 3'
 # other
 alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
@@ -181,27 +217,6 @@ export PATH="$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # }}}
 
-# # `brew shellenv` {{{
-# I used to run `eval $(brew shellenv)` but it was too slow
-if [ -f /proc/sys/kernel/osrelease ]; then
-  # Linuxbrew
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-  export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-  export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-  export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-  export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
-  export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
-else
-  # macOS Homebrew
-  export HOMEBREW_PREFIX="/opt/homebrew";
-  export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-  export HOMEBREW_REPOSITORY="/opt/homebrew";
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-  export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
-fi
-# }}}
-
 # Cargo {{{
 export PATH="$HOME/.cargo/bin:$PATH"
 function cargo { # lazy load cargo
@@ -226,14 +241,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Local config (not tracked) {{{
 F=$HOME/.additional; [ -f $F ] && . $F
-# }}}
-
-# oh-my-zsh config {{{
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/oh-my-zsh.sh
-bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
-setopt PROMPT_SUBST
 # }}}
 
 # prompt {{{

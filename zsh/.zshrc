@@ -235,6 +235,7 @@ F=$HOME/.additional; [ -f $F ] && . $F
 
 # Copilot {{{
 bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
+# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
 # }}}
 
 # prompt {{{

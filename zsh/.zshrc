@@ -39,7 +39,17 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 fi
 source ~/.zpm/zpm.zsh
 # Plugins
+## Copilot suggestions on CLI
 zpm load loiccoyle/zsh-github-copilot
+bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
+# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
+## Search history with substring
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 # }}}
 
 # Functions {{{
@@ -231,11 +241,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Local config (not tracked) {{{
 F=$HOME/.additional; [ -f $F ] && . $F
-# }}}
-
-# Copilot {{{
-bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
-# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
 # }}}
 
 # prompt {{{

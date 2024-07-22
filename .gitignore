@@ -22,3 +22,7 @@ zed/.config/**/prompts
 # Lock files
 nvim/.config/nvim/lazy-lock.json
 
+# ignore all unison/.unison/* other than preferences.prf
+unison/.unison/*
+!unison/.unison/preferences.prf
+

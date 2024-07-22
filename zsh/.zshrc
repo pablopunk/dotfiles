@@ -27,6 +27,12 @@ else
 fi
 # }}}
 
+# zsh config {{{
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+setopt PROMPT_SUBST
+# }}}
+
 # Zsh plugin manager (zpm) {{{
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
   git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm

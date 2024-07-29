@@ -434,12 +434,13 @@ end)
 
 -- Wilder {{{
 later(function()
+  local function update_plugins()
+    vim.cmd "UpdateRemotePlugins"
+  end
   add {
     source = "gelguy/wilder.nvim",
     hooks = {
-      post_checkout = function()
-        vim.cmd "UpdateRemotePlugins"
-      end,
+      post_checkout = update_plugins,
     },
   }
   require("wilder").setup { modes = { ":", "/", "?" } }

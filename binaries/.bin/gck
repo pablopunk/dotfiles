@@ -5,9 +5,9 @@ fzf_short() {
 }
 
 if [[ $# -eq 0 ]]; then
-  ut_branches=$(git reflog | grep -oE '\b(ut-[a-zA-Z0-9_-]+)' | sort -r | uniq)
+  unmod_branches=$(git reflog | grep -oE '\b(unmod-[a-zA-Z0-9_-]+)' | sort -r | uniq)
   all_branches=$(git branch | sed 's/\*//g' | sed 's/ /\n/g' | uniq)
-  unique_branches=$(echo -e "$ut_branches\n$all_branches" | uniq)
+  unique_branches=$(echo -e "$unmod_branches\n$all_branches" | uniq)
   unique_branches=$(echo "$unique_branches" | sed '/^\s*$/d') # remove empty lines
   echo "$unique_branches" | fzf_short | xargs -I {} git checkout {}
 else

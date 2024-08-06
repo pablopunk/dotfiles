@@ -18,9 +18,9 @@ if [[ $(uname) == "Darwin" ]]; then
   # killall Dock
 
   defaults write com.apple.AppleMultitouchTrackpad HIDScrollZoomModifierMask -int 262144
-  sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool yes
-  sudo defaults write com.apple.universalaccess closeViewSplitScreenRatio -float 0.2
-  sudo defaults write com.apple.universalaccess closeViewZoomFactorBeforeTermination -bool yes
+  # sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool yes
+  # sudo defaults write com.apple.universalaccess closeViewSplitScreenRatio -float 0.2
+  # sudo defaults write com.apple.universalaccess closeViewZoomFactorBeforeTermination -bool yes
 
   defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
   defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true

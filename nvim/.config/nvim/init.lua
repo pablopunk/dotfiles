@@ -89,6 +89,9 @@ map("n", "[q", ":cprev<cr>", "Previous quickfix file")
 -- Options {{{
 local opt = vim.opt
 
+-- hidden buffers
+opt.hidden = true
+
 -- no command line
 opt.cmdheight = 0 -- it's been 6 long years https://www.reddit.com/r/vim/comments/75h0oz/can_i_move_the_command_line_up_so_airline_and/
 
@@ -206,8 +209,8 @@ end)
 later(function()
   add "FabijanZulj/blame.nvim"
   add "almo7aya/openingh.nvim"
-  require("blame").setup {}
-  require("openingh").setup {}
+  require("blame").setup()
+  require("openingh").setup()
   map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", "Toggle git blame")
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
@@ -234,10 +237,7 @@ end)
 -- Tabline {{{
 later(function()
   add "pablopunk/unclutter.nvim"
-  require("unclutter").setup {
-    clean_after = 0,
-    tabline = false,
-  }
+  require("unclutter").setup { clean_after = 0, tabline = true }
   map("n", "<c-f>", require("unclutter.telescope").open, "Show unclutter buffers in Telescope")
   map("n", "<c-n>", require("unclutter.tabline").next, "Next buffer (unclutter)")
   map("n", "<c-p>", require("unclutter.tabline").prev, "Previous buffer (unclutter)")
@@ -434,12 +434,13 @@ end)
 
 -- Wilder {{{
 later(function()
+  local function update_plugins()
+    vim.cmd "UpdateRemotePlugins"
+  end
   add {
     source = "gelguy/wilder.nvim",
     hooks = {
-      post_checkout = function()
-        vim.cmd "UpdateRemotePlugins"
-      end,
+      post_checkout = update_plugins,
     },
   }
   require("wilder").setup { modes = { ":", "/", "?" } }

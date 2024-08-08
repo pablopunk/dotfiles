@@ -205,7 +205,7 @@ later(function()
 end)
 -- }}}
 
--- Git blame and open in GitHub {{{
+-- Git stuff {{{
 later(function()
   add "FabijanZulj/blame.nvim"
   add "almo7aya/openingh.nvim"
@@ -214,7 +214,14 @@ later(function()
   map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", "Toggle git blame")
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", "Open file in github")
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", "Open file in github (main branch)")
+  add { source = "akinsho/git-conflict.nvim", checkout = "*" }
+  ---@diagnostic disable-next-line: missing-fields
+  require("git-conflict").setup {}
+  add "NeogitOrg/neogit"
+  require("neogit").setup {}
+  map("n", "<leader>gg", "<cmd>Neogit<cr>", "Open neogit")
 end)
+
 -- }}}
 
 -- Auto session {{{

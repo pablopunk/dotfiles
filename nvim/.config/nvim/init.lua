@@ -541,7 +541,7 @@ end)
 -- Formatter {{{
 later(function()
   add "stevearc/conform.nvim"
-  local js_formatters = { { "biome", "eslint_d" } }
+  local js_formatters = { "biome", "eslint_d" }
   require("conform").setup {
     format_after_save = {
       lsp_format = "fallback",

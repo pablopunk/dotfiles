@@ -17,7 +17,7 @@
   "project_panel": {
     "dock": "left"
   },
-  "theme": "Catppuccin Macchiato",
+  "theme": "Catppuccin Mocha",
   "buffer_font_family": "SF Mono Powerline",
   "buffer_font_size": 16,
   "vim_mode": true,
@@ -26,6 +26,19 @@
   },
   "lsp": {},
   "format_on_save": "on",
+  "formatter": [
+    // an array to use several formatters
+    {
+      "language_server": {
+        "name": "biome"
+      }
+    },
+    {
+      "code_actions": {
+        "source.organizeImports": true
+      }
+    }
+  ],
   "hard_tabs": false,
   "tab_size": 2,
   "soft_wrap": "editor_width"

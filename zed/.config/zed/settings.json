@@ -51,5 +51,8 @@
   "tabs": {
     "file_icons": true,
     "git_status": true
+  },
+  "features": {
+    "inline_completion_provider": "supermaven"
   }
 }

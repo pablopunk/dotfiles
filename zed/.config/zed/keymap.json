@@ -50,9 +50,11 @@
         "workspace::ActivatePaneInDirection",
         "Down"
       ],
-      "leader g r": "editor::RevertSelectedHunks",
       ") g": "editor::GoToHunk",
       "( g": "editor::GoToPrevHunk",
+      "leader g r": "editor::RevertSelectedHunks",
+      "leader f f": "file_finder::Toggle",
+      "leader f s": "workspace::NewSearch"
     }
   },
   {

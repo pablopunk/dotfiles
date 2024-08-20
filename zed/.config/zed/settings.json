@@ -12,7 +12,9 @@
   },
   "base_keymap": "VSCode",
   "terminal": {
-    "dock": "bottom"
+    "dock": "bottom",
+    "detect_venv": false,
+    "working_directory": "current_project_directory"
   },
   "project_panel": {
     "dock": "left",

@@ -60,7 +60,8 @@
     "bindings": {
       "cmd-r": "outline::Toggle",
       "cmd-t": "workspace::ToggleBottomDock",
-      "cmd-j": "workspace::ToggleRightDock"
+      "cmd-j": "workspace::ToggleRightDock",
+      "cmd-k": "assistant::InlineAssist"
     }
   }
 ]

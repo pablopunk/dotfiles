@@ -15,16 +15,22 @@
     "dock": "bottom"
   },
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
+    "indent_size": 8,
+    "scrollbar": {
+      "show": "never"
+    }
   },
-  "theme": "Catppuccin Mocha",
-  "buffer_font_family": "SF Mono Powerline",
+  "collaboration_panel": {
+    "button": false
+  },
+  "theme": "Tokyo Night",
+  "buffer_font_family": "SF Mono",
   "buffer_font_size": 16,
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank"
   },
-  "lsp": {},
   "format_on_save": "on",
   "formatter": [
     // an array to use several formatters
@@ -41,5 +47,9 @@
   ],
   "hard_tabs": false,
   "tab_size": 2,
-  "soft_wrap": "editor_width"
+  "soft_wrap": "none",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  }
 }

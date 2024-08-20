@@ -294,7 +294,7 @@ local function setup_plugins()
       },
     }
     require("chatgpt").setup {
-      open_ai_params = {
+      openai_params = {
         model = "gpt-4o",
         frequency_penalty = 0,
         presence_penalty = 0,
@@ -304,6 +304,8 @@ local function setup_plugins()
         n = 1,
       },
     }
+    map("v", "<leader>cg", "<cmd>ChatGPTEditWithInstructions<cr>", { desc = "Edit code with ChatGPT" })
+    map("n", "<leader>cg", "<cmd>ChatGPT<cr>", { desc = "Edit code with ChatGPT" })
   end
 
   local function git()

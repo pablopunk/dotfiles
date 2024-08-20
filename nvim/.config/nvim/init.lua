@@ -235,7 +235,7 @@ later(function()
   }
   map("n", "<leader>sd", function()
     vim.cmd "silent! SessionDelete" -- delete session
-    vim.cmd "silent! %bd" -- close all buffers
+    vim.cmd "silent! %bd"           -- close all buffers
   end, "Delete session")
   map("n", "<leader>sr", ":SessionRestore<cr>", "Restore session")
 end)
@@ -310,11 +310,11 @@ later(function()
   require("mini.splitjoin").setup {}
   require("mini.files").setup {
     mappings = {
-      go_in_plus = "<cr>", -- <Enter> will open the file and close the explorer
+      go_in_plus = "<cr>",   -- <Enter> will open the file and close the explorer
       synchronize = "<c-s>", -- <c-s> will write the changes you make in the explorer
     },
     windows = {
-      preview = true, -- preview file under cursor
+      preview = true,     -- preview file under cursor
       width_preview = 60, -- width of the preview window
     },
   }
@@ -458,8 +458,8 @@ end)
 -- LSP {{{
 later(function()
   add "neovim/nvim-lspconfig"
-  add "folke/neodev.nvim" -- lsp for nvim's Lua API
-  add "williamboman/mason.nvim" -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
+  add "folke/neodev.nvim"                 -- lsp for nvim's Lua API
+  add "williamboman/mason.nvim"           -- Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters
   add "williamboman/mason-lspconfig.nvim" -- Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
   local function mini_completion_on_attach(client, bufnr)
     local function buf_set_option(name, value)

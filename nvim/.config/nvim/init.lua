@@ -217,6 +217,7 @@ later(function()
   add { source = "akinsho/git-conflict.nvim", checkout = "*" }
   ---@diagnostic disable-next-line: missing-fields
   require("git-conflict").setup {}
+  add "nvim-lua/plenary.nvim" -- necessary for neogit
   add "NeogitOrg/neogit"
   require("neogit").setup {}
   map("n", "<leader>gg", "<cmd>Neogit<cr>", "Open neogit")

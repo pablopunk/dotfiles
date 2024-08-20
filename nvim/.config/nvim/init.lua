@@ -2,6 +2,8 @@
 -- Enable Neovim's built-in loader
 vim.loader.enable()
 
+local add, now, later -- mini.deps will be setup later
+
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
   opts.noremap = opts.noremap == nil and true or opts.noremap
@@ -154,26 +156,25 @@ local function setup_abbreviations()
   ]]
 end
 
--- Plugin manager (mini.deps) {{{
-local path_package = vim.fn.stdpath "data" .. "/site/"
-local mini_path = path_package .. "pack/deps/start/mini.nvim"
-if not vim.loop.fs_stat(mini_path) then
-  vim.api.nvim_command 'echo "Installing `mini.nvim`" | redraw'
-  local clone_cmd = {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/echasnovski/mini.nvim",
-    mini_path,
-  }
-  vim.fn.system(clone_cmd)
-  vim.api.nvim_command "packadd mini.nvim | helptags ALL"
-  vim.api.nvim_command 'echo "Installed `mini.nvim`" | redraw'
+local function setup_plugin_manager()
+  local path_package = vim.fn.stdpath "data" .. "/site/"
+  local mini_path = path_package .. "pack/deps/start/mini.nvim"
+  if not vim.loop.fs_stat(mini_path) then
+    vim.api.nvim_command 'echo "Installing `mini.nvim`" | redraw'
+    local clone_cmd = {
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/echasnovski/mini.nvim",
+      mini_path,
+    }
+    vim.fn.system(clone_cmd)
+    vim.api.nvim_command "packadd mini.nvim | helptags ALL"
+    vim.api.nvim_command 'echo "Installed `mini.nvim`" | redraw'
+  end
+  require("mini.deps").setup { path = { package = path_package } }
+  add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 end
-require("mini.deps").setup { path = { package = path_package } }
-local MiniDeps = require "mini.deps"
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
--- }}}
 
 -- Load these plugins first
 local function setup_priority_plugins()
@@ -277,6 +278,32 @@ local function setup_plugins()
       { desc = "Old files" }
     )
     map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
+  end
+
+  local function ai()
+    add "supermaven-inc/supermaven-nvim"
+    require("supermaven-nvim").setup { log_level = "off" }
+
+    add {
+      source = "jackMort/ChatGPT.nvim",
+      depends = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "folke/trouble.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+    }
+    require("chatgpt").setup {
+      open_ai_params = {
+        model = "gpt-4o",
+        frequency_penalty = 0,
+        presence_penalty = 0,
+        max_tokens = 4095,
+        temperature = 0.2,
+        top_p = 0.1,
+        n = 1,
+      },
+    }
   end
 
   local function git()
@@ -520,6 +547,7 @@ local function setup_plugins()
   plugins_that_should_be_the_default()
   which_key()
   telescope()
+  ai()
   git()
   auto_session()
   mini_nvim()
@@ -529,6 +557,8 @@ local function setup_plugins()
   trouble()
   conform()
 end
+
+setup_plugin_manager()
 
 now(function()
   setup_options()

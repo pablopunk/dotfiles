@@ -91,21 +91,19 @@ local function setup_mappings()
   map("n", "Y", "y$", { desc = "Yank til end of line" })
 
   -- Search & replace in current file/line
-  local function verbose_map(mode, lhs, rhs, opts)
-    opts = opts or {}
-    opts.noremap = opts.noremap == nil and true or opts.noremap
-    opts.silent = false
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
-
-  verbose_map("v", "<leader>rw", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = "Search & replace selection" })
-  verbose_map("n", "<leader>rw", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = "Search & replace word" })
-  verbose_map("v", "<leader>rl", '"9y:s@<c-r>9@<c-r>9@g<left><left>', { desc = "Search & replace in current line" })
-  verbose_map(
+  map("v", "<leader>rw", '"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = "Search & replace selection", silent = false })
+  map("n", "<leader>rw", 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = "Search & replace word", silent = false })
+  map(
+    "v",
+    "<leader>rl",
+    '"9y:s@<c-r>9@<c-r>9@g<left><left>',
+    { desc = "Search & replace in current line", silent = false }
+  )
+  map(
     "n",
     "<leader>rl",
     'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
-    { desc = "Search & replace word in current line" }
+    { desc = "Search & replace word in current line", silent = false }
   )
 
   -- Follow cursor while searching

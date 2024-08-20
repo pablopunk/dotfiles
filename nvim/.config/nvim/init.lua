@@ -1,3 +1,4 @@
+-- # vim:fileencoding=utf-8:ft=lua:foldmethod=indent
 -- Enable Neovim's built-in loader
 vim.loader.enable()
 
@@ -175,7 +176,7 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- }}}
 
 -- Load these plugins first
-local function priority_plugins()
+local function setup_priority_plugins()
   -- Color config
   vim.opt.background = "dark"
   add "pablopunk/transparent.vim"
@@ -192,6 +193,8 @@ local function priority_plugins()
     vim.cmd "colorscheme tokyonight-day"
   end, {})
 
+  add "nvim-lua/plenary.nvim" -- necessary for lots of plugins
+  --
   -- Tabline
   add "pablopunk/unclutter.nvim"
   require("unclutter").setup { clean_after = 0, tabline = true }
@@ -201,7 +204,7 @@ local function priority_plugins()
 end
 
 -- Lazy load plugins
-local function async_plugins_setup()
+local function setup_plugins()
   -- Some plugins that should be default behavior
   add "pablopunk/persistent-undo.vim"
   add "stefandtw/quickfix-reflector.vim"
@@ -215,9 +218,61 @@ local function async_plugins_setup()
   vim.o.timeoutlen = 300
   require("which-key").setup {}
 
-  -- Copilot
-  add "supermaven-inc/supermaven-nvim"
-  require("supermaven-nvim").setup { log_level = "off" }
+  -- Telescope
+  add "nvim-telescope/telescope.nvim"
+  require("telescope").setup {
+    defaults = {
+      file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
+      path_display = { "truncate" },
+      layout_strategy = "vertical",
+      layout_config = {
+        vertical = {
+          preview_cutoff = 0,
+        },
+      },
+      selection_caret = "◦ ",
+      prompt_prefix = " → ",
+      mappings = {
+        i = {
+          ["<c-k>"] = require("telescope.actions").cycle_history_prev,
+          ["<c-j>"] = require("telescope.actions").cycle_history_next,
+        },
+      },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      grep_string = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
+      },
+      live_grep = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
+      },
+    },
+  }
+  map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
+  map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
+  map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
+  map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
+  map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
+  map(
+    "n",
+    "<leader>fW",
+    '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>',
+    { desc = "Grep Word" }
+  )
+  map(
+    "n",
+    "<leader>fr",
+    '<cmd>lua require("telescope.builtin").oldfiles({ only_cwd = true })<cr>',
+    { desc = "Old files" }
+  )
+  map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
 
   -- Git stuff
   add "FabijanZulj/blame.nvim"
@@ -229,7 +284,6 @@ local function async_plugins_setup()
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
   add { source = "akinsho/git-conflict.nvim", checkout = "*" }
   require("git-conflict").setup {}
-  add "nvim-lua/plenary.nvim" -- necessary for neogit
   add "NeogitOrg/neogit"
   require("neogit").setup {}
   map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })
@@ -339,63 +393,6 @@ local function async_plugins_setup()
       },
     },
   }
-
-  -- Telescope
-  add "nvim-lua/plenary.nvim"
-  add "nvim-telescope/telescope.nvim"
-  require("telescope").setup {
-    defaults = {
-      file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
-      path_display = { "truncate" },
-      layout_strategy = "vertical",
-      layout_config = {
-        vertical = {
-          preview_cutoff = 0,
-        },
-      },
-      selection_caret = "◦ ",
-      prompt_prefix = " → ",
-      mappings = {
-        i = {
-          ["<c-k>"] = require("telescope.actions").cycle_history_prev,
-          ["<c-j>"] = require("telescope.actions").cycle_history_next,
-        },
-      },
-    },
-    pickers = {
-      find_files = {
-        hidden = true,
-      },
-      grep_string = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
-      },
-      live_grep = {
-        additional_args = function()
-          return { "--hidden" }
-        end,
-      },
-    },
-  }
-  map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
-  map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
-  map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
-  map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
-  map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
-  map(
-    "n",
-    "<leader>fW",
-    '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>',
-    { desc = "Grep Word" }
-  )
-  map(
-    "n",
-    "<leader>fr",
-    '<cmd>lua require("telescope.builtin").oldfiles({ only_cwd = true })<cr>',
-    { desc = "Old files" }
-  )
-  map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
 
   -- Wilder
   add {
@@ -516,9 +513,9 @@ now(function()
   setup_options()
   setup_mappings()
   setup_abbreviations()
-  priority_plugins()
+  setup_priority_plugins()
 end)
 
 later(function()
-  async_plugins_setup()
+  setup_plugins()
 end)

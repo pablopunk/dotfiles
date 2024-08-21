@@ -61,12 +61,15 @@ local function setup_mappings()
 
   -- Quit/Save file
   map({ "n", "v" }, "<c-q>", function()
-    local more_than_one_window = vim.fn.winnr "$" > 1
-    local is_last_buffer = vim.fn.buflisted(0) == 0
-    if more_than_one_window or is_last_buffer then
-      vim.cmd "q!"
+    local bufnr = vim.api.nvim_get_current_buf()
+    local is_last_buffer = #vim.fn.getbufinfo({buflisted = 1}) == 1
+    local is_existing_file = vim.fn.filereadable(vim.api.nvim_buf_get_name(bufnr)) == 1
+    if not is_last_buffer then
+      vim.cmd "bd!"
+    elseif is_last_buffer and is_existing_file then
+      vim.cmd "wq!"
     else
-      vim.cmd "wq"
+      vim.cmd "q!"
     end
   end, { desc = "Close file buffer" })
 
@@ -528,7 +531,10 @@ local function setup_plugins()
 
   local function conform()
     add "stevearc/conform.nvim"
-    local js_formatters = { "biome", "eslint_d" }
+    local js_formatters = {
+      "biome",
+      -- "eslint_d"
+    }
     require("conform").setup {
       format_after_save = {
         lsp_format = "fallback",

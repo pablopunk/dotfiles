@@ -55,7 +55,9 @@
       "leader space": "command_palette::Toggle",
       "leader g r": "editor::RevertSelectedHunks",
       "leader f f": "file_finder::Toggle",
-      "leader f s": "workspace::NewSearch"
+      "leader f s": "workspace::NewSearch",
+      "ctrl-n": "pane::ActivateNextItem",
+      "ctrl-p": "pane::ActivatePrevItem"
     }
   },
   {

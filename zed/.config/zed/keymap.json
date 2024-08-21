@@ -54,6 +54,7 @@
       "( g": "editor::GoToPrevHunk",
       "leader space": "command_palette::Toggle",
       "leader g r": "editor::RevertSelectedHunks",
+      "leader g d": "editor::ToggleHunkDiff",
       "leader f f": "file_finder::Toggle",
       "leader f s": "workspace::NewSearch",
       "ctrl-n": "pane::ActivateNextItem",

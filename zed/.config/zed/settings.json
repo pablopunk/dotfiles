@@ -43,17 +43,32 @@
   "format_on_save": "on",
   "formatter": [
     // an array to use several formatters
+    // {
+    //   "language_server": {
+    //     "name": "biome"
+    //   }
+    // },
+    // {
+    //   "code_actions": {
+    //     "source.organizeImports": true
+    //   }
+    // },
     {
-      "language_server": {
-        "name": "biome"
-      }
-    },
-    {
-      "code_actions": {
-        "source.organizeImports": true
+      "external": {
+        "command": "biome",
+        "arguments": [
+          "check",
+          "--write",
+          "--stdin-file-path",
+          "{buffer_path}"
+        ]
       }
     }
   ],
+  "indent_guides": {
+    "line_width": 0,
+    "coloring": "indent_aware",
+  },
   "hard_tabs": false,
   "tab_size": 2,
   "soft_wrap": "none",

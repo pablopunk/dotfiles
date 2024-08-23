@@ -53,6 +53,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # }}}
 
 # Functions {{{
+function rm {
+  mkdir -p /tmp/trash/$USER
+  mv "$@" /tmp/trash/$USER
+}
 function gcm {
   git commit -m "$*"
 }
@@ -182,7 +186,6 @@ alias vvi='command vi'
 alias viu='nvim -u NONE'
 alias todo=todo.sh
 alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
-alias rm=trash
 alias mkidr='mkdir -p'
 alias n='npm run'
 alias run='npx tsx'

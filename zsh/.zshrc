@@ -257,8 +257,8 @@ TERM=xterm-256color
 # }}}
 
 # auto tmux on vscode and ssh {{{
-[ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
-[ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
+# [ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
+# [ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
 # }}}
 
 # theme (dark/light) {{{

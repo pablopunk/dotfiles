@@ -62,7 +62,7 @@ local function setup_mappings()
   -- Quit/Save file
   map({ "n", "v" }, "<c-q>", function()
     local bufnr = vim.api.nvim_get_current_buf()
-    local is_last_buffer = #vim.fn.getbufinfo({buflisted = 1}) == 1
+    local is_last_buffer = #vim.fn.getbufinfo { buflisted = 1 } == 1
     local is_existing_file = vim.fn.filereadable(vim.api.nvim_buf_get_name(bufnr)) == 1
     if not is_last_buffer then
       vim.cmd "bd!"
@@ -567,12 +567,12 @@ end
 setup_plugin_manager()
 
 now(function()
-  setup_options()
-  setup_mappings()
-  setup_abbreviations()
   setup_priority_plugins()
 end)
 
 later(function()
+  setup_options()
+  setup_mappings()
+  setup_abbreviations()
   setup_plugins()
 end)

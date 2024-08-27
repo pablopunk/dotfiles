@@ -205,351 +205,351 @@ local function setup_priority_plugins()
   map("n", "<c-p>", require("unclutter.tabline").prev, { desc = "Previous buffer (unclutter)" })
 end
 
--- Lazy load plugins
-local function setup_plugins()
-  local function plugins_that_should_be_the_default()
-    add "pablopunk/persistent-undo.vim"
-    add "stefandtw/quickfix-reflector.vim"
-    add "christoomey/vim-tmux-navigator"
-    add "markonm/traces.vim"
-    add "tpope/vim-surround"
-    add "dstein64/vim-startuptime"
-    add "wakatime/vim-wakatime"
-  end
+local function plugins_that_should_be_the_default()
+  add "pablopunk/persistent-undo.vim"
+  add "stefandtw/quickfix-reflector.vim"
+  add "christoomey/vim-tmux-navigator"
+  add "markonm/traces.vim"
+  add "tpope/vim-surround"
+  add "dstein64/vim-startuptime"
+  add "wakatime/vim-wakatime"
+end
 
-  local function which_key()
-    add "folke/which-key.nvim"
-    vim.o.timeout = true
-    vim.o.timeoutlen = 300
-    require("which-key").setup {}
-  end
+local function which_key()
+  add "folke/which-key.nvim"
+  vim.o.timeout = true
+  vim.o.timeoutlen = 300
+  require("which-key").setup {}
+end
 
-  local function telescope()
-    add "nvim-telescope/telescope.nvim"
-    require("telescope").setup {
-      defaults = {
-        file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
-        path_display = { "truncate" },
-        layout_strategy = "vertical",
-        layout_config = {
-          vertical = {
-            preview_cutoff = 0,
-          },
-        },
-        selection_caret = "◦ ",
-        prompt_prefix = " → ",
-        mappings = {
-          i = {
-            ["<c-k>"] = require("telescope.actions").cycle_history_prev,
-            ["<c-j>"] = require("telescope.actions").cycle_history_next,
-          },
+local function telescope()
+  add "nvim-telescope/telescope.nvim"
+  require("telescope").setup {
+    defaults = {
+      file_ignore_patterns = { ".git", "node_modules/", "vendor/" },
+      path_display = { "truncate" },
+      layout_strategy = "vertical",
+      layout_config = {
+        vertical = {
+          preview_cutoff = 0,
         },
       },
-      pickers = {
-        find_files = {
-          hidden = true,
-        },
-        grep_string = {
-          additional_args = function()
-            return { "--hidden" }
-          end,
-        },
-        live_grep = {
-          additional_args = function()
-            return { "--hidden" }
-          end,
-        },
-      },
-    }
-    map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
-    map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
-    map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
-    map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
-    map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
-    map(
-      "n",
-      "<leader>fW",
-      '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>',
-      { desc = "Grep Word" }
-    )
-    map(
-      "n",
-      "<leader>fr",
-      '<cmd>lua require("telescope.builtin").oldfiles({ only_cwd = true })<cr>',
-      { desc = "Old files" }
-    )
-    map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
-  end
-
-  local function ai()
-    add "supermaven-inc/supermaven-nvim"
-    require("supermaven-nvim").setup { log_level = "off" }
-
-    add {
-      source = "jackMort/ChatGPT.nvim",
-      depends = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "folke/trouble.nvim",
-        "nvim-telescope/telescope.nvim",
-      },
-    }
-    require("chatgpt").setup {
-      openai_params = {
-        model = "gpt-4o",
-        frequency_penalty = 0,
-        presence_penalty = 0,
-        max_tokens = 4095,
-        temperature = 0.2,
-        top_p = 0.1,
-        n = 1,
-      },
-    }
-    map("v", "<leader>cg", "<cmd>ChatGPTEditWithInstructions<cr>", { desc = "Edit code with ChatGPT" })
-    map("n", "<leader>cg", "<cmd>ChatGPT<cr>", { desc = "Edit code with ChatGPT" })
-  end
-
-  local function git()
-    add "FabijanZulj/blame.nvim"
-    add "almo7aya/openingh.nvim"
-    require("blame").setup()
-    require("openingh").setup()
-    map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", { desc = "Toggle git blame" })
-    map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", { desc = "Open file in github" })
-    map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
-    add { source = "akinsho/git-conflict.nvim", checkout = "*" }
-    require("git-conflict").setup {}
-    add "NeogitOrg/neogit"
-    require("neogit").setup {}
-    map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })
-  end
-
-  local function auto_session()
-    add "rmagatti/auto-session"
-    require("auto-session").setup {
-      log_level = "error",
-      auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
-      auto_session_use_git_branch = true,
-      bypass_session_save_file_types = { "NvimTree", "Lazy", "Starter" },
-    }
-    map("n", "<leader>sd", function()
-      vim.cmd "silent! SessionDelete" -- delete session
-      vim.cmd "silent! %bd" -- close all buffers
-    end, { desc = "Delete session" })
-    map("n", "<leader>sr", ":SessionRestore<cr>", { desc = "Restore session" })
-  end
-
-  local function mini_nvim()
-    add "echasnovski/mini.nvim"
-    require("mini.completion").setup {}
-    require("mini.comment").setup {}
-    require("mini.indentscope").setup { symbol = "│" }
-    require("mini.cursorword").setup {}
-    require("mini.ai").setup {}
-    vim.api.nvim_command "hi! link MiniCursorWord CursorLine"
-    vim.api.nvim_command "hi! link MiniCursorWordCurrent CursorLine"
-    require("mini.pick").setup {
+      selection_caret = "◦ ",
+      prompt_prefix = " → ",
       mappings = {
-        to_quickfix = {
-          char = "<c-q>",
-          func = function()
-            local items = MiniPick.get_picker_items() or {}
-            MiniPick.default_choose_marked(items)
-            MiniPick.stop()
-          end,
+        i = {
+          ["<c-k>"] = require("telescope.actions").cycle_history_prev,
+          ["<c-j>"] = require("telescope.actions").cycle_history_next,
         },
       },
-    }
-    vim.ui.select = MiniPick.ui_select
-    require("mini.diff").setup {
-      mappings = {
-        apply = "gh",
-        reset = "gH",
-        textobject = "gh",
-        goto_first = "[G",
-        goto_prev = "[g",
-        goto_next = "]g",
-        goto_last = "]G",
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
       },
-    }
-    require("mini.splitjoin").setup {}
-    require("mini.files").setup {
-      mappings = {
-        go_in_plus = "<cr>",
-        synchronize = "<c-s>",
-      },
-      windows = {
-        preview = true,
-        width_preview = 60,
-      },
-    }
-    map("n", "<leader>gd", function()
-      require("mini.diff").toggle_overlay(vim.api.nvim_get_current_buf())
-    end, { desc = "Toggle overlay diff in the whole file" })
-    map("n", "<leader>gr", function()
-      vim.cmd "normal gHgh"
-    end, { desc = "Reset hunk" })
-    map("v", "<leader>gr", function()
-      vim.cmd "normal gH"
-    end, { desc = "Reset visual selection" })
-    map("n", "<leader>gs", function()
-      vim.cmd "normal ghgh"
-    end, { desc = "Stage hunk" })
-    map("v", "<leader>gs", function()
-      vim.cmd "normal gh"
-    end, { desc = "Stage visual selection" })
-    map({ "n", "v" }, "<c-t>", function()
-      local MiniFiles = require "mini.files"
-      if not MiniFiles.close() then
-        local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
-        if is_buffer_a_file then
-          MiniFiles.open(vim.api.nvim_buf_get_name(0))
-        else
-          MiniFiles.open()
-        end
-      end
-    end, { desc = "Toggle file explorer" })
-    require("mini.icons").setup {}
-    MiniIcons.mock_nvim_web_devicons()
-  end
-
-  local function treesitter()
-    add "nvim-treesitter/nvim-treesitter"
-    ---@diagnostic disable-next-line: missing-fields
-    require("nvim-treesitter.configs").setup {
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          node_decremental = "<bs>",
-          scope_incremental = false,
-        },
-      },
-    }
-  end
-
-  local function wilder()
-    add {
-      source = "gelguy/wilder.nvim",
-      hooks = {
-        post_checkout = function()
-          vim.cmd "UpdateRemotePlugins"
+      grep_string = {
+        additional_args = function()
+          return { "--hidden" }
         end,
       },
-    }
-    require("wilder").setup { modes = { ":", "/", "?" } }
-    vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
-  end
-
-  local function lsp()
-    add "neovim/nvim-lspconfig"
-    add "folke/neodev.nvim"
-    add "williamboman/mason.nvim"
-    add "williamboman/mason-lspconfig.nvim"
-
-    local function mini_completion_on_attach(client, bufnr)
-      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-    end
-
-    require("neodev").setup {}
-    require("mason").setup {}
-    require("mason-lspconfig").setup {
-      ensure_installed = {
-        "bashls",
-        "jsonls",
-        "html",
-        "vimls",
-        "lua_ls",
-        "astro",
-        "biome",
-        "eslint",
+      live_grep = {
+        additional_args = function()
+          return { "--hidden" }
+        end,
       },
-    }
+    },
+  }
+  map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
+  map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
+  map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
+  map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
+  map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
+  map(
+    "n",
+    "<leader>fW",
+    '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>',
+    { desc = "Grep Word" }
+  )
+  map(
+    "n",
+    "<leader>fr",
+    '<cmd>lua require("telescope.builtin").oldfiles({ only_cwd = true })<cr>',
+    { desc = "Old files" }
+  )
+  map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
+end
 
-    map("n", "E", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
-    map("n", "]d", function()
-      vim.diagnostic.goto_next()
-      vim.cmd "normal! zz"
-    end, { desc = "Go to next diagnostic" })
-    map("n", "[d", function()
-      vim.diagnostic.goto_prev()
-      vim.cmd "normal! zz"
-    end, { desc = "Go to previous diagnostic" })
-    map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-    map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-    map("n", "gd", ":Telescope lsp_definitions<cr>zz", { desc = "Go to definition" })
-    map("n", "gr", ":Telescope lsp_references<cr>", { desc = "Go to references" })
-    map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
-    map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols (dynamic)" })
-    map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
-    map("n", "<leader>ls", ":LspStart<cr>", { desc = "Start LSP" })
-    map("n", "<leader>lx", ":LspStop<cr>", { desc = "Stop LSP" })
-    map("n", "<leader>lr", ":LspRestart<cr>", { desc = "Restart LSP" })
-    map("n", "<leader>li", ":LspInfo<cr>", { desc = "Info LSP" })
+local function ai()
+  add "supermaven-inc/supermaven-nvim"
+  require("supermaven-nvim").setup { log_level = "off" }
 
-    local lspconfig = require "lspconfig"
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local on_attach = function(client, bufnr)
-      mini_completion_on_attach(client, bufnr)
-    end
+  add {
+    source = "jackMort/ChatGPT.nvim",
+    depends = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  }
+  require("chatgpt").setup {
+    openai_params = {
+      model = "gpt-4o",
+      frequency_penalty = 0,
+      presence_penalty = 0,
+      max_tokens = 4095,
+      temperature = 0.2,
+      top_p = 0.1,
+      n = 1,
+    },
+  }
+  map("v", "<leader>cg", "<cmd>ChatGPTEditWithInstructions<cr>", { desc = "Edit code with ChatGPT" })
+  map("n", "<leader>cg", "<cmd>ChatGPT<cr>", { desc = "Edit code with ChatGPT" })
+end
 
-    local function setup_lsp(lsp, settings)
-      lspconfig[lsp].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = settings,
-      }
-    end
+local function git()
+  add "FabijanZulj/blame.nvim"
+  add "almo7aya/openingh.nvim"
+  require("blame").setup()
+  require("openingh").setup()
+  map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", { desc = "Toggle git blame" })
+  map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", { desc = "Open file in github" })
+  map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
+  add { source = "akinsho/git-conflict.nvim", checkout = "*" }
+  require("git-conflict").setup {}
+  add "NeogitOrg/neogit"
+  require("neogit").setup {}
+  map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })
+end
 
-    setup_lsp "tsserver"
-    setup_lsp "vimls"
-    setup_lsp "bashls"
-    setup_lsp "jsonls"
-    setup_lsp "html"
-    setup_lsp "astro"
-    setup_lsp "biome"
-    setup_lsp "eslint"
-    setup_lsp("lua_ls", {
-      Lua = {
-        diagnostics = { globals = { "vim" } },
-        hint = { enable = true },
-        workspace = {
-          checkThirdParty = false,
-        },
+local function auto_session()
+  add "rmagatti/auto-session"
+  require("auto-session").setup {
+    log_level = "error",
+    auto_session_suppress_dirs = { "/", "~/", "~/src", "~/Downloads", "~/Desktop" },
+    auto_session_use_git_branch = true,
+    bypass_session_save_file_types = { "NvimTree", "Lazy", "Starter" },
+  }
+  map("n", "<leader>sd", function()
+    vim.cmd "silent! SessionDelete" -- delete session
+    vim.cmd "silent! %bd" -- close all buffers
+  end, { desc = "Delete session" })
+  map("n", "<leader>sr", ":SessionRestore<cr>", { desc = "Restore session" })
+end
+
+local function mini_nvim()
+  add "echasnovski/mini.nvim"
+  require("mini.completion").setup {}
+  require("mini.comment").setup {}
+  require("mini.indentscope").setup { symbol = "│" }
+  require("mini.cursorword").setup {}
+  require("mini.ai").setup {}
+  vim.api.nvim_command "hi! link MiniCursorWord CursorLine"
+  vim.api.nvim_command "hi! link MiniCursorWordCurrent CursorLine"
+  require("mini.pick").setup {
+    mappings = {
+      to_quickfix = {
+        char = "<c-q>",
+        func = function()
+          local items = MiniPick.get_picker_items() or {}
+          MiniPick.default_choose_marked(items)
+          MiniPick.stop()
+        end,
       },
-    })
+    },
+  }
+  vim.ui.select = MiniPick.ui_select
+  require("mini.diff").setup {
+    mappings = {
+      apply = "gh",
+      reset = "gH",
+      textobject = "gh",
+      goto_first = "[G",
+      goto_prev = "[g",
+      goto_next = "]g",
+      goto_last = "]G",
+    },
+  }
+  require("mini.splitjoin").setup {}
+  require("mini.files").setup {
+    mappings = {
+      go_in_plus = "<cr>",
+      synchronize = "<c-s>",
+    },
+    windows = {
+      preview = true,
+      width_preview = 60,
+    },
+  }
+  map("n", "<leader>gd", function()
+    require("mini.diff").toggle_overlay(vim.api.nvim_get_current_buf())
+  end, { desc = "Toggle overlay diff in the whole file" })
+  map("n", "<leader>gr", function()
+    vim.cmd "normal gHgh"
+  end, { desc = "Reset hunk" })
+  map("v", "<leader>gr", function()
+    vim.cmd "normal gH"
+  end, { desc = "Reset visual selection" })
+  map("n", "<leader>gs", function()
+    vim.cmd "normal ghgh"
+  end, { desc = "Stage hunk" })
+  map("v", "<leader>gs", function()
+    vim.cmd "normal gh"
+  end, { desc = "Stage visual selection" })
+  map({ "n", "v" }, "<c-t>", function()
+    local MiniFiles = require "mini.files"
+    if not MiniFiles.close() then
+      local is_buffer_a_file = (vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "")
+      if is_buffer_a_file then
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+      else
+        MiniFiles.open()
+      end
+    end
+  end, { desc = "Toggle file explorer" })
+  require("mini.icons").setup {}
+  MiniIcons.mock_nvim_web_devicons()
+end
+
+local function treesitter()
+  add "nvim-treesitter/nvim-treesitter"
+  ---@diagnostic disable-next-line: missing-fields
+  require("nvim-treesitter.configs").setup {
+    highlight = { enable = true },
+    indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        node_decremental = "<bs>",
+        scope_incremental = false,
+      },
+    },
+  }
+end
+
+local function wilder()
+  add {
+    source = "gelguy/wilder.nvim",
+    hooks = {
+      post_checkout = function()
+        vim.cmd "UpdateRemotePlugins"
+      end,
+    },
+  }
+  require("wilder").setup { modes = { ":", "/", "?" } }
+  vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
+end
+
+local function lsp()
+  add "neovim/nvim-lspconfig"
+  add "folke/neodev.nvim"
+  add "williamboman/mason.nvim"
+  add "williamboman/mason-lspconfig.nvim"
+
+  local function mini_completion_on_attach(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
-  local function trouble()
-    add "folke/trouble.nvim"
-    require("trouble").setup {}
-    map("n", "<leader>d", ":Trouble diagnostics toggle<cr>", { desc = "Toggle trouble diagnostics" })
-  end
-
-  local function conform()
-    add "stevearc/conform.nvim"
-    local js_formatters = {
+  require("neodev").setup {}
+  require("mason").setup {}
+  require("mason-lspconfig").setup {
+    ensure_installed = {
+      "bashls",
+      "jsonls",
+      "html",
+      "vimls",
+      "lua_ls",
+      "astro",
       "biome",
-      -- "eslint_d"
-    }
-    require("conform").setup {
-      format_after_save = {
-        lsp_format = "fallback",
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-        javascript = js_formatters,
-        typescript = js_formatters,
-        typescriptreact = js_formatters,
-        javascriptreact = js_formatters,
-        astro = js_formatters,
-      },
+      "eslint",
+    },
+  }
+
+  map("n", "E", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+  map("n", "]d", function()
+    vim.diagnostic.goto_next()
+    vim.cmd "normal! zz"
+  end, { desc = "Go to next diagnostic" })
+  map("n", "[d", function()
+    vim.diagnostic.goto_prev()
+    vim.cmd "normal! zz"
+  end, { desc = "Go to previous diagnostic" })
+  map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+  map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+  map("n", "gd", ":Telescope lsp_definitions<cr>zz", { desc = "Go to definition" })
+  map("n", "gr", ":Telescope lsp_references<cr>", { desc = "Go to references" })
+  map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
+  map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols (dynamic)" })
+  map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+  map("n", "<leader>ls", ":LspStart<cr>", { desc = "Start LSP" })
+  map("n", "<leader>lx", ":LspStop<cr>", { desc = "Stop LSP" })
+  map("n", "<leader>lr", ":LspRestart<cr>", { desc = "Restart LSP" })
+  map("n", "<leader>li", ":LspInfo<cr>", { desc = "Info LSP" })
+
+  local lspconfig = require "lspconfig"
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local on_attach = function(client, bufnr)
+    mini_completion_on_attach(client, bufnr)
+  end
+
+  local function setup_lsp(lsp, settings)
+    lspconfig[lsp].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = settings,
     }
   end
 
+  setup_lsp "tsserver"
+  setup_lsp "vimls"
+  setup_lsp "bashls"
+  setup_lsp "jsonls"
+  setup_lsp "html"
+  setup_lsp "astro"
+  setup_lsp "biome"
+  setup_lsp "eslint"
+  setup_lsp("lua_ls", {
+    Lua = {
+      diagnostics = { globals = { "vim" } },
+      hint = { enable = true },
+      workspace = {
+        checkThirdParty = false,
+      },
+    },
+  })
+end
+
+local function trouble()
+  add "folke/trouble.nvim"
+  require("trouble").setup {}
+  map("n", "<leader>d", ":Trouble diagnostics toggle<cr>", { desc = "Toggle trouble diagnostics" })
+end
+
+local function conform()
+  add "stevearc/conform.nvim"
+  local js_formatters = {
+    "biome",
+    -- "eslint_d"
+  }
+  require("conform").setup {
+    format_after_save = {
+      lsp_format = "fallback",
+    },
+    formatters_by_ft = {
+      lua = { "stylua" },
+      javascript = js_formatters,
+      typescript = js_formatters,
+      typescriptreact = js_formatters,
+      javascriptreact = js_formatters,
+      astro = js_formatters,
+    },
+  }
+end
+
+-- Lazy load plugins
+local function setup_plugins()
   plugins_that_should_be_the_default()
   which_key()
   telescope()

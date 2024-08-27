@@ -567,11 +567,11 @@ end
 setup_plugin_manager()
 
 now(function()
+  setup_options()
   setup_priority_plugins()
 end)
 
 later(function()
-  setup_options()
   setup_mappings()
   setup_abbreviations()
   setup_plugins()

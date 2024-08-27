@@ -279,10 +279,66 @@ local function telescope()
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
 end
 
-local function ai()
-  add "supermaven-inc/supermaven-nvim"
-  require("supermaven-nvim").setup { log_level = "off" }
+local function codecompanion()
+  add {
+    source = "olimorris/codecompanion.nvim",
+    depends = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- Optional
+    },
+  }
+  require("codecompanion").setup {
+    adapters = {
+      openai = function()
+        return require("codecompanion.adapters").extend("openai", {
+          schema = {
+            model = {
+              default = "gpt-4o",
+            },
+          },
+          env = {
+            api_key = os.getenv "OPENAI_API_KEY",
+          },
+        })
+      end,
+    },
+    strategies = {
+      chat = {
+        adapter = "openai",
+        keymaps = {
+          send = {
+            modes = {
+              n = { "<CR>", "<C-s>" },
+              i = "<C-s>",
+            },
+            index = 1,
+            callback = "keymaps.send",
+            description = "Send",
+          },
+          close = {
+            modes = {
+              n = "<C-q>",
+              i = "<C-q>",
+            },
+            index = 2,
+            callback = "keymaps.close",
+            description = "Close Chat",
+          },
+        },
+      },
+      inline = {
+        adapter = "openai",
+      },
+      agent = {
+        adapter = "openai",
+      },
+    },
+  }
+  map({ "n", "v" }, "<leader>cg", "<cmd>CodeCompanionActions<cr>", { desc = "Edit code with ChatGPT" })
+end
 
+local function chatgpt()
   add {
     source = "jackMort/ChatGPT.nvim",
     depends = {
@@ -305,6 +361,41 @@ local function ai()
   }
   map("v", "<leader>cg", "<cmd>ChatGPTEditWithInstructions<cr>", { desc = "Edit code with ChatGPT" })
   map("n", "<leader>cg", "<cmd>ChatGPT<cr>", { desc = "Edit code with ChatGPT" })
+end
+
+local function supermaven()
+  add "supermaven-inc/supermaven-nvim"
+  require("supermaven-nvim").setup { log_level = "off" }
+end
+
+local function avante()
+  add {
+    source = "yetone/avante.nvim",
+    depends = {
+      "echasnovski/mini.icons",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  }
+  require("avante").setup {
+    provider = "openai", -- openai | azure | copilot | claude
+    mappings = {
+      ask = "<leader>cg",
+      diff = {
+        -- ours = "<c-x>",
+        -- theirs = "<c-a>",
+      },
+    },
+    hints = { enabled = true },
+  }
+end
+
+local function ai()
+  supermaven()
+  -- chatgpt()
+  -- codecompanion()
+  avante()
 end
 
 local function git()
@@ -494,8 +585,8 @@ local function lsp()
     mini_completion_on_attach(client, bufnr)
   end
 
-  local function setup_lsp(lsp, settings)
-    lspconfig[lsp].setup {
+  local function setup_lsp(lsp_name, settings)
+    lspconfig[lsp_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = settings,

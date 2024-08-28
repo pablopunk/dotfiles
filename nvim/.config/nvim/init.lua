@@ -279,90 +279,6 @@ local function telescope()
   map("n", "<leader><leader>", ":Telescope keymaps<cr>", { desc = "Command palette (kinda)" })
 end
 
-local function codecompanion()
-  add {
-    source = "olimorris/codecompanion.nvim",
-    depends = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- Optional
-    },
-  }
-  require("codecompanion").setup {
-    adapters = {
-      openai = function()
-        return require("codecompanion.adapters").extend("openai", {
-          schema = {
-            model = {
-              default = "gpt-4o",
-            },
-          },
-          env = {
-            api_key = os.getenv "OPENAI_API_KEY",
-          },
-        })
-      end,
-    },
-    strategies = {
-      chat = {
-        adapter = "openai",
-        keymaps = {
-          send = {
-            modes = {
-              n = { "<CR>", "<C-s>" },
-              i = "<C-s>",
-            },
-            index = 1,
-            callback = "keymaps.send",
-            description = "Send",
-          },
-          close = {
-            modes = {
-              n = "<C-q>",
-              i = "<C-q>",
-            },
-            index = 2,
-            callback = "keymaps.close",
-            description = "Close Chat",
-          },
-        },
-      },
-      inline = {
-        adapter = "openai",
-      },
-      agent = {
-        adapter = "openai",
-      },
-    },
-  }
-  map({ "n", "v" }, "<leader>cg", "<cmd>CodeCompanionActions<cr>", { desc = "Edit code with ChatGPT" })
-end
-
-local function chatgpt()
-  add {
-    source = "jackMort/ChatGPT.nvim",
-    depends = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  }
-  require("chatgpt").setup {
-    openai_params = {
-      model = "gpt-4o",
-      frequency_penalty = 0,
-      presence_penalty = 0,
-      max_tokens = 4095,
-      temperature = 0.2,
-      top_p = 0.1,
-      n = 1,
-    },
-  }
-  map("v", "<leader>cg", "<cmd>ChatGPTEditWithInstructions<cr>", { desc = "Edit code with ChatGPT" })
-  map("n", "<leader>cg", "<cmd>ChatGPT<cr>", { desc = "Edit code with ChatGPT" })
-end
-
 local function supermaven()
   add "supermaven-inc/supermaven-nvim"
   require("supermaven-nvim").setup { log_level = "off" }
@@ -407,6 +323,7 @@ local function git()
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", { desc = "Open file in github" })
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
   add { source = "akinsho/git-conflict.nvim", checkout = "*" }
+  ---@diagnostic disable-next-line: missing-fields
   require("git-conflict").setup {}
   add "NeogitOrg/neogit"
   require("neogit").setup {}
@@ -516,19 +433,6 @@ local function treesitter()
       },
     },
   }
-end
-
-local function wilder()
-  add {
-    source = "gelguy/wilder.nvim",
-    hooks = {
-      post_checkout = function()
-        vim.cmd "UpdateRemotePlugins"
-      end,
-    },
-  }
-  require("wilder").setup { modes = { ":", "/", "?" } }
-  vim.opt.wildmenu = false -- disable wildmenu because wilder is enough
 end
 
 local function lsp()

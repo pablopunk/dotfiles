@@ -532,6 +532,7 @@ local function wilder()
 end
 
 local function lsp()
+  -- vim.lsp.inlay_hint.enable() -- enable inlay hints
   add "neovim/nvim-lspconfig"
   add "folke/neodev.nvim"
   add "williamboman/mason.nvim"
@@ -578,6 +579,9 @@ local function lsp()
   map("n", "<leader>lx", ":LspStop<cr>", { desc = "Stop LSP" })
   map("n", "<leader>lr", ":LspRestart<cr>", { desc = "Restart LSP" })
   map("n", "<leader>li", ":LspInfo<cr>", { desc = "Info LSP" })
+  map("n", "<leader>lh", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+  end, { desc = "Toggle inlay hints (LSP)" })
 
   local lspconfig = require "lspconfig"
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -639,6 +643,22 @@ local function conform()
   }
 end
 
+local function noice()
+  add {
+    source = "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  }
+  require("noice").setup {
+    lsp = { progress = { enabled = false } },
+    notify = { enabled = false },
+    cmdline = { view = "cmdline" },
+    messages = { enabled = true, view = "notify" },
+  }
+end
+
 -- Lazy load plugins
 local function setup_plugins()
   plugins_that_should_be_the_default()
@@ -653,6 +673,7 @@ local function setup_plugins()
   lsp()
   trouble()
   conform()
+  noice()
 end
 
 setup_plugin_manager()

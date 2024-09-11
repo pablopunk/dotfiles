@@ -200,7 +200,9 @@ local function setup_priority_plugins()
   -- Tabline
   add "pablopunk/unclutter.nvim"
   require("unclutter").setup { clean_after = 0, tabline = true }
-  map("n", "<c-f>", require("unclutter.telescope").open, { desc = "Show unclutter buffers in Telescope" })
+  map("n", "<c-f>", function()
+    require("unclutter.telescope").open { hide_current = true }
+  end, { desc = "Show unclutter buffers in Telescope" })
   map("n", "<c-n>", require("unclutter.tabline").next, { desc = "Next buffer (unclutter)" })
   map("n", "<c-p>", require("unclutter.tabline").prev, { desc = "Previous buffer (unclutter)" })
 end

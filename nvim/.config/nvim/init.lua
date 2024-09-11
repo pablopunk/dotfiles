@@ -15,7 +15,7 @@ local function setup_options()
   vim.opt.hidden = true
   vim.opt.cmdheight = 0
   vim.opt.number = true
-  vim.opt.relativenumber = true
+  -- vim.opt.relativenumber = true
   vim.opt.signcolumn = "no"
   vim.opt.showmode = false
   vim.opt.laststatus = 2

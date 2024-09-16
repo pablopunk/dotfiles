@@ -177,27 +177,24 @@ local function setup_plugin_manager()
   add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 end
 
--- Load these plugins first
-local function setup_priority_plugins()
-  -- Color config
+local function colors()
   vim.opt.background = "dark"
   add "pablopunk/transparent.vim"
-  add "AlexvZyl/nordic.nvim"
-  require("nordic").load()
-  vim.api.nvim_command [[
-    hi! CursorLine guibg=#2e3440
-    hi! link Visual CursorLine
-  ]]
-
-  add "folke/tokyonight.nvim"
+  add "Shatur/neovim-ayu"
+  vim.cmd "colorscheme ayu-mirage"
+  local dark_theme = "ayu-mirage"
+  local light_theme = "ayu-light"
   vim.api.nvim_create_user_command("Light", function()
     vim.opt.background = "light"
-    vim.cmd "colorscheme tokyonight-day"
+    vim.cmd("colorscheme" .. light_theme)
   end, {})
+  vim.api.nvim_create_user_command("Dark", function()
+    vim.opt.background = "dark"
+    vim.cmd("colorscheme" .. dark_theme)
+  end, {})
+end
 
-  add "nvim-lua/plenary.nvim" -- necessary for lots of plugins
-  --
-  -- Tabline
+local function unclutter()
   add "pablopunk/unclutter.nvim"
   require("unclutter").setup { clean_after = 0, tabline = true }
   map("n", "<c-f>", function()
@@ -205,6 +202,17 @@ local function setup_priority_plugins()
   end, { desc = "Show unclutter buffers in Telescope" })
   map("n", "<c-n>", require("unclutter.tabline").next, { desc = "Next buffer (unclutter)" })
   map("n", "<c-p>", require("unclutter.tabline").prev, { desc = "Previous buffer (unclutter)" })
+end
+
+local function plenary()
+  add "nvim-lua/plenary.nvim" -- necessary for lots of plugins
+end
+
+-- Load these plugins first
+local function setup_priority_plugins()
+  colors()
+  unclutter()
+  plenary()
 end
 
 local function plugins_that_should_be_the_default()

@@ -110,7 +110,8 @@ function add_spacer_to_dock {
 
 function wait_for_docker {
   until docker info &> /dev/null; do
-    open /Applications/OrbStack.app
+    echo "Waiting for docker to start..."
+    [ -d "/Applications/Podman Desktop.app/" ] && open "/Applications/Podman Desktop.app"
     sleep 1
   done
 }

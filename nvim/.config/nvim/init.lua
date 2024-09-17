@@ -186,12 +186,17 @@ local function colors()
   local light_theme = "ayu-light"
   vim.api.nvim_create_user_command("Light", function()
     vim.opt.background = "light"
-    vim.cmd("colorscheme" .. light_theme)
+    vim.cmd("colorscheme " .. light_theme)
   end, {})
   vim.api.nvim_create_user_command("Dark", function()
     vim.opt.background = "dark"
-    vim.cmd("colorscheme" .. dark_theme)
+    vim.cmd("colorscheme " .. dark_theme)
   end, {})
+  -- Fix cursorline
+  vim.api.nvim_command [[
+    hi! CursorLine guibg=#2e3440
+    hi! link Visual CursorLine
+  ]]
 end
 
 local function unclutter()

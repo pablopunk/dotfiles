@@ -17,7 +17,11 @@ fzf_short() {
 all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PATH" | sed 's/^[[:space:]]*//'))
 
 trigger_item() {
-  tilt enable "$1" && tilt trigger "$1"
+  if [[ $DISABLE_MODE == true ]]; then
+    tilt disable "$1"
+  else
+    tilt enable "$1" && tilt trigger "$1"
+  fi
 }
 
 export -f trigger_item # so it can be used in xargs
@@ -25,6 +29,13 @@ export -f trigger_item # so it can be used in xargs
 select_and_trigger() {
   printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}
 }
+
+if [[ $1 == "--disable" || $1 == "-d" ]]; then
+  DISABLE_MODE=true
+  shift
+else
+  DISABLE_MODE=false
+fi
 
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do

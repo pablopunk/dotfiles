@@ -297,6 +297,15 @@ end
 local function supermaven()
   add "supermaven-inc/supermaven-nvim"
   require("supermaven-nvim").setup { log_level = "off" }
+  -- Trigger completion with <tab> manually since mini.completion doesn't play well with supermaven
+  map("i", "<tab>", function()
+    local suggestion = require "supermaven-nvim.completion_preview"
+    if suggestion.has_suggestion() then
+      suggestion.on_accept_suggestion()
+    else
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<tab>", true, false, true), "n", true)
+    end
+  end, { desc = "Accept Supermaven suggestion" })
 end
 
 local function avante()
@@ -362,18 +371,7 @@ end
 
 local function mini_nvim()
   add "echasnovski/mini.nvim"
-  require("mini.completion").setup {
-    disable_keymaps = true, -- disables built in keymaps for more manual control
-  }
-  -- Trigger completion with <tab> manually since mini.completion doesn't play well with supermaven
-  map("i", "<tab>", function()
-    local suggestion = require "supermaven-nvim.completion_preview"
-    if suggestion.has_suggestion() then
-      suggestion.on_accept_suggestion()
-    else
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<tab>", true, false, true), "n", true)
-    end
-  end, { desc = "Accept Supermaven suggestion" })
+  require("mini.completion").setup {}
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   require("mini.cursorword").setup {}

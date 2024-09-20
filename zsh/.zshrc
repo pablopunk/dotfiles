@@ -68,6 +68,9 @@ function gcam {
     git commit -m "$*"
   fi
 }
+function gcamm {
+  git commit --amend --message "$*"
+}
 function powersave {
   # linux
   sudo cpufreq-set -g powersave && \

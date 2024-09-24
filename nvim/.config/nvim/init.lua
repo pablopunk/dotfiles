@@ -587,6 +587,11 @@ local function noice()
   }
 end
 
+local function highlight_colors()
+  add "brenoprata10/nvim-highlight-colors"
+  require("nvim-highlight-colors").setup {}
+end
+
 -- Lazy load plugins
 local function setup_plugins()
   plugins_that_should_be_the_default()
@@ -601,6 +606,7 @@ local function setup_plugins()
   trouble()
   conform()
   noice()
+  highlight_colors()
 end
 
 setup_plugin_manager()

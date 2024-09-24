@@ -374,6 +374,7 @@ local function mini_nvim()
   require("mini.completion").setup {}
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
+  vim.cmd "hi! link MiniIndentscopeSymbol Whitespace"
   require("mini.cursorword").setup {}
   require("mini.ai").setup {}
   vim.api.nvim_command "hi! link MiniCursorWord CursorLine"

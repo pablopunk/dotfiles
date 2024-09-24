@@ -180,10 +180,10 @@ end
 local function colors()
   vim.opt.background = "dark"
   add "pablopunk/transparent.vim"
-  add "Shatur/neovim-ayu"
-  vim.cmd "colorscheme ayu-mirage"
-  local dark_theme = "ayu-mirage"
-  local light_theme = "ayu-light"
+  add "folke/tokyonight.nvim"
+  local dark_theme = "tokyonight-night"
+  local light_theme = "tokyonight-day"
+  vim.cmd("colorscheme " .. dark_theme)
   vim.api.nvim_create_user_command("Light", function()
     vim.opt.background = "light"
     vim.cmd("colorscheme " .. light_theme)

@@ -11,10 +11,8 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find "Dark" then
-    -- return "Catppuccin Macchiato"
-    return "Tinacious Design (Dark)"
+    return "Tokyo Night"
   else
-    -- return "Catppuccin Latte"
     return "Gruvbox light, hard (base16)"
   end
 end
@@ -57,7 +55,7 @@ config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "TITLE | RESIZE" -- one of "NONE", "TITLE", "RESIZE", or "TITLE | RESIZE"
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 config.window_padding = {
   left = 16,

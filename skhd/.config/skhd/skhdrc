@@ -1,0 +1,31 @@
+# Change window focus (and jump through monitors)
+ctrl + cmd - h : yabai -m window --focus west || yabai -m display --focus west
+ctrl + cmd - j : yabai -m window --focus south || yabai -m display --focus south
+ctrl + cmd - k : yabai -m window --focus north || yabai -m display --focus north
+ctrl + cmd - l : yabai -m window --focus east  || yabai -m display --focus east
+
+# rotate layout clockwise
+ctrl + cmd - r : yabai -m space --rotate 270
+# flip along y-axis
+ctrl + cmd - y : yabai -m space --mirror y-axis
+# flip along x-axis
+ctrl + cmd - x : yabai -m space --mirror x-axis
+# toggle window float (removes window from tiling)
+ctrl + cmd - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+# maximize a window
+ctrl + cmd - m : yabai -m window --toggle zoom-fullscreen
+# balance out tree of windows (resize to occupy same area)
+ctrl + cmd - e : yabai -m space --balance
+
+# # Swap windows
+# shift + alt - h : yabai -m window --swap west
+# shift + alt - j : yabai -m window --swap south
+# shift + alt - k : yabai -m window --swap north
+# shift + alt - l : yabai -m window --swap east
+
+# Warp windows (swap + split)
+# if window is moved to another monitor, focus that monitor
+ctrl + cmd + shift - h : yabai -m window --warp west  || ( yabai -m window --display west  ; yabai -m display --focus west )
+ctrl + cmd + shift - j : yabai -m window --warp south || ( yabai -m window --display south ; yabai -m display --focus south )
+ctrl + cmd + shift - k : yabai -m window --warp north || ( yabai -m window --display north ; yabai -m display --focus north )
+ctrl + cmd + shift - l : yabai -m window --warp east  || ( yabai -m window --display east  ; yabai -m display --focus east )

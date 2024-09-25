@@ -43,13 +43,6 @@ source ~/.zpm/zpm.zsh
 zpm load loiccoyle/zsh-github-copilot
 bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
 # if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
-## Search history with substring
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
 # }}}
 
 # Functions {{{
@@ -302,8 +295,18 @@ if hash zoxide 2>/dev/null; then
 fi
 # }}}
 
+# Search history with substring {{{
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+# }}}
+
 # End profiling {{{
 if [ -n "${ZSH_DEBUGRC+1}" ]; then
   zprof
 fi
 # }}}
+

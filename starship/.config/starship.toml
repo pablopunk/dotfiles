@@ -48,6 +48,10 @@ disabled = false
 style = "bg:#284387"
 disabled = false # Disabled by default
 
+[os.symbols]
+Macos = " "
+Linux = "🐧 "
+
 [directory]
 style = "bg:#DA627D"
 format = "[ $path ]($style)"

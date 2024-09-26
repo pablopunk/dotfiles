@@ -1,5 +1,5 @@
 #!/bin/bash
 
 if [[ $(uname) == "Darwin" ]]; then
-  brew_install skhd
+  brew_install koekeishiya/formulae/skhd
 fi

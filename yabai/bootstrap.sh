@@ -1,5 +1,5 @@
 #!/bin/bash
 
 if [[ $(uname) == "Darwin" ]]; then
-  brew_install yabai
+  brew_install koekeishiya/formulae/yabai
 fi

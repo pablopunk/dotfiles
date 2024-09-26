@@ -52,7 +52,7 @@ disabled = false # Disabled by default
 Macos = " "
 
 [directory]
-style = "bg:#DA627D fg:#142b5c"
+style = "bg:#DA627D fg:#ffffff"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -92,13 +92,13 @@ format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D fg:#197292"
+style = "bg:#FCA17D fg:#01295a"
 format = '[ $symbol $branch ]($style)'
 truncation_length = 12
 truncation_symbol = "…"
 
 [git_status]
-style = "bg:#FCA17D fg:#197292"
+style = "bg:#FCA17D fg:#01295a"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]

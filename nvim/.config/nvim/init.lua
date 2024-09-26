@@ -335,7 +335,7 @@ local function ai()
   supermaven()
   -- chatgpt()
   -- codecompanion()
-  avante()
+  -- avante()
 end
 
 local function git()
@@ -526,7 +526,7 @@ local function lsp()
     }
   end
 
-  setup_lsp "tsserver"
+  setup_lsp "ts_ls"
   setup_lsp "vimls"
   setup_lsp "bashls"
   setup_lsp "jsonls"
@@ -575,7 +575,7 @@ end
 local function noice()
   add {
     source = "folke/noice.nvim",
-    dependencies = {
+    depends = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },

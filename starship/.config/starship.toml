@@ -52,7 +52,7 @@ disabled = false # Disabled by default
 Macos = " "
 
 [directory]
-style = "bg:#DA627D"
+style = "bg:#DA627D fg:#142b5c"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"

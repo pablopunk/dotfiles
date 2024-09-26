@@ -1,8 +1,10 @@
 format = """
-[](#9A348E)\
+[](#284387)\
 $os\
 $username\
-[](bg:#DA627D fg:#9A348E)\
+[](bg:#fffc7f fg:#284387)\
+$hostname\
+[](bg:#DA627D fg:#fffc7f)\
 $directory\
 [](fg:#DA627D bg:#FCA17D)\
 $git_branch\
@@ -35,16 +37,16 @@ add_newline = false
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#9A348E"
-style_root = "bg:#9A348E"
+style_user = "bg:#284387"
+style_root = "bg:#284387"
 format = '[$user ]($style)'
 disabled = false
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#9A348E"
-disabled = true # Disabled by default
+style = "bg:#284387"
+disabled = false # Disabled by default
 
 [directory]
 style = "bg:#DA627D"
@@ -87,13 +89,13 @@ format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D fg:#063970"
+style = "bg:#FCA17D fg:#197292"
 format = '[ $symbol $branch ]($style)'
 truncation_length = 12
 truncation_symbol = "…"
 
 [git_status]
-style = "bg:#FCA17D fg:#063970"
+style = "bg:#FCA17D fg:#197292"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
@@ -146,3 +148,9 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#33658A"
 format = '[ ♥ $time ]($style)'
+
+[hostname]
+ssh_only = true
+ssh_symbol = "📡"
+style = "bg:#fffc7f fg:#197292"
+format = '[ $ssh_symbol$hostname ]($style)'

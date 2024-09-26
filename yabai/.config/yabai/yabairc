@@ -27,6 +27,8 @@ yabai -m mouse_drop_action swap
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Ajustes" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="CleanShot X" manage=off mouse_follows_focus=off
 
 # Enable this line only if you use sketchybar or something similar
 # yabai -m config external_bar all:32:0

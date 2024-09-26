@@ -50,7 +50,6 @@ disabled = false # Disabled by default
 
 [os.symbols]
 Macos = " "
-Linux = "🐧 "
 
 [directory]
 style = "bg:#DA627D"

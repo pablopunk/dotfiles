@@ -47,8 +47,9 @@ bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
 
 # Functions {{{
 function rm {
-  mkdir -p /tmp/trash/$USER
-  mv "$@" /tmp/trash/$USER
+  going_to="/tmp/trash/$USER/$(date +%s%N)"
+  mkdir -p "$going_to"
+  mv -f "$@" "$going_to"
 }
 function gcm {
   git commit -m "$*"

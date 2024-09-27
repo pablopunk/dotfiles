@@ -485,6 +485,7 @@ local function lsp()
       "astro",
       "biome",
       "eslint",
+      "tsserver",
     },
   }
 
@@ -526,7 +527,7 @@ local function lsp()
     }
   end
 
-  setup_lsp "ts_ls"
+  setup_lsp "tsserver"
   setup_lsp "vimls"
   setup_lsp "bashls"
   setup_lsp "jsonls"

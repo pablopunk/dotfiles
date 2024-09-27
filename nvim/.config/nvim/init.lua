@@ -578,7 +578,7 @@ local function noice()
     source = "folke/noice.nvim",
     depends = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      -- "rcarriga/nvim-notify",
     },
   }
   require("noice").setup {

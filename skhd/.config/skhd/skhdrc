@@ -13,7 +13,7 @@ ctrl + cmd - x : yabai -m space --mirror x-axis
 # toggle window float (removes window from tiling)
 ctrl + cmd - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 # maximize a window
-ctrl + cmd - m : yabai -m window --toggle zoom-fullscreen
+ctrl + cmd - space : yabai -m window --toggle zoom-fullscreen
 # balance out tree of windows (resize to occupy same area)
 ctrl + cmd - e : yabai -m space --balance
 

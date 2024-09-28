@@ -23,7 +23,7 @@ function brew_install {
   echo $brew_list > /tmp/brew_list # cache brew list
   if [[ -z "$(echo $brew_list | grep -w $package)" ]]; then
     brew install $@ > /dev/null # install only if it's not installed
-    echo -e "\033[94m✔︎\033[0m installed $1 (brew)"
+    echo -e "\033[94m✓\033[0m installed $1 (brew)"
   fi
 }
 
@@ -39,7 +39,7 @@ export -f brew_install
 for script in `ls -1 */bootstrap.sh`
 do
   bash $script
-  echo -e "\033[32m✔︎\033[0m $(dirname "$script")"
+  echo -e "\033[32m✓\033[0m $(dirname "$script")"
 done
 
 rm /tmp/brew_list

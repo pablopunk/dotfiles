@@ -27,6 +27,7 @@ yabai -m rule --add app="^Ajustes" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="CleanShot X" manage=off
+yabai -m rule --add app="Raycast" manage=off
 
 # Auto balance makes it so all windows always occupy the same space, independent of how deeply nested they are in the window tree. When a new window is inserted or a window is removed, the split ratios will be automatically adjusted.
 yabai -m config auto_balance on

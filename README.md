@@ -17,7 +17,7 @@ cd ~/.dotfiles
 Install with nix:
 
 ```bash
-nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.config/nix#m1pro
+nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.dotfiles#m1pro
 ```
 
 > NOTE: m1pro in this case is one of the possible values. Check nix/hosts for other possible values.
@@ -25,5 +25,5 @@ nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch 
 To rebuild the config:
 
 ```bash
-darwin-rebuild switch --flake ~/.dotfiles/nix#m1pro
+darwin-rebuild switch --flake ~/.dotfiles#m1pro
 ```

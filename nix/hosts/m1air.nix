@@ -16,6 +16,7 @@
       "spotify"
       "telegram-desktop"
       "whatsapp"
+      "zed"
     ];
     onActivation.cleanup = "zap";
   };

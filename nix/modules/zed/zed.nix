@@ -2,7 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    zed
+    # build is not working
+    # zed-editor
   ];
 
   home.file = {

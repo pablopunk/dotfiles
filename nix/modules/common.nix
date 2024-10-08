@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   nixpkgs.config.allowUnfree = true;
-
+  # nixpkgs.config.allowBroken = true; # zed-editor available as unstable
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [ pkgs.mkalias ];

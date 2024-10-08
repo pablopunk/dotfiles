@@ -23,6 +23,7 @@
       "telegram-desktop"
       "whatsapp"
       "zoom"
+      "zed"
     ];
     onActivation.cleanup = "zap";
   };

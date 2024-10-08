@@ -30,5 +30,7 @@
     ../modules/starship/starship.nix
     ../modules/shell.nix
     ../modules/binaries/binaries.nix
+    ../modules/gh/gh.nix
+    ../modules/karabiner/karabiner.nix
   ];
 }

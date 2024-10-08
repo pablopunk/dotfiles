@@ -34,5 +34,6 @@
     (mod "wezterm/wezterm")
     (mod "zed/zed")
     (mod "zsh/zsh")
+    (mod "editorconfig/editorconfig")
   ];
 }

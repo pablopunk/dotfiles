@@ -38,6 +38,7 @@
       autohide-delay = 0.0;
       persistent-apps = [ # Apps in the dock
         "/Applications/Notion Calendar.app"
+        "/Applications/Missive.app"
         "/Applications/Arc.app"
         "/Applications/Slack.app"
         "/Applications/Cursor.app"

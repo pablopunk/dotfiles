@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [ pkgs.zsh pkgs.zsh-autosuggestions pkgs.zsh-syntax-highlighting ];
+  home.packages = with pkgs; [ zsh zsh-autosuggestions zsh-syntax-highlighting ];
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;

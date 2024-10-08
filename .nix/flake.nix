@@ -17,28 +17,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [
-          pkgs._1password
-          pkgs.btop
-          pkgs.delta
-          pkgs.eza
-          pkgs.gh
-          pkgs.git
-          pkgs.jq
-          pkgs.karabiner-elements
-          pkgs.luarocks
-          pkgs.mise
           pkgs.mkalias # fix for macOS /Applications links
-          pkgs.neovim
-          pkgs.powerline-fonts
-          pkgs.python3
-          pkgs.ripgrep
-          pkgs.skhd
-          pkgs.starship
-          pkgs.tmux
-          pkgs.vim
-          pkgs.wezterm
-          pkgs.yabai
-          pkgs.zoxide
         ];
 
       # Auto upgrade nix package and the daemon service.

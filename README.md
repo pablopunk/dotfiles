@@ -21,3 +21,9 @@ nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch 
 ```
 
 > NOTE: m1pro in this case is one of the possible values. Check nix/hosts for other possible values.
+
+To rebuild the config:
+
+```bash
+darwin-rebuild switch --flake ~/.dotfiles/nix#m1pro
+```

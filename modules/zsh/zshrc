@@ -1,10 +1,8 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
 
-# Start profiling {{{
-if [ -n "${ZSH_DEBUGRC+1}" ]; then
-  zmodload zsh/zprof
+if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+   . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 fi
-# }}}
 
 # zsh config {{{
 # [ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -268,11 +266,5 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-# }}}
-
-# End profiling {{{
-if [ -n "${ZSH_DEBUGRC+1}" ]; then
-  zprof
-fi
 # }}}
 

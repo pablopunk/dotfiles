@@ -5,7 +5,7 @@
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    syntaxHighlighting.enable = true; # is this working?
   };
   home.file.".zshrc".source = ./zshrc;
 }

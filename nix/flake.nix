@@ -45,8 +45,5 @@
         username = "pol";
       };
     };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."m1pro".pkgs;
   };
 }

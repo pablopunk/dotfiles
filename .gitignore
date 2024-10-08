@@ -13,10 +13,10 @@ kitty/.config/kitty/current-theme.conf
 kitty/.config/kitty/kitty.conf.bak
 
 # I prefer my conversations to be private
-zed/.config/**/conversations
-zed/.config/**/embeddings
-zed/.config/**/.tmp*
-zed/.config/**/prompts
+nix/modules/zed/config/conversations
+nix/modules/zed/config/embeddings
+nix/modules/zed/config/.tmp*
+nix/modules/zed/config/prompts
 .tmp*
 
 # Lock files

@@ -2,5 +2,5 @@
 
 {
   home.packages = with pkgs; [ wezterm ];
-  home.file.".wezterm.lua".text = builtins.readFile ./wezterm.lua;
+  home.file.".wezterm.lua".source = ./wezterm.lua;
 }

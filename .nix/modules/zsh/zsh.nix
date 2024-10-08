@@ -7,5 +7,5 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
   };
-  home.file.".zshrc".text = builtins.readFile ./zshrc;
+  home.file.".zshrc".source = ./zshrc;
 }

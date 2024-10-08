@@ -42,7 +42,8 @@
       ShowStatusBar = true;
     };
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      # AppleInterfaceStyle = "Auto";
+      AppleInterfaceStyleSwitchesAutomatically = true;
       KeyRepeat = 2;
     };
   };

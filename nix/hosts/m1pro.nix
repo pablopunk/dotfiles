@@ -22,7 +22,6 @@
       "spotify"
       "telegram-desktop"
       "whatsapp"
-      "zed"
       "zoom"
     ];
     onActivation.cleanup = "zap";

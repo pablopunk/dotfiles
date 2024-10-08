@@ -14,4 +14,10 @@ git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-> WIP. Nix installation
+Install with nix:
+
+```bash
+nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.config/nix#m1pro
+```
+
+> NOTE: m1pro in this case is one of the possible values. Check nix/hosts for other possible values.

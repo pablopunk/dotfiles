@@ -7,16 +7,16 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    pkgs._1password
-    pkgs.btop
-    pkgs.delta
-    pkgs.git
-    pkgs.mise
-    pkgs.powerline-fonts
-    pkgs.ripgrep
-    pkgs.skhd
-    pkgs.tmux
-    pkgs.yabai
+    _1password
+    btop
+    delta
+    git
+    mise
+    powerline-fonts
+    ripgrep
+    skhd
+    tmux
+    yabai
   ];
 
   imports = [
@@ -29,5 +29,6 @@
     ../modules/gh/gh.nix
     ../modules/karabiner/karabiner.nix
     ../modules/tmux/tmux.nix
+    ../modules/git/git.nix
   ];
 }

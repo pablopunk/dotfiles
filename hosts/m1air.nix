@@ -14,7 +14,6 @@
       "raycast"
       "sf-symbols"
       "spotify"
-      "telegram-desktop"
       "whatsapp"
       "zed"
     ];

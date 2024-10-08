@@ -30,5 +30,6 @@
     ../modules/karabiner/karabiner.nix
     ../modules/tmux/tmux.nix
     ../modules/git/git.nix
+    ../modules/vim/vim.nix
   ];
 }

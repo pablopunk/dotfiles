@@ -21,7 +21,8 @@
   "terminal": {
     "dock": "bottom",
     "detect_venv": false,
-    "working_directory": "current_project_directory"
+    "working_directory": "current_project_directory",
+    "font_family": "Fira Mono for Powerline"
   },
   "project_panel": {
     "dock": "left",
@@ -56,18 +57,13 @@
     {
       "external": {
         "command": "biome",
-        "arguments": [
-          "check",
-          "--write",
-          "--stdin-file-path",
-          "{buffer_path}"
-        ]
+        "arguments": ["check", "--write", "--stdin-file-path", "{buffer_path}"]
       }
     }
   ],
   "indent_guides": {
     "line_width": 0,
-    "coloring": "indent_aware",
+    "coloring": "indent_aware"
   },
   "hard_tabs": false,
   "tab_size": 2,

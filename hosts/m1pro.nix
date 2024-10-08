@@ -20,7 +20,6 @@
       "sf-symbols"
       "slack"
       "spotify"
-      "telegram-desktop"
       "whatsapp"
       "zoom"
       "zed"

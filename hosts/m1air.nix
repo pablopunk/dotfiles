@@ -2,6 +2,7 @@
   homebrew = {
     enable = true;
     casks = [
+      "1password"
       "alt-tab"
       "arc"
       "cleanshot"

@@ -1,4 +1,14 @@
-{ description = "m1pro Darwin system flake"; inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; nix-darwin.url = "github:LnL7/nix-darwin"; nix-darwin.inputs.nixpkgs.follows = "nixpkgs"; nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew"; }; outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, }:
+{
+  description = "Pablopunk's Darwin system flake";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+ };
+ outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, home-manager }:
   let
     configuration = { pkgs, config, ... }: {
       nixpkgs.config.allowUnfree = true;
@@ -29,8 +39,6 @@
           pkgs.wezterm
           pkgs.yabai
           pkgs.zoxide
-          pkgs.zsh-autosuggestions
-          pkgs.zsh-syntax-highlighting
         ];
 
       # Auto upgrade nix package and the daemon service.
@@ -74,8 +82,8 @@
           "zoom"
         ];
         onActivation.cleanup = "zap"; # remove brew packages that are not in nix
-        onActivation.autoUpdate = true;
-        onActivation.upgrade = true;
+        # onActivation.autoUpdate = true;
+        # onActivation.upgrade = true;
       };
 
       # macOS settings https://mynixos.com/nix-darwin/options/system.defaults
@@ -127,6 +135,22 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      # Home Manager configuration
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.pablopunk = import ./home-manager/pablopunk.nix;
+      };
+      # prevents bug https://github.com/nix-community/home-manager/issues/4026
+      users.users.pablopunk.home = "/Users/pablopunk";
+
+      nix-homebrew = {
+        enable = true;
+        enableRosetta = true;
+        user = "pablopunk";
+        autoMigrate = false;
+      };
     };
   in
   {
@@ -136,14 +160,7 @@
       modules = [
         configuration
         nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = "pablopunk";
-            autoMigrate = true;
-          };
-        }
+        home-manager.darwinModules.home-manager
       ];
     };
 

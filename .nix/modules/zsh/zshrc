@@ -12,18 +12,6 @@ fi
 setopt PROMPT_SUBST
 # }}}
 
-# Zsh plugin manager (zpm) {{{
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
-fi
-source ~/.zpm/zpm.zsh
-# Plugins
-## Copilot suggestions on CLI
-# zpm load loiccoyle/zsh-github-copilot
-# bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
-# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
-# }}}
-
 # Functions {{{
 function rm {
   going_to="/tmp/trash/$USER/$(date +%s%N)"

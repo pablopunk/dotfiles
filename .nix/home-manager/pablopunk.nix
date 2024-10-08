@@ -10,16 +10,12 @@
     pkgs._1password
     pkgs.btop
     pkgs.delta
-    pkgs.gh
     pkgs.git
-    pkgs.karabiner-elements
     pkgs.mise
     pkgs.powerline-fonts
     pkgs.ripgrep
     pkgs.skhd
-    pkgs.starship
     pkgs.tmux
-    pkgs.wezterm
     pkgs.yabai
   ];
 
@@ -32,5 +28,6 @@
     ../modules/binaries/binaries.nix
     ../modules/gh/gh.nix
     ../modules/karabiner/karabiner.nix
+    ../modules/tmux/tmux.nix
   ];
 }

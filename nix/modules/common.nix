@@ -8,6 +8,10 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+  # Import yabai configuration
+  services.yabai = import ./yabai/yabai.nix { inherit pkgs; };
+  services.skhd = import ./skhd/skhd.nix { inherit pkgs; };
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 

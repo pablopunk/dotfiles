@@ -1,3 +1,8 @@
+{ pkgs, ... }: {
+  enable = true;
+  package = pkgs.skhd;
+
+  skhdConfig = ''
 # Change window focus (and jump through monitors)
 ctrl + cmd - h : yabai -m window --focus west || yabai -m display --focus west
 ctrl + cmd - j : yabai -m window --focus south || yabai -m display --focus south
@@ -29,3 +34,5 @@ ctrl + cmd + shift - h : yabai -m window --warp west  || ( yabai -m window --dis
 ctrl + cmd + shift - j : yabai -m window --warp south || ( yabai -m window --display south ; yabai -m display --focus south )
 ctrl + cmd + shift - k : yabai -m window --warp north || ( yabai -m window --display north ; yabai -m display --focus north )
 ctrl + cmd + shift - l : yabai -m window --warp east  || ( yabai -m window --display east  ; yabai -m display --focus east )
+  '';
+}

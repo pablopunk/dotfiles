@@ -20,7 +20,7 @@ Install with nix:
 nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/.dotfiles#m1pro
 ```
 
-> NOTE: m1pro in this case is one of the possible values. Check nix/hosts for other possible values.
+> NOTE: _m1pro_ in this case is one of the possible values. Check ./nix/hosts for other possible values.
 
 To rebuild the config:
 

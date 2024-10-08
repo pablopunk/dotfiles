@@ -8,7 +8,6 @@
   home.packages = with pkgs; [
     _1password
     btop
-    mise
     powerline-fonts
   ];
 

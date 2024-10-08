@@ -1,14 +1,4 @@
-{
-  description = "m1pro Darwin system flake";
-
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-  };
-
-  outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, }:
+{ description = "m1pro Darwin system flake"; inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; nix-darwin.url = "github:LnL7/nix-darwin"; nix-darwin.inputs.nixpkgs.follows = "nixpkgs"; nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew"; }; outputs = inputs@{ self, nixpkgs, nix-darwin, nix-homebrew, }:
   let
     configuration = { pkgs, config, ... }: {
       nixpkgs.config.allowUnfree = true;
@@ -16,17 +6,31 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
-        [ pkgs.vim
+        [
+          pkgs._1password
+          pkgs.btop
+          pkgs.delta
+          pkgs.eza
+          pkgs.gh
+          pkgs.git
+          pkgs.jq
+          pkgs.karabiner-elements
+          pkgs.luarocks
+          pkgs.mise
           pkgs.mkalias # fix for macOS /Applications links
           pkgs.neovim
-          pkgs.tmux
-          pkgs.wezterm
           pkgs.powerline-fonts
-          pkgs.mise
+          pkgs.python3
+          pkgs.ripgrep
+          pkgs.skhd
           pkgs.starship
-          pkgs.gh
+          pkgs.tmux
+          pkgs.vim
+          pkgs.wezterm
+          pkgs.yabai
           pkgs.zoxide
-          pkgs._1password
+          pkgs.zsh-autosuggestions
+          pkgs.zsh-syntax-highlighting
         ];
 
       # Auto upgrade nix package and the daemon service.
@@ -70,6 +74,30 @@
           "zoom"
         ];
         onActivation.cleanup = "zap"; # remove brew packages that are not in nix
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
+      };
+
+      # macOS settings https://mynixos.com/nix-darwin/options/system.defaults
+      system.defaults = {
+        dock.autohide = true;
+        dock.orientation = "right";
+        dock.autohide-delay = 0.0;
+        dock.persistent-apps = [
+          "/Applications/Notion Calendar.app"
+          "/Applications/Arc.app"
+          "/Applications/Slack.app"
+          "/Applications/Cursor.app"
+          "${pkgs.wezterm}/Applications/Wezterm.app"
+          "/Applications/zoom.us.app"
+          "/Applications/Spotify.app"
+        ];
+        trackpad.Clicking = true;
+        trackpad.Dragging = true;
+        finder.ShowPathbar = true;
+        finder.ShowStatusBar = true;
+        NSGlobalDomain.AppleInterfaceStyle = "Dark";
+        NSGlobalDomain.KeyRepeat = 2;
       };
 
       # Fix for /Applications links on macOS.

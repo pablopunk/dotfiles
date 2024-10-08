@@ -32,6 +32,7 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 
 --- Fonts {{{
 config.font = wezterm.font_with_fallback {
+  "Fira Mono for Powerline",
   "GeistMono Nerd Font Mono",
   "SF Mono Powerline",
   "Nova",
@@ -63,6 +64,10 @@ config.window_padding = {
   top = 16,
   bottom = 0, -- for some reason there's already a gap at the bottom
 }
+--- }}}
+
+--- Fix for nix visual bug {{{
+config.front_end = "WebGpu"
 --- }}}
 
 --- Keys {{{

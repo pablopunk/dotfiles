@@ -1,10 +1,11 @@
 return {
   brew = {
     { name = "neovim", options = "--HEAD" },
-    "ripgrep"
+    "ripgrep",
   },
   config = {
     source = "./config",
     output = "~/.config/nvim",
-  }
+  },
 }
+

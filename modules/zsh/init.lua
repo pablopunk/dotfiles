@@ -12,5 +12,6 @@ return {
   config = {
     source = "./zshrc",
     output = "~/.zshrc",
-  }
+  },
 }
+

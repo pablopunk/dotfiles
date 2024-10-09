@@ -5,5 +5,5 @@ return {
   config = {
     source = "./skhdrc",
     output = "~/.config/skhd/skhdrc",
-  }
+  },
 }

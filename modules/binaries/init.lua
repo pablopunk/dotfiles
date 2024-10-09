@@ -1,9 +1,10 @@
 return {
   brew = {
-    "fzf"
+    "fzf",
   },
   config = {
     source = "./bin",
     output = "~/.bin",
-  }
+  },
 }
+

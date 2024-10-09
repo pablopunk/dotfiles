@@ -1,6 +1,7 @@
 return {
   brew = {
-    { name = "neovim", options = "--HEAD" },
+--     { name = "neovim", options = "--HEAD" },
+    "neovim",
     "ripgrep",
   },
   config = {

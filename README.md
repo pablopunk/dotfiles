@@ -5,6 +5,14 @@
   alt="neovim"
   width="700px" />
 
+## 👀 Requirements
+
+Install [_nos_](https://github.com/pablopunk/nos)
+
+```bash
+brew install pablopunk/formulae/nos
+```
+
 ## 🚀 Install
 
 I usually keep the repo in `~/.dotfiles`:
@@ -12,6 +20,5 @@ I usually keep the repo in `~/.dotfiles`:
 ```bash
 git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 cd ~/.dotfiles
+nos
 ```
-
-> WIP. `nos`

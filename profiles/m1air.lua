@@ -1,0 +1,6 @@
+return {
+  modules = {
+    "apps/personal",
+    "*",
+  },
+}

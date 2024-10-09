@@ -2,9 +2,14 @@
 
 -- Parse command-line arguments
 local force_mode = false
+local version = "0.0.1"
+
 for i, arg in ipairs(arg) do
   if arg == "-f" then
     force_mode = true
+  elseif arg == "--version" then
+    print("nos version " .. version)
+    os.exit(0)
   end
 end
 

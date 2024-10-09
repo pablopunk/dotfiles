@@ -1,7 +1,7 @@
 return {
-  brew = {"git", "delta"},
+  brew = { "git", "git-delta" },
   config = {
     source = "./gitconfig",
     output = "~/.gitconfig",
-  }
+  },
 }

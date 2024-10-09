@@ -5,5 +5,5 @@ return {
   config = {
     source = "./yabairc",
     output = "~/.config/yabai/yabairc",
-  }
+  },
 }

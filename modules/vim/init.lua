@@ -1,7 +1,8 @@
 return {
-  brew = {"vim", "ripgrep"},
+  brew = { "vim", "ripgrep" },
   config = {
     source = "./vimrc",
     output = "~/vimrc",
-  }
+  },
 }
+

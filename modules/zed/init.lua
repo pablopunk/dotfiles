@@ -5,5 +5,5 @@ return {
   config = {
     source = "./config",
     output = "~/.config/zed",
-  }
+  },
 }

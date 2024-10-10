@@ -2,6 +2,7 @@ return {
   brew = {
     "aws-vault",
     "cloudflare-warp",
+    "mise",
     "monitorcontrol",
     "orbstack",
     "scroll-reverser",
@@ -9,4 +10,3 @@ return {
     "zoom",
   },
 }
-

@@ -13,11 +13,9 @@ kitty/.config/kitty/current-theme.conf
 kitty/.config/kitty/kitty.conf.bak
 
 # I prefer my conversations to be private
-nix/modules/zed/config/conversations
-nix/modules/zed/config/embeddings
-nix/modules/zed/config/.tmp*
-nix/modules/zed/config/prompts
-.tmp*
+modules/zed/config/*
+!modules/zed/config/keymap.json
+!modules/zed/config/settings.json
 
 # Lock files
 nvim/.config/nvim/lazy-lock.json
@@ -25,4 +23,10 @@ nvim/.config/nvim/lazy-lock.json
 # ignore all unison/.unison/* other than preferences.prf
 unison/.unison/*
 !unison/.unison/preferences.prf
+
+# cursor ignore eveything but two files
+modules/cursor/config/**
+modules/cursor/config/*
+!modules/cursor/config/settings.json
+!modules/cursor/config/keybindings.json
 

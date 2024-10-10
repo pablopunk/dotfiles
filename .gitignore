@@ -2,8 +2,6 @@
 .DS_Store
 node_modules
 
-karabiner/.config/karabiner/automatic_backups
-
 # generated files
 nvim/plugin/packer_compiled.lua
 nvim/lazy-lock.json
@@ -12,21 +10,10 @@ kitty/kitty.conf.bak
 kitty/.config/kitty/current-theme.conf
 kitty/.config/kitty/kitty.conf.bak
 
-# I prefer my conversations to be private
-modules/zed/config/*
-!modules/zed/config/keymap.json
-!modules/zed/config/settings.json
-
 # Lock files
 nvim/.config/nvim/lazy-lock.json
 
 # ignore all unison/.unison/* other than preferences.prf
 unison/.unison/*
 !unison/.unison/preferences.prf
-
-# cursor ignore eveything but two files
-modules/cursor/config/**
-modules/cursor/config/*
-!modules/cursor/config/settings.json
-!modules/cursor/config/keybindings.json
 

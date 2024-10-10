@@ -1,6 +1,6 @@
 {
   "window.commandCenter": 1,
-  "workbench.colorTheme": "Ayu Mirage Bordered",
+  "workbench.colorTheme": "Default Dark Modern",
   "editor.fontFamily": "SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "github.copilot.enable": {

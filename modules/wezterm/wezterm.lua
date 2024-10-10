@@ -45,7 +45,7 @@ config.font = wezterm.font_with_fallback {
   "SF Mono",
   "Fira Mono for Powerline",
 }
-config.font_size = 16.0
+config.font_size = 15.0
 config.line_height = 1.2
 --- }}}
 

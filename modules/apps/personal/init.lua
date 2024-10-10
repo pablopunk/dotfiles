@@ -10,6 +10,7 @@ return {
     "latest",
     "missive",
     "notion-calendar",
+    "pablopunk/brew/swift-shift",
     "raycast",
     "sf-symbols",
     "spotify",

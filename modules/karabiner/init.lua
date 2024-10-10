@@ -3,7 +3,7 @@ return {
     "karabiner-elements",
   },
   config = {
-    source = "./config",
-    output = "~/.config/karabiner",
+    source = "./karabiner.json",
+    output = "~/.config/karabiner/karabiner.json",
   },
 }

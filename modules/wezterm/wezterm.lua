@@ -32,20 +32,21 @@ config.color_scheme = scheme_for_appearance(get_appearance())
 
 --- Fonts {{{
 config.font = wezterm.font_with_fallback {
+  "Source Code Pro for Powerline",
+  "Fira Mono for Powerline",
+  "CaskaydiaCove Nerd Font Mono",
+  "Nova Mono for Powerline",
   "SF Mono Powerline",
-  "Nova",
   "Dank Mono",
   "Monaspace Neon Regular",
   "Victor Mono",
   "Hack Nerd Font",
   "Hack",
-  "CaskaydiaCove Nerd Font",
   "Cascadia Code",
   "Comic Mono",
   "SF Mono",
-  "Fira Mono for Powerline",
 }
-config.font_size = 15.0
+config.font_size = 16.0
 config.line_height = 1.2
 --- }}}
 

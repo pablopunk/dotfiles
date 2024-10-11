@@ -313,3 +313,5 @@ if [ -n "${ZSH_DEBUGRC+1}" ]; then
 fi
 # }}}
 
+
+PATH=~/.console-ninja/.bin:$PATH

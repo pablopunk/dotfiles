@@ -45,5 +45,7 @@
   },
   "editor.formatOnSave": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "terminal.integrated.env.osx": {}
+  "terminal.integrated.env.osx": {},
+  "console-ninja.featureSet": "Community",
+  "editor.defaultFormatter": "biomejs.biome"
 }

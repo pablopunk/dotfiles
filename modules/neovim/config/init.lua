@@ -573,12 +573,23 @@ local function conform()
   }
 end
 
+local function notify()
+  add "rcarriga/nvim-notify"
+  ---@diagnostic disable-next-line: missing-fields
+  require("notify").setup {
+    stages = "no_animation",
+    render = "compact",
+    timeout = 1000,
+  }
+  vim.notify = require "notify" -- make it available to other plugins
+end
+
 local function noice()
+  notify()
   add {
     source = "folke/noice.nvim",
     depends = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
     },
   }
   require("noice").setup {
@@ -587,16 +598,6 @@ local function noice()
     messages = { enabled = true, view = "notify" },
     cmdline = { view = "cmdline_popup" },
   }
-end
-
-local function notify()
-  add "rcarriga/nvim-notify"
-  ---@diagnostic disable-next-line: missing-fields
-  require("notify").setup {
-    stages = "no_animation",
-    timeout = 1000,
-  }
-  vim.notify = require "notify" -- make it available to other plugins
 end
 
 local function highlight_colors()

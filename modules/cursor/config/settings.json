@@ -1,6 +1,6 @@
 {
   "window.commandCenter": 1,
-  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.colorTheme": "Tokyo Night Storm",
   "editor.fontFamily": "SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "github.copilot.enable": {
@@ -16,7 +16,6 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "workbench.iconTheme": "moxer-icons",
   "git.enableSmartCommit": true,
   "diffEditor.renderSideBySide": false,
   "totalTypeScript.hideAllTips": false,

@@ -27,7 +27,7 @@ $docker_context\
 [](fg:#06969A bg:#33658A)\
 $time\
 [ ](fg:#33658A)\
-\n→\u00A0
+[\n λ](fg:#FCA17D)\u00A0
 """
 
 # Disable the blank line at the start of the prompt

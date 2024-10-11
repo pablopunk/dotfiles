@@ -485,7 +485,7 @@ local function lsp()
       "astro",
       "biome",
       "eslint",
-      "tsserver",
+      "vtsls",
     },
   }
 
@@ -527,7 +527,7 @@ local function lsp()
     }
   end
 
-  setup_lsp "tsserver"
+  setup_lsp "vtsls"
   setup_lsp "vimls"
   setup_lsp "bashls"
   setup_lsp "jsonls"
@@ -578,15 +578,25 @@ local function noice()
     source = "folke/noice.nvim",
     depends = {
       "MunifTanjim/nui.nvim",
-      -- "rcarriga/nvim-notify",
+      "rcarriga/nvim-notify",
     },
   }
   require("noice").setup {
     lsp = { progress = { enabled = false } },
-    notify = { enabled = false },
-    cmdline = { view = "cmdline" },
+    notify = { enabled = true, view = "notify" },
     messages = { enabled = true, view = "notify" },
+    cmdline = { view = "cmdline_popup" },
   }
+end
+
+local function notify()
+  add "rcarriga/nvim-notify"
+  ---@diagnostic disable-next-line: missing-fields
+  require("notify").setup {
+    stages = "no_animation",
+    timeout = 1000,
+  }
+  vim.notify = require "notify" -- make it available to other plugins
 end
 
 local function highlight_colors()
@@ -596,6 +606,8 @@ end
 
 -- Lazy load plugins
 local function setup_plugins()
+  -- notify()
+  noice()
   plugins_that_should_be_the_default()
   which_key()
   telescope()
@@ -607,7 +619,6 @@ local function setup_plugins()
   lsp()
   trouble()
   conform()
-  noice()
   highlight_colors()
 end
 

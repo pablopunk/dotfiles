@@ -22,10 +22,11 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 
 # Disable apps
-yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Ajustes" manage=off
-yabai -m rule --add app="^Karabiner-Elements$" manage=off
-yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="System Settings" manage=off
+yabai -m rule --add app="Ajustes" manage=off
+yabai -m rule --add app="Karabiner-Elements" manage=off
+yabai -m rule --add app="Karabiner-EventViewer" manage=off
+yabai -m rule --add app="Finder" manage=off
 yabai -m rule --add app="CleanShot X" manage=off
 yabai -m rule --add app="Raycast" manage=off
 yabai -m rule --add app="Yonna" manage=off

@@ -42,8 +42,9 @@ source ~/.zpm/zpm.zsh
 ## Copilot suggestions on CLI
 ## Requires gh CLI and extension: gh extension install github/gh-copilot --force
 zpm load loiccoyle/zsh-github-copilot
-bindkey '^ ' zsh_gh_copilot_suggest # ctrl+space to trigger copilot suggestions
-# if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
+# ctrl + space to trigger copilot suggestions
+## if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
+bindkey '^ ' zsh_gh_copilot_suggest
 # }}}
 
 # Functions {{{

@@ -7,10 +7,10 @@
 
 ## 👀 Requirements
 
-Install [_nos_](https://github.com/pablopunk/nos)
+Install [dot](https://github.com/pablopunk/dot)
 
 ```bash
-brew install pablopunk/formulae/nos
+brew install pablopunk/formulae/dot
 ```
 
 ## 🚀 Install
@@ -20,5 +20,5 @@ I usually keep the repo in `~/.dotfiles`:
 ```bash
 git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
 cd ~/.dotfiles
-nos
+dot
 ```

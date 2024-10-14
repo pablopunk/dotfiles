@@ -17,6 +17,5 @@ return {
     "whatsapp",
     "zed",
     "battery",
-  },
-  post_install = "open /Applications/battery.app",
+  }
 }

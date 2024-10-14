@@ -50,6 +50,24 @@ bindkey '^ ' zsh_gh_copilot_suggest
 # }}}
 
 # Functions {{{
+my_cd() {
+  if ! hash zoxide 2>/dev/null; then
+    \cd $@
+    return
+  fi
+  local results dir
+  results=$(zoxide query -l "$@")
+  if [[ $(echo "$results" | wc -l) -eq 1 ]]; then
+    # If there's only one match, cd into it directly
+    \cd "$results"
+  else
+    # If there are multiple matches, use the fuzzy finder
+    dir=$(echo "$results" | zi)
+    if [[ -n $dir ]]; then
+      \cd "$dir"
+    fi
+  fi
+}
 function rm {
   going_to="/tmp/trash/$USER/$(date +%s%N)"
   mkdir -p "$going_to"
@@ -163,6 +181,7 @@ function tilt {
 # }}}
 
 # Aliases {{{
+alias cd=my_cd
 alias g=git
 alias gst='git status'
 alias gp='git push'
@@ -196,8 +215,6 @@ alias :q='exit'
 alias :qa='exit'
 alias :x='exit'
 alias :xa='exit'
-# zoxide
-alias cd='z'
 # source entry file
 alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'

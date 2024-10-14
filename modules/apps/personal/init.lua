@@ -18,5 +18,5 @@ return {
     "zed",
     "battery",
   },
-  post_install = "open /Applications/Battery.app",
+  post_install = "open /Applications/battery.app",
 }

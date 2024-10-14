@@ -486,6 +486,7 @@ local function lsp()
       "biome",
       "eslint",
       "vtsls",
+      -- "zls", --for zig
     },
   }
 
@@ -544,6 +545,7 @@ local function lsp()
       },
     },
   })
+  -- setup_lsp "zls"
 end
 
 local function trouble()

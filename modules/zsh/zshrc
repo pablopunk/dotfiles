@@ -50,6 +50,13 @@ bindkey '^ ' zsh_gh_copilot_suggest
 # }}}
 
 # Functions {{{
+my_ls() {
+  if ! hash eza 2>/dev/null; then
+    \ls $@
+    return
+  fi
+  eza $@
+}
 my_cd() {
   if ! hash zoxide 2>/dev/null; then
     \cd $@
@@ -195,10 +202,10 @@ alias amend='git commit --amend'
 alias gca='git add -A && git commit'
 alias gpr='git fetch upstream && git diff -w --minimal upstream/master'
 # ls aliases
-alias ls='eza -G --icons=always'
-alias ll='eza -lagh --icons=always'
-alias la='eza -a1 --icons=always'
-alias l='eza -a1 --icons=always'
+alias ls='my_ls -G --icons=always'
+alias ll='my_ls -lagh --icons=always'
+alias la='my_ls -a1 --icons=always'
+alias l='my_ls -a1 --icons=always'
 alias t='tree -L 3'
 # other
 alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '

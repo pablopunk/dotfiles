@@ -85,7 +85,7 @@ local function setup_mappings()
   map("n", "<leader>fpp", ":file<cr>", { desc = "Print file path" })
   map("n", "<leader>fpa", ":let @+ = expand('%:p')<cr>", { desc = "Copy file path (absolute)" })
   map("n", "<leader>fpr", ":let @+ = expand('%:p:~:.')<cr>", { desc = "Copy file path (relative)" })
-  map("n", "<leader>fni", ":let @0 = expand('%:p:t')<cr>\"0p", { desc = "Insert file name" })
+  map("n", "<leader>fpi", ":let @0 = expand('%:p:t')<cr>\"0p", { desc = "Insert file name" })
 
   -- System clipboard
   map({ "n", "v" }, "<leader>y", '"*y', { desc = "Copy to system clipboard" })
@@ -581,9 +581,15 @@ local function notify()
   require("notify").setup {
     stages = "no_animation",
     render = "compact",
-    timeout = 1000,
+    timeout = 2000,
   }
   vim.notify = require "notify" -- make it available to other plugins
+  map("n", "<leader>fn", ":Telescope notify<cr>", { desc = "Filter messages/errors (nvim-notify)" })
+  map("n", "<leader>h", function()
+    ---@diagnostic disable-next-line: missing-parameter
+    require("notify").dismiss()
+    vim.cmd "noh"
+  end, { desc = "Dismiss notification (nvim-notify)" })
 end
 
 local function noice()

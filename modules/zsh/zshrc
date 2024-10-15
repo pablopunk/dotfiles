@@ -58,6 +58,11 @@ my_ls() {
   eza $@
 }
 my_cd() {
+  folder_exists_in_pwd=$(find . -maxdepth 1 -type d -name "$1")
+  if [[ -n $folder_exists_in_pwd ]]; then
+    \cd "$folder_exists_in_pwd"
+    return
+  fi
   if ! hash zoxide 2>/dev/null; then
     \cd $@
     return

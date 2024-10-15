@@ -3,6 +3,7 @@
 vim.loader.enable()
 
 local add, now, later -- mini.deps will be setup later
+local light_theme, dark_theme -- colors, look at colors()
 
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
@@ -177,12 +178,29 @@ local function setup_plugin_manager()
   add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 end
 
+local function iceberg()
+  add "cocopon/iceberg.vim"
+  dark_theme = "iceberg"
+  light_theme = "iceberg"
+end
+
+local function komau()
+  add "ntk148v/komau.vim"
+  dark_theme = "komau"
+  light_theme = "komau"
+end
+
+local function tokyonight()
+  add "folke/tokyonight.nvim"
+  dark_theme = "tokyonight-night"
+  light_theme = "tokyonight-day"
+end
+
 local function colors()
   vim.opt.background = "dark"
   add "pablopunk/transparent.vim"
-  add "folke/tokyonight.nvim"
-  local dark_theme = "tokyonight-night"
-  local light_theme = "tokyonight-day"
+  komau()
+  -- color utils
   vim.cmd("colorscheme " .. dark_theme)
   vim.api.nvim_create_user_command("Light", function()
     vim.opt.background = "light"

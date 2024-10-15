@@ -57,29 +57,6 @@ my_ls() {
   fi
   eza $@
 }
-my_cd() {
-  folder_exists_in_pwd=$(find . -maxdepth 1 -type d -name "$1")
-  if [[ -n $folder_exists_in_pwd ]]; then
-    \cd "$folder_exists_in_pwd"
-    return
-  fi
-  if ! hash zoxide 2>/dev/null; then
-    \cd $@
-    return
-  fi
-  local results dir
-  results=$(zoxide query -l "$@")
-  if [[ $(echo "$results" | wc -l) -eq 1 ]]; then
-    # If there's only one match, cd into it directly
-    \cd "$results"
-  else
-    # If there are multiple matches, use the fuzzy finder
-    dir=$(echo "$results" | zi)
-    if [[ -n $dir ]]; then
-      \cd "$dir"
-    fi
-  fi
-}
 function rm {
   going_to="/tmp/trash/$USER/$(date +%s%N)"
   mkdir -p "$going_to"
@@ -193,7 +170,7 @@ function tilt {
 # }}}
 
 # Aliases {{{
-alias cd=my_cd
+alias cd=z
 alias g=git
 alias gst='git status'
 alias gp='git push'

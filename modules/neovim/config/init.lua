@@ -296,7 +296,7 @@ local function telescope()
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
   map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
-  map("n", "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
+  map({ "n", "v" }, "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
   map(
     "n",
     "<leader>fW",

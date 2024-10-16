@@ -1,159 +1,169 @@
-format = """
-[](#284387)\
-$os\
-$username\
-[](bg:#fffc7f fg:#284387)\
-$hostname\
-[](bg:#DA627D fg:#fffc7f)\
-$directory\
-[](fg:#DA627D bg:#FCA17D)\
-$git_branch\
-$git_status\
-[](fg:#FCA17D bg:#86BBD8)\
-$c\
-$elixir\
-$elm\
-$golang\
-$gradle\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$rust\
-$scala\
-[](fg:#86BBD8 bg:#06969A)\
-$docker_context\
-[](fg:#06969A bg:#33658A)\
-$time\
-[ ](fg:#33658A)\
-[\n λ](fg:#FCA17D)\u00A0
-"""
-
-# Disable the blank line at the start of the prompt
 add_newline = false
 
-# You can also replace your username with a neat symbol like   or disable this
-# and use the os module below
-[username]
-show_always = true
-style_user = "bg:#284387"
-style_root = "bg:#284387"
-format = '[$user ]($style)'
-disabled = false
+[character]
+success_symbol = '[λ](bold green)'
 
-# An alternative to the username module which displays a symbol that
-# represents the current operating system
-[os]
-style = "bg:#284387"
-disabled = false # Disabled by default
+[aws]
+symbol = "  "
 
-[os.symbols]
-Macos = " "
-
-[directory]
-style = "bg:#DA627D fg:#ffffff"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
-
-# Here is how you can shorten some long paths by text replacement
-# similar to mapped_locations in Oh My Posh:
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-# Keep in mind that the order matters. For example:
-# "Important Documents" = " 󰈙 "
-# will not be replaced, because "Documents" was already substituted before.
-# So either put "Important Documents" before "Documents" or use the substituted version:
-# "Important 󰈙 " = " 󰈙 "
+[buf]
+symbol = " "
 
 [c]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " 󰌾"
 
 [docker_context]
 symbol = " "
-style = "bg:#06969A"
-format = '[ $symbol $context ]($style)'
 
 [elixir]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = " "
 
 [elm]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+
+[fennel]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
 
 [git_branch]
-symbol = ""
-style = "bg:#FCA17D fg:#01295a"
-format = '[ $symbol $branch ]($style)'
-truncation_length = 12
-truncation_symbol = "…"
-
-[git_status]
-style = "bg:#FCA17D fg:#01295a"
-format = '[$all_status$ahead_behind ]($style)'
+symbol = " "
 
 [golang]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
 
-[gradle]
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+[guix_shell]
+symbol = " "
 
 [haskell]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
 
 [java]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
 
 [julia]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
 
-[nodejs]
-symbol = ""
-# dark blue fg
-style = "bg:#86BBD8 fg:#063970"
-format = '[ $symbol ($version) ]($style)'
+[kotlin]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
 
 [nim]
 symbol = "󰆥 "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
 
 [rust]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+symbol = "󱘗 "
 
 [scala]
 symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
 
-[time]
-disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#33658A"
-format = '[ ♥ $time ]($style)'
+[swift]
+symbol = " "
 
-[hostname]
-ssh_only = true
-ssh_symbol = "📡"
-style = "bg:#fffc7f fg:#197292"
-format = '[ $ssh_symbol$hostname ]($style)'
+[zig]
+symbol = " "

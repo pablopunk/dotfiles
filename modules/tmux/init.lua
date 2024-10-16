@@ -1,9 +1,11 @@
 return {
   brew = {
     "tmux",
+    "bash", -- the homebrew version of bash is necessary for janoamaral/tokyo-night-tmux
   },
   config = {
     source = "./tmux.conf",
     output = "~/.tmux.conf",
   },
+  post_install = "mkdir -p ~/.tmux/plugins && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm",
 }

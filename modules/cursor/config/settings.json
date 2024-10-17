@@ -1,7 +1,7 @@
 {
   "window.commandCenter": 1,
   "workbench.colorTheme": "Tokyo Night Storm",
-  "editor.fontFamily": "SF Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "github.copilot.enable": {
     "*": true,

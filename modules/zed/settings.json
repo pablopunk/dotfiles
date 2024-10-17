@@ -34,7 +34,7 @@
   "collaboration_panel": {
     "button": false
   },
-  "theme": "Tokyo Night",
+  "theme": "Ayu Dark",
   "buffer_font_family": "SF Mono",
   "buffer_font_size": 16,
   "vim_mode": true,

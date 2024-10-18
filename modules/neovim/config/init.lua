@@ -336,6 +336,9 @@ local function avante()
       "MunifTanjim/nui.nvim",
     },
   }
+  require("avante_lib").load() -- fixes bug https://github.com/yetone/avante.nvim/issues/665#issuecomment-2412440939
+  -- ^ fix above requires building with
+  --   cd $HOME/.local/share/nvim/site/pack/deps/opt/avante.nvim && make
   require("avante").setup {
     provider = "openai", -- openai | azure | copilot | claude
     mappings = {
@@ -353,7 +356,7 @@ local function ai()
   supermaven()
   -- chatgpt()
   -- codecompanion()
-  -- avante()
+  avante()
 end
 
 local function git()

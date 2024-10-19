@@ -10,12 +10,12 @@ fi
 # I used to run `eval $(brew shellenv)` but it was too slow
 if [ -f /proc/sys/kernel/osrelease ]; then
   # Linuxbrew
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
   export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
   export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
   export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-  export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+  [ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
   export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+  [ -z "${XDG_DATA_DIRS-}" ] || export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:${XDG_DATA_DIRS-}";
 else
   # macOS Homebrew
   export HOMEBREW_PREFIX="/opt/homebrew";
@@ -87,7 +87,7 @@ function power {
 }
 
 function gclone {
-  git clone git@github.com:pablopunk/$1 && cd $1
+  git clone https://github.com/pablopunk/$1 && cd $1
 }
 
 function grebase {

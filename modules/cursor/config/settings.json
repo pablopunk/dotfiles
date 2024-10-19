@@ -1,7 +1,7 @@
 {
   "window.commandCenter": 1,
   "workbench.colorTheme": "Tokyo Night Storm",
-  "editor.fontFamily": "SF Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "github.copilot.enable": {
     "*": true,
@@ -29,7 +29,7 @@
     "nuke": "linux"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDragAndDrop": false,
@@ -43,9 +43,13 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.formatOnSave": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "terminal.integrated.env.osx": {},
   "console-ninja.featureSet": "Community",
-  "editor.defaultFormatter": "biomejs.biome"
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  }
 }

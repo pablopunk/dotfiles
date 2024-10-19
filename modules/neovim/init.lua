@@ -8,5 +8,6 @@ return {
     source = "./config",
     output = "~/.config/nvim",
   },
+  post_install = "nvim --headless +qa > /dev/null 2>&1" -- install plugins
 }
 

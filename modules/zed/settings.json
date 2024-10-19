@@ -20,7 +20,7 @@
   "base_keymap": "VSCode",
   "terminal": {
     "dock": "bottom",
-    "detect_venv": false,
+    "detect_venv": "off",
     "working_directory": "current_project_directory",
     "font_family": "Fira Mono for Powerline"
   },
@@ -35,7 +35,7 @@
     "button": false
   },
   "theme": "Tokyo Night",
-  "buffer_font_family": "SF Mono",
+  "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 16,
   "vim_mode": true,
   "vim": {

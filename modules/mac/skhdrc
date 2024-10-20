@@ -6,10 +6,6 @@ ctrl + cmd - l : yabai -m window --focus east  || yabai -m display --focus east
 
 # rotate layout clockwise
 ctrl + cmd - r : yabai -m space --rotate 270
-# flip along y-axis
-ctrl + cmd - y : yabai -m space --mirror y-axis
-# flip along x-axis
-ctrl + cmd - x : yabai -m space --mirror x-axis
 # toggle window float (removes window from tiling)
 ctrl + cmd - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 # maximize a window
@@ -29,3 +25,6 @@ ctrl + cmd + shift - h : yabai -m window --warp west  || ( yabai -m window --dis
 ctrl + cmd + shift - j : yabai -m window --warp south || ( yabai -m window --display south ; yabai -m display --focus south )
 ctrl + cmd + shift - k : yabai -m window --warp north || ( yabai -m window --display north ; yabai -m display --focus north )
 ctrl + cmd + shift - l : yabai -m window --warp east  || ( yabai -m window --display east  ; yabai -m display --focus east )
+
+# Toggle yabai service
+cmd + ctrl - y : [ "$(ps aux | grep bin/yabai | wc -l | awk '{$1=$1};1')" = 2 ] && yabai --stop-service || yabai --start-service

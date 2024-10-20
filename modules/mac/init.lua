@@ -4,18 +4,13 @@ return {
   brew = {
     "coreutils",
     "battery",
-    "yabai",
-    "skhd",
+    "nikitabobko/tap/aerospace",
   },
-  post_install = "battery charge 80; yabai --restart-server; skhd restart-server",
+  post_install = "battery charge 80",
   config = {
     {
-      source = "./yabairc",
-      output = "~/.config/yabai/yabairc",
-    },
-    {
-      source = "./skhdrc",
-      output = "~/.config/skhd/skhdrc",
+      source = "./aerospace.toml",
+      output = "~/.aerospace.toml",
     },
   },
 }

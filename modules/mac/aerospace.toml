@@ -213,3 +213,7 @@ run = "move-node-to-workspace T"
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
 run = "move-node-to-workspace Z"
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = "move-node-to-workspace G"

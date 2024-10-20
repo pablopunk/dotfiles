@@ -48,6 +48,9 @@ local function setup_mappings()
   map({ "n", "v", "x", "o", "c" }, "q:", "<nop>", { desc = "Noop" })
   map({ "n", "v", "x", "o" }, "Q", "<nop>", { desc = "Noop" })
 
+  -- Search with - (Spanish layout)
+  map("n", "-", "/", { silent = false })
+
   -- Use () instead of []
   vim.api.nvim_command [[
     nmap ( [
@@ -147,6 +150,7 @@ end
 
 local function setup_abbreviations()
   vim.cmd [[
+    iabbr ''' ``
     iabbr widht width
     iabbr heigth height
     iabbr lenght length

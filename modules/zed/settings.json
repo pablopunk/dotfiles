@@ -22,7 +22,7 @@
     "dock": "bottom",
     "detect_venv": "off",
     "working_directory": "current_project_directory",
-    "font_family": "Fira Mono for Powerline"
+    "font_family": "JetBrains Mono"
   },
   "project_panel": {
     "dock": "left",

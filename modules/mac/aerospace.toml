@@ -45,7 +45,7 @@ automatically-unhide-macos-hidden-apps = false
 
 # Open apps apps when changing workspaces
 exec-on-workspace-change = ['/bin/bash', '-c',
-    'if [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "T" ]]; then open -a WezTerm; elif [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "G" ]]; then open -a ChatGPT; elif [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "Z" ]]; then open -a "zoom.us"; fi',
+    'if [[ "$AEROSPACE_PREV_WORKSPACE" != "$AEROSPACE_FOCUSED_WORKSPACE" ]]; then if [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "T" ]]; then open -a WezTerm; elif [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "G" ]]; then open -a ChatGPT; elif [[ "$AEROSPACE_FOCUSED_WORKSPACE" == "Z" ]]; then open -a "zoom.us"; fi; fi',
 ]
 
 
@@ -212,14 +212,31 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+# [Z] Zoom
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = "move-node-to-workspace T"
-
-[[on-window-detected]]
-if.app-id = 'us.zoom.xos'
+if.app-name-regex-substring = 'zoom.us'
 run = "move-node-to-workspace Z"
 
+# [G] ChatGPT
 [[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = "move-node-to-workspace Gkkkkk"
+if.app-id = 'ChatGPT'
+run = "move-node-to-workspace G"
+
+# [M] Music/Mail/Messaging
+[[on-window-detected]]
+if.app-id = 'WhatsApp'
+run = "move-node-to-workspace M"
+[[on-window-detected]]
+if.app-id = 'Telegram'
+run = "move-node-to-workspace M"
+[[on-window-detected]]
+if.app-id = 'Missive'
+run = "move-node-to-workspace M"
+[[on-window-detected]]
+if.app-id = 'Spotify'
+run = "move-node-to-workspace M"
+
+# [B] BambuStudio
+[[on-window-detected]]
+if.app-bundle-id = 'com.bambustudio.BambuStudio'
+run = "move-node-to-workspace B"

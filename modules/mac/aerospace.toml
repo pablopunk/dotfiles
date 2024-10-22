@@ -219,24 +219,24 @@ run = "move-node-to-workspace Z"
 
 # [G] ChatGPT
 [[on-window-detected]]
-if.app-id = 'ChatGPT'
+if.app-name-regex-substring = 'ChatGPT'
 run = "move-node-to-workspace G"
 
 # [M] Music/Mail/Messaging
 [[on-window-detected]]
-if.app-id = 'WhatsApp'
+if.app-name-regex-substring = 'WhatsApp'
 run = "move-node-to-workspace M"
 [[on-window-detected]]
-if.app-id = 'Telegram'
+if.app-name-regex-substring = 'Telegram'
 run = "move-node-to-workspace M"
 [[on-window-detected]]
-if.app-id = 'Missive'
+if.app-name-regex-substring = 'Missive'
 run = "move-node-to-workspace M"
 [[on-window-detected]]
-if.app-id = 'Spotify'
+if.app-name-regex-substring = 'Spotify'
 run = "move-node-to-workspace M"
 
 # [B] BambuStudio
 [[on-window-detected]]
-if.app-bundle-id = 'com.bambustudio.BambuStudio'
+if.app-name-regex-substring = 'BambuStudio'
 run = "move-node-to-workspace B"

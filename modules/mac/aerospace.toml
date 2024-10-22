@@ -238,5 +238,5 @@ run = "move-node-to-workspace M"
 
 # [B] BambuStudio
 [[on-window-detected]]
-if.app-name-regex-substring = 'BambuStudio'
+if.app-name-regex-substring = 'Bambu Studio'
 run = "move-node-to-workspace B"

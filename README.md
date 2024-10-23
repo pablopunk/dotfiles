@@ -10,7 +10,7 @@
 Install [dot](https://github.com/pablopunk/dot)
 
 ```bash
-brew install pablopunk/formulae/dot
+brew install pablopunk/brew/dot
 ```
 
 ## 🚀 Install

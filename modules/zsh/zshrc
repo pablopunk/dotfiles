@@ -31,8 +31,8 @@ fi
 [ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt PROMPT_SUBST
-# enable vi mode
-bindkey -v
+# enable  mode
+# bindkey -v
 # }}}
 
 # Zsh plugin manager (zpm) {{{

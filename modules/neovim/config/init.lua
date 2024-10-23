@@ -347,10 +347,6 @@ local function avante()
     provider = "openai", -- openai | azure | copilot | claude
     mappings = {
       ask = "<leader>cg",
-      diff = {
-        -- ours = "<c-x>",
-        -- theirs = "<c-a>",
-      },
     },
     hints = { enabled = true },
   }
@@ -633,6 +629,15 @@ local function noice()
   }
 end
 
+local function markdown()
+  add "OXY2DEV/markview.nvim"
+  require("markview").setup {
+    filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
+    buf_ignore = {},
+    max_length = 99999,
+  }
+end
+
 local function highlight_colors()
   add "brenoprata10/nvim-highlight-colors"
   require("nvim-highlight-colors").setup {}
@@ -654,6 +659,7 @@ local function setup_plugins()
   trouble()
   conform()
   highlight_colors()
+  markdown()
 end
 
 setup_plugin_manager()

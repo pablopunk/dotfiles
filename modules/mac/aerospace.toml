@@ -216,6 +216,12 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+# Apps that should always float
+[[on-window-detected]]
+if.app-name-regex-substring = 'Shop'
+run = 'layout floating'
+
+# Apps that should go to a workspace
 # [Z] Zoom
 [[on-window-detected]]
 if.app-name-regex-substring = 'zoom.us'

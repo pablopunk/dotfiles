@@ -277,6 +277,7 @@ local function telescope()
         i = {
           ["<c-k>"] = require("telescope.actions").cycle_history_prev,
           ["<c-j>"] = require("telescope.actions").cycle_history_next,
+          ["<esc>"] = require("telescope.actions").close,
         },
       },
     },

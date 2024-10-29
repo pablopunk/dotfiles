@@ -39,6 +39,13 @@ local function setup_options()
   vim.opt.wildignore:append "**/node_modules/**,**/dist/**"
 end
 
+local function tmux_session()
+  -- prompt for a tmux session name and then call tx <name>
+  vim.ui.input({ prompt = "Session name: " }, function(input)
+    vim.cmd("!tx " .. input)
+  end)
+end
+
 local function setup_mappings()
   vim.g.mapleader = " "
 
@@ -62,6 +69,8 @@ local function setup_mappings()
   ]]
 
   map("n", "<leader>h", ":nohlsearch<cr>", { desc = "Remove highlights" })
+
+  map("n", "<leader>tx", tmux_session, { desc = "Switch tmux session" })
 
   -- Quit/Save file
   map({ "n", "v" }, "<c-q>", function()

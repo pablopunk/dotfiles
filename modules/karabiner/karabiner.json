@@ -8,6 +8,12 @@
                         "description": "layer1 triggers",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 12951 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "spacebar",
                                     "modifiers": { "optional": ["any"] }
@@ -32,6 +38,12 @@
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 12951 }],
+                                        "type": "device_unless"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "tab",
                                     "modifiers": { "optional": ["any"] }

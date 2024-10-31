@@ -49,6 +49,8 @@ end
 local function setup_mappings()
   vim.g.mapleader = " "
 
+  map("i", "jk", "<esc>", { desc = "ESC" })
+
   map("n", "<c-c>", "<esc>", { desc = "ESC" })
   map("v", "<c-c>", "<esc>", { desc = "ESC" })
   map("i", "<c-c>", "<esc>", { desc = "ESC" })

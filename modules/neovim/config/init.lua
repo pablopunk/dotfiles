@@ -270,6 +270,21 @@ local function which_key()
   require("which-key").setup {}
 end
 
+local function telescope_pull_request_files()
+  local builtin = require "telescope.builtin"
+
+  local main_ancestor = vim.fn.systemlist("git merge-base origin/main HEAD")[1]
+  if main_ancestor == nil then
+    print "Could not determine the common ancestor with main branch."
+    return
+  end
+
+  builtin.git_files {
+    prompt_title = "Pull Request files",
+    git_command = { "git", "diff", "--name-only", main_ancestor },
+  }
+end
+
 local function telescope()
   add "nvim-telescope/telescope.nvim"
   require("telescope").setup {
@@ -310,7 +325,8 @@ local function telescope()
   }
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
-  map("n", "<leader>fg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
+  map("n", "<leader>fgs", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
+  map("n", "<leader>fgh", telescope_pull_request_files, { desc = "Pull request files" })
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
   map({ "n", "v" }, "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
   map(

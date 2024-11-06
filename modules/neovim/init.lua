@@ -1,6 +1,6 @@
 return {
   brew = {
---     { name = "neovim", options = "--HEAD" },
+    -- { name = "neovim", options = "--HEAD" },
     "neovim",
     "ripgrep",
   },
@@ -8,6 +8,5 @@ return {
     source = "./config",
     output = "~/.config/nvim",
   },
-  post_install = "nvim --headless +qa > /dev/null 2>&1" -- install plugins
+  post_install = "nvim --headless +qa > /dev/null 2>&1", -- install plugins
 }
-

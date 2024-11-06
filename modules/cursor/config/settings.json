@@ -1,6 +1,5 @@
 {
   "window.commandCenter": 1,
-  "workbench.colorTheme": "Tokyo Night Storm",
   "editor.fontFamily": "Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "github.copilot.enable": {
@@ -51,5 +50,9 @@
   "editor.codeActionsOnSave": {
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit"
-  }
+  },
+  "window.autoDetectColorScheme": true,
+  "workbench.colorTheme": "Monochrome Dark Subtle",
+  "workbench.preferredLightColorTheme": "Monochrome Light Subtle",
+  "workbench.preferredDarkColorTheme": "Monochrome Dark Subtle"
 }

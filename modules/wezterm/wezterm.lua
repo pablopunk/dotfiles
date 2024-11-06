@@ -27,6 +27,8 @@ wezterm.on("window-config-reloaded", function(window)
   end
 end)
 
+config.max_fps = 120 -- default is 60
+
 config.color_scheme = scheme_for_appearance(get_appearance())
 --- }}}
 

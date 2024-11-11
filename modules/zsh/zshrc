@@ -281,6 +281,10 @@ prompt_custom() {
     if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
       git_status="%F{yellow}*%f"
     fi
+    # Check if there are commits to push
+    if [[ -n $(git rev-list @{u}..HEAD 2>/dev/null) ]]; then
+      git_status="${git_status}%F{yellow}↑%f"  # Add up arrow if there are unpushed commits
+    fi
   fi
 
   # Set arrow color based on last command status

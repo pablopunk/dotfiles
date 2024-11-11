@@ -54,5 +54,8 @@
   "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "Monochrome Dark Subtle",
   "workbench.preferredLightColorTheme": "Monochrome Light Subtle",
-  "workbench.preferredDarkColorTheme": "Monochrome Dark Subtle"
+  "workbench.preferredDarkColorTheme": "Monochrome Dark Subtle",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }

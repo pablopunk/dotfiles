@@ -269,10 +269,10 @@ prompt_custom() {
 
   if [[ "$current_dir" == "~"* ]]; then
     # Inside home: shorten each directory except the last one
-    prompt_path="%F{magenta}$(echo "$current_dir" | awk -F/ '{ for (i=1; i<NF; i++) printf substr($i,1,1) "/"; print $NF }')%f"
+    prompt_path="%F{blue}$(echo "$current_dir" | awk -F/ '{ for (i=1; i<NF; i++) printf substr($i,1,1) "/"; print $NF }')%f"
   else
     # Outside home: show full path
-    prompt_path="%F{magenta}${current_dir}%f"
+    prompt_path="%F{blue}${current_dir}%f"
   fi
 
   # Git status indicator (shows * if git is dirty)

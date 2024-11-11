@@ -255,11 +255,48 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 F=$HOME/.additional; [ -f $F ] && . $F
 # }}}
 
-# prompt {{{
-eval "$(starship init zsh)"
-# NEWLINE=$'\n'
-# PROMPT='$(bashy -r)${NEWLINE}%F{yellow}ƛ%f '
-# }}}
+# PROMPT {{{
+prompt_custom() {
+  # Show hostname if it's an SSH session
+  local host=""
+  if [[ -n $SSH_CONNECTION ]]; then
+    host="%F{green}%m%f "
+  fi
+
+  # Shorten the PWD path relative to $HOME
+  local current_dir="${PWD/#$HOME/~}"
+  local prompt_path=""
+
+  if [[ "$current_dir" == "~"* ]]; then
+    # Inside home: shorten each directory except the last one
+    prompt_path="%F{magenta}$(echo "$current_dir" | awk -F/ '{ for (i=1; i<NF; i++) printf substr($i,1,1) "/"; print $NF }')%f"
+  else
+    # Outside home: show full path
+    prompt_path="%F{magenta}${current_dir}%f"
+  fi
+
+  # Git status indicator (shows * if git is dirty)
+  local git_status=""
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+      git_status="%F{yellow}*%f"
+    fi
+  fi
+
+  # Set arrow color based on last command status
+  local arrow_color="%F{cyan}"
+  if [[ $? -ne 0 ]]; then
+    arrow_color="%F{red}"
+  fi
+
+  # Combine everything for the prompt
+  PROMPT="${host}${prompt_path} ${git_status}${arrow_color}❯%f "
+}
+
+# Initialize the custom prompt
+autoload -U add-zsh-hook
+add-zsh-hook precmd prompt_custom
+### }}}
 
 # TERM {{{
 TERM=xterm-256color

@@ -3,7 +3,7 @@
 vim.loader.enable()
 
 local add, now, later -- mini.deps will be setup later
-local light_theme, dark_theme -- colors, look at colors()
+local light_theme, dark_theme -- see colors() implementation
 
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
@@ -253,12 +253,15 @@ local function setup_priority_plugins()
   plenary()
 end
 
-local function plugins_that_should_be_the_default()
+local function plugins_that_could_be_default_behavior()
   add "pablopunk/persistent-undo.vim"
   add "stefandtw/quickfix-reflector.vim"
   add "christoomey/vim-tmux-navigator"
   add "markonm/traces.vim"
   add "tpope/vim-surround"
+end
+
+local function editor_utils()
   add "dstein64/vim-startuptime"
   add "wakatime/vim-wakatime"
 end
@@ -387,20 +390,36 @@ local function ai()
   avante()
 end
 
-local function git()
+local function git_blame()
   add "FabijanZulj/blame.nvim"
-  add "almo7aya/openingh.nvim"
   require("blame").setup()
-  require("openingh").setup()
   map({ "n", "v" }, "<leader>gb", "<cmd>BlameToggle<cr>", { desc = "Toggle git blame" })
+end
+
+local function openingh()
+  add "almo7aya/openingh.nvim"
+  require("openingh").setup()
   map({ "n", "v" }, "<leader>go", "<cmd>OpenInGHFile<cr>", { desc = "Open file in github" })
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
-  add { source = "akinsho/git-conflict.nvim", checkout = "*" }
+end
+
+local function git_conflict()
+  add "akinsho/git-conflict.nvim"
   ---@diagnostic disable-next-line: missing-fields
   require("git-conflict").setup {}
+end
+
+local function neogit()
   add "NeogitOrg/neogit"
   require("neogit").setup {}
   map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })
+end
+
+local function git()
+  git_blame()
+  openingh()
+  git_conflict()
+  neogit()
 end
 
 local function auto_session()
@@ -673,9 +692,9 @@ end
 
 -- Lazy load plugins
 local function setup_plugins()
-  -- notify()
   noice()
-  plugins_that_should_be_the_default()
+  plugins_that_could_be_default_behavior()
+  editor_utils()
   which_key()
   telescope()
   ai()

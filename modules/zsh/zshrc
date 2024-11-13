@@ -39,6 +39,7 @@ setopt PROMPT_SUBST
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
   git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
 fi
+# if zsh is stuck at this line, remove ~/.zpm and clone again
 source ~/.zpm/zpm.zsh
 # Plugins
 ## Copilot suggestions on CLI

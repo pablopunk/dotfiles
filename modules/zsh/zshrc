@@ -365,5 +365,5 @@ fi
 # }}}
 
 # these last lines are usually added automatically by installed tools
-PATH=~/.console-ninja/.bin:$PATH
+
 export PATH=$PATH:/Users/pablopunk/.spicetify

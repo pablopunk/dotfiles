@@ -57,5 +57,6 @@
   "workbench.preferredDarkColorTheme": "Sequoia Moonlight",
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  },
+  "workbench.sideBar.location": "right"
 }

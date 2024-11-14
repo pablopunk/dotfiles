@@ -58,5 +58,6 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true
 }

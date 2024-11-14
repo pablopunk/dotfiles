@@ -424,13 +424,7 @@ end
 
 local function restore_session()
   vim.cmd "silent! SessionRestore" -- restore session form auto-session
-  -- open all restored buffers in unclutter
-  local tabline = require "unclutter.tabline"
-  -- tabline.keep_all_buffers() -- this should be available soon https://github.com/pablopunk/unclutter.nvim/pull/30
-  local bufs = vim.api.nvim_list_bufs()
-  for _, buf in ipairs(bufs) do
-    tabline.keep_buffer(buf)
-  end
+  require("unclutter.tabline").keep_all_buffers()
 end
 
 local function auto_session()
@@ -693,6 +687,9 @@ local function markdown()
     filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
     buf_ignore = {},
     max_length = 99999,
+    code_blocks = {
+      style = "simple", -- Makes it easier to read when wrap is enabled in buffer
+    },
   }
 end
 

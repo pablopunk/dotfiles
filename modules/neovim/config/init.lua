@@ -422,6 +422,17 @@ local function git()
   neogit()
 end
 
+local function restore_session()
+  vim.cmd "silent! SessionRestore" -- restore session form auto-session
+  -- open all restored buffers in unclutter
+  local tabline = require "unclutter.tabline"
+  -- tabline.keep_all_buffers() -- this should be available soon https://github.com/pablopunk/unclutter.nvim/pull/30
+  local bufs = vim.api.nvim_list_bufs()
+  for _, buf in ipairs(bufs) do
+    tabline.keep_buffer(buf)
+  end
+end
+
 local function auto_session()
   add "rmagatti/auto-session"
   require("auto-session").setup {
@@ -434,7 +445,7 @@ local function auto_session()
     vim.cmd "silent! SessionDelete" -- delete session
     vim.cmd "silent! %bd" -- close all buffers
   end, { desc = "Delete session" })
-  map("n", "<leader>sr", ":SessionRestore<cr>", { desc = "Restore session" })
+  map("n", "<leader>sr", restore_session, { desc = "Restore session" })
 end
 
 local function mini_nvim()

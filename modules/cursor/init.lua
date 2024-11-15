@@ -9,9 +9,9 @@ return {
       source = "./config/keybindings.json",
       output = "~/Library/Application Support/Cursor/User/keybindings.json",
     },
-    {
-      source = "./config/extensions.json",
-      output = "~/.cursor/extensions/extensions.json",
-    },
+    -- {
+    --   source = "./config/extensions.json",
+    --   output = "~/.cursor/extensions/extensions.json",
+    -- },
   },
 }

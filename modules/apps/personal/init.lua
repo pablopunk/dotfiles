@@ -1,8 +1,10 @@
 return {
   brew = {
     "1password",
+    "aldente",
     "alt-tab",
     "arc",
+    "battery",
     "cleanshot",
     "hiddenbar",
     "iina",
@@ -16,6 +18,5 @@ return {
     "spotify",
     "whatsapp",
     "zed",
-    "battery",
-  }
+  },
 }

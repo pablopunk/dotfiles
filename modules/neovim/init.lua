@@ -5,8 +5,8 @@ return {
     "ripgrep",
   },
   config = {
-    source = "./config",
-    output = "~/.config/nvim",
+    source = "./config.lua",
+    output = "~/.config/nvim/init.lua",
   },
   post_install = "nvim --headless +qa > /dev/null 2>&1", -- install plugins
 }

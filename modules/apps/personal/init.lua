@@ -4,9 +4,7 @@ return {
     "aldente",
     "alt-tab",
     "arc",
-    "battery",
     "cleanshot",
-    "hiddenbar",
     "iina",
     "karabiner-elements",
     "latest",
@@ -19,4 +17,12 @@ return {
     "whatsapp",
     "zed",
   },
+  post_install = [[
+    open -a "AlDente"
+    open -a "AltTab"
+    open -a "Karabiner-Elements"
+    open -a "Raycast"
+    open -a "Swift Shift"
+    open -a "CleanShot X"
+  ]],
 }

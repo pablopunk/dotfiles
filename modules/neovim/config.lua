@@ -618,7 +618,6 @@ local function lsp()
       },
     },
   })
-  -- setup_lsp "zls"
 end
 
 local function trouble()

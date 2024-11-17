@@ -367,3 +367,5 @@ fi
 # these last lines are usually added automatically by installed tools
 
 export PATH=$PATH:/Users/pablopunk/.spicetify
+
+PATH=~/.console-ninja/.bin:$PATH

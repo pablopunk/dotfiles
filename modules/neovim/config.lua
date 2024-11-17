@@ -618,7 +618,7 @@ local function lsp()
       },
     },
   })
-  -- create a command that installs and configs a new lsp server on the fly
+  -- create a command that installs and configs a new lsp server
   vim.api.nvim_create_user_command("LspConfig", function(opts)
     local server_name = opts.args
     vim.cmd("MasonInstall " .. opts.args)

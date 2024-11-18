@@ -75,7 +75,7 @@ local function setup_mappings()
   map("n", "<leader>tx", tmux_session, { desc = "Switch tmux session" })
 
   -- Quit/Save file
-  map({ "n", "v" }, "<c-q>", function()
+  local function quit()
     local bufnr = vim.api.nvim_get_current_buf()
     local is_last_buffer = #vim.fn.getbufinfo { buflisted = 1 } == 1
     local is_existing_file = vim.fn.filereadable(vim.api.nvim_buf_get_name(bufnr)) == 1
@@ -86,8 +86,11 @@ local function setup_mappings()
     else
       vim.cmd "q!"
     end
-  end, { desc = "Close file buffer" })
-
+  end
+  map({ "n", "v" }, "<c-q>", quit, { desc = "Close file buffer" })
+  map({ "n", "v" }, "<leader>q", quit, { desc = "Close file buffer" })
+  map({ "n", "v" }, "<leader>x", ":xa!<cr>", { desc = "Save all files and quit" })
+  map({ "n", "v" }, "<leader>s", ":w!<cr>", { desc = "Save file" })
   map({ "n", "v" }, "<c-s>", ":w!<cr>", { desc = "Save file" })
   map("n", "<leader>wca", ":silent! %bd<cr>", { desc = "Close all buffers" })
   map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", { desc = "Close all buffers except the current one" })

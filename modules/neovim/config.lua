@@ -266,20 +266,6 @@ local function editor_utils()
   add "wakatime/vim-wakatime"
 end
 
-local function vscode_nvim()
-  if vim.g.vscode then
-    map("n", "gd", "<cmd>call VSCodeNotify('editor.action.goToDeclaration')<CR>")
-    map("n", "gr", "<cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>")
-    map("n", "<leader>rn", "<cmd>call VSCodeNotify('editor.action.rename')<CR>")
-    map("n", "<leader>ca", "<cmd>call VSCodeNotify('editor.action.quickFix')<CR>")
-    map("n", "<c-o>", "<cmd>call VSCodeNotify('workbench.action.navigateBack')<CR>")
-    map("n", "<c-i>", "<cmd>call VSCodeNotify('workbench.action.navigateForward')<CR>")
-    -- map("n", "<c-n>", "<cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<CR>")
-    -- map("n", "<c-p>", "<cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<CR>")
-    map("n", "K", "<cmd>call VSCodeNotify('editor.action.showHover')<CR>")
-  end
-end
-
 local function which_key()
   add "folke/which-key.nvim"
   vim.o.timeout = true
@@ -735,7 +721,6 @@ local function setup_plugins()
   conform()
   highlight_colors()
   markdown()
-  vscode_nvim()
 end
 
 setup_plugin_manager()

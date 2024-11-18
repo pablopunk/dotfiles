@@ -5,8 +5,14 @@ return {
     "ripgrep",
   },
   config = {
-    source = "./config.lua",
-    output = "~/.config/nvim/init.lua",
+    {
+      source = "./config.lua",
+      output = "~/.config/nvim/init.lua",
+    },
+    {
+      source = "./vscode.lua",
+      output = "~/.config/nvim-vscode/init.lua",
+    },
   },
   post_install = "nvim --headless +qa > /dev/null 2>&1", -- install plugins
 }

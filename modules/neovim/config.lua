@@ -208,6 +208,12 @@ local function komau()
   light_theme = "komau"
 end
 
+local function aquarium()
+  add "frenzyexists/aquarium-vim"
+  dark_theme = "aquarium"
+  light_theme = "aquarium"
+end
+
 local function tokyonight()
   add "folke/tokyonight.nvim"
   dark_theme = "tokyonight-night"
@@ -217,7 +223,7 @@ end
 local function colors()
   vim.opt.background = "dark"
   add "pablopunk/transparent.vim"
-  komau()
+  aquarium()
   -- color utils
   vim.cmd("colorscheme " .. dark_theme)
   vim.api.nvim_create_user_command("Light", function()

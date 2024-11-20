@@ -412,6 +412,33 @@ local function openingh()
   map({ "n", "v" }, "<leader>gm", "<cmd>OpenInGHFile main<cr>", { desc = "Open file in github (main branch)" })
 end
 
+local function git_pr_review()
+  local function select_and_review()
+    local has_gh = tonumber(vim.fn.system "hash gh ; echo $?") == 0
+    if not has_gh then
+      print "gh (github-cli) is required"
+      return
+    end
+    local prs = vim.fn.systemlist "gh pr list --state open --limit 100"
+    if #prs == 0 then
+      print "No open pull requests found."
+      return
+    end
+    vim.ui.select(prs, {
+      prompt = "Select a pull request to review",
+    }, function(choice)
+      print(choice)
+      local pr_number = choice:match "%d+"
+      local pr_diff = vim.fn.system("gh pr diff --patch " .. pr_number)
+      vim.cmd "tabnew"
+      vim.cmd "setlocal buftype=nofile"
+      vim.cmd "setlocal filetype=diff"
+      vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(pr_diff, "\n"))
+    end)
+  end
+  map("n", "<leader>gpr", select_and_review, { desc = "Select and review pull request" })
+end
+
 local function git_conflict()
   add "akinsho/git-conflict.nvim"
   ---@diagnostic disable-next-line: missing-fields
@@ -429,6 +456,7 @@ local function git()
   openingh()
   git_conflict()
   neogit()
+  git_pr_review()
 end
 
 local function restore_session()

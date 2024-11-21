@@ -214,6 +214,12 @@ local function aquarium()
   light_theme = "aquarium"
 end
 
+local function oxocarbon()
+  add "nyoom-engineering/oxocarbon.nvim"
+  dark_theme = "oxocarbon"
+  light_theme = "oxocarbon"
+end
+
 local function tokyonight()
   add "folke/tokyonight.nvim"
   dark_theme = "tokyonight-night"
@@ -222,10 +228,10 @@ end
 
 local function colors()
   vim.opt.background = "dark"
-  add "pablopunk/transparent.vim"
-  aquarium()
-  -- color utils
+  oxocarbon()
   vim.cmd("colorscheme " .. dark_theme)
+  add "pablopunk/transparent.vim"
+  -- color utils
   vim.api.nvim_create_user_command("Light", function()
     vim.opt.background = "light"
     vim.cmd("colorscheme " .. light_theme)

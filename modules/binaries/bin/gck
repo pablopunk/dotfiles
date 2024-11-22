@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 
-fzf_short() {
-  fzf --height=10 --reverse "$@"
-}
+fzf_short() { fzf --height=10 --reverse "$@"; }
+clean_branches() { sed 's/\*//g' | awk '{$1=$1};1' | uniq; }
+all_branches() { git branch --sort=-committerdate | clean_branches; }
 
 if [[ $# -eq 0 ]]; then
-  all_branches=$( git branch --sort=-committerdate | sed 's/\*//g' | sed 's/ /\n/g' | sed '/^\s*$/d' | uniq)
-  echo "$all_branches" | fzf_short | xargs -I {} git checkout {}
+  all_branches | fzf_short | xargs -r git checkout
 else
   git checkout "$@"
 fi
-
-

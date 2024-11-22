@@ -2,7 +2,6 @@ return {
   brew = {
     "1password",
     "aldente",
-    "alt-tab",
     "arc",
     "cleanshot",
     "iina",
@@ -32,7 +31,6 @@ return {
   post_install = [[
     open -a "1Piece"
     open -a "AlDente"
-    open -a "AltTab"
     open -a "CleanShot X"
     open -a "Karabiner-Elements"
     open -a "Raycast"

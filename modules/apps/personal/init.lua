@@ -38,7 +38,6 @@ return {
     open -a "Raycast"
     open -a "Supercharge"
     open -a "Swift Shift"
-    open -a "Visual Studio Code"
     open ~/.dotfiles/modules/apps/personal/1Piece.app-settings
     open ~/.dotfiles/modules/apps/personal/AlDente.app-settings
   ]],

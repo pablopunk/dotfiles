@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LaunchAtLogin__hasMigrated</key>
+	<true/>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>970 777 647 398 0 0 2560 1415 </string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUHasLaunchedBefore</key>
+	<true/>
+	<key>SULastCheckTime</key>
+	<date>2024-11-22T13:28:56Z</date>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>775364811</integer>
+	<key>__APP_SETTINGS__bundleIdentifier</key>
+	<string>com.apphousekitchen.aldente-pro</string>
+	<key>automaticDischarge</key>
+	<false/>
+	<key>chargeVal</key>
+	<real>80</real>
+	<key>checkForUpdates</key>
+	<true/>
+	<key>completelyDisableSleep</key>
+	<false/>
+	<key>exitInhibitCharge</key>
+	<false/>
+	<key>heatProtectMode</key>
+	<false/>
+	<key>helpMessage</key>
+	<false/>
+	<key>lastSailingCheckpoint</key>
+	<integer>1</integer>
+	<key>launchAtLogin</key>
+	<true/>
+	<key>lockScreenWhenClosed</key>
+	<false/>
+	<key>lpmPreference</key>
+	<false/>
+	<key>menuBarIconStyle</key>
+	<integer>0</integer>
+	<key>noMenubarIcon</key>
+	<false/>
+	<key>popoverAnimation</key>
+	<false/>
+	<key>sailingMode</key>
+	<false/>
+	<key>showDockIcon</key>
+	<false/>
+	<key>showGUIonStartup</key>
+	<true/>
+	<key>showHelperInstallationMessage</key>
+	<false/>
+	<key>showPercentage</key>
+	<false/>
+	<key>sleepInhibitCharge</key>
+	<false/>
+	<key>uiCollapseState</key>
+	<dict>
+		<key>-10416421599204756957887957215979750</key>
+		<integer>1</integer>
+		<key>-1318249120465870638-4071467148609560390</key>
+		<integer>1</integer>
+		<key>-1458630060188842859762081235660722612</key>
+		<integer>1</integer>
+		<key>-3230630320450044050-6612708876894093183</key>
+		<integer>1</integer>
+		<key>-4108633999761963693-5857299537269537966</key>
+		<integer>1</integer>
+		<key>-7249036044461167944585525999024836142</key>
+		<integer>1</integer>
+		<key>-773960490381955395612562476249411</key>
+		<integer>1</integer>
+		<key>-8885946648720201007656860710966635595</key>
+		<integer>1</integer>
+		<key>194787627903667743339158721790</key>
+		<integer>1</integer>
+		<key>3759641777914300657666460</key>
+		<integer>1</integer>
+	</dict>
+	<key>useRealPercentage</key>
+	<false/>
+</dict>
+</plist>

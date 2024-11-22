@@ -30,8 +30,8 @@ return {
     open -a "Karabiner-Elements"
     open -a "Raycast"
     open -a "Swift Shift"
-    defaults import jp.fuji.1Piece ~/.dotfiles/modules/apps/personal/1Piece.plist
-    defaults import pl.maketheweb.cleanshotx ~/.dotfiles/modules/apps/personal/CleanShotX.plist
-    defaults import com.apphousekitchen.aldente-pro ~/.dotfiles/modules/apps/personal/AlDente.plist
+    defaults import jp.fuji.1Piece ~/.dotfiles/modules/apps/personal/preferences/1Piece.plist
+    defaults import pl.maketheweb.cleanshotx ~/.dotfiles/modules/apps/personal/preferences/CleanShotX.plist
+    defaults import com.apphousekitchen.aldente-pro ~/.dotfiles/modules/apps/personal/preferences/AlDente.plist
   ]], -- use defaults while I don't make dot compatible. To see app id: defaults domains | tr ', ' '\n' | grep -i 1Piece
 }

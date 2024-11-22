@@ -22,11 +22,6 @@ return {
       output = "/Applications/1Piece.app",
       zip = true,
     },
-    {
-      url = "https://www.dropbox.com/scl/fi/lziq2egjb0e4twszlbu9b/Supercharge-1.7.0-trial-1732193286.zip?rlkey=vqoqknmzuo7yiryzyddkoxwo0&raw=1",
-      output = "/Applications/Supercharge.app",
-      zip = true,
-    },
   },
   post_install = [[
     open -a "1Piece"
@@ -34,9 +29,9 @@ return {
     open -a "CleanShot X"
     open -a "Karabiner-Elements"
     open -a "Raycast"
-    open -a "Supercharge"
     open -a "Swift Shift"
-    open ~/.dotfiles/modules/apps/personal/1Piece.app-settings
-    open ~/.dotfiles/modules/apps/personal/AlDente.app-settings
-  ]],
+    defaults import jp.fuji.1Piece ~/.dotfiles/modules/apps/personal/1Piece.plist
+    defaults import pl.maketheweb.cleanshotx ~/.dotfiles/modules/apps/personal/CleanShotX.plist
+    defaults import com.apphousekitchen.aldente-pro ~/.dotfiles/modules/apps/personal/AlDente.plist
+  ]], -- use defaults while I don't make dot compatible. To see app id: defaults domains | tr ', ' '\n' | grep -i 1Piece
 }

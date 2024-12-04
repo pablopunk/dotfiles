@@ -560,6 +560,11 @@ local function mini_nvim()
   MiniIcons.mock_nvim_web_devicons()
 end
 
+local function treesitter_context()
+  add "nvim-treesitter/nvim-treesitter-context"
+  require("treesitter-context").setup {}
+end
+
 local function treesitter()
   add "nvim-treesitter/nvim-treesitter"
   ---@diagnostic disable-next-line: missing-fields
@@ -574,6 +579,7 @@ local function treesitter()
       },
     },
   }
+  treesitter_context()
 end
 
 local function lsp()

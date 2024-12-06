@@ -247,6 +247,14 @@ local function colors()
   ]]
 end
 
+local function snacks()
+  add "folke/snacks.nvim"
+  require("snacks").setup {
+    styles = {},
+    bigfile = { enabled = true }, -- don't load lsp and treesitter on big files
+  }
+end
+
 local function unclutter()
   add "pablopunk/unclutter.nvim"
   require("unclutter").setup { clean_after = 0, tabline = true }
@@ -770,6 +778,7 @@ local function setup_plugins()
   conform()
   highlight_colors()
   markdown()
+  snacks()
 end
 
 setup_plugin_manager()

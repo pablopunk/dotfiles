@@ -23,6 +23,7 @@ return {
       zip = true,
     },
   },
+  -- defaults domains | tr ', ' '\n' | grep -i <app-name>
   defaults = {
     {
       plist = "./defaults/1Piece.plist",
@@ -35,6 +36,10 @@ return {
     {
       plist = "./defaults/AlDente.plist",
       app = "com.apphousekitchen.aldente-pro",
+    },
+    {
+      plist = "./defaults/SwiftShift.plist",
+      app = "com.pablopunk.Swift-Shift",
     },
   },
   post_install = [[

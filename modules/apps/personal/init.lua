@@ -13,6 +13,7 @@ return {
     "raycast",
     "sf-symbols",
     "spotify",
+    "stats",
     "whatsapp",
     "zed",
   },
@@ -44,8 +45,6 @@ return {
   },
   post_install = [[
     open -a "1Piece"
-    open -a "AlDente"
-    open -a "CleanShot X"
     open -a "Karabiner-Elements"
     open -a "Raycast"
     open -a "Swift Shift"

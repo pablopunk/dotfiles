@@ -577,7 +577,10 @@ end
 
 local function treesitter_context()
   add "nvim-treesitter/nvim-treesitter-context"
-  require("treesitter-context").setup {}
+  require("treesitter-context").setup {
+    max_lines = 3,
+  }
+  map("n", "<leader>lc", "<cmd>TSContextToggle<cr>", { desc = "Toggle tresitter context" })
 end
 
 local function treesitter()

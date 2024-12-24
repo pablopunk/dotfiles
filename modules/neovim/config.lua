@@ -495,7 +495,16 @@ end
 
 local function mini_nvim()
   add "echasnovski/mini.nvim"
-  require("mini.completion").setup {}
+  require("mini.icons").setup {}
+  ---@diagnostic disable-next-line: undefined-global
+  MiniIcons.mock_nvim_web_devicons()
+  require("mini.completion").setup {
+    delay = {
+      completion = 1000,
+      info = 100,
+      signature = 50,
+    },
+  }
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   vim.cmd "hi! link MiniIndentscopeSymbol Whitespace"
@@ -564,8 +573,6 @@ local function mini_nvim()
       end
     end
   end, { desc = "Toggle file explorer" })
-  require("mini.icons").setup {}
-  MiniIcons.mock_nvim_web_devicons()
 end
 
 local function treesitter_context()

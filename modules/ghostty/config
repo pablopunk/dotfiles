@@ -1,0 +1,10 @@
+font-family = JetBrains Mono
+font-size = 16
+
+theme = xcodedarkhc
+
+background-opacity = 0.9
+background-blur-radius = 16
+window-padding-x = 12
+window-padding-y = 12
+

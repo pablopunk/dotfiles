@@ -704,7 +704,7 @@ local function conform()
   add "stevearc/conform.nvim"
   local js_formatters = {
     "biome",
-    -- "eslint_d"
+    -- "eslint_d",
   }
   require("conform").setup {
     format_after_save = {

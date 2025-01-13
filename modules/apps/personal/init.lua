@@ -14,6 +14,7 @@ return {
     "sf-symbols",
     "spotify",
     "stats",
+    "tailscale",
     "whatsapp",
     "zed",
   },

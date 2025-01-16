@@ -31,7 +31,7 @@ export -f trigger_item
 export DISABLE_MODE
 
 select_and_trigger() {
-  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}
+  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {} &
 }
 
 if [[ $1 == "--disable" || $1 == "-d" ]]; then
@@ -45,7 +45,7 @@ if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
     matches=($(printf '%s\n' "${all_items[@]}" | grep -i "$arg"))
     if [[ ${#matches[@]} -eq 1 ]]; then
-      trigger_item "${matches[0]}"
+      trigger_item "${matches[0]}" &
     else
       select_and_trigger -q "$arg"
     fi

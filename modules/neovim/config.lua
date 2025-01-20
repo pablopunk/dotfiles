@@ -702,23 +702,32 @@ end
 
 local function conform()
   add "stevearc/conform.nvim"
-  local js_formatters = {
-    "biome",
-    -- "eslint_d",
-  }
-  require("conform").setup {
-    format_after_save = {
-      lsp_format = "fallback",
-    },
-    formatters_by_ft = {
-      lua = { "stylua" },
-      javascript = js_formatters,
-      typescript = js_formatters,
-      typescriptreact = js_formatters,
-      javascriptreact = js_formatters,
-      astro = js_formatters,
-    },
-  }
+  local function setup_conform(js_formatters)
+    require("conform").setup {
+      format_after_save = {
+        lsp_format = "fallback",
+      },
+      formatters_by_ft = {
+        lua = { "stylua" },
+        javascript = js_formatters,
+        typescript = js_formatters,
+        typescriptreact = js_formatters,
+        javascriptreact = js_formatters,
+        astro = js_formatters,
+      },
+    }
+  end
+  local function use_biome()
+    setup_conform { "biome" }
+    vim.cmd "LspRestart"
+  end
+  local function use_eslint()
+    setup_conform { "eslint_d" }
+    vim.cmd "LspRestart"
+  end
+  vim.api.nvim_create_user_command("BiomeFormat", use_biome, {})
+  vim.api.nvim_create_user_command("EslintFormat", use_eslint, {})
+  setup_conform { "biome" } -- default formatter
 end
 
 local function notify()

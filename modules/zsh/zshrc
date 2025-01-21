@@ -183,7 +183,6 @@ alias gds='git diff -w --staged --minimal'
 alias gc='git commit'
 alias amend='git commit --amend'
 alias gca='git add -A && git commit'
-alias gpr='git fetch upstream && git diff -w --minimal upstream/master'
 # ls aliases
 alias ls='my_ls -G --icons=always'
 alias ll='my_ls -lagh --icons=always'
@@ -368,4 +367,4 @@ fi
 
 export PATH=$PATH:/Users/pablopunk/.spicetify
 
-PATH=~/.console-ninja/.bin:$PATH
+

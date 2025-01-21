@@ -85,5 +85,9 @@
     "key": "shift+cmd+x",
     "command": "-workbench.view.extensions",
     "when": "viewContainer.workbench.view.extensions.enabled"
+  },
+  {
+    "key": "cmd+l",
+    "command": "-aichat.newchataction"
   }
 ]

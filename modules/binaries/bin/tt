@@ -41,6 +41,7 @@ else
   DISABLE_MODE=false
 fi
 
+echo
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
     matches=($(printf '%s\n' "${all_items[@]}" | grep -i "$arg"))

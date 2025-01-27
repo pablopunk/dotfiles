@@ -196,39 +196,21 @@ local function setup_plugin_manager()
   add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 end
 
-local function iceberg()
-  add "cocopon/iceberg.vim"
-  dark_theme = "iceberg"
-  light_theme = "iceberg"
-end
-
-local function komau()
-  add "ntk148v/komau.vim"
-  dark_theme = "komau"
-  light_theme = "komau"
-end
-
-local function aquarium()
-  add "frenzyexists/aquarium-vim"
-  dark_theme = "aquarium"
-  light_theme = "aquarium"
-end
-
 local function oxocarbon()
   add "nyoom-engineering/oxocarbon.nvim"
   dark_theme = "oxocarbon"
   light_theme = "oxocarbon"
 end
 
-local function tokyonight()
-  add "folke/tokyonight.nvim"
-  dark_theme = "tokyonight-night"
-  light_theme = "tokyonight-day"
+local function kanagawa()
+  add "rebelot/kanagawa.nvim"
+  dark_theme = "kanagawa"
+  light_theme = "kanagawa"
 end
 
 local function colors()
   vim.opt.background = "dark"
-  oxocarbon()
+  kanagawa()
   vim.cmd("colorscheme " .. dark_theme)
   add "pablopunk/transparent.vim"
   -- color utils
@@ -643,6 +625,7 @@ local function lsp()
   map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
   map("n", "gd", ":Telescope lsp_definitions<cr>zz", { desc = "Go to definition" })
   map("n", "gr", ":Telescope lsp_references<cr>", { desc = "Go to references" })
+  map("n", "gi", ":Telescope lsp_implementations<cr>", { desc = "Go to implementations" })
   map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
   map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols (dynamic)" })
   map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })

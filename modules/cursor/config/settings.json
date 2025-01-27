@@ -11,7 +11,9 @@
   "window.customTitleBarVisibility": "never",
   "window.titleBarStyle": "native",
   "window.nativeTabs": true,
-  "cursor.cpp.disabledLanguages": ["scminput"],
+  "cursor.cpp.disabledLanguages": [
+    "scminput"
+  ],
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
@@ -59,5 +61,6 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "workbench.sideBar.location": "right",
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.columnSelection": true
 }

@@ -18,11 +18,11 @@ fzf_short() {
 all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PATH" | sed 's/^[[:space:]]*//'))
 
 trigger_item() {
+  # call this fn in the background
   if [[ $DISABLE_MODE == true ]]; then
-    tilt disable "$1"
-    echo "Disabled $1"
+    ( tilt disable "$1" && echo "Disabled $1" ) &
   else
-    tilt enable "$1" && tilt trigger "$1"
+    ( tilt enable "$1" && tilt trigger "$1" ) &
   fi
 }
 
@@ -31,7 +31,7 @@ export -f trigger_item
 export DISABLE_MODE
 
 select_and_trigger() {
-  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {} &
+  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}
 }
 
 if [[ $1 == "--disable" || $1 == "-d" ]]; then

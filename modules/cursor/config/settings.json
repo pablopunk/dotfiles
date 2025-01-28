@@ -56,7 +56,7 @@
   "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "Monochrome Dark Subtle",
   "workbench.preferredLightColorTheme": "Monochrome Light Subtle",
-  "workbench.preferredDarkColorTheme": "Sequoia Moonlight",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },

@@ -25,6 +25,8 @@ else
   export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
   export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 fi
+# disable auto-update
+export HOMEBREW_NO_AUTO_UPDATE=1
 # }}}
 
 # zsh config {{{

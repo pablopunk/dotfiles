@@ -44,10 +44,4 @@ return {
       app = "com.pablopunk.Swift-Shift",
     },
   },
-  post_install = [[
-    open -a "1Piece"
-    open -a "Karabiner-Elements"
-    open -a "Raycast"
-    open -a "Swift Shift"
-  ]],
 }

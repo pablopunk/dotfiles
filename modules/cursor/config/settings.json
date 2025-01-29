@@ -56,11 +56,10 @@
   "window.autoDetectColorScheme": true,
   "workbench.colorTheme": "Monochrome Dark Subtle",
   "workbench.preferredLightColorTheme": "Monochrome Light Subtle",
-  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
+  "workbench.preferredDarkColorTheme": "Kanagawa",
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "workbench.sideBar.location": "right",
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.columnSelection": true
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true
 }

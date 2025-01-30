@@ -54,4 +54,3 @@ if [[ $# -gt 0 ]]; then
 else
   select_and_trigger
 fi
-

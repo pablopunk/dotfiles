@@ -61,5 +61,6 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "keyboard.dispatch": "keyCode"
+  "keyboard.dispatch": "keyCode",
+  "git.openRepositoryInParentFolders": "never"
 }

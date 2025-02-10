@@ -763,7 +763,9 @@ local function vscode()
     -- otherwise vscode would be opening the bottom drawer all the time
     -- with the message "3 more lines" or whatever
     vim.opt.cmdheight = 4
+    return true
   end
+  return false
 end
 
 local function highlight_colors()
@@ -773,22 +775,25 @@ end
 
 -- Lazy load plugins
 local function setup_plugins()
-  noice()
-  plugins_that_could_be_default_behavior()
-  editor_utils()
-  which_key()
-  telescope()
-  ai()
-  git()
-  auto_session()
-  mini_nvim()
-  treesitter()
-  lsp()
-  trouble()
-  conform()
-  highlight_colors()
-  markdown()
-  snacks()
+  if vscode() then
+    plugins_that_could_be_default_behavior()
+    git()
+    mini_nvim()
+  else
+    noice()
+    telescope()
+    editor_utils()
+    which_key()
+    ai()
+    auto_session()
+    treesitter()
+    lsp()
+    trouble()
+    conform()
+    highlight_colors()
+    markdown()
+    snacks()
+  end
 end
 
 setup_plugin_manager()

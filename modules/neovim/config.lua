@@ -777,11 +777,11 @@ end
 local function setup_plugins()
   if vscode() then
     plugins_that_could_be_default_behavior()
-    git()
     mini_nvim()
   else
     noice()
     telescope()
+    git()
     editor_utils()
     which_key()
     ai()

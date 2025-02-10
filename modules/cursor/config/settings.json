@@ -14,6 +14,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDragAndDrop": false,
   "editor.accessibilitySupport": "off",
+  "editor.defaultFormatter": "biomejs.biome",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -41,7 +42,6 @@
   },
   "javascript.updateImportsOnFileMove.enabled": "always",
   "terminal.integrated.env.osx": {},
-  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "window.autoDetectColorScheme": true,
   "workbench.preferredDarkColorTheme": "Kanagawa",

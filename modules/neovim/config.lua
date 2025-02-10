@@ -758,6 +758,14 @@ local function markdown()
   }
 end
 
+local function vscode()
+  if vim.g.vscode then
+    -- otherwise vscode would be opening the bottom drawer all the time
+    -- with the message "3 more lines" or whatever
+    vim.opt.cmdheight = 4
+  end
+end
+
 local function highlight_colors()
   add "brenoprata10/nvim-highlight-colors"
   require("nvim-highlight-colors").setup {}

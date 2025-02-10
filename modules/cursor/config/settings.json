@@ -49,5 +49,7 @@
   "keyboard.dispatch": "keyCode",
   "git.openRepositoryInParentFolders": "never",
   "editor.formatOnSaveMode": "modificationsIfAvailable",
-  "typescript.format.enable": false
+  "typescript.format.enable": false,
+  "cursor.cmdk.useThemedDiffBackground": true,
+  "cursor.diffs.useCharacterLevelDiffs": true
 }

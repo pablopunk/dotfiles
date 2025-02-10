@@ -775,10 +775,11 @@ end
 
 -- Lazy load plugins
 local function setup_plugins()
-  if vscode() then
+  plugins_that_could_be_default_behavior()
+  mini_nvim()
+  if not vscode() then
     plugins_that_could_be_default_behavior()
     mini_nvim()
-  else
     noice()
     telescope()
     git()

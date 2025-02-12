@@ -1,8 +1,7 @@
 font-family = JetBrains Mono
 font-size = 16
 
-# theme = xcodedarkhc
-theme = xcodelight
+theme = light:rose-pine-dawn,dark:xcodedarkhc
 
 background-opacity = 0.9
 background-blur-radius = 16

@@ -51,5 +51,6 @@
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "typescript.format.enable": false,
   "cursor.cmdk.useThemedDiffBackground": true,
-  "cursor.diffs.useCharacterLevelDiffs": true
+  "cursor.diffs.useCharacterLevelDiffs": true,
+  "workbench.preferredLightColorTheme": "GitHub Light"
 }

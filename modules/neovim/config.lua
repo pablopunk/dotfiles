@@ -208,25 +208,40 @@ local function kanagawa()
   light_theme = "kanagawa"
 end
 
+local function color_utils()
+  local function Light()
+    vim.opt.background = "light"
+    vim.cmd("colorscheme " .. light_theme)
+  end
+  local function Dark()
+    vim.opt.background = "dark"
+    vim.cmd("colorscheme " .. dark_theme)
+  end
+  vim.api.nvim_create_user_command("Light", Light, {})
+  vim.api.nvim_create_user_command("Dark", Dark, {})
+  add "f-person/auto-dark-mode.nvim"
+  require("auto-dark-mode").setup {
+    set_dark_mode = Dark,
+    set_light_mode = Light,
+    update_interval = 3000,
+    fallback = "dark",
+  }
+end
+
+local function fix_cursorline_color()
+  -- vim.api.nvim_command [[
+  --   hi! CursorLine guibg=#2e3440
+  --   hi! link Visual CursorLine
+  -- ]]
+end
+
 local function colors()
-  vim.opt.background = "dark"
+  vim.opt.background = "dark" -- by default
   kanagawa()
   vim.cmd("colorscheme " .. dark_theme)
   add "pablopunk/transparent.vim"
-  -- color utils
-  vim.api.nvim_create_user_command("Light", function()
-    vim.opt.background = "light"
-    vim.cmd("colorscheme " .. light_theme)
-  end, {})
-  vim.api.nvim_create_user_command("Dark", function()
-    vim.opt.background = "dark"
-    vim.cmd("colorscheme " .. dark_theme)
-  end, {})
-  -- Fix cursorline
-  vim.api.nvim_command [[
-    hi! CursorLine guibg=#2e3440
-    hi! link Visual CursorLine
-  ]]
+  fix_cursorline_color()
+  color_utils()
 end
 
 local function snacks()
@@ -480,13 +495,13 @@ local function mini_nvim()
   require("mini.icons").setup {}
   ---@diagnostic disable-next-line: undefined-global
   MiniIcons.mock_nvim_web_devicons()
-  require("mini.completion").setup {
-    delay = {
-      completion = 1000,
-      info = 100,
-      signature = 50,
-    },
-  }
+  -- require("mini.completion").setup {
+  --   delay = {
+  --     completion = 1000,
+  --     info = 100,
+  --     signature = 50,
+  --   },
+  -- }
   require("mini.comment").setup {}
   require("mini.indentscope").setup { symbol = "│" }
   vim.cmd "hi! link MiniIndentscopeSymbol Whitespace"

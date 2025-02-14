@@ -1,11 +1,12 @@
 return {
   modules = {
-    "*",
-    "!apps/personal",
-    "!apps/work",
-    "!cursor",
-    "!fonts",
-    "!karabiner",
-    "!mac",
+    "binaries",
+    "editorconfig",
+    "gh",
+    "git",
+    "neovim",
+    "tmux",
+    "vim",
+    "zsh",
   },
 }

@@ -35,7 +35,7 @@
     "button": false
   },
   "buffer_font_family": "JetBrains Mono",
-  "theme": "Ayu Dark",
+  "theme": "Catppuccin Mocha",
   "buffer_font_size": 16,
   "vim_mode": true,
   "vim": {
@@ -73,6 +73,6 @@
     "git_status": true
   },
   "features": {
-    "inline_completion_provider": "supermaven"
+    "edit_prediction_provider": "zed"
   }
 }

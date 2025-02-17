@@ -18,11 +18,13 @@ fzf_short() {
 all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PATH" | sed 's/^[[:space:]]*//'))
 
 trigger_item() {
+  local item="$1"
+  local output_file="$2"
   # call this fn in the background
   if [[ $DISABLE_MODE == true ]]; then
-    tilt disable "$1" && echo "Disabled $1" && echo
+    (tilt disable "$item" && echo "Disabled $item") &> "$output_file"
   else
-    tilt enable "$1" && tilt trigger "$1" && echo
+    (tilt enable "$item" && tilt trigger "$item") &> "$output_file"
   fi
 }
 
@@ -31,7 +33,9 @@ export -f trigger_item
 export DISABLE_MODE
 
 select_and_trigger() {
-  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {}
+  local output_file="$1"
+  shift
+  printf '%s\n' "${all_items[@]}" | fzf_short "$@" | xargs -I {} bash -c 'trigger_item "$@"' _ {} "$output_file"
 }
 
 if [[ $1 == "--disable" || $1 == "-d" ]]; then
@@ -43,23 +47,34 @@ fi
 
 echo
 pids=()
+output_files=()
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
     matches=($(printf '%s\n' "${all_items[@]}" | grep -i "$arg"))
+    output_file=$(mktemp)
+    output_files+=("$output_file")
     if [[ ${#matches[@]} -eq 1 ]]; then
-      trigger_item "${matches[0]}" &
+      trigger_item "${matches[0]}" "$output_file" &
       pids+=($!) # Store the PID of the background process
     else
-      select_and_trigger -q "$arg" &
+      select_and_trigger "$output_file" -q "$arg" &
       pids+=($!) # Store the PID of the background process
     fi
   done
 else
-  select_and_trigger &
+  output_file=$(mktemp)
+  output_files+=("$output_file")
+  select_and_trigger "$output_file" &
   pids+=($!) # Store the PID of the background process
 fi
 
 # Wait for all stored PIDs
 for pid in "${pids[@]}"; do
   wait "$pid"
+done
+
+# Print the contents of all output files
+for output_file in "${output_files[@]}"; do
+  cat "$output_file"
+  rm "$output_file"
 done

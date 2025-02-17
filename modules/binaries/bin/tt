@@ -20,9 +20,9 @@ all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PA
 trigger_item() {
   # call this fn in the background
   if [[ $DISABLE_MODE == true ]]; then
-    ( tilt disable "$1" && echo "Disabled $1" && echo ) &
+    tilt disable "$1" && echo "Disabled $1" && echo
   else
-    ( tilt enable "$1" && tilt trigger "$1" && echo ) &
+    tilt enable "$1" && tilt trigger "$1" && echo
   fi
 }
 
@@ -42,15 +42,24 @@ else
 fi
 
 echo
+pids=()
 if [[ $# -gt 0 ]]; then
   for arg in "$@"; do
     matches=($(printf '%s\n' "${all_items[@]}" | grep -i "$arg"))
     if [[ ${#matches[@]} -eq 1 ]]; then
       trigger_item "${matches[0]}" &
+      pids+=($!) # Store the PID of the background process
     else
-      select_and_trigger -q "$arg"
+      select_and_trigger -q "$arg" &
+      pids+=($!) # Store the PID of the background process
     fi
   done
 else
-  select_and_trigger
+  select_and_trigger &
+  pids+=($!) # Store the PID of the background process
 fi
+
+# Wait for all stored PIDs
+for pid in "${pids[@]}"; do
+  wait "$pid"
+done

@@ -5,6 +5,7 @@ return {
     "arc",
     "cleanshot",
     "iina",
+    "jordanbaird-ice",
     "karabiner-elements",
     "latest",
     "missive",

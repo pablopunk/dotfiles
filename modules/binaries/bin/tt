@@ -45,7 +45,6 @@ else
   DISABLE_MODE=false
 fi
 
-echo
 pids=()
 output_files=()
 if [[ $# -gt 0 ]]; then

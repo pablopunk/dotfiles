@@ -67,7 +67,8 @@
       "cmd-r": "outline::Toggle",
       "cmd-t": "workspace::ToggleBottomDock",
       "cmd-l": "workspace::ToggleRightDock",
-      "cmd-k": "assistant::InlineAssist"
+      "cmd-k": "assistant::InlineAssist",
+      "cmd-.": "editor::ToggleCodeActions"
     }
   }
 ]

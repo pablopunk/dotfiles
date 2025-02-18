@@ -35,15 +35,26 @@
     "button": false
   },
   "buffer_font_family": "JetBrains Mono",
-  "theme": "Catppuccin Mocha",
-  "buffer_font_size": 16,
+  "theme": "Kanagawa",
+  "buffer_font_size": 15.0,
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank"
   },
+  "lsp": {
+    "biome": {
+      "settings": {
+        // "config_path": "/Users/pablopunk/src/maze/maze-monorepo/biome.json",
+        "require_config_file": true // only enable biome when biome.json is present
+      }
+    }
+  },
+  "code_actions_on_format": {
+    "source.fixAll.biome": true,
+    "source.organizeImports.biome": true
+  },
   "format_on_save": "on",
-  "formatter": [
-    // an array to use several formatters
+  "formatter": [ // an array to use several formatters
     // {
     //   "language_server": {
     //     "name": "biome"
@@ -56,8 +67,17 @@
     // },
     {
       "external": {
-        "command": "biome",
-        "arguments": ["check", "--write", "--stdin-file-path", "{buffer_path}"]
+        // for the monorepo
+        // "command": "./node_modules/.bin/biome",
+        // for subpackages of the monorepo
+        "command": "../../node_modules/.bin/biome",
+        "arguments": [
+          "check",
+          "--write",
+          "--linter-enabled=false",
+          "--stdin-file-path",
+          "{buffer_path}"
+        ]
       }
     }
   ],

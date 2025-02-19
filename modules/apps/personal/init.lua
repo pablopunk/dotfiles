@@ -44,5 +44,9 @@ return {
       plist = "./defaults/SwiftShift.plist",
       app = "com.pablopunk.Swift-Shift",
     },
+    {
+      plist = "./defaults/Ice.plist",
+      app = "com.jordanbaird.Ice",
+    },
   },
 }

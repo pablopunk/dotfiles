@@ -29,6 +29,10 @@ return {
   -- defaults domains | tr ', ' '\n' | grep -i <app-name>
   defaults = {
     {
+      plist = "./defaults/Stats.plist",
+      app = "eu.exelban.Stats",
+    },
+    {
       plist = "./defaults/1Piece.plist",
       app = "jp.fuji.1Piece",
     },
@@ -43,6 +47,10 @@ return {
     {
       plist = "./defaults/SwiftShift.plist",
       app = "com.pablopunk.Swift-Shift",
+    },
+    {
+      plist = "./defaults/Ice.plist",
+      app = "com.jordanbaird.Ice",
     },
   },
 }

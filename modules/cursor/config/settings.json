@@ -47,7 +47,6 @@
   "workbench.preferredDarkColorTheme": "Kanagawa",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "keyboard.dispatch": "keyCode",
-  "git.openRepositoryInParentFolders": "never",
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "typescript.format.enable": false,
   "cursor.cmdk.useThemedDiffBackground": true,

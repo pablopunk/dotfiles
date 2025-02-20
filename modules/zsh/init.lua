@@ -3,7 +3,7 @@ return {
     "eza",
     "fd",
     "jq",
-    "python@3.12",
+    "python3",
     "tldr",
     "vim",
     "watchman",

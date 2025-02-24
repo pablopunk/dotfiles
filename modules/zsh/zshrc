@@ -33,6 +33,13 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 [ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt PROMPT_SUBST
+# History size https://stackoverflow.com/a/26846960
+export HISTSIZE=100000
+export SAVEHIST=100000
+export HISTFILE=~/.zhistory
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt EXTENDED_HISTORY
 # enable  mode
 # bindkey -v
 # }}}

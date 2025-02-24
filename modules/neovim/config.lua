@@ -723,8 +723,13 @@ local function conform()
     setup_conform { "eslint_d" }
     vim.cmd "LspRestart"
   end
+  local function use_none()
+    setup_conform {}
+    vim.cmd "LspRestart"
+  end
   vim.api.nvim_create_user_command("BiomeFormat", use_biome, {})
   vim.api.nvim_create_user_command("EslintFormat", use_eslint, {})
+  vim.api.nvim_create_user_command("NoFormat", use_none, {})
   setup_conform { "biome" } -- default formatter
 end
 

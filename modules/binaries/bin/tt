@@ -20,11 +20,10 @@ all_items=($(awk -F: '/^[[:space:]]{6}[a-zA-Z_-]+/ {print $1}' "$MAZE_RUNTIME_PA
 trigger_item() {
   local item="$1"
   local output_file="$2"
-  # call this fn in the background
   if [[ $DISABLE_MODE == true ]]; then
-    (tilt disable "$item" && echo "Disabled $item") &> "$output_file"
+    (tilt disable "$item" && echo "⏹️ $item") &> "$output_file"
   else
-    (tilt enable "$item" && tilt trigger "$item") &> "$output_file"
+    (tilt enable "$item" && tilt trigger "$item" > /dev/null && echo "✅ $item" || echo "❌ $item") &> "$output_file"
   fi
 }
 

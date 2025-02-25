@@ -34,8 +34,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 [ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 setopt PROMPT_SUBST
 # History size https://stackoverflow.com/a/26846960
-export HISTSIZE=100000
-export SAVEHIST=100000
+export HISTSIZE=10000
+export SAVEHIST=10000
 export HISTFILE=~/.zhistory
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS

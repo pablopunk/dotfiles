@@ -129,8 +129,11 @@ function add_spacer_to_dock {
 function wait_for_docker {
   until docker info &> /dev/null; do
     echo "Waiting for docker to start..."
-    [ -d "/Applications/OrbStack.app/" ] && open "/Applications/OrbStack.app"
-    [ -d "/Applications/Podman Desktop.app/" ] && open "/Applications/Podman Desktop.app"
+    if [ -d "/Applications/OrbStack.app/" ]; then open "/Applications/OrbStack.app"
+    elif [ -d "/Applications/Podman Desktop.app/" ]; then open "/Applications/Podman Desktop.app";
+    elif [ -d "/Applications/Docker.app/" ]; then open "/Applications/Docker.app"
+    else echo "No docker app found"; exit 1;
+    fi
     sleep 1
   done
 }

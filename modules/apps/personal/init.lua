@@ -1,4 +1,5 @@
 return {
+  os = { "mac" }, -- NOTE TO SELF: PLEASE IMPLEMENT THIS LIKE RIGHT NOW
   brew = {
     "1password",
     "aldente",
@@ -9,7 +10,6 @@ return {
     "karabiner-elements",
     "latest",
     "missive",
-    "mos",
     "notion-calendar",
     "pablopunk/brew/swift-shift",
     "raycast",

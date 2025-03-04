@@ -4,7 +4,7 @@ return {
     "cloudflare-warp",
     "mise",
     "monitorcontrol",
-    "scroll-reverser",
+    "mos",
     "slack",
     "zoom",
   },

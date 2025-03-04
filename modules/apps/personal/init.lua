@@ -9,6 +9,7 @@ return {
     "karabiner-elements",
     "latest",
     "missive",
+    "mos",
     "notion-calendar",
     "pablopunk/brew/swift-shift",
     "raycast",

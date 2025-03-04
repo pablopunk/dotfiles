@@ -51,5 +51,7 @@
   "typescript.format.enable": false,
   "cursor.cmdk.useThemedDiffBackground": true,
   "cursor.diffs.useCharacterLevelDiffs": true,
-  "workbench.preferredLightColorTheme": "GitHub Light"
+  "workbench.preferredLightColorTheme": "GitHub Light",
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.renderSideBySide": false
 }

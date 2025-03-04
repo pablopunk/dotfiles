@@ -92,6 +92,7 @@ local function setup_mappings()
   map({ "n", "v" }, "<leader>x", ":xa!<cr>", { desc = "Save all files and quit" })
   map({ "n", "v" }, "<leader>s", ":w!<cr>", { desc = "Save file" })
   map({ "n", "v" }, "<c-s>", ":w!<cr>", { desc = "Save file" })
+  map({ "n", "v" }, "<leader>S", ":noa w!<cr>", { desc = "Save without formatting" })
   map("n", "<leader>wca", ":silent! %bd<cr>", { desc = "Close all buffers" })
   map("n", "<leader>wcA", ":silent %bd|e#|bd#<cr>", { desc = "Close all buffers except the current one" })
 
@@ -724,7 +725,12 @@ local function conform()
   vim.api.nvim_create_user_command("BiomeFormat", use_biome, {})
   vim.api.nvim_create_user_command("EslintFormat", use_eslint, {})
   vim.api.nvim_create_user_command("NoFormat", use_none, {})
-  setup_conform { "biome" } -- default formatter
+  local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+  if project == "maze-mobile-app" then -- use eslint for the mobile app
+    setup_conform { "eslint_d" }
+  else -- default formatter for everything else
+    setup_conform { "biome" }
+  end
 end
 
 local function notify()

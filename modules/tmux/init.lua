@@ -7,5 +7,5 @@ return {
     source = "./tmux.conf",
     output = "~/.tmux.conf",
   },
-  post_install = "[ -d ~/.tmux/plugins ] || (mkdir -p ~/.tmux/plugins && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm)",
+  post_install = "[ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins",
 }

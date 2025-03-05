@@ -6,7 +6,7 @@ return {
   },
   config = {
     {
-      source = "./config.lua",
+      source = "./neovim.lua",
       output = "~/.config/nvim/init.lua",
     },
     {

@@ -291,12 +291,11 @@ prompt_custom() {
   # Git status indicator (shows * if git is dirty)
   local git_status=""
   if git rev-parse --is-inside-work-tree &>/dev/null; then
-    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+    if timeout 3 git status --porcelain &>/dev/null; then
       git_status="%F{yellow}*%f"
     fi
-    # Check if there are commits to push
-    if [[ -n $(git rev-list @{u}..HEAD 2>/dev/null) ]]; then
-      git_status="${git_status}%F{yellow}↑%f"  # Add up arrow if there are unpushed commits
+    if timeout 3 git rev-list @{u}..HEAD &>/dev/null; then
+      git_status="${git_status}%F{yellow}↑%f"
     fi
   fi
 

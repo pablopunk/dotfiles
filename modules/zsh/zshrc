@@ -268,6 +268,25 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 F=$HOME/.additional; [ -f $F ] && . $F
 # }}}
 
+run_async_git_status() {
+  if git status --porcelain &>/dev/null; then
+    echo "%F{yellow}*%f" > /tmp/zsh_git_status_dirty_${1}
+  else
+    rm -f /tmp/zsh_git_status_dirty_${1}
+  fi
+  if [ "$(git rev-list --count HEAD@{upstream}..HEAD)" -gt 0 ]; then
+    echo "%F{yellow}↑%f" > /tmp/zsh_git_status_ahead_${1}
+  else
+    rm -f /tmp/zsh_git_status_ahead_${1}
+  fi
+}
+
+get_git_status() {
+  local dirty=$(cat /tmp/zsh_git_status_dirty_${1} 2>/dev/null)
+  local ahead=$(cat /tmp/zsh_git_status_ahead_${1} 2>/dev/null)
+  echo "${dirty}${ahead}"
+}
+
 # PROMPT {{{
 prompt_custom() {
   # Show hostname if it's an SSH session
@@ -288,15 +307,12 @@ prompt_custom() {
     prompt_path="%F{blue}${current_dir}%f"
   fi
 
-  # Git status indicator (shows * if git is dirty)
-  local git_status=""
-  if git rev-parse --is-inside-work-tree &>/dev/null; then
-    if timeout 3 git status --porcelain &>/dev/null; then
-      git_status="%F{yellow}*%f"
-    fi
-    if timeout 3 git rev-list @{u}..HEAD &>/dev/null; then
-      git_status="${git_status}%F{yellow}↑%f"
-    fi
+  # Git status indicator (* dirty, ↑ unpushed commits)
+  local repo_path=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [[ -n "$repo_path" ]]; then
+    local repo_name=$(basename "$repo_path")
+    ( run_async_git_status "$repo_name" & ) > /dev/null 2>&1
+    local git_status=$(get_git_status "$repo_name")
   fi
 
   # Set arrow color based on last command status
@@ -378,5 +394,3 @@ fi
 # these last lines are usually added automatically by installed tools
 
 export PATH=$PATH:/Users/pablopunk/.spicetify
-
-

@@ -269,7 +269,7 @@ F=$HOME/.additional; [ -f $F ] && . $F
 # }}}
 
 run_async_git_status() {
-  if git status --porcelain &>/dev/null; then
+  if [ -n "$(git status --porcelain)" ]; then
     echo "%F{yellow}*%f" > /tmp/zsh_git_status_dirty_${1}
   else
     rm -f /tmp/zsh_git_status_dirty_${1}

@@ -392,15 +392,23 @@ local function avante()
       "MunifTanjim/nui.nvim",
     },
   }
-  require("avante_lib").load() -- fixes bug https://github.com/yetone/avante.nvim/issues/665#issuecomment-2412440939
+  -- require("avante_lib").load() -- fixes bug https://github.com/yetone/avante.nvim/issues/665#issuecomment-2412440939
   -- ^ fix above requires building with
   --   cd $HOME/.local/share/nvim/site/pack/deps/opt/avante.nvim && make
   require("avante").setup {
-    provider = "openai", -- openai | azure | copilot | claude
+    provider = "openai",
     mappings = {
       ask = "<leader>cg",
     },
     hints = { enabled = true },
+    openai = {
+      endpoint = "https://api.openai.com/v1",
+      model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+      timeout = 30000, -- timeout in milliseconds
+      temperature = 0, -- adjust if needed
+      max_tokens = 4096,
+      -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
+    },
   }
 end
 
@@ -408,7 +416,7 @@ local function ai()
   supermaven()
   -- chatgpt()
   -- codecompanion()
-  avante()
+  -- avante()
 end
 
 local function git_blame()

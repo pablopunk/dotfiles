@@ -1,0 +1,121 @@
+my_ls() {
+  if ! hash eza 2>/dev/null; then
+    \ls $@
+    return
+  fi
+  eza $@
+}
+function rm {
+  going_to="/tmp/trash/$USER/$(date +%s%N)"
+  mkdir -p "$going_to"
+  mv -f "$@" "$going_to"
+}
+function gcm {
+  git commit -m "$*"
+}
+function gcam {
+  if [[ "$*" == *--amend* ]]; then
+    git commit -m"$@"
+  else
+    git add -A
+    git commit -m "$*"
+  fi
+}
+function gcamm {
+  git commit --amend --message "$*"
+}
+function powersave {
+  # linux
+  sudo cpufreq-set -g powersave && \
+    sudo pm-powersave true
+}
+function power {
+  sudo cpufreq-set -g performance && \
+    sudo pm-powersave false
+}
+
+function gclone {
+  git clone https://github.com/pablopunk/$1 && cd $1
+}
+
+function grebase {
+  branch="$(git symbolic-ref --short HEAD)"
+  git fetch upstream && \
+    git rebase upstream/$branch
+}
+
+function greset_hard {
+  branch="$(git symbolic-ref --short HEAD)"
+  git fetch upstream && \
+    git reset --hard upstream/$branch
+}
+
+function copy {
+  [[ "$(uname)" == "Linux" ]] && xsel --clipboard --input
+  [[ "$(uname)" == "Darwin" ]] && pbcopy
+}
+
+function weather {
+  curl -s "wttr.in/${1-pontevedra}?format=1"
+}
+
+function add_spacer_to_dock {
+  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+  killall Dock
+}
+
+function wait_for_docker {
+  until docker info &> /dev/null; do
+    echo "Waiting for docker to start..."
+    if [ -d "/Applications/OrbStack.app/" ]; then open "/Applications/OrbStack.app"
+    elif [ -d "/Applications/Podman Desktop.app/" ]; then open "/Applications/Podman Desktop.app";
+    elif [ -d "/Applications/Docker.app/" ]; then open "/Applications/Docker.app"
+    else echo "No docker app found"; exit 1;
+    fi
+    sleep 1
+  done
+}
+
+function benchmark_neovim_plugins {
+  python3 <(curl -sSL https://raw.githubusercontent.com/hyiltiz/vim-plugins-profile/master/vim-plugins-profile.py) nvim
+}
+
+function benchmark_neovim_startuptime {
+  hyperfine "nvim --headless +qa" --warmup 5
+}
+
+function benchmark_disk {
+  tempfile="tempfile"
+  echo "Benchmarking disk speed in $PWD"
+  echo
+  echo "WRITING..."
+  sudo dd if=/dev/zero of=$tempfile bs=1G count=1 oflag=dsync > /dev/null
+  echo
+  echo "READING..."
+  sudo dd if=$tempfile of=/dev/zero bs=8k > /dev/null | grep bytes
+  sudo rm -f $tempfile
+}
+
+function tilt_playwright {
+  for service in \
+    "signup-api" \
+    "localstack" \
+    "panel-core" \
+    "graph-gateway" \
+    "maze-api" \
+    "maze-video-recording-api" \
+    "maze-webapp" \
+    "report-webapp" \
+    "testing-webapp" \
+    "signup-webapp" \
+  ; do
+    tilt enable "$service"
+    tilt trigger "$service"
+  done
+}
+
+function tilt {
+  [[ "$#" -eq 1 && "$1" == "up" ]] && { wait_for_docker; command tilt up; return; }
+  [[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
+  command tilt $@
+}

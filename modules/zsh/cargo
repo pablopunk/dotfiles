@@ -1,0 +1,6 @@
+export PATH="$HOME/.cargo/bin:$PATH"
+function cargo { # lazy load cargo
+  [[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
+  command cargo $@
+}
+

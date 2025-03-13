@@ -3,7 +3,7 @@ return {
     "eza",
     "fd",
     "jq",
---     "python3",
+    --     "python3",
     "tldr",
     "vim",
     "watchman",
@@ -43,5 +43,5 @@ return {
       output = "~/.bun_zsh",
     },
   },
---   post_install = "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
+  post_install = "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh",
 }

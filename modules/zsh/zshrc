@@ -114,5 +114,9 @@ if hash zoxide 2>/dev/null; then
 fi
 # zoxide }}}
 
+# Generic term stuff {{{
 TERM=xterm-256color
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+# Generic term stuff }}}
 

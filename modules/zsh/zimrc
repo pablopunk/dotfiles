@@ -27,8 +27,8 @@ zmodule utility
 zmodule duration-info
 # Exposes git repository status information to prompts, used by asciiship.
 zmodule git-info
-# A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-zmodule asciiship
+# Prompt theme
+zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 
 #
 # Completion

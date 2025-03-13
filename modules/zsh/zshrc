@@ -1,12 +1,51 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
 
-# Start profiling {{{
-if [ -n "${ZSH_DEBUGRC+1}" ]; then
-  zmodload zsh/zprof
+# Start configuration added by Zim install {{{
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -e
+# Prompt for spelling correction of commands.
+setopt CORRECT
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+# Zim configuration
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+# zsh-syntax-highlighting
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# Initialize modules
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
-# }}}
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init
+fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
-# # `brew shellenv` {{{
+# zsh-history-substring-search
+zmodload -F zsh/terminfo +p:terminfo
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+# }}} End configuration added by Zim install
+
+# `brew shellenv` {{{
 # I used to run `eval $(brew shellenv)` but it was too slow
 if [ -f /proc/sys/kernel/osrelease ]; then
   # Linuxbrew
@@ -31,314 +70,16 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export FPATH=$(echo "$FPATH" | tr ':' '\n' | grep -v "/usr/local/share/zsh/site-functions" | awk '{printf "%s:", $0}' | sed 's/:$//')
 # }}}
 
-# zsh config {{{
-[ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-[ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-setopt PROMPT_SUBST
-# History size https://stackoverflow.com/a/26846960
-export HISTSIZE=10000
-export SAVEHIST=10000
-export HISTFILE=~/.zhistory
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt EXTENDED_HISTORY
-# enable  mode
-# bindkey -v
-# }}}
-
-# Zsh plugin manager (zpm) {{{
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
-fi
-# if zsh is stuck at this line, remove ~/.zpm and clone again
-source ~/.zpm/zpm.zsh
-# Plugins
-## Copilot suggestions on CLI
-## Requires gh CLI and extension: gh extension install github/gh-copilot --force
-zpm load loiccoyle/zsh-github-copilot
-# ctrl + space to trigger copilot suggestions
-## if it doesn't work, try this: https://github.com/zsh-users/zsh-autosuggestions/issues/132#issuecomment-491248596
-bindkey '^ ' zsh_gh_copilot_suggest
-# }}}
-
-# Functions {{{
-my_ls() {
-  if ! hash eza 2>/dev/null; then
-    \ls $@
-    return
-  fi
-  eza $@
-}
-function rm {
-  going_to="/tmp/trash/$USER/$(date +%s%N)"
-  mkdir -p "$going_to"
-  mv -f "$@" "$going_to"
-}
-function gcm {
-  git commit -m "$*"
-}
-function gcam {
-  if [[ "$*" == *--amend* ]]; then
-    git commit -m"$@"
-  else
-    git add -A
-    git commit -m "$*"
-  fi
-}
-function gcamm {
-  git commit --amend --message "$*"
-}
-function powersave {
-  # linux
-  sudo cpufreq-set -g powersave && \
-    sudo pm-powersave true
-}
-function power {
-  sudo cpufreq-set -g performance && \
-    sudo pm-powersave false
-}
-
-function gclone {
-  git clone https://github.com/pablopunk/$1 && cd $1
-}
-
-function grebase {
-  branch="$(git symbolic-ref --short HEAD)"
-  git fetch upstream && \
-    git rebase upstream/$branch
-}
-
-function greset_hard {
-  branch="$(git symbolic-ref --short HEAD)"
-  git fetch upstream && \
-    git reset --hard upstream/$branch
-}
-
-function copy {
-  [[ "$(uname)" == "Linux" ]] && xsel --clipboard --input
-  [[ "$(uname)" == "Darwin" ]] && pbcopy
-}
-
-function weather {
-  curl -s "wttr.in/${1-pontevedra}?format=1"
-}
-
-function add_spacer_to_dock {
-  defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
-  killall Dock
-}
-
-function wait_for_docker {
-  until docker info &> /dev/null; do
-    echo "Waiting for docker to start..."
-    if [ -d "/Applications/OrbStack.app/" ]; then open "/Applications/OrbStack.app"
-    elif [ -d "/Applications/Podman Desktop.app/" ]; then open "/Applications/Podman Desktop.app";
-    elif [ -d "/Applications/Docker.app/" ]; then open "/Applications/Docker.app"
-    else echo "No docker app found"; exit 1;
-    fi
-    sleep 1
-  done
-}
-
-function benchmark_neovim_plugins {
-  python3 <(curl -sSL https://raw.githubusercontent.com/hyiltiz/vim-plugins-profile/master/vim-plugins-profile.py) nvim
-}
-
-function benchmark_neovim_startuptime {
-  hyperfine "nvim --headless +qa" --warmup 5
-}
-
-function benchmark_disk {
-  tempfile="tempfile"
-  echo "Benchmarking disk speed in $PWD"
-  echo
-  echo "WRITING..."
-  sudo dd if=/dev/zero of=$tempfile bs=1G count=1 oflag=dsync > /dev/null
-  echo
-  echo "READING..."
-  sudo dd if=$tempfile of=/dev/zero bs=8k > /dev/null | grep bytes
-  sudo rm -f $tempfile
-}
-
-function tilt_playwright {
-  for service in \
-    "signup-api" \
-    "localstack" \
-    "panel-core" \
-    "graph-gateway" \
-    "maze-api" \
-    "maze-video-recording-api" \
-    "maze-webapp" \
-    "report-webapp" \
-    "testing-webapp" \
-    "signup-webapp" \
-  ; do
-    tilt enable "$service"
-    tilt trigger "$service"
-  done
-}
-
-function tilt {
-  [[ "$#" -eq 1 && "$1" == "up" ]] && { wait_for_docker; command tilt up; return; }
-  [[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
-  command tilt $@
-}
-# }}}
-
-# Aliases {{{
-alias cd=z
-alias g=git
-alias gst='git status'
-alias gp='git push'
-alias gl='git pull'
-alias gf='git fetch'
-alias glog='git log --oneline --decorate'
-alias gd='git diff -w --minimal'
-alias gds='git diff -w --staged --minimal'
-alias gc='git commit'
-alias amend='git commit --amend'
-alias gca='git add -A && git commit'
-# ls aliases
-alias ls='my_ls -G --icons=always'
-alias ll='my_ls -lagh --icons=always'
-alias la='my_ls -a1 --icons=always'
-alias l='my_ls -a1 --icons=always'
-alias t='tree -L 3'
-# other
-alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
-alias vi=nvim
-alias vvi='command vi'
-alias viu='nvim -u NONE'
-alias todo=todo.sh
-alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
-alias mkidr='mkdir -p'
-alias n='npm run'
-alias run='npx tsx'
-# not in vim but who cares
-alias :q='exit'
-alias :qa='exit'
-alias :x='exit'
-alias :xa='exit'
-# source entry file
-alias zs='source ~/.zshrc'
-alias bs='source ~/.bashrc'
-# }}}
-
-# PATH {{{
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.deno/bin:$PATH"
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
-export PATH="$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
-export PATH="$HOME/.console-ninja/.bin:$PATH"
-
-# }}}
-
-# Ripgrep config {{{
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-# }}}
-
-# Cargo {{{
-export PATH="$HOME/.cargo/bin:$PATH"
-function cargo { # lazy load cargo
-  [[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
-  command cargo $@
-}
-# }}}
-
-# Bun.sh {{{
-function bun { # lazy load bun
-  [[ -f $HOME/.bun/_bun ]] && . "$HOME/.bun/_bun"
-  command bun $@
-}
-
-function bunx { # lazy load bunx
-  [[ -f $HOME/.bun/_bun ]] && . "$HOME/.bun/_bun"
-  command bunx $@
-}
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# }}}
+# modular config {{{
+source ~/.aliases
+source ~/.functions
+source ~/.path
+source ~/.cargo_zsh
+source ~/.bun_zsh
+# modular config }}}
 
 # Local config (not tracked) {{{
 F=$HOME/.additional; [ -f $F ] && . $F
-# }}}
-
-run_async_git_status() {
-  if [ -n "$(git status --porcelain)" ]; then
-    echo "%F{yellow}*%f" > /tmp/zsh_git_status_dirty_${1}
-  else
-    rm -f /tmp/zsh_git_status_dirty_${1}
-  fi
-  if [ "$(git rev-list --count HEAD@{upstream}..HEAD)" -gt 0 ]; then
-    echo "%F{yellow}↑%f" > /tmp/zsh_git_status_ahead_${1}
-  else
-    rm -f /tmp/zsh_git_status_ahead_${1}
-  fi
-}
-
-get_git_status() {
-  local dirty=$(cat /tmp/zsh_git_status_dirty_${1} 2>/dev/null)
-  local ahead=$(cat /tmp/zsh_git_status_ahead_${1} 2>/dev/null)
-  echo "${dirty}${ahead}"
-}
-
-# PROMPT {{{
-prompt_custom() {
-  # Show hostname if it's an SSH session
-  local host=""
-  if [[ -n $SSH_CONNECTION ]]; then
-    host="%F{green}%m%f "
-  fi
-
-  # Shorten the PWD path relative to $HOME
-  local current_dir="${PWD/#$HOME/~}"
-  local prompt_path=""
-
-  if [[ "$current_dir" == "~"* ]]; then
-    # Inside home: shorten each directory except the last one
-    prompt_path="%F{blue}$(echo "$current_dir" | awk -F/ '{ for (i=1; i<NF; i++) printf substr($i,1,1) "/"; print $NF }')%f"
-  else
-    # Outside home: show full path
-    prompt_path="%F{blue}${current_dir}%f"
-  fi
-
-  # Git status indicator (* dirty, ↑ unpushed commits)
-  local repo_path=$(git rev-parse --show-toplevel 2>/dev/null)
-  if [[ -n "$repo_path" ]]; then
-    local repo_name=$(basename "$repo_path")
-    ( run_async_git_status "$repo_name" & ) > /dev/null 2>&1
-    local git_status=$(get_git_status "$repo_name")
-  fi
-
-  # Set arrow color based on last command status
-  local arrow_color="%F{cyan}"
-  if [[ $? -ne 0 ]]; then
-    arrow_color="%F{red}"
-  fi
-
-  # Combine everything for the prompt
-  PROMPT="${host}${prompt_path} ${git_status}${arrow_color}❯%f "
-}
-
-# Initialize the custom prompt
-autoload -U add-zsh-hook
-add-zsh-hook precmd prompt_custom
-### }}}
-
-# TERM {{{
-TERM=xterm-256color
-# }}}
-
-# auto tmux on vscode and ssh {{{
-# [ "$TERM_PROGRAM" = "vscode" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
-# [ ! -z "$SSH_CONNECTION" ] && [ -z "$TMUX" ] && ( tmux a || tmux )
 # }}}
 
 # theme (dark/light) {{{
@@ -359,40 +100,16 @@ change_colorscheme() {
 }
 # Run the colorscheme change function in the background without output
 (change_colorscheme >/dev/null 2>&1 &)
-# }}}
-
-# movements (alt+arrows) {{{
-bindkey "^[[1;3D" backward-word
-bindkey "^[[1;3C" forward-word
-# }}}
+# theme (dark/light) }}}
 
 # mise {{{
 if hash mise 2>/dev/null; then
   eval "$(mise activate zsh)"
 fi
-# }}}
+# mise }}}
 
 # zoxide {{{
 if hash zoxide 2>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
-# }}}
-
-# Search history with substring {{{
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
-# }}}
-
-# End profiling {{{
-if [ -n "${ZSH_DEBUGRC+1}" ]; then
-  zprof
-fi
-# }}}
-
-# these last lines are usually added automatically by installed tools
-
-export PATH=$PATH:/Users/pablopunk/.spicetify
+# zoxide }}}

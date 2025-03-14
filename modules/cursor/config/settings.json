@@ -53,5 +53,6 @@
   "cursor.diffs.useCharacterLevelDiffs": true,
   "workbench.preferredLightColorTheme": "GitHub Light",
   "diffEditor.hideUnchangedRegions.enabled": true,
-  "diffEditor.renderSideBySide": false
+  "diffEditor.renderSideBySide": false,
+  "cursor.cpp.enablePartialAccepts": true
 }

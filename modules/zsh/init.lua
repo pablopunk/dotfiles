@@ -35,6 +35,7 @@ return {
     {
       source = "./lazy",
       output = "~/.lazy",
+    },
   },
   post_install = "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh",
 }

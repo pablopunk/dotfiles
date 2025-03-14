@@ -3,15 +3,13 @@ return {
     "eza",
     "fd",
     "jq",
-    --     "python3",
+    -- "python3",
     "tldr",
     "vim",
     "watchman",
     "wget",
     "zoxide",
     "zsh",
-    "zsh-autosuggestions",
-    "zsh-syntax-highlighting",
   },
   config = {
     {

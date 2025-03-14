@@ -74,8 +74,7 @@ export FPATH=$(echo "$FPATH" | tr ':' '\n' | grep -v "/usr/local/share/zsh/site-
 source ~/.aliases
 source ~/.functions
 source ~/.path
-source ~/.cargo_zsh
-source ~/.bun_zsh
+source ~/.lazy
 # modular config }}}
 
 # Local config (not tracked) {{{
@@ -101,18 +100,6 @@ change_colorscheme() {
 # Run the colorscheme change function in the background without output
 (change_colorscheme >/dev/null 2>&1 &)
 # theme (dark/light) }}}
-
-# mise {{{
-if hash mise 2>/dev/null; then
-  eval "$(mise activate zsh)"
-fi
-# mise }}}
-
-# zoxide {{{
-if hash zoxide 2>/dev/null; then
-  eval "$(zoxide init zsh)"
-fi
-# zoxide }}}
 
 # Generic term stuff {{{
 TERM=xterm-256color

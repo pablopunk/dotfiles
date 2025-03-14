@@ -1,8 +1,0 @@
-function bunx { # lazy load bunx
-  [[ -f $HOME/.bun/_bun ]] && . "$HOME/.bun/_bun"
-  command bunx $@
-}
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# }}}
-

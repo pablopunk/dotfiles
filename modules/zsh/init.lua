@@ -33,13 +33,8 @@ return {
       output = "~/.functions",
     },
     {
-      source = "./cargo",
-      output = "~/.cargo_zsh",
-    },
-    {
-      source = "./bun",
-      output = "~/.bun_zsh",
-    },
+      source = "./lazy",
+      output = "~/.lazy",
   },
   post_install = "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh",
 }

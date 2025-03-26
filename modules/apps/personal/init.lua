@@ -14,6 +14,7 @@ return {
     "pablopunk/brew/swift-shift",
     "raycast",
     "sf-symbols",
+    "spacelauncher",
     "spotify",
     "stats",
     "tailscale",
@@ -52,6 +53,10 @@ return {
     {
       plist = "./defaults/Ice.plist",
       app = "com.jordanbaird.Ice",
+    },
+    {
+      plist = "./defaults/SpaceLauncher.plist",
+      app = "name.guoc.SpaceLauncher",
     },
   },
 }

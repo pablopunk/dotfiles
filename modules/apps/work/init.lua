@@ -5,6 +5,7 @@ return {
     "mise",
     "monitorcontrol",
     "mos",
+    "orbstack",
     "slack",
     "zoom",
   },

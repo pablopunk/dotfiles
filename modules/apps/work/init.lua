@@ -9,4 +9,10 @@ return {
     "slack",
     "zoom",
   },
+  defaults = {
+    {
+      plist = "./defaults/Mos.plist",
+      app = "com.caldis.Mos",
+    },
+  },
 }

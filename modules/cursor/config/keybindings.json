@@ -90,4 +90,8 @@
     "key": "cmd+e",
     "command": "workbench.files.action.focusFilesExplorer"
   },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
 ]

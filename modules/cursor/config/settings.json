@@ -1,5 +1,5 @@
 {
-  "window.commandCenter": true,
+  "window.commandCenter": 1,
   "editor.fontFamily": "Jetbrains Mono, Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "window.customTitleBarVisibility": "never",
@@ -44,7 +44,7 @@
   "terminal.integrated.env.osx": {},
   "editor.formatOnSave": true,
   "window.autoDetectColorScheme": true,
-  "workbench.preferredDarkColorTheme": "Kanagawa",
+  "workbench.preferredDarkColorTheme": "Cursor Dark Midnight",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "keyboard.dispatch": "keyCode",
   "editor.formatOnSaveMode": "modificationsIfAvailable",

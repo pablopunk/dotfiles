@@ -1,7 +1,7 @@
 font-family = JetBrains Mono
 font-size = 16
 
-theme = light:Tinacious Design (Light),dark:xcodedarkhc
+theme = light:tokyonight-day,dark:tokyonight
 
 background-opacity = 0.9
 background-blur-radius = 16

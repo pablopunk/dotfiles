@@ -709,7 +709,7 @@ local function conform()
         lsp_format = "fallback",
       },
       formatters_by_ft = {
-        lua = { "stylua" },
+        lua = { "stylua" }, -- brew install stylua
         javascript = js_formatters,
         typescript = js_formatters,
         typescriptreact = js_formatters,
@@ -778,9 +778,9 @@ local function markdown()
   add "OXY2DEV/markview.nvim"
   require("markview").setup {
     preview = {
-    filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
+      filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
+      buf_ignore = {},
     },
-    buf_ignore = {},
     max_length = 99999,
     code_blocks = {
       style = "simple", -- Makes it easier to read when wrap is enabled in buffer

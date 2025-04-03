@@ -777,7 +777,9 @@ end
 local function markdown()
   add "OXY2DEV/markview.nvim"
   require("markview").setup {
+    preview = {
     filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
+    },
     buf_ignore = {},
     max_length = 99999,
     code_blocks = {

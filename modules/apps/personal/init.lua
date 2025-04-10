@@ -4,7 +4,6 @@ return {
     "1password",
     "aldente",
     "arc",
-    "cleanshot",
     "iina",
     "jordanbaird-ice",
     "karabiner-elements",
@@ -38,10 +37,6 @@ return {
       app = "jp.fuji.1Piece",
     },
     {
-      plist = "./defaults/CleanShotX.plist",
-      app = "pl.maketheweb.cleanshotx",
-    },
-    {
       plist = "./defaults/AlDente.plist",
       app = "com.apphousekitchen.aldente-pro",
     },
@@ -54,4 +49,12 @@ return {
       app = "com.jordanbaird.Ice",
     },
   },
+  post_install = [[
+    open /Applications/Ice.app
+    open /Applications/Stats.app
+    open /Applications/1Piece.app
+    open /Applications/AlDente.app
+    open /Applications/SwiftShift.app
+    open /Applications/SpaceLauncher.app
+  ]]
 }

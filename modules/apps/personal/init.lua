@@ -54,7 +54,7 @@ return {
     open /Applications/Stats.app
     open /Applications/1Piece.app
     open /Applications/AlDente.app
-    open /Applications/SwiftShift.app
+    open "/Applications/Swift Shift.app"
     open /Applications/SpaceLauncher.app
   ]]
 }

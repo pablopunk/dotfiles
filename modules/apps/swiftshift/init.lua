@@ -5,11 +5,11 @@ return {
   },
   defaults = {
     {
-      plist = "./SwiftShift.plist",
+      plist = "./SwiftShift.xml",
       app = "com.pablopunk.Swift-Shift",
     },
   },
   post_install = [[
     open "/Applications/Swift Shift.app"
-  ]]
+  ]],
 }

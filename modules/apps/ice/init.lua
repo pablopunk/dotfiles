@@ -5,7 +5,7 @@ return {
   },
   defaults = {
     {
-      plist = "./Ice.plist",
+      plist = "./Ice.xml",
       app = "com.jordanbaird.Ice",
     },
   },

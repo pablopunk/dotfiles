@@ -1,4 +1,5 @@
 return {
+  os = { "macos" },
   wget = {
     {
       url = "https://app1piece.com/1Piece-4.2.1.zip",

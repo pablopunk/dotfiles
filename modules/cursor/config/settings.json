@@ -54,5 +54,8 @@
   "workbench.preferredLightColorTheme": "GitHub Light",
   "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.renderSideBySide": false,
-  "cursor.cpp.enablePartialAccepts": true
+  "cursor.cpp.enablePartialAccepts": true,
+  "[lua]": {
+    "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  }
 }

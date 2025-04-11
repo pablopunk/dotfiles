@@ -11,11 +11,11 @@ return {
   },
   defaults = {
     {
-      plist = "./defaults/Mos.plist",
+      plist = "./defaults/Mos.xml",
       app = "com.caldis.Mos",
     },
     {
-      plist = "./defaults/CleanShotX.plist",
+      plist = "./defaults/CleanShotX.xml",
       app = "pl.maketheweb.cleanshotx",
     },
   },

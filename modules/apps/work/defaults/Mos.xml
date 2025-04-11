@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSStatusItem Visible Item-0</key>
+	<false/>
+	<key>allowlist</key>
+	<false/>
+	<key>applications</key>
+	<data>
+	W10=
+	</data>
+	<key>block</key>
+	<integer>56</integer>
+	<key>dash</key>
+	<integer>0</integer>
+	<key>duration</key>
+	<real>3.8999999999999999</real>
+	<key>hideStatusItem</key>
+	<true/>
+	<key>optionsExist</key>
+	<string>optionsExist</string>
+	<key>precision</key>
+	<real>1</real>
+	<key>reverse</key>
+	<true/>
+	<key>smooth</key>
+	<true/>
+	<key>speed</key>
+	<real>3</real>
+	<key>step</key>
+	<real>35</real>
+	<key>toggle</key>
+	<integer>0</integer>
+</dict>
+</plist>

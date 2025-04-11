@@ -9,7 +9,7 @@ return {
   },
   defaults = {
     {
-      plist = "./1Piece.plist",
+      plist = "./1Piece.xml",
       app = "jp.fuji.1Piece",
     },
   },

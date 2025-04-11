@@ -5,7 +5,7 @@ return {
   },
   defaults = {
     {
-      plist = "./Stats.plist",
+      plist = "./Stats.xml",
       app = "eu.exelban.Stats",
     },
   },

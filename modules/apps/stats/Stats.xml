@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Battery_barChart_position</key>
+	<integer>3</integer>
+	<key>Battery_batteryDetails_position</key>
+	<integer>4</integer>
+	<key>Battery_battery_position</key>
+	<integer>0</integer>
+	<key>Battery_label_position</key>
+	<integer>1</integer>
+	<key>Battery_mini_position</key>
+	<integer>2</integer>
+	<key>Battery_widget</key>
+	<string></string>
+	<key>CPU_barChart_position</key>
+	<integer>3</integer>
+	<key>CPU_label_position</key>
+	<integer>1</integer>
+	<key>CPU_lineChart_position</key>
+	<integer>0</integer>
+	<key>CPU_line_chart_color</key>
+	<string>system</string>
+	<key>CPU_line_chart_valueColor</key>
+	<false/>
+	<key>CPU_mini_position</key>
+	<integer>2</integer>
+	<key>CPU_pieChart_position</key>
+	<integer>4</integer>
+	<key>CPU_tachometer_position</key>
+	<integer>5</integer>
+	<key>CPU_widget</key>
+	<string>line_chart</string>
+	<key>Disk_state</key>
+	<false/>
+	<key>LaunchAtLoginNext</key>
+	<true/>
+	<key>NSStatusItem Preferred Position CPU_line_chart</key>
+	<real>363</real>
+	<key>NSStatusItem Preferred Position Network_speed</key>
+	<real>411</real>
+	<key>NSStatusItem Preferred Position RAM_pie_chart</key>
+	<real>329</real>
+	<key>NSStatusItem Restore Position Battery_battery</key>
+	<integer>5654</integer>
+	<key>NSStatusItem Restore Position CPU_line_chart</key>
+	<integer>448</integer>
+	<key>NSStatusItem Restore Position CPU_mini</key>
+	<integer>220</integer>
+	<key>NSStatusItem Restore Position Disk_mini</key>
+	<integer>902</integer>
+	<key>NSStatusItem Restore Position Network_speed</key>
+	<integer>496</integer>
+	<key>NSStatusItem Restore Position RAM_mini</key>
+	<integer>173</integer>
+	<key>NSStatusItem Restore Position RAM_pie_chart</key>
+	<integer>414</integer>
+	<key>NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<true/>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
+	<key>RAM_barChart_position</key>
+	<integer>5</integer>
+	<key>RAM_label_position</key>
+	<integer>4</integer>
+	<key>RAM_lineChart_position</key>
+	<integer>3</integer>
+	<key>RAM_memory_position</key>
+	<integer>6</integer>
+	<key>RAM_mini_position</key>
+	<integer>2</integer>
+	<key>RAM_pieChart_position</key>
+	<integer>0</integer>
+	<key>RAM_tachometer_position</key>
+	<integer>1</integer>
+	<key>RAM_text_position</key>
+	<integer>7</integer>
+	<key>RAM_widget</key>
+	<string>pie_chart</string>
+	<key>runAtLoginInitialized</key>
+	<true/>
+	<key>setupProcess</key>
+	<true/>
+	<key>support_ts</key>
+	<integer>1741365000</integer>
+	<key>telemetry</key>
+	<false/>
+	<key>telemetry_id</key>
+	<string>B4C8BE77-DA58-4591-AB84-230F0922777E</string>
+	<key>temperature_units</key>
+	<string>celsius</string>
+	<key>updater_check_ts</key>
+	<integer>1743673748</integer>
+	<key>version</key>
+	<string>2.11.37</string>
+</dict>
+</plist>

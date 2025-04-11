@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Custom</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
+	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGmCwwZGhscVSRudWxs1g0ODxAR
+	EhMUFRQXGF1tb2RpZmllckZsYWdzXxAbY2hhcmFjdGVyc0lnbm9yaW5nTW9kaWZpZXJz
+	ViRjbGFzc1pjaGFyYWN0ZXJzV2tleUNvZGVXdmVyc2lvboADgASABYAEgAKAABAAEgAQ
+	AABRYdIdHh8gWiRjbGFzc25hbWVYJGNsYXNzZXNaU1JTaG9ydGN1dKIfIVhOU09iamVj
+	dAAIABEAGgAkACkAMgA3AEkATABRAFMAWgBgAG0AewCZAKAAqwCzALsAvQC/AMEAwwDF
+	AMcAyQDOANAA1QDgAOkA9AD3AAAAAAAAAgEAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAQA=
+	</data>
+	<key>Move</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
+	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwZGhtVJG51bGzWDQ4PEBES
+	ExQVFBcUXW1vZGlmaWVyRmxhZ3NfEBtjaGFyYWN0ZXJzSWdub3JpbmdNb2RpZmllcnNW
+	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAU
+	AADSHB0eH1okY2xhc3NuYW1lWCRjbGFzc2VzWlNSU2hvcnRjdXSiHiBYTlNPYmplY3QI
+	ERokKTI3SUxRU1lfbHqYn6qyury+wMLExsnO097n8vUAAAAAAAABAQAAAAAAAAAhAAAA
+	AAAAAAAAAAAAAAAA/g==
+	</data>
+	<key>Move_mouseButton</key>
+	<string>None</string>
+	<key>NSStatusItem Preferred Position Item-0</key>
+	<real>5715</real>
+	<key>NSStatusItem Visible Item-0</key>
+	<true/>
+	<key>NSWindow Frame Main Window</key>
+	<string>459 485 354 222 0 0 1352 843 </string>
+	<key>NSWindow Frame SwiftUI.ModifiedContent&lt;Swift_Shift.AppView, SwiftUI._FrameLayout&gt;-1-AppWindow-1</key>
+	<string>1039 -878 900 450 505 -982 1512 944 </string>
+	<key>NSWindow Frame Swift_Shift.AppView-1-AppWindow-1</key>
+	<string>595 355 354 198 0 0 1352 843 </string>
+	<key>NSWindow Frame Swift_Shift.ContentView-1-AppWindow-1</key>
+	<string>1053 -594 900 450 505 -982 1512 944 </string>
+	<key>Resize</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
+	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwZGhtVJG51bGzWDQ4PEBES
+	ExQVFBcUXW1vZGlmaWVyRmxhZ3NfEBtjaGFyYWN0ZXJzSWdub3JpbmdNb2RpZmllcnNW
+	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAS
+	AADSHB0eH1okY2xhc3NuYW1lWCRjbGFzc2VzWlNSU2hvcnRjdXSiHiBYTlNPYmplY3QI
+	ERokKTI3SUxRU1lfbHqYn6qyury+wMLExsnO097n8vUAAAAAAAABAQAAAAAAAAAhAAAA
+	AAAAAAAAAAAAAAAA/g==
+	</data>
+	<key>Resize_mouseButton</key>
+	<string>None</string>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUHasLaunchedBefore</key>
+	<true/>
+	<key>SULastCheckTime</key>
+	<date>2025-04-10T21:23:15Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>1138178282</integer>
+	<key>allowMouseOptions</key>
+	<false/>
+	<key>focusOnApp</key>
+	<true/>
+	<key>requireMouseClick</key>
+	<false/>
+	<key>showMenuBarIcon</key>
+	<true/>
+	<key>startAtLogin</key>
+	<false/>
+	<key>useQuadrants</key>
+	<true/>
+	<key>userShortcut</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
+	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGnCwwZGhscHVUkbnVsbNYNDg8Q
+	ERITFBUWFxhdbW9kaWZpZXJGbGFnc18QG2NoYXJhY3RlcnNJZ25vcmluZ01vZGlmaWVy
+	c1YkY2xhc3NaY2hhcmFjdGVyc1drZXlDb2RlV3ZlcnNpb26AA4AFgAaABIACgAAQABIA
+	EgAAUWFRQdIeHyAhWiRjbGFzc25hbWVYJGNsYXNzZXNaU1JTaG9ydGN1dKIgIlhOU09i
+	amVjdAAIABEAGgAkACkAMgA3AEkATABRAFMAWwBhAG4AfACaAKEArAC0ALwAvgDAAMIA
+	xADGAMgAygDPANEA0wDYAOMA7AD3APoAAAAAAAACAQAAAAAAAAAjAAAAAAAAAAAAAAAA
+	AAABAw==
+	</data>
+</dict>
+</plist>

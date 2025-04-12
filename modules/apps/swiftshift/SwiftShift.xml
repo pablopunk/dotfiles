@@ -25,7 +25,7 @@
 	<key>Move_mouseButton</key>
 	<string>None</string>
 	<key>NSStatusItem Preferred Position Item-0</key>
-	<real>5715</real>
+	<real>5576</real>
 	<key>NSStatusItem Visible Item-0</key>
 	<true/>
 	<key>NSWindow Frame Main Window</key>
@@ -71,7 +71,7 @@
 	<key>startAtLogin</key>
 	<false/>
 	<key>useQuadrants</key>
-	<true/>
+	<false/>
 	<key>userShortcut</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS

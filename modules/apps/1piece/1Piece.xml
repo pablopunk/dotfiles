@@ -50,6 +50,8 @@
 	<false/>
 	<key>FlagPopupMenuBarContextMenuShortCut</key>
 	<false/>
+	<key>FlagScreenCaptureAlertAsk</key>
+	<true/>
 	<key>FlagSendWindowToBackShortCut</key>
 	<false/>
 	<key>FlagStageManager</key>

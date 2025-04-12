@@ -1291,15 +1291,15 @@
 		<string>211.000000, 0.000000, 689.000000, 625.000000, NO, NO</string>
 	</array>
 	<key>NSStatusItem Preferred Position HItem</key>
-	<real>508</real>
+	<real>560</real>
 	<key>NSStatusItem Preferred Position SItem</key>
-	<real>482</real>
+	<real>534</real>
 	<key>NSStatusItem Visible AHItem</key>
 	<false/>
 	<key>NSWindow Frame PermissionsWindow</key>
 	<string>509 194 493 637 0 0 1512 944 </string>
 	<key>NSWindow Frame SettingsWindow</key>
-	<string>1012 351 900 625 0 0 2560 1415 </string>
+	<string>39 264 900 625 0 0 1512 944 </string>
 	<key>RehideInterval</key>
 	<real>15</real>
 	<key>RehideStrategy</key>

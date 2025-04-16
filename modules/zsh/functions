@@ -108,14 +108,25 @@ function benchmark_neovim_startuptime {
 }
 
 function benchmark_disk {
-  tempfile="tempfile"
+  folder=$1
+  if [ -z "$folder" ]; then
+    echo "Usage: $0 <folder>"
+    return 1
+  fi
+  tempfile="$folder/tempfile_delete_me"
   echo "Benchmarking disk speed in $PWD"
   echo
   echo "WRITING..."
-  sudo dd if=/dev/zero of=$tempfile bs=1G count=1 oflag=dsync > /dev/null
+  write_output=$(sudo dd if=/dev/zero of=$tempfile bs=512M count=1 2>&1)
+  write_speed=$(echo "$write_output" | grep -o '[0-9]* bytes/sec' | awk '{print $1}')
+  write_speed_human=$(echo "scale=2; $write_speed/1024/1024" | bc)
+  echo "Write speed: ${write_speed_human} MB/s"
   echo
   echo "READING..."
-  sudo dd if=$tempfile of=/dev/zero bs=8k > /dev/null | grep bytes
+  read_output=$(sudo dd if=$tempfile of=/dev/zero bs=8k 2>&1)
+  read_speed=$(echo "$read_output" | grep -o '[0-9]* bytes/sec' | awk '{print $1}')
+  read_speed_human=$(echo "scale=2; $read_speed/1024/1024" | bc)
+  echo "Read speed: ${read_speed_human} MB/s"
   sudo rm -f $tempfile
 }
 

@@ -117,7 +117,7 @@ function benchmark_disk {
   echo "Benchmarking disk speed in $PWD"
   echo
   echo "WRITING..."
-  write_output=$(sudo dd if=/dev/zero of=$tempfile bs=512M count=1 2>&1)
+  write_output=$(sudo dd if=/dev/zero of=$tempfile bs=120M count=1 2>&1)
   write_speed=$(echo "$write_output" | grep -o '[0-9]* bytes/sec' | awk '{print $1}')
   write_speed_human=$(echo "scale=2; $write_speed/1024/1024" | bc)
   echo "Write speed: ${write_speed_human} MB/s"

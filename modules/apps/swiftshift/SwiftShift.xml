@@ -17,7 +17,7 @@
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwZGhtVJG51bGzWDQ4PEBES
 	ExQVFBcUXW1vZGlmaWVyRmxhZ3NfEBtjaGFyYWN0ZXJzSWdub3JpbmdNb2RpZmllcnNW
-	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAU
+	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAY
 	AADSHB0eH1okY2xhc3NuYW1lWCRjbGFzc2VzWlNSU2hvcnRjdXSiHiBYTlNPYmplY3QI
 	ERokKTI3SUxRU1lfbHqYn6qyury+wMLExsnO097n8vUAAAAAAAABAQAAAAAAAAAhAAAA
 	AAAAAAAAAAAAAAAA/g==
@@ -25,7 +25,7 @@
 	<key>Move_mouseButton</key>
 	<string>None</string>
 	<key>NSStatusItem Preferred Position Item-0</key>
-	<real>588</real>
+	<real>5610</real>
 	<key>NSStatusItem Visible Item-0</key>
 	<true/>
 	<key>NSWindow Frame Main Window</key>
@@ -55,7 +55,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2025-04-10T21:23:15Z</date>
+	<date>2025-04-22T00:56:09Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>

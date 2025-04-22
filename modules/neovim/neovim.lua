@@ -412,8 +412,21 @@ local function avante()
   }
 end
 
+local function codex()
+  add "johnseth97/codex.nvim"
+  require("codex").setup {
+    keymaps = {}, -- disable internal mapping
+    border = "rounded", -- or 'double'
+    width = 0.8,
+    height = 0.8,
+    autoinstall = true,
+  }
+  map("n", "<leader>cg", "<cmd>CodexToggle<cr>", { desc = "Toggle codex popup" })
+end
+
 local function ai()
   supermaven()
+  codex()
   -- chatgpt()
   -- codecompanion()
   -- avante()

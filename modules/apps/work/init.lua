@@ -14,9 +14,5 @@ return {
       plist = "./defaults/Mos.xml",
       app = "com.caldis.Mos",
     },
-    {
-      plist = "./defaults/CleanShotX.xml",
-      app = "pl.maketheweb.cleanshotx",
-    },
   },
 }

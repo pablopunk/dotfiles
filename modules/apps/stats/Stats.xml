@@ -39,17 +39,17 @@
 	<key>NSStatusItem Preferred Position Battery_battery</key>
 	<real>5593</real>
 	<key>NSStatusItem Preferred Position CPU_line_chart</key>
-	<real>5588</real>
+	<real>348</real>
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
-	<real>5636</real>
+	<real>430</real>
 	<key>NSStatusItem Preferred Position RAM_mini</key>
 	<real>5682</real>
 	<key>NSStatusItem Preferred Position RAM_pie_chart</key>
-	<real>480</real>
+	<real>396</real>
 	<key>NSStatusItem Restore Position Battery_battery</key>
 	<integer>5654</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>

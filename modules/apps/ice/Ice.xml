@@ -1291,15 +1291,15 @@
 		<string>211.000000, 0.000000, 689.000000, 625.000000, NO, NO</string>
 	</array>
 	<key>NSStatusItem Preferred Position HItem</key>
-	<real>475</real>
+	<real>527</real>
 	<key>NSStatusItem Preferred Position SItem</key>
-	<real>411</real>
+	<real>501</real>
 	<key>NSStatusItem Visible AHItem</key>
 	<false/>
 	<key>NSWindow Frame PermissionsWindow</key>
 	<string>1032 492 493 637 0 0 2560 1415 </string>
 	<key>NSWindow Frame SettingsWindow</key>
-	<string>373 142 900 625 0 0 1512 944 </string>
+	<string>39 264 900 625 0 0 1512 944 </string>
 	<key>RehideInterval</key>
 	<real>15</real>
 	<key>RehideStrategy</key>
@@ -1311,7 +1311,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2025-04-22T00:55:36Z</date>
+	<date>2025-04-26T11:26:32Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>

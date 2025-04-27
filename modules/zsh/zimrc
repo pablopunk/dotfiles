@@ -28,7 +28,9 @@ zmodule duration-info
 # Exposes git repository status information to prompts, used by asciiship.
 zmodule git-info
 # Prompt theme
-zmodule sindresorhus/pure --source async.zsh --source pure.zsh
+# zmodule sindresorhus/pure --source async.zsh --source pure.zsh
+zmodule prompt-pwd # needed for s1ck94
+zmodule zimfw/s1ck94
 
 #
 # Completion

@@ -101,6 +101,11 @@ change_colorscheme() {
 (change_colorscheme >/dev/null 2>&1 &)
 # theme (dark/light) }}}
 
+# Prompt stuff {{{
+export ON_COLOR=magenta
+export OFF_COLOR=cyan
+# Prompt stuff }}}
+
 # Generic term stuff {{{
 TERM=xterm-256color
 export LANG="en_US.UTF-8"

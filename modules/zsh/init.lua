@@ -21,20 +21,20 @@ return {
       output = "~/.zimrc",
     },
     {
-      source = "./aliases",
-      output = "~/.aliases",
+      source = "./zshrc.d/aliases.sh",
+      output = "~/.zshrc.d/aliases.sh",
     },
     {
-      source = "./path",
-      output = "~/.path",
+      source = "./zshrc.d/path.sh",
+      output = "~/.zshrc.d/path.sh",
     },
     {
-      source = "./functions",
-      output = "~/.functions",
+      source = "./zshrc.d/prompt.sh",
+      output = "~/.zshrc.d/prompt.sh",
     },
     {
-      source = "./lazy",
-      output = "~/.lazy",
+      source = "./zshrc.d/lazy.sh",
+      output = "~/.zshrc.d/lazy.sh",
     },
   },
   post_install = "curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh",

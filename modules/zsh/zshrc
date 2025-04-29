@@ -71,15 +71,12 @@ export FPATH=$(echo "$FPATH" | tr ':' '\n' | grep -v "/usr/local/share/zsh/site-
 # }}}
 
 # modular config {{{
-source ~/.aliases
-source ~/.functions
-source ~/.path
-source ~/.lazy
+ZSHRC_D="${ZDOTDIR:-$HOME}/.zshrc.d"
+[ -d "$ZSHRC_D" ] || mkdir -p "$ZSHRC_D"
+for rc in "$ZSHRC_D"/*.sh; do
+  [ -f "$rc" ] && source "$rc"
+done
 # modular config }}}
-
-# Local config (not tracked) {{{
-F=$HOME/.additional; [ -f $F ] && . $F
-# }}}
 
 # theme (dark/light) {{{
 change_colorscheme() {

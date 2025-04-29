@@ -57,5 +57,8 @@
   "cursor.cpp.enablePartialAccepts": true,
   "[lua]": {
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

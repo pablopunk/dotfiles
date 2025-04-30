@@ -61,7 +61,7 @@ automatically-unhide-macos-hidden-apps = false
   inner.vertical =   4
   outer.left =       8
   outer.bottom =     8
-  outer.top =        8
+  outer.top =        48 # sketchy bar + 8
   outer.right =      8
 
 # 'main' binding mode declaration
@@ -114,8 +114,8 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-shift-l = 'move right'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-  # alt-cmd-ctrl-minus = 'resize smart -50'
-  # alt-cmd-ctrl-equal = 'resize smart +50'
+  alt-cmd-ctrl-comma = 'resize smart -50'
+  alt-cmd-ctrl-period = 'resize smart +50'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
   alt-cmd-ctrl-1 = 'workspace 1'

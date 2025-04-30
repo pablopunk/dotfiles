@@ -29,8 +29,8 @@ return {
       output = "~/.zshrc.d/path.sh",
     },
     {
-      source = "./zshrc.d/prompt.sh",
-      output = "~/.zshrc.d/prompt.sh",
+      source = "./zshrc.d/functions.sh",
+      output = "~/.zshrc.d/functions.sh",
     },
     {
       source = "./zshrc.d/lazy.sh",

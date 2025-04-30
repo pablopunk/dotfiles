@@ -158,3 +158,11 @@ function tilt {
   [[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
   command tilt $@
 }
+
+function defaults_search {
+  if [[ -z "$1" ]]; then
+    echo "Usage: $0 <search>"
+    return
+  fi
+  defaults domains | tr ', ' '\n' | grep -i $1
+}

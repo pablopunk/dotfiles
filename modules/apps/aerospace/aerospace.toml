@@ -14,6 +14,16 @@ after-startup-command = []
 # Start AeroSpace at login
 start-at-login = false
 
+# Utils for sketchybar https://github.com/FelixKratz/SketchyBar/discussions/599#discussioncomment-11093795
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
+on-focus-changed = [
+  'exec-and-forget sketchybar --trigger aerospace_focus_change',
+]
+
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true

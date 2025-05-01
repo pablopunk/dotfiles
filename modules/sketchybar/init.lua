@@ -4,9 +4,9 @@ return {
     "FelixKratz/formulae/sketchybar",
     "switchaudio-osx",
     "nowplaying-cli",
-    "font-sf-mono --cask",
-    "font-sf-pro --cask",
-    "sf-symbols --cask",
+    "font-sf-mono",
+    "font-sf-pro",
+    "sf-symbols",
   },
   config = {
     source = "./config",

@@ -6,11 +6,6 @@
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 
-# You can use it to add commands that run after AeroSpace startup.
-# 'after-startup-command' is run after 'after-login-command'
-# Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
-
 # Start AeroSpace at login
 start-at-login = false
 
@@ -22,6 +17,11 @@ exec-on-workspace-change = [
 ]
 on-focus-changed = [
   'exec-and-forget sketchybar --trigger aerospace_focus_change',
+]
+
+# Utils for janky borders
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
 ]
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
@@ -67,11 +67,11 @@ automatically-unhide-macos-hidden-apps = false
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-  inner.horizontal = 4
-  inner.vertical =   4
+  inner.horizontal = 8
+  inner.vertical =   8
   outer.left =       8
   outer.bottom =     8
-  outer.top =        48 # sketchy bar + 8
+  outer.top =        42 # sketchy bar + 8
   outer.right =      8
 
 # 'main' binding mode declaration
@@ -214,10 +214,10 @@ automatically-unhide-macos-hidden-apps = false
   # sticky is not yetjsupported https://github.com/nikitabobko/AeroSpace/issues/2
   #s = ['layout sticky tiling', 'mode main']
 
-  # alt-cmd-ctrl-shift-h = ['join-with left', 'mode main']
-  # alt-cmd-ctrl-shift-j = ['join-with down', 'mode main']
-  # alt-cmd-ctrl-shift-k = ['join-with up', 'mode main']
-  # alt-cmd-ctrl-shift-l = ['join-with right', 'mode main']
+  h = ['join-with left', 'mode main']
+  j = ['join-with down', 'mode main']
+  k = ['join-with up', 'mode main']
+  l = ['join-with right', 'mode main']
 
   # down = 'volume down'
   # up = 'volume up'

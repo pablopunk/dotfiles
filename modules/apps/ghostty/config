@@ -7,3 +7,5 @@ background-opacity = 0.9
 background-blur-radius = 16
 window-padding-x = 12
 window-padding-y = 12
+window-decoration = auto
+macos-titlebar-style = hidden

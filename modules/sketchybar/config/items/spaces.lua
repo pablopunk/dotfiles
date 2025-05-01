@@ -61,7 +61,7 @@ for i = 1, 10, 1 do
     background = {
       drawing = true,
       image = {
-        corner_radius = 9,
+        corner_radius = 50,
         scale = 0.2,
       },
     },

@@ -7,7 +7,7 @@
 after-login-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Utils for sketchybar https://github.com/FelixKratz/SketchyBar/discussions/599#discussioncomment-11093795
 exec-on-workspace-change = [
@@ -225,6 +225,10 @@ automatically-unhide-macos-hidden-apps = false
 
 
 [[on-window-detected]]
-    if.app-id = 'org.pqrs.Karabiner-Elements.Settings'
-    run = 'layout floating'
+  if.app-name-regex-substring = "Karabiner"
+  run = 'layout floating'
+
+[[on-window-detected]]
+  if.window-title-regex-substring = "SecurityAgent"
+  run = 'layout floating'
 

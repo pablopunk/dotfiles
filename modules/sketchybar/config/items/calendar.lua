@@ -26,7 +26,6 @@ local cal = sbar.add("item", {
   padding_right = 1,
   background = {
     color = colors.bg2,
-    border_color = colors.black,
     border_width = 1,
   },
   click_script = "open -a 'Notion Calendar'",

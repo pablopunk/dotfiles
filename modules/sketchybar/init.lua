@@ -1,5 +1,5 @@
 return {
-  os = { "mac" },
+  os = { "macos" },
   brew = {
     "FelixKratz/formulae/sketchybar",
     "switchaudio-osx",

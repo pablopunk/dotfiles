@@ -6,7 +6,19 @@ sbar = require("sketchybar")
 
 -- Bundle the entire initial configuration into a single message to sketchybar
 sbar.begin_config()
-require("bar")
+
+-- Detect if laptop/monitor
+local handle =
+  io.popen 'system_profiler SPDisplaysDataType | grep -q "Display Type: Built-in" && echo "laptop" || echo "external"'
+local result = handle:read "*a"
+handle:close()
+
+if result:find "laptop" then
+  require "bar-laptop"
+else
+  require "bar"
+end
+
 require("default")
 require("items")
 sbar.end_config()

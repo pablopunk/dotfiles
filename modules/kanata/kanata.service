@@ -1,0 +1,12 @@
+[Unit]
+Description=Kanata Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/modprobe uinput
+ExecStart=/usr/local/bin/kanata -c /var/home/pol/.config/kanata/kanata.conf
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

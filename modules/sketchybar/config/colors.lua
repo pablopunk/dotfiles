@@ -1,11 +1,11 @@
 return {
   black = 0xff181819,
   white = 0xffe2e2e3,
-  red = 0xfffc5d7c,
-  green = 0xff9ed072,
-  blue = 0xff76cce0,
+  red = 0xfffcbddc,
+  green = 0xff9ed0d0,
+  blue = 0xff70f0f0,
   yellow = 0xffe7c664,
-  orange = 0xfff39660,
+  orange = 0xfff3c6c0,
   magenta = 0xffb39df3,
   grey = 0x3f414550,
   transparent = 0x00000000,
@@ -18,8 +18,9 @@ return {
     bg = 0xc02c2e34,
     border = 0xff7f8490,
   },
-  bg1 = 0x3f414550,
-  bg2 = 0x3f414550,
+
+  bg = 0x9f414550,
+  fg = 0xffffffff,
 
   with_alpha = function(color, alpha)
     if alpha > 1.0 or alpha < 0.0 then

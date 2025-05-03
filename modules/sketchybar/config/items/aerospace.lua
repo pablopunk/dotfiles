@@ -8,31 +8,31 @@ local query_workspaces =
   "aerospace list-workspaces --all --format '%{workspace}%{monitor-appkit-nsscreen-screens-id}' --json"
 local workspace_monitor = {}
 
--- Add padding to the left
-sbar.add("item", {
-  icon = {
-    color = colors.with_alpha(colors.white, 0.3),
-    highlight_color = colors.white,
-    drawing = false,
-  },
-  label = {
-    color = colors.grey,
-    highlight_color = colors.white,
-    drawing = false,
-  },
-  background = {
-    color = colors.bg0,
-    border_width = 1,
-    height = 24,
-    border_color = colors.black,
-    corner_radius = 100,
-    padding_left = 12,
-    drawing = false,
-  },
-  padding_left = 6,
-  padding_right = 0,
-})
-
+-- -- Add padding to the left
+-- sbar.add("item", {
+--   icon = {
+--     color = colors.with_alpha(colors.white, 0.3),
+--     highlight_color = colors.white,
+--     drawing = false,
+--   },
+--   label = {
+--     color = colors.grey,
+--     highlight_color = colors.white,
+--     drawing = false,
+--   },
+--   background = {
+--     color = colors.bg0,
+--     border_width = 1,
+--     height = 24,
+--     border_color = colors.black,
+--     corner_radius = 100,
+--     padding_left = 12,
+--     drawing = false,
+--   },
+--   padding_left = 6,
+--   padding_right = 0,
+-- })
+--
 local workspaces = {}
 
 local function updateWindows(workspace_index)
@@ -58,7 +58,7 @@ local function updateWindows(workspace_index)
           for i, visible_workspace in ipairs(visible_workspaces) do
             if no_app and workspace_index == tonumber(visible_workspace["workspace"]) then
               local monitor_id = visible_workspace["monitor-appkit-nsscreen-screens-id"]
-              icon_line = " —"
+              icon_line = app_icons["Finder"]
               workspaces[workspace_index]:set {
                 icon = { drawing = true },
                 label = {
@@ -87,7 +87,7 @@ local function updateWindows(workspace_index)
             return
           end
           if no_app and workspace_index == tonumber(focused_workspaces) then
-            icon_line = " —"
+            icon_line = ""
             workspaces[workspace_index]:set {
               icon = { drawing = true },
               label = {
@@ -132,9 +132,8 @@ end
 for workspace_index = 1, max_workspaces do
   local workspace = sbar.add("item", {
     icon = {
-      color = colors.with_alpha(colors.white, 0.3),
-      -- highlight_color = colors.red,
-      highlight_color = colors.white,
+      color = colors.fg2,
+      highlight_color = colors.fg,
       drawing = false,
       font = { family = settings.font.numbers },
       string = workspace_index,
@@ -144,18 +143,17 @@ for workspace_index = 1, max_workspaces do
     label = {
       padding_right = 12,
       -- color = colors.grey,
-      color = colors.with_alpha(colors.white, 0.3),
-      highlight_color = colors.white,
+      color = colors.fg2,
+      highlight_color = colors.fg,
       font = "sketchybar-app-font:Regular:16.0",
       y_offset = -1,
     },
     padding_right = 5,
     padding_left = 5,
     background = {
-      color = colors.bg3,
-      border_width = 1,
+      color = colors.bg,
       height = 24,
-      border_color = colors.bg2,
+      border_width = 3,
     },
     click_script = "aerospace workspace " .. workspace_index,
   })

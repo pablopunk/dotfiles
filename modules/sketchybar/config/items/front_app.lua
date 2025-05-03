@@ -11,10 +11,10 @@ local front_app = sbar.add("item", "front_app", {
     },
     padding_left = 3,
     padding_right = 9,
+    color = colors.fg,
   },
   background = {
-    color = colors.bg2,
-    border_width = 1,
+    color = colors.bg,
     height = 24,
     corner_radius = 100,
   },

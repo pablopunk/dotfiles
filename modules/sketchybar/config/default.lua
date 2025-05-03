@@ -29,10 +29,10 @@ sbar.default {
     height = 24,
     corner_radius = 100,
     border_width = 2,
-    border_color = colors.bg2,
+    border_color = colors.with_alpha(colors.bg, 0.3),
     image = {
       corner_radius = 100,
-      border_color = colors.grey,
+      border_color = colors.with_alpha(colors.grey, 0.3),
       border_width = 1,
     },
   },

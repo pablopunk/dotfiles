@@ -27,7 +27,7 @@ for i = 1, 10, 1 do
     padding_right = 1,
     padding_left = 1,
     background = {
-      color = colors.bg1,
+      color = colors.bg,
       border_width = 1,
       height = 26,
       border_color = colors.black,
@@ -41,7 +41,7 @@ for i = 1, 10, 1 do
   local space_bracket = sbar.add("bracket", { space.name }, {
     background = {
       color = colors.transparent,
-      border_color = colors.bg2,
+      border_color = colors.bg,
       height = 28,
       border_width = 2,
     },
@@ -69,14 +69,14 @@ for i = 1, 10, 1 do
 
   space:subscribe("space_change", function(env)
     local selected = env.SELECTED == "true"
-    local color = selected and colors.grey or colors.bg2
+    local color = selected and colors.grey or colors.bg
     space:set {
       icon = { highlight = selected },
       label = { highlight = selected },
-      background = { border_color = selected and colors.black or colors.bg2 },
+      background = { border_color = selected and colors.black or colors.bg },
     }
     space_bracket:set {
-      background = { border_color = selected and colors.grey or colors.bg2 },
+      background = { border_color = selected and colors.grey or colors.bg },
     }
   end)
 
@@ -114,11 +114,11 @@ local spaces_indicator = sbar.add("item", {
     padding_left = 0,
     padding_right = 8,
     string = "Spaces",
-    color = colors.bg1,
+    color = colors.bg,
   },
   background = {
     color = colors.with_alpha(colors.grey, 0.0),
-    border_color = colors.with_alpha(colors.bg1, 0.0),
+    border_color = colors.with_alpha(colors.bg, 0.0),
   },
 })
 
@@ -154,7 +154,7 @@ spaces_indicator:subscribe("mouse.entered", function(env)
         color = { alpha = 1.0 },
         border_color = { alpha = 1.0 },
       },
-      icon = { color = colors.bg1 },
+      icon = { color = colors.bg },
       label = { width = "dynamic" },
     }
   end)

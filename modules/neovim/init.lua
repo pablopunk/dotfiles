@@ -3,6 +3,7 @@ return {
     -- { name = "neovim", options = "--HEAD" },
     "neovim",
     "ripgrep",
+    "stylua",
   },
   config = {
     {

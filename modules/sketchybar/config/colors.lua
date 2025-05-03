@@ -7,7 +7,7 @@ return {
   yellow = 0xffe7c664,
   orange = 0xfff39660,
   magenta = 0xffb39df3,
-  grey = 0xff7f8490,
+  grey = 0x3f414550,
   transparent = 0x00000000,
 
   bar = {
@@ -18,8 +18,8 @@ return {
     bg = 0xc02c2e34,
     border = 0xff7f8490,
   },
-  bg1 = 0xff363944,
-  bg2 = 0xff414550,
+  bg1 = 0x3f414550,
+  bg2 = 0x3f414550,
 
   with_alpha = function(color, alpha)
     if alpha > 1.0 or alpha < 0.0 then

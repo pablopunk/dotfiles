@@ -9,6 +9,14 @@ local front_app = sbar.add("item", "front_app", {
       style = settings.font.style_map["Black"],
       size = 12.0,
     },
+    padding_left = 3,
+    padding_right = 9,
+  },
+  background = {
+    color = colors.bg2,
+    border_width = 1,
+    height = 24,
+    corner_radius = 100,
   },
   updates = true,
 })

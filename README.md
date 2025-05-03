@@ -1,9 +1,11 @@
 # dotfiles
 
+<p align="center">
 <img
-  src="https://github.com/pablopunk/dotfiles/assets/4324982/d5badddc-5bc7-48dc-aaa4-061d4755826b"
+  src="https://github.com/user-attachments/assets/1fedd2d2-7339-408d-aa99-f85277252373"
   alt="neovim"
-  width="700px" />
+  width="900px" />
+</p>
 
 ## 👀 Requirements
 

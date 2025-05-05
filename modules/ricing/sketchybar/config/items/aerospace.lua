@@ -132,7 +132,7 @@ end
 for workspace_index = 1, max_workspaces do
   local workspace = sbar.add("item", {
     icon = {
-      color = colors.fg2,
+      color = colors.with_alpha(colors.fg, 0.5),
       highlight_color = colors.fg,
       drawing = false,
       font = { family = settings.font.numbers },
@@ -142,8 +142,7 @@ for workspace_index = 1, max_workspaces do
     },
     label = {
       padding_right = 12,
-      -- color = colors.grey,
-      color = colors.fg2,
+      color = colors.with_alpha(colors.fg, 0.5),
       highlight_color = colors.fg,
       font = "sketchybar-app-font:Regular:16.0",
       y_offset = -1,
@@ -153,7 +152,6 @@ for workspace_index = 1, max_workspaces do
     background = {
       color = colors.bg,
       height = 24,
-      border_width = 3,
     },
     click_script = "aerospace workspace " .. workspace_index,
   })
@@ -169,7 +167,7 @@ for workspace_index = 1, max_workspaces do
         icon = { highlight = is_focused },
         label = { highlight = is_focused },
         background = {
-          border_width = is_focused and 2 or 1,
+          -- border_width = is_focused and 2 or 1,
         },
         blur_radius = 30,
       }
@@ -192,7 +190,7 @@ for workspace_index = 1, max_workspaces do
     workspaces[tonumber(focused_workspace)]:set {
       icon = { highlight = true },
       label = { highlight = true },
-      background = { border_width = 2 },
+      -- background = { border_width = 2 },
     }
   end)
 end

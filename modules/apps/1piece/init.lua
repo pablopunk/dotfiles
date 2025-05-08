@@ -15,5 +15,5 @@ return {
   },
   post_install = [[
     open /Applications/1Piece.app
-  ]]
+  ]],
 }

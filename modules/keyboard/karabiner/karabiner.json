@@ -770,6 +770,30 @@
                                     }
                                 ],
                                 "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "t",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     }

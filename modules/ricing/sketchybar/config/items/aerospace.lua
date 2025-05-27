@@ -35,9 +35,12 @@ local workspace_monitor = {}
 --
 local workspaces = {}
 
+local workspace_letters = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p" }
+
 local function updateWindows(workspace_index)
+  local workspace_name = workspace_letters[workspace_index]:upper()
   local get_windows =
-    string.format("aerospace list-windows --workspace %s --format '%%{app-name}' --json", workspace_index)
+    string.format("aerospace list-windows --workspace %s --format '%%{app-name}' --json", workspace_name)
   local query_visible_workspaces =
     "aerospace list-workspaces --visible --monitor all --format '%{workspace}%{monitor-appkit-nsscreen-screens-id}' --json"
   local get_focus_workspaces = "aerospace list-workspaces --focused"
@@ -56,7 +59,7 @@ local function updateWindows(workspace_index)
 
         sbar.animate("tanh", 10, function()
           for i, visible_workspace in ipairs(visible_workspaces) do
-            if no_app and workspace_index == tonumber(visible_workspace["workspace"]) then
+            if no_app and workspace_name == tostring(visible_workspace["workspace"]):upper() then
               local monitor_id = visible_workspace["monitor-appkit-nsscreen-screens-id"]
               icon_line = app_icons["Finder"]
               workspaces[workspace_index]:set {
@@ -76,7 +79,7 @@ local function updateWindows(workspace_index)
               return
             end
           end
-          if no_app and workspace_index ~= tonumber(focused_workspaces) then
+          if no_app and workspace_name ~= tostring(focused_workspaces):upper() then
             workspaces[workspace_index]:set {
               icon = { drawing = false },
               label = { drawing = false },
@@ -86,7 +89,7 @@ local function updateWindows(workspace_index)
             }
             return
           end
-          if no_app and workspace_index == tonumber(focused_workspaces) then
+          if no_app and workspace_name == tostring(focused_workspaces):upper() then
             icon_line = ""
             workspaces[workspace_index]:set {
               icon = { drawing = true },
@@ -117,26 +120,28 @@ local function updateWindows(workspace_index)
 end
 
 local function updateWorkspaceMonitor(workspace_index)
+  local workspace_name = workspace_letters[workspace_index]:upper()
   sbar.exec(query_workspaces, function(workspaces_and_monitors)
     for _, entry in ipairs(workspaces_and_monitors) do
-      local space_index = tonumber(entry.workspace)
+      local space_name = tostring(entry.workspace):upper()
       local monitor_id = math.floor(entry["monitor-appkit-nsscreen-screens-id"])
-      workspace_monitor[space_index] = monitor_id
+      workspace_monitor[space_name] = monitor_id
     end
     workspaces[workspace_index]:set {
-      display = workspace_monitor[workspace_index],
+      display = workspace_monitor[workspace_name],
     }
   end)
 end
 
 for workspace_index = 1, max_workspaces do
+  local workspace_name = workspace_letters[workspace_index]:upper()
   local workspace = sbar.add("item", {
     icon = {
       color = colors.with_alpha(colors.fg, 0.5),
       highlight_color = colors.fg,
       drawing = false,
       font = { family = settings.font.numbers },
-      string = workspace_index,
+      string = workspace_name,
       padding_left = 12,
       padding_right = 5,
     },
@@ -153,14 +158,14 @@ for workspace_index = 1, max_workspaces do
       color = colors.bg,
       height = 24,
     },
-    click_script = "aerospace workspace " .. workspace_index,
+    click_script = "aerospace workspace " .. workspace_name,
   })
 
   workspaces[workspace_index] = workspace
 
   workspace:subscribe("aerospace_workspace_change", function(env)
-    local focused_workspace = tonumber(env.FOCUSED_WORKSPACE)
-    local is_focused = focused_workspace == workspace_index
+    local focused_workspace = tostring(env.FOCUSED_WORKSPACE):upper()
+    local is_focused = focused_workspace == workspace_name
 
     sbar.animate("tanh", 10, function()
       workspace:set {
@@ -187,10 +192,12 @@ for workspace_index = 1, max_workspaces do
   updateWorkspaceMonitor(workspace_index)
   updateWindows(workspace_index)
   sbar.exec("aerospace list-workspaces --focused", function(focused_workspace)
-    workspaces[tonumber(focused_workspace)]:set {
-      icon = { highlight = true },
-      label = { highlight = true },
-      -- background = { border_width = 2 },
-    }
+    if tostring(focused_workspace):upper() == workspace_name then
+      workspaces[workspace_index]:set {
+        icon = { highlight = true },
+        label = { highlight = true },
+        -- background = { border_width = 2 },
+      }
+    end
   end)
 end

@@ -13,6 +13,7 @@ local space_menu_swap = sbar.add("item", {
 sbar.add("event", "swap_menus_and_spaces")
 
 local max_items = 15
+local menu_letters = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g" }
 local menu_items = {}
 for i = 1, max_items, 1 do
   local menu = sbar.add("item", "menu." .. i, {
@@ -27,7 +28,7 @@ for i = 1, max_items, 1 do
       padding_left = 6,
       padding_right = 6,
     },
-    click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s " .. i,
+    click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s " .. menu_letters[i],
   })
 
   menu_items[i] = menu

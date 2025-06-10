@@ -39,31 +39,31 @@
 	<key>NSStatusItem Preferred Position Battery_battery</key>
 	<real>5593</real>
 	<key>NSStatusItem Preferred Position CPU_line_chart</key>
-	<real>348</real>
+	<real>5561</real>
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
-	<real>430</real>
+	<real>5609</real>
 	<key>NSStatusItem Preferred Position RAM_mini</key>
 	<real>5682</real>
 	<key>NSStatusItem Preferred Position RAM_pie_chart</key>
-	<real>396</real>
+	<real>371</real>
 	<key>NSStatusItem Restore Position Battery_battery</key>
 	<integer>5654</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>
-	<integer>5588</integer>
+	<integer>5561</integer>
 	<key>NSStatusItem Restore Position CPU_mini</key>
 	<integer>220</integer>
 	<key>NSStatusItem Restore Position Disk_mini</key>
 	<integer>902</integer>
 	<key>NSStatusItem Restore Position Network_speed</key>
-	<integer>5636</integer>
+	<integer>5609</integer>
 	<key>NSStatusItem Restore Position RAM_mini</key>
 	<integer>173</integer>
 	<key>NSStatusItem Restore Position RAM_pie_chart</key>
-	<integer>480</integer>
+	<integer>371</integer>
 	<key>NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar</key>
 	<dict>
 		<key>TB Display Mode</key>

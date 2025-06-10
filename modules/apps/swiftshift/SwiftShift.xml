@@ -24,12 +24,31 @@
 	</data>
 	<key>Move_mouseButton</key>
 	<string>None</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{800, 448}</string>
+	<key>NSOSPLastRootDirectory</key>
+	<data>
+	Ym9va0wCAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAEA
+	AAQAAAADAwAAAAQAAAwAAAABAQAAQXBwbGljYXRpb25zBAAAAAEGAAAQAAAACAAAAAQD
+	AABnRz0AAAAAAAQAAAABBgAAMAAAAAgAAAAABAAAQcbKs6iAAAAYAAAAAQIAAAIAAAAA
+	AAAAHwIAAAAAAAAfAgAAAAAAAAAAAAABBQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAA
+	TWFjaW50b3NoIEhECAAAAAQDAAAAUKEbcwAAACQAAAABAQAARjg4MkMxRTYtMzI5NC00
+	RTJGLTkyOEItMDY3NEY0MjdCMDc3GAAAAAECAACBAAAAAQAAAO8TAAABAAAA7xMAAAEA
+	AAABAAAAAQEAAC8AAAAwAAAAAQIAAGRuaWIAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAHNwcGECAAAAAAAAAMwAAAD+////AQAAAAAAAAAQAAAABBAAACQAAAAAAAAA
+	BRAAAEAAAAAAAAAAEBAAAFwAAAAAAAAAQBAAAEwAAAAAAAAAAiAAAAQBAAAAAAAABSAA
+	AIQAAAAAAAAAECAAAJQAAAAAAAAAESAAALgAAAAAAAAAEiAAAKgAAAAAAAAAEyAAAEwA
+	AAAAAAAAICAAAOQAAAAAAAAAMCAAAHwAAAAAAAAAAdAAAHwAAAAAAAAAENAAAAQAAAAA
+	AAAAF/AAABAAAAAAAAAAIvAAABABAAAAAAAA
+	</data>
 	<key>NSStatusItem Preferred Position Item-0</key>
-	<real>5543</real>
+	<real>301</real>
 	<key>NSStatusItem Visible Item-0</key>
 	<true/>
 	<key>NSWindow Frame Main Window</key>
 	<string>459 485 354 222 0 0 1352 843 </string>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>356 372 800 448 0 0 1512 944 </string>
 	<key>NSWindow Frame SwiftUI.ModifiedContent&lt;Swift_Shift.AppView, SwiftUI._FrameLayout&gt;-1-AppWindow-1</key>
 	<string>1039 -878 900 450 505 -982 1512 944 </string>
 	<key>NSWindow Frame Swift_Shift.AppView-1-AppWindow-1</key>
@@ -55,7 +74,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2025-04-26T11:30:02Z</date>
+	<date>2025-06-10T08:17:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
@@ -64,6 +83,8 @@
 	<false/>
 	<key>focusOnApp</key>
 	<true/>
+	<key>ignoredApps</key>
+	<array/>
 	<key>requireMouseClick</key>
 	<false/>
 	<key>showMenuBarIcon</key>

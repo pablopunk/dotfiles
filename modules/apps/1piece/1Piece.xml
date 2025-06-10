@@ -10,6 +10,10 @@
 	<false/>
 	<key>FlagFocusWindowBottomShortCut</key>
 	<true/>
+	<key>FlagFocusWindowCycleLeftRight</key>
+	<true/>
+	<key>FlagFocusWindowCycleTopBottom</key>
+	<true/>
 	<key>FlagFocusWindowLeftShortCut</key>
 	<true/>
 	<key>FlagFocusWindowRightShortCut</key>
@@ -146,6 +150,8 @@
 	<false/>
 	<key>FlagWindowOperationLeftProportionallyShortCut</key>
 	<false/>
+	<key>FlagWindowOperationLeftRightShortCut</key>
+	<true/>
 	<key>FlagWindowOperationLeftShortCut</key>
 	<false/>
 	<key>FlagWindowOperationLeftThirdShortCut</key>
@@ -277,7 +283,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2025-04-26T22:58:28Z</date>
+	<date>2025-06-10T08:13:00Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SelectedIndex</key>
@@ -336,46 +342,47 @@
 	<key>focusWindowBottomHotKey</key>
 	<dict>
 		<key>characters</key>
-		<string>j</string>
+		<string>
+</string>
 		<key>charactersIgnoringModifiers</key>
-		<string>J</string>
+		<string>j</string>
 		<key>keyCode</key>
 		<integer>38</integer>
 		<key>modifierFlags</key>
-		<integer>1179648</integer>
+		<integer>1835008</integer>
 	</dict>
 	<key>focusWindowLeftHotKey</key>
 	<dict>
 		<key>characters</key>
-		<string>h</string>
+		<string></string>
 		<key>charactersIgnoringModifiers</key>
-		<string>H</string>
+		<string>h</string>
 		<key>keyCode</key>
 		<integer>4</integer>
 		<key>modifierFlags</key>
-		<integer>1179648</integer>
+		<integer>1835008</integer>
 	</dict>
 	<key>focusWindowRightHotKey</key>
 	<dict>
 		<key>characters</key>
-		<string>l</string>
+		<string></string>
 		<key>charactersIgnoringModifiers</key>
-		<string>L</string>
+		<string>l</string>
 		<key>keyCode</key>
 		<integer>37</integer>
 		<key>modifierFlags</key>
-		<integer>1179648</integer>
+		<integer>1835008</integer>
 	</dict>
 	<key>focusWindowTopHotKey</key>
 	<dict>
 		<key>characters</key>
-		<string>k</string>
+		<string></string>
 		<key>charactersIgnoringModifiers</key>
-		<string>K</string>
+		<string>k</string>
 		<key>keyCode</key>
 		<integer>40</integer>
 		<key>modifierFlags</key>
-		<integer>1179648</integer>
+		<integer>1835008</integer>
 	</dict>
 	<key>hotKeyCycleWindowsHotKey</key>
 	<dict>
@@ -567,13 +574,13 @@
 	<key>windowOperationLeftRightHotKey</key>
 	<dict>
 		<key>characters</key>
-		<string></string>
+		<string></string>
 		<key>charactersIgnoringModifiers</key>
-		<string>V</string>
+		<string>s</string>
 		<key>keyCode</key>
-		<integer>9</integer>
+		<integer>1</integer>
 		<key>modifierFlags</key>
-		<integer>1966080</integer>
+		<integer>1835008</integer>
 	</dict>
 </dict>
 </plist>

@@ -294,6 +294,7 @@
                     },
                     {
                         "description": "left_option as Hyper key",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -546,7 +547,6 @@
                     },
                     {
                         "description": "left_option is hyper_key for some keys",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

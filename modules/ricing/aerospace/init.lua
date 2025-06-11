@@ -2,7 +2,7 @@ return {
   os = { "macos" },
   brew = {
     "nikitabobko/tap/aerospace --cask",
-    "FelixKratz/formulae/borders",
+    -- "FelixKratz/formulae/borders",
   },
   config = {
     {

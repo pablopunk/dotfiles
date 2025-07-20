@@ -141,6 +141,16 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-i = 'workspace I'
   alt-cmd-ctrl-o = 'workspace O'
   alt-cmd-ctrl-p = 'workspace P'
+  alt-cmd-ctrl-1 = 'workspace 1'
+  alt-cmd-ctrl-2 = 'workspace 2'
+  alt-cmd-ctrl-3 = 'workspace 3'
+  alt-cmd-ctrl-4 = 'workspace 4'
+  alt-cmd-ctrl-5 = 'workspace 5'
+  alt-cmd-ctrl-6 = 'workspace 6'
+  alt-cmd-ctrl-7 = 'workspace 7'
+  alt-cmd-ctrl-8 = 'workspace 8'
+  alt-cmd-ctrl-9 = 'workspace 9'
+  alt-cmd-ctrl-0 = 'workspace 0'
 
   alt-cmd-ctrl-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 
@@ -155,6 +165,16 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-shift-i = 'move-node-to-workspace I'
   alt-cmd-ctrl-shift-o = 'move-node-to-workspace O'
   alt-cmd-ctrl-shift-p = 'move-node-to-workspace P'
+  alt-cmd-ctrl-shift-1 = 'move-node-to-workspace 1'
+  alt-cmd-ctrl-shift-2 = 'move-node-to-workspace 2'
+  alt-cmd-ctrl-shift-3 = 'move-node-to-workspace 3'
+  alt-cmd-ctrl-shift-4 = 'move-node-to-workspace 4'
+  alt-cmd-ctrl-shift-5 = 'move-node-to-workspace 5'
+  alt-cmd-ctrl-shift-6 = 'move-node-to-workspace 6'
+  alt-cmd-ctrl-shift-7 = 'move-node-to-workspace 7'
+  alt-cmd-ctrl-shift-8 = 'move-node-to-workspace 8'
+  alt-cmd-ctrl-shift-9 = 'move-node-to-workspace 9'
+  alt-cmd-ctrl-shift-0 = 'move-node-to-workspace 0'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
   alt-cmd-ctrl-tab = 'workspace-back-and-forth'

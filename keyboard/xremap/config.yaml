@@ -1,4 +1,10 @@
-modmap:
-  - name: Global
+virtual_modifiers:
+  - CapsLock
+
+keymap:
+  - name: Caps+hjkl Navigation
     remap:
-      CapsLock: Esc
+      CapsLock-h: Left
+      CapsLock-j: Down
+      CapsLock-k: Up
+      CapsLock-l: Right

@@ -17,3 +17,4 @@ nvim/.config/nvim/lazy-lock.json
 unison/.unison/*
 !unison/.unison/preferences.prf
 
+.claude

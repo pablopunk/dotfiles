@@ -11,6 +11,14 @@
 
 Install [dot](https://github.com/pablopunk/dot)
 
+### Option 1: Using curl (installs Lua and dot)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/install.sh | bash
+```
+
+### Option 2: Using Homebrew
+
 ```bash
 brew install pablopunk/brew/dot
 ```

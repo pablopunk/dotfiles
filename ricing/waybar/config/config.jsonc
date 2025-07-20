@@ -96,9 +96,9 @@
     "on-click": "pavucontrol"
   },
   "network": {
-    "format-wifi": "󰤨",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰤭",
+    "format-wifi": "󰤨  {signalStrength}%",
+    "format-ethernet": "󰈀  Connected",
+    "format-disconnected": "󰤭  Disconnected",
     "tooltip-format": "{ifname}: {ipaddr}/{cidr} - {essid}",
     "on-click": "nm-connection-editor"
   },

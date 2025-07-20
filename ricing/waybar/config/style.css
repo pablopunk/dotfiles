@@ -1,16 +1,16 @@
 @import "mocha.css";
 
 * {
-  font-family: "FantasqueSansMono Nerd Font", "Font Awesome 6 Free Solid", "Font Awesome 6 Free", "FontAwesome";
-  font-size: 9px;
+  font-family: "JetBrains Mono", "FantasqueSansMono Nerd Font", "Font Awesome 6 Free Solid", "Font Awesome 6 Free", "FontAwesome";
+  font-size: 12px;
   min-height: 0;
 }
 
-/* Make icons bigger */
+/* Balanced size for all modules - compromise between icon and text */
 #network, #bluetooth, #pulseaudio, #backlight, #battery,
 #memory, #cpu, #temperature, #clock, #custom-music,
 #custom-lock, #custom-power {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #waybar {

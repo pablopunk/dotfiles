@@ -1,0 +1,192 @@
+@import "mocha.css";
+
+* {
+  font-family: "FantasqueSansMono Nerd Font", "Font Awesome 6 Free Solid", "Font Awesome 6 Free", "FontAwesome";
+  font-size: 9px;
+  min-height: 0;
+}
+
+/* Make icons bigger */
+#network, #bluetooth, #pulseaudio, #backlight, #battery,
+#memory, #cpu, #temperature, #clock, #custom-music,
+#custom-lock, #custom-power {
+  font-size: 16px;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px 5px;
+}
+
+#workspaces {
+  border-radius: 1rem;
+  margin: 5px;
+  background-color: @surface0;
+  margin-left: 1rem;
+}
+
+#workspaces button {
+  color: @lavender;
+  border-radius: 1rem;
+  padding: 0.4rem;
+}
+
+#workspaces button.active {
+  color: @sky;
+  border-radius: 1rem;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+  border-radius: 1rem;
+}
+
+#custom-music,
+#tray,
+#network,
+#bluetooth,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#custom-lock,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#backlight, #battery {
+    border-radius: 0;
+}
+
+#network {
+  color: @teal;
+  border-radius: 1rem 0px 0px 0px;
+  margin-left: 1rem;
+}
+
+#bluetooth {
+  color: @sapphire;
+  border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  border-radius: 0;
+}
+
+#memory {
+  color: @peach;
+  border-radius: 0;
+}
+
+#cpu {
+  color: @red;
+  border-radius: 0;
+}
+
+#cpu.warning {
+  color: @yellow;
+}
+
+#cpu.critical {
+  color: @red;
+  animation: blink 1s infinite;
+}
+
+#temperature {
+  color: @green;
+  border-radius: 0;
+}
+
+#temperature.critical {
+  color: @red;
+  animation: blink 1s infinite;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+}
+
+#custom-lock {
+    border-radius: 1rem 0px 0px 1rem;
+    color: @lavender;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    border-radius: 0px 1rem 1rem 0px;
+    color: @red;
+}
+
+#tray {
+  border-radius: 1rem;
+}
+
+/* Add hover effects */
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#battery:hover,
+#memory:hover,
+#cpu:hover,
+#temperature:hover {
+  background-color: @surface1;
+}
+
+#custom-music:hover {
+  background-color: @surface1;
+}
+
+/* Add breathing animation for critical states */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Network disconnected state */
+#network.disconnected {
+  color: @red;
+  animation: blink 2s infinite;
+}
+
+/* Bluetooth states */
+#bluetooth.disabled,
+#bluetooth.off {
+  color: @surface2;
+}
+
+#bluetooth.connected {
+  color: @sapphire;
+}

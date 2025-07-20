@@ -1,13 +1,4 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
-my_ls() {
-  if hash eza 2>/dev/null; then
-    eza $@
-  elif hash exa 2>/dev/null; then
-    exa $@
-  else
-    \ls $@
-  fi
-}
 function rm {
   # if it contains -rf then execute command rm
   if [[ "$*" == *"-rf"* ]]; then

@@ -1,9 +1,9 @@
 return {
-  check = "which eza && which fd && which jq && which tldr && which tree && which vim && which wget && which zoxide && which zsh",
+  check = "which fd && which jq && which tldr && which tree && which vim && which wget && which zoxide && which zsh",
   install = {
-    apt = "sudo apt install -y eza fd-find jq tldr tree vim wget zoxide zsh",
-    dnf = "sudo dnf install -y eza fd-find jq tldr tree vim wget zoxide zsh",
-    brew = "brew install eza fd jq tldr tree vim wget zoxide zsh",
+    apt = "sudo apt install -y fd-find jq tldr tree vim wget zoxide zsh",
+    dnf = "sudo dnf install -y fd-find jq tldr tree vim wget zoxide zsh",
+    brew = "brew install fd jq tldr tree vim wget zoxide zsh",
   },
   link = {
     ["./zshrc"] = "~/.zshrc",

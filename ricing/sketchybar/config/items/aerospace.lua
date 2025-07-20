@@ -3,7 +3,7 @@ local app_icons = require "helpers.app_icons"
 local colors = require "colors"
 local settings = require "settings"
 
-local max_workspaces = 10
+local max_workspaces = 20
 local query_workspaces =
   "aerospace list-workspaces --all --format '%{workspace}%{monitor-appkit-nsscreen-screens-id}' --json"
 local workspace_monitor = {}
@@ -35,7 +35,8 @@ local workspace_monitor = {}
 --
 local workspaces = {}
 
-local workspace_letters = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p" }
+local workspace_letters =
+  { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
 
 local function updateWindows(workspace_index)
   local workspace_name = workspace_letters[workspace_index]:upper()

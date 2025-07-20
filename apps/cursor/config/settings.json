@@ -3,7 +3,6 @@
   "editor.fontFamily": "Jetbrains Mono, Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
   "window.titleBarStyle": "custom",
-  "window.nativeTabs": true,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },

@@ -17,7 +17,7 @@
     "cpu",
     "temperature",
     "clock",
-    "tray",
+    // "tray", // system tray (wifi/bluetooth)
     "custom/lock",
     "custom/power"
   ],

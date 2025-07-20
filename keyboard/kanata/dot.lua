@@ -3,14 +3,7 @@ return {
   check = "which kanata",
   install = {
     brew = "brew install kanata",
-    apt = [[
-      curl https://sh.rustup.rs -sSf | sh
-      cargo install kanata
-    ]],
-    dnf = [[
-      curl https://sh.rustup.rs -sSf | sh
-      cargo install kanata
-    ]],
+    cargo = "cargo install kanata",
   },
   link = {
     ["./kanata.conf"] = "~/.config/kanata/kanata.conf",

@@ -1,6 +1,0 @@
-return {
-  modules = {
-    "*",
-    "!apps/work",
-  },
-}

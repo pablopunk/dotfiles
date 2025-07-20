@@ -1,0 +1,5 @@
+return {
+  link = {
+    ["./editorconfig"] = "~/.editorconfig",
+  },
+}

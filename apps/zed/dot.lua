@@ -1,4 +1,5 @@
 return {
+  os = "macos",
   check = "which zed",
   install = {
     brew = "brew install zed",

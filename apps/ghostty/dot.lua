@@ -3,7 +3,11 @@ return {
   install = {
     dnf = [[
       sudo dnf copr enable pgdev/ghostty
-      sudo dnf install ghostty
+      sudo dnf install -y ghostty
+    ]],
+    apt = [[
+      curl -s https://packagecloud.io/install/repositories/alvarobp/ubuntu/script.deb.sh | sudo bash
+      sudo apt-get install -y ghostty
     ]],
     brew = "brew install ghostty",
   },

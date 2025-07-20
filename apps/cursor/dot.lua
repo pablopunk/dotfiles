@@ -1,4 +1,5 @@
 return {
+  os = { "macos" },
   check = "which cursor",
   install = {
     brew = "brew install cursor",

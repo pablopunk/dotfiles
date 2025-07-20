@@ -1,4 +1,5 @@
 return {
+  os = { "macos" },
   check = "[ -d '/Applications/Mos.app' ]",
   install = {
     brew = "brew install mos",

@@ -552,22 +552,14 @@
                                 "from": {
                                     "key_code": "0",
                                     "modifiers": {
-                                        "mandatory": [
-                                            "left_option"
-                                        ],
-                                        "optional": [
-                                            "any"
-                                        ]
+                                        "mandatory": ["left_option"],
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
                                     {
                                         "key_code": "0",
-                                        "modifiers": [
-                                            "left_control",
-                                            "left_option",
-                                            "left_command"
-                                        ]
+                                        "modifiers": ["left_control", "left_option", "left_command"]
                                     }
                                 ],
                                 "type": "basic"
@@ -1082,6 +1074,19 @@
                         "product_id": 6519,
                         "vendor_id": 12951
                     },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "non_us_backslash" }]
+                        },
+                        {
+                            "from": { "key_code": "non_us_backslash" },
+                            "to": [{ "key_code": "grave_accent_and_tilde" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": { "is_keyboard": true },
                     "simple_modifications": [
                         {
                             "from": { "key_code": "grave_accent_and_tilde" },

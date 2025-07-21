@@ -1,6 +1,6 @@
 return {
   os = { "macos" },
-  check = "which karabiner-elements",
+  check = "[ -d /Applications/Karabiner-Elements.app/ ]",
   install = {
     brew = "brew install karabiner-elements",
   },

@@ -1,3 +1,4 @@
 [tools]
 bun = "latest"
 node = "latest"
+rust = "latest" # for cargo

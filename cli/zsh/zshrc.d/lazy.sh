@@ -1,13 +1,5 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
 
-# cargo {{{
-export PATH="$HOME/.cargo/bin:$PATH"
-function cargo { # lazy load cargo
-  [[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
-  command cargo $@
-}
-# cargo }}}
-
 # bun {{{
 function bunx {
   [[ -f $HOME/.bun/_bun ]] && . "$HOME/.bun/_bun"

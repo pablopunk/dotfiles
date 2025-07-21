@@ -55,7 +55,7 @@ function copy {
 }
 
 function weather {
-  curl -s "wttr.in/${1-pontevedra}?format=1"
+  curl -s "wttr.in/${1-valencia}?format=1"
 }
 
 function add_spacer_to_dock {

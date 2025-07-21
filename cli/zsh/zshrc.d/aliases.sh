@@ -1,5 +1,4 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
-alias cd=z
 alias g=git
 alias gst='git status'
 alias gp='git push'

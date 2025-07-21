@@ -20,9 +20,9 @@ on-focus-changed = [
 ]
 
 # Utils for janky borders
-after-startup-command = [
-  'exec-and-forget brew services restart borders'
-]
+# after-startup-command = [
+#   'exec-and-forget brew services restart borders'
+# ]
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true

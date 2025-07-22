@@ -44,7 +44,7 @@ default=(
 sketchybar --default "${default[@]}"
 
 # Bar Appearance
-sketchybar --bar position=bottom height=32 color=$COLOR_TRANSPARENT margin=0
+sketchybar --bar position=bottom height=32 color=$COLOR_BASE margin=0
 
 # Aerospace Workspaces
 sketchybar --add event aerospace_workspace_change
@@ -69,7 +69,7 @@ for ws in "${active_workspaces[@]}"; do
     sketchybar --add item space.$escaped_ws left \
         --subscribe space.$escaped_ws aerospace_workspace_change \
         --set space.$escaped_ws \
-            background.color=$COLOR_LAVENDER \
+            background.color=$COLOR_BASE \
             background.corner_radius=6 \
             background.height=24 \
             background.drawing=off \
@@ -81,7 +81,7 @@ for ws in "${active_workspaces[@]}"; do
 done
 
 sketchybar --add bracket spaces '/space\..*/' \
-	--set spaces background.color=$COLOR_SURFACE0 \
+	--set spaces background.color=$COLOR_BASE \
 		background.corner_radius=8 \
 		background.height=28 \
 		background.border_width=0
@@ -93,25 +93,20 @@ sketchybar --add item spacer right \
 # RAM
 sketchybar --add item ram.number right \
 	--set ram.number \
-		label.padding_right=8 \
 		update_freq=2 \
 		script="$PLUGIN_DIR/ram.sh"
 
 sketchybar --add item ram.label right \
 	--set ram.label \
-		label="RAM" \
-		label.padding_left=8 \
-		label.padding_right=4 \
-		label.color=$COLOR_YELLOW
+		icon="􀫦" \
+		icon.color=$COLOR_YELLOW
 
 sketchybar --add bracket ram ram.number ram.label \
 	--set ram \
-		background.color=$COLOR_SURFACE0 \
+		background.color=$COLOR_BASE \
 		background.corner_radius=8 \
 		background.height=28 \
-		background.border_width=0 \
-		padding_left=8 \
-		padding_right=8
+		background.border_width=0
 
 # Spacer
 sketchybar --add item spacer2 right \
@@ -120,25 +115,20 @@ sketchybar --add item spacer2 right \
 # CPU
 sketchybar --add item cpu.number right \
 	--set cpu.number \
-		label.padding_right=8 \
 		update_freq=2 \
 		script="$PLUGIN_DIR/cpu.sh"
 
 sketchybar --add item cpu.label right \
 	--set cpu.label \
-		label="CPU" \
-		label.padding_left=8 \
-		label.padding_right=4 \
-		label.color=$COLOR_YELLOW
+		icon="􀫥" \
+		icon.color=$COLOR_YELLOW
 
 sketchybar --add bracket cpu cpu.number cpu.label \
 	--set cpu \
-		background.color=$COLOR_SURFACE0 \
+		background.color=$COLOR_BASE \
 		background.corner_radius=8 \
 		background.height=28 \
-		background.border_width=0 \
-		padding_left=8 \
-		padding_right=8
+		background.border_width=0 
 
 # Force all scripts to run the first time
 sketchybar --update

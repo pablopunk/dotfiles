@@ -1,5 +1,144 @@
-#!/usr/bin/env lua
+#!/bin/bash
 
--- Load the sketchybar-package and prepare the helper binaries
-require("helpers")
-require("init")
+# Configuration directory
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+# Colors - Catppuccin Mocha
+COLOR_WHITE="0xffffffff"
+COLOR_BLACK="0xff000000"
+COLOR_TRANSPARENT="0x00000000"
+
+# Catppuccin Mocha colors
+COLOR_BASE="0xff1e1e2e"      # Base
+COLOR_SURFACE0="0xff313244"   # Surface0
+COLOR_SURFACE1="0xff45475a"   # Surface1
+COLOR_OVERLAY0="0xff585b70"   # Overlay0
+COLOR_OVERLAY1="0xff6c7086"   # Overlay1
+COLOR_SUBTEXT0="0xffa6adc8"  # Subtext0
+COLOR_SUBTEXT1="0xffbac2de"  # Subtext1
+COLOR_TEXT="0xffcdd6f4"      # Text
+COLOR_LAVENDER="0xffb4befe"  # Lavender
+COLOR_BLUE="0xff89b4fa"      # Blue
+COLOR_SAPPHIRE="0xff74c7ec"  # Sapphire
+COLOR_SKY="0xff89dceb"       # Sky
+COLOR_TEAL="0xff94e2d5"      # Teal
+COLOR_GREEN="0xffa6e3a1"     # Green
+COLOR_YELLOW="0xfff9e2af"    # Yellow
+COLOR_PEACH="0xfffab387"     # Peach
+COLOR_MAROON="0xffeba0ac"    # Maroon
+COLOR_RED="0xfff38ba8"       # Red
+COLOR_MAUVE="0xffcba6f7"     # Mauve
+COLOR_PINK="0xfff5c2e7"      # Pink
+COLOR_FLAMINGO="0xfff2cdcd"  # Flamingo
+COLOR_ROSEWATER="0xfff5e0dc" # Rosewater
+
+# Defaults
+default=(
+	icon.font="SF Pro Display:Regular:12.0"
+	label.font="SF Pro Display:Regular:12.0"
+	icon.color=$COLOR_WHITE
+	label.color=$COLOR_WHITE
+)
+
+sketchybar --default "${default[@]}"
+
+# Bar Appearance
+sketchybar --bar position=bottom height=32 color=$COLOR_TRANSPARENT margin=0
+
+# Aerospace Workspaces
+sketchybar --add event aerospace_workspace_change
+
+# Get active workspaces (those with windows)
+active_workspaces=()
+for ws in $(aerospace list-workspaces --all 2>/dev/null); do
+    if aerospace list-windows --workspace "$ws" 2>/dev/null | grep -q .; then
+        active_workspaces+=("$ws")
+    fi
+done
+
+# If no active workspaces, show current workspace
+if [ ${#active_workspaces[@]} -eq 0 ]; then
+    current_ws=$(aerospace list-workspaces --focused 2>/dev/null || echo "1")
+    active_workspaces=("$current_ws")
+fi
+
+# Create workspace items
+for ws in "${active_workspaces[@]}"; do
+    escaped_ws=$(echo "$ws" | sed 's/[^a-zA-Z0-9]/_/g')
+    sketchybar --add item space.$escaped_ws left \
+        --subscribe space.$escaped_ws aerospace_workspace_change \
+        --set space.$escaped_ws \
+            background.color=$COLOR_LAVENDER \
+            background.corner_radius=6 \
+            background.height=24 \
+            background.drawing=off \
+            label.align=center \
+            label.width=24 \
+            label="$ws" \
+            click_script="aerospace workspace $ws" \
+            script="$PLUGIN_DIR/aerospace.sh $ws"
+done
+
+sketchybar --add bracket spaces '/space\..*/' \
+	--set spaces background.color=$COLOR_SURFACE0 \
+		background.corner_radius=8 \
+		background.height=28 \
+		background.border_width=0
+
+# Spacer
+sketchybar --add item spacer right \
+	--set spacer width=8
+
+# RAM
+sketchybar --add item ram.number right \
+	--set ram.number \
+		label.padding_right=8 \
+		update_freq=2 \
+		script="$PLUGIN_DIR/ram.sh"
+
+sketchybar --add item ram.label right \
+	--set ram.label \
+		label="RAM" \
+		label.padding_left=8 \
+		label.padding_right=4 \
+		label.color=$COLOR_YELLOW
+
+sketchybar --add bracket ram ram.number ram.label \
+	--set ram \
+		background.color=$COLOR_SURFACE0 \
+		background.corner_radius=8 \
+		background.height=28 \
+		background.border_width=0 \
+		padding_left=8 \
+		padding_right=8
+
+# Spacer
+sketchybar --add item spacer2 right \
+	--set spacer2 width=12
+
+# CPU
+sketchybar --add item cpu.number right \
+	--set cpu.number \
+		label.padding_right=8 \
+		update_freq=2 \
+		script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item cpu.label right \
+	--set cpu.label \
+		label="CPU" \
+		label.padding_left=8 \
+		label.padding_right=4 \
+		label.color=$COLOR_YELLOW
+
+sketchybar --add bracket cpu cpu.number cpu.label \
+	--set cpu \
+		background.color=$COLOR_SURFACE0 \
+		background.corner_radius=8 \
+		background.height=28 \
+		background.border_width=0 \
+		padding_left=8 \
+		padding_right=8
+
+# Force all scripts to run the first time
+sketchybar --update

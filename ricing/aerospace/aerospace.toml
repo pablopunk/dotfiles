@@ -72,7 +72,7 @@ automatically-unhide-macos-hidden-apps = false
   outer.left =       8
   outer.right =      8
   outer.bottom =    38
-  outer.top =       12
+  outer.top =        8
   # outer.top = [
   #   { monitor."built-in" = 8 }, # for built-in display (notch)
   #   38 # regular monitors (with sketchy bar)

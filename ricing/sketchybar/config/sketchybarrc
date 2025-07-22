@@ -49,39 +49,17 @@ sketchybar --bar position=bottom height=32 color=$COLOR_BASE margin=0
 # Aerospace Workspaces
 sketchybar --add event aerospace_workspace_change
 
-# Get active workspaces (those with windows)
-active_workspaces=()
-for ws in $(aerospace list-workspaces --all 2>/dev/null); do
-    if aerospace list-windows --workspace "$ws" 2>/dev/null | grep -q .; then
-        active_workspaces+=("$ws")
-    fi
-done
+# Add workspace manager item that will handle dynamic workspace management
+sketchybar --add item workspace_manager left \
+    --set workspace_manager \
+        update_freq=5 \
+        script="$PLUGIN_DIR/workspace_manager.sh update"
 
-# If no active workspaces, show current workspace
-if [ ${#active_workspaces[@]} -eq 0 ]; then
-    current_ws=$(aerospace list-workspaces --focused 2>/dev/null || echo "1")
-    active_workspaces=("$current_ws")
-fi
-
-# Create workspace items
-for ws in "${active_workspaces[@]}"; do
-    escaped_ws=$(echo "$ws" | sed 's/[^a-zA-Z0-9]/_/g')
-    sketchybar --add item space.$escaped_ws left \
-        --subscribe space.$escaped_ws aerospace_workspace_change \
-        --set space.$escaped_ws \
-            background.color=$COLOR_BASE \
-            background.corner_radius=6 \
-            background.height=24 \
-            background.drawing=off \
-            label.align=center \
-            label.width=24 \
-            label="$ws" \
-            click_script="aerospace workspace $ws" \
-            script="$PLUGIN_DIR/aerospace.sh $ws"
-done
+# Initial workspace setup
+"$PLUGIN_DIR/workspace_manager.sh" update
 
 sketchybar --add bracket spaces '/space\..*/' \
-	--set spaces background.color=$COLOR_BASE \
+	--set spaces \
 		background.corner_radius=8 \
 		background.height=28 \
 		background.border_width=0

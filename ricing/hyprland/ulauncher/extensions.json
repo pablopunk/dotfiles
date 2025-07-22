@@ -19,5 +19,12 @@
         "updated_at": "2025-07-22T15:23:25.485236",
         "last_commit": "7dedd992709fa2297735cddf852404144d4da47c",
         "last_commit_time": "2023-11-14T16:53:20"
+    },
+    "com.github.isacikgoz.ukill": {
+        "id": "com.github.isacikgoz.ukill",
+        "url": "https://github.com/isacikgoz/ukill",
+        "updated_at": "2025-07-22T15:32:44.502793",
+        "last_commit": "bc50d9f41d46b6813a5aeebddd15734dcdb9d8db",
+        "last_commit_time": "2019-05-28T18:30:00"
     }
 }

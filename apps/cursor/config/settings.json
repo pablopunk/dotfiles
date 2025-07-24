@@ -61,5 +61,6 @@
   },
   "cursor.cpp.disabledLanguages": [
     "plaintext"
-  ]
+  ],
+  "biome.suggestInstallingGlobally": false
 }

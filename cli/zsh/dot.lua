@@ -12,6 +12,7 @@ return {
     ["./zshrc.d/path.sh"] = "~/.zshrc.d/path.sh",
     ["./zshrc.d/functions.sh"] = "~/.zshrc.d/functions.sh",
     ["./zshrc.d/lazy.sh"] = "~/.zshrc.d/lazy.sh",
+    ["./zshrc.d/java.sh"] = "~/.zshrc.d/java.sh",
     -- The temptation to just link the directory
     -- ["./zshrc.d"] = "~/.zshrc.d",
     -- but it's not a good idea because sometimes

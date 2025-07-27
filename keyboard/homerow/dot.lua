@@ -1,6 +1,6 @@
 return {
   os = { "macos" },
-  check = "which homerow",
+  check = "[ -d /Applications/Homerow.app ]",
   install = {
     brew = "brew install homerow",
   },

@@ -122,7 +122,7 @@
     "interval": 10,
     "format": "󰘚 {}%",
     "max-length": 10,
-    "on-click": "ghostty --title='Task Manager' -e htop"
+    "on-click": "ghostty --title='Task Manager' -e btop"
   },
   "temperature": {
     "thermal-zone": 2,
@@ -130,7 +130,7 @@
     "critical-threshold": 80,
     "format-critical": "󰔥 {temperatureC}°C",
     "format": "󰔐 {temperatureC}°C",
-    "on-click": "ghostty --title='Task Manager' -e htop"
+    "on-click": "ghostty --title='Task Manager' -e btop"
   },
   "custom/lock": {
     "tooltip": false,

@@ -7,7 +7,6 @@ return {
   },
   link = {
     ["./aerospace.toml"] = "~/.aerospace.toml",
-    ["./bordersrc"] = "~/.config/borders/bordersrc",
   },
   postinstall = [[
     brew services restart borders

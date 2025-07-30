@@ -116,10 +116,10 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-a = 'layout accordion horizontal vertical'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-  alt-cmd-ctrl-h = 'focus left --boundaries workspace --boundaries-action fail'
-  alt-cmd-ctrl-j = 'focus down --boundaries workspace --boundaries-action fail'
-  alt-cmd-ctrl-k = 'focus up --boundaries workspace --boundaries-action fail'
-  alt-cmd-ctrl-l = 'focus right --boundaries workspace --boundaries-action fail'
+  alt-cmd-ctrl-h = 'focus left'
+  alt-cmd-ctrl-j = 'focus down'
+  alt-cmd-ctrl-k = 'focus up'
+  alt-cmd-ctrl-l = 'focus right'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#move
   alt-cmd-ctrl-shift-h = 'move left'

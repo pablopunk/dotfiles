@@ -42,7 +42,7 @@ profiles:
           "./config/zsh/zshrc.d/lazy.sh": "~/.zshrc.d/lazy.sh"
           "./config/zsh/zshrc.d/java.sh": "~/.zshrc.d/java.sh"
         postinstall: |
-          [[ -d /Users/pablopunk/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+          [[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
       tmux:
         install:
           brew: "brew install tmux bash"

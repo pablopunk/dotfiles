@@ -637,6 +637,7 @@ local function lsp()
       "biome",
       "eslint",
       "vtsls",
+      "gopls",
       -- "zls", --for zig
     },
   })
@@ -688,6 +689,7 @@ local function lsp()
   setup_lsp("astro")
   setup_lsp("biome")
   setup_lsp("eslint")
+  setup_lsp("gopls")
   setup_lsp("lua_ls", {
     Lua = {
       diagnostics = { globals = { "vim" } },
@@ -726,6 +728,7 @@ local function conform()
         typescriptreact = js_formatters,
         javascriptreact = js_formatters,
         astro = js_formatters,
+        go = { "gofmt" },
       },
     })
   end

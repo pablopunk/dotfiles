@@ -151,7 +151,7 @@ profiles:
         link:
           "./config/macos-wallpapers": "~/.config/wallpapers"
         postlink: |
-          wallpaper="fuji.jpg"
+          wallpaper="pexels-eberhardgross-1428277.jpg"
           img_path="${HOME}/.config/wallpapers/${wallpaper}"
           osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
       mos:

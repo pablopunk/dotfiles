@@ -146,17 +146,15 @@ profiles:
           brew: "brew install aerospace"
         link:
           "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
-      wallpaper-mac:
+      wallpapers:
         os: ["mac"]
         link:
           "./config/wallpapers": "~/.config/wallpapers"
         postlink: |
-          wallpaper="pexels-eberhardgross-1428277.jpg"
-          img_path="${HOME}/.config/wallpapers/${wallpaper}"
-          if [[ $(uname -s) == "Darwin" ]]; then
+          if [[ $(uname -s) == "Darwin" ]]; then # i use hyprpaper on linux
+            wallpaper="pexels-eberhardgross-1428277.jpg"
+            img_path="${HOME}/.config/wallpapers/${wallpaper}"
             osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
-          else
-            echo "Unsupported OS"
           fi
       mos:
         os: ["mac"]

@@ -11,7 +11,7 @@
 
 Install [dot](https://github.com/pablopunk/dot)
 
-### Option 1: Using curl (installs Lua and dot)
+### Option 1: Using curl
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash

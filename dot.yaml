@@ -146,14 +146,18 @@ profiles:
           brew: "brew install aerospace"
         link:
           "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
-      macos-wallpaper:
+      wallpaper-mac:
         os: ["mac"]
         link:
-          "./config/macos-wallpapers": "~/.config/wallpapers"
+          "./config/wallpapers": "~/.config/wallpapers"
         postlink: |
           wallpaper="pexels-eberhardgross-1428277.jpg"
           img_path="${HOME}/.config/wallpapers/${wallpaper}"
-          osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
+          if [[ $(uname -s) == "Darwin" ]]; then
+            osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
+          else
+            echo "Unsupported OS"
+          fi
       mos:
         os: ["mac"]
         install:

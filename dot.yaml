@@ -85,6 +85,8 @@ profiles:
       opencode:
         install:
           brew: "brew install opencode"
+        uninstall:
+          brew: "brew uninstall opencode"
         link:
           "./config/opencode/opencode.json": "~/.config/opencode/opencode.json"
     apps:

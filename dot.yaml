@@ -149,7 +149,11 @@ profiles:
       macos-wallpaper:
         os: ["mac"]
         link:
-          "./config/macos-wallpaper": "~/Pictures/wallpapers"
+          "./config/macos-wallpapers": "~/.config/wallpapers"
+        postlink: |
+          wallpaper="fuji.jpg"
+          img_path="${HOME}/.config/wallpapers/${wallpaper}"
+          osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
       mos:
         os: ["mac"]
         install:

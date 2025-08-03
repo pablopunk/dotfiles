@@ -1,5 +1,0 @@
-return {
-  link = {
-    ["./editorconfig"] = "~/.editorconfig",
-  },
-}

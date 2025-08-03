@@ -1,0 +1,228 @@
+# vim:fileencoding=utf-8:ft=yaml:foldmethod=indent
+
+profiles:
+  "*":
+    cli:
+      git:
+        install:
+          brew: "brew install git git-delta gh"
+          dnf: |
+            sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+            sudo dnf install gh git-delta git
+          apt: |
+            (type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \
+            && sudo mkdir -p -m 755 /etc/apt/keyrings \
+            && out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+            && cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+            && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+            && sudo mkdir -p -m 755 /etc/apt/sources.list.d \
+            && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+            && sudo apt update \
+            && sudo apt install gh git-delta git -y
+        link:
+          "./config/git/gitconfig": "~/.gitconfig"
+          "./config/git/gh.yml": "~/.config/gh/config.yml"
+        postinstall: |
+          gh auth status | grep 'Logged in to github.com account' > /dev/null || gh auth login --web -h github.com
+          gh extension list | grep gh-copilot > /dev/null || gh extension install github/gh-copilot
+      zsh:
+        install:
+          apt: "sudo apt install -y fd-find jq tldr tree vim wget zoxide zsh"
+          dnf: "sudo dnf install -y fd-find jq tldr tree vim wget zoxide zsh"
+          brew: "brew install fd jq tldr tree vim wget zoxide zsh"
+        link:
+          "./config/zsh/zshrc": "~/.zshrc"
+          "./config/zsh/zimrc": "~/.zimrc"
+          # I could just do "./config/zsh/zshrc.d": "~/.zshrc.d/"
+          # But I prefer not to do it because sometimes I just put stuff like secrets.sh
+          # in there and I don't want to have to remember to add it to the gitignore
+          "./config/zsh/zshrc.d/aliases.sh": "~/.zshrc.d/aliases.sh"
+          "./config/zsh/zshrc.d/path.sh": "~/.zshrc.d/path.sh"
+          "./config/zsh/zshrc.d/functions.sh": "~/.zshrc.d/functions.sh"
+          "./config/zsh/zshrc.d/lazy.sh": "~/.zshrc.d/lazy.sh"
+          "./config/zsh/zshrc.d/java.sh": "~/.zshrc.d/java.sh"
+        postinstall: |
+          [[ -d /Users/pablopunk/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+      tmux:
+        install:
+          brew: "brew install tmux bash"
+          apt: "sudo apt install -y tmux"
+          dnf: "sudo dnf install -y tmux"
+        link:
+          "./config/tmux/tmux.conf": "~/.tmux.conf"
+        postinstall: "[ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins"
+      vim:
+        install:
+          brew: "brew install vim"
+          apt: "sudo apt install -y vim"
+          dnf: "sudo dnf install -y vim"
+        link:
+          "./config/vim/vimrc": "~/.vimrc"
+      neovim:
+        install:
+          brew: "brew install neovim"
+          apt: "sudo apt install -y neovim"
+          dnf: "sudo dnf install -y neovim"
+        link:
+          "./config/neovim/init.lua": "~/.config/nvim/init.lua"
+      coreutils:
+        install:
+          brew: "brew install coreutils"
+          apt: "sudo apt install -y coreutils"
+          dnf: "sudo dnf install -y coreutils"
+      mise:
+        install:
+          brew: "brew install mise"
+          curl: "curl https://mise.run | sh"
+        link:
+          "./config/mise/config.toml": "~/.config/mise/config.toml"
+      editorconfig:
+        link:
+          "./config/editorconfig/editorconfig": "~/.editorconfig"
+      binaries:
+        link:
+          "./config/binaries": "~/.bin"
+      opencode:
+        install:
+          brew: "brew install opencode"
+        link:
+          "./config/opencode/opencode.json": "~/.config/opencode/opencode.json"
+    apps:
+      cursor:
+        os: ["mac"]
+        install:
+          brew: "brew install cursor"
+        link:
+          "./config/cursor/settings.json": "~/Library/Application Support/Cursor/User/settings.json"
+          "./config/cursor/keybindings.json": "~/Library/Application Support/Cursor/User/keybindings.json"
+      zed:
+        os: ["mac"]
+        install:
+          brew: "brew install zed"
+        link:
+          "./config/zed/settings.json": "~/.config/zed/settings.json"
+          "./config/zed/keymap.json": "~/.config/zed/keymap.json"
+      "1password":
+        os: ["mac"]
+        install:
+          brew: "brew install 1password"
+      "1piece":
+        os: ["mac"]
+        install:
+          wget: |
+            rm -rf /Applications/1Piece.app
+            wget https://app1piece.com/1Piece-4.2.1.zip -O /tmp/1Piece.zip \
+            && unzip /tmp/1Piece.zip -d /Applications
+        defaults:
+          "jp.fuji.1Piece": "./config/1piece/1Piece.xml"
+      arc:
+        os: ["mac"]
+        install:
+          brew: "brew install arc"
+      battery:
+        os: ["mac"]
+        install:
+          brew: "brew install battery"
+        postinstall: "open /Applications/Battery.app"
+      ghostty:
+        os: ["mac"]
+        install:
+          brew: "brew install ghostty"
+      homerow:
+        os: ["mac"]
+        install:
+          brew: "brew install homerow"
+      karabiner:
+        os: ["mac"]
+        install:
+          brew: "brew install karabiner-elements"
+        link:
+          "./config/karabiner/karabiner.json": "~/.config/karabiner/karabiner.json"
+      aerospace:
+        os: ["mac"]
+        install:
+          brew: "brew install aerospace"
+        link:
+          "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
+      macos-wallpaper:
+        os: ["mac"]
+        link:
+          "./config/macos-wallpaper": "~/Pictures/wallpapers"
+      mos:
+        os: ["mac"]
+        install:
+          brew: "brew install mos"
+        defaults:
+          "com.caldis.Mos": "./config/mos/Mos.xml"
+      raycast:
+        os: ["mac"]
+        install:
+          brew: "brew install raycast"
+      swiftshift:
+        os: ["mac"]
+        install:
+          brew: "brew install swift-shift"
+        defaults:
+          "com.pablopunk.Swift-Shift": "./config/swiftshift/SwiftShift.xml"
+      tailscale:
+        os: ["mac"]
+        install:
+          brew: "brew install tailscale"
+      telegram:
+        os: ["mac"]
+        install:
+          brew: "brew install telegram"
+      whatsapp:
+        os: ["mac"]
+        install:
+          brew: "brew install whatsapp"
+      missive:
+        os: ["mac"]
+        install:
+          brew: "brew install missive"
+    ricing:
+      hyprland:
+        os: ["linux"]
+        install:
+          dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
+        link:
+          "./config/hypr": "~/.config/hypr"
+          "./config/ulauncher/": "~/.config/ulauncher"
+      waybar:
+        os: ["linux"]
+        install:
+          dnf: "sudo dnf install -y waybar"
+        link:
+          "./config/waybar": "~/.config/waybar"
+      xremap:
+        os: ["linux"]
+        install:
+          dnf: "sudo dnf install -y xremap"
+        link:
+          "./config/xremap/config.yml": "~/.config/xremap/config.yml"
+
+  work:
+    cloudflare-warp:
+      os: ["mac"]
+      install:
+        brew: "brew install cloudflare-warp"
+    monitorcontrol:
+      os: ["mac"]
+      install:
+        brew: "brew install monitorcontrol"
+    orbstack:
+      os: ["mac"]
+      install:
+        brew: "brew install orbstack"
+    slack:
+      os: ["mac"]
+      install:
+        brew: "brew install slack"
+    zoom:
+      os: ["mac"]
+      install:
+        brew: "brew install zoom"
+    cleanshot:
+      os: ["mac"]
+      install:
+        brew: "brew install cleanshot"

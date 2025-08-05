@@ -130,6 +130,8 @@ profiles:
         os: ["mac"]
         install:
           brew: "brew install ghostty"
+        link:
+          "./config/ghostty/config": "~/.config/ghostty/config"
       homerow:
         os: ["mac"]
         install:

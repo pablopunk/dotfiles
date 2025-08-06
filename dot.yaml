@@ -65,11 +65,17 @@ profiles:
           dnf: "sudo dnf install -y neovim"
         link:
           "./config/neovim/init.lua": "~/.config/nvim/init.lua"
+      btop:
+        install:
+          brew: "brew install btop"
+          apt: "sudo apt install -y btop"
+          dnf: "sudo dnf install -y btop"
+        link:
+          "./config/btop/btop.conf": "~/.config/btop/btop.conf"
       coreutils:
+        os: ["mac"]
         install:
           brew: "brew install coreutils"
-          apt: "sudo apt install -y coreutils"
-          dnf: "sudo dnf install -y coreutils"
       mise:
         install:
           brew: "brew install mise"

@@ -82,6 +82,7 @@ profiles:
           curl: "curl https://mise.run | sh"
         link:
           "./config/mise/config.toml": "~/.config/mise/config.toml"
+        postinstall: "cd ~ && mise install"
       editorconfig:
         link:
           "./config/editorconfig/editorconfig": "~/.editorconfig"

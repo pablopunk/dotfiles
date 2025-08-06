@@ -425,8 +425,6 @@ end
 local function ai()
   supermaven()
   -- codex()
-  -- chatgpt()
-  -- codecompanion()
   avante()
 end
 

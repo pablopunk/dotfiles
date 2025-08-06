@@ -91,8 +91,10 @@ profiles:
       opencode:
         install:
           brew: "brew install opencode"
+          curl: "XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash"
         uninstall:
           brew: "brew uninstall opencode"
+          curl: "rm -rf $HOME/.local/bin/opencode"
         link:
           "./config/opencode/opencode.json": "~/.config/opencode/opencode.json"
     apps:
@@ -213,7 +215,9 @@ profiles:
       xremap:
         os: ["linux"]
         install:
-          dnf: "sudo dnf install -y xremap"
+          cargo: "cargo install xremap --features hypr"
+        uninstall:
+          cargo: "cargo uninstall xremap"
         link:
           "./config/xremap/config.yml": "~/.config/xremap/config.yml"
 

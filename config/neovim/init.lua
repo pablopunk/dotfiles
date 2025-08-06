@@ -209,6 +209,18 @@ local function kanagawa()
   light_theme = "kanagawa"
 end
 
+local function gruvbox()
+  add("ellisonleao/gruvbox.nvim")
+  dark_theme = "gruvbox"
+  light_theme = "gruvbox"
+end
+
+local function rose_pine()
+  add("rose-pine/neovim")
+  dark_theme = "rose-pine"
+  light_theme = "rose-pine"
+end
+
 local function color_utils()
   local function Light()
     vim.opt.background = "light"
@@ -238,7 +250,7 @@ end
 
 local function colors()
   vim.opt.background = "dark" -- by default
-  kanagawa()
+  rose_pine()
   vim.cmd("colorscheme " .. dark_theme)
   add("pablopunk/transparent.vim")
   fix_cursorline_color()

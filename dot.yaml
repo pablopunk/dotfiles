@@ -262,5 +262,5 @@ profiles:
           # requires python 3.12 (3.13 does not work)
           $HOME/.local/share/mise/installs/python/3.12/bin/python -m venv .venv
           source .venv/bin/activate
-          pip install -e .
+          $HOME/.local/share/mise/installs/python/3.12/bin/pip install -e .
           source install.sh

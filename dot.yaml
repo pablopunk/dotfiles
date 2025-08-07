@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:ft=yaml:foldmethod=indent
 
 profiles:
-  "*":
+  "*": # this should only contain tools that you absolutely want in ALL computers
     cli:
       git:
         install:

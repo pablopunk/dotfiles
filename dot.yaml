@@ -249,3 +249,18 @@ profiles:
       os: ["mac"]
       install:
         brew: "brew install cleanshot"
+
+  ai-node:
+    exo:
+      install:
+        python: |
+          # requires python 3.12 (3.13 does not work)
+          dir="$HOME/src/exo"; mkdir -p $dir
+          git clone https://github.com/exo-explore/exo.git $dir
+          cd $dir
+          # https://github.com/exo-explore/exo/issues/844
+          [ $(uname -s) = "Darwin" ] && sed -i '' 's/mlx==0.22.0/mlx==0.26.1/g' setup.py
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -e .
+          source install.sh

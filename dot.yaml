@@ -91,10 +91,8 @@ profiles:
           "./config/binaries": "~/.bin"
       opencode:
         install:
-          brew: "brew install opencode"
-          curl: "XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash"
+          curl: "XDG_BIN_DIR=$HOME/.local/bin VERSION=latest curl -fsSL https://opencode.ai/install | bash"
         uninstall:
-          brew: "brew uninstall opencode"
           curl: "rm -rf $HOME/.local/bin/opencode"
         link:
           "./config/opencode/opencode.json": "~/.config/opencode/opencode.json"
@@ -249,18 +247,3 @@ profiles:
       os: ["mac"]
       install:
         brew: "brew install cleanshot"
-
-  ai-node:
-    exo:
-      install:
-        python: |
-          # requires python 3.12 (3.13 does not work)
-          dir="$HOME/src/exo"; mkdir -p $dir
-          git clone https://github.com/exo-explore/exo.git $dir
-          cd $dir
-          # https://github.com/exo-explore/exo/issues/844
-          [ $(uname -s) = "Darwin" ] && sed -i '' 's/mlx==0.22.0/mlx==0.26.1/g' setup.py
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install -e .
-          source install.sh

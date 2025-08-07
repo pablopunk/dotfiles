@@ -161,7 +161,6 @@ profiles:
         link:
           "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
       wallpapers:
-        os: ["mac"]
         link:
           "./config/wallpapers": "~/.config/wallpapers"
         postlink: |

@@ -3,8 +3,8 @@ font-size = 14
 
 theme = light:GruvboxLightHard,dark:GruvboxDarkHard
 
-background-opacity = 0.9
-background-blur-radius = 16
+background-opacity = 0.8
+background-blur-radius = 14
 window-padding-x = 12
 window-padding-y = 12
 # window-decoration = auto

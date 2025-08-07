@@ -136,9 +136,12 @@ profiles:
           brew: "brew install battery"
         postinstall: "open /Applications/Battery.app"
       ghostty:
-        os: ["mac"]
         install:
           brew: "brew install ghostty"
+          dnf: "sudo dnf install -y ghostty"
+        uninstall:
+          brew: "brew uninstall ghostty"
+          dnf: "sudo dnf remove -y ghostty"
         link:
           "./config/ghostty/config": "~/.config/ghostty/config"
       homerow:

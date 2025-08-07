@@ -3,3 +3,6 @@ bun = "latest"
 node = "latest"
 rust = "latest" # for cargo
 go = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]

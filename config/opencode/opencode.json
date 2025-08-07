@@ -13,6 +13,9 @@
       "models": {
         "https://lmstudio.ai/models/qwen/qwen3-coder-30b": {
           "name": "Qwen3 Coder 30B"
+        },
+        "https://lmstudio.ai/models/openai/gpt-oss-20b": {
+          "name": "OpenAI GPT-OSS 20B"
         }
       }
     }

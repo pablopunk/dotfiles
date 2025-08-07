@@ -61,5 +61,10 @@
   "cursor.cpp.disabledLanguages": [
     "plaintext"
   ],
-  "biome.suggestInstallingGlobally": false
+  "biome.suggestInstallingGlobally": false,
+  "remote.portsAttributes": {
+    "8080": {
+      "protocol": "http"
+    }
+  }
 }

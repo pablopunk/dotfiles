@@ -37,6 +37,7 @@ local function setup_options()
   vim.opt.path:append("**")
   vim.opt.wildmenu = true
   vim.opt.wildignore:append("**/node_modules/**,**/dist/**")
+  -- vim.opt.winborder = "rounded" -- this is nice for a barebones neovim, but every other plugin adds a border so it would be twice as wide
 end
 
 local function tmux_session()
@@ -164,6 +165,7 @@ local function setup_mappings()
 end
 
 local function setup_abbreviations()
+  -- don't judge, English is hard
   vim.cmd([[
     iabbr ''' ``
     iabbr widht width
@@ -171,9 +173,6 @@ local function setup_abbreviations()
     iabbr lenght length
     iabbr ligth light
     iabbr rigth right
-    iabbr ireact import React from 'react'
-    iabbr fcreact const Component = () =>
-    iabbr ccreact class Component extends React.Component
   ]])
 end
 
@@ -361,10 +360,10 @@ local function telescope()
   })
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
   map("n", "<leader>fs", '<cmd>lua require("telescope.builtin").live_grep()<cr>', { desc = "Live grep" })
+  map({ "n", "v" }, "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
   map("n", "<leader>fgg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
   map("n", "<leader>fgh", telescope_pull_request_files, { desc = "Pull request files" })
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
-  map({ "n", "v" }, "<leader>fw", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep word" })
   map(
     "n",
     "<leader>fW",
@@ -546,6 +545,8 @@ local function mini_nvim()
     },
   })
   vim.ui.select = MiniPick.ui_select
+  -- map("n", "<leader>ff", MiniPick.builtin.files, { desc = "Fuzzy file finder" })
+  -- map("n", "<leader>fs", MiniPick.builtin.grep_live, { desc = "Fuzzy string search" })
   require("mini.diff").setup({
     mappings = {
       apply = "gh",

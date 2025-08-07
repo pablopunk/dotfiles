@@ -253,7 +253,7 @@ profiles:
   ai-node:
     exo:
       install:
-        python: |
+        mise: |
           dir="$HOME/src/exo"; mkdir -p $dir
           git clone https://github.com/exo-explore/exo.git $dir
           cd $dir

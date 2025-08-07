@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:ft=yaml:foldmethod=indent
 
 profiles:
-  "*":
+  "*": # this should only contain tools that you absolutely want in ALL computers
     cli:
       git:
         install:
@@ -254,13 +254,13 @@ profiles:
     exo:
       install:
         python: |
-          # requires python 3.12 (3.13 does not work)
           dir="$HOME/src/exo"; mkdir -p $dir
           git clone https://github.com/exo-explore/exo.git $dir
           cd $dir
           # https://github.com/exo-explore/exo/issues/844
           [ $(uname -s) = "Darwin" ] && sed -i '' 's/mlx==0.22.0/mlx==0.26.1/g' setup.py
-          python -m venv .venv
+          # requires python 3.12 (3.13 does not work)
+          $HOME/.local/share/mise/installs/python/3.12/bin/python -m venv .venv
           source .venv/bin/activate
           pip install -e .
           source install.sh

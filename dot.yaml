@@ -62,7 +62,7 @@ profiles:
       neovim:
         install:
           brew: "brew install neovim"
-          apt: >
+          apt: |
             sudo apt install software-properties-common -y
             sudo add-apt-repository ppa:neovim-ppa/stable -y
             sudo apt update -y

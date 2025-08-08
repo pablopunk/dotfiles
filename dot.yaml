@@ -139,6 +139,12 @@ profiles:
         os: ["mac"]
         install:
           brew: "brew install arc"
+      ice:
+        os: ["mac"]
+        install:
+          brew: "brew install ice"
+        defaults:
+          "com.jordanbaird.Ice": "./config/ice/Ice.xml"
       battery:
         os: ["mac"]
         install:

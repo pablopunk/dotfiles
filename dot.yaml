@@ -64,10 +64,14 @@ profiles:
           brew: "brew install neovim"
           apt: |
             sudo apt install software-properties-common -y
-            sudo add-apt-repository ppa:neovim-ppa/stable -y
+            sudo add-apt-repository ppa:neovim-ppa/unstable -y
             sudo apt update -y
             sudo apt install neovim -y
           dnf: "sudo dnf install -y neovim"
+        uninstall:
+          brew: "brew uninstall neovim"
+          apt: "sudo apt remove -y neovim"
+          dnf: "sudo dnf remove -y neovim"
         link:
           "./config/neovim/init.lua": "~/.config/nvim/init.lua"
       btop:

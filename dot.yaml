@@ -39,7 +39,8 @@ profiles:
           "./config/zsh/zshrc.d/aliases.sh": "~/.zshrc.d/aliases.sh"
           "./config/zsh/zshrc.d/path.sh": "~/.zshrc.d/path.sh"
           "./config/zsh/zshrc.d/functions.sh": "~/.zshrc.d/functions.sh"
-          "./config/zsh/zshrc.d/lazy.sh": "~/.zshrc.d/lazy.sh"
+          "./config/zsh/zshrc.d/mise.sh": "~/.zshrc.d/mise.sh"
+          "./config/zsh/zshrc.d/zoxide.sh": "~/.zshrc.d/zoxide.sh"
           "./config/zsh/zshrc.d/java.sh": "~/.zshrc.d/java.sh"
         postinstall: |
           [[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
@@ -61,7 +62,11 @@ profiles:
       neovim:
         install:
           brew: "brew install neovim"
-          apt: "sudo apt install -y neovim"
+          apt: >
+            sudo apt install software-properties-common -y
+            sudo add-apt-repository ppa:neovim-ppa/stable -y
+            sudo apt update -y
+            sudo apt install neovim -y
           dnf: "sudo dnf install -y neovim"
         link:
           "./config/neovim/init.lua": "~/.config/nvim/init.lua"

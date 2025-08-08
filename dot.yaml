@@ -70,7 +70,9 @@ profiles:
           dnf: "sudo dnf install -y neovim"
         uninstall:
           brew: "brew uninstall neovim"
-          apt: "sudo apt remove -y neovim"
+          apt: |
+            sudo add-apt-repository -r ppa:neovim-ppa/unstable
+            sudo apt purge -y neovim
           dnf: "sudo dnf remove -y neovim"
         link:
           "./config/neovim/init.lua": "~/.config/nvim/init.lua"

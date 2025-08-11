@@ -81,8 +81,6 @@ profiles:
           brew: "brew install btop"
           apt: "sudo apt install -y btop"
           dnf: "sudo dnf install -y btop"
-        link:
-          "./config/btop/btop.conf": "~/.config/btop/btop.conf"
       coreutils:
         os: ["mac"]
         install:

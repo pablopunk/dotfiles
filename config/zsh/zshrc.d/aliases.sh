@@ -26,6 +26,7 @@ alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
 alias mkidr='mkdir -p'
 alias n='npm run'
 alias run='npx tsx'
+alias oc="opencode"
 # not in vim but who cares
 alias :q='exit'
 alias :qa='exit'

@@ -72,11 +72,10 @@ automatically-unhide-macos-hidden-apps = false
   outer.left =       4
   outer.right =      4
   outer.bottom =     4
-  outer.top =        0
-  # outer.top = [
-  #   { monitor."built-in" = 8 }, # for built-in display (notch)
-  #   38 # regular monitors (with sketchy bar)
-  # ]
+  outer.top = [
+    { monitor."built-in" = 0 }, # for built-in display (notch)
+    4 # regular monitors (with sketchy bar)
+  ]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

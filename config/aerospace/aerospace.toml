@@ -113,6 +113,7 @@ automatically-unhide-macos-hidden-apps = false
   # See: https://nikitabobko.github.io/AeroSpace/commands#layout
   alt-cmd-ctrl-s = 'layout tiles horizontal vertical'
   alt-cmd-ctrl-a = 'layout accordion horizontal vertical'
+  # alt-cmd-ctrl-d = 'layout bsp vertical horizontal' # one day...
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#focus
   alt-cmd-ctrl-h = 'focus left'

@@ -37,6 +37,7 @@ local function setup_options()
   vim.opt.path:append("**")
   vim.opt.wildmenu = true
   vim.opt.wildignore:append("**/node_modules/**,**/dist/**")
+  vim.opt.fillchars = "eob: " -- no ~ chars at end of buffer
   -- vim.opt.winborder = "rounded" -- this is nice for a barebones neovim, but every other plugin adds a border so it would be twice as wide
 end
 

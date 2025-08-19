@@ -66,5 +66,6 @@
     "8080": {
       "protocol": "http"
     }
-  }
+  },
+  "git.autofetch": true
 }

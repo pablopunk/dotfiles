@@ -208,8 +208,12 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.app-name-regex-substring = "Karabiner"
   run = 'layout floating'
-
 [[on-window-detected]]
   if.window-title-regex-substring = "SecurityAgent"
   run = 'layout floating'
-
+[[on-window-detected]]
+  if.window-title-regex-substring = "Vista Previa"
+  run = 'layout floating'
+[[on-window-detected]]
+  if.window-title-regex-substring = "Preview"
+  run = 'layout floating'

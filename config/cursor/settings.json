@@ -67,5 +67,7 @@
       "protocol": "http"
     }
   },
-  "git.autofetch": true
+  "git.autofetch": true,
+  "diffEditor.diffAlgorithm": "advanced",
+  "diffEditor.experimental.showMoves": true,
 }

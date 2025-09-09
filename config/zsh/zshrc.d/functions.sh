@@ -159,3 +159,43 @@ function defaults_search {
   fi
   defaults domains | tr ', ' '\n' | grep -i $1
 }
+
+function wt {
+  if [[ "$1" == "-d" ]]; then
+    if [[ "$2" == "main" ]]; then
+      echo "Cannot delete main worktree"
+      return
+    fi
+    git_root="$(git rev-parse --show-toplevel 2> /dev/null)"
+    parent_dir="$(dirname "$git_root")"
+    git worktree remove "$parent_dir/$2"
+    echo "Deleted worktree $2"
+    return
+  fi
+  git_root="$(git rev-parse --show-toplevel 2> /dev/null)"
+  if [[ -z "$git_root" ]]; then
+    echo "No .git directory found"
+    return
+  fi
+  parent_dir="$(dirname "$git_root")"
+  if [[ "$parent_dir" != *"worktrees"* ]]; then
+    echo "Your git repo is not inside a folder that ends with 'worktrees'"
+    echo "Repo: $git_root"
+    echo "Repo parent: $parent_dir"
+    return
+  fi
+  list_of_worktrees="$(ls -1 "$parent_dir")"
+  if [[ -n "$1" ]]; then
+    list_of_worktrees="$1"$'\n'"$list_of_worktrees"
+  fi
+  selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$1" --height=10 --reverse)"
+  if [[ -z "$selected_worktree" ]]; then
+    echo "No worktree selected"
+    return
+  fi
+  worktree_dir="$parent_dir/$selected_worktree"
+  if [[ ! -d "$worktree_dir" ]]; then
+    git worktree add "$worktree_dir" -b "$selected_worktree"
+  fi
+  cd "$worktree_dir"
+}

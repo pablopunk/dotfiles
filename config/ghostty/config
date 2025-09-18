@@ -1,7 +1,7 @@
 font-family = JetBrains Mono
 font-size = 14
 
-theme = light:GruvboxLightHard,dark:GruvboxDarkHard
+theme = light:Gruvbox Light,dark:Gruvbox Dark
 
 background-opacity = 0.8
 background-blur-radius = 14

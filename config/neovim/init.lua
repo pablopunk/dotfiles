@@ -250,7 +250,8 @@ end
 
 local function colors()
   vim.opt.background = "dark" -- by default
-  rose_pine()
+  -- rose_pine()
+  gruvbox()
   vim.cmd("colorscheme " .. dark_theme)
   add("pablopunk/transparent.vim")
   fix_cursorline_color()

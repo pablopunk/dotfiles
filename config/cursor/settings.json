@@ -2,9 +2,6 @@
   "window.commandCenter": 1,
   "editor.fontFamily": "Jetbrains Mono, Source Code Pro for Powerline, SF Mono, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 15,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
   "git.enableSmartCommit": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   // "vscode-neovim.neovimInitVimPaths.darwin": "NONE",

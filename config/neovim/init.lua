@@ -221,6 +221,12 @@ local function rose_pine()
   light_theme = "rose-pine"
 end
 
+local function catppuccin()
+  add({ source = "catppuccin/nvim", name = "catppuccin" })
+  dark_theme = "catppuccin-macchiato"
+  light_theme = "catppuccin"
+end
+
 local function color_utils()
   local function Light()
     vim.opt.background = "light"
@@ -251,7 +257,8 @@ end
 local function colors()
   vim.opt.background = "dark" -- by default
   -- rose_pine()
-  gruvbox()
+  -- gruvbox()
+  catppuccin()
   vim.cmd("colorscheme " .. dark_theme)
   add("pablopunk/transparent.vim")
   fix_cursorline_color()

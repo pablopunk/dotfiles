@@ -217,3 +217,26 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.window-title-regex-substring = "Preview"
   run = 'layout floating'
+
+# Assign apps on particular workspaces
+[[on-window-detected]]
+  if.app-name-regex-substring = "Slack"
+  run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+  if.app-name-regex-substring = "zoom.us"
+  run = 'move-node-to-workspace 4'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Missive"
+  run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Calendar"
+  run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Spotify"
+  run = 'move-node-to-workspace 6'
+[[on-window-detected]]
+  if.app-name-regex-substring = "WhatsApp"
+  run = 'move-node-to-workspace 7'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Telegram"
+  run = 'move-node-to-workspace 7'

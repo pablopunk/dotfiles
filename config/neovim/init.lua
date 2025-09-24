@@ -424,7 +424,8 @@ local function avante()
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
-        model = "gpt-4.1-mini",
+        model = "gpt-5-mini",
+        temperature = 1,
       },
     },
   })
@@ -687,7 +688,7 @@ local function lsp()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
   end, { desc = "Toggle inlay hints (LSP)" })
 
-  local lspconfig = require("lspconfig")
+  local lspconfig = require("lspconfig") -- TODO: deprecated, use vim.lsp.config
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local on_attach = function(client, bufnr)
     mini_completion_on_attach(client, bufnr)

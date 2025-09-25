@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSStatusItem Visible Item-0</key>
+	<key>NSStatusItem VisibleCC Item-0</key>
 	<false/>
 	<key>allowlist</key>
 	<false/>

@@ -250,5 +250,5 @@ automatically-unhide-macos-hidden-apps = false
   if.app-name-regex-substring = "BambuStudio"
   run = 'move-node-to-workspace 8'
 [[on-window-detected]]
-  if.app-name-regex-substring = "Pixelmator"
+  if.app-name-regex-substring = "Pixelmator Pro"
   run = 'move-node-to-workspace 8'

@@ -178,7 +178,7 @@ profiles:
           "./config/wallpapers": "~/.config/wallpapers"
         postlink: |
           if [[ $(uname -s) == "Darwin" ]]; then # i use hyprpaper on linux
-            wallpaper="pexels-eberhardgross-1428277.jpg"
+            wallpaper="range-dark.jpg"
             img_path="${HOME}/.config/wallpapers/${wallpaper}"
             osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
           fi

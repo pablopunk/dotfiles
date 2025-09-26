@@ -161,17 +161,33 @@ function defaults_search {
 }
 
 function wt {
-  if [[ "$1" == "-d" ]]; then
-    if [[ "$2" == "main" ]]; then
-      echo "Cannot delete main worktree"
-      return
-    fi
-    git_root="$(git rev-parse --show-toplevel 2> /dev/null)"
-    parent_dir="$(dirname "$git_root")"
-    git worktree remove "$parent_dir/$2"
-    echo "Deleted worktree $2"
-    return
-  fi
+  local delete_mode=false
+  local force_mode=false
+  local search_term=""
+
+  # Parse arguments
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -d)
+        delete_mode=true
+        shift
+        ;;
+      -f)
+        force_mode=true
+        shift
+        ;;
+      -df|-fd)
+        delete_mode=true
+        force_mode=true
+        shift
+        ;;
+      *)
+        search_term="$1"
+        shift
+        ;;
+    esac
+  done
+
   git_root="$(git rev-parse --show-toplevel 2> /dev/null)"
   if [[ -z "$git_root" ]]; then
     echo "No .git directory found"
@@ -184,11 +200,45 @@ function wt {
     echo "Repo parent: $parent_dir"
     return
   fi
-  list_of_worktrees="$(ls -1 "$parent_dir")"
-  if [[ -n "$1" ]]; then
-    list_of_worktrees="$1"$'\n'"$list_of_worktrees"
+
+  if [[ "$delete_mode" == true ]]; then
+    list_of_worktrees="$(ls -1 "$parent_dir" | grep -v "^main$")"
+    selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$search_term" --height=10 --reverse)"
+    if [[ -z "$selected_worktree" ]]; then
+      echo "No worktree selected"
+      return
+    fi
+    if [[ "$selected_worktree" == "main" ]]; then
+      echo "Cannot delete main worktree"
+      return
+    fi
+
+    # Attempt to delete worktree
+    if [[ "$force_mode" == true ]]; then
+      if git worktree remove --force "$parent_dir/$selected_worktree"; then
+        echo "Force deleted worktree $selected_worktree"
+      else
+        echo "Failed to delete worktree $selected_worktree"
+        return 1
+      fi
+    else
+      if git worktree remove "$parent_dir/$selected_worktree"; then
+        echo "Deleted worktree $selected_worktree"
+      else
+        echo "Failed to delete worktree $selected_worktree"
+        echo "Use 'wt -f -d $selected_worktree' to force delete"
+        return 1
+      fi
+    fi
+    return
   fi
-  selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$1" --height=10 --reverse)"
+
+  # Regular mode - create/switch to worktree
+  list_of_worktrees="$(ls -1 "$parent_dir")"
+  if [[ -n "$search_term" ]]; then
+    list_of_worktrees="$search_term"$'\n'"$list_of_worktrees"
+  fi
+  selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$search_term" --height=10 --reverse)"
   if [[ -z "$selected_worktree" ]]; then
     echo "No worktree selected"
     return

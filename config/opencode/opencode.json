@@ -2,22 +2,4 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "autoupdate": true,
-  "model": "google/gemini-2.5-flash",
-  "provider": {
-    "lmstudio": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "LM Studio (local)",
-      "options": {
-        "baseURL": "http://127.0.0.1:1234/v1"
-      },
-      "models": {
-        "https://lmstudio.ai/models/qwen/qwen3-coder-30b": {
-          "name": "Qwen3 Coder 30B"
-        },
-        "https://lmstudio.ai/models/openai/gpt-oss-20b": {
-          "name": "OpenAI GPT-OSS 20B"
-        }
-      }
-    }
-  }
 }

@@ -220,6 +220,12 @@ automatically-unhide-macos-hidden-apps = false
 
 # Assign apps on particular workspaces
 [[on-window-detected]]
+  if.app-name-regex-substring = "Zen"
+  run = 'move-node-to-workspace 1'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Ghostty"
+  run = 'move-node-to-workspace 2'
+[[on-window-detected]]
   if.app-name-regex-substring = "Slack"
   run = 'move-node-to-workspace 3'
 [[on-window-detected]]

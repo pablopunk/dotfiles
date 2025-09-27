@@ -100,7 +100,7 @@ profiles:
           "./config/binaries": "~/.bin"
       opencode:
         install:
-          brew: "brew install sst/tap/opencode""
+          brew: "brew install sst/tap/opencode"
           curl: "XDG_BIN_DIR=$HOME/.local/bin VERSION=latest curl -fsSL https://opencode.ai/install | bash"
         uninstall:
           brew: "brew uninstall opencode"

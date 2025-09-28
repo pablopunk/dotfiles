@@ -490,11 +490,22 @@ local function opencode()
   end, { desc = "Explain this code" })
 end
 
+local function sidekick()
+  add("folke/sidekick.nvim")
+  require("sidekick").setup({})
+  map("n", "<tab>", function()
+    if not require("sidekick").nes_jump_or_apply() then
+      return "<tab>"
+    end
+  end, { desc = "Jump/Apply AI suggestions", expr = true })
+end
+
 local function ai()
   supermaven()
+  opencode()
   -- codex()
   -- avante()
-  opencode()
+  -- sidekick()
 end
 
 local function git_blame()
@@ -707,6 +718,7 @@ local function lsp()
       "eslint",
       "vtsls",
       "gopls",
+      "copilot", -- for AI suggestions
       -- "zls", --for zig
     },
   })

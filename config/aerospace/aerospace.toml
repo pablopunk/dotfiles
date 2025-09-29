@@ -217,6 +217,9 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.window-title-regex-substring = "Preview"
   run = 'layout floating'
+[[on-window-detected]]
+  if.window-title-regex-substring = "1Password"
+  run = 'layout floating'
 
 # Assign apps on particular workspaces
 [[on-window-detected]]

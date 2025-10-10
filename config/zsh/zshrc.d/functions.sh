@@ -249,3 +249,7 @@ function wt {
   fi
   cd "$worktree_dir"
 }
+
+function killp {
+  ps aux | grep "$@" | grep -v grep | awk '{print $2}' | xargs kill -9
+}

@@ -60,8 +60,8 @@
   ],
   "biome.suggestInstallingGlobally": false,
   "remote.portsAttributes": {
-    "8080": {
-      "protocol": "http"
+    "3000": {
+      "protocol": "https"
     }
   },
   "git.autofetch": true,

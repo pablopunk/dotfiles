@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Configurable path
-MAZE_RUNTIME_PATH=~/src/maze/maze-monorepo/.maze-runtime.yaml
+MAZE_RUNTIME_PATH=~/src/maze/monorepo/.maze-runtime.yaml
 
 # Usage: tt [--disable|-d] [search]
 # Examples:

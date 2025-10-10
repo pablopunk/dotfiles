@@ -829,7 +829,7 @@ local function conform()
   vim.api.nvim_create_user_command("EslintFormat", use_eslint, {})
   vim.api.nvim_create_user_command("NoFormat", use_none, {})
   local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-  if project == "maze-mobile-app" then -- use eslint for the mobile app
+  if vim.regex("mobile-app"):match_str(project) then
     setup_conform({ "eslint_d" })
   else -- default formatter for everything else
     setup_conform({ "biome" })

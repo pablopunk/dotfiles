@@ -126,10 +126,6 @@ profiles:
         os: ["mac"]
         install:
           brew: "brew install 1password"
-      arc:
-        os: ["mac"]
-        install:
-          brew: "brew install arc"
       ice:
         os: ["mac"]
         install:

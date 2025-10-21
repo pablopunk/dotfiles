@@ -488,6 +488,11 @@ local function opencode()
   map("n", "<leader>oe", function()
     require("opencode").prompt("Explain @cursor and its context")
   end, { desc = "Explain this code" })
+  -- Fix tmux navigation
+  map("t", "<C-h>", "<C-\\><C-n>:TmuxNavigateLeft<cr>")
+  map("t", "<C-j>", "<C-\\><C-n>:TmuxNavigateDown<cr>")
+  map("t", "<C-k>", "<C-\\><C-n>:TmuxNavigateUp<cr>")
+  map("t", "<C-l>", "<C-\\><C-n>:TmuxNavigateRight<cr>")
 end
 
 local function sidekick()
@@ -664,6 +669,7 @@ local function mini_nvim()
       end
     end
   end, { desc = "Toggle file explorer" })
+  require("mini.map").setup({ window = { width = 5 } })
 end
 
 local function treesitter_context()

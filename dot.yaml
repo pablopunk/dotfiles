@@ -126,15 +126,6 @@ profiles:
         os: ["mac"]
         install:
           brew: "brew install 1password"
-      "1piece":
-        os: ["mac"]
-        install:
-          wget: |
-            rm -rf /Applications/1Piece.app
-            wget https://app1piece.com/1Piece-4.2.1.zip -O /tmp/1Piece.zip \
-            && unzip /tmp/1Piece.zip -d /Applications
-        defaults:
-          "jp.fuji.1Piece": "./config/1piece/1Piece.xml"
       arc:
         os: ["mac"]
         install:

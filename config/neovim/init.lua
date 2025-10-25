@@ -724,7 +724,7 @@ local function lsp()
       "eslint",
       "vtsls",
       "gopls",
-      "copilot", -- for AI suggestions
+      -- "copilot", -- for AI suggestions
       -- "zls", --for zig
     },
   })

@@ -232,6 +232,9 @@ automatically-unhide-macos-hidden-apps = false
   if.app-name-regex-substring = "Safari"
   run = 'move-node-to-workspace 1'
 [[on-window-detected]]
+  if.app-name-regex-substring = "Helium"
+  run = 'move-node-to-workspace 1'
+[[on-window-detected]]
   if.app-name-regex-substring = "Ghostty"
   run = 'move-node-to-workspace 2'
 [[on-window-detected]]

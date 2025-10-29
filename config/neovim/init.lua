@@ -504,7 +504,7 @@ end
 local function ai()
   supermaven()
   opencode()
-  claude()
+  -- claude()
   -- codex()
   -- avante()
   -- sidekick()
@@ -562,12 +562,18 @@ local function neogit()
   map("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Open neogit" })
 end
 
+local function octo()
+  add("pwntester/octo.nvim") -- gh auth refresh -s read:project
+  require("octo").setup({})
+end
+
 local function git()
   git_blame()
   openingh()
   git_conflict()
   neogit()
   git_pr_review()
+  octo()
 end
 
 local function restore_session()

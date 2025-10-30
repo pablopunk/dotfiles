@@ -193,16 +193,12 @@ function wt {
     echo "No .git directory found"
     return
   fi
-  parent_dir="$(dirname "$git_root")"
-  if [[ "$parent_dir" != *"worktrees"* ]]; then
-    echo "Your git repo is not inside a folder that ends with 'worktrees'"
-    echo "Repo: $git_root"
-    echo "Repo parent: $parent_dir"
-    return
-  fi
+  repo_name="$(basename "$git_root")"
+  worktree_base="$HOME/.worktrees/$repo_name"
+  mkdir -p "$worktree_base"
 
   if [[ "$delete_mode" == true ]]; then
-    list_of_worktrees="$(ls -1 "$parent_dir" | grep -v "^main$")"
+    list_of_worktrees="$(ls -1 "$worktree_base" | grep -v "^main$")"
     selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$search_term" --height=10 --reverse)"
     if [[ -z "$selected_worktree" ]]; then
       echo "No worktree selected"
@@ -215,14 +211,14 @@ function wt {
 
     # Attempt to delete worktree
     if [[ "$force_mode" == true ]]; then
-      if git worktree remove --force "$parent_dir/$selected_worktree"; then
+      if git worktree remove --force "$worktree_base/$selected_worktree"; then
         echo "Force deleted worktree $selected_worktree"
       else
         echo "Failed to delete worktree $selected_worktree"
         return 1
       fi
     else
-      if git worktree remove "$parent_dir/$selected_worktree"; then
+      if git worktree remove "$worktree_base/$selected_worktree"; then
         echo "Deleted worktree $selected_worktree"
       else
         echo "Failed to delete worktree $selected_worktree"
@@ -234,7 +230,7 @@ function wt {
   fi
 
   # Regular mode - create/switch to worktree
-  list_of_worktrees="$(ls -1 "$parent_dir")"
+  list_of_worktrees="$(ls -1 "$worktree_base")"
   if [[ -n "$search_term" ]]; then
     list_of_worktrees="$search_term"$'\n'"$list_of_worktrees"
   fi
@@ -243,7 +239,7 @@ function wt {
     echo "No worktree selected"
     return
   fi
-  worktree_dir="$parent_dir/$selected_worktree"
+  worktree_dir="$worktree_base/$selected_worktree"
   if [[ ! -d "$worktree_dir" ]]; then
     git worktree add "$worktree_dir" -b "$selected_worktree"
   fi

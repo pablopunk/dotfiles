@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dirs="$HOME/src $HOME/src/maze $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME"
+dirs="$HOME/src $HOME/src/maze $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME $HOME/.worktrees"
 
 for dir in $dirs; do
   mkdir -p $dir

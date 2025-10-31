@@ -26,7 +26,6 @@ alias rm-nvim-history='rm ~/.local/state/nvim/swap/*'
 alias mkidr='mkdir -p'
 alias n='npm run'
 alias run='npx tsx'
-alias oc="opencode"
 # not in vim but who cares
 alias :q='exit'
 alias :qa='exit'
@@ -35,3 +34,9 @@ alias :xa='exit'
 # source entry file
 alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'
+# opencode
+alias oc="opencode"
+alias gpt4mini='oc run -m openrouter/openai/gpt-4.1-mini --agent build "$@"'
+alias gpt5codex='oc run -m openrouter/openai/gpt-5-codex --agent build "$@"'
+alias claudeopus41='oc run -m openrouter/anthropic/claude-opus-4.1 --agent build "$@"'
+

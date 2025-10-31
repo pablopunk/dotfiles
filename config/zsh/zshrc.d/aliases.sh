@@ -39,4 +39,4 @@ alias oc="opencode"
 alias gpt4mini='oc run -m openrouter/openai/gpt-4.1-mini --agent build "$@"'
 alias gpt5codex='oc run -m openrouter/openai/gpt-5-codex --agent build "$@"'
 alias claudeopus41='oc run -m openrouter/anthropic/claude-opus-4.1 --agent build "$@"'
-
+alias gemini25flash='oc run -m openrouter/google/gemini-2.5-flash --agent build "$@"'

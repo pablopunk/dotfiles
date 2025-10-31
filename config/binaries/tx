@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-dirs="$HOME/src $HOME/src/maze $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME $HOME/.worktrees"
+top_level_dirs="$HOME/src $HOME/src/maze $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME"
+recursive_dirs="$HOME/.worktrees"
 
-for dir in $dirs; do
+for dir in $top_level_dirs $recursive_dirs; do
   mkdir -p $dir
 done
 
 all_directories() {
-  find $dirs -mindepth 1 -maxdepth 1 -type d | sed "s|$HOME|~|g" | sed 's|//|/|g'
+  {
+    find $top_level_dirs -mindepth 1 -maxdepth 1 -type d
+    find $recursive_dirs -mindepth 1 -maxdepth 2 -type d
+  } | sed "s|$HOME|~|g" | sed 's|//|/|g'
 }
 
 fzf_short() {

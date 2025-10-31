@@ -250,7 +250,7 @@ function wt {
     echo "No worktree selected"
     return
   fi
-  
+
   if [[ "$selected_worktree" == "main" ]]; then
     selected_path=$(echo "$worktree_list" | awk '$3 == "[main]" {print $1}')
   else
@@ -270,5 +270,6 @@ function wt {
 }
 
 function killp {
-  ps aux | grep "$@" | grep -v grep | awk '{print $2}' | xargs kill -9
+   local count=$(ps aux | grep "$@" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null | wc -l)
+   echo "Killed $count process(es) for '$@'"
 }

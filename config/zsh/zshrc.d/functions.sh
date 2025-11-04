@@ -190,7 +190,7 @@ function wt {
     esac
   done
 
-  git_root="$(git rev-parse --show-toplevel 2> /dev/null)"
+  git_root="$(git worktree list | head -1 | awk '{print $1}')"
   if [[ -z "$git_root" ]]; then
     echo "Error: Not in a git repository"
     return 1

@@ -233,7 +233,7 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace 5'
 [[on-window-detected]]
   if.app-name-regex-substring = "Spotify"
-  run = 'move-node-to-workspace R'
+  run = 'move-node-to-workspace W'
 [[on-window-detected]]
   if.app-name-regex-substring = "WhatsApp"
   run = 'move-node-to-workspace E'
@@ -245,7 +245,7 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace B'
 [[on-window-detected]]
   if.app-name-regex-substring = "Pixelmator Pro"
-  run = 'move-node-to-workspace W'
+  run = 'move-node-to-workspace R'
 [[on-window-detected]]
   if.app-name-regex-substring = "YouTube"
-  run = 'move-node-to-workspace R'
+  run = 'move-node-to-workspace W'

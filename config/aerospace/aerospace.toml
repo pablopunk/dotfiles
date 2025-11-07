@@ -151,7 +151,7 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-7 = 'workspace 7'
   alt-cmd-ctrl-8 = 'workspace 8'
   alt-cmd-ctrl-9 = 'workspace 9'
-  # alt-cmd-ctrl-0 = 'workspace 0'
+  alt-cmd-ctrl-0 = 'workspace 0'
 
   alt-cmd-ctrl-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 
@@ -174,7 +174,7 @@ automatically-unhide-macos-hidden-apps = false
   alt-cmd-ctrl-shift-7 = 'move-node-to-workspace --focus-follows-window 7'
   alt-cmd-ctrl-shift-8 = 'move-node-to-workspace --focus-follows-window 8'
   alt-cmd-ctrl-shift-9 = 'move-node-to-workspace --focus-follows-window 9'
-  # alt-cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 0'
+  alt-cmd-ctrl-shift-0 = 'move-node-to-workspace --focus-follows-window 0'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
   alt-cmd-ctrl-tab = 'workspace-back-and-forth'
@@ -264,3 +264,6 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.app-name-regex-substring = "Pixelmator Pro"
   run = 'move-node-to-workspace 8'
+[[on-window-detected]]
+  if.app-name-regex-substring = "YouTube"
+  run = 'move-node-to-workspace 0'

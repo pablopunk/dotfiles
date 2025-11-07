@@ -270,6 +270,10 @@ function wt {
 }
 
 function killp {
-   local count=$(ps aux | grep "$@" | grep -v grep | awk '{print $2}' | xargs kill -9 2>/dev/null | wc -l)
+   local pids=$(ps aux | grep "$@" | grep -v grep | awk '{print $2}')
+   local count=$(echo "$pids" | grep -v '^$' | wc -l | tr -d ' ')
+   if [[ $count -gt 0 ]]; then
+      echo "$pids" | xargs kill -9 2>/dev/null
+   fi
    echo "Killed $count process(es) for '$@'"
 }

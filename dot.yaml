@@ -132,6 +132,12 @@ profiles:
           brew: "brew install ice"
         defaults:
           "com.jordanbaird.Ice": "./config/ice/Ice.xml"
+      stats:
+        os: ["mac"]
+        install:
+          brew: "brew install stats"
+        defaults:
+          "eu.exelban.Stats": "./config/stats/Stats.xml"
       battery:
         os: ["mac"]
         install:

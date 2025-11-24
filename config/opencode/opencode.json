@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
+  "theme": "catppuccin",
   "model": "openrouter/anthropic/claude-sonnet-4-5",
   "autoupdate": true,
   "agent": {

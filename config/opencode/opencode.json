@@ -1,7 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
-  "model": "openrouter/anthropic/claude-sonnet-4-5",
   "autoupdate": true,
   "agent": {
     "plan": {
@@ -21,5 +20,16 @@
     "todowrite": true,
     "webfetch": true,
     "write": true
+  },
+  "mcp": {
+    "linear": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ]
+    }
   }
 }

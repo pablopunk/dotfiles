@@ -51,7 +51,7 @@
 	<key>CPU_tachometer_position</key>
 	<integer>5</integer>
 	<key>CPU_widget</key>
-	<string>pie_chart</string>
+	<string></string>
 	<key>Clock_label_position</key>
 	<integer>0</integer>
 	<key>Clock_position</key>
@@ -110,10 +110,20 @@
 	<true/>
 	<key>NSStatusItem Preferred Position Battery_battery</key>
 	<real>5593</real>
+	<key>NSStatusItem Preferred Position CPU_line_chart</key>
+	<real>5561</real>
+	<key>NSStatusItem Preferred Position CPU_mini</key>
+	<real>5729</real>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
 	<real>327</real>
+	<key>NSStatusItem Preferred Position Disk_mini</key>
+	<real>5635</real>
+	<key>NSStatusItem Preferred Position Network_speed</key>
+	<real>5609</real>
 	<key>NSStatusItem Preferred Position RAM_mini</key>
 	<real>5682</real>
+	<key>NSStatusItem Preferred Position RAM_pie_chart</key>
+	<real>371</real>
 	<key>NSStatusItem Restore Position Battery_battery</key>
 	<integer>5654</integer>
 	<key>NSStatusItem Restore Position CPU_line_chart</key>
@@ -188,7 +198,7 @@
 	<key>RAM_text_position</key>
 	<integer>7</integer>
 	<key>RAM_widget</key>
-	<string></string>
+	<string>pie_chart</string>
 	<key>Sensors_barChart_position</key>
 	<integer>3</integer>
 	<key>Sensors_label_position</key>
@@ -216,7 +226,7 @@
 	<key>temperature_units</key>
 	<string>celsius</string>
 	<key>updater_check_ts</key>
-	<integer>1763834858</integer>
+	<integer>1764066701</integer>
 	<key>version</key>
 	<string>2.11.61</string>
 </dict>

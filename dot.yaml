@@ -133,7 +133,9 @@ profiles:
       stats:
         os: ["mac"]
         install:
-          brew: "brew install stats"
+          brew: "brew install --cask stats"
+        uninstall:
+          brew: "brew uninstall --cask stats"
         defaults:
           "eu.exelban.Stats": "./config/stats/Stats.xml"
       battery:

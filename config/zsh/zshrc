@@ -75,7 +75,7 @@ fi
 # disable auto-update
 export HOMEBREW_NO_AUTO_UPDATE=1
 # fix compinit:527: no such file or directory: /usr/local/share/zsh/site-functions/_brew
-export FPATH=$(echo "$FPATH" | tr ':' '\n' | grep -v "/usr/local/share/zsh/site-functions" | awk '{printf "%s:", $0}' | sed 's/:$//')
+fpath=(${fpath:#/usr/local/share/zsh/site-functions})
 # }}}
 
 # modular config {{{

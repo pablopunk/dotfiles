@@ -1,8 +1,16 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
 
 # Start configuration added by Zim install {{{
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
+# History configuration
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_ALL_DUPS   # Remove older duplicate from history
+setopt SHARE_HISTORY          # Share history across all sessions
+setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicates first when trimming
+setopt HIST_IGNORE_SPACE      # Don't save commands starting with space
+setopt HIST_VERIFY            # Show command before executing from history
+setopt APPEND_HISTORY         # Append instead of overwrite
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -e
 # Prompt for spelling correction of commands.
@@ -77,26 +85,6 @@ for rc in "$ZSHRC_D"/*.sh; do
   [ -f "$rc" ] && source "$rc"
 done
 # modular config }}}
-
-# theme (dark/light) {{{
-change_colorscheme() {
-  current_theme=$(cat $HOME/.theme 2>/dev/null || echo Dark)
-
-  if [ ! -f /proc/sys/kernel/osrelease ]; then
-    defaults read -g AppleInterfaceStyle 2>&- >&-
-    if [[ $? == 1 ]]; then
-      new_theme=Light
-    else
-      new_theme=Dark
-    fi
-    if [[ $current_theme != $new_theme ]]; then
-      echo $new_theme > $HOME/.theme
-    fi
-  fi
-}
-# Run the colorscheme change function in the background without output
-(change_colorscheme >/dev/null 2>&1 &)
-# theme (dark/light) }}}
 
 # Prompt stuff {{{
 export ON_COLOR=magenta

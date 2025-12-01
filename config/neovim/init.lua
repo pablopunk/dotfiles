@@ -53,9 +53,7 @@ local function setup_mappings()
 
   map("i", "jk", "<esc>", { desc = "ESC" })
 
-  map("n", "<c-c>", "<esc>", { desc = "ESC" })
-  map("v", "<c-c>", "<esc>", { desc = "ESC" })
-  map("i", "<c-c>", "<esc>", { desc = "ESC" })
+  map({ "n", "v", "i" }, "<c-c>", "<esc>", { desc = "ESC" })
   map({ "n", "v", "x", "o", "c" }, "q:", "<nop>", { desc = "Noop" })
   map({ "n", "v", "x", "o" }, "Q", "<nop>", { desc = "Noop" })
 
@@ -150,7 +148,7 @@ local function setup_mappings()
 
   -- Folds
   map("n", "<leader><", function()
-    if not vim.opt.foldmethod then
+    if vim.opt.foldmethod:get() == "" then
       vim.opt.foldmethod = "indent"
     end
     vim.cmd("normal! zM")
@@ -180,7 +178,7 @@ end
 local function setup_plugin_manager()
   local path_package = vim.fn.stdpath("data") .. "/site/"
   local mini_path = path_package .. "pack/deps/start/mini.nvim"
-  if not vim.loop.fs_stat(mini_path) then
+  if not vim.uv.fs_stat(mini_path) then
     vim.api.nvim_command('echo "Installing `mini.nvim`" | redraw')
     local clone_cmd = {
       "git",
@@ -276,11 +274,13 @@ end
 local function unclutter()
   add("pablopunk/unclutter.nvim")
   require("unclutter").setup({ clean_after = 0, tabline = true })
+  local unclutter_telescope = require("unclutter.telescope")
+  local unclutter_tabline = require("unclutter.tabline")
   map("n", "<c-f>", function()
-    require("unclutter.telescope").open({ hide_current = true })
+    unclutter_telescope.open({ hide_current = true })
   end, { desc = "Show unclutter buffers in Telescope" })
-  map("n", "<c-n>", require("unclutter.tabline").next, { desc = "Next buffer (unclutter)" })
-  map("n", "<c-p>", require("unclutter.tabline").prev, { desc = "Previous buffer (unclutter)" })
+  map("n", "<c-n>", unclutter_tabline.next, { desc = "Next buffer (unclutter)" })
+  map("n", "<c-p>", unclutter_tabline.prev, { desc = "Previous buffer (unclutter)" })
 end
 
 local function plenary()
@@ -688,6 +688,8 @@ local function treesitter()
     incremental_selection = {
       enable = true,
       keymaps = {
+        init_selection = "<cr>",
+        node_incremental = "<cr>",
         node_decremental = "<bs>",
         scope_incremental = false,
       },
@@ -704,7 +706,7 @@ local function lsp()
   add("williamboman/mason-lspconfig.nvim")
 
   local function mini_completion_on_attach(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.MiniCompletion.completefunc_lsp")
+    vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -905,8 +907,6 @@ end
 
 -- Lazy load plugins
 local function setup_plugins()
-  plugins_that_could_be_default_behavior()
-  mini_nvim()
   if not vscode() then
     plugins_that_could_be_default_behavior()
     mini_nvim()

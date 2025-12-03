@@ -699,19 +699,10 @@ local function treesitter()
 end
 
 local function lsp()
-  -- vim.lsp.inlay_hint.enable() -- enable inlay hints
-  add("neovim/nvim-lspconfig")
-  add("folke/neodev.nvim")
   add("williamboman/mason.nvim")
   add("williamboman/mason-lspconfig.nvim")
+  add("neovim/nvim-lspconfig") -- provides server configs for vim.lsp.enable()
 
-  local function mini_completion_on_attach(client, bufnr)
-    vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end
-
-  require("neodev").setup({})
   require("mason").setup({})
   require("mason-lspconfig").setup({
     ensure_installed = {
@@ -725,75 +716,86 @@ local function lsp()
       "eslint",
       "vtsls",
       "gopls",
-      -- "copilot", -- for AI suggestions
-      -- "zls", --for zig
     },
   })
 
+  -- Shared config for all LSP servers
+  vim.lsp.config("*", {
+    root_markers = { ".git" },
+    capabilities = {
+      general = {
+        positionEncodings = { "utf-16" }, -- consistent encoding for all clients
+      },
+    },
+  })
+
+  -- Server-specific configs
+  vim.lsp.config("lua_ls", {
+    settings = {
+      Lua = {
+        diagnostics = { globals = { "vim" } },
+        hint = { enable = true },
+        workspace = { checkThirdParty = false },
+      },
+    },
+  })
+
+  -- Enable all servers
+  vim.lsp.enable({
+    "bashls",
+    "jsonls",
+    "html",
+    "vimls",
+    "lua_ls",
+    "astro",
+    "biome",
+    "eslint",
+    "vtsls",
+    "gopls",
+  })
+
+  -- Use mini.completion's omnifunc instead of the built-in LSP one
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client then
+        vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end
+    end,
+  })
+
+  -- Keymaps (K for hover is now a built-in default)
   map("n", "E", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
   map("n", "]d", function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jump({ count = 1 })
     vim.cmd("normal! zz")
   end, { desc = "Go to next diagnostic" })
   map("n", "[d", function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jump({ count = -1 })
     vim.cmd("normal! zz")
   end, { desc = "Go to previous diagnostic" })
   map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-  map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+  -- Override defaults to use Telescope instead of quickfix
   map("n", "gd", ":Telescope lsp_definitions<cr>zz", { desc = "Go to definition" })
   map("n", "gr", ":Telescope lsp_references<cr>", { desc = "Go to references" })
   map("n", "gi", ":Telescope lsp_implementations<cr>", { desc = "Go to implementations" })
   map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
-  map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols (dynamic)" })
+  map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
   map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
-  map("n", "<leader>ls", ":LspStart<cr>", { desc = "Start LSP" })
-  map("n", "<leader>lx", ":LspStop<cr>", { desc = "Stop LSP" })
-  map("n", "<leader>lr", ":LspRestart<cr>", { desc = "Restart LSP" })
-  map("n", "<leader>li", ":LspInfo<cr>", { desc = "Info LSP" })
+  map("n", "<leader>ls", ":lua vim.lsp.enable(vim.bo.filetype)<cr>", { desc = "Start LSP" })
+  map("n", "<leader>lx", function()
+    vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
+  end, { desc = "Stop LSP" })
+  map("n", "<leader>lr", function()
+    vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
+    vim.cmd("edit")
+  end, { desc = "Restart LSP" })
+  map("n", "<leader>li", ":checkhealth vim.lsp<cr>", { desc = "Info LSP" })
   map("n", "<leader>lh", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
   end, { desc = "Toggle inlay hints (LSP)" })
-
-  local lspconfig = require("lspconfig") -- TODO: deprecated, use vim.lsp.config
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  local on_attach = function(client, bufnr)
-    mini_completion_on_attach(client, bufnr)
-  end
-
-  local function setup_lsp(lsp_name, settings)
-    lspconfig[lsp_name].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = settings,
-    })
-  end
-
-  setup_lsp("vtsls")
-  setup_lsp("vimls")
-  setup_lsp("bashls")
-  setup_lsp("jsonls")
-  setup_lsp("html")
-  setup_lsp("astro")
-  setup_lsp("biome")
-  setup_lsp("eslint")
-  setup_lsp("gopls")
-  setup_lsp("lua_ls", {
-    Lua = {
-      diagnostics = { globals = { "vim" } },
-      hint = { enable = true },
-      workspace = {
-        checkThirdParty = false,
-      },
-    },
-  })
-  -- create a command that installs and configs a new lsp server
-  vim.api.nvim_create_user_command("LspConfig", function(opts)
-    local server_name = opts.args
-    vim.cmd("MasonInstall " .. opts.args)
-    setup_lsp(server_name)
-    vim.cmd("LspStart " .. server_name)
-  end, { nargs = 1 })
 end
 
 local function trouble()

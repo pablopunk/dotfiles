@@ -10,16 +10,26 @@
       }
     }
   },
-  "tools": {
-    "bash": true,
-    "glob": true,
-    "grep": true,
-    "list": true,
-    "patch": true,
-    "todoread": true,
-    "todowrite": true,
-    "webfetch": true,
-    "write": true
+  // === Models ===
+  "model": "anthropic/claude-opus-4-5",
+  "small_model": "anthropic/claude-haiku-4-5",  // title gen, lightweight tasks
+  // === TUI ===
+  "tui": {
+    "scroll_acceleration": {
+      "enabled": true  // macOS-style momentum scrolling
+    }
+  },
+  // === Permissions ===
+  "permission": {
+    "external_directory": "allow",
+    "bash": {
+      "sudo *": "deny",
+      "rm -rf /": "deny",
+      "rm -rf /*": "deny",
+      "rm -rf ~": "deny",
+      "rm -rf ~/*": "deny",
+      ":(){:|:&};:": "deny"  // fork bomb, just in case
+    }
   },
   "mcp": {
     "linear": {

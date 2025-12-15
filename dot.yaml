@@ -105,7 +105,7 @@ profiles:
         uninstall:
           curl: "rm -rf $HOME/.local/bin/opencode"
         link:
-          "./config/opencode/opencode.json": "~/.config/opencode/opencode.json"
+          "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
     apps:
       cursor:
         os: ["mac"]

@@ -892,6 +892,11 @@ local function markdown()
   })
 end
 
+local function todo()
+  add("pablopunk/todo.nvim")
+  require("todo").setup()
+end
+
 local function vscode()
   if vim.g.vscode then
     -- otherwise vscode would be opening the bottom drawer all the time
@@ -926,6 +931,7 @@ local function setup_plugins()
     highlight_colors()
     markdown()
     snacks()
+    todo()
   end
 end
 

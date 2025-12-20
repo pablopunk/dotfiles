@@ -12,7 +12,6 @@
   },
   // === Models ===
   "model": "anthropic/claude-haiku-4-5",
-  "small_model": "google/gemini-3-flash-preview",  // title gen, lightweight tasks
   // === TUI ===
   "tui": {
     "scroll_acceleration": {

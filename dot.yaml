@@ -82,6 +82,10 @@ profiles:
           brew: "brew install btop"
           apt: "sudo apt install -y btop"
           dnf: "sudo dnf install -y btop"
+      macmon:
+        os: ["mac"]
+        install:
+          brew: "brew install macmon"
       coreutils:
         os: ["mac"]
         install:

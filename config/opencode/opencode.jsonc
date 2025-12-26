@@ -11,7 +11,7 @@
     }
   },
   // === Models ===
-  "model": "anthropic/claude-haiku-4.5",
+  "model": "anthropic/claude-haiku-4-5",
   // === TUI ===
   "tui": {
     "scroll_acceleration": {

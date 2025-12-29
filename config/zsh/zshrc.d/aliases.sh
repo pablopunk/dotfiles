@@ -36,10 +36,7 @@ alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'
 # opencode
 alias oc="opencode"
-alias gpt4mini='oc run -m openrouter/openai/gpt-4.1-mini --agent build "$@"'
 alias gpt5='oc run -m openrouter/openai/gpt-5 --agent build "$@"'
 alias gpt5mini='oc run -m openrouter/openai/gpt-5-mini --agent build "$@"'
-alias gpt5codex='oc run -m openrouter/openai/gpt-5-codex --agent build "$@"'
-alias claudesonnet45='oc run -m openrouter/anthropic/claude-sonnet-4.5 --agent build "$@"'
-alias gemini25flash='oc run -m openrouter/google/gemini-2.5-flash --agent build "$@"'
-alias gemini25pro='oc run -m openrouter/google/gemini-2.5-pro --agent build "$@"'
+alias haiku='oc run -m openrouter/anthropic/claude-haiku-4-5 --agent build "$@"'
+alias gemini3flash='oc run -m openrouter/google/gemini-3-flash --agent build "$@"'

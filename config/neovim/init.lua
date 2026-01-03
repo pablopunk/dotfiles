@@ -333,7 +333,7 @@ local function telescope()
   add("nvim-telescope/telescope.nvim")
   require("telescope").setup({
     defaults = {
-      file_ignore_patterns = { ".git", "node_modules/" },
+      file_ignore_patterns = { ".git/", "node_modules/" },
       path_display = { "truncate" },
       layout_strategy = "vertical",
       layout_config = {

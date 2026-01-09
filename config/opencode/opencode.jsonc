@@ -5,8 +5,7 @@
   "agent": {
     "plan": {
       "tools": {
-        "write": false,
-        "bash": false
+        "write": false
       }
     }
   },
@@ -61,6 +60,11 @@
       "oauth": {
         "scope": "tools:read"
       }
+    },
+    "grep.app": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
     }
   }
 }

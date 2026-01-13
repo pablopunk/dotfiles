@@ -9,4 +9,6 @@ window-padding-x = 12
 window-padding-y = 12
 # window-decoration = auto
 # macos-titlebar-style = hidden
-keybind = shift+enter=text:\n
+
+# fix for opencode https://github.com/anomalyco/opencode/issues/4046#issuecomment-3717801839
+keybind = shift+enter=text:\x1b\r

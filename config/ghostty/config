@@ -1,7 +1,7 @@
 font-family = JetBrains Mono
 font-size = 15
 
-theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+theme = light:Catppuccin Latte,dark:Cutie Pro
 
 background-opacity = 0.8
 background-blur-radius = 14

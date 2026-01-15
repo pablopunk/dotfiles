@@ -706,41 +706,222 @@ local function lsp()
   require("mason").setup({})
   require("mason-lspconfig").setup({
     ensure_installed = {
+      -- General
       "bashls",
       "jsonls",
       "html",
       "vimls",
       "lua_ls",
-      "astro",
-      "biome",
-      "eslint",
-      "vtsls",
+      -- JavaScript/TypeScript
+      "vtsls", -- Modern TS/JS server (replaces tsserver)
+      "eslint", -- ESLint language server
+      "biome", -- Biome language server (linter + formatter)
+      -- Frameworks
+      "astro", -- Astro support
+      "tailwindcss", -- Tailwind CSS completions
+      -- Go
       "gopls",
     },
   })
 
-  -- Shared config for all LSP servers
+  -- Shared config for ALL LSP servers
   vim.lsp.config("*", {
-    root_markers = { ".git" },
+    -- Root directory markers - LSP will search upwards for these files
+    -- Priority: first match wins, nested arrays = equal priority
+    root_markers = {
+      { "package.json", "tsconfig.json", "jsconfig.json" }, -- JS/TS projects
+      { "biome.json", ".eslintrc.js", ".eslintrc.json" }, -- Linter configs
+      { "tailwind.config.js", "tailwind.config.ts" }, -- Tailwind projects
+      ".git", -- Fallback to git root
+    },
     capabilities = {
       general = {
-        positionEncodings = { "utf-16" }, -- consistent encoding for all clients
+        positionEncodings = { "utf-16" }, -- Consistent encoding for all clients
+      },
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true, -- Watch file changes
+        },
       },
     },
   })
 
-  -- Server-specific configs
+  -- TypeScript/JavaScript (vtsls) - Modern TS/JS language server
+  -- Full-stack React + Node development with auto-imports and inlay hints
+  vim.lsp.config("vtsls", {
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+    settings = {
+      vtsls = {
+        -- Auto-imports configuration
+        autoUseWorkspaceTsdk = true,
+        experimental = {
+          completion = {
+            enableServerSideFuzzyMatch = true,
+          },
+        },
+      },
+      typescript = {
+        -- Inlay hints for parameters and types
+        inlayHints = {
+          includeInlayParameterNameHints = "all", -- Show all parameter names
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+        -- Better import sorting
+        preferences = {
+          importModuleSpecifier = "non-relative",
+          includePackageJsonAutoImports = "auto",
+        },
+        -- Performance: faster project loading
+        tsserver = {
+          maxTsServerMemory = 8192, -- 8GB max memory for TS server
+        },
+        -- Enable suggestions for completing JSDoc comments
+        suggest = {
+          completeFunctionCalls = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+        preferences = {
+          importModuleSpecifier = "non-relative",
+        },
+        suggest = {
+          completeFunctionCalls = true,
+        },
+      },
+    },
+  })
+
+  -- ESLint - Code actions and auto-fix
+  vim.lsp.config("eslint", {
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue",
+      "astro",
+    },
+    settings = {
+      -- Run eslint on save via code actions
+      codeAction = {
+        disableRuleComment = {
+          enable = true,
+          location = "separateLine",
+        },
+        showDocumentation = {
+          enable = true,
+        },
+      },
+      -- Auto-fix on save will be handled by conform.nvim
+      -- but code actions are still available
+      codeActionOnSave = {
+        enable = false, -- Disabled because we use conform.nvim
+        mode = "all",
+      },
+      format = false, -- Let conform.nvim handle formatting
+      quiet = false, -- Show all ESLint errors
+      onIgnoredFiles = "off",
+    },
+  })
+
+  -- Tailwind CSS - Class name completions in JSX/TSX
+  vim.lsp.config("tailwindcss", {
+    filetypes = {
+      "html",
+      "css",
+      "scss",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue",
+      "astro",
+      "markdown",
+    },
+    settings = {
+      tailwindCSS = {
+        -- Support class attributes in JSX
+        classAttributes = {
+          "class",
+          "className",
+          "class:list",
+          "classList",
+          "ngClass",
+        },
+        -- Experimental features
+        experimental = {
+          classRegex = {
+            -- Match Tailwind classes in template literals
+            { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+            { "cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+            { "clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+          },
+        },
+        -- Enable linting
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning",
+        },
+        validate = true,
+      },
+    },
+  })
+
+  -- Lua - Neovim Lua development
   vim.lsp.config("lua_ls", {
     settings = {
       Lua = {
-        diagnostics = { globals = { "vim" } },
-        hint = { enable = true },
-        workspace = { checkThirdParty = false },
+        runtime = {
+          version = "LuaJIT",
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+        hint = {
+          enable = true, -- Inlay hints for Lua
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+            -- You can add more paths here if needed
+          },
+        },
+        telemetry = {
+          enable = false,
+        },
       },
     },
   })
 
-  -- Enable all servers
+  -- Enable All Servers
   vim.lsp.enable({
     "bashls",
     "jsonls",
@@ -751,22 +932,36 @@ local function lsp()
     "biome",
     "eslint",
     "vtsls",
+    "tailwindcss",
     "gopls",
   })
 
-  -- Use mini.completion's omnifunc instead of the built-in LSP one
+  -- Runs every time an LSP client attaches to a buffer
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client then
-        vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
+      if not client then
+        return
+      end
+
+      -- Use mini.completion's omnifunc instead of the built-in LSP one
+      vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+
+      -- Disable LSP formatting (we use conform.nvim instead)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+
+      -- Enable inlay hints by default (toggle with <leader>lh)
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
       end
     end,
   })
 
-  -- Keymaps (K for hover is now a built-in default)
+  -- ============================================================================
+  -- Keymaps
+  -- ============================================================================
+  -- Diagnostics
   map("n", "E", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
   map("n", "]d", function()
     vim.diagnostic.jump({ count = 1 })
@@ -776,14 +971,32 @@ local function lsp()
     vim.diagnostic.jump({ count = -1 })
     vim.cmd("normal! zz")
   end, { desc = "Go to previous diagnostic" })
+
+  -- Code actions
   map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-  -- Override defaults to use Telescope instead of quickfix
+
+  -- Navigation (using Telescope for better UI)
   map("n", "gd", ":Telescope lsp_definitions<cr>zz", { desc = "Go to definition" })
   map("n", "gr", ":Telescope lsp_references<cr>", { desc = "Go to references" })
   map("n", "gi", ":Telescope lsp_implementations<cr>", { desc = "Go to implementations" })
   map("n", "<leader>lo", ":Telescope lsp_document_symbols<cr>", { desc = "Document symbols" })
   map("n", "<leader>lO", ":Telescope lsp_workspace_symbols<cr>", { desc = "Workspace symbols" })
+
+  -- Refactoring
   map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+
+  -- TypeScript/JavaScript specific: Organize imports
+  map("n", "<leader>oi", function()
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = {
+        only = { "source.organizeImports" },
+        diagnostics = {},
+      },
+    })
+  end, { desc = "Organize imports (TS/JS)" })
+
+  -- LSP control
   map("n", "<leader>ls", ":lua vim.lsp.enable(vim.bo.filetype)<cr>", { desc = "Start LSP" })
   map("n", "<leader>lx", function()
     vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
@@ -792,7 +1005,9 @@ local function lsp()
     vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
     vim.cmd("edit")
   end, { desc = "Restart LSP" })
-  map("n", "<leader>li", ":checkhealth vim.lsp<cr>", { desc = "Info LSP" })
+  map("n", "<leader>li", ":checkhealth vim.lsp<cr>", { desc = "LSP info" })
+
+  -- Inlay hints toggle
   map("n", "<leader>lh", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
   end, { desc = "Toggle inlay hints (LSP)" })

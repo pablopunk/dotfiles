@@ -223,6 +223,9 @@ automatically-unhide-macos-hidden-apps = false
   if.app-name-regex-substring = "Slack"
   run = 'move-node-to-workspace 3'
 [[on-window-detected]]
+  if.app-name-regex-substring = "TickTick"
+  run = 'move-node-to-workspace 3'
+[[on-window-detected]]
   if.app-name-regex-substring = "Missive"
   run = 'move-node-to-workspace 4'
 [[on-window-detected]]

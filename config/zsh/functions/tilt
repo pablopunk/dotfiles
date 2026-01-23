@@ -1,0 +1,4 @@
+# vim:fileencoding=utf-8:ft=zsh
+[[ "$#" -eq 1 && "$1" == "up" ]] && { wait_for_docker; command tilt up; return; }
+[[ "$#" -ge 2 && "$1" == "trigger" ]] && { shift; for arg in "$@"; do command tilt enable "$arg"; command tilt trigger "$arg"; done; return; }
+command tilt "$@"

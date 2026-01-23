@@ -1,0 +1,2 @@
+# vim:fileencoding=utf-8:ft=zsh
+hyperfine "nvim --headless +qa" --warmup 5

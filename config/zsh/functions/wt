@@ -1,0 +1,108 @@
+# vim:fileencoding=utf-8:ft=zsh
+# Git worktree management function
+local delete_mode=false
+local force_mode=false
+local search_term=""
+local selected_worktree=""
+local selected_path=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -d)
+      delete_mode=true
+      shift
+      ;;
+    -f)
+      force_mode=true
+      shift
+      ;;
+    -df|-fd)
+      delete_mode=true
+      force_mode=true
+      shift
+      ;;
+    *)
+      search_term="$1"
+      shift
+      ;;
+  esac
+done
+
+git_root="$(git worktree list | head -1 | awk '{print $1}')"
+if [[ -z "$git_root" ]]; then
+  echo "Error: Not in a git repository"
+  return 1
+fi
+repo_name="$(basename "$git_root")"
+worktree_base="$HOME/.worktrees/$repo_name"
+mkdir -p "$worktree_base"
+
+# Cache worktree list for efficiency
+local worktree_list
+worktree_list=$(git worktree list)
+local all_worktrees
+all_worktrees=$(echo "$worktree_list" | awk '{print $3}' | sed 's/\[//' | sed 's/\]//' | sed 's/^$/main/')
+
+if [[ "$delete_mode" == true ]]; then
+  local list_of_worktrees
+  list_of_worktrees=$(echo "$all_worktrees" | grep -v "^main$")
+  selected_worktree="$(printf '%s\n' $list_of_worktrees | sort | uniq | fzf -q "$search_term" --height=10 --reverse)"
+  if [[ -z "$selected_worktree" ]]; then
+    echo "No worktree selected for deletion"
+    return
+  fi
+
+  selected_path=$(echo "$worktree_list" | grep -E "\[$selected_worktree\]" | awk '{print $1}')
+
+  # Attempt to delete worktree
+  if [[ "$force_mode" == true ]]; then
+    if git worktree remove --force "$selected_path"; then
+      echo "Force deleted worktree: $selected_worktree"
+    else
+      echo "Error: Failed to delete worktree: $selected_worktree"
+      return 1
+    fi
+  else
+    if git worktree remove "$selected_path"; then
+      echo "Deleted worktree: $selected_worktree"
+    else
+      echo "Error: Failed to delete worktree: $selected_worktree"
+      echo "Use 'wt -f -d $selected_worktree' to force delete"
+      return 1
+    fi
+  fi
+  return
+fi
+
+# Regular mode - create/switch to worktree
+if [[ -n "$search_term" ]]; then
+  if echo "$all_worktrees" | grep -q "^$search_term$"; then
+    selected_worktree="$search_term"
+  else
+    selected_worktree="$search_term"
+  fi
+else
+  selected_worktree="$(printf '%s\n' $all_worktrees | sort | uniq | fzf --height=10 --reverse)"
+fi
+if [[ -z "$selected_worktree" ]]; then
+  echo "No worktree selected"
+  return
+fi
+
+if [[ "$selected_worktree" == "main" ]]; then
+  selected_path=$(echo "$worktree_list" | awk '$3 == "[main]" {print $1}')
+else
+  selected_path=$(echo "$worktree_list" | grep -E "\[$selected_worktree\]" | awk '{print $1}')
+  if [[ -z "$selected_path" ]]; then
+    # Create new worktree
+    local worktree_dir="$worktree_base/$selected_worktree"
+    if git show-ref --verify --quiet refs/heads/"$selected_worktree"; then
+      git worktree add "$worktree_dir" "$selected_worktree"
+    else
+      git worktree add "$worktree_dir" -b "$selected_worktree"
+    fi
+    selected_path="$worktree_dir"
+  fi
+fi
+cd "$selected_path"

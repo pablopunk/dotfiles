@@ -33,16 +33,17 @@ profiles:
         link:
           "./config/zsh/zshrc": "~/.zshrc"
           "./config/zsh/zimrc": "~/.zimrc"
+          "./config/zsh/functions": "~/.zsh/functions"
           # I could just do "./config/zsh/zshrc.d": "~/.zshrc.d/"
           # But I prefer not to do it because sometimes I just put stuff like secrets.sh
           # in there and I don't want to have to remember to add it to the gitignore
-          "./config/zsh/zshrc.d/aliases.sh": "~/.zshrc.d/aliases.sh"
-          "./config/zsh/zshrc.d/path.sh": "~/.zshrc.d/path.sh"
-          "./config/zsh/zshrc.d/functions.sh": "~/.zshrc.d/functions.sh"
-          "./config/zsh/zshrc.d/zoxide.sh": "~/.zshrc.d/zoxide.sh"
-          "./config/zsh/zshrc.d/java.sh": "~/.zshrc.d/java.sh"
-          "./config/zsh/zshrc.d/completions.sh": "~/.zshrc.d/completions.sh"
-          "./config/zsh/zshrc.d/zsh-ai.sh": "~/.zshrc.d/zsh-ai.sh"
+          "./config/zsh/zshrc.d/00-path.sh": "~/.zshrc.d/00-path.sh"
+          "./config/zsh/zshrc.d/10-aliases.sh": "~/.zshrc.d/10-aliases.sh"
+          "./config/zsh/zshrc.d/20-core-functions.sh": "~/.zshrc.d/20-core-functions.sh"
+          "./config/zsh/zshrc.d/30-completions.sh": "~/.zshrc.d/30-completions.sh"
+          "./config/zsh/zshrc.d/50-zoxide.sh": "~/.zshrc.d/50-zoxide.sh"
+          "./config/zsh/zshrc.d/60-zsh-ai.sh": "~/.zshrc.d/60-zsh-ai.sh"
+          "./config/zsh/zshrc.d/99-java.sh": "~/.zshrc.d/99-java.sh"
         postinstall: |
           [[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
       zsh-ai:
@@ -99,7 +100,7 @@ profiles:
           curl: "curl https://mise.run | sh"
         link:
           "./config/mise/config.toml": "~/.config/mise/config.toml"
-          "./config/zsh/zshrc.d/mise.sh": "~/.zshrc.d/mise.sh"
+          "./config/zsh/zshrc.d/40-mise.sh": "~/.zshrc.d/40-mise.sh"
         postinstall: "cd ~ && mise install"
       editorconfig:
         link:

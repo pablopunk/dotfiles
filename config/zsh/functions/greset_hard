@@ -1,0 +1,4 @@
+# vim:fileencoding=utf-8:ft=zsh
+branch="$(git symbolic-ref --short HEAD)"
+git fetch upstream && \
+  git reset --hard upstream/$branch

@@ -1,0 +1,2 @@
+# vim:fileencoding=utf-8:ft=zsh
+python3 <(curl -sSL https://raw.githubusercontent.com/hyiltiz/vim-plugins-profile/master/vim-plugins-profile.py) nvim

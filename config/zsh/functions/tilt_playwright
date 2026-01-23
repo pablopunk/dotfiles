@@ -1,0 +1,16 @@
+# vim:fileencoding=utf-8:ft=zsh
+for service in \
+  "signup-api" \
+  "localstack" \
+  "panel-core" \
+  "graph-gateway" \
+  "maze-api" \
+  "maze-video-recording-api" \
+  "maze-webapp" \
+  "report-webapp" \
+  "testing-webapp" \
+  "signup-webapp" \
+; do
+  tilt enable "$service"
+  tilt trigger "$service"
+done

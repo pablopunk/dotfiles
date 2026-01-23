@@ -1,0 +1,21 @@
+# vim:fileencoding=utf-8:ft=zsh
+folder=$1
+if [ -z "$folder" ]; then
+  echo "Usage: benchmark_disk <folder>"
+  return 1
+fi
+tempfile="$folder/tempfile_delete_me"
+echo "Benchmarking disk speed in $PWD"
+echo
+echo "WRITING..."
+write_output=$(sudo dd if=/dev/zero of=$tempfile bs=120M count=1 2>&1)
+write_speed=$(echo "$write_output" | grep -o '[0-9]* bytes/sec' | awk '{print $1}')
+write_speed_human=$(echo "scale=2; $write_speed/1024/1024" | bc)
+echo "Write speed: ${write_speed_human} MB/s"
+echo
+echo "READING..."
+read_output=$(sudo dd if=$tempfile of=/dev/zero bs=8k 2>&1)
+read_speed=$(echo "$read_output" | grep -o '[0-9]* bytes/sec' | awk '{print $1}')
+read_speed_human=$(echo "scale=2; $read_speed/1024/1024" | bc)
+echo "Read speed: ${read_speed_human} MB/s"
+sudo rm -f $tempfile

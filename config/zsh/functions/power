@@ -1,0 +1,4 @@
+# vim:fileencoding=utf-8:ft=zsh
+# Linux power management
+sudo cpufreq-set -g performance && \
+  sudo pm-powersave false

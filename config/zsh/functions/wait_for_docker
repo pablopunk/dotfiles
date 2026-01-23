@@ -1,0 +1,32 @@
+# vim:fileencoding=utf-8:ft=zsh
+local docker_app=""
+declare -A app_paths=(
+  ["orbstack"]="/Applications/OrbStack.app"
+  ["podman"]="/Applications/Podman Desktop.app"
+  ["docker"]="/Applications/Docker.app"
+)
+
+# Check for Docker apps *before* waiting
+for app in "orbstack" "podman" "docker"; do
+  if [ -d "${app_paths[$app]}" ]; then
+    docker_app="$app"
+    break
+  fi
+done
+
+# Open the app if found *before* waiting
+if [ -n "$docker_app" ]; then
+  open "${app_paths[$docker_app]}"
+  echo "Opening $docker_app"
+fi
+
+until docker info &> /dev/null; do
+  echo "Waiting for docker to start..."
+  sleep 1
+done
+
+if [[ "$docker_app" == "orbstack" ]]; then
+  docker context use "orbstack"
+else
+  docker context use "default"
+fi

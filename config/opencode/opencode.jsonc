@@ -66,5 +66,6 @@
       "url": "https://mcp.grep.app",
       "enabled": true
     }
-  }
+  },
+  "plugin": ["@mohak34/opencode-notifier@latest"]
 }

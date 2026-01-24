@@ -76,7 +76,7 @@ fi
 # This ensures PATH is set before other configs need it
 ZSHRC_D="${ZDOTDIR:-$HOME}/.zshrc.d"
 [ -d "$ZSHRC_D" ] || mkdir -p "$ZSHRC_D"
-for rc in "$ZSHRC_D"/*.sh(N); do
+for rc in "$ZSHRC_D"/*.sh(N-.); do
   source "$rc"
 done
 unset rc

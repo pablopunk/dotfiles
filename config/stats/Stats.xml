@@ -115,7 +115,7 @@
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>327</real>
+	<real>365</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
@@ -213,21 +213,21 @@
 	<true/>
 	<key>Sensors_widget</key>
 	<string></string>
+	<key>remote_id</key>
+	<string>B4C8BE77-DA58-4591-AB84-230F0922777E</string>
 	<key>runAtLoginInitialized</key>
 	<true/>
 	<key>setupProcess</key>
 	<true/>
 	<key>support_ts</key>
-	<integer>1763828663</integer>
+	<integer>1767087833</integer>
 	<key>telemetry</key>
 	<false/>
-	<key>telemetry_id</key>
-	<string>B4C8BE77-DA58-4591-AB84-230F0922777E</string>
 	<key>temperature_units</key>
 	<string>celsius</string>
 	<key>updater_check_ts</key>
-	<integer>1764066701</integer>
+	<integer>1769424413</integer>
 	<key>version</key>
-	<string>2.11.61</string>
+	<string>2.11.64</string>
 </dict>
 </plist>

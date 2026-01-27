@@ -713,7 +713,7 @@ local function lsp()
       "vimls",
       "lua_ls",
       -- JavaScript/TypeScript
-      "vtsls", -- Modern TS/JS server (replaces tsserver)
+      "tsgo", -- Experimental Go-based TS server (better performance, monorepo support)
       "eslint", -- ESLint language server
       "biome", -- Biome language server (linter + formatter)
       -- Frameworks
@@ -746,74 +746,62 @@ local function lsp()
     },
   })
 
-  -- TypeScript/JavaScript (vtsls) - Modern TS/JS language server
-  -- Full-stack React + Node development with auto-imports and inlay hints
-  vim.lsp.config("vtsls", {
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
-    settings = {
-      vtsls = {
-        -- Auto-imports configuration
-        autoUseWorkspaceTsdk = true,
-        experimental = {
-          completion = {
-            enableServerSideFuzzyMatch = true,
-          },
-        },
-      },
-      typescript = {
-        -- Inlay hints for parameters and types
-        inlayHints = {
-          includeInlayParameterNameHints = "all", -- Show all parameter names
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-        },
-        -- Better import sorting
-        preferences = {
-          importModuleSpecifier = "non-relative",
-          includePackageJsonAutoImports = "auto",
-        },
-        -- Performance: faster project loading
-        tsserver = {
-          maxTsServerMemory = 8192, -- 8GB max memory for TS server
-        },
-        -- Enable suggestions for completing JSDoc comments
-        suggest = {
-          completeFunctionCalls = true,
-        },
-      },
-      javascript = {
-        inlayHints = {
-          includeInlayParameterNameHints = "all",
-          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayVariableTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayEnumMemberValueHints = true,
-        },
-        preferences = {
-          importModuleSpecifier = "non-relative",
-        },
-        suggest = {
-          completeFunctionCalls = true,
-        },
-      },
-    },
-  })
+   -- TypeScript/JavaScript (tsgo) - Experimental Go-based TS server
+   -- Better performance and native monorepo support. Drop-in replacement for vtsls.
+   -- Install with: npm install -g @typescript/native-preview
+   vim.lsp.config("tsgo", {
+     filetypes = {
+       "javascript",
+       "javascriptreact",
+       "javascript.jsx",
+       "typescript",
+       "typescriptreact",
+       "typescript.tsx",
+     },
+     settings = {
+       typescript = {
+         -- Inlay hints for parameters and types
+         inlayHints = {
+           includeInlayParameterNameHints = "all",
+           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+           includeInlayFunctionParameterTypeHints = true,
+           includeInlayVariableTypeHints = true,
+           includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+           includeInlayPropertyDeclarationTypeHints = true,
+           includeInlayFunctionLikeReturnTypeHints = true,
+           includeInlayEnumMemberValueHints = true,
+         },
+         -- Better import sorting
+         preferences = {
+           importModuleSpecifier = "non-relative",
+           includePackageJsonAutoImports = "auto",
+         },
+         -- Enable suggestions for completing JSDoc comments
+         suggest = {
+           completeFunctionCalls = true,
+         },
+       },
+       javascript = {
+         inlayHints = {
+           includeInlayParameterNameHints = "all",
+           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+           includeInlayFunctionParameterTypeHints = true,
+           includeInlayVariableTypeHints = true,
+           includeInlayPropertyDeclarationTypeHints = true,
+           includeInlayFunctionLikeReturnTypeHints = true,
+           includeInlayEnumMemberValueHints = true,
+         },
+         preferences = {
+           importModuleSpecifier = "non-relative",
+         },
+         suggest = {
+           completeFunctionCalls = true,
+         },
+       },
+     },
+   })
 
-  -- ESLint - Code actions and auto-fix
+   -- ESLint - Code actions and auto-fix
   vim.lsp.config("eslint", {
     filetypes = {
       "javascript",
@@ -921,20 +909,20 @@ local function lsp()
     },
   })
 
-  -- Enable All Servers
-  vim.lsp.enable({
-    "bashls",
-    "jsonls",
-    "html",
-    "vimls",
-    "lua_ls",
-    "astro",
-    "biome",
-    "eslint",
-    "vtsls",
-    "tailwindcss",
-    "gopls",
-  })
+   -- Enable All Servers
+   vim.lsp.enable({
+     "bashls",
+     "jsonls",
+     "html",
+     "vimls",
+     "lua_ls",
+     "astro",
+     "biome",
+     "eslint",
+     "tsgo",
+     "tailwindcss",
+     "gopls",
+   })
 
   -- Runs every time an LSP client attaches to a buffer
   vim.api.nvim_create_autocmd("LspAttach", {

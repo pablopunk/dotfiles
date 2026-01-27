@@ -67,5 +67,22 @@
       "enabled": true
     }
   },
-  "plugin": ["@mohak34/opencode-notifier@latest"]
+  "plugin": ["@mohak34/opencode-notifier@latest"],
+  // "provider": {
+  //   "ollama": {
+  //     "npm": "@ai-sdk/openai-compatible",
+  //     "name": "Ollama (local)",
+  //     "options": {
+  //       "baseURL": "http://{env:OLLAMA_IP}:11434/v1"
+  //     },
+  //     "models": {
+  //       "llama3.2": {
+  //         "name": "Llama 3.2"
+  //       },
+  //       "qwen3": {
+  //         "name": "Qwen 3"
+  //       }
+  //     }
+  //   }
+  // }
 }

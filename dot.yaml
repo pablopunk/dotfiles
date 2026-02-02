@@ -110,9 +110,9 @@ profiles:
           "./config/binaries": "~/.bin"
       opencode:
         install:
-          curl: "XDG_BIN_DIR=$HOME/.local/bin VERSION=latest curl -fsSL https://opencode.ai/install | bash"
+          bun: "bun i -g opencode-ai@beta"
         uninstall:
-          curl: "rm -rf $HOME/.local/bin/opencode"
+          bun: "bun rm -g opencode-ai@beta"
         link:
           "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
     apps:

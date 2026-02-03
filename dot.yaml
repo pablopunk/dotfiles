@@ -105,6 +105,17 @@ profiles:
       editorconfig:
         link:
           "./config/editorconfig/editorconfig": "~/.editorconfig"
+      ripgrep:
+        install:
+          brew: "brew install ripgrep"
+          apt: "sudo apt install -y ripgrep"
+          dnf: "sudo dnf install -y ripgrep"
+        uninstall:
+          brew: "brew uninstall ripgrep"
+          apt: "sudo apt purge -y ripgrep"
+          dnf: "sudo dnf remove -y ripgrep"
+        link:
+          "./config/ripgrep/ripgreprc": "~/.ripgreprc"
       binaries:
         link:
           "./config/binaries": "~/.bin"

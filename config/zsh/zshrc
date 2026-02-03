@@ -94,4 +94,8 @@ export EDITOR="nvim"
 # Prompt colors (for custom prompts)
 export ON_COLOR=magenta
 export OFF_COLOR=cyan
+
+# Ripgrep config
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 # }}} End Environment

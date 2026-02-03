@@ -355,12 +355,6 @@ local function telescope()
       find_files = {
         hidden = true,
       },
-      grep_string = {
-        additional_args = { "--hidden" },
-      },
-      live_grep = {
-        additional_args = { "--hidden" },
-      },
     },
   })
   map("n", "<leader>ff", '<cmd>lua require("telescope.builtin").find_files()<cr>', { desc = "Find files" })
@@ -369,12 +363,7 @@ local function telescope()
   map("n", "<leader>fgg", ":Telescope git_status<cr>", { desc = "Find modified files (git)" })
   map("n", "<leader>fgh", telescope_pull_request_files, { desc = "Pull request files" })
   map("n", "<leader>fh", '<cmd>lua require("telescope.builtin").help_tags()<cr>', { desc = "Help tags" })
-  map(
-    "n",
-    "<leader>fW",
-    '<cmd>lua require("telescope.builtin").grep_string({ hidden = true })<cr>',
-    { desc = "Grep Word" }
-  )
+  map("n", "<leader>fW", '<cmd>lua require("telescope.builtin").grep_string()<cr>', { desc = "Grep Word" })
   map(
     "n",
     "<leader>fr",

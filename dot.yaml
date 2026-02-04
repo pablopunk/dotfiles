@@ -126,6 +126,11 @@ profiles:
           bun: "bun rm -g opencode-ai@beta"
         link:
           "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
+      pi:
+        install:
+          bun: "bun i -g @mariozechner/pi-coding-agent"
+        uninstall:
+          bun: "bun rm -g @mariozechner/pi-coding-agent"
     apps:
       cursor:
         os: ["mac"]

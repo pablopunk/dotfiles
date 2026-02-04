@@ -99,3 +99,11 @@ export OFF_COLOR=cyan
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # }}} End Environment
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/pablopunk/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# bun completions
+[ -s "/Users/pablopunk/.bun/_bun" ] && source "/Users/pablopunk/.bun/_bun"

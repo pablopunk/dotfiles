@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
+  "theme": "ayu",
   "autoupdate": true,
   // === Models ===
   "model": "anthropic/claude-haiku-4-5",
@@ -68,21 +68,67 @@
     }
   },
   "plugin": ["@mohak34/opencode-notifier@latest"],
-  // "provider": {
-  //   "ollama": {
-  //     "npm": "@ai-sdk/openai-compatible",
-  //     "name": "Ollama (local)",
-  //     "options": {
-  //       "baseURL": "http://{env:OLLAMA_IP}:11434/v1"
-  //     },
-  //     "models": {
-  //       "llama3.2": {
-  //         "name": "Llama 3.2"
-  //       },
-  //       "qwen3": {
-  //         "name": "Qwen 3"
-  //       }
-  //     }
-  //   }
-  // }
+  "provider": {
+    // "google": {"models":{
+    //     "google/gemini-3-flash-preview": {
+    //       "name": "Gemini 3 Flash"
+    //     }
+    // }},
+    // "openai": {"models":{
+    //     "openai/gpt-5.2-codex": {
+    //       "name": "GPT-5.2 Codex"
+    //     }
+    // }},
+    // "anthropic": {
+    //   "models": {
+    //     "claude-haiku-4-5": {
+    //       "name": "Claude Haiku 4.5"
+    //     },
+    //     "claude-sonnet-4-5": {
+    //       "name": "Claude Haiku 4.5"
+    //     },
+    //     "claude-opus-4-5": {
+    //       "name": "Claude Haiku 4.5"
+    //     }
+    //   }
+    // },
+    // "opencode": {
+    //   "models": {
+    //     "kimi-k2.5-free": {
+    //       "name": "Kimi K2.5 Free"
+    //     }
+    //    }
+    // },
+    // "openrouter": {
+    //   "models": {
+    //     "moonshotai/kimi-k2.5": {
+    //       "name": "Kimi K2.5"
+    //     },
+    //     "google/gemini-3-flash-preview": {
+    //       "name": "Gemini 3 Flash"
+    //     },
+    //     "google/gemini-3-pro-preview": {
+    //       "name": "Gemini 3 Pro"
+    //     },
+    //     "openai/gpt-5.2-codex": {
+    //       "name": "GPT-5.2 Codex"
+    //     }
+    //   }
+    // },
+    "lm-studio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        // "zai-org/glm-4.7-flash": {
+        //   "name": "GLM 4.7 Flash"
+        // },
+        "openai/gpt-oss-20b": {
+          "name": "GPT-OSS 20B"
+        }
+      }
+    }
+  }
 }

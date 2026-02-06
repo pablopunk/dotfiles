@@ -476,6 +476,20 @@ local function claude()
   require("claude-code").setup()
 end
 
+local function pi_nvim()
+  -- Local plugin - no need to add() since it's in lua/
+  require("pi").setup({
+    provider = "openrouter",
+    model = "moonshotai/kimi-k2.5",
+  })
+  map("n", "<leader>ai", function()
+    require("pi").prompt_with_buffer()
+  end, { desc = "Ask pi (buffer context)" })
+  map("v", "<leader>ai", function()
+    require("pi").prompt_with_selection()
+  end, { desc = "Ask pi (selection context)" })
+end
+
 local function sidekick()
   add("folke/sidekick.nvim")
   require("sidekick").setup({})
@@ -489,6 +503,7 @@ end
 local function ai()
   supermaven()
   opencode()
+  pi_nvim()
   -- claude()
   -- codex()
   -- avante()

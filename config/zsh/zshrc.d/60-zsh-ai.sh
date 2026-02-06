@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:ft=zsh
 unsetopt noclobber  # Allow overwriting files with >
-export ZSH_AI_PROVIDER="openai"
-export ZSH_AI_OPENAI_MODEL="gpt-4.1-nano"
+export ZSH_AI_PROVIDER="anthropic"
+export ZSH_AI_OPENAI_MODEL="claude-haiku-4-5"
 
 # Hardcoded brew prefix for speed (avoids ~22ms `brew --prefix` call)
 # Update this path if homebrew location changes

@@ -502,8 +502,8 @@ end
 
 local function ai()
   supermaven()
-  opencode()
   pi_nvim()
+  -- opencode()
   -- claude()
   -- codex()
   -- avante()

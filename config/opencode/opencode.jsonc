@@ -67,7 +67,6 @@
       }
     }
   },
-  "plugin": ["@mohak34/opencode-notifier@latest"],
   "provider": {
     // "google": {"models":{
     //     "google/gemini-3-flash-preview": {

@@ -477,7 +477,8 @@ local function claude()
 end
 
 local function pi_nvim()
-  -- Local plugin - no need to add() since it's in lua/
+  -- add("pablopunk/pi.nvim")
+  add({ source = "~/src/pi.nvim" })
   require("pi").setup({
     provider = "openrouter",
     model = "moonshotai/kimi-k2.5",

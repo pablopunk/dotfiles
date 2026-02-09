@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-top_level_dirs="$HOME/src $HOME/src/maze $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME"
+top_level_dirs="$HOME/src $HOME/src/maze $HOME/src/maze/monorepo-worktrees $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME"
 recursive_dirs="$HOME/.worktrees"
 
 for dir in $top_level_dirs $recursive_dirs; do

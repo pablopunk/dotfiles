@@ -1,7 +1,6 @@
 # vim:fileencoding=utf-8:ft=bash:foldmethod=marker
 alias g=git
 alias gst='git status'
-alias gp='git push'
 alias gl='git pull'
 alias gf='git fetch'
 alias glog='git log --oneline --decorate'

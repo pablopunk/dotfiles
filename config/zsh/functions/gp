@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# gp - git push wrapper that forces --force-with-lease over --force
+
+detect_force=false
+new_args=()
+
+# Check for --force or -f in args
+for arg in "$@"; do
+  if [[ "$arg" == "--force" ]] || [[ "$arg" == "-f" ]]; then
+    detect_force=true
+    new_args+=("--force-with-lease")
+  else
+    new_args+=("$arg")
+  fi
+done
+
+if $detect_force; then
+  echo -e "\033[33m⚠️ Detected --force, using --force-with-lease instead\033[0m"
+fi
+
+git push "${new_args[@]}"

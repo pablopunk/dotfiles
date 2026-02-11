@@ -24,7 +24,10 @@ cd "$HOME/.dotfiles"
 
 # Show available profiles
 echo "Available profiles:"
-dot --profiles 2>/dev/null || exit 1
+dot --profiles || {
+  echo -e "${RED}✗${NC} Failed to list profiles"
+  exit 1
+}
 
 echo ""
 read -p "Profiles to install (empty for default): " -r profiles_input

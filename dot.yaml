@@ -171,6 +171,7 @@ profiles:
           brew: "brew install battery"
         postinstall: "open /Applications/Battery.app"
       ghostty:
+        os: ["mac"]
         install:
           brew: "brew install ghostty"
           dnf: "sudo dnf install -y ghostty"

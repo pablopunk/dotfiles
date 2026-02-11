@@ -7,28 +7,14 @@
   width="900px" />
 </p>
 
-## 👀 Requirements
-
-Install [dot](https://github.com/pablopunk/dot)
-
-### Option 1: Using curl
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
-```
-
-### Option 2: Using Homebrew
-
-```bash
-brew install pablopunk/brew/dot
-```
-
 ## 🚀 Install
 
-I usually keep the repo in `~/.dotfiles`:
+Run the install script:
 
 ```bash
-git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
-cd ~/.dotfiles
-dot
+curl -fsSL https://raw.githubusercontent.com/pablopunk/dotfiles/main/install.sh | bash
 ```
+
+The script will:
+- Install [dot](https://github.com/pablopunk/dot)
+- Clone the dotfiles repo to `~/.dotfiles`

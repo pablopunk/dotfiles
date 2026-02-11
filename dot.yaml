@@ -238,28 +238,29 @@ profiles:
         os: ["mac"]
         install:
           brew: "brew install missive"
-    ricing:
-      hyprland:
-        os: ["linux"]
-        install:
-          dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
-        link:
-          "./config/hypr": "~/.config/hypr"
-          "./config/ulauncher/": "~/.config/ulauncher"
-      waybar:
-        os: ["linux"]
-        install:
-          dnf: "sudo dnf install -y waybar"
-        link:
-          "./config/waybar": "~/.config/waybar"
-      xremap:
-        os: ["linux"]
-        install:
-          cargo: "cargo install xremap --features hypr"
-        uninstall:
-          cargo: "cargo uninstall xremap"
-        link:
-          "./config/xremap/config.yml": "~/.config/xremap/config.yml"
+
+  rice:
+    hyprland:
+      os: ["linux"]
+      install:
+        dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
+      link:
+        "./config/hypr": "~/.config/hypr"
+        "./config/ulauncher/": "~/.config/ulauncher"
+    waybar:
+      os: ["linux"]
+      install:
+        dnf: "sudo dnf install -y waybar"
+      link:
+        "./config/waybar": "~/.config/waybar"
+    xremap:
+      os: ["linux"]
+      install:
+        cargo: "cargo install xremap --features hypr"
+      uninstall:
+        cargo: "cargo uninstall xremap"
+      link:
+        "./config/xremap/config.yml": "~/.config/xremap/config.yml"
 
   work:
     cloudflare-warp:

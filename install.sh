@@ -12,11 +12,11 @@ if [[ -d "$HOME/.dotfiles" ]]; then
 fi
 
 # Install dot
-if ! command -v dot &> /dev/null; then
+DOT_BIN="$HOME/.local/bin/dot"
+if [[ ! -f "$DOT_BIN" ]]; then
   curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
-  # dot might have been installed to ~/.local/bin, add to PATH
-  export PATH="$HOME/.local/bin:$PATH"
 fi
+export PATH="$HOME/.local/bin:$PATH"
 
 # Clone dotfiles
 git clone https://github.com/pablopunk/dotfiles.git ~/.dotfiles > /dev/null 2>&1
@@ -24,7 +24,7 @@ cd "$HOME/.dotfiles"
 
 # Show available profiles
 echo "Available profiles:"
-dot --profiles || {
+"$DOT_BIN" --profiles || {
   echo -e "${RED}✗${NC} Failed to list profiles"
   exit 1
 }
@@ -33,9 +33,11 @@ echo ""
 read -p "Profiles to install (empty for default): " -r profiles_input
 
 # Run dot
-dot_cmd="dot"
-[[ -n "$profiles_input" ]] && dot_cmd="dot $profiles_input"
-$dot_cmd
+if [[ -n "$profiles_input" ]]; then
+  "$DOT_BIN" $profiles_input
+else
+  "$DOT_BIN"
+fi
 
 # Set zsh as default
 zsh_path=$(command -v zsh)

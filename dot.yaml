@@ -179,10 +179,12 @@ profiles:
           dnf: "sudo dnf remove -y ghostty"
         link:
           "./config/ghostty/config": "~/.config/ghostty/config"
-      homerow:
+      shortcat:
         os: ["mac"]
         install:
-          brew: "brew install homerow"
+          brew: "brew install shortcat"
+        uninstall:
+          brew: "brew uninstall shortcat"
       karabiner:
         os: ["mac"]
         install:

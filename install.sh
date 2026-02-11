@@ -30,7 +30,7 @@ echo "Available profiles:"
 }
 
 echo ""
-read -p "Profiles to install (empty for default): " -r profiles_input
+read -p "Profiles to install (empty for default): " -r profiles_input < /dev/tty
 
 # Run dot
 if [[ -n "$profiles_input" ]]; then

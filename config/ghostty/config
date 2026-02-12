@@ -1,10 +1,10 @@
 font-family = JetBrains Mono
 font-size = 15
 
-theme = light:Catppuccin Latte,dark:Solarized Osaka Night
+theme = light:Catppuccin Latte,dark:Ayu
 
-background-opacity = 0.8
-background-blur-radius = 14
+background-opacity = 0.85
+background-blur-radius = 10
 window-padding-x = 12
 window-padding-y = 12
 # window-decoration = auto

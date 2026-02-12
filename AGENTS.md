@@ -61,18 +61,26 @@ nvim --version                    # Verify editor config loads
 **YAML Structure (`dot.yaml`):**
 ```yaml
 profiles:
-  "*":                    # Always installed
-    app_name:
-      os: ["mac"]          # Platform restrictions (optional)
-      install:
-        brew: "brew install pkg"
-        apt: "sudo apt install -y pkg"
-      link:
-        "./config/path": "~/target"
-      postinstall: |       # Multi-line commands
-        command1
-        command2
-      postlink: "single command"
+  "*":                    # Always installed on every machine
+    - app_name
+    - another_app
+
+  work:                   # Only on your work computer
+    - slack
+    - docker
+
+config:
+  app_name:
+    os: ["mac"]           # Platform restrictions (optional)
+    install:
+      brew: "brew install pkg"
+      apt: "sudo apt install -y pkg"
+    link:
+      "./config/path": "~/target"
+    postinstall: |        # Multi-line commands
+      command1
+      command2
+    postlink: "single command"
 ```
 
 **Import/Path Conventions:**
@@ -101,11 +109,14 @@ profiles:
 ## TL;DR - Quick Commands
 
 ```bash
-dot                    # Install default "*" profile (runs on all machines)
-dot --dry-run          # Preview changes without applying
-dot --profiles         # List all available profiles
-dot work               # Install a specific profile
-dot -v --dry-run work  # Verbose preview
+dot                           # Install default "*" profile (runs on all machines)
+dot --dry-run                 # Preview changes without applying
+dot --profiles                # List all available profiles
+dot work                      # Install "*" profile + "work" profile
+dot work laptop               # Install "*" + "work" + "laptop" profiles
+dot work git                  # Install "*" + "work" + any tool matching "git"
+dot -v --dry-run work         # Verbose preview
+dot --dry-run -v              # Verbose dry-run of default profile
 ```
 
 ## Purpose
@@ -123,24 +134,44 @@ dot -v --dry-run work  # Verbose preview
 
 ## Profile Strategy
 
+Profiles are simple lists of tool names defined in the `profiles` section. Each tool has its configuration in the `config` section.
+
 ### `"*"` Profile (Always Installs)
 
 Contains tools and configs needed on **every machine**:
-- **CLI tools**: Git, Zsh, Tmux, Vim, Neovim, Mise, etc.
-- **Cross-platform apps**: Ghostty (terminal), editors
-- **Essential configs**: Gitconfig, shell aliases, keybindings, wallpapers
+- **CLI tools**: git, zsh, tmux, vim, neovim, mise, etc.
+- **Cross-platform apps**: ghostty (terminal), editors
+- **Essential configs**: gitconfig, shell aliases, keybindings, wallpapers
 
 ### Named Profiles (Machine-Specific)
 
-- **`work`**: Tools for work machines (Slack, Zoom, Cloudflare Warp, etc.)
+- **`work`**: Tools for work machines (slack, zoom, cloudflare-warp, docker, etc.)
+- **`rice`**: Linux desktop environment tools (hyprland, waybar, xremap, etc.)
 - Add more profiles as needed for other machine types (e.g., `laptop`, `server`, etc.)
+
+### Nested Profiles (Profile References)
+
+Profiles can reference other profiles to avoid duplication:
+```yaml
+profiles:
+  shells:      # Grouping profile
+    - bash
+    - zsh
+    - fish
+  
+  work:        # References another profile
+    - shells
+    - docker
+    - slack
+```
 
 ### How to Use
 
 ```bash
 dot              # Install all tools from "*" profile
 dot work         # Install "*" profile + "work" profile (cumulative)
-dot work laptop  # Install "*" + "work" + "laptop" profiles
+dot work laptop  # Install "*" + "work" + "laptop" profiles (all combined)
+dot work git     # Install "*" + "work" profiles, plus any tool matching "git"
 ```
 
 ## Common Operations
@@ -160,11 +191,27 @@ dot --dry-run -v work     # Verbose (show each step)
 - **Window managers:** Restart or use reload hotkey (Super+Shift+E for Hyprland)
 - **Binaries:** Test with `~/.bin/script_name` after linking
 
-### Adding Components
+### Adding Tools/Components
 
 1. Create `config/myapp/` with config files
-2. Add entry to `dot.yaml` with install/link/postinstall sections
-3. Run `dot --dry-run` to verify, then `dot` to apply
+2. Add the tool name to a profile in `dot.yaml`:
+   ```yaml
+   profiles:
+     "*":
+       - myapp
+   ```
+3. Define the tool's configuration in the `config` section:
+   ```yaml
+   config:
+     myapp:
+       install:
+         brew: "brew install myapp"
+         apt: "sudo apt install -y myapp"
+       link:
+         "./config/myapp/myapprc": "~/.myapprc"
+       postinstall: "myapp --setup"
+   ```
+4. Run `dot --dry-run` to verify, then `dot` to apply
 
 ### Commit Style
 

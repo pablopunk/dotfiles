@@ -142,6 +142,10 @@ config:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
         "./config/opencode/plugins": "~/.opencode/plugins"
 
+    agents:
+      link:
+        "./config/agents": "~/.agents"
+
     pi:
       install:
         bun: "bun i -g @mariozechner/pi-coding-agent"

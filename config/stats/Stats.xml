@@ -115,7 +115,7 @@
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>365</real>
+	<real>390</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
@@ -220,7 +220,7 @@
 	<key>setupProcess</key>
 	<true/>
 	<key>support_ts</key>
-	<integer>1767087833</integer>
+	<integer>1770212242</integer>
 	<key>telemetry</key>
 	<false/>
 	<key>temperature_units</key>

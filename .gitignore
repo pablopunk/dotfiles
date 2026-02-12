@@ -18,3 +18,5 @@ unison/.unison/*
 !unison/.unison/preferences.prf
 
 .claude
+
+config/agents/.skill-lock.json

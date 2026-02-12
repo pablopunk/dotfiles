@@ -7,12 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "assistant": {
+  "edit_predictions": {
+    "provider": "zed"
+  },
+  "agent": {
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-3-7-sonnet-latest"
+      "model": "claude-haiku-4-5-thinking-latest"
     },
-    "version": "2"
   },
   "telemetry": {
     "metrics": true
@@ -22,7 +24,7 @@
     "dock": "bottom",
     "detect_venv": "off",
     "working_directory": "current_project_directory",
-    "font_family": "JetBrains Mono"
+    "font_family": "JetBrainsMono Nerd Font Mono"
   },
   "project_panel": {
     "dock": "left",
@@ -34,20 +36,12 @@
   "collaboration_panel": {
     "button": false
   },
-  "buffer_font_family": "JetBrains Mono",
-  "theme": "Kanagawa",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "theme": "Ayu Mirage",
   "buffer_font_size": 15.0,
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank"
-  },
-  "lsp": {
-    "biome": {
-      "settings": {
-        // "config_path": "/Users/pablopunk/src/maze/maze-monorepo/biome.json",
-        "require_config_file": true // only enable biome when biome.json is present
-      }
-    }
   },
   "code_actions_on_format": {
     "source.fixAll.biome": true,
@@ -91,8 +85,5 @@
   "tabs": {
     "file_icons": true,
     "git_status": true
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
   }
 }

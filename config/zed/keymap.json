@@ -3,22 +3,10 @@
     "context": "Terminal",
     "bindings": {
       // vim navigation in terminal too
-      "ctrl-h": [
-        "workspace::ActivatePaneInDirection",
-        "Left"
-      ],
-      "ctrl-l": [
-        "workspace::ActivatePaneInDirection",
-        "Right"
-      ],
-      "ctrl-k": [
-        "workspace::ActivatePaneInDirection",
-        "Up"
-      ],
-      "ctrl-j": [
-        "workspace::ActivatePaneInDirection",
-        "Down"
-      ]
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown"
     }
   },
   {
@@ -34,31 +22,19 @@
       "g r": "editor::FindAllReferences",
       "g d": "editor::GoToDefinition",
       "K": "editor::Hover",
-      "ctrl-h": [
-        "workspace::ActivatePaneInDirection",
-        "Left"
-      ],
-      "ctrl-l": [
-        "workspace::ActivatePaneInDirection",
-        "Right"
-      ],
-      "ctrl-k": [
-        "workspace::ActivatePaneInDirection",
-        "Up"
-      ],
-      "ctrl-j": [
-        "workspace::ActivatePaneInDirection",
-        "Down"
-      ],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
       ") g": "editor::GoToHunk",
-      "( g": "editor::GoToPrevHunk",
+      "( g": "editor::GoToPreviousHunk",
       "leader space": "command_palette::Toggle",
       "leader g r": "editor::RevertSelectedHunks",
       "leader g d": "editor::ToggleSelectedDiffHunks",
       "leader f f": "file_finder::Toggle",
       "leader f s": "workspace::NewSearch",
       "ctrl-n": "pane::ActivateNextItem",
-      "ctrl-p": "pane::ActivatePrevItem"
+      "ctrl-p": "pane::ActivatePreviousItem"
     }
   },
   {

@@ -18,6 +18,14 @@ if [[ ! -f "$DOT_BIN" ]]; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
+# Install zb on macOS
+if [[ $(uname -s) == "Darwin" ]]; then
+  if ! command -v zb &> /dev/null; then
+    curl -sSL https://zerobrew.rs/install | bash
+    export PATH="$HOME/.local/bin:$PATH"
+  fi
+fi
+
 # Clone dotfiles
 git clone https://github.com/pablopunk/dotfiles.git ~/.dotfiles > /dev/null 2>&1
 cd "$HOME/.dotfiles"

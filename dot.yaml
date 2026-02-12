@@ -265,26 +265,26 @@ profiles:
 
   work:
     cloudflare-warp:
-      os: ["mac"]
-      install:
-        brew: "brew install cloudflare-warp"
+       os: ["mac"]
+       install:
+         brew: "brew install cloudflare-warp"
     monitorcontrol:
-      os: ["mac"]
-      install:
-        brew: "brew install monitorcontrol"
+       os: ["mac"]
+       install:
+         brew: "brew install monitorcontrol"
     orbstack:
-      os: ["mac"]
-      install:
-        brew: "brew install orbstack"
+       os: ["mac"]
+       install:
+         brew: "brew install orbstack"
     slack:
-      os: ["mac"]
-      install:
-        brew: "brew install slack"
+       os: ["mac"]
+       install:
+         brew: "brew install slack"
     zoom:
-      os: ["mac"]
-      install:
-        brew: "brew install zoom"
+       os: ["mac"]
+       install:
+         brew: "brew install zoom"
     cleanshot:
-      os: ["mac"]
-      install:
-        brew: "brew install cleanshot"
+       os: ["mac"]
+       install:
+         brew: "brew install cleanshot"

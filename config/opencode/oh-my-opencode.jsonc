@@ -1,0 +1,133 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+
+  "agents": {
+    // ============================================================
+    // MAIN ORCHESTRATION
+    // ============================================================
+
+    // 🎯 THE BOSS: Main orchestrator - coordinates all work
+    // Used for: Everything - the one in charge
+    // How to use: Type "ulw" in your prompt, it figures out the rest
+    "sisyphus": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+
+    // 📋 THE PLANNER: Creates detailed work plans
+    // Used for: Complex tasks requiring careful planning
+    // How to use: Press Tab to enter Prometheus mode
+    "prometheus": {
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+
+    // ============================================================
+    // SPECIALIZED WORKERS
+    // ============================================================
+
+    // 🔨 THE WORKER: Deep autonomous worker
+    // Used for: Heavy lifting, end-to-end implementation
+    // Better at: Writing production code, problem solving
+    "hephaestus": {
+      "model": "openai/gpt-5.2"
+    },
+
+    // 🐛 THE DEBUGGER: Architecture & debugging expert
+    // Used for: Debugging complex issues, architectural decisions
+    // Better at: Understanding system design, root cause analysis
+    "oracle": {
+      "model": "openai/gpt-5.2"
+    },
+
+    // 📚 THE RESEARCHER: Docs & codebase research
+    // Used for: Exploring documentation, understanding open source
+    // Better at: Reading docs, finding patterns in large codebases
+    "librarian": {
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+
+    // 🔍 THE SCOUT: Fast pattern search & exploration
+    // Used for: Quick codebase searching, finding similar patterns
+    // Better at: Speed, exploring file structure
+    "explore": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+
+    // 🎨 THE DESIGNER: UI/visual design tasks
+    // Used for: Frontend design, visual components
+    // Better at: Visual reasoning, UI layout
+    "multimodal-looker": {
+      "model": "google/gemini-2.5-flash"
+    },
+
+    // ============================================================
+    // VALIDATION & QUALITY
+    // ============================================================
+
+    // ✅ THE REVIEWER: Validates plans & best practices
+    // Used for: Reviewing work plans before execution
+    "metis": {
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+
+    // 📝 THE CRITIC: Code quality & comment checker
+    // Used for: Preventing excessive comments, ensuring clean code
+    // Better at: Code style enforcement, removing boilerplate
+    "momus": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+
+    // ⚙️ THE EXECUTOR: Task executor & result verifier
+    // Used for: Executing work plans from Prometheus
+    // Better at: Systematic task completion, verification
+    "atlas": {
+      "model": "anthropic/claude-sonnet-4-5"
+    }
+  },
+
+  "categories": {
+    // ============================================================
+    // TASK CATEGORY ROUTING
+    // These determine which model to use based on task type
+    // ============================================================
+
+    // Visual/frontend tasks
+    "visual-engineering": {
+      "model": "google/gemini-2.5-flash"
+    },
+
+    // Deep thinking, complex logic
+    "ultrabrain": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+
+    // Complex research & exploration
+    "deep": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+
+    // Creative/design tasks
+    "artistry": {
+      "model": "google/gemini-2.5-flash"
+    },
+
+    // Fast, simple tasks (cost optimization)
+    "quick": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+
+    // Low-complexity unspecified tasks
+    "unspecified-low": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+
+    // High-complexity unspecified tasks
+    "unspecified-high": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+
+    // Writing & documentation
+    "writing": {
+      "model": "anthropic/claude-sonnet-4-5"
+    }
+  }
+}

@@ -140,6 +140,7 @@ config:
         opencode: "opencode uninstall"
       link:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
+        "./config/opencode/oh-my-opencode.json": "~/.config/opencode/oh-my-opencode.json"
         "./config/opencode/plugins": "~/.opencode/plugins"
 
     agents:

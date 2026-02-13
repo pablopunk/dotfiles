@@ -42,8 +42,8 @@ config:
 
     zsh:
       install:
-        apt: "sudo apt install -y fd-find jq tldr tree vim wget zoxide zsh"
-        dnf: "sudo dnf install -y fd-find jq tldr tree vim wget zoxide zsh"
+        apt: "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
+        dnf: "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
         brew: "brew install fd jq tldr tree vim wget zoxide zsh"
       link:
         "./config/zsh/zshrc": "~/.zshrc"

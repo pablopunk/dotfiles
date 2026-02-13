@@ -70,21 +70,19 @@
   },
   "provider": {
     "anthropic": {
-      "apiKey": "{env:ANTHROPIC_API_KEY}",
       "models": {
         "claude-opus-4-5": {
-          "name": "Claude Opus 4.5 (Work)"
+          "name": "Claude Opus 4.5"
         },
         "claude-sonnet-4-5": {
-          "name": "Claude Sonnet 4.5 (Work)"
+          "name": "Claude Sonnet 4.5"
         },
         "claude-haiku-4-5": {
-          "name": "Claude Haiku 4.5 (Work)"
+          "name": "Claude Haiku 4.5"
         }
       }
     },
     "openrouter": {
-      "apiKey": "{env:OPENROUTER_API_KEY}",
       "models": {
         "google/gemini-2.5-flash": {
           "name": "Gemini 2.5 Flash"

@@ -339,6 +339,14 @@ config:
       install:
         brew: "brew install zoom"
 
+    opencode-work:
+      os: ["mac"]
+      link:
+        "./config/opencode/oh-my-opencode.maze.jsonc":
+          - "~/src/maze/oh-my-opencode.jsonc"
+          - "~/src/maze/mobile-app/oh-my-opencode.jsonc"
+          - "~/src/maze/monorepo/oh-my-opencode.jsonc"
+
     cleanshot:
       os: ["mac"]
       install:

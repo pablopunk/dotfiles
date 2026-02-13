@@ -5,7 +5,7 @@
   "autoupdate": true,
   // === Models ===
   "model": "anthropic/claude-haiku-4-5",
-  "small_model": "openrouter/google/gemini-2.5-flash",
+  "small_model": "openrouter/google/gemini-2.5-flash-lite",
   // === TUI ===
   "tui": {
     "scroll_acceleration": {

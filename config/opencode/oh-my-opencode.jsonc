@@ -13,7 +13,7 @@
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)
     "prometheus": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "openai/gpt-5.2"
     },
 
     // ============================================================
@@ -22,12 +22,12 @@
 
     // 🔨 THE WORKER: Deep autonomous worker for heavy lifting & end-to-end implementation
     "hephaestus": {
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.3-codex"
     },
 
     // 🐛 THE DEBUGGER: Architecture & debugging expert for complex issues
     "oracle": {
-      "model": "openai/gpt-5.2"
+      "model": "anthropic/claude-opus-4-6"
     },
 
     // 📚 THE RESEARCHER: Explores documentation & understands open source code patterns

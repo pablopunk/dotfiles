@@ -50,6 +50,7 @@ config:
         "./config/zsh/zimrc": "~/.zimrc"
         "./config/zsh/functions": "~/.zsh/functions"
         "./config/zsh/zshrc.d/00-path.sh": "~/.zshrc.d/00-path.sh"
+        "./config/zsh/zshrc.d/05-opencode.sh": "~/.zshrc.d/05-opencode.sh"
         "./config/zsh/zshrc.d/10-aliases.sh": "~/.zshrc.d/10-aliases.sh"
         "./config/zsh/zshrc.d/20-core-functions.sh": "~/.zshrc.d/20-core-functions.sh"
         "./config/zsh/zshrc.d/30-completions.sh": "~/.zshrc.d/30-completions.sh"

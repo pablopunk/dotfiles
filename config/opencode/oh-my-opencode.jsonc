@@ -3,7 +3,7 @@
   "agents": {
     // 🎯 THE BOSS: Main orchestrator - coordinates all work, delegates to specialized agents
     "sisyphus": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)
@@ -33,7 +33,7 @@
 
     // 🎨 THE DESIGNER: UI/visual design tasks with visual reasoning
     "multimodal-looker": {
-      "model": "opencode/kimi-k2.5-free"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // ============================================================
@@ -83,7 +83,7 @@
 
     // ⚡ Fast & simple tasks (cost optimized)
     "quick": {
-      "model": "openrouter/google/gemini-3-flash"
+      "model": "openrouter/google/gemini-3-flash-preview"
     },
 
     // 📊 Low-complexity unspecified tasks

@@ -1,48 +1,39 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
-
   "agents": {
-    // ============================================================
-    // MAIN ORCHESTRATION
-    // ============================================================
-
     // 🎯 THE BOSS: Main orchestrator - coordinates all work, delegates to specialized agents
     "sisyphus": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)
     "prometheus": {
-      "model": "openai/gpt-5.2"
+      "model": "opencode/minimax-m2.5-free"
     },
-
-    // ============================================================
-    // SPECIALIZED WORKERS
-    // ============================================================
 
     // 🔨 THE WORKER: Deep autonomous worker for heavy lifting & end-to-end implementation
     "hephaestus": {
-      "model": "openai/gpt-5.3-codex"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 🐛 THE DEBUGGER: Architecture & debugging expert for complex issues
     "oracle": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 📚 THE RESEARCHER: Explores documentation & understands open source code patterns
     "librarian": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 🔍 THE SCOUT: Fast pattern search & codebase exploration (speed optimized)
     "explore": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 🎨 THE DESIGNER: UI/visual design tasks with visual reasoning
     "multimodal-looker": {
-      "model": "google/gemini-2.5-flash"
+      "model": "opencode/kimi-k2.5-free"
     },
 
     // ============================================================
@@ -51,17 +42,17 @@
 
     // ✅ THE REVIEWER: Validates plans for feasibility & best practices
     "metis": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 📝 THE CRITIC: Code quality checker - prevents excessive comments & boilerplate
     "momus": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // ⚙️ THE EXECUTOR: Task executor & result verifier for systematic completion
     "atlas": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "opencode/minimax-m2.5-free"
     }
   },
 
@@ -72,42 +63,42 @@
 
     // 🎨 Visual/frontend tasks
     "visual-engineering": {
-      "model": "google/gemini-2.5-flash"
+      "model": "openrouter/google/gemini-2.5-flash"
     },
 
     // 🧠 Deep thinking & complex logic
     "ultrabrain": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 🔬 Complex research & exploration
     "deep": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // ✨ Creative/design tasks
     "artistry": {
-      "model": "google/gemini-2.5-flash"
+      "model": "openrouter/google/gemini-2.5-flash"
     },
 
     // ⚡ Fast & simple tasks (cost optimized)
     "quick": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openrouter/google/gemini-3-flash"
     },
 
     // 📊 Low-complexity unspecified tasks
     "unspecified-low": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openrouter/google/gemini-2.5-flash"
     },
 
     // 🎯 High-complexity unspecified tasks
     "unspecified-high": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // ✍️ Writing & documentation
     "writing": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "opencode/minimax-m2.5-free"
     }
   },
 
@@ -120,15 +111,15 @@
   },
 
   // COST CONTROL: Limit parallel background agents
-  "background_task": {
-    "defaultConcurrency": 5,
-    "staleTimeoutMs": 180000,
-    "modelConcurrency": {
-      "anthropic/claude-opus-4-6": 2,
-      "anthropic/claude-sonnet-4-5": 4,
-      "anthropic/claude-haiku-4-5": 10,
-      "openai/gpt-5.2": 3,
-      "google/gemini-2.5-flash": 10
-    }
-  }
+  // "background_task": {
+  //   "defaultConcurrency": 5,
+  //   "staleTimeoutMs": 180000,
+  //   "modelConcurrency": {
+  //     "anthropic/claude-opus-4-6": 2,
+  //     "anthropic/claude-sonnet-4-5": 4,
+  //     "anthropic/claude-haiku-4-5": 10,
+  //     "openai/gpt-5.2": 3,
+  //     "google/gemini-2.5-flash": 10
+  //   }
+  // }
 }

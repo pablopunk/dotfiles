@@ -135,9 +135,9 @@ config:
 
     opencode:
       install:
-        bun: "bun i -g opencode-ai@beta"
+        curl: "curl -fsSL https://opencode.ai/install | bash"
       uninstall:
-        bun: "bun rm -g opencode-ai@beta"
+        opencode: "opencode uninstall"
       link:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
         "./config/opencode/plugins": "~/.opencode/plugins"

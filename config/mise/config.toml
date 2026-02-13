@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-node = "latest"
+node = "25"
 rust = "latest" # for cargo
 go = "latest"
 python = "3.12"

@@ -56,52 +56,6 @@
     }
   },
 
-  "categories": {
-    // ============================================================
-    // TASK CATEGORY ROUTING
-    // ============================================================
-
-    // 🎨 Visual/frontend tasks
-    "visual-engineering": {
-      "model": "openrouter/google/gemini-2.5-flash"
-    },
-
-    // 🧠 Deep thinking & complex logic
-    "ultrabrain": {
-      "model": "opencode/minimax-m2.5-free"
-    },
-
-    // 🔬 Complex research & exploration
-    "deep": {
-      "model": "opencode/minimax-m2.5-free"
-    },
-
-    // ✨ Creative/design tasks
-    "artistry": {
-      "model": "openrouter/google/gemini-2.5-flash"
-    },
-
-    // ⚡ Fast & simple tasks (cost optimized)
-    "quick": {
-      "model": "openrouter/google/gemini-3-flash-preview"
-    },
-
-    // 📊 Low-complexity unspecified tasks
-    "unspecified-low": {
-      "model": "openrouter/google/gemini-2.5-flash"
-    },
-
-    // 🎯 High-complexity unspecified tasks
-    "unspecified-high": {
-      "model": "opencode/minimax-m2.5-free"
-    },
-
-    // ✍️ Writing & documentation
-    "writing": {
-      "model": "opencode/minimax-m2.5-free"
-    }
-  },
-
   // TMUX: Visual multi-agent in separate panes
   // Requires: running inside tmux with `opencode --port 4096`
   "tmux": {

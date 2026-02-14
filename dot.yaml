@@ -168,7 +168,7 @@ config:
     cursor:
       os: ["mac"]
       install:
-        brew: "brew install cursor"
+        brew: "[[ -d /Applications/Cursor.app ]] || brew install cursor"
       link:
         "./config/cursor/settings.json": "~/Library/Application Support/Cursor/User/settings.json"
         "./config/cursor/keybindings.json": "~/Library/Application Support/Cursor/User/keybindings.json"
@@ -176,7 +176,7 @@ config:
     zed:
       os: ["mac"]
       install:
-        brew: "brew install zed"
+        brew: "[[ -d /Applications/Zed.app ]] || brew install zed"
       link:
         "./config/zed/settings.json": "~/.config/zed/settings.json"
         "./config/zed/keymap.json": "~/.config/zed/keymap.json"
@@ -184,19 +184,19 @@ config:
     "1password":
       os: ["mac"]
       install:
-        brew: "brew install 1password"
+        brew: "[[ -d /Applications/1Password.app ]] || brew install 1password"
 
     ice:
       os: ["mac"]
       install:
-        brew: "brew install ice"
+        brew: "[[ -d /Applications/Ice.app ]] || brew install ice"
       defaults:
         "com.jordanbaird.Ice": "./config/ice/Ice.xml"
 
     stats:
       os: ["mac"]
       install:
-        brew: "brew install --cask stats"
+        brew: "[[ -d /Applications/Stats.app ]] || brew install --cask stats"
       uninstall:
         brew: "brew uninstall --cask stats"
       defaults:
@@ -205,13 +205,13 @@ config:
     battery:
       os: ["mac"]
       install:
-        brew: "brew install battery"
-      postinstall: "open /Applications/Battery.app"
+        brew: "[[ -d /Applications/Battery.app ]] || brew install battery"
+      postinstall: "[[ -d /Applications/Battery.app ]] || open /Applications/Battery.app"
 
     ghostty:
       os: ["mac"]
       install:
-        brew: "brew install ghostty"
+        brew: "[[ -d /Applications/Ghostty.app ]] || brew install ghostty"
         dnf: "sudo dnf install -y ghostty"
       uninstall:
         brew: "brew uninstall ghostty"
@@ -222,21 +222,21 @@ config:
     shortcat:
       os: ["mac"]
       install:
-        brew: "brew install shortcat"
+        brew: "[[ -d /Applications/Shortcat.app ]] || brew install shortcat"
       uninstall:
         brew: "brew uninstall shortcat"
 
     karabiner:
       os: ["mac"]
       install:
-        brew: "brew install karabiner-elements"
+        brew: "[[ -d /Applications/Karabiner-Elements.app ]] || brew install karabiner-elements"
       link:
         "./config/karabiner/karabiner.json": "~/.config/karabiner/karabiner.json"
 
     aerospace:
       os: ["mac"]
       install:
-        brew: "brew install aerospace"
+        brew: "[[ -d /Applications/AeroSpace.app ]] || brew install aerospace"
       link:
         "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
 
@@ -253,41 +253,41 @@ config:
     mos:
       os: ["mac"]
       install:
-        brew: "brew install mos"
+        brew: "[[ -d /Applications/Mos.app ]] || brew install mos"
       defaults:
         "com.caldis.Mos": "./config/mos/Mos.xml"
 
     raycast:
       os: ["mac"]
       install:
-        brew: "brew install raycast"
+        brew: "[[ -d /Applications/Raycast.app ]] || brew install raycast"
 
     swiftshift:
       os: ["mac"]
       install:
-        brew: "brew install swift-shift"
+        brew: "[[ -d /Applications/Swift-Shift.app ]] || brew install swift-shift"
       defaults:
         "com.pablopunk.Swift-Shift": "./config/swiftshift/SwiftShift.xml"
 
     tailscale:
       os: ["mac"]
       install:
-        brew: "brew install tailscale"
+        brew: "[[ -d /Applications/Tailscale.app ]] || brew install tailscale"
 
     telegram:
       os: ["mac"]
       install:
-        brew: "brew install telegram"
+        brew: "[[ -d /Applications/Telegram.app ]] || brew install telegram"
 
     whatsapp:
       os: ["mac"]
       install:
-        brew: "brew install whatsapp"
+        brew: "[[ -d /Applications/WhatsApp.app ]] || brew install whatsapp"
 
     missive:
       os: ["mac"]
       install:
-        brew: "brew install missive"
+        brew: "[[ -d /Applications/Missive.app ]] || brew install missive"
 
   hyprland:
     os: ["linux"]
@@ -317,37 +317,41 @@ config:
     cloudflare-warp:
       os: ["mac"]
       install:
-        brew: "brew install cloudflare-warp"
+        brew: "[[ -d /Applications/Cloudflare\\ WARP.app ]] || brew install cloudflare-warp"
 
     monitorcontrol:
       os: ["mac"]
       install:
-        brew: "brew install monitorcontrol"
+        brew: "[[ -d /Applications/MonitorControl.app ]] || brew install monitorcontrol"
 
     orbstack:
       os: ["mac"]
       install:
-        brew: "brew install orbstack"
+        brew: "[[ -d /Applications/OrbStack.app ]] || brew install orbstack"
 
     slack:
       os: ["mac"]
       install:
-        brew: "brew install slack"
+        brew: "[[ -d /Applications/Slack.app ]] || brew install slack"
 
     zoom:
       os: ["mac"]
       install:
-        brew: "brew install zoom"
+        brew: "[[ -d /Applications/zoom.us.app ]] || brew install zoom"
 
     opencode-work:
       os: ["mac"]
       link:
         "./config/opencode/oh-my-opencode.maze.jsonc":
-          - "~/src/maze/oh-my-opencode.jsonc"
-          - "~/src/maze/mobile-app/oh-my-opencode.jsonc"
-          - "~/src/maze/monorepo/oh-my-opencode.jsonc"
+          - "~/src/maze/.opencode/oh-my-opencode.json"
+          - "~/src/maze/mobile-app/.opencode/oh-my-opencode.jsonc"
+          - "~/src/maze/monorepo/.opencode/oh-my-opencode.jsonc"
+        "./config/opencode/opencode.maze.jsonc":
+          - "~/src/maze/opencode.jsonc"
+          - "~/src/maze/mobile-app/opencode.jsonc"
+          - "~/src/maze/monorepo/opencode.jsonc"
 
     cleanshot:
       os: ["mac"]
       install:
-        brew: "brew install cleanshot"
+        brew: "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"

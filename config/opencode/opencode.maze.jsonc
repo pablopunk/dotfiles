@@ -4,8 +4,8 @@
   "theme": "system",
   "autoupdate": true,
   // === Models ===
-  "model": "anthropic/claude-haiku-4-5",
-  "small_model": "openrouter/google/gemini-2.5-flash-lite",
+  "model": "anthropic/claude-sonnet-4-5",
+  "small_model": "anthropic/claude-haiku-4-5",
   // === TUI ===
   "tui": {
     "scroll_acceleration": {
@@ -25,6 +25,13 @@
     }
   },
   "mcp": {
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/sse",
+      "oauth": {
+        "scope": "tools:read"
+      }
+    },
     "sequential-thinking": {
       "type": "local",
       "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
@@ -41,10 +48,24 @@
       "type": "local",
       "command": ["bunx", "-y", "chrome-devtools-mcp@latest"]
     },
+    "datadog": {
+      "type": "remote",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "oauth": {
+        "scope": "tools:read"
+      }
+    },
     "grep.app": {
       "type": "remote",
       "url": "https://mcp.grep.app",
       "enabled": true
+    },
+    "figma": {
+      "type": "local",
+      "command": ["npx", "-y", "figma-mcp"],
+      "environment": {
+        "FIGMA_API_KEY": "{env:FIGMA_API_KEY}"
+      }
     }
   }
 }

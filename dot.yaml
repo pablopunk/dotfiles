@@ -150,7 +150,6 @@ config:
       link:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
         "./config/opencode/oh-my-opencode.jsonc": "~/.config/opencode/oh-my-opencode.jsonc"
-        "./config/opencode/plugins": "~/.opencode/plugins"
         "./config/opencode/05-opencode.sh": "~/.zshrc.d/05-opencode.sh"
 
     agents:

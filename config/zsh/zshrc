@@ -84,7 +84,7 @@ unset rc
 
 # Environment Variables {{{
 # Terminal settings
-[[ -z "$TERM" || "$TERM" == "dumb" ]] && export TERM=xterm-256color
+[[ -z "$TERM" || "$TERM" == "dumb" || "$TERM" == "xterm-ghostty" ]] && export TERM=xterm-256color
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 

@@ -100,11 +100,11 @@
 
   // TMUX: Visual multi-agent in separate panes
   // Requires: running inside tmux with `opencode --port 4096`
-  "tmux": {
-    "enabled": true,
-    "layout": "main-vertical",
-    "main_pane_size": 60
-  },
+  // "tmux": {
+  //   "enabled": true,
+  //   "layout": "main-vertical",
+  //   "main_pane_size": 60
+  // },
 
   // COST CONTROL: Limit parallel background agents
   // "background_task": {

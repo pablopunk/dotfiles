@@ -53,6 +53,48 @@
     // ⚙️ THE EXECUTOR: Task executor & result verifier for systematic completion
     "atlas": {
       "model": "anthropic/claude-haiku-4-5"
+    },
+
+    // ============================================================
+    // ADDITIONAL SPECIALIZED AGENTS
+    // ============================================================
+
+    // 🎨 THE UI/UX ENGINEER: Creates production-grade frontend interfaces
+    "frontend-ui-ux-engineer": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+
+    // 📄 THE TECHNICAL WRITER: Documentation, prose & technical writing
+    "document-writer": {
+      "model": "anthropic/claude-sonnet-4-5"
+    }
+  },
+
+  // CATEGORY MODEL OVERRIDES: Route task types to specific models
+  "categories": {
+    "visual-engineering": {
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+    "ultrabrain": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+    "deep": {
+      "model": "openai/gpt-5.3-codex"
+    },
+    "artistry": {
+      "model": "anthropic/claude-opus-4-6"
+    },
+    "quick": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "writing": {
+      "model": "openai/gpt-5.3-codex"
+    },
+    "unspecified-low": {
+      "model": "anthropic/claude-haiku-4-5"
+    },
+    "unspecified-high": {
+      "model": "anthropic/claude-opus-4-6"
     }
   },
 

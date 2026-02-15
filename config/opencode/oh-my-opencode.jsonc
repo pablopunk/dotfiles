@@ -8,27 +8,27 @@
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)
     "prometheus": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 🔨 THE WORKER: Deep autonomous worker for heavy lifting & end-to-end implementation
     "hephaestus": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 🐛 THE DEBUGGER: Architecture & debugging expert for complex issues
     "oracle": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 📚 THE RESEARCHER: Explores documentation & understands open source code patterns
     "librarian": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 🔍 THE SCOUT: Fast pattern search & codebase exploration (speed optimized)
     "explore": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 🎨 THE DESIGNER: UI/visual design tasks with visual reasoning
@@ -42,17 +42,59 @@
 
     // ✅ THE REVIEWER: Validates plans for feasibility & best practices
     "metis": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 📝 THE CRITIC: Code quality checker - prevents excessive comments & boilerplate
     "momus": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // ⚙️ THE EXECUTOR: Task executor & result verifier for systematic completion
     "atlas": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+
+    // ============================================================
+    // ADDITIONAL SPECIALIZED AGENTS
+    // ============================================================
+
+    // 🎨 THE UI/UX ENGINEER: Creates production-grade frontend interfaces
+    "frontend-ui-ux-engineer": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+
+    // 📄 THE TECHNICAL WRITER: Documentation, prose & technical writing
+    "document-writer": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    }
+  },
+
+  // CATEGORY MODEL OVERRIDES: Route task types to specific models
+  "categories": {
+    "visual-engineering": {
+      "model": "openrouter/moonshotai/kimi-k2.5"
+    },
+    "ultrabrain": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "deep": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "artistry": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "quick": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "writing": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "unspecified-low": {
+      "model": "openrouter/minimax/minimax-m2.5"
+    },
+    "unspecified-high": {
+      "model": "openrouter/moonshotai/kimi-k2.5"
     }
   },
 

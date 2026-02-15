@@ -3,7 +3,7 @@
   "agents": {
     // 🎯 THE BOSS: Main orchestrator - coordinates all work, delegates to specialized agents
     "sisyphus": {
-      "model": "openrouter/moonshotai/kimi-k2.5"
+      "model": "opencode/minimax-m2.5-free"
     },
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)

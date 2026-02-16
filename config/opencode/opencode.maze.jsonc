@@ -1,5 +1,5 @@
 {
-  "plugin": ["oh-my-opencode@latest"],
+  "plugin": ["oh-my-opencode@latest", "opencode-plugin-auto-update@latest"],
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "autoupdate": true,
@@ -9,7 +9,7 @@
   // === TUI ===
   "tui": {
     "scroll_acceleration": {
-      "enabled": true  // macOS-style momentum scrolling
+      "enabled": true // macOS-style momentum scrolling
     }
   },
   // === Permissions ===
@@ -21,7 +21,7 @@
       "rm -rf /*": "deny",
       "rm -rf ~": "deny",
       "rm -rf ~/*": "deny",
-      ":(){:|:&};:": "deny"  // fork bomb, just in case
+      ":(){:|:&};:": "deny" // fork bomb, just in case
     }
   },
   "mcp": {

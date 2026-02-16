@@ -3,7 +3,7 @@
   "agents": {
     // 🎯 THE BOSS: Main orchestrator - coordinates all work, delegates to specialized agents
     "sisyphus": {
-      "model": "opencode/minimax-m2.5-free"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // 📋 THE PLANNER: Creates detailed work plans by interviewing you (Press Tab to use)
@@ -18,7 +18,7 @@
 
     // 🐛 THE DEBUGGER: Architecture & debugging expert for complex issues
     "oracle": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // 📚 THE RESEARCHER: Explores documentation & understands open source code patterns
@@ -47,7 +47,7 @@
 
     // 📝 THE CRITIC: Code quality checker - prevents excessive comments & boilerplate
     "momus": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // ⚙️ THE EXECUTOR: Task executor & result verifier for systematic completion
@@ -61,7 +61,7 @@
 
     // 🎨 THE UI/UX ENGINEER: Creates production-grade frontend interfaces
     "frontend-ui-ux-engineer": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // 📄 THE TECHNICAL WRITER: Documentation, prose & technical writing
@@ -82,7 +82,7 @@
       "model": "openrouter/minimax/minimax-m2.5"
     },
     "artistry": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
     "quick": {
       "model": "openrouter/minimax/minimax-m2.5"

@@ -1,5 +1,5 @@
 {
-  "plugin": ["oh-my-opencode@latest"],
+  "plugin": ["oh-my-opencode@latest", "opencode-plugin-auto-update@latest"],
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "autoupdate": true,

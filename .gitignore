@@ -20,3 +20,6 @@ unison/.unison/*
 .claude
 
 config/agents/.skill-lock.json
+
+# OpenCode generated configs
+config/opencode/opencode-notifier.json

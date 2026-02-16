@@ -168,6 +168,10 @@ config:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
         "./config/opencode/oh-my-opencode.jsonc": "~/.config/opencode/oh-my-opencode.jsonc"
         "./config/opencode/05-opencode.sh": "~/.zshrc.d/05-opencode.sh"
+        "./config/opencode/sounds/": "~/.config/opencode/sounds"
+      postlink: |
+        mkdir -p ~/.config/opencode
+        sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config/opencode/opencode-notifier.json
 
     agents:
       link:

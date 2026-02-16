@@ -1,0 +1,9 @@
+{
+  "sounds": {
+    "permission": "~/.config/opencode/sounds/knock.wav",
+    "complete": "~/.config/opencode/sounds/check.wav",
+    "subagent_complete": "~/.config/opencode/sounds/check2.wav",
+    "error": "~/.config/opencode/sounds/error.wav",
+    "question": "~/.config/opencode/sounds/question.wav"
+  }
+}

@@ -205,23 +205,14 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.window-title-regex-substring = "Yonna"
   run = 'layout floating'
+[[on-window-detected]]
+  if.window-title-regex-substring = "Finder"
+  run = 'layout floating'
 
 # Assign apps on particular workspaces
 [[on-window-detected]]
   if.app-name-regex-substring = "Zen"
   run = 'move-node-to-workspace 1'
-[[on-window-detected]]
-  if.app-name-regex-substring = "Dia"
-  run = 'move-node-to-workspace Q'
-[[on-window-detected]]
-  if.app-name-regex-substring = "Safari"
-  run = 'move-node-to-workspace Q'
-[[on-window-detected]]
-  if.app-name-regex-substring = "Helium"
-  run = 'move-node-to-workspace 1'
-[[on-window-detected]]
-  if.app-name-regex-substring = "Ghostty"
-  run = 'move-node-to-workspace 2'
 [[on-window-detected]]
   if.app-name-regex-substring = "Slack"
   run = 'move-node-to-workspace 3'
@@ -248,10 +239,7 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace E'
 [[on-window-detected]]
   if.app-name-regex-substring = "BambuStudio"
-  run = 'move-node-to-workspace B'
+  run = 'move-node-to-workspace R'
 [[on-window-detected]]
   if.app-name-regex-substring = "Pixelmator Pro"
   run = 'move-node-to-workspace R'
-[[on-window-detected]]
-  if.app-name-regex-substring = "YouTube"
-  run = 'move-node-to-workspace W'

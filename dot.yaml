@@ -33,6 +33,10 @@ config:
           && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
           && sudo apt update \
           && sudo apt install gh git-delta git -y
+      uninstall:
+        brew: "brew uninstall git git-delta gh"
+        apt: "sudo apt purge -y gh git-delta git"
+        dnf: "sudo dnf remove -y gh git-delta git"
       link:
         "./config/git/gitconfig": "~/.gitconfig"
         "./config/git/gh.yml": "~/.config/gh/config.yml"
@@ -42,9 +46,11 @@ config:
 
     zsh:
       install:
-        apt: "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
-        dnf: "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
         brew: "brew install fd jq tldr tree vim wget zoxide zsh"
+      uninstall:
+        brew: "brew uninstall fd jq tldr tree vim wget zoxide zsh"
+        apt: "sudo apt purge -y fd-find jq tree vim wget zoxide zsh"
+        dnf: "sudo dnf remove -y fd-find jq tree vim wget zoxide zsh"
       link:
         "./config/zsh/zshrc": "~/.zshrc"
         "./config/zsh/zimrc": "~/.zimrc"
@@ -62,6 +68,8 @@ config:
     zsh-ai:
       install:
         brew: "brew tap matheusml/zsh-ai && brew install zsh-ai"
+      uninstall:
+        brew: "brew uninstall zsh-ai && brew tap remove matheusml/zsh-ai"
       link:
         "./config/zsh-ai/60-zsh-ai.sh": "~/.zshrc.d/60-zsh-ai.sh"
 
@@ -75,8 +83,10 @@ config:
     tmux:
       install:
         brew: "brew install tmux bash"
-        apt: "sudo apt install -y tmux"
-        dnf: "sudo dnf install -y tmux"
+      uninstall:
+        brew: "brew uninstall tmux bash"
+        apt: "sudo apt purge -y tmux"
+        dnf: "sudo dnf remove -y tmux"
       link:
         "./config/tmux/tmux.conf": "~/.tmux.conf"
       postinstall: "[ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins"
@@ -84,8 +94,10 @@ config:
     vim:
       install:
         brew: "brew install vim"
-        apt: "sudo apt install -y vim"
-        dnf: "sudo dnf install -y vim"
+      uninstall:
+        brew: "brew uninstall vim"
+        apt: "sudo apt purge -y vim"
+        dnf: "sudo dnf remove -y vim"
       link:
         "./config/vim/vimrc": "~/.vimrc"
 
@@ -110,17 +122,22 @@ config:
     btop:
       install:
         brew: "brew install btop"
-        apt: "sudo apt install -y btop"
-        dnf: "sudo dnf install -y btop"
+      uninstall:
+        brew: "brew uninstall btop"
+        apt: "sudo apt purge -y btop"
+        dnf: "sudo dnf remove -y btop"
+      link:
+        "./config/mise/config.toml": "~/.config/mise/config.toml"
+        "./config/zsh/zshrc.d/40-mise.sh": "~/.zshrc.d/40-mise.sh"
+      postinstall: "cd ~ && mise install"
 
     mise:
       install:
         brew: "brew install mise"
         curl: "curl https://mise.run | sh"
-      link:
-        "./config/mise/config.toml": "~/.config/mise/config.toml"
-        "./config/zsh/zshrc.d/40-mise.sh": "~/.zshrc.d/40-mise.sh"
-      postinstall: "cd ~ && mise install"
+      uninstall:
+        brew: "brew uninstall mise"
+        curl: "rm -rf ~/.local/bin/mise ~/.local/share/mise"
 
     editorconfig:
       link:
@@ -166,25 +183,30 @@ config:
       os: ["mac"]
       install:
         brew: "brew install macmon"
+      uninstall:
+        brew: "brew uninstall macmon"
+
+    mole:
+      os: ["mac"]
+      install:
+        brew: "brew install mole"
+      uninstall:
+        brew: "brew uninstall mole"
 
     coreutils:
       os: ["mac"]
       install:
         brew: "brew install coreutils"
+      uninstall:
+        brew: "brew uninstall coreutils"
 
   apps:
-    cursor:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/Cursor.app ]] || brew install cursor"
-      link:
-        "./config/cursor/settings.json": "~/Library/Application Support/Cursor/User/settings.json"
-        "./config/cursor/keybindings.json": "~/Library/Application Support/Cursor/User/keybindings.json"
-
     zed:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Zed.app ]] || brew install zed"
+      uninstall:
+        brew: "brew uninstall zed"
       link:
         "./config/zed/settings.json": "~/.config/zed/settings.json"
         "./config/zed/keymap.json": "~/.config/zed/keymap.json"
@@ -193,11 +215,15 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/1Password.app ]] || brew install 1password"
+      uninstall:
+        brew: "brew uninstall 1password"
 
     ice:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Ice.app ]] || brew install ice"
+      uninstall:
+        brew: "brew uninstall ice"
       defaults:
         "com.jordanbaird.Ice": "./config/ice/Ice.xml"
 
@@ -214,6 +240,8 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Battery.app ]] || brew install battery"
+      uninstall:
+        brew: "brew uninstall battery"
       postinstall: "[[ -d /Applications/Battery.app ]] || open /Applications/Battery.app"
 
     ghostty:
@@ -238,6 +266,8 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Karabiner-Elements.app ]] || brew install karabiner-elements"
+      uninstall:
+        brew: "brew uninstall karabiner-elements"
       link:
         "./config/karabiner/karabiner.json": "~/.config/karabiner/karabiner.json"
 
@@ -245,6 +275,8 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/AeroSpace.app ]] || brew install aerospace"
+      uninstall:
+        brew: "brew uninstall aerospace"
       link:
         "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
 
@@ -262,6 +294,8 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Mos.app ]] || brew install mos"
+      uninstall:
+        brew: "brew uninstall mos"
       defaults:
         "com.caldis.Mos": "./config/mos/Mos.xml"
 
@@ -269,11 +303,15 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Raycast.app ]] || brew install raycast"
+      uninstall:
+        brew: "brew uninstall raycast"
 
     swiftshift:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Swift-Shift.app ]] || brew install swift-shift"
+      uninstall:
+        brew: "brew uninstall swift-shift"
       defaults:
         "com.pablopunk.Swift-Shift": "./config/swiftshift/SwiftShift.xml"
 
@@ -281,26 +319,36 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Tailscale.app ]] || brew install tailscale"
+      uninstall:
+        brew: "brew uninstall tailscale"
 
     telegram:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Telegram.app ]] || brew install telegram"
+      uninstall:
+        brew: "brew uninstall telegram"
 
     whatsapp:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/WhatsApp.app ]] || brew install whatsapp"
+      uninstall:
+        brew: "brew uninstall whatsapp"
 
     missive:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Missive.app ]] || brew install missive"
+      uninstall:
+        brew: "brew uninstall missive"
 
   hyprland:
     os: ["linux"]
     install:
       dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
+    uninstall:
+      dnf: "sudo dnf remove -y hyprland ulauncher copyq hyprshot"
     link:
       "./config/hypr": "~/.config/hypr"
       "./config/ulauncher/": "~/.config/ulauncher"
@@ -309,6 +357,8 @@ config:
     os: ["linux"]
     install:
       dnf: "sudo dnf install -y waybar"
+    uninstall:
+      dnf: "sudo dnf remove -y waybar"
     link:
       "./config/waybar": "~/.config/waybar"
 
@@ -330,26 +380,36 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Cloudflare\\ WARP.app ]] || brew install cloudflare-warp"
+      uninstall:
+        brew: "brew uninstall cloudflare-warp"
 
     monitorcontrol:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/MonitorControl.app ]] || brew install monitorcontrol"
+      uninstall:
+        brew: "brew uninstall monitorcontrol"
 
     orbstack:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/OrbStack.app ]] || brew install orbstack"
+      uninstall:
+        brew: "brew uninstall orbstack"
 
     slack:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/Slack.app ]] || brew install slack"
+      uninstall:
+        brew: "brew uninstall slack"
 
     zoom:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/zoom.us.app ]] || brew install zoom"
+      uninstall:
+        brew: "brew uninstall zoom"
 
     opencode-work:
       os: ["mac"]
@@ -367,3 +427,5 @@ config:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
+      uninstall:
+        brew: "brew uninstall cleanshot"

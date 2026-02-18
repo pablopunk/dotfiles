@@ -60,7 +60,7 @@
 
     // 🔍 Contextual grep: runs 2-5 in parallel
     "explore": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/xiaomi/mimo-v2-flash"
     },
 
     // 📝 Code review: repetitive, doesn't need a top model
@@ -70,7 +70,7 @@
 
     // ⚙️ Executes already-planned tasks
     "atlas": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/xiaomi/mimo-v2-flash"
     },
 
     // 📄 Docs and technical writing
@@ -96,9 +96,9 @@
     "artistry": {
       "model": "openrouter/moonshotai/kimi-k2.5"
     },
-    // Trivial tasks → MiniMax (fast, dirt cheap)
+    // Trivial tasks
     "quick": {
-      "model": "openrouter/minimax/minimax-m2.5"
+      "model": "openrouter/xiaomi/mimo-v2-flash"
     },
     // Documentation → MiniMax (cheap, good enough)
     "writing": {

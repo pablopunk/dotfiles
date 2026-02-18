@@ -9,7 +9,7 @@
 
     // 🎯 Orchestrator: delegates, coordinates, maintains TODO list
     "sisyphus": {
-      "model": "openrouter/z-ai/glm-5"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
 
     // 📋 Planner: creates multi-step plans with dependency graphs

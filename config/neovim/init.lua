@@ -481,7 +481,7 @@ local function pi_nvim()
   -- add({ source = "~/src/pi.nvim" })
   require("pi").setup({
     provider = "openrouter",
-    model = "moonshotai/kimi-k2.5",
+    model = "google/gemini-3-flash-preview",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

@@ -7,7 +7,7 @@
 
     // 🎯 Orchestrator: delegates, coordinates, maintains global plan
     "sisyphus": {
-      "model": "openai/gpt-5.2"
+      "model": "anthropic/claude-sonnet-4-6"
     },
 
     // 📋 Planner: creates multi-step plans with dependency graphs

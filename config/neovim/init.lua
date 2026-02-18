@@ -481,7 +481,7 @@ local function pi_nvim()
   -- add({ source = "~/src/pi.nvim" })
   require("pi").setup({
     provider = "openrouter",
-    model = "google/gemini-3-flash-preview",
+    model = "xiaomi/mimo-v2-flash",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

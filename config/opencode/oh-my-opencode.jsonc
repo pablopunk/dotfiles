@@ -14,7 +14,7 @@
 
     // 📋 Planner: creates multi-step plans with dependency graphs
     "prometheus": {
-      "model": "openrouter/z-ai/glm-5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // 🐛 Debugger/Advisor: read-only, needs maximum IQ
@@ -24,7 +24,7 @@
 
     // ✅ Pre-planning: detects ambiguities and hidden requirements
     "metis": {
-      "model": "openrouter/z-ai/glm-5"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
 
     // ============================================================

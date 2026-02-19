@@ -1,107 +1,65 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
-    // ============================================================
-    // TIER 1: STRATEGIC THINKERS — need max intelligence & reasoning
-    // ============================================================
-
-    // 🎯 Orchestrator: delegates, coordinates, maintains global plan
     "sisyphus": {
       "model": "anthropic/claude-sonnet-4-6"
     },
-
-    // 📋 Planner: creates multi-step plans with dependency graphs
     "prometheus": {
       "model": "anthropic/claude-opus-4-6"
     },
-
-    // 🐛 Debugger/Advisor: read-only, needs deepest reasoning
     "oracle": {
       "model": "anthropic/claude-opus-4-6"
     },
-
-    // ✅ Pre-planning: detects ambiguities and hidden requirements
     "metis": {
       "model": "anthropic/claude-opus-4-6"
     },
-
-    // ============================================================
-    // TIER 2: DEEP WORKERS — need strong coding + execution speed
-    // ============================================================
-
-    // 🔨 Deep autonomous worker: heavy lifting & end-to-end implementation
     "hephaestus": {
       "model": "openai/gpt-5.3-codex"
     },
-
     "multimodal-looker": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
-
-    // 📚 Researcher: explores docs & open source patterns — sustained focus
     "librarian": {
       "model": "anthropic/claude-haiku-4-5"
     },
-
-    // 🎨 Frontend/React/UI: Sonnet excels at sustained agentic coding
     "frontend-ui-ux-engineer": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
-
-    // ============================================================
-    // TIER 3: FAST EXECUTORS — high volume, cost optimized
-    // ============================================================
-
-    // 🔍 Fast pattern search: runs 2-5 in parallel, speed matters
     "explore": {
       "model": "anthropic/claude-haiku-4-5"
     },
-
-    // 📝 Code review: repetitive validation, doesn't need frontier IQ
     "momus": {
       "model": "anthropic/claude-haiku-4-5"
     },
-
-    // ⚙️ Task executor: runs already-planned tasks systematically
     "atlas": {
       "model": "anthropic/claude-haiku-4-5"
     },
-
-    // 📄 Technical writing: docs, prose, READMEs — GPT-5.2 writes well
     "document-writer": {
       "model": "openai/gpt-5.2"
     }
   },
-
   "categories": {
-    // Frontend/UI → Sonnet
     "visual-engineering": {
-      "model": "anthropic/claude-sonnet-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "ultrabrain": {
       "model": "anthropic/claude-opus-4-6"
     },
-    // Deep autonomous work → GPT-5.3 Codex
     "deep": {
       "model": "openai/gpt-5.3-codex"
     },
-    // Creative tasks → Opus 4.6
     "artistry": {
       "model": "anthropic/claude-opus-4-6"
     },
-    // Trivial/fast tasks → Haiku
     "quick": {
       "model": "anthropic/claude-haiku-4-5"
     },
-    // Documentation → GPT-5.2
     "writing": {
       "model": "openai/gpt-5.2"
     },
-    // Catch-all low effort → Haiku
     "unspecified-low": {
       "model": "anthropic/claude-haiku-4-5"
     },
-    // Catch-all high effort → Opus 4.6
     "unspecified-high": {
       "model": "anthropic/claude-opus-4-6"
     }

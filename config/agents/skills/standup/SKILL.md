@@ -1,5 +1,5 @@
 ---
-name: Standup
+name: standup
 description: Creates a quick summary of the user's activity on Linear and Github, usually for yesterday and today, but not limited.
 ---
 

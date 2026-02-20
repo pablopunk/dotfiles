@@ -14,7 +14,7 @@
       "model": "anthropic/claude-opus-4-6"
     },
     "hephaestus": {
-      "model": "openai/gpt-5.3-codex"
+      "model": "anthropic/claude-opus-4-6"
     },
     "multimodal-looker": {
       "model": "anthropic/claude-sonnet-4-6"
@@ -46,7 +46,7 @@
       "model": "anthropic/claude-opus-4-6"
     },
     "deep": {
-      "model": "openai/gpt-5.3-codex"
+      "model": "anthropic/claude-opus-4-6"
     },
     "artistry": {
       "model": "anthropic/claude-opus-4-6"

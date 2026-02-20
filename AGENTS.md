@@ -112,12 +112,34 @@ config:
 dot                           # Install default "*" profile (runs on all machines)
 dot --dry-run                 # Preview changes without applying
 dot --profiles                # List all available profiles
-dot work                      # Install "*" profile + "work" profile
+dot work gui                  # Install "*" + "work" + "gui" profiles
 dot work laptop               # Install "*" + "work" + "laptop" profiles
 dot work git                  # Install "*" + "work" + any tool matching "git"
 dot -v --dry-run work         # Verbose preview
 dot --dry-run -v              # Verbose dry-run of default profile
 ```
+
+**⚠️ CRITICAL: Profile Installation Behavior**
+
+`dot` installs **EXACTLY** the profiles you specify (plus the `*` profile which always runs):
+
+```bash
+# WRONG - This REMOVES gui profile if you had it installed before
+dot work              # Only installs: "*" + "work"
+
+# CORRECT - Specify ALL profiles you want active
+dot work gui          # Installs: "*" + "work" + "gui"
+```
+
+**Why this matters:**
+- Running `dot work` when you previously had `gui` installed will **UNINSTALL** gui components
+- `dot` is declarative: it makes the system match EXACTLY what you specify
+- Always include ALL active profiles in the command
+
+**Best practice:**
+- Check current profiles: `dot --dry-run -v` (shows what's installed)
+- List all profiles: `dot --profiles`
+- Install all needed profiles: `dot work gui rice` (example)
 
 ## Purpose
 
@@ -167,12 +189,23 @@ profiles:
 
 ### How to Use
 
+**⚠️ CRITICAL:** `dot` is **declarative** - it installs exactly what you specify and uninstalls everything else.
+
 ```bash
-dot              # Install all tools from "*" profile
-dot work         # Install "*" profile + "work" profile (cumulative)
-dot work laptop  # Install "*" + "work" + "laptop" profiles (all combined)
-dot work git     # Install "*" + "work" profiles, plus any tool matching "git"
+dot              # Install "*" profile ONLY (uninstalls other profiles)
+dot work gui     # Install "*" + "work" + "gui" (uninstalls other profiles like "rice")
+dot work laptop  # Install "*" + "work" + "laptop" (uninstalls other profiles)
+dot work git     # Install "*" + "work" + any component matching "git"
 ```
+
+**Common mistake:**
+```bash
+# You had: dot work gui (both profiles active)
+# You run: dot work
+# Result: gui profile is UNINSTALLED
+```
+
+**Always specify ALL active profiles when running `dot`.**
 
 ## Common Operations
 

@@ -167,8 +167,8 @@ config:
       link:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
         "./config/opencode/oh-my-opencode.jsonc": "~/.config/opencode/oh-my-opencode.jsonc"
-        "./config/opencode/05-opencode.sh": "~/.zshrc.d/05-opencode.sh"
         "./config/opencode/sounds/": "~/.config/opencode/sounds"
+        "./config/opencode/opencode.sh": "~/.zshrc.d/05-opencode.sh"
       postlink: |
         mkdir -p ~/.config/opencode
         sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config/opencode/opencode-notifier.json
@@ -418,14 +418,13 @@ config:
     opencode-work:
       os: ["mac"]
       link:
-        "./config/opencode/oh-my-opencode.maze.jsonc":
-          - "~/src/maze/.opencode/oh-my-opencode.json"
-          - "~/src/maze/mobile-app/.opencode/oh-my-opencode.jsonc"
-          - "~/src/maze/monorepo/.opencode/oh-my-opencode.jsonc"
-        "./config/opencode/opencode.maze.jsonc":
-          - "~/src/maze/opencode.jsonc"
-          - "~/src/maze/mobile-app/opencode.jsonc"
-          - "~/src/maze/monorepo/opencode.jsonc"
+        "./config/opencode/opencode.work.jsonc": "~/.config-work/opencode/opencode.jsonc"
+        "./config/opencode/oh-my-opencode.work.jsonc": "~/.config-work/opencode/oh-my-opencode.jsonc"
+        "./config/opencode/sounds/": "~/.config-work/opencode/sounds"
+      postlink: |
+        mkdir -p ~/.config-work/opencode
+        mkdir -p ~/.local/share-work/opencode
+        sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config-work/opencode/opencode-notifier.json
 
     cleanshot:
       os: ["mac"]

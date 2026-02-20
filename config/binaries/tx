@@ -1,6 +1,32 @@
 #!/usr/bin/env bash
+#
+# tx - Tmux session manager with fzf directory selection
+#
+# This tool helps you quickly navigate to existing directories and create new
+# projects, all within tmux sessions. It uses fzf for interactive selection.
+#
+# FEATURES:
+#   - List and switch between existing tmux sessions
+#   - Browse and select from configured directories (~/src, ~/Desktop, etc.)
+#   - Create new folders on-the-fly by typing a name and pressing Enter
+#   - Support for nested paths (e.g., "mynewproject/backend" creates ~/src/mynewproject/backendclient)
+#   - Clone git repositories by pasting a URL (HTTPS or SSH)
+#
+# USAGE:
+#   tx                  # Interactive mode: list tmux sessions or directories
+#   tx <name>           # Search for matching directory/session
+#   tx my-project       # Creates ~/src/my-project if it doesn't exist
+#   tx mynewproject/client      # Creates ~/src/mynewproject/client
+#   tx https://github...# Clones repo to ~/src/ and switches to it
+#
+# CONFIGURATION:
+#   Set PROJECTS variable below to change where new projects are created.
+#
 
-top_level_dirs="$HOME/src $HOME/src/maze $HOME/src/maze/monorepo-worktrees $HOME/src/raycast $HOME/Desktop $HOME/Downloads $HOME"
+# Configurable directory for new projects
+PROJECTS="$HOME/src"
+
+top_level_dirs="$PROJECTS $PROJECTS/maze $PROJECTS/maze/monorepo-worktrees $PROJECTS/raycast $HOME/Desktop $HOME/Downloads $HOME"
 recursive_dirs="$HOME/.worktrees"
 
 for dir in $top_level_dirs $recursive_dirs; do
@@ -16,6 +42,114 @@ all_directories() {
 
 fzf_short() {
   fzf --height=10 --reverse "$@"
+}
+
+# Run fzf with --print-query to accept arbitrary input
+# Outputs the query on first line, selection on second line (if any)
+fzf_with_query() {
+  local result
+  result=$(all_directories | fzf --height=10 --reverse --print-query "$@")
+
+  # Output is: query line (line 1), selection (line 2) - if there is a selection
+  # If no selection (user pressed enter with no match), only query line is output
+  echo "$result"
+}
+
+# Process fzf output: returns the final path to use
+# First line is always the query, second line is selection if exists
+# Returns empty string if processing fails
+process_fzf_result() {
+  local fzf_output="$1"
+  local query
+  local selection
+  local result
+
+  # Get query (first line)
+  query=$(echo "$fzf_output" | head -n1)
+
+  # Get selection (second line, if exists)
+  selection=$(echo "$fzf_output" | tail -n1)
+
+  # If selection is different from query, user selected an existing directory
+  if [[ "$selection" != "$query" && -n "$selection" ]]; then
+    echo "$selection"
+    return 0
+  fi
+
+  # Otherwise, process the query
+  result=$(handle_input "$query")
+  if [[ $? -ne 0 ]] || [[ -z "$result" ]]; then
+    return 1
+  fi
+  echo "$result"
+}
+
+# Handle user input - could be path, URL, or simple name
+# Returns the path on success, empty string on failure
+handle_input() {
+  local input="$1"
+
+  # Expand ~ if present
+  input=$(echo "$input" | sed "s|~|$HOME|g")
+
+  # Check if it's a URL (http://, https://, git@)
+  if [[ "$input" =~ ^https?:// ]] || [[ "$input" =~ ^git@ ]]; then
+    handle_url "$input"
+    return
+  fi
+
+  # Check if it's already an absolute path or relative path with /
+  if [[ "$input" =~ ^/ ]] || [[ "$input" =~ / ]]; then
+    # It's a path - ensure it exists
+    if [[ ! -d "$input" ]]; then
+      if ! mkdir -p "$input" 2>/dev/null; then
+        echo "Error: Failed to create directory '$input'" >&2
+        return 1
+      fi
+    fi
+    echo "$input"
+    return
+  fi
+
+  # Simple name - create in PROJECTS
+  local new_path="$PROJECTS/$input"
+  if ! mkdir -p "$new_path" 2>/dev/null; then
+    echo "Error: Failed to create directory '$new_path'" >&2
+    return 1
+  fi
+  echo "$new_path"
+}
+
+# Handle git URL - clone to PROJECTS
+# Returns the path on success, empty string on failure
+handle_url() {
+  local url="$1"
+  local repo_name
+
+  # Extract repo name from URL
+  # Handle https://github.com/user/repo or git@github.com:user/repo
+  if [[ "$url" =~ /([^/]+)\.git$ ]]; then
+    repo_name="${BASH_REMATCH[1]}"
+  elif [[ "$url" =~ /([^/]+)$ ]]; then
+    repo_name="${BASH_REMATCH[1]}"
+  else
+    repo_name="repo-$(date +%s)"
+  fi
+
+  local clone_path="$PROJECTS/$repo_name"
+
+  if [[ -d "$clone_path" ]]; then
+    echo "$clone_path"
+    return
+  fi
+
+  echo "Cloning $url..." >&2
+  if git clone "$url" "$clone_path" 2>/dev/null; then
+    echo "$clone_path"
+  else
+    echo "Error: Failed to clone repository '$url'" >&2
+    return 1
+  fi
 }
 
 go_to_session() {
@@ -63,20 +197,30 @@ if [[ $# -eq 1 ]]; then
     selected="$dir_matches"
   elif [[ $match_count -gt 1 ]]; then
     # If more than one match, use fzf for selection
-    selected=$(echo "$dir_matches" | fzf_short -q "$1")
+    fzf_result=$(echo "$dir_matches" | fzf_with_query -q "$1")
+    selected=$(process_fzf_result "$fzf_result")
   else
     # If no specific match, show all directories with fzf
-    selected=$(all_directories | fzf_short)
+    fzf_result=$(fzf_with_query)
+    selected=$(process_fzf_result "$fzf_result")
   fi
 else
   # If no argument is provided, list all directories for selection
-  selected=$(all_directories | fzf_short)
+  fzf_result=$(fzf_with_query)
+  selected=$(process_fzf_result "$fzf_result")
 fi
 
 [[ -z $selected ]] && exit 0
 
 # Convert the selected path back to an absolute path if it was shortened
 selected=$(echo "$selected" | sed "s|~|$HOME|g")
+
+# Validate that the selected path exists and is a directory
+if [[ ! -d "$selected" ]]; then
+  echo "Error: Directory '$selected' does not exist" >&2
+  exit 1
+fi
+
 # Session name is the last folder name of the selected path
 selected_name=$(basename "$selected")
 

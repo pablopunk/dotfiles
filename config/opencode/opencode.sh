@@ -18,6 +18,10 @@ oc() {
   fi
 }
 
+occ() {
+  oc --continue
+}
+
 ocp() {
   env -u ANTHROPIC_API_KEY -u OPENAI_API_KEY -u GOOGLE_API_KEY -u OPENROUTER_API_KEY -u OPENCODE_API_KEY \
   opencode "$@"

@@ -60,7 +60,7 @@
 
     // 🔍 Contextual grep: runs 2-5 in parallel
     "explore": {
-      "model": "openai/gpt-4.1-mini"
+      "model": "gpt-5.1-codex-mini"
     },
 
     // 📝 Code review: repetitive, doesn't need a top model

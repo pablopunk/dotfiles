@@ -89,6 +89,11 @@ process_fzf_result() {
 handle_input() {
   local input="$1"
 
+  # If input is empty, exit without creating anything
+  if [[ -z "$input" ]]; then
+    return 1
+  fi
+
   # Expand ~ if present
   input=$(echo "$input" | sed "s|~|$HOME|g")
 

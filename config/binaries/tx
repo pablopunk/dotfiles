@@ -173,12 +173,28 @@ go_to_session() {
 if [[ $# -eq 0 ]]; then
   # List tmux sessions for selection if any exist
   # You can ctrl+c to skip selecting a tmux session (and just select a directory instead)
+  # You can also type/paste a URL, path, or new folder name
   tmux_sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
   if [[ -n $tmux_sessions ]]; then
-    selected_session=$(echo "$tmux_sessions" | fzf_short --prompt="tmux sessions: ")
-    if [[ -n $selected_session ]]; then
-      go_to_session "$selected_session"
-      exit 0
+    fzf_result=$(echo "$tmux_sessions" | fzf --height=10 --reverse --print-query --prompt="tmux sessions: ")
+    if [[ -n $fzf_result ]]; then
+      # Check if a session was selected (second line) or just query entered
+      query=$(echo "$fzf_result" | head -n1)
+      selection=$(echo "$fzf_result" | tail -n1)
+
+      if [[ "$selection" != "$query" && -n "$selection" ]]; then
+        # User selected an existing tmux session
+        go_to_session "$selection"
+        exit 0
+      else
+        # User typed something that wasn't a session - process it as input
+        selected=$(handle_input "$query")
+        if [[ -n "$selected" && -d "$selected" ]]; then
+          selected_name=$(basename "$selected")
+          go_to_session "$selected_name"
+          exit 0
+        fi
+      fi
     fi
   fi
 fi

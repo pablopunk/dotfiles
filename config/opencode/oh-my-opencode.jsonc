@@ -50,22 +50,21 @@
 
     // ============================================================
     // TIER 3: EXECUTORS — high volume, cost optimized
-    // MiniMax M2.5: $0.15/$1.20, 80.2% SWE-Bench, fast
     // ============================================================
 
     // 📚 Research docs: high volume, read-only
     "librarian": {
-      "model": "gpt-5.1-codex-mini"
+      "model": "openai/gpt-5.1-codex-mini"
     },
 
     // 🔍 Contextual grep: runs 2-5 in parallel
     "explore": {
-      "model": "gpt-5.1-codex-mini"
+      "model": "openai/gpt-5.1-codex-mini"
     },
 
     // 📝 Code review: repetitive, doesn't need a top model
     "momus": {
-      "model": "gpt-5.1-codex-mini"
+      "model": "openai/gpt-5.1-codex-mini"
     },
 
     // ⚙️ Executes already-planned tasks

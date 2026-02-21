@@ -187,13 +187,18 @@ if [[ $# -eq 0 ]]; then
         go_to_session "$selection"
         exit 0
       else
-        # User typed something that wasn't a session - process it as input
-        selected=$(handle_input "$query")
-        if [[ -n "$selected" && -d "$selected" ]]; then
-          selected_name=$(basename "$selected")
-          go_to_session "$selected_name"
-          exit 0
+        # Check if it's a URL - handle immediately
+        if [[ "$query" =~ ^https?:// ]] || [[ "$query" =~ ^git@ ]]; then
+          selected=$(handle_url "$query")
+          if [[ -n "$selected" && -d "$selected" ]]; then
+            selected_name=$(basename "$selected")
+            go_to_session "$selected_name"
+            exit 0
+          fi
         fi
+        # Otherwise, pass the query to the directory fzf (waterfall)
+        # Continue to the directory selection below with the query pre-filled
+        set -- "$query"
       fi
     fi
   fi
@@ -217,12 +222,12 @@ if [[ $# -eq 1 ]]; then
   if [[ $match_count -eq 1 ]]; then
     selected="$dir_matches"
   elif [[ $match_count -gt 1 ]]; then
-    # If more than one match, use fzf for selection
+    # If more than one match, use fzf for selection with query pre-filled
     fzf_result=$(echo "$dir_matches" | fzf_with_query -q "$1")
     selected=$(process_fzf_result "$fzf_result")
   else
-    # If no specific match, show all directories with fzf
-    fzf_result=$(fzf_with_query)
+    # If no specific match, show all directories with fzf and query pre-filled
+    fzf_result=$(fzf_with_query -q "$1")
     selected=$(process_fzf_result "$fzf_result")
   fi
 else

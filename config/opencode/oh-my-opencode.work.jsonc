@@ -1,67 +1,122 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "agents": {
+    // Orchestrator that delegates, coordinates, and maintains TODO list
     "sisyphus": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "anthropic/claude-sonnet-4-6",
+      "reasoningEffort": "high"
     },
+    // Planner that creates multi-step plans with dependency graphs
     "prometheus": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Debugger/Advisor - read-only, needs maximum IQ
     "oracle": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Pre-planning agent that detects ambiguities and hidden requirements
     "metis": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Deep autonomous worker that explores, understands, and implements
     "hephaestus": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Analyzes screenshots, PDFs, and diagrams
     "multimodal-looker": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "anthropic/claude-sonnet-4-6",
+      "reasoningEffort": "medium"
     },
-    "librarian": {
-      "model": "anthropic/claude-haiku-4-5"
-    },
+    // Frontend/React/UI engineer - visual programming and UI design
     "frontend-ui-ux-engineer": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "anthropic/claude-sonnet-4-6",
+      "reasoningEffort": "medium"
     },
+    // Research docs - high volume, read-only
+    "librarian": {
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
+    },
+    // Contextual grep - runs 2-5 in parallel
     "explore": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
     },
+    // Code review - repetitive, doesn't need a top model
     "momus": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
     },
+    // Executes already-planned tasks
     "atlas": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
     },
+    // Documentation and technical writing
     "document-writer": {
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.2",
+      "reasoningEffort": "medium"
+    },
+    // Creates execution plans from tasks
+    "plan": {
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
+    },
+    // Junior orchestrator for simpler delegation tasks
+    "sisyphus-junior": {
+      "model": "anthropic/claude-sonnet-4-6",
+      "reasoningEffort": "medium"
+    },
+    // Builds and implements code from plans
+    "OpenCode-Builder": {
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     }
   },
   "categories": {
+    // Frontend, React, UI — visual programming and multimodal analysis
     "visual-engineering": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "anthropic/claude-sonnet-4-6",
+      "reasoningEffort": "medium"
     },
+    // Complex logic, algorithms, and deep reasoning tasks
     "ultrabrain": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Autonomous deep work, implementation, and exploration
     "deep": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     },
+    // Creative tasks, design, and artistic work
     "artistry": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "medium"
     },
+    // Trivial, low-effort, quick tasks
     "quick": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
     },
+    // Documentation and technical writing
     "writing": {
-      "model": "openai/gpt-5.2"
+      "model": "openai/gpt-5.2",
+      "reasoningEffort": "medium"
     },
+    // Catch-all for low-effort unclassified tasks
     "unspecified-low": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-haiku-4-5",
+      "reasoningEffort": "low"
     },
+    // Catch-all for high-effort unclassified tasks
     "unspecified-high": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "anthropic/claude-opus-4-6",
+      "reasoningEffort": "high"
     }
   }
 }

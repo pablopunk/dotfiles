@@ -208,6 +208,9 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
   if.window-title-regex-substring = "Finder"
   run = 'layout floating'
+[[on-window-detected]]
+  if.window-title-regex-substring = "Mouseless"
+  run = 'layout floating'
 
 # Assign apps on particular workspaces
 [[on-window-detected]]

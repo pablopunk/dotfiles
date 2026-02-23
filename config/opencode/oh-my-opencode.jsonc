@@ -3,120 +3,97 @@
   "agents": {
     // Orchestrator that delegates, coordinates, and maintains TODO list
     "sisyphus": {
-      "model": "openrouter/moonshotai/kimi-k2.5",
-      "reasoningEffort": "high"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
     // Planner that creates multi-step plans with dependency graphs
     "prometheus": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.2"
     },
     // Debugger/Advisor - read-only, needs maximum IQ
     "oracle": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.3-codex"
     },
     // Pre-planning agent that detects ambiguities and hidden requirements
     "metis": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.2"
     },
     // Deep autonomous worker that explores, understands, and implements
     "hephaestus": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.3-codex"
     },
     // Analyzes screenshots, PDFs, and diagrams
     "multimodal-looker": {
-      "model": "openrouter/moonshotai/kimi-k2.5",
-      "reasoningEffort": "medium"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
     // Frontend/React/UI engineer - visual programming and UI design
     "frontend-ui-ux-engineer": {
-      "model": "openrouter/moonshotai/kimi-k2.5",
-      "reasoningEffort": "medium"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
     // Research docs - high volume, read-only
     "librarian": {
-      "model": "openai/gpt-5.1-codex-mini",
-      "reasoningEffort": "low"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     // Contextual grep - runs 2-5 in parallel
     "explore": {
-      "model": "openai/gpt-5.1-codex-mini",
-      "reasoningEffort": "low"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     // Code review - repetitive, doesn't need a top model
     "momus": {
-      "model": "openai/gpt-5.1-codex-mini",
-      "reasoningEffort": "low"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     // Executes already-planned tasks
     "atlas": {
-      "model": "openai/gpt-5.1-codex-mini",
-      "reasoningEffort": "low"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     // Documentation and technical writing
     "document-writer": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "medium"
+      "model": "openai/gpt-5.2"
     },
     // Creates execution plans from tasks
     "plan": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.2"
     },
     // Junior orchestrator for simpler delegation tasks
     "sisyphus-junior": {
-      "model": "openai/gpt-5.1-codex-mini",
-      "reasoningEffort": "medium"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     // Builds and implements code from plans
     "OpenCode-Builder": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.3-codex"
     }
   },
   "categories": {
     // Frontend, React, UI — visual programming and multimodal analysis
     "visual-engineering": {
-      "model": "openrouter/moonshotai/kimi-k2.5",
-      "reasoningEffort": "medium"
+      "model": "openrouter/moonshotai/kimi-k2.5"
     },
     // Complex logic, algorithms, and deep reasoning tasks
     "ultrabrain": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.2"
     },
     // Autonomous deep work, implementation, and exploration
     "deep": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.3-codex"
     },
     // Creative tasks, design, and artistic work
     "artistry": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "medium"
+      "model": "openai/gpt-5.3-codex"
     },
     // Trivial, low-effort, quick tasks
     "quick": {
-      "model": "openrouter/xiaomi/mimo-v2-flash",
-      "reasoningEffort": "low"
+      "model": "openrouter/xiaomi/mimo-v2-flash"
     },
     // Documentation and technical writing
     "writing": {
-      "model": "openai/gpt-5.2",
-      "reasoningEffort": "medium"
+      "model": "openai/gpt-5.2"
     },
     // Catch-all for low-effort unclassified tasks
     "unspecified-low": {
-      "model": "openrouter/minimax/minimax-m2.5",
-      "reasoningEffort": "low"
+      "model": "openrouter/minimax/minimax-m2.5"
     },
     // Catch-all for high-effort unclassified tasks
     "unspecified-high": {
-      "model": "openai/gpt-5.3-codex",
-      "reasoningEffort": "high"
+      "model": "openai/gpt-5.3-codex"
     }
   }
 }

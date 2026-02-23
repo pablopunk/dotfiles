@@ -90,6 +90,7 @@ if [[ -z "$selected_worktree" ]]; then
   return
 fi
 
+local newly_created=false
 if [[ "$selected_worktree" == "main" ]]; then
   selected_path=$(echo "$worktree_list" | awk '$3 == "[main]" {print $1}')
 else
@@ -103,6 +104,12 @@ else
       git worktree add "$worktree_dir" -b "$selected_worktree"
     fi
     selected_path="$worktree_dir"
+    newly_created=true
   fi
 fi
 cd "$selected_path"
+
+# Run mise trust only if worktree was newly created and mise.toml or .tool-versions exists
+if [[ "$newly_created" == true && (-f "mise.toml" || -f ".tool-versions") ]]; then
+  mise trust
+fi

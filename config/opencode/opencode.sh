@@ -10,8 +10,7 @@ export OPENCODE_PORT=4096
 
 oc() {
   local current_dir="${PWD}"
-
-  if [[ "${current_dir}" == "${HOME}/src/maze"* ]]; then
+  if [[ "${current_dir}" == "${HOME}/src/maze"* ]] || [[ "${current_dir}" == "${HOME}/.worktrees/monorepo"* ]]; then
     ocw "$@"
   else
     ocp "$@"

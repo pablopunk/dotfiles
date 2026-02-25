@@ -60,6 +60,11 @@
       "url": "https://mcp.grep.app",
       "enabled": true
     },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true
+    },
     "figma": {
       "type": "local",
       "command": ["npx", "-y", "figma-mcp"],

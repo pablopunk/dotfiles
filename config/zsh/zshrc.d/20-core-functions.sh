@@ -39,7 +39,7 @@ function gcm {
 # Git add all and commit with message
 function gcam {
   if [[ "$*" == *--amend* ]]; then
-    git commit -m"$@"
+    git commit "$@"
   else
     git add -A
     git commit -m "$*"
@@ -53,7 +53,7 @@ function gcamm {
 
 # Clone from personal GitHub and cd into directory
 function gclone {
-  git clone https://github.com/pablopunk/$1 && cd $1
+  git clone "https://github.com/pablopunk/$1" && cd "$1" || return 1
 }
 
 # Copy to clipboard (cross-platform)

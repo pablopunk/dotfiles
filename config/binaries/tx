@@ -26,17 +26,31 @@
 # Configurable directory for new projects
 PROJECTS="$HOME/src"
 
-top_level_dirs="$PROJECTS $PROJECTS/maze $PROJECTS/maze/monorepo-worktrees $PROJECTS/raycast $HOME/Desktop $HOME/Downloads $HOME"
-recursive_dirs="$HOME/.worktrees"
+top_level_dirs=(
+  "$PROJECTS"
+  "$PROJECTS/maze"
+  "$PROJECTS/maze/monorepo-worktrees"
+  "$PROJECTS/raycast"
+  "$HOME/Desktop"
+  "$HOME/Downloads"
+  "$HOME"
+)
+recursive_dirs=(
+  "$HOME/.worktrees"
+)
 
-for dir in $top_level_dirs $recursive_dirs; do
-  mkdir -p $dir
+for dir in "${top_level_dirs[@]}" "${recursive_dirs[@]}"; do
+  mkdir -p "$dir"
 done
 
 all_directories() {
   {
-    find $top_level_dirs -mindepth 1 -maxdepth 1 -type d
-    find $recursive_dirs -mindepth 1 -maxdepth 2 -type d
+    for dir in "${top_level_dirs[@]}"; do
+      find "$dir" -mindepth 1 -maxdepth 1 -type d
+    done
+    for dir in "${recursive_dirs[@]}"; do
+      find "$dir" -mindepth 1 -maxdepth 2 -type d
+    done
   } | sed "s|$HOME|~|g" | sed 's|//|/|g'
 }
 
@@ -77,8 +91,7 @@ process_fzf_result() {
   fi
 
   # Otherwise, process the query
-  result=$(handle_input "$query")
-  if [[ $? -ne 0 ]] || [[ -z "$result" ]]; then
+  if ! result=$(handle_input "$query") || [[ -z "$result" ]]; then
     return 1
   fi
   echo "$result"
@@ -95,7 +108,7 @@ handle_input() {
   fi
 
   # Expand ~ if present
-  input=$(echo "$input" | sed "s|~|$HOME|g")
+  input="${input/#~/$HOME}"
 
   # Check if it's a URL (http://, https://, git@)
   if [[ "$input" =~ ^https?:// ]] || [[ "$input" =~ ^git@ ]]; then
@@ -166,7 +179,11 @@ go_to_session() {
     tmux new-session -d -s "$session_name" -c "$selected"
   fi
   # Attach or switch to the session based on whether we're inside TMUX
-  [[ -z $TMUX ]] && tmux attach -t "$session_name" || tmux switch-client -t "$session_name"
+  if [[ -z "$TMUX" ]]; then
+    tmux attach -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
   exit 0
 }
 
@@ -239,7 +256,7 @@ fi
 [[ -z $selected ]] && exit 0
 
 # Convert the selected path back to an absolute path if it was shortened
-selected=$(echo "$selected" | sed "s|~|$HOME|g")
+selected="${selected/#~/$HOME}"
 
 # Validate that the selected path exists and is a directory
 if [[ ! -d "$selected" ]]; then

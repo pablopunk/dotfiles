@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 if [ $# -eq 0 ]; then
-  cmd=$(basename $0)
+  cmd=$(basename "$0")
   echo "Usage: $cmd <input-file.mp4>"
   exit 1
 fi
 
 input="$*"
 
-extension=$(basename "$input" | awk -F . '{print $NF}')
-
-# if output is video.mp4, then output is 'video (compressed).mp4'
-output=$(echo "$input" | sed "s/\.$extension/ (compressed).$extension/")
+if [[ "$input" == *.* ]]; then
+  output="${input%.*} (compressed).${input##*.}"
+else
+  output="$input (compressed)"
+fi
 
 ffmpeg -i "$input" -vcodec libx264 -crf 30 "$output"
 
@@ -24,12 +25,12 @@ file_to_clipboard() {
 }
 
 normalize_number() {
-  echo $1 | sed 's/,/./'
+  echo "${1//,/.}"
 }
 before_kbytes=$(du -k "$input" | awk '{print $1}')
 after_kbytes=$(du -k "$output" | awk '{print $1}')
-before_kbytes=$(normalize_number $before_kbytes)
-after_kbytes=$(normalize_number $after_kbytes)
+before_kbytes=$(normalize_number "$before_kbytes")
+after_kbytes=$(normalize_number "$after_kbytes")
 if [ "$before_kbytes" -eq 0 ]; then
   echo -e "\033[31mError: Input size is zero, cannot calculate savings.\033[0m"
   exit 1

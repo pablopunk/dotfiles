@@ -42,7 +42,8 @@ read -p "Profiles to install (empty for default): " -r profiles_input < /dev/tty
 
 # Run dot
 if [[ -n "$profiles_input" ]]; then
-  "$DOT_BIN" $profiles_input
+  read -r -a profiles <<< "$profiles_input"
+  "$DOT_BIN" "${profiles[@]}"
 else
   "$DOT_BIN"
 fi

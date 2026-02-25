@@ -1,6 +1,6 @@
 # vim:fileencoding=utf-8:ft=zsh
 if [[ -z "$1" ]]; then
   echo "Usage: defaults_search <search>"
-  return
+  return 1
 fi
-defaults domains | tr ', ' '\n' | grep -i $1
+defaults domains | tr ', ' '\n' | grep -i -- "$1"

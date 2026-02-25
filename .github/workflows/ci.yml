@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  shell-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install zsh
+        run: sudo apt-get update && sudo apt-get install -y zsh
+
+      - name: Validate bash syntax
+        run: |
+          set -euo pipefail
+          bash -n install.sh
+          bash -n benchmark-zsh.sh
+          for file in config/binaries/*; do
+            bash -n "$file"
+          done
+
+      - name: Validate zsh syntax
+        run: |
+          set -euo pipefail
+          zsh -n config/zsh/zshrc
+          for file in config/zsh/zshrc.d/*.sh config/opencode/opencode.sh config/zsh-ai/60-zsh-ai.sh config/java/99-java.sh; do
+            zsh -n "$file"
+          done
+
+  dot-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create stub package manager commands
+        run: |
+          set -euo pipefail
+          mkdir -p .ci/bin
+          for cmd in brew dnf cargo bun osascript defaults open; do
+            printf '#!/usr/bin/env bash\nexit 0\n' > ".ci/bin/$cmd"
+            chmod +x ".ci/bin/$cmd"
+          done
+
+      - name: Install dot
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
+
+      - name: Run dry-run checks for all profiles
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot --profiles
+          dot --dry-run -v
+          dot --dry-run -v gui
+          dot --dry-run -v work
+          dot --dry-run -v rice
+          dot --dry-run -v work gui rice

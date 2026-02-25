@@ -74,13 +74,6 @@ config:
       link:
         "./config/zsh-ai/60-zsh-ai.sh": "~/.zshrc.d/60-zsh-ai.sh"
 
-    zerobrew:
-      os: ["mac"]
-      install:
-        curl: "curl -fsSL https://zerobrew.rs/install | bash"
-      link:
-        "./config/zerobrew/25-zb.sh": "~/.zshrc.d/25-zb.sh"
-
     tmux:
       install:
         brew: "brew install tmux bash"

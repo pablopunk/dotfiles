@@ -1,5 +1,5 @@
 {
-  "plugin": ["oh-my-opencode@latest", "opencode-plugin-auto-update@latest", "@mohak34/opencode-notifier@latest"],
+  "plugin": ["@mohak34/opencode-notifier@latest"],
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
   "autoupdate": true,
@@ -9,7 +9,7 @@
   // === TUI ===
   "tui": {
     "scroll_acceleration": {
-      "enabled": true  // macOS-style momentum scrolling
+      "enabled": true
     }
   },
   // === Permissions ===
@@ -21,7 +21,7 @@
       "rm -rf /*": "deny",
       "rm -rf ~": "deny",
       "rm -rf ~/*": "deny",
-      ":(){:|:&};:": "deny"  // fork bomb, just in case
+      ":(){:|:&};:": "deny"
     }
   },
   "mcp": {
@@ -49,15 +49,15 @@
   },
   // === Providers ===
   "provider": {
-    "chatjimmy": {
+    "free": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "ChatJimmy (local)",
+      "name": "Free AI API (local)",
       "options": {
         "baseURL": "http://localhost:3000/v1"
       },
       "models": {
-        "llama3.1-8B": {
-          "name": "Llama 3.1 8B"
+        "free": {
+          "name": "Free AI (Auto-Rotating)"
         }
       }
     }

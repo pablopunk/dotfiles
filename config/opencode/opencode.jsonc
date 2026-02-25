@@ -65,6 +65,13 @@
           "name": "Free AI (Auto-Rotating)"
         }
       }
+    },
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      }
     }
   }
 }

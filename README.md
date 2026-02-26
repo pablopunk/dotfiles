@@ -16,7 +16,7 @@ curl -fsSL https://raw.githubusercontent.com/pablopunk/dotfiles/main/install.sh 
 ```
 
 The script will:
-- Install [zb](https://github.com/romkatv/zsh-bin) (macOS only)
+- Install [Homebrew](https://brew.sh) (macOS only)
 - Install [dot](https://github.com/pablopunk/dot)
 - Clone the dotfiles repo to `~/.dotfiles`
 - Run `dot` with your preferred profiles (will ask)

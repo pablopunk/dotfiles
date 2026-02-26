@@ -160,6 +160,7 @@ config:
         opencode: "opencode uninstall"
       link:
         "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
+        "./config/opencode/tui.jsonc": "~/.config/opencode/tui.jsonc"
         "./config/opencode/sounds/": "~/.config/opencode/sounds"
         "./config/opencode/opencode.sh": "~/.zshrc.d/05-opencode.sh"
       postlink: |
@@ -412,6 +413,7 @@ config:
       os: ["mac"]
       link:
         "./config/opencode/opencode.work.jsonc": "~/.config-work/opencode/opencode.jsonc"
+        "./config/opencode/tui.jsonc": "~/.config-work/opencode/tui.jsonc"
         "./config/opencode/sounds/": "~/.config-work/opencode/sounds"
       postlink: |
         mkdir -p ~/.config-work/opencode

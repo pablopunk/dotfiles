@@ -1,17 +1,10 @@
 {
   "plugin": ["@mohak34/opencode-notifier@latest"],
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
   "autoupdate": true,
   // === Models ===
   "model": "openai/gpt-5.3-codex",
   "small_model": "anthropic/claude-haiku-4-5",
-  // === TUI ===
-  "tui": {
-    "scroll_acceleration": {
-      "enabled": true // macOS-style momentum scrolling
-    }
-  },
   // === Permissions ===
   "permission": {
     "external_directory": "allow",

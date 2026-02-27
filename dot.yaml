@@ -253,13 +253,6 @@ config:
       link:
         "./config/ghostty/config": "~/.config/ghostty/config"
 
-    shortcat:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/Shortcat.app ]] || brew install shortcat"
-      uninstall:
-        brew: "brew uninstall shortcat"
-
     karabiner:
       os: ["mac"]
       install:
@@ -296,6 +289,15 @@ config:
         brew: "brew uninstall mos"
       defaults:
         "com.caldis.Mos": "./config/mos/Mos.xml"
+
+    mouseless:
+      os: ["mac"]
+      install:
+        brew: "[[ -d /Applications/Mouseless.app ]] || brew install mouseless"
+      uninstall:
+        brew: "brew uninstall mouseless"
+      link:
+        "./config/mouseless/config.yaml": "~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml"
 
     raycast:
       os: ["mac"]

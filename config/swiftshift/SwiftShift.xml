@@ -17,7 +17,7 @@
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
 	AAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRyb290gAGlCwwZGhtVJG51bGzWDQ4PEBES
 	ExQVFBcUXW1vZGlmaWVyRmxhZ3NfEBtjaGFyYWN0ZXJzSWdub3JpbmdNb2RpZmllcnNW
-	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAY
+	JGNsYXNzWmNoYXJhY3RlcnNXa2V5Q29kZVd2ZXJzaW9ugAOAAIAEgACAAoAAEf//EgAU
 	AADSHB0eH1okY2xhc3NuYW1lWCRjbGFzc2VzWlNSU2hvcnRjdXSiHiBYTlNPYmplY3QI
 	ERokKTI3SUxRU1lfbHqYn6qyury+wMLExsnO097n8vUAAAAAAAABAQAAAAAAAAAhAAAA
 	AAAAAAAAAAAAAAAA/g==
@@ -42,7 +42,7 @@
 	AAAAF/AAABAAAAAAAAAAIvAAABABAAAAAAAA
 	</data>
 	<key>NSStatusItem Preferred Position Item-0</key>
-	<real>5586</real>
+	<real>553</real>
 	<key>NSStatusItem Visible Item-0</key>
 	<true/>
 	<key>NSWindow Frame Main Window</key>
@@ -74,7 +74,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2026-02-11T18:46:20Z</date>
+	<date>2026-02-26T22:12:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>

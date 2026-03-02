@@ -120,10 +120,6 @@ config:
         brew: "brew uninstall btop"
         apt: "sudo apt purge -y btop"
         dnf: "sudo dnf remove -y btop"
-      link:
-        "./config/mise/config.toml": "~/.config/mise/config.toml"
-        "./config/zsh/zshrc.d/40-mise.sh": "~/.zshrc.d/40-mise.sh"
-      postinstall: "cd ~ && mise install"
 
     mise:
       install:
@@ -132,6 +128,10 @@ config:
       uninstall:
         brew: "brew uninstall mise"
         curl: "rm -rf ~/.local/bin/mise ~/.local/share/mise"
+      link:
+        "./config/mise/config.toml": "~/.config/mise/config.toml"
+        "./config/zsh/zshrc.d/40-mise.sh": "~/.zshrc.d/40-mise.sh"
+      postinstall: "cd ~ && mise install"
 
     editorconfig:
       link:

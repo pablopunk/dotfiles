@@ -64,6 +64,14 @@
       "name": "LM Studio (local)",
       "options": {
         "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "qwen3.5-0.8b": {
+          "name": "Qwen 3.5 0.8b"
+        },
+        "qwen/qwen3.5-9b": {
+          "name": "Qwen 3.5 9b"
+        }
       }
     }
   }

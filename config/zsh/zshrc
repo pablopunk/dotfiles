@@ -99,4 +99,3 @@ export OFF_COLOR=cyan
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # }}} End Environment
-export AWS_PROFILE=testing_developer

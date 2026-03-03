@@ -404,6 +404,14 @@ config:
       uninstall:
         brew: "brew uninstall slack"
 
+    aws:
+      install:
+        brew: "brew install awscli"
+      uninstall:
+        brew: "brew uninstall awscli"
+      link:
+        "./config/aws/aws.sh": "~/.zshrc.d/95-aws.sh"
+
     zoom:
       os: ["mac"]
       install:

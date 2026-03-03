@@ -377,13 +377,6 @@ config:
       link:
         "./config/java/99-java.sh": "~/.zshrc.d/99-java.sh"
 
-    cloudflare-warp:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/Cloudflare\\ WARP.app ]] || brew install cloudflare-warp"
-      uninstall:
-        brew: "brew uninstall cloudflare-warp"
-
     monitorcontrol:
       os: ["mac"]
       install:
@@ -398,13 +391,6 @@ config:
       uninstall:
         brew: "brew uninstall orbstack"
 
-    slack:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/Slack.app ]] || brew install slack"
-      uninstall:
-        brew: "brew uninstall slack"
-
     aws:
       install:
         brew: "brew install awscli"
@@ -412,13 +398,6 @@ config:
         brew: "brew uninstall awscli"
       link:
         "./config/aws/aws.sh": "~/.zshrc.d/95-aws.sh"
-
-    zoom:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/zoom.us.app ]] || brew install zoom"
-      uninstall:
-        brew: "brew uninstall zoom"
 
     opencode-work:
       os: ["mac"]

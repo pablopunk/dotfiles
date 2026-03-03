@@ -101,14 +101,18 @@ automatically-unhide-macos-hidden-apps = false
   # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-  # You can uncomment the following lines to open up terminal with alt + enter shortcut
-  # (like in i3)
-  # alt-cmd-ctrl-enter = '''exec-and-forget osascript -e '
-  # tell application "Terminal"
-  #     do script
-  #     activate
-  # end tell'
-  # '''
+  # Open new Ghostty window (or launch if not running)
+  alt-cmd-ctrl-t = '''exec-and-forget osascript -e '
+  tell application "Ghostty"
+      if it is running then
+          tell application "System Events" to tell process "Ghostty"
+              click menu item "New Window" of menu "File" of menu bar 1
+          end tell
+      else
+          activate
+      end if
+  end tell'
+  '''
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#layout
   alt-cmd-ctrl-s = 'layout tiles horizontal vertical'
@@ -230,6 +234,9 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace 4'
 [[on-window-detected]]
   if.app-name-regex-substring = "zoom.us"
+  run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+  if.app-name-regex-substring = "Granola"
   run = 'move-node-to-workspace 5'
 [[on-window-detected]]
   if.app-name-regex-substring = "Spotify"

@@ -296,8 +296,9 @@ config:
         brew: "[[ -d /Applications/Mouseless.app ]] || brew install mouseless"
       uninstall:
         brew: "brew uninstall mouseless"
-      link:
-        "./config/mouseless/config.yaml": "~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml"
+      postinstall: |
+        mkdir -p ~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs
+        cp ~/.dotfiles/config/mouseless/config.yaml ~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml
 
     raycast:
       os: ["mac"]

@@ -1,4 +1,4 @@
-app_version: 0.4.3
+app_version: 0.5.0-preview.1
 behavior_configs:
 - base_move_speed: 5
   base_wheel_speed: 16
@@ -368,11 +368,11 @@ style_configs:
   - 1
   - 1
   - 0.2
-  background_rgba:
-  - 0.17647058823529413
-  - 0.4117647058823529
-  - 0.33725490196078434
-  - 0.35
+  background_colors:
+  - - 0.17647058823529413
+    - 0.4117647058823529
+    - 0.33725490196078434
+    - 0.35
   char_spacing_cell_width_ratio: 0.5
   char_spacing_font_size_ratio: 0.5
   char_spacing_strategy: cell_width_relative

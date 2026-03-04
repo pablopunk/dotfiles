@@ -9,7 +9,7 @@ behavior_configs:
   initial_action_location: system_cursor
   initial_overlay_monitor: with_mouse
   move_duration_ms: 100
-  move_real_cursor_with_virtual: false
+  move_real_cursor_with_virtual: true
   move_speed_multiplier: 3.0
   movement_easing: 0.2
   multi_action_timeout_ms: 400
@@ -48,9 +48,9 @@ grid_configs:
   nudges_per_cell: 4
   strategy: subgrid
   subgrid_dims:
-  - 8
+  - 10
   - 3
-  subgrid_mouse_action_keys: "QWER UIOP ASDF JKL\xD1 ZXCV M,.-"
+  subgrid_mouse_action_keys: "QWERT YUIOP ASDFG HJKL\xD1 ZXCVB NM,.-"
 keyboard_layout:
   id: com.apple.keylayout.Spanish-ISO
   name: Spanish

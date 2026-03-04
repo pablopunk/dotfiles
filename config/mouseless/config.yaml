@@ -1,7 +1,7 @@
 app_version: 0.5.0-preview.1
 behavior_configs:
-- base_move_speed: 5
-  base_wheel_speed: 16
+- base_move_speed: 5.0
+  base_wheel_speed: 16.0
   free_mode_auto_off_s: 10
   grid_action_level: subgrid
   hide_cursor_on_click: false
@@ -10,16 +10,16 @@ behavior_configs:
   initial_overlay_monitor: with_mouse
   move_duration_ms: 100
   move_real_cursor_with_virtual: false
-  move_speed_multiplier: 3
+  move_speed_multiplier: 3.0
   movement_easing: 0.2
   multi_action_timeout_ms: 400
   name: main_behavior
   send_escape_after_global_alt_tap__windows: true
   tap_threshold_ms: 250
   wheel_easing: 0.3
-  wheel_speed_multiplier: 4
-  wheel_step_size: 100
-  wheel_step_size_large: 500
+  wheel_speed_multiplier: 4.0
+  wheel_step_size: 100.0
+  wheel_step_size_large: 500.0
 classname: AppConfig
 custom_monitor_assignments: []
 debug_options: {}
@@ -30,7 +30,7 @@ grid_configs:
   grid_defn:
   - border_width: 0.0
     callback: build_cell_strings
-    keys: QWERT ASDFG ZXCVB YUIOP HJKL; NM,./
+    keys: "QWERT ASDFG ZXCVB YUIOP HJKL\xD1 NM,.-"
     num_cells_x: 5
     num_cells_y: 6
   - border_width: 1.0
@@ -50,7 +50,7 @@ grid_configs:
   subgrid_dims:
   - 8
   - 3
-  subgrid_mouse_action_keys: QWER UIOP ASDF JKL; ZXCV M,./
+  subgrid_mouse_action_keys: "QWER UIOP ASDF JKL\xD1 ZXCV M,.-"
 keyboard_layout:
   id: com.apple.keylayout.Spanish-ISO
   name: Spanish
@@ -364,18 +364,33 @@ monitor_assignment_mode: auto
 name: ''
 style_configs:
 - always_on_subgrid_rgba:
-  - 1
-  - 1
-  - 1
+  - 1.0
+  - 1.0
+  - 1.0
   - 0.2
   background_colors:
   - - 0.17647058823529413
     - 0.4117647058823529
     - 0.33725490196078434
     - 0.35
+  bg_color_block_size: 1
+  bg_color_transforms_level_1:
+  - - hsla_add
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+  bg_color_transforms_level_2:
+  - - hsla_add
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+  char_display: all
   char_spacing_cell_width_ratio: 0.5
   char_spacing_font_size_ratio: 0.5
   char_spacing_strategy: cell_width_relative
+  colorParamInput: none
   cursor_drag_rgba:
   - 0.0
   - 0.5
@@ -407,9 +422,9 @@ style_configs:
   font_weight: 500
   grid_line_style: lines
   grid_rgba:
-  - 1
-  - 1
-  - 1
+  - 1.0
+  - 1.0
+  - 1.0
   - 0.5
   highlight_animation_ms: 0
   highlight_rgba:
@@ -421,28 +436,29 @@ style_configs:
   show_initial_highlight: false
   subgrid_font_size_multiplier: 0.75
   subgrid_rgba:
-  - 1
-  - 1
-  - 1
+  - 1.0
+  - 1.0
+  - 1.0
   - 0.5
   subgrid_text_rgba:
-  - 1
-  - 1
-  - 1
+  - 1.0
+  - 1.0
+  - 1.0
   - 0.5
   text_rgba:
-  - 1
-  - 1
-  - 1
-  - 1
-  text_shadow_blur_radius: 4
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  text_shadow_blur_radius: 4.0
   text_shadow_offset:
-  - 0
-  - 0
+  - 0.0
+  - 0.0
   text_shadow_rgba:
   - 0.02
   - 0.04
   - 0.06
-  - 1
-  text_y_offset: 0
+  - 1.0
+  text_y_offset: 0.0
+  use_bg_color_transforms: false
   window_opacity: 1.0

@@ -41,7 +41,7 @@ config:
         "./config/git/gitconfig": "~/.gitconfig"
         "./config/git/gh.yml": "~/.config/gh/config.yml"
       postinstall: |
-        gh auth login -p ssh -h github.com
+        gh auth status | grep 'Logged in to github.com account' > /dev/null || gh auth login -p ssh -h github.com
         gh extension list | grep gh-copilot > /dev/null || gh extension install github/gh-copilot
         gh extension list | grep gh-dash > /dev/null || gh extension install dlvhdr/gh-dash
 

@@ -79,6 +79,8 @@ config:
     tmux:
       install:
         brew: "brew install tmux bash"
+        apt: "sudo apt install -y tmux"
+        dnf: "sudo dnf install -y tmux"
       uninstall:
         brew: "brew uninstall tmux bash"
         apt: "sudo apt purge -y tmux"
@@ -90,6 +92,8 @@ config:
     vim:
       install:
         brew: "brew install vim"
+        apt: "sudo apt install -y vim"
+        dnf: "sudo dnf install -y vim"
       uninstall:
         brew: "brew uninstall vim"
         apt: "sudo apt purge -y vim"

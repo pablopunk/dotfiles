@@ -48,6 +48,8 @@ config:
     zsh:
       install:
         brew: "brew install fd jq tldr tree vim wget zoxide zsh"
+        apt: "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
+        dnf: "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
       uninstall:
         brew: "brew uninstall fd jq tldr tree vim wget zoxide zsh"
         apt: "sudo apt purge -y fd-find jq tree vim wget zoxide zsh"

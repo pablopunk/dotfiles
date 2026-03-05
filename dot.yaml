@@ -118,6 +118,8 @@ config:
     btop:
       install:
         brew: "brew install btop"
+        apt: "sudo apt install -y btop"
+        dnf: "sudo dnf install -y btop"
       uninstall:
         brew: "brew uninstall btop"
         apt: "sudo apt purge -y btop"

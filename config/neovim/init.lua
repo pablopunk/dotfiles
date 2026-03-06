@@ -480,8 +480,8 @@ local function pi_nvim()
   add("pablopunk/pi.nvim")
   -- add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "openai-codex",
-    model = "gpt-5.1-codex-mini",
+    provider = "openrouter",
+    model = "xiaomi/mimo-v2-flash",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

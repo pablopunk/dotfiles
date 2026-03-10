@@ -24,6 +24,15 @@ start-at-login = true
 #   'exec-and-forget brew services restart borders'
 # ]
 
+################################################################################
+# SETTINGS ONLY SPECIFIC TO MY OWN FORK https://github.com/pablopunk/AeroSpace
+################################################################################
+window-insertion-policy = 'bsp'
+bsp-float-after-splits = 2 # after splitting 2 times, the next window will be floating
+################################################################################
+# END OF MY OWN FORK SETTINGS
+################################################################################
+
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true

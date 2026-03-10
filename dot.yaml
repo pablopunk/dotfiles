@@ -273,7 +273,7 @@ config:
     aerospace:
       os: ["mac"]
       install:
-        brew: "[[ -d /Applications/AeroSpace.app ]] || brew install aerospace"
+        brew: "[[ -d /Applications/AeroSpace.app ]] || brew install pablopunk/brew/aerospace"
       uninstall:
         brew: "brew uninstall aerospace"
       link:

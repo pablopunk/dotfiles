@@ -11,9 +11,13 @@
 	W10=
 	</data>
 	<key>block</key>
-	<integer>56</integer>
+	<data>
+	eyJjb2RlIjo1NiwidHlwZSI6ImtleWJvYXJkIn0=
+	</data>
 	<key>dash</key>
-	<integer>0</integer>
+	<data>
+	eyJjb2RlIjowLCJ0eXBlIjoia2V5Ym9hcmQifQ==
+	</data>
 	<key>duration</key>
 	<real>3.8999999999999999</real>
 	<key>hideStatusItem</key>
@@ -31,6 +35,8 @@
 	<key>step</key>
 	<real>35</real>
 	<key>toggle</key>
-	<integer>0</integer>
+	<data>
+	eyJjb2RlIjowLCJ0eXBlIjoia2V5Ym9hcmQifQ==
+	</data>
 </dict>
 </plist>

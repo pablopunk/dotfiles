@@ -115,7 +115,7 @@
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>411</real>
+	<real>284</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
@@ -226,8 +226,8 @@
 	<key>temperature_units</key>
 	<string>celsius</string>
 	<key>updater_check_ts</key>
-	<integer>1772058726</integer>
+	<integer>1772665244</integer>
 	<key>version</key>
-	<string>2.12.0</string>
+	<string>2.12.1</string>
 </dict>
 </plist>

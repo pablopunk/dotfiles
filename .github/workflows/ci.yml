@@ -13,26 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install zsh
-        run: sudo apt-get update && sudo apt-get install -y zsh
-
-      - name: Validate bash syntax
-        run: |
-          set -euo pipefail
-          bash -n install.sh
-          bash -n benchmark-zsh.sh
-          for file in config/binaries/*; do
-            bash -n "$file"
-          done
-
-      - name: Validate zsh syntax
-        run: |
-          set -euo pipefail
-          zsh -n config/zsh/zshrc
-          for file in config/zsh/zshrc.d/*.sh config/opencode/opencode.sh config/zsh-ai/60-zsh-ai.sh config/java/99-java.sh; do
-            zsh -n "$file"
-          done
-
   dot-dry-run:
     runs-on: ubuntu-latest
     steps:

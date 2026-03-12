@@ -8,9 +8,7 @@ profiles:
     - apps
 
   rice:
-    - hyprland
-    - waybar
-    - xremap
+    - rice
 
   work:
     - work
@@ -67,14 +65,6 @@ config:
 
       postinstall: |
         [[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-
-    zsh-ai:
-      install:
-        brew: "brew tap matheusml/zsh-ai && brew install zsh-ai"
-      uninstall:
-        brew: "brew uninstall zsh-ai && brew tap remove matheusml/zsh-ai"
-      link:
-        "./config/zsh-ai/60-zsh-ai.sh": "~/.zshrc.d/60-zsh-ai.sh"
 
     tmux:
       install:
@@ -178,12 +168,6 @@ config:
     agents:
       link:
         "./config/agents": "~/.agents"
-
-    pi:
-      install:
-        bun: "bun i -g @mariozechner/pi-coding-agent"
-      uninstall:
-        bun: "bun rm -g @mariozechner/pi-coding-agent"
 
     macmon:
       os: ["mac"]
@@ -352,33 +336,34 @@ config:
       uninstall:
         brew: "brew uninstall missive"
 
-  hyprland:
-    os: ["linux"]
-    install:
-      dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
-    uninstall:
-      dnf: "sudo dnf remove -y hyprland ulauncher copyq hyprshot"
-    link:
-      "./config/hypr": "~/.config/hypr"
-      "./config/ulauncher/": "~/.config/ulauncher"
+  rice:
+    hyprland:
+      os: ["linux"]
+      install:
+        dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
+      uninstall:
+        dnf: "sudo dnf remove -y hyprland ulauncher copyq hyprshot"
+      link:
+        "./config/hypr": "~/.config/hypr"
+        "./config/ulauncher/": "~/.config/ulauncher"
 
-  waybar:
-    os: ["linux"]
-    install:
-      dnf: "sudo dnf install -y waybar"
-    uninstall:
-      dnf: "sudo dnf remove -y waybar"
-    link:
-      "./config/waybar": "~/.config/waybar"
+    waybar:
+      os: ["linux"]
+      install:
+        dnf: "sudo dnf install -y waybar"
+      uninstall:
+        dnf: "sudo dnf remove -y waybar"
+      link:
+        "./config/waybar": "~/.config/waybar"
 
-  xremap:
-    os: ["linux"]
-    install:
-      cargo: "cargo install xremap --features hypr"
-    uninstall:
-      cargo: "cargo uninstall xremap"
-    link:
-      "./config/xremap/config.yml": "~/.config/xremap/config.yml"
+    xremap:
+      os: ["linux"]
+      install:
+        cargo: "cargo install xremap --features hypr"
+      uninstall:
+        cargo: "cargo uninstall xremap"
+      link:
+        "./config/xremap/config.yml": "~/.config/xremap/config.yml"
 
   work:
     java:

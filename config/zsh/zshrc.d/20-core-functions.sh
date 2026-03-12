@@ -61,3 +61,12 @@ function copy {
   [[ "$(uname)" == "Linux" ]] && xsel --clipboard --input
   [[ "$(uname)" == "Darwin" ]] && pbcopy
 }
+
+# SSH session hostname indicator for prompt
+function ssh_indicator {
+  if [[ -n "$SSH_CONNECTION" || -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+    print -n "%F{red}${HOST%%.*}%f "
+  fi
+}
+
+RPS1='$(ssh_indicator)'"$RPS1"

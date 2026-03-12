@@ -3,7 +3,7 @@ font-size = 15
 
 theme = light:Catppuccin Latte,dark:Ayu
 
-background-opacity = 0.85
+background-opacity = 0.75
 background-blur-radius = 50
 window-padding-x = 12
 window-padding-y = 12

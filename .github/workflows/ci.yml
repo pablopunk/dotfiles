@@ -43,3 +43,57 @@ jobs:
           dot --dry-run -v work
           dot --dry-run -v rice
           dot --dry-run -v work gui rice
+
+  dot-apply-default:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create CI gh mock
+        run: |
+          set -euo pipefail
+          mkdir -p .ci/bin
+          cat > .ci/bin/gh <<'EOF'
+          #!/usr/bin/env bash
+          set -euo pipefail
+
+          if [[ "${1:-}" == "auth" && "${2:-}" == "status" ]]; then
+            printf 'Logged in to github.com account ci\n'
+            exit 0
+          fi
+
+          if [[ "${1:-}" == "extension" && "${2:-}" == "list" ]]; then
+            printf 'gh-copilot\n'
+            printf 'gh-dash\n'
+            exit 0
+          fi
+
+          if [[ "${1:-}" == "auth" && "${2:-}" == "login" ]]; then
+            exit 0
+          fi
+
+          if [[ "${1:-}" == "extension" && "${2:-}" == "install" ]]; then
+            exit 0
+          fi
+
+          exit 0
+          EOF
+          chmod +x .ci/bin/gh
+
+      - name: Install dot
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
+
+      - name: Apply default profile
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot
+
+      - name: Verify default profile converges
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot --dry-run -v

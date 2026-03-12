@@ -65,7 +65,7 @@ function copy {
 # SSH session hostname indicator for prompt
 function ssh_indicator {
   if [[ -n "$SSH_CONNECTION" || -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
-    print -n "%F{red}${HOST%%.*}%f "
+    print -n "%F{red}ssh:${HOST%%.*}%f "
   fi
 }
 

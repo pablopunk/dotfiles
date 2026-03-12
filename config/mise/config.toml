@@ -1,8 +1,6 @@
 [tools]
 bun = "latest"
 node = "25"
-rust = "latest"
-go = "latest"
 python = "3.12"
 
 [settings]

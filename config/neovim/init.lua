@@ -271,6 +271,15 @@ local function snacks()
   })
 end
 
+local function vimade()
+  add("TaDaa/vimade")
+  require("vimade").setup({
+    recipe = { "default", { animate = true } },
+    ncmode = "windows",
+    fadelevel = 0.4,
+  })
+end
+
 local function unclutter()
   add("pablopunk/unclutter.nvim")
   require("unclutter").setup({ clean_after = 0, tabline = true })
@@ -480,8 +489,8 @@ local function pi_nvim()
   add("pablopunk/pi.nvim")
   -- add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "openrouter",
-    model = "xiaomi/mimo-v2-flash",
+    provider = "openai-codex",
+    model = "gpt-5.4",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()
@@ -1139,6 +1148,7 @@ local function setup_plugins()
     highlight_colors()
     markdown()
     snacks()
+    vimade()
     todo()
   end
 end

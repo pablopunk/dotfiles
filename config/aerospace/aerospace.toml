@@ -20,9 +20,9 @@ start-at-login = true
 # ]
 
 # Utils for janky borders
-# after-startup-command = [
-#   'exec-and-forget brew services restart borders'
-# ]
+after-startup-command = [
+  'exec-and-forget brew services restart borders'
+]
 
 ################################################################################
 # SETTINGS ONLY SPECIFIC TO MY OWN FORK https://github.com/pablopunk/AeroSpace

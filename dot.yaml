@@ -263,6 +263,17 @@ config:
       link:
         "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
 
+    borders:
+      os: ["mac"]
+      install:
+        brew: "brew tap FelixKratz/formulae && brew install borders"
+      uninstall:
+        brew: "brew services stop borders || true && brew uninstall borders"
+      link:
+        "./config/borders/bordersrc": "~/.config/borders/bordersrc"
+      postinstall: "brew services start borders"
+      postlink: "brew services restart borders"
+
     wallpapers:
       link:
         "./config/wallpapers": "~/.config/wallpapers"

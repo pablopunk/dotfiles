@@ -10,7 +10,7 @@
       "model": "anthropic/claude-haiku-4-5"
     },
     "compaction": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "summary": {
       "model": "anthropic/claude-haiku-4-5"
@@ -19,7 +19,7 @@
       "model": "anthropic/claude-opus-4-6"
     },
     "build": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "anthropic/claude-sonnet-4-6"
     }
   },
   // === Permissions ===
@@ -72,7 +72,7 @@
     },
     "exa": {
       "type": "remote",
-      "url": "https://mcp.exa.ai/mcp",
+      "url": "https://mcp.exa.ai/mcp?exaApiKey={env:EXA_API_KEY}",
       "enabled": true
     },
     "figma": {

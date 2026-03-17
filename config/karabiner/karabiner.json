@@ -849,6 +849,29 @@
                                     }
                                 ],
                                 "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "mandatory": ["left_option"],
+                                        "optional": ["shift"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "g",
+                                        "modifiers": ["left_control", "left_option", "left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "layer1",
+                                        "type": "variable_unless",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
                                     "key_code": "tab",
                                     "modifiers": {
                                         "mandatory": ["left_option"],

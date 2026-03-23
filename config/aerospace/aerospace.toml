@@ -58,12 +58,25 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
+# on-focused-monitor-changed = ['move-mouse window-lazy-center']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-cmd-ctrl-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
+
+[workspace-to-monitor-force-assignment]
+  1 = 'main'
+  2 = 'main'
+  5 = 'main'
+  Q = 'main'
+  W = 'main'
+  R = 'main'
+
+  3 = 'built-in'
+  4 = 'built-in'
+  E = 'built-in'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -160,10 +173,10 @@ automatically-unhide-macos-hidden-apps = false
   # alt-cmd-ctrl-d = 'layout bsp horizontal vertical' # one day...
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-  alt-cmd-ctrl-h = 'focus left'
-  alt-cmd-ctrl-j = 'focus down'
-  alt-cmd-ctrl-k = 'focus up'
-  alt-cmd-ctrl-l = 'focus right'
+  alt-cmd-ctrl-h = 'focus --boundaries all-monitors-outer-frame left'
+  alt-cmd-ctrl-j = 'focus --boundaries all-monitors-outer-frame down'
+  alt-cmd-ctrl-k = 'focus --boundaries all-monitors-outer-frame up'
+  alt-cmd-ctrl-l = 'focus --boundaries all-monitors-outer-frame right'
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#move
   alt-cmd-ctrl-shift-h = 'move left'
@@ -262,9 +275,6 @@ automatically-unhide-macos-hidden-apps = false
   if.app-name-regex-substring = "Slack"
   run = 'move-node-to-workspace 3'
 [[on-window-detected]]
-  if.app-name-regex-substring = "TickTick"
-  run = 'move-node-to-workspace 3'
-[[on-window-detected]]
   if.app-name-regex-substring = "Missive"
   run = 'move-node-to-workspace 4'
 [[on-window-detected]]
@@ -275,6 +285,9 @@ automatically-unhide-macos-hidden-apps = false
   run = 'move-node-to-workspace 5'
 [[on-window-detected]]
   if.app-name-regex-substring = "Granola"
+  run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+  if.app-name-regex-substring = "OpenOats"
   run = 'move-node-to-workspace 5'
 [[on-window-detected]]
   if.app-name-regex-substring = "Spotify"

@@ -322,7 +322,7 @@ config:
     tailscale:
       os: ["mac"]
       install:
-        brew: "[[ -d /Applications/Tailscale.app ]] || brew install tailscale"
+        brew: "[[ -d /Applications/Tailscale.app ]] || brew install --cask tailscale"
       uninstall:
         brew: "brew uninstall tailscale"
 

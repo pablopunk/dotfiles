@@ -613,6 +613,11 @@ local function mini_nvim()
   MiniIcons.mock_nvim_web_devicons()
   require("mini.completion").setup({})
   require("mini.comment").setup({})
+  require("mini.animate").setup({
+    scroll = {
+      timing = require("mini.animate").gen_timing.linear({ duration = 100, unit = "total" }),
+    },
+  })
   require("mini.indentscope").setup({ symbol = "│" })
   vim.cmd("hi! link MiniIndentscopeSymbol Whitespace")
   require("mini.cursorword").setup({})

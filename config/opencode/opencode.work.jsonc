@@ -4,22 +4,22 @@
   "autoupdate": true,
   // === Models ===
   "model": "openai/gpt-5.4-pro",
-  "small_model": "anthropic/claude-haiku-4-5",
+  "small_model": "openai/gpt-5.1-codex-mini",
   "agent": {
     "explore": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     "compaction": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     "summary": {
-      "model": "anthropic/claude-haiku-4-5"
+      "model": "openai/gpt-5.1-codex-mini"
     },
     "plan": {
-      "model": "anthropic/claude-opus-4-6"
+      "model": "openai/gpt-5.4-pro"
     },
     "build": {
-      "model": "anthropic/claude-sonnet-4-6"
+      "model": "openai/gpt-5.4"
     }
   },
   // === Permissions ===

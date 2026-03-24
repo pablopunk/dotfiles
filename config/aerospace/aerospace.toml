@@ -31,7 +31,7 @@ workspace-preview-enabled = 'alt-cmd-ctrl' # hold thtis to view workspaces previ
 workspace-preview-after-workspace-switch = true # either show it after switch or always
 workspace-preview-show-empty = true # show empty workspaces or not
 window-insertion-policy = 'bsp'
-bsp-float-after-splits = 2 # after splitting 2 times, the next window will be floating
+# bsp-float-after-splits = 2 # after splitting 2 times, the next window will be floating
 ################################################################################
 # END OF MY OWN FORK SETTINGS
 ################################################################################
@@ -58,25 +58,25 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
-on-focus-changed = ['move-mouse window-lazy-center']
-# on-focused-monitor-changed = ['move-mouse window-lazy-center']
+# on-focus-changed = ['move-mouse window-lazy-center']
+on-focused-monitor-changed = ['move-mouse window-lazy-center']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-cmd-ctrl-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
-[workspace-to-monitor-force-assignment]
-  1 = 'main'
-  2 = 'main'
-  5 = 'main'
-  Q = 'main'
-  W = 'main'
-  R = 'main'
-
-  3 = 'built-in'
-  4 = 'built-in'
-  E = 'built-in'
+# [workspace-to-monitor-force-assignment]
+  # 1 = 'main'
+  # 2 = 'main'
+  # 5 = 'main'
+  # Q = 'main'
+  # W = 'main'
+  # R = 'main'
+  #
+  # 3 = 'built-in'
+  # 4 = 'built-in'
+  # E = 'built-in'
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -265,6 +265,9 @@ automatically-unhide-macos-hidden-apps = false
   run = 'layout floating'
 [[on-window-detected]]
   if.window-title-regex-substring = "Mouseless"
+  run = 'layout floating'
+[[on-window-detected]]
+  if.window-title-regex-substring = "Google Chrome for Testing"
   run = 'layout floating'
 
 # Assign apps on particular workspaces

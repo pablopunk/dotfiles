@@ -107,9 +107,10 @@ else
     newly_created=true
   fi
 fi
-cd "$selected_path"
+
+# cd "$selected_path"
 
 # Run mise trust only if worktree was newly created and mise.toml or .tool-versions exists
-if [[ "$newly_created" == true && (-f "mise.toml" || -f ".tool-versions") ]]; then
-  mise trust
-fi
+# if [[ "$newly_created" == true && (-f "mise.toml" || -f ".tool-versions") ]]; then
+#   mise trust
+# fi

@@ -403,6 +403,12 @@ config:
       link:
         "./config/aws/aws.sh": "~/.zshrc.d/95-aws.sh"
 
+    pup:
+      install:
+        brew: "brew install datadog-labs/pack/pup"
+      uninstall:
+        brew: "brew uninstall datadog-labs/pack/pup"
+
     opencode-work:
       os: ["mac"]
       link:

@@ -169,6 +169,10 @@ config:
       link:
         "./config/agents": "~/.agents"
 
+    pi:
+      link:
+        "./config/pi": "~/.pi"
+
     macmon:
       os: ["mac"]
       install:

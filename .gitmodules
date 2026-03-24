@@ -1,0 +1,6 @@
+[submodule "config/agents"]
+	path = config/agents
+	url = git@github.com:pablopunk/agents.git
+[submodule "config/pi"]
+	path = config/pi
+	url = git@github.com:pablopunk/pi.git

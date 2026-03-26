@@ -487,10 +487,10 @@ end
 
 local function pi_nvim()
   add("pablopunk/pi.nvim")
-  -- add({ source = "~/src/pi.nvim" })
+  add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "openai-codex",
-    model = "gpt-5.4",
+    provider = "anthropic-1m",
+    model = "claude-haiku-4-5",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

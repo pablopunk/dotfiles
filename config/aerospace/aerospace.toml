@@ -19,9 +19,8 @@ start-at-login = true
 #   'exec-and-forget sketchybar --trigger aerospace_focus_change',
 # ]
 
-# Utils for janky borders
 after-startup-command = [
-  'exec-and-forget brew services restart borders'
+  'exec-and-forget brew services restart edges'
 ]
 
 ################################################################################

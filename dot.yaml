@@ -267,16 +267,16 @@ config:
       link:
         "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
 
-    borders:
+    edges:
       os: ["mac"]
       install:
-        brew: "brew tap FelixKratz/formulae && brew install borders"
+        brew: "brew install --HEAD pablopunk/brew/edges"
       uninstall:
-        brew: "brew services stop borders || true && brew uninstall borders"
+        brew: "brew uninstall pablopunk/brew/edges"
       link:
-        "./config/borders/bordersrc": "~/.config/borders/bordersrc"
-      postinstall: "brew services start borders"
-      postlink: "brew services restart borders"
+        "./config/edges/edges.toml": "~/.config/edges/edges.toml"
+      postinstall: "brew services start edges"
+      postlink: "brew services restart edges"
 
     wallpapers:
       link:

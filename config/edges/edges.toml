@@ -1,0 +1,4 @@
+style = "round"
+width = 6.0
+active_color = "0xff87ceeb"
+inactive_color = "0xff808080"

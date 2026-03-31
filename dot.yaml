@@ -170,6 +170,10 @@ config:
         "./config/agents": "~/.agents"
 
     pi:
+      install:
+        bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
+      uninstall:
+        bun: "bun rm -g @mariozechner/pi-coding-agent"
       link:
         "./config/pi": "~/.pi"
 
@@ -270,7 +274,7 @@ config:
     edges:
       os: ["mac"]
       install:
-        brew: "brew install --HEAD pablopunk/brew/edges"
+        brew: "brew install pablopunk/brew/edges"
       uninstall:
         brew: "brew uninstall pablopunk/brew/edges"
       link:

@@ -33,7 +33,7 @@
 	<key>CPU_label_position</key>
 	<integer>2</integer>
 	<key>CPU_lineChart_position</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>CPU_line_chart_color</key>
 	<string>system</string>
 	<key>CPU_line_chart_valueColor</key>
@@ -41,7 +41,7 @@
 	<key>CPU_mini_position</key>
 	<integer>3</integer>
 	<key>CPU_pieChart_position</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>CPU_pie_chart_label</key>
 	<false/>
 	<key>CPU_pie_chart_monochrome</key>
@@ -51,7 +51,7 @@
 	<key>CPU_tachometer_position</key>
 	<integer>5</integer>
 	<key>CPU_widget</key>
-	<string></string>
+	<string>line_chart</string>
 	<key>Clock_label_position</key>
 	<integer>0</integer>
 	<key>Clock_position</key>
@@ -115,7 +115,7 @@
 	<key>NSStatusItem Preferred Position CPU_mini</key>
 	<real>5729</real>
 	<key>NSStatusItem Preferred Position CombinedModules</key>
-	<real>284</real>
+	<real>338</real>
 	<key>NSStatusItem Preferred Position Disk_mini</key>
 	<real>5635</real>
 	<key>NSStatusItem Preferred Position Network_speed</key>
@@ -149,6 +149,8 @@
 		<key>TB Size Mode</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame eu.exelban.Stats.Settings.WindowFrame</key>
+	<string>920 548 728 480 0 0 2560 1409 </string>
 	<key>Network_label_position</key>
 	<integer>1</integer>
 	<key>Network_networkChart_position</key>
@@ -188,17 +190,17 @@
 	<key>RAM_mini_position</key>
 	<integer>2</integer>
 	<key>RAM_pieChart_position</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>RAM_position</key>
 	<integer>2</integer>
 	<key>RAM_state</key>
 	<true/>
 	<key>RAM_tachometer_position</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>RAM_text_position</key>
 	<integer>7</integer>
 	<key>RAM_widget</key>
-	<string>pie_chart</string>
+	<string></string>
 	<key>Sensors_barChart_position</key>
 	<integer>3</integer>
 	<key>Sensors_label_position</key>
@@ -220,14 +222,14 @@
 	<key>setupProcess</key>
 	<true/>
 	<key>support_ts</key>
-	<integer>1770212242</integer>
+	<integer>1774523098</integer>
 	<key>telemetry</key>
 	<false/>
 	<key>temperature_units</key>
 	<string>celsius</string>
 	<key>updater_check_ts</key>
-	<integer>1772665244</integer>
+	<integer>1774951346</integer>
 	<key>version</key>
-	<string>2.12.1</string>
+	<string>2.12.7</string>
 </dict>
 </plist>

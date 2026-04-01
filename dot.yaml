@@ -301,15 +301,12 @@ config:
       defaults:
         "com.caldis.Mos": "./config/mos/Mos.xml"
 
-    mouseless:
+    mousetrap:
       os: ["mac"]
       install:
-        brew: "[[ -d /Applications/Mouseless.app ]] || brew install mouseless"
+        brew: brew install pablopunk/brew/mousetrap
       uninstall:
-        brew: "brew uninstall mouseless"
-      postinstall: |
-        mkdir -p ~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs
-        cp ~/.dotfiles/config/mouseless/config.yaml ~/Library/Containers/net.sonuscape.mouseless/Data/.mouseless/configs/config.yaml
+        brew: brew uninstall pablopunk/brew/mousetrap
 
     raycast:
       os: ["mac"]

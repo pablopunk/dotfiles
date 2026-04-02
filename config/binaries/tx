@@ -58,6 +58,10 @@ fzf_short() {
   fzf --height=10 --reverse "$@"
 }
 
+fzf_full() {
+  fzf --reverse "$@"
+}
+
 # Run fzf with --print-query to accept arbitrary input
 # Outputs the query on first line, selection on second line (if any)
 fzf_with_query() {
@@ -193,7 +197,7 @@ if [[ $# -eq 0 ]]; then
   # You can also type/paste a URL, path, or new folder name
   tmux_sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
   if [[ -n $tmux_sessions ]]; then
-    fzf_result=$(echo "$tmux_sessions" | fzf --height=10 --reverse --print-query --prompt="tmux sessions: ")
+    fzf_result=$(echo "$tmux_sessions" | fzf_full --print-query --prompt="tmux sessions: ")
     if [[ -n $fzf_result ]]; then
       # Check if a session was selected (second line) or just query entered
       query=$(echo "$fzf_result" | head -n1)
@@ -226,7 +230,7 @@ if [[ $# -eq 1 ]]; then
   selected_name=$(tmux ls 2>/dev/null | cut -d: -f1 | grep "$1")
   # If multiple sessions are found, use fzf to allow the user to select one
   if [[ $(echo "$selected_name" | wc -l) -gt 1 ]]; then
-    selected_name=$(echo "$selected_name" | fzf_short)
+    selected_name=$(echo "$selected_name" | fzf_full)
   fi
   # If a session name is selected or uniquely identified, go to that session
   if [[ -n $selected_name ]]; then

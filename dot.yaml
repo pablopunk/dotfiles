@@ -301,6 +301,14 @@ config:
       defaults:
         "com.caldis.Mos": "./config/mos/Mos.xml"
 
+    syncthing:
+      os: ["mac"]
+      install:
+        brew: "[[ -d /Applications/Syncthing.app ]] || brew install syncthing"
+      uninstall:
+        brew: "brew uninstall syncthing"
+      postinstall: "brew services start syncthing"
+
     mousetrap:
       os: ["mac"]
       install:
@@ -351,6 +359,13 @@ config:
         brew: "[[ -d /Applications/Missive.app ]] || brew install missive"
       uninstall:
         brew: "brew uninstall missive"
+
+    fluxmarkdown: # .md preview in macos quicklook
+      os: ["mac"]
+      install:
+        brew: brew install --cask xykong/tap/flux-markdown
+      uninstall:
+        brew: brew uninstall xykong/tap/flux-markdown
 
   rice:
     hyprland:

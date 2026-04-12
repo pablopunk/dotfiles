@@ -234,14 +234,6 @@ config:
       defaults:
         "eu.exelban.Stats": "./config/stats/Stats.xml"
 
-    battery:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/Battery.app ]] || brew install battery"
-      uninstall:
-        brew: "brew uninstall battery"
-      postinstall: "[[ -d /Applications/Battery.app ]] || open /Applications/Battery.app"
-
     ghostty:
       os: ["mac"]
       install:

@@ -7,11 +7,12 @@ profiles:
   gui:
     - apps
 
-  rice:
-    - rice
-
   work:
     - work
+
+  omarchy:
+    - omabin
+    - xremap
 
 config:
   cli:
@@ -151,31 +152,11 @@ config:
       link:
         "./config/binaries": "~/.bin"
 
-    opencode:
-      install:
-        curl: "curl -fsSL https://opencode.ai/install | bash"
-      uninstall:
-        opencode: "opencode uninstall"
-      link:
-        "./config/opencode/opencode.jsonc": "~/.config/opencode/opencode.jsonc"
-        "./config/opencode/tui.jsonc": "~/.config/opencode/tui.jsonc"
-        "./config/opencode/sounds/": "~/.config/opencode/sounds"
-        "./config/opencode/opencode.sh": "~/.zshrc.d/05-opencode.sh"
-      postlink: |
-        mkdir -p ~/.config/opencode
-        sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config/opencode/opencode-notifier.json
-
-    agents:
-      link:
-        "./config/agents": "~/.agents"
-
     pi:
       install:
         bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
       uninstall:
         bun: "bun rm -g @mariozechner/pi-coding-agent"
-      link:
-        "./config/pi": "~/.pi"
 
     macmon:
       os: ["mac"]
@@ -359,35 +340,6 @@ config:
       uninstall:
         brew: brew uninstall xykong/tap/flux-markdown
 
-  rice:
-    hyprland:
-      os: ["linux"]
-      install:
-        dnf: "sudo dnf install -y hyprland ulauncher copyq hyprshot"
-      uninstall:
-        dnf: "sudo dnf remove -y hyprland ulauncher copyq hyprshot"
-      link:
-        "./config/hypr": "~/.config/hypr"
-        "./config/ulauncher/": "~/.config/ulauncher"
-
-    waybar:
-      os: ["linux"]
-      install:
-        dnf: "sudo dnf install -y waybar"
-      uninstall:
-        dnf: "sudo dnf remove -y waybar"
-      link:
-        "./config/waybar": "~/.config/waybar"
-
-    xremap:
-      os: ["linux"]
-      install:
-        cargo: "cargo install xremap --features hypr"
-      uninstall:
-        cargo: "cargo uninstall xremap"
-      link:
-        "./config/xremap/config.yml": "~/.config/xremap/config.yml"
-
   work:
     java:
       link:
@@ -438,3 +390,28 @@ config:
         brew: "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
       uninstall:
         brew: "brew uninstall cleanshot"
+
+  omabin:
+    os: ["linux"]
+    link:
+      "./config/omarchy/bin/omarchy-menu-flat": "~/.local/bin/omarchy-menu-flat"
+      "./config/omarchy/hypr": "~/.config/hypr"
+    postlink: "hyprctl reload 2>/dev/null || true"
+
+  xremap:
+    os: ["linux"]
+    install:
+      cargo: "cargo install xremap --features hypr"
+    uninstall:
+      cargo: "cargo uninstall xremap"
+    link:
+      "./config/xremap/config.yml": "~/.config/xremap/config.yml"
+      "./config/xremap/xremap.service": "~/.config/systemd/user/xremap.service"
+    postinstall: |
+      # Enable and start xremap service
+      systemctl --user daemon-reload 2>/dev/null || true
+      systemctl --user enable xremap.service 2>/dev/null || true
+      systemctl --user start xremap.service 2>/dev/null || true
+      # Reminder: udev rule needed for first setup (requires sudo):
+      # echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-xremap.rules
+      # sudo udevadm control --reload-rules && sudo udevadm trigger

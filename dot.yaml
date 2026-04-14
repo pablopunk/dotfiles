@@ -152,17 +152,11 @@ config:
       link:
         "./config/binaries": "~/.bin"
 
-    agents:
-      link:
-        "./config/agents": "~/.agents"
-
     pi:
       install:
         bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
       uninstall:
         bun: "bun rm -g @mariozechner/pi-coding-agent"
-      link:
-        "./config/pi": "~/.pi"
 
     macmon:
       os: ["mac"]

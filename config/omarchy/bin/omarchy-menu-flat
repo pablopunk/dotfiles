@@ -1,57 +1,112 @@
 #!/bin/bash
-# Flat omarchy menu — all leaf actions searchable in one fuzzel prompt.
+# Dynamic flat menu - parses omarchy-menu at runtime with caching
+# Rebuilds flat menu structure from hierarchical omarchy-menu automatically
 #
-# NOTE: This is a hardcoded flat version of the hierarchical omarchy-menu.
-# When omarchy updates with new menu items, run:
-#   omarchy-menu-diff
-# to see what new items might need to be added here.
-#
-# The apps list (from .desktop files) is generated dynamically with caching.
-#
+# When omarchy updates, delete the cache to rebuild:
+#   rm ~/.cache/omarchy-menu-flat/flat.cache
+
 set -euo pipefail
 
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
-# Cache settings
+OMARCHY_MENU="${OMARCHY_MENU:-$HOME/.local/share/omarchy/bin/omarchy-menu}"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/omarchy-menu-flat"
-CACHE_FILE="$CACHE_DIR/apps.cache"
+FLAT_CACHE="$CACHE_DIR/flat.cache"
+APPS_CACHE="$CACHE_DIR/apps.cache"
 HISTORY_FILE="$CACHE_DIR/history.txt"
-CACHE_MAX_AGE=300  # 5 minutes
+CACHE_MAX_AGE=3600  # 1 hour for menu structure
+APPS_MAX_AGE=300    # 5 minutes for apps
 HISTORY_MAX_ITEMS=50
 
-# Record a selection to history
-record_history() {
-    local item="$1"
-    [[ -z "$item" ]] && return
+# Terminal helper
+terminal() { alacritty --class=Omarchy -e "$@"; }
+present_terminal() { omarchy-launch-floating-terminal-with-presentation "$1"; }
+open_in_editor() { notify-send "Editing config file" "$1"; omarchy-launch-editor "$1"; }
+install() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2"; }
+install_and_launch() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2 && setsid gtk-launch $3"; }
+install_font() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm --needed $2 && sleep 2 && omarchy-font-set '$3'"; }
+install_terminal() { present_terminal "omarchy-install-terminal $1"; }
+aur_install() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2"; }
+aur_install_and_launch() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2 && setsid gtk-launch $3"; }
+
+# Parse omarchy-menu and extract flat menu items
+parse_omarchy_menu() {
+    [[ -f "$OMARCHY_MENU" ]] || { echo "Error: omarchy-menu not found at $OMARCHY_MENU" >&2; exit 1; }
     
-    # Remove existing entry for this item, then add to top
-    local temp=$(mktemp)
-    if [[ -f "$HISTORY_FILE" ]]; then
-        awk -F'|' -v it="$item" '$2 != it' "$HISTORY_FILE" | tail -n $((HISTORY_MAX_ITEMS - 1)) > "$temp"
-    fi
-    echo "$(date +%s)|$item" >> "$temp"
-    mv "$temp" "$HISTORY_FILE"
+    # Extract all menu items from show_*_menu functions
+    # Format: ICON  Category › Item|COMMAND
+    awk '
+    BEGIN { category=""; icon=""; }
+    
+    # Track which function we are in
+    /^show_([a-z_]+)_menu\(\)/ {
+        match($0, /show_([a-z_]+)_menu/, m)
+        func = m[1]
+        # Map function names to categories and icons
+        if (func == "main") { category=""; icon=""; }
+        else if (func == "system") { category="System"; icon=""; }
+        else if (func == "learn") { category="Learn"; icon="󰧑"; }
+        else if (func == "trigger") { category="Trigger"; icon="󱓞"; }
+        else if (func == "capture") { category="Capture"; icon=""; }
+        else if (func == "share") { category="Share"; icon=""; }
+        else if (func == "toggle") { category="Toggle"; icon="󰔎"; }
+        else if (func == "style") { category="Style"; icon=""; }
+        else if (func == "setup") { category="Setup"; icon=""; }
+        else if (func == "install") { category="Install"; icon="󰉉"; }
+        else if (func == "remove") { category="Remove"; icon="󰭌"; }
+        else if (func == "update") { category="Update"; icon=""; }
+        else { category=func; gsub(/_/, " ", category); icon="󰀻"; }
+    }
+    
+    # Extract menu options from case statements
+    /^\s+\*[^\*]+\*\)/ {
+        # Extract the label between * and *)
+        match($0, /\*([^)]+)\*\)/, m)
+        label = m[1]
+        
+        # Skip navigation items
+        if (label ~ /Back|Exit|Close/) next
+        
+        # Get the command from the next line
+        getline cmd_line
+        gsub(/^\s+/, "", cmd_line)
+        
+        # Extract the command (before ;;)
+        cmd = cmd_line
+        sub(/;;.*$/, "", cmd)
+        
+        # Format output
+        if (category == "") {
+            printf "%s  %s|%s\n", icon, label, cmd
+        } else {
+            printf "%s  %s › %s|%s\n", icon, category, label, cmd
+        }
+    }
+    ' "$OMARCHY_MENU" 2>/dev/null | sort -t'|' -k1,1 -u
 }
 
-# Get the recency score for an item (higher = more recent)
-get_recency() {
-    local item="$1"
-    [[ -f "$HISTORY_FILE" ]] || { echo "0"; return; }
-    # Extract timestamp for this item, default to 0 if not found
-    local ts=$(grep -F "|$item" "$HISTORY_FILE" 2>/dev/null | tail -1 | cut -d'|' -f1)
-    echo "${ts:-0}"
-}
-
-# Get cache age in seconds
+# Cache age check
 cache_age() {
-    [[ -f "$CACHE_FILE" ]] || echo 999999 && return
+    local file="$1"
+    [[ -f "$file" ]] || { echo 999999; return; }
     local now=$(date +%s)
-    local mtime=$(stat -c %Y "$CACHE_FILE" 2>/dev/null || stat -f %m "$CACHE_FILE" 2>/dev/null || echo 0)
+    local mtime=$(stat -c %Y "$file" 2>/dev/null || stat -f %m "$file" 2>/dev/null || echo 0)
     echo $((now - mtime))
 }
 
-# Icon mapping for common desktop icons to Nerd Font
-icon_for() {
+# Get or build flat menu items
+get_flat_items() {
+    if [[ $(cache_age "$FLAT_CACHE") -lt $CACHE_MAX_AGE && -f "$FLAT_CACHE" ]]; then
+        cat "$FLAT_CACHE"
+    else
+        mkdir -p "$CACHE_DIR"
+        parse_omarchy_menu > "$FLAT_CACHE"
+        cat "$FLAT_CACHE"
+    fi
+}
+
+# Icon mapping for apps
+icon_for_app() {
     case "$1" in
         firefox*) echo "" ;;
         chromium*|google-chrome*) echo "" ;;
@@ -80,20 +135,15 @@ icon_for() {
     esac
 }
 
-# Generate desktop apps list from .desktop files
+# Generate apps list
 generate_apps() {
-    # Use cache if fresh
-    local age=$(cache_age)
-    if [[ $age -lt $CACHE_MAX_AGE && -f "$CACHE_FILE" ]]; then
-        cat "$CACHE_FILE"
+    if [[ $(cache_age "$APPS_CACHE") -lt $APPS_MAX_AGE && -f "$APPS_CACHE" ]]; then
+        cat "$APPS_CACHE"
         return
     fi
-
-    mkdir -p "$CACHE_DIR"
-    local temp=$(mktemp)
     
-    # Parse .desktop files
     local dirs="/usr/share/applications /usr/local/share/applications $HOME/.local/share/applications $HOME/.local/share/omarchy/applications"
+    local temp=$(mktemp)
     
     for dir in $dirs; do
         [[ -d "$dir" ]] || continue
@@ -113,175 +163,65 @@ generate_apps() {
             done < "$file"
             
             [[ -z "$name" || -z "$exec" || "$hide" == 1 ]] && continue
-            
-            # Clean exec
             exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g')
-            local icon_char=$(icon_for "$icon")
+            local icon_char=$(icon_for_app "$icon")
             
             if [[ "$term" == 1 ]]; then
-                echo "$icon_char  $name|terminal $exec"
+                echo "$icon_char  $name|APP:$exec:term"
             else
-                echo "$icon_char  $name|uwsm-app -- $exec"
+                echo "$icon_char  $name|APP:$exec:gui"
             fi
         done
     done | sort -t'|' -k1,1 -u > "$temp"
     
-    mv "$temp" "$CACHE_FILE"
-    cat "$CACHE_FILE"
+    mv "$temp" "$APPS_CACHE"
+    cat "$APPS_CACHE"
 }
 
-# Helpers from omarchy-menu
-terminal() { alacritty --class=Omarchy -e "$@"; }
-present_terminal() { omarchy-launch-floating-terminal-with-presentation "$1"; }
-open_in_editor() { notify-send "Editing config file" "$1"; omarchy-launch-editor "$1"; }
-install() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2"; }
-install_and_launch() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2 && setsid gtk-launch $3"; }
-install_font() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm --needed $2 && sleep 2 && omarchy-font-set '$3'"; }
-install_terminal() { present_terminal "omarchy-install-terminal $1"; }
-aur_install() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2"; }
-aur_install_and_launch() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2 && setsid gtk-launch $3"; }
+# Record history
+record_history() {
+    local item="$1"
+    [[ -z "$item" ]] && return
+    local temp=$(mktemp)
+    if [[ -f "$HISTORY_FILE" ]]; then
+        awk -F'|' -v it="$item" '$2 != it' "$HISTORY_FILE" | tail -n $((HISTORY_MAX_ITEMS - 1)) > "$temp"
+    fi
+    echo "$(date +%s)|$item" >> "$temp"
+    mv "$temp" "$HISTORY_FILE"
+}
 
-declare -A ACTIONS
+# Refresh apps and launch fuzzel
+refresh_apps_and_launch_fuzzel() {
+    rm -f "$APPS_CACHE"
+    generate_apps > /dev/null 2>&1
+    fuzzel
+}
 
-# System
-ACTIONS["  Lock"]='omarchy-lock-screen'
-ACTIONS["󱄄  Screensaver"]='omarchy-launch-screensaver force'
-ACTIONS["󰤄  Suspend"]='systemctl suspend'
-ACTIONS["  Relaunch"]='uwsm stop'
-ACTIONS["󰜉  Restart"]='systemctl reboot'
-ACTIONS["󰐥  Shutdown"]='systemctl poweroff'
+# --- MAIN ---
 
-# Learn
-ACTIONS["󰌌  Keybindings"]='omarchy-menu-keybindings'
-ACTIONS["  Omarchy Manual"]='omarchy-launch-webapp "https://learn.omacom.io/2/the-omarchy-manual"'
-ACTIONS["  Hyprland Wiki"]='omarchy-launch-webapp "https://wiki.hypr.land/"'
-ACTIONS["󰣇  Arch Wiki"]='omarchy-launch-webapp "https://wiki.archlinux.org/title/Main_page"'
-ACTIONS["  Neovim Keymaps"]='omarchy-launch-webapp "https://www.lazyvim.org/keymaps"'
-ACTIONS["󱆃  Bash Cheat Sheet"]='omarchy-launch-webapp "https://devhints.io/bash"'
+mkdir -p "$CACHE_DIR"
 
-# Trigger › Capture
-ACTIONS["  Screenshot › Region"]='omarchy-cmd-screenshot'
-ACTIONS["  Screenshot › Window"]='omarchy-cmd-screenshot window'
-ACTIONS["  Screenshot › Display"]='omarchy-cmd-screenshot output'
-ACTIONS["  Screenrecord › Region"]='omarchy-cmd-screenrecord'
-ACTIONS["  Screenrecord › Region + Audio"]='omarchy-cmd-screenrecord region audio'
-ACTIONS["  Screenrecord › Display"]='omarchy-cmd-screenrecord output'
-ACTIONS["  Screenrecord › Display + Audio"]='omarchy-cmd-screenrecord output audio'
-ACTIONS["󰃉  Color Picker"]='pkill hyprpicker || hyprpicker -a'
-
-# Trigger › Share
-ACTIONS["  Share Clipboard"]='terminal bash -c "omarchy-cmd-share clipboard"'
-ACTIONS["  Share File"]='terminal bash -c "omarchy-cmd-share file"'
-ACTIONS["  Share Folder"]='terminal bash -c "omarchy-cmd-share folder"'
-
-# Toggle
-ACTIONS["󱄄  Toggle Screensaver"]='omarchy-toggle-screensaver'
-ACTIONS["󰔎  Toggle Nightlight"]='omarchy-toggle-nightlight'
-ACTIONS["󱫖  Toggle Idle Lock"]='omarchy-toggle-idle'
-ACTIONS["󰍜  Toggle Top Bar"]='omarchy-toggle-waybar'
-
-# Style
-ACTIONS["󰸌  Theme"]='omarchy-menu theme'
-ACTIONS["  Font"]='omarchy-menu font'
-ACTIONS["  Background"]='omarchy-menu background'
-ACTIONS["󰸌  Edit Hyprland Look"]='open_in_editor ~/.config/hypr/looknfeel.conf'
-ACTIONS["󱄄  Edit Screensaver"]='open_in_editor ~/.config/omarchy/branding/screensaver.txt'
-ACTIONS["  Edit About"]='open_in_editor ~/.config/omarchy/branding/about.txt'
-
-# Setup
-ACTIONS["  Audio"]='$TERMINAL --class=Wiremix -e wiremix'
-ACTIONS["  Wifi"]='rfkill unblock wifi; omarchy-launch-wifi'
-ACTIONS["󰂯  Bluetooth"]='rfkill unblock bluetooth; blueberry'
-ACTIONS["󱐋  Power Profile"]='omarchy-menu power'
-ACTIONS["󰍹  Monitors"]='open_in_editor ~/.config/hypr/monitors.conf'
-ACTIONS["  Keybindings Config"]='open_in_editor ~/.config/hypr/bindings.conf'
-ACTIONS["  Input Config"]='open_in_editor ~/.config/hypr/input.conf'
-ACTIONS["󰌌  Keyboard Layout"]='present_terminal omarchy-setup-keyboard'
-ACTIONS["󰗈  Defaults"]='open_in_editor ~/.config/uwsm/default'
-ACTIONS["󰱔  DNS"]='present_terminal omarchy-setup-dns'
-ACTIONS["󰈷  Fingerprint"]='present_terminal omarchy-setup-fingerprint'
-ACTIONS["  Fido2"]='present_terminal omarchy-setup-fido2'
-
-# Config
-ACTIONS["  Config › Hyprland"]='open_in_editor ~/.config/hypr/hyprland.conf'
-ACTIONS["  Config › Hypridle"]='open_in_editor ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle'
-ACTIONS["  Config › Hyprlock"]='open_in_editor ~/.config/hypr/hyprlock.conf'
-ACTIONS["  Config › Hyprsunset"]='open_in_editor ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset'
-ACTIONS["  Config › Swayosd"]='open_in_editor ~/.config/swayosd/config.toml && omarchy-restart-swayosd'
-ACTIONS["󱄅  Config › Fuzzel"]='open_in_editor ~/.config/fuzzel/fuzzel.ini'
-ACTIONS["󰍜  Config › Waybar"]='open_in_editor ~/.config/waybar/config.jsonc && omarchy-restart-waybar'
-ACTIONS["󰞅  Config › XCompose"]='open_in_editor ~/.XCompose && omarchy-restart-xcompose'
-
-# Install
-ACTIONS["󰣇  Install Package"]='terminal omarchy-pkg-install'
-ACTIONS["󰣇  Install AUR"]='terminal omarchy-pkg-aur-install'
-ACTIONS["  Install AppImage"]='terminal omarchy-appimage-install'
-ACTIONS["  Install Web App"]='present_terminal omarchy-webapp-install'
-ACTIONS["  Install TUI"]='present_terminal omarchy-tui-install'
-ACTIONS["󱚤  Install Claude Code"]='install "Claude Code" "claude-code"'
-ACTIONS["󱚤  Install Gemini"]='aur_install "Gemini" "gemini-cli"'
-ACTIONS["󱚤  Install Ollama"]='install "Ollama" "ollama"'
-ACTIONS["󱚤  Install LM Studio"]='install "LM Studio" "lmstudio"'
-ACTIONS["  Install VSCode"]='install_and_launch "VSCode" "visual-studio-code-bin" "code"'
-ACTIONS["  Install Cursor"]='install_and_launch "Cursor" "cursor-bin" "cursor"'
-ACTIONS["  Install Zed"]='install_and_launch "Zed" "zed" "dev.zed.Zed"'
-ACTIONS["  Install Docker DB"]='present_terminal omarchy-install-docker-dbs'
-ACTIONS["󰫏  Install Ruby on Rails"]='present_terminal "omarchy-install-dev-env ruby"'
-ACTIONS["  Install Go"]='present_terminal "omarchy-install-dev-env go"'
-ACTIONS["  Install Python"]='present_terminal "omarchy-install-dev-env python"'
-ACTIONS["  Install Rust"]='present_terminal "omarchy-install-dev-env rust"'
-ACTIONS["  Install Node.js"]='present_terminal "omarchy-install-dev-env node"'
-ACTIONS["  Install Bun"]='present_terminal "omarchy-install-dev-env bun"'
-ACTIONS["  Install Steam"]='present_terminal omarchy-install-steam'
-ACTIONS["󰸌  Install Theme"]='present_terminal omarchy-theme-install'
-
-# Remove
-ACTIONS["󰭌  Remove Package"]='terminal omarchy-pkg-remove'
-ACTIONS["󰭌  Remove Web App"]='present_terminal omarchy-webapp-remove'
-ACTIONS["󰭌  Remove TUI"]='present_terminal omarchy-tui-remove'
-ACTIONS["󰭌  Remove Theme"]='present_terminal omarchy-theme-remove'
-
-# Update
-ACTIONS["  Update Omarchy"]='present_terminal omarchy-update'
-ACTIONS["  Update Firmware"]='present_terminal omarchy-update-firmware'
-ACTIONS["󰸌  Update Extra Themes"]='present_terminal omarchy-theme-update'
-ACTIONS["  Update Timezone"]='present_terminal omarchy-tz-select'
-ACTIONS["  Update Time"]='present_terminal omarchy-update-time'
-ACTIONS["  Update Password › Drive"]='present_terminal omarchy-drive-set-password'
-ACTIONS["  Update Password › User"]='present_terminal passwd'
-ACTIONS["  Restart Hypridle"]='omarchy-restart-hypridle'
-ACTIONS["  Restart Hyprsunset"]='omarchy-restart-hyprsunset'
-ACTIONS["  Restart Swayosd"]='omarchy-restart-swayosd'
-ACTIONS["  Restart Waybar"]='omarchy-restart-waybar'
-ACTIONS["  Restart Wi-Fi"]='present_terminal omarchy-restart-wifi'
-ACTIONS["  Restart Bluetooth"]='present_terminal omarchy-restart-bluetooth'
-ACTIONS["🟢  Channel › Stable"]='present_terminal "omarchy-channel-set stable"'
-ACTIONS["🟡  Channel › Edge"]='present_terminal "omarchy-channel-set edge"'
-ACTIONS["🔴  Channel › Dev"]='present_terminal "omarchy-channel-set dev"'
-
-# About
-ACTIONS["  About"]='omarchy-launch-about'
-
-# Apps - flat list with generic icons + option to browse all with real icons
-ACTIONS["󰀻  (Browse all apps...)"]='fuzzel'
-
-# Build the list: ACTIONS + generated desktop apps
+# Build items list
 declare -a ALL_ITEMS
-for key in "${!ACTIONS[@]}"; do
-    ALL_ITEMS+=("$key|${ACTIONS[$key]}")
-done
 
-# Add desktop apps (with generic Nerd Font icons)
+# Add special items
+ALL_ITEMS+=("󰀻  (Browse all apps...)|refresh_apps_and_launch_fuzzel")
+
+# Add parsed omarchy menu items
+while IFS='|' read -r name cmd; do
+    [[ -n "$name" ]] && ALL_ITEMS+=("$name|$cmd")
+done < <(get_flat_items)
+
+# Add apps
 while IFS='|' read -r name cmd; do
     [[ -n "$name" ]] && ALL_ITEMS+=("$name|$cmd")
 done < <(generate_apps)
 
-# Toggle: if fuzzel is already running with our menu, kill it
+# Toggle logic
 PIDFILE="$CACHE_DIR/menu.pid"
 if [[ -f "$PIDFILE" ]]; then
     oldpid=$(cat "$PIDFILE" 2>/dev/null)
     if [[ -n "$oldpid" ]] && kill -0 "$oldpid" 2>/dev/null; then
-        # Check it's actually our fuzzel (not some other instance)
         if grep -q "Search all" /proc/$oldpid/cmdline 2>/dev/null; then
             kill "$oldpid" 2>/dev/null
             rm -f "$PIDFILE"
@@ -290,44 +230,34 @@ if [[ -f "$PIDFILE" ]]; then
     fi
 fi
 
-# Sort by recency: build list with history first, then remaining items alphabetically
+# Sort by recency
 declare -a SORTED_ITEMS
 declare -A SEEN
 
-# First, add items from history (most recent first)
 if [[ -f "$HISTORY_FILE" ]]; then
-    # Read history in reverse (most recent last in file = most recent first)
-    tac "$HISTORY_FILE" 2>/dev/null | while IFS='|' read -r ts item; do
+    while IFS='|' read -r ts item; do
         [[ -n "$item" ]] || continue
-        # Find this item in ALL_ITEMS
         for full_item in "${ALL_ITEMS[@]}"; do
             if [[ "${full_item%%|*}" == "$item" ]]; then
                 if [[ -z "${SEEN[$item]:-}" ]]; then
-                    echo "$full_item"
+                    SORTED_ITEMS+=("$full_item")
                     SEEN["$item"]=1
                 fi
                 break
             fi
         done
-    done > "$CACHE_DIR/sorted.tmp"
+    done < <(tac "$HISTORY_FILE" 2>/dev/null)
 fi
 
-# Add remaining items alphabetically
 for full_item in "${ALL_ITEMS[@]}"; do
     item_name="${full_item%%|*}"
     if [[ -z "${SEEN[$item_name]:-}" ]]; then
-        echo "$full_item" >> "$CACHE_DIR/sorted.tmp"
+        SORTED_ITEMS+=("$full_item")
     fi
 done
 
-# Read sorted items
-while IFS= read -r line; do
-    [[ -n "$line" ]] && SORTED_ITEMS+=("$line")
-done < "$CACHE_DIR/sorted.tmp"
-rm -f "$CACHE_DIR/sorted.tmp"
-
-# Show fuzzel with combined list - run in background so we can toggle-kill it
-printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 | fuzzel --dmenu --width 35 --placeholder "Search all..." > "$CACHE_DIR/choice.tmp" &
+# Show fuzzel
+choice=$(printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 | fuzzel --dmenu --width 35 --placeholder "Search all..." &
 fuzzel_pid=$!
 echo $fuzzel_pid > "$PIDFILE"
 wait $fuzzel_pid 2>/dev/null
@@ -337,13 +267,32 @@ rm -f "$CACHE_DIR/choice.tmp"
 
 [[ -z "$choice" || "$choice" == "CNCLD" ]] && exit 0
 
-# Record selection to history
 record_history "$choice"
 
-# Find command for selected item
+# Find and execute command
 for item in "${SORTED_ITEMS[@]}"; do
     if [[ "${item%%|*}" == "$choice" ]]; then
         cmd="${item#*|}"
+        
+        # Handle app launches
+        if [[ "$cmd" == APP:* ]]; then
+            exec_type=$(echo "$cmd" | cut -d: -f3)
+            app_cmd=$(echo "$cmd" | cut -d: -f2)
+            if [[ "$exec_type" == "term" ]]; then
+                terminal $app_cmd
+            else
+                uwsm-app -- $app_cmd
+            fi
+            exit 0
+        fi
+        
+        # Handle special functions
+        if [[ "$cmd" == "refresh_apps_and_launch_fuzzel" ]]; then
+            refresh_apps_and_launch_fuzzel
+            exit 0
+        fi
+        
+        # Handle omarchy commands
         eval "$cmd"
         exit 0
     fi

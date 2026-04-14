@@ -1,0 +1,350 @@
+#!/bin/bash
+# Flat omarchy menu — all leaf actions searchable in one fuzzel prompt.
+#
+# NOTE: This is a hardcoded flat version of the hierarchical omarchy-menu.
+# When omarchy updates with new menu items, run:
+#   omarchy-menu-diff
+# to see what new items might need to be added here.
+#
+# The apps list (from .desktop files) is generated dynamically with caching.
+#
+set -euo pipefail
+
+export PATH="$HOME/.local/share/omarchy/bin:$PATH"
+
+# Cache settings
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/omarchy-menu-flat"
+CACHE_FILE="$CACHE_DIR/apps.cache"
+HISTORY_FILE="$CACHE_DIR/history.txt"
+CACHE_MAX_AGE=300  # 5 minutes
+HISTORY_MAX_ITEMS=50
+
+# Record a selection to history
+record_history() {
+    local item="$1"
+    [[ -z "$item" ]] && return
+    
+    # Remove existing entry for this item, then add to top
+    local temp=$(mktemp)
+    if [[ -f "$HISTORY_FILE" ]]; then
+        awk -F'|' -v it="$item" '$2 != it' "$HISTORY_FILE" | tail -n $((HISTORY_MAX_ITEMS - 1)) > "$temp"
+    fi
+    echo "$(date +%s)|$item" >> "$temp"
+    mv "$temp" "$HISTORY_FILE"
+}
+
+# Get the recency score for an item (higher = more recent)
+get_recency() {
+    local item="$1"
+    [[ -f "$HISTORY_FILE" ]] || { echo "0"; return; }
+    # Extract timestamp for this item, default to 0 if not found
+    local ts=$(grep -F "|$item" "$HISTORY_FILE" 2>/dev/null | tail -1 | cut -d'|' -f1)
+    echo "${ts:-0}"
+}
+
+# Get cache age in seconds
+cache_age() {
+    [[ -f "$CACHE_FILE" ]] || echo 999999 && return
+    local now=$(date +%s)
+    local mtime=$(stat -c %Y "$CACHE_FILE" 2>/dev/null || stat -f %m "$CACHE_FILE" 2>/dev/null || echo 0)
+    echo $((now - mtime))
+}
+
+# Icon mapping for common desktop icons to Nerd Font
+icon_for() {
+    case "$1" in
+        firefox*) echo "" ;;
+        chromium*|google-chrome*) echo "" ;;
+        code|vscodium) echo "" ;;
+        cursor) echo "" ;;
+        zed) echo "" ;;
+        slack*) echo "" ;;
+        discord) echo "" ;;
+        telegram*) echo "" ;;
+        signal*) echo "" ;;
+        spotify) echo "" ;;
+        vlc) echo "嗢" ;;
+        mpv) echo "" ;;
+        obs*) echo "" ;;
+        steam*) echo "" ;;
+        gimp*) echo "" ;;
+        inkscape) echo "" ;;
+        blender) echo "" ;;
+        krita) echo "" ;;
+        alacritty*|gnome-terminal*|konsole*|wezterm*|kitty*|ghostty*) echo "" ;;
+        nautilus*|dolphin*|thunar*|pcmanfm*) echo "" ;;
+        settings*|gnome-control-center*|system-settings*) echo "" ;;
+        1password*|bitwarden*|keepass*) echo "󰟵" ;;
+        font*) echo "" ;;
+        *) echo "󰀻" ;;
+    esac
+}
+
+# Generate desktop apps list from .desktop files
+generate_apps() {
+    # Use cache if fresh
+    local age=$(cache_age)
+    if [[ $age -lt $CACHE_MAX_AGE && -f "$CACHE_FILE" ]]; then
+        cat "$CACHE_FILE"
+        return
+    fi
+
+    mkdir -p "$CACHE_DIR"
+    local temp=$(mktemp)
+    
+    # Parse .desktop files
+    local dirs="/usr/share/applications /usr/local/share/applications $HOME/.local/share/applications $HOME/.local/share/omarchy/applications"
+    
+    for dir in $dirs; do
+        [[ -d "$dir" ]] || continue
+        for file in "$dir"/*.desktop; do
+            [[ -f "$file" ]] || continue
+            [[ "$file" == */hidden/* ]] && continue
+            
+            local name="" exec="" icon="" hide="" term=""
+            while IFS='=' read -r key val; do
+                case "$key" in
+                    Name) [[ -z "$name" ]] && name="$val" ;;
+                    Exec) [[ -z "$exec" ]] && exec="$val" ;;
+                    Icon) [[ -z "$icon" ]] && icon="$val" ;;
+                    NoDisplay) [[ "$val" == "true" ]] && hide=1 ;;
+                    Terminal) [[ "$val" == "true" ]] && term=1 ;;
+                esac
+            done < "$file"
+            
+            [[ -z "$name" || -z "$exec" || "$hide" == 1 ]] && continue
+            
+            # Clean exec
+            exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g')
+            local icon_char=$(icon_for "$icon")
+            
+            if [[ "$term" == 1 ]]; then
+                echo "$icon_char  $name|terminal $exec"
+            else
+                echo "$icon_char  $name|uwsm-app -- $exec"
+            fi
+        done
+    done | sort -t'|' -k1,1 -u > "$temp"
+    
+    mv "$temp" "$CACHE_FILE"
+    cat "$CACHE_FILE"
+}
+
+# Helpers from omarchy-menu
+terminal() { alacritty --class=Omarchy -e "$@"; }
+present_terminal() { omarchy-launch-floating-terminal-with-presentation "$1"; }
+open_in_editor() { notify-send "Editing config file" "$1"; omarchy-launch-editor "$1"; }
+install() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2"; }
+install_and_launch() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2 && setsid gtk-launch $3"; }
+install_font() { present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm --needed $2 && sleep 2 && omarchy-font-set '$3'"; }
+install_terminal() { present_terminal "omarchy-install-terminal $1"; }
+aur_install() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2"; }
+aur_install_and_launch() { present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2 && setsid gtk-launch $3"; }
+
+declare -A ACTIONS
+
+# System
+ACTIONS["  Lock"]='omarchy-lock-screen'
+ACTIONS["󱄄  Screensaver"]='omarchy-launch-screensaver force'
+ACTIONS["󰤄  Suspend"]='systemctl suspend'
+ACTIONS["  Relaunch"]='uwsm stop'
+ACTIONS["󰜉  Restart"]='systemctl reboot'
+ACTIONS["󰐥  Shutdown"]='systemctl poweroff'
+
+# Learn
+ACTIONS["󰌌  Keybindings"]='omarchy-menu-keybindings'
+ACTIONS["  Omarchy Manual"]='omarchy-launch-webapp "https://learn.omacom.io/2/the-omarchy-manual"'
+ACTIONS["  Hyprland Wiki"]='omarchy-launch-webapp "https://wiki.hypr.land/"'
+ACTIONS["󰣇  Arch Wiki"]='omarchy-launch-webapp "https://wiki.archlinux.org/title/Main_page"'
+ACTIONS["  Neovim Keymaps"]='omarchy-launch-webapp "https://www.lazyvim.org/keymaps"'
+ACTIONS["󱆃  Bash Cheat Sheet"]='omarchy-launch-webapp "https://devhints.io/bash"'
+
+# Trigger › Capture
+ACTIONS["  Screenshot › Region"]='omarchy-cmd-screenshot'
+ACTIONS["  Screenshot › Window"]='omarchy-cmd-screenshot window'
+ACTIONS["  Screenshot › Display"]='omarchy-cmd-screenshot output'
+ACTIONS["  Screenrecord › Region"]='omarchy-cmd-screenrecord'
+ACTIONS["  Screenrecord › Region + Audio"]='omarchy-cmd-screenrecord region audio'
+ACTIONS["  Screenrecord › Display"]='omarchy-cmd-screenrecord output'
+ACTIONS["  Screenrecord › Display + Audio"]='omarchy-cmd-screenrecord output audio'
+ACTIONS["󰃉  Color Picker"]='pkill hyprpicker || hyprpicker -a'
+
+# Trigger › Share
+ACTIONS["  Share Clipboard"]='terminal bash -c "omarchy-cmd-share clipboard"'
+ACTIONS["  Share File"]='terminal bash -c "omarchy-cmd-share file"'
+ACTIONS["  Share Folder"]='terminal bash -c "omarchy-cmd-share folder"'
+
+# Toggle
+ACTIONS["󱄄  Toggle Screensaver"]='omarchy-toggle-screensaver'
+ACTIONS["󰔎  Toggle Nightlight"]='omarchy-toggle-nightlight'
+ACTIONS["󱫖  Toggle Idle Lock"]='omarchy-toggle-idle'
+ACTIONS["󰍜  Toggle Top Bar"]='omarchy-toggle-waybar'
+
+# Style
+ACTIONS["󰸌  Theme"]='omarchy-menu theme'
+ACTIONS["  Font"]='omarchy-menu font'
+ACTIONS["  Background"]='omarchy-menu background'
+ACTIONS["󰸌  Edit Hyprland Look"]='open_in_editor ~/.config/hypr/looknfeel.conf'
+ACTIONS["󱄄  Edit Screensaver"]='open_in_editor ~/.config/omarchy/branding/screensaver.txt'
+ACTIONS["  Edit About"]='open_in_editor ~/.config/omarchy/branding/about.txt'
+
+# Setup
+ACTIONS["  Audio"]='$TERMINAL --class=Wiremix -e wiremix'
+ACTIONS["  Wifi"]='rfkill unblock wifi; omarchy-launch-wifi'
+ACTIONS["󰂯  Bluetooth"]='rfkill unblock bluetooth; blueberry'
+ACTIONS["󱐋  Power Profile"]='omarchy-menu power'
+ACTIONS["󰍹  Monitors"]='open_in_editor ~/.config/hypr/monitors.conf'
+ACTIONS["  Keybindings Config"]='open_in_editor ~/.config/hypr/bindings.conf'
+ACTIONS["  Input Config"]='open_in_editor ~/.config/hypr/input.conf'
+ACTIONS["󰌌  Keyboard Layout"]='present_terminal omarchy-setup-keyboard'
+ACTIONS["󰗈  Defaults"]='open_in_editor ~/.config/uwsm/default'
+ACTIONS["󰱔  DNS"]='present_terminal omarchy-setup-dns'
+ACTIONS["󰈷  Fingerprint"]='present_terminal omarchy-setup-fingerprint'
+ACTIONS["  Fido2"]='present_terminal omarchy-setup-fido2'
+
+# Config
+ACTIONS["  Config › Hyprland"]='open_in_editor ~/.config/hypr/hyprland.conf'
+ACTIONS["  Config › Hypridle"]='open_in_editor ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle'
+ACTIONS["  Config › Hyprlock"]='open_in_editor ~/.config/hypr/hyprlock.conf'
+ACTIONS["  Config › Hyprsunset"]='open_in_editor ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset'
+ACTIONS["  Config › Swayosd"]='open_in_editor ~/.config/swayosd/config.toml && omarchy-restart-swayosd'
+ACTIONS["󱄅  Config › Fuzzel"]='open_in_editor ~/.config/fuzzel/fuzzel.ini'
+ACTIONS["󰍜  Config › Waybar"]='open_in_editor ~/.config/waybar/config.jsonc && omarchy-restart-waybar'
+ACTIONS["󰞅  Config › XCompose"]='open_in_editor ~/.XCompose && omarchy-restart-xcompose'
+
+# Install
+ACTIONS["󰣇  Install Package"]='terminal omarchy-pkg-install'
+ACTIONS["󰣇  Install AUR"]='terminal omarchy-pkg-aur-install'
+ACTIONS["  Install AppImage"]='terminal omarchy-appimage-install'
+ACTIONS["  Install Web App"]='present_terminal omarchy-webapp-install'
+ACTIONS["  Install TUI"]='present_terminal omarchy-tui-install'
+ACTIONS["󱚤  Install Claude Code"]='install "Claude Code" "claude-code"'
+ACTIONS["󱚤  Install Gemini"]='aur_install "Gemini" "gemini-cli"'
+ACTIONS["󱚤  Install Ollama"]='install "Ollama" "ollama"'
+ACTIONS["󱚤  Install LM Studio"]='install "LM Studio" "lmstudio"'
+ACTIONS["  Install VSCode"]='install_and_launch "VSCode" "visual-studio-code-bin" "code"'
+ACTIONS["  Install Cursor"]='install_and_launch "Cursor" "cursor-bin" "cursor"'
+ACTIONS["  Install Zed"]='install_and_launch "Zed" "zed" "dev.zed.Zed"'
+ACTIONS["  Install Docker DB"]='present_terminal omarchy-install-docker-dbs'
+ACTIONS["󰫏  Install Ruby on Rails"]='present_terminal "omarchy-install-dev-env ruby"'
+ACTIONS["  Install Go"]='present_terminal "omarchy-install-dev-env go"'
+ACTIONS["  Install Python"]='present_terminal "omarchy-install-dev-env python"'
+ACTIONS["  Install Rust"]='present_terminal "omarchy-install-dev-env rust"'
+ACTIONS["  Install Node.js"]='present_terminal "omarchy-install-dev-env node"'
+ACTIONS["  Install Bun"]='present_terminal "omarchy-install-dev-env bun"'
+ACTIONS["  Install Steam"]='present_terminal omarchy-install-steam'
+ACTIONS["󰸌  Install Theme"]='present_terminal omarchy-theme-install'
+
+# Remove
+ACTIONS["󰭌  Remove Package"]='terminal omarchy-pkg-remove'
+ACTIONS["󰭌  Remove Web App"]='present_terminal omarchy-webapp-remove'
+ACTIONS["󰭌  Remove TUI"]='present_terminal omarchy-tui-remove'
+ACTIONS["󰭌  Remove Theme"]='present_terminal omarchy-theme-remove'
+
+# Update
+ACTIONS["  Update Omarchy"]='present_terminal omarchy-update'
+ACTIONS["  Update Firmware"]='present_terminal omarchy-update-firmware'
+ACTIONS["󰸌  Update Extra Themes"]='present_terminal omarchy-theme-update'
+ACTIONS["  Update Timezone"]='present_terminal omarchy-tz-select'
+ACTIONS["  Update Time"]='present_terminal omarchy-update-time'
+ACTIONS["  Update Password › Drive"]='present_terminal omarchy-drive-set-password'
+ACTIONS["  Update Password › User"]='present_terminal passwd'
+ACTIONS["  Restart Hypridle"]='omarchy-restart-hypridle'
+ACTIONS["  Restart Hyprsunset"]='omarchy-restart-hyprsunset'
+ACTIONS["  Restart Swayosd"]='omarchy-restart-swayosd'
+ACTIONS["  Restart Waybar"]='omarchy-restart-waybar'
+ACTIONS["  Restart Wi-Fi"]='present_terminal omarchy-restart-wifi'
+ACTIONS["  Restart Bluetooth"]='present_terminal omarchy-restart-bluetooth'
+ACTIONS["🟢  Channel › Stable"]='present_terminal "omarchy-channel-set stable"'
+ACTIONS["🟡  Channel › Edge"]='present_terminal "omarchy-channel-set edge"'
+ACTIONS["🔴  Channel › Dev"]='present_terminal "omarchy-channel-set dev"'
+
+# About
+ACTIONS["  About"]='omarchy-launch-about'
+
+# Apps - flat list with generic icons + option to browse all with real icons
+ACTIONS["󰀻  (Browse all apps...)"]='fuzzel'
+
+# Build the list: ACTIONS + generated desktop apps
+declare -a ALL_ITEMS
+for key in "${!ACTIONS[@]}"; do
+    ALL_ITEMS+=("$key|${ACTIONS[$key]}")
+done
+
+# Add desktop apps (with generic Nerd Font icons)
+while IFS='|' read -r name cmd; do
+    [[ -n "$name" ]] && ALL_ITEMS+=("$name|$cmd")
+done < <(generate_apps)
+
+# Toggle: if fuzzel is already running with our menu, kill it
+PIDFILE="$CACHE_DIR/menu.pid"
+if [[ -f "$PIDFILE" ]]; then
+    oldpid=$(cat "$PIDFILE" 2>/dev/null)
+    if [[ -n "$oldpid" ]] && kill -0 "$oldpid" 2>/dev/null; then
+        # Check it's actually our fuzzel (not some other instance)
+        if grep -q "Search all" /proc/$oldpid/cmdline 2>/dev/null; then
+            kill "$oldpid" 2>/dev/null
+            rm -f "$PIDFILE"
+            exit 0
+        fi
+    fi
+fi
+
+# Sort by recency: build list with history first, then remaining items alphabetically
+declare -a SORTED_ITEMS
+declare -A SEEN
+
+# First, add items from history (most recent first)
+if [[ -f "$HISTORY_FILE" ]]; then
+    # Read history in reverse (most recent last in file = most recent first)
+    tac "$HISTORY_FILE" 2>/dev/null | while IFS='|' read -r ts item; do
+        [[ -n "$item" ]] || continue
+        # Find this item in ALL_ITEMS
+        for full_item in "${ALL_ITEMS[@]}"; do
+            if [[ "${full_item%%|*}" == "$item" ]]; then
+                if [[ -z "${SEEN[$item]:-}" ]]; then
+                    echo "$full_item"
+                    SEEN["$item"]=1
+                fi
+                break
+            fi
+        done
+    done > "$CACHE_DIR/sorted.tmp"
+fi
+
+# Add remaining items alphabetically
+for full_item in "${ALL_ITEMS[@]}"; do
+    item_name="${full_item%%|*}"
+    if [[ -z "${SEEN[$item_name]:-}" ]]; then
+        echo "$full_item" >> "$CACHE_DIR/sorted.tmp"
+    fi
+done
+
+# Read sorted items
+while IFS= read -r line; do
+    [[ -n "$line" ]] && SORTED_ITEMS+=("$line")
+done < "$CACHE_DIR/sorted.tmp"
+rm -f "$CACHE_DIR/sorted.tmp"
+
+# Show fuzzel with combined list - run in background so we can toggle-kill it
+printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 | fuzzel --dmenu --width 35 --placeholder "Search all..." > "$CACHE_DIR/choice.tmp" &
+fuzzel_pid=$!
+echo $fuzzel_pid > "$PIDFILE"
+wait $fuzzel_pid 2>/dev/null
+rm -f "$PIDFILE"
+choice=$(cat "$CACHE_DIR/choice.tmp" 2>/dev/null || true)
+rm -f "$CACHE_DIR/choice.tmp"
+
+[[ -z "$choice" || "$choice" == "CNCLD" ]] && exit 0
+
+# Record selection to history
+record_history "$choice"
+
+# Find command for selected item
+for item in "${SORTED_ITEMS[@]}"; do
+    if [[ "${item%%|*}" == "$choice" ]]; then
+        cmd="${item#*|}"
+        eval "$cmd"
+        exit 0
+    fi
+done

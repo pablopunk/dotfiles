@@ -252,11 +252,123 @@ local function fix_cursorline_color()
   -- ]]
 end
 
+-- Global theme configuration - any tool can place a theme spec at this location
+local global_theme_file = vim.fn.expand("~/.config/omarchy/current/theme/neovim.lua")
+local global_theme_mtime = nil
+
+-- Map global theme names to plugin loaders
+local global_theme_map = {
+  ["tokyonight-night"] = function() add("folke/tokyonight.nvim") return "tokyonight-night" end,
+  ["tokyonight"] = function() add("folke/tokyonight.nvim") return "tokyonight" end,
+  ["catppuccin"] = function() add({ source = "catppuccin/nvim", name = "catppuccin" }) return "catppuccin" end,
+  ["catppuccin-macchiato"] = function() add({ source = "catppuccin/nvim", name = "catppuccin" }) return "catppuccin-macchiato" end,
+  ["catppuccin-mocha"] = function() add({ source = "catppuccin/nvim", name = "catppuccin" }) return "catppuccin-mocha" end,
+  ["catppuccin-frappe"] = function() add({ source = "catppuccin/nvim", name = "catppuccin" }) return "catppuccin-frappe" end,
+  ["catppuccin-latte"] = function() add({ source = "catppuccin/nvim", name = "catppuccin" }) return "catppuccin-latte" end,
+  ["rose-pine"] = function() add("rose-pine/neovim") return "rose-pine" end,
+  ["rose-pine-dawn"] = function() add("rose-pine/neovim") return "rose-pine-dawn" end,
+  ["rose-pine-moon"] = function() add("rose-pine/neovim") return "rose-pine-moon" end,
+  ["gruvbox"] = function() add("ellisonleao/gruvbox.nvim") return "gruvbox" end,
+  ["kanagawa"] = function() add("rebelot/kanagawa.nvim") return "kanagawa" end,
+  ["kanagawa-dragon"] = function() add("rebelot/kanagawa.nvim") return "kanagawa-dragon" end,
+  ["nord"] = function() add("gbprod/nord.nvim") return "nord" end,
+  ["everforest"] = function() add("sainnhe/everforest") return "everforest" end,
+  ["oxocarbon"] = function() add("nyoom-engineering/oxocarbon.nvim") return "oxocarbon" end,
+  ["ethereal"] = function() add("bjarneo/ethereal.nvim") return "ethereal" end,
+  ["flexoki-light"] = function() add("stevedylandev/flexoki-nvim") return "flexoki-light" end,
+  ["hackerman"] = function() add("bjarneo/hackerman.nvim") return "hackerman" end,
+  ["matteblack"] = function() add("bluz71/vim-moonfly-colors") return "moonfly" end,
+  ["miasma"] = function() add("xero/miasma.nvim") return "miasma" end,
+  ["bamboo"] = function() add("ribru17/bamboo.nvim") return "bamboo" end,
+  ["monokai-pro"] = function() add("loctvl842/monokai-pro.nvim") return "monokai-pro" end,
+  ["vantablack"] = function() add("space-chalk/space-chalk.nvim") return "vantablack" end,
+  ["white"] = function() add("pgdouyon/vim-yin-yang") return "white" end,
+}
+
+local function load_global_theme()
+  local stat = vim.loop.fs_stat(global_theme_file)
+  if not stat then
+    return false
+  end
+
+  local ok, theme_spec = pcall(dofile, global_theme_file)
+  if not ok or not theme_spec then
+    return false
+  end
+
+  -- Track mtime for auto-reload
+  global_theme_mtime = stat.mtime.sec
+
+  -- Get colorscheme from LazyVim opts format
+  for _, plugin in ipairs(theme_spec) do
+    if type(plugin) == "table" and plugin[1] == "LazyVim/LazyVim" and plugin.opts and plugin.opts.colorscheme then
+      local colorscheme = plugin.opts.colorscheme
+
+      -- Use mapped function if available, otherwise fallback
+      local theme_fn = global_theme_map[colorscheme]
+      if theme_fn then
+        local applied_colorscheme = theme_fn()
+        dark_theme = applied_colorscheme
+        light_theme = applied_colorscheme
+        return true
+      else
+        -- Unknown theme - warn and fallback
+        vim.notify("Unknown global theme: " .. colorscheme .. ", using fallback", vim.log.levels.WARN)
+        return false
+      end
+    end
+  end
+
+  return false
+end
+
+local function setup_global_theme_reload()
+  vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    callback = function()
+      local stat = vim.loop.fs_stat(global_theme_file)
+      if not stat then
+        return
+      end
+
+      local new_mtime = stat.mtime.sec
+      if global_theme_mtime and new_mtime > global_theme_mtime then
+        global_theme_mtime = new_mtime
+        -- Reload theme
+        local ok, theme_spec = pcall(dofile, global_theme_file)
+        if ok and theme_spec then
+          for _, plugin in ipairs(theme_spec) do
+            if type(plugin) == "table" and plugin[1] == "LazyVim/LazyVim" and plugin.opts and plugin.opts.colorscheme then
+              local colorscheme = plugin.opts.colorscheme
+              local theme_fn = global_theme_map[colorscheme]
+              if theme_fn then
+                local applied_colorscheme = theme_fn()
+                vim.cmd("colorscheme " .. applied_colorscheme)
+                dark_theme = applied_colorscheme
+                light_theme = applied_colorscheme
+              else
+                vim.cmd("colorscheme " .. colorscheme)
+              end
+              break
+            end
+          end
+        end
+      end
+    end,
+  })
+end
+
 local function colors()
   vim.opt.background = "dark" -- by default
-  -- rose_pine()
-  -- gruvbox()
-  catppuccin()
+
+  -- Try global theme file first, fallback to default
+  if load_global_theme() then
+    setup_global_theme_reload()
+  else
+    -- rose_pine()
+    -- gruvbox()
+    catppuccin()
+  end
+
   vim.cmd("colorscheme " .. dark_theme)
   add("pablopunk/transparent.vim")
   fix_cursorline_color()

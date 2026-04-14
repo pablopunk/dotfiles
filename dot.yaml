@@ -387,6 +387,15 @@ config:
         cargo: "cargo uninstall xremap"
       link:
         "./config/xremap/config.yml": "~/.config/xremap/config.yml"
+        "./config/xremap/xremap.service": "~/.config/systemd/user/xremap.service"
+      postinstall: |
+        # Enable and start xremap service
+        systemctl --user daemon-reload 2>/dev/null || true
+        systemctl --user enable xremap.service 2>/dev/null || true
+        systemctl --user start xremap.service 2>/dev/null || true
+        # Reminder: udev rule needed for first setup (requires sudo):
+        # echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-xremap.rules
+        # sudo udevadm control --reload-rules && sudo udevadm trigger
 
   work:
     java:

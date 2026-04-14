@@ -274,7 +274,7 @@ end
 local function vimade()
   add("TaDaa/vimade")
   require("vimade").setup({
-    recipe = { "default", { animate = true } },
+    recipe = { "minimalist", { animate = true } },
     ncmode = "windows",
     fadelevel = 0.4,
   })
@@ -691,7 +691,7 @@ local function mini_nvim()
 end
 
 local function treesitter_context()
-  add("nvim-treesitter/nvim-treesitter-context")
+  add({ source = "nvim-treesitter/nvim-treesitter-context", checkout = "master" })
   require("treesitter-context").setup({
     max_lines = 3,
   })
@@ -699,21 +699,28 @@ local function treesitter_context()
 end
 
 local function treesitter()
-  add("nvim-treesitter/nvim-treesitter")
-  ---@diagnostic disable-next-line: missing-fields
-  require("nvim-treesitter.configs").setup({
-    highlight = { enable = true },
-    indent = { enable = true },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<cr>",
-        node_incremental = "<cr>",
-        node_decremental = "<bs>",
-        scope_incremental = false,
-      },
-    },
+  add({ source = "nvim-treesitter/nvim-treesitter", checkout = "main" })
+  require("nvim-treesitter").setup({
+    install_dir = vim.fn.stdpath("data") .. "/site",
   })
+
+  vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+      pcall(vim.treesitter.start, args.buf)
+
+      local ignored = {
+        help = true,
+        checkhealth = true,
+        lazy = true,
+        telescopeprompt = true,
+      }
+      local ft = vim.bo[args.buf].filetype
+      if not ignored[ft] then
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end,
+  })
+
   treesitter_context()
 end
 
@@ -1146,7 +1153,6 @@ local function setup_plugins()
     which_key()
     ai()
     auto_session()
-    treesitter()
     lsp()
     trouble()
     conform()
@@ -1163,6 +1169,7 @@ setup_plugin_manager()
 now(function()
   setup_options()
   setup_priority_plugins()
+  treesitter()
 end)
 
 later(function()

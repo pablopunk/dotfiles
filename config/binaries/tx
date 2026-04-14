@@ -29,8 +29,6 @@ PROJECTS="$HOME/src"
 top_level_dirs=(
   "$PROJECTS"
   "$PROJECTS/maze"
-  "$PROJECTS/maze/monorepo-worktrees"
-  "$PROJECTS/raycast"
   "$HOME/Desktop"
   "$HOME/Downloads"
   "$HOME"

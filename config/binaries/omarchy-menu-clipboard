@@ -17,14 +17,22 @@ fi
 if [[ "$selection" == *"[[ binary data"* ]]; then
   # Extract the ID (first field before tab)
   id="${selection%%$'\t'*}"
-  # Create temp file with appropriate extension (default to png)
+  # Create temp file
   tmpfile="/tmp/clipboard-$(date +%s).png"
-  # Decode binary data to file (no newline!)
   printf '%s' "$id" | cliphist decode > "$tmpfile"
-  # Copy the file path to clipboard
-  printf '%s' "$tmpfile" | wl-copy
-  notify-send "Clipboard" "Image saved to $tmpfile"
+  
+  # Ask what to copy
+  action=$(echo -e "Copy image data (for apps)\nCopy file path (for terminal)" | fuzzel --dmenu --placeholder "Copy as..." --width 40 || true)
+  
+  if [[ "$action" == "Copy file path"* ]]; then
+    printf '%s' "$tmpfile" | wl-copy
+    notify-send "Clipboard" "Path copied: $tmpfile"
+  else
+    # Copy image data (default)
+    wl-copy --type image/png < "$tmpfile"
+    notify-send "Clipboard" "Image copied (saved to $tmpfile)"
+  fi
 else
-  # Regular text - decode and copy to clipboard
+  # Regular text
   printf '%s\n' "$selection" | cliphist decode | wl-copy
 fi

@@ -21,18 +21,10 @@ if [[ "$selection" == *"[[ binary data"* ]]; then
   tmpfile="/tmp/clipboard-$(date +%s).png"
   printf '%s' "$id" | cliphist decode > "$tmpfile"
   
-  # Ask what to copy
-  action=$(echo -e "Copy image data (for apps)\nCopy file path (for terminal)" | fuzzel --dmenu --placeholder "Copy as..." --width 40 || true)
-  
-  if [[ "$action" == "Copy file path"* ]]; then
-    printf '%s' "$tmpfile" | wl-copy
-    notify-send "Clipboard" "Path copied: $tmpfile"
-  else
-    # Copy image data (default)
-    wl-copy --type image/png < "$tmpfile"
-    notify-send "Clipboard" "Image copied (saved to $tmpfile)"
-  fi
+  # Copy the path to clipboard (for terminal pasting)
+  printf '%s' "$tmpfile" | wl-copy
+  notify-send "Clipboard" "Image path: $tmpfile"
 else
-  # Regular text
+  # Regular text - decode and copy to clipboard
   printf '%s\n' "$selection" | cliphist decode | wl-copy
 fi

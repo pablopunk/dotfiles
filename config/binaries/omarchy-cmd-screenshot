@@ -1,0 +1,74 @@
+#!/bin/bash
+# Override that saves screenshots to /tmp with timestamp and copies PATH to clipboard
+# This gives macOS-like behavior: paste path in terminal, image data still available via file
+
+set -euo pipefail
+
+[[ -f ~/.config/user-dirs.dirs ]] && source ~/.config/user-dirs.dirs
+OUTPUT_DIR="${OMARCHY_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}}"
+
+# Also save to /tmp for easy clipboard pasting
+TMP_DIR="/tmp/screenshots"
+mkdir -p "$TMP_DIR"
+mkdir -p "$OUTPUT_DIR"
+
+pkill slurp 2>/dev/null && exit 0
+
+# JQ for monitor geometry
+JQ_MONITOR_GEO='
+  def format_geo:
+    .x as $x | .y as $y |
+    (.width / .scale | floor) as $w |
+    (.height / .scale | floor) as $h |
+    .transform as $t |
+    if $t == 1 or $t == 3 then
+      "\($x),\($y) \($h)x\($w)"
+    else
+      "\($x),\($y) \($w)x\($h)"
+    end;
+'
+
+get_rectangles() {
+  local active_workspace=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .activeWorkspace.id')
+  hyprctl monitors -j | jq -r --arg ws "$active_workspace" "${JQ_MONITOR_GEO} .[] | select(.activeWorkspace.id == (\$ws | tonumber)) | format_geo"
+  hyprctl clients -j | jq -r --arg ws "$active_workspace" '.[] | select(.workspace.id == ($ws | tonumber)) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+MODE="${1:-smart}"
+
+# Get selection based on mode
+case "$MODE" in
+  region)
+    hyprpicker -r -z >/dev/null 2>&1 & PID=$!
+    sleep .1
+    SELECTION=$(slurp 2>/dev/null)
+    kill $PID 2>/dev/null || true
+    ;;
+  *)
+    RECTS=$(get_rectangles)
+    hyprpicker -r -z >/dev/null 2>&1 & PID=$!
+    sleep .1
+    SELECTION=$(echo "$RECTS" | slurp 2>/dev/null)
+    kill $PID 2>/dev/null || true
+    ;;
+esac
+
+[[ -z $SELECTION ]] && exit 0
+
+FILENAME="screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
+FILEPATH="$OUTPUT_DIR/$FILENAME"
+TMPPATH="$TMP_DIR/$FILENAME"
+
+# Take screenshot
+grim -g "$SELECTION" "$FILEPATH"
+
+# Copy to tmp for easy access
+cp "$FILEPATH" "$TMPPATH"
+
+# Copy PATH to clipboard (not image data!) - this allows pasting into terminal
+printf '%s' "$TMPPATH" | wl-copy
+
+# Store image in cliphist for later retrieval via clipboard manager
+cliphist store < "$FILEPATH"
+
+notify-send "Screenshot saved" "$FILEPATH" -i "$FILEPATH"

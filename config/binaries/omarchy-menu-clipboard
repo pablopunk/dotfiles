@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if omarchy-cmd-missing cliphist || omarchy-cmd-missing fuzzel; then
+  notify-send "Clipboard manager" "Install cliphist and fuzzel to browse clipboard history"
+  exit 1
+fi
+
+selection="$(cliphist list | fuzzel --dmenu --placeholder "Clipboard" --width 80 || true)"
+
+if [[ -z $selection ]]; then
+  exit 0
+fi
+
+# Check if selection is binary data (image)
+if [[ "$selection" == *"[[ binary data"* ]]; then
+  # Extract the ID (first field before tab)
+  id="${selection%%$'\t'*}"
+  # Create temp file with appropriate extension (default to png)
+  tmpfile="/tmp/clipboard-$(date +%s).png"
+  # Decode binary data to file
+  echo "$id" | cliphist decode > "$tmpfile"
+  # Copy the file path to clipboard
+  printf '%s' "$tmpfile" | wl-copy
+  notify-send "Clipboard" "Image saved to $tmpfile"
+else
+  # Regular text - decode and copy to clipboard
+  printf '%s\n' "$selection" | cliphist decode | wl-copy
+fi

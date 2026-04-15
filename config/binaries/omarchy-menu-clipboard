@@ -19,8 +19,8 @@ if [[ "$selection" == *"[[ binary data"* ]]; then
   id="${selection%%$'\t'*}"
   # Create temp file with appropriate extension (default to png)
   tmpfile="/tmp/clipboard-$(date +%s).png"
-  # Decode binary data to file
-  echo "$id" | cliphist decode > "$tmpfile"
+  # Decode binary data to file (no newline!)
+  printf '%s' "$id" | cliphist decode > "$tmpfile"
   # Copy the file path to clipboard
   printf '%s' "$tmpfile" | wl-copy
   notify-send "Clipboard" "Image saved to $tmpfile"

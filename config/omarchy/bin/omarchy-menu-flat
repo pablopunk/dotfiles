@@ -154,7 +154,7 @@ generate_apps() {
                 esac
             done < "$file"
             [[ -z "$name" || -z "$exec" || "$hide" == 1 ]] && continue
-            exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g')
+            exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g' | sed 's/^"//;s/"$//')
             local icon_char
             icon_char=$(icon_for_app "$icon")
             if [[ "$term" == 1 ]]; then

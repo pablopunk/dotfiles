@@ -1,94 +1,20 @@
 #!/bin/bash
-# Dynamic flat menu - parses omarchy-menu at runtime with caching
-
+# Flat omarchy menu - all items searchable in one list with icons
+# Features: recent-first ordering, toggle with Super+Space
 set -euo pipefail
-
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
-OMARCHY_MENU="${OMARCHY_MENU:-$HOME/.local/share/omarchy/bin/omarchy-menu}"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/omarchy-menu-flat"
-FLAT_CACHE="$CACHE_DIR/flat.cache"
 APPS_CACHE="$CACHE_DIR/apps.cache"
 HISTORY_FILE="$CACHE_DIR/history.txt"
-CACHE_MAX_AGE=3600
-APPS_MAX_AGE=300
+CACHE_MAX_AGE=300
 HISTORY_MAX_ITEMS=50
+mkdir -p "$CACHE_DIR"
 
 terminal() { alacritty --class=Omarchy -e "$@"; }
 present_terminal() { omarchy-launch-floating-terminal-with-presentation "$1"; }
-open_in_editor() { notify-send "Editing config file" "$1"; omarchy-launch-editor "$1"; }
 
-parse_omarchy_menu() {
-    [[ -f "$OMARCHY_MENU" ]] || { echo "Error: omarchy-menu not found" >&2; exit 1; }
-    
-    # Use sed/awk to extract menu structure
-    grep -E '^\*[^*]+\*\)' "$OMARCHY_MENU" | \
-    sed 's/^\s*\*//;s/\*)$//' | \
-    while read -r label; do
-        # Skip navigation items
-        [[ "$label" =~ (Back|Exit|Close) ]] && continue
-        echo "$label"
-    done | sort -u
-}
-
-cache_age() {
-    local file="$1"
-    [[ -f "$file" ]] || { echo 999999; return; }
-    local now=$(date +%s)
-    local mtime=$(stat -c %Y "$file" 2>/dev/null || stat -f %m "$file" 2>/dev/null || echo 0)
-    echo $((now - mtime))
-}
-
-get_flat_items() {
-    if [[ $(cache_age "$FLAT_CACHE") -lt $CACHE_MAX_AGE && -f "$FLAT_CACHE" ]]; then
-        cat "$FLAT_CACHE"
-    else
-        mkdir -p "$CACHE_DIR"
-        parse_omarchy_menu > "$FLAT_CACHE"
-        cat "$FLAT_CACHE"
-    fi
-}
-
-generate_apps() {
-    if [[ $(cache_age "$APPS_CACHE") -lt $APPS_MAX_AGE && -f "$APPS_CACHE" ]]; then
-        cat "$APPS_CACHE"
-        return
-    fi
-    
-    local dirs="/usr/share/applications /usr/local/share/applications $HOME/.local/share/applications $HOME/.local/share/omarchy/applications"
-    local temp=$(mktemp)
-    
-    for dir in $dirs; do
-        [[ -d "$dir" ]] || continue
-        for file in "$dir"/*.desktop; do
-            [[ -f "$file" ]] || continue
-            [[ "$file" == */hidden/* ]] && continue
-            
-            local name="" exec="" hide="" term=""
-            while IFS='=' read -r key val; do
-                case "$key" in
-                    Name) [[ -z "$name" ]] && name="$val" ;;
-                    Exec) [[ -z "$exec" ]] && exec="$val" ;;
-                    NoDisplay) [[ "$val" == "true" ]] && hide=1 ;;
-                    Terminal) [[ "$val" == "true" ]] && term=1 ;;
-                esac
-            done < "$file"
-            
-            [[ -z "$name" || -z "$exec" || "$hide" == 1 ]] && continue
-            exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g')
-            
-            if [[ "$term" == 1 ]]; then
-                echo "$name|APP:$exec:term"
-            else
-                echo "$name|APP:$exec:gui"
-            fi
-        done
-    done | sort -t'|' -k1,1 -u > "$temp"
-    
-    mv "$temp" "$APPS_CACHE"
-    cat "$APPS_CACHE"
-}
-
+# Record selection to history
 record_history() {
     local item="$1"
     [[ -z "$item" ]] && return
@@ -100,38 +26,175 @@ record_history() {
     mv "$temp" "$HISTORY_FILE"
 }
 
-mkdir -p "$CACHE_DIR"
+# Build flat items list with icons
+declare -a ITEMS
 
-declare -a ALL_ITEMS
-ALL_ITEMS+=("(Browse all apps...)|LAUNCH_FUZZEL")
+# System
+ITEMS+=(" Lock|omarchy-lock-screen")
+ITEMS+=("󱄄 Screensaver|omarchy-launch-screensaver force")
+ITEMS+=("󰤄 Suspend|systemctl suspend")
+ITEMS+=(" Relaunch|uwsm stop")
+ITEMS+=("󰜉 Restart|systemctl reboot")
+ITEMS+=("󰐥 Shutdown|systemctl poweroff")
 
+# Learn
+ITEMS+=("󰌌 Keybindings|omarchy-menu-keybindings")
+ITEMS+=(" Omarchy Manual|omarchy-launch-webapp https://learn.omacom.io/2/the-omarchy-manual")
+ITEMS+=(" Hyprland Wiki|omarchy-launch-webapp https://wiki.hypr.land/")
+ITEMS+=("󰣇 Arch Wiki|omarchy-launch-webapp https://wiki.archlinux.org/title/Main_page")
+ITEMS+=(" Neovim Keymaps|omarchy-launch-webapp https://www.lazyvim.org/keymaps")
+ITEMS+=("󱆃 Bash Cheatsheet|omarchy-launch-webapp https://devhints.io/bash")
+
+# Capture
+ITEMS+=(" Screenshot Region|omarchy-cmd-screenshot")
+ITEMS+=(" Screenshot Window|omarchy-cmd-screenshot window")
+ITEMS+=(" Screenshot Display|omarchy-cmd-screenshot output")
+ITEMS+=(" Screenrecord Region|omarchy-cmd-screenrecord")
+ITEMS+=(" Screenrecord Region + Audio|omarchy-cmd-screenrecord region audio")
+ITEMS+=(" Screenrecord Display|omarchy-cmd-screenrecord output")
+ITEMS+=(" Screenrecord Display + Audio|omarchy-cmd-screenrecord output audio")
+ITEMS+=("󰃉 Color Picker|pkill hyprpicker || hyprpicker -a")
+
+# Share
+ITEMS+=(" Share Clipboard|terminal bash -c omarchy-cmd-share clipboard")
+ITEMS+=(" Share File|terminal bash -c omarchy-cmd-share file")
+ITEMS+=(" Share Folder|terminal bash -c omarchy-cmd-share folder")
+
+# Toggle
+ITEMS+=("󱄄 Toggle Screensaver|omarchy-toggle-screensaver")
+ITEMS+=("󰔎 Toggle Nightlight|omarchy-toggle-nightlight")
+ITEMS+=("󱫖 Toggle Idle Lock|omarchy-toggle-idle")
+ITEMS+=("󰍜 Toggle Top Bar|omarchy-toggle-waybar")
+
+# Style
+ITEMS+=("󰸌 Theme|omarchy-menu theme")
+ITEMS+=(" Font|omarchy-menu font")
+ITEMS+=(" Background|omarchy-menu background")
+
+# Setup
+ITEMS+=(" Audio|\$TERMINAL --class=Wiremix -e wiremix")
+ITEMS+=(" Wifi|rfkill unblock wifi; omarchy-launch-wifi")
+ITEMS+=("󰂯 Bluetooth|rfkill unblock bluetooth; blueberry")
+
+# Install
+ITEMS+=("󰣇 Install Package|terminal omarchy-pkg-install")
+ITEMS+=("󰣇 Install AUR|terminal omarchy-pkg-aur-install")
+ITEMS+=(" Install VSCode|present_terminal yay -S --noconfirm visual-studio-code-bin")
+ITEMS+=(" Install Cursor|present_terminal yay -S --noconfirm cursor-bin")
+ITEMS+=(" Install Zed|present_terminal sudo pacman -S --noconfirm zed")
+
+# Remove
+ITEMS+=("󰭌 Remove Package|terminal omarchy-pkg-remove")
+
+# Update
+ITEMS+=(" Update Omarchy|present_terminal omarchy-update")
+ITEMS+=(" Update Firmware|present_terminal omarchy-update-firmware")
+
+# About
+ITEMS+=(" About|omarchy-launch-about")
+
+# Apps
+ITEMS+=("󰀻 (Browse all apps...)|FUZZEL")
+
+# Icon for apps based on desktop file icon name
+icon_for_app() {
+    case "$1" in
+        firefox*) echo "" ;;
+        chromium*|google-chrome*|chrome) echo "" ;;
+        code*|vscodium) echo "" ;;
+        cursor) echo "" ;;
+        zed) echo "" ;;
+        slack*) echo "" ;;
+        discord) echo "" ;;
+        telegram*) echo "" ;;
+        signal*) echo "" ;;
+        spotify) echo "" ;;
+        vlc) echo "嗢" ;;
+        mpv) echo "" ;;
+        obs*) echo "" ;;
+        steam*) echo "" ;;
+        gimp*) echo "" ;;
+        inkscape) echo "" ;;
+        blender) echo "" ;;
+        krita) echo "" ;;
+        alacritty*|gnome-terminal*|konsole*|wezterm*|kitty*|ghostty*) echo "" ;;
+        nautilus*|dolphin*|thunar*|pcmanfm*|files) echo "" ;;
+        settings*|gnome-control-center*|system-settings*) echo "" ;;
+        1password*|bitwarden*|keepass*|password*) echo "󰟵" ;;
+        font*) echo "" ;;
+        *) echo "󰀻" ;;
+    esac
+}
+
+# Generate apps with icons (cached)
+generate_apps() {
+    if [[ -f "$APPS_CACHE" ]]; then
+        local mtime age
+        mtime=$(stat -c %Y "$APPS_CACHE" 2>/dev/null || stat -f %m "$APPS_CACHE" 2>/dev/null || echo 0)
+        age=$(($(date +%s) - mtime))
+        [[ $age -lt $CACHE_MAX_AGE ]] && { cat "$APPS_CACHE"; return; }
+    fi
+    
+    local dirs="/usr/share/applications /usr/local/share/applications $HOME/.local/share/applications $HOME/.local/share/omarchy/applications"
+    local temp
+    temp=$(mktemp)
+    for dir in $dirs; do
+        [[ -d "$dir" ]] || continue
+        for file in "$dir"/*.desktop; do
+            [[ -f "$file" ]] || continue
+            [[ "$file" == */hidden/* ]] && continue
+            local name="" exec="" icon="" hide="" term=""
+            while IFS='=' read -r key val; do
+                case "$key" in
+                    Name) [[ -z "$name" ]] && name="$val" ;;
+                    Exec) [[ -z "$exec" ]] && exec="$val" ;;
+                    Icon) [[ -z "$icon" ]] && icon="$val" ;;
+                    NoDisplay) [[ "$val" == "true" ]] && hide=1 ;;
+                    Terminal) [[ "$val" == "true" ]] && term=1 ;;
+                esac
+            done < "$file"
+            [[ -z "$name" || -z "$exec" || "$hide" == 1 ]] && continue
+            exec=$(echo "$exec" | sed 's/ %[fFuUdDnNickvm]//g')
+            local icon_char
+            icon_char=$(icon_for_app "$icon")
+            if [[ "$term" == 1 ]]; then
+                echo "$icon_char $name|TERM:$exec"
+            else
+                echo "$icon_char $name|GUI:$exec"
+            fi
+        done
+    done | sort -t'|' -k1,1 -u > "$temp"
+    mv "$temp" "$APPS_CACHE"
+    cat "$APPS_CACHE"
+}
+
+# Add apps to ITEMS
 while IFS='|' read -r name cmd; do
-    [[ -n "$name" ]] && ALL_ITEMS+=("$name|ACTION:$cmd")
-done < <(get_flat_items)
-
-while IFS='|' read -r name cmd; do
-    [[ -n "$name" ]] && ALL_ITEMS+=("$name|$cmd")
+    [[ -n "$name" ]] && ITEMS+=("$name|$cmd")
 done < <(generate_apps)
 
+# Toggle: if menu is already open, close it
 PIDFILE="$CACHE_DIR/menu.pid"
 if [[ -f "$PIDFILE" ]]; then
     oldpid=$(cat "$PIDFILE" 2>/dev/null)
     if [[ -n "$oldpid" ]] && kill -0 "$oldpid" 2>/dev/null; then
-        if grep -q "Search all" /proc/$oldpid/cmdline 2>/dev/null; then
-            kill "$oldpid" 2>/dev/null
-            rm -f "$PIDFILE"
-            exit 0
-        fi
+        # Kill the fuzzel process and our script will exit too
+        kill "$oldpid" 2>/dev/null
+        rm -f "$PIDFILE"
+        exit 0
     fi
+    # Stale pid file
+    rm -f "$PIDFILE"
 fi
 
+# Sort by recency: history first, then remaining items
 declare -a SORTED_ITEMS
 declare -A SEEN
 
 if [[ -f "$HISTORY_FILE" ]]; then
     while IFS='|' read -r ts item; do
         [[ -n "$item" ]] || continue
-        for full_item in "${ALL_ITEMS[@]}"; do
+        for full_item in "${ITEMS[@]}"; do
             if [[ "${full_item%%|*}" == "$item" ]]; then
                 if [[ -z "${SEEN[$item]:-}" ]]; then
                     SORTED_ITEMS+=("$full_item")
@@ -143,54 +206,48 @@ if [[ -f "$HISTORY_FILE" ]]; then
     done < <(tac "$HISTORY_FILE" 2>/dev/null)
 fi
 
-for full_item in "${ALL_ITEMS[@]}"; do
+for full_item in "${ITEMS[@]}"; do
     item_name="${full_item%%|*}"
     if [[ -z "${SEEN[$item_name]:-}" ]]; then
         SORTED_ITEMS+=("$full_item")
     fi
 done
 
-choice=$(printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 | fuzzel --dmenu --width 35 --placeholder "Search all..." &
+# Show menu - run fuzzel in background
+choice_file=$(mktemp)
+printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 > "$CACHE_DIR/menu_items.txt"
+fuzzel --dmenu --width 35 --placeholder "Search all..." < "$CACHE_DIR/menu_items.txt" > "$choice_file" &
 fuzzel_pid=$!
 echo $fuzzel_pid > "$PIDFILE"
 wait $fuzzel_pid 2>/dev/null
-rm -f "$PIDFILE"
-choice=$(cat "$CACHE_DIR/choice.tmp" 2>/dev/null || true)
-rm -f "$CACHE_DIR/choice.tmp"
+rm -f "$PIDFILE" "$CACHE_DIR/menu_items.txt"
 
-[[ -z "$choice" || "$choice" == "CNCLD" ]] && exit 0
+choice=$(cat "$choice_file" 2>/dev/null || true)
+rm -f "$choice_file"
+
+[[ -z "$choice" ]] && exit 0
 
 record_history "$choice"
 
+# Find and execute
 for item in "${SORTED_ITEMS[@]}"; do
-    if [[ "${item%%|*}" == "$choice" ]]; then
-        cmd="${item#*|}"
-        
-        if [[ "$cmd" == APP:* ]]; then
-            exec_type=$(echo "$cmd" | cut -d: -f3)
-            app_cmd=$(echo "$cmd" | cut -d: -f2)
-            if [[ "$exec_type" == "term" ]]; then
-                terminal $app_cmd
-            else
-                uwsm-app -- $app_cmd
-            fi
-            exit 0
-        fi
-        
-        if [[ "$cmd" == "LAUNCH_FUZZEL" ]]; then
-            rm -f "$APPS_CACHE"
-            generate_apps > /dev/null 2>&1
-            fuzzel
-            exit 0
-        fi
-        
-        if [[ "$cmd" == ACTION:* ]]; then
-            action_cmd="${cmd#ACTION:}"
-            # Map label to actual command - this is the challenge
-            # For now, just show what was selected
-            notify-send "Menu" "Selected: $choice"
-        fi
-        
+    name="${item%%|*}"
+    cmd="${item#*|}"
+    if [[ "$name" == "$choice" ]]; then
+        case "$cmd" in
+            FUZZEL)
+                fuzzel
+                ;;
+            TERM:*)
+                terminal "${cmd#TERM:}"
+                ;;
+            GUI:*)
+                uwsm-app -- "${cmd#GUI:}"
+                ;;
+            *)
+                eval "$cmd"
+                ;;
+        esac
         exit 0
     fi
 done

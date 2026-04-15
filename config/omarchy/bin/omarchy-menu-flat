@@ -79,16 +79,26 @@ ITEMS+=("󰂯 Bluetooth|rfkill unblock bluetooth; blueberry")
 # Install
 ITEMS+=("󰣇 Install Package|terminal omarchy-pkg-install")
 ITEMS+=("󰣇 Install AUR|terminal omarchy-pkg-aur-install")
+ITEMS+=(" Install AppImage|terminal omarchy-appimage-install")
+ITEMS+=(" Install Web App|present_terminal omarchy-webapp-install")
+ITEMS+=(" Install TUI|present_terminal omarchy-tui-install")
 ITEMS+=(" Install VSCode|present_terminal yay -S --noconfirm visual-studio-code-bin")
 ITEMS+=(" Install Cursor|present_terminal yay -S --noconfirm cursor-bin")
 ITEMS+=(" Install Zed|present_terminal sudo pacman -S --noconfirm zed")
 
 # Remove
 ITEMS+=("󰭌 Remove Package|terminal omarchy-pkg-remove")
+ITEMS+=(" Remove Web App|present_terminal omarchy-webapp-remove")
+ITEMS+=(" Remove TUI|present_terminal omarchy-tui-remove")
+ITEMS+=("󰸌 Remove Theme|present_terminal omarchy-theme-remove")
+ITEMS+=("󰈷 Remove Fingerprint|present_terminal omarchy-setup-fingerprint --remove")
+ITEMS+=(" Remove Fido2|present_terminal omarchy-setup-fido2 --remove")
 
 # Update
 ITEMS+=(" Update Omarchy|present_terminal omarchy-update")
 ITEMS+=(" Update Firmware|present_terminal omarchy-update-firmware")
+ITEMS+=(" Update Timezone|present_terminal omarchy-tz-select")
+ITEMS+=(" Update Time|present_terminal omarchy-update-time")
 
 # About
 ITEMS+=(" About|omarchy-launch-about")

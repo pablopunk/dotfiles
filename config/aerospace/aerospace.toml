@@ -141,17 +141,10 @@ automatically-unhide-macos-hidden-apps = false
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
   # Open new Ghostty window (or launch if not running)
-  alt-cmd-ctrl-t = '''exec-and-forget osascript -e '
-  tell application "Ghostty"
-      if it is running then
-          tell application "System Events" to tell process "Ghostty"
-              click menu item "New Window" of menu "File" of menu bar 1
-          end tell
-      else
-          activate
-      end if
-  end tell'
-  '''
+  alt-cmd-ctrl-t = 'exec-and-forget ~/.bin/ghostty-new'
+
+  # Open new Ghostty window, make it floating, and center it
+  alt-cmd-ctrl-shift-t = 'exec-and-forget ~/.bin/ghostty-new-float'
 
   # Open new Helium window (or launch if not running)
   alt-cmd-ctrl-g = '''exec-and-forget osascript -e '

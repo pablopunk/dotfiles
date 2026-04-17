@@ -1,0 +1,26 @@
+#!/bin/bash
+osascript -e '
+tell application "Ghostty"
+    if it is running then
+        tell application "System Events" to tell process "Ghostty"
+            click menu item "New Window" of menu "File" of menu bar 1
+        end tell
+    else
+        activate
+    end if
+end tell'
+sleep 0.3
+aerospace layout floating
+osascript -e '
+tell application "System Events" to tell process "Ghostty"
+    set frontWindow to window 1
+    set winSize to size of frontWindow
+    tell application "Finder"
+        set screenBounds to bounds of window of desktop
+        set screenWidth to item 3 of screenBounds
+        set screenHeight to item 4 of screenBounds
+    end tell
+    set newX to (screenWidth - (item 1 of winSize)) / 2
+    set newY to (screenHeight - (item 2 of winSize)) / 2
+    set position of frontWindow to {newX, newY}
+end tell'

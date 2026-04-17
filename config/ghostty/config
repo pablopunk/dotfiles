@@ -11,4 +11,5 @@ window-padding-y = 12
 # macos-titlebar-style = hidden
 
 # fix for opencode https://github.com/anomalyco/opencode/issues/4046#issuecomment-3717801839
-keybind = shift+enter=text:\x1b\r
+# disabled because it breaks pi/tmux Shift+Enter handling
+# keybind = shift+enter=text:\x1b\r

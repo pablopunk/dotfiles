@@ -505,7 +505,6 @@ end
 
 local function editor_utils()
   add("dstein64/vim-startuptime")
-  add("wakatime/vim-wakatime")
 end
 
 local function which_key()

@@ -1,0 +1,11 @@
+[Unit]
+Description=Run scheduled Omarchy theme changes
+
+[Timer]
+OnCalendar=*-*-* 09:00:00
+OnCalendar=*-*-* 20:00:00
+Persistent=true
+Unit=omarchy-theme-schedule.service
+
+[Install]
+WantedBy=timers.target

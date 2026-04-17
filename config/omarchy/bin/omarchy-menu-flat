@@ -13,6 +13,39 @@ mkdir -p "$CACHE_DIR"
 
 terminal() { alacritty --class=Omarchy -e "$@"; }
 present_terminal() { omarchy-launch-floating-terminal-with-presentation "$1"; }
+run_shell() { bash -lc "$1"; }
+
+require_fuzzel() {
+    if ! command -v fuzzel >/dev/null 2>&1; then
+        notify-send "Omarchy menu" "Install fuzzel before using this utility. Try: pacman -S fuzzel"
+        echo "fuzzel not found; please install 'fuzzel'." >&2
+        exit 127
+    fi
+}
+
+fuzzel_theme_ready() {
+    local main_conf theme_include
+    main_conf="${XDG_CONFIG_HOME:-$HOME/.config}/fuzzel/fuzzel.ini"
+    [[ -f "$main_conf" ]] || return 0
+    theme_include=$(awk -F'= *' '/^[[:space:]]*include[[:space:]]*=/{print $2; exit}' "$main_conf" | sed 's/[[:space:]]*$//')
+    [[ -z "$theme_include" ]] && return 0
+    theme_include="${theme_include/#\~/$HOME}"
+    [[ -f "$theme_include" ]]
+}
+
+ensure_fuzzel_ready() {
+    require_fuzzel
+    if ! fuzzel_theme_ready; then
+        notify-send "Omarchy menu" "Missing fuzzel theme include. Try reapplying Omarchy/dotfiles."
+        echo "Missing fuzzel theme include referenced by ~/.config/fuzzel/fuzzel.ini" >&2
+        exit 1
+    fi
+}
+
+add_item() {
+    local label="$1" kind="$2" payload="$3"
+    ITEMS+=("$label|$kind|$payload")
+}
 
 # Record selection to history
 record_history() {
@@ -30,51 +63,72 @@ record_history() {
 declare -a ITEMS
 
 # System
-ITEMS+=(" Lock|omarchy-lock-screen")
-ITEMS+=("󱄄 Screensaver|omarchy-launch-screensaver force")
-ITEMS+=("󰤄 Suspend|systemctl suspend")
-ITEMS+=(" Relaunch|uwsm stop")
-ITEMS+=("󰜉 Restart|systemctl reboot")
-ITEMS+=("󰐥 Shutdown|systemctl poweroff")
+add_item " Lock" SHELL "omarchy-lock-screen"
+add_item "󱄄 Screensaver" SHELL "omarchy-launch-screensaver force"
+add_item "󰤄 Suspend" SHELL "systemctl suspend"
+add_item " Relaunch" SHELL "uwsm stop"
+add_item "󰜉 Restart" SHELL "systemctl reboot"
+add_item "󰐥 Shutdown" SHELL "systemctl poweroff"
 
 # Learn
-ITEMS+=("󰌌 Keybindings|omarchy-menu-keybindings")
-ITEMS+=(" Omarchy Manual|omarchy-launch-webapp https://learn.omacom.io/2/the-omarchy-manual")
-ITEMS+=(" Hyprland Wiki|omarchy-launch-webapp https://wiki.hypr.land/")
-ITEMS+=("󰣇 Arch Wiki|omarchy-launch-webapp https://wiki.archlinux.org/title/Main_page")
-ITEMS+=(" Neovim Keymaps|omarchy-launch-webapp https://www.lazyvim.org/keymaps")
-ITEMS+=("󱆃 Bash Cheatsheet|omarchy-launch-webapp https://devhints.io/bash")
+add_item "󰌌 Keybindings" SHELL "omarchy-menu-keybindings"
+add_item " Omarchy Manual" SHELL "omarchy-launch-webapp https://learn.omacom.io/2/the-omarchy-manual"
+add_item " Hyprland Wiki" SHELL "omarchy-launch-webapp https://wiki.hypr.land/"
+add_item "󰣇 Arch Wiki" SHELL "omarchy-launch-webapp https://wiki.archlinux.org/title/Main_page"
+add_item " Neovim Keymaps" SHELL "omarchy-launch-webapp https://www.lazyvim.org/keymaps"
+add_item "󱆃 Bash Cheatsheet" SHELL "omarchy-launch-webapp https://devhints.io/bash"
 
 # Capture
-ITEMS+=(" Screenshot Region|omarchy-cmd-screenshot")
-ITEMS+=(" Screenshot Window|omarchy-cmd-screenshot window")
-ITEMS+=(" Screenshot Display|omarchy-cmd-screenshot output")
-ITEMS+=(" Screenrecord Region|omarchy-cmd-screenrecord")
-ITEMS+=(" Screenrecord Region + Audio|omarchy-cmd-screenrecord region audio")
-ITEMS+=(" Screenrecord Display|omarchy-cmd-screenrecord output")
-ITEMS+=(" Screenrecord Display + Audio|omarchy-cmd-screenrecord output audio")
-ITEMS+=("󰃉 Color Picker|pkill hyprpicker || hyprpicker -a")
+add_item " Screenshot Region" SHELL "omarchy-cmd-screenshot"
+add_item " Screenshot Window" SHELL "omarchy-cmd-screenshot window"
+add_item " Screenshot Display" SHELL "omarchy-cmd-screenshot output"
+add_item " Screenrecord Region" SHELL "omarchy-cmd-screenrecord"
+add_item " Screenrecord Region + Audio" SHELL "omarchy-cmd-screenrecord region audio"
+add_item " Screenrecord Display" SHELL "omarchy-cmd-screenrecord output"
+add_item " Screenrecord Display + Audio" SHELL "omarchy-cmd-screenrecord output audio"
+add_item "󰃉 Color Picker" SHELL "pkill hyprpicker || hyprpicker -a"
 
 # Share
-ITEMS+=(" Share Clipboard|terminal bash -c omarchy-cmd-share clipboard")
-ITEMS+=(" Share File|terminal bash -c omarchy-cmd-share file")
-ITEMS+=(" Share Folder|terminal bash -c omarchy-cmd-share folder")
+add_item " Share Clipboard" TERM "bash -lc 'omarchy-cmd-share clipboard'"
+add_item " Share File" TERM "bash -lc 'omarchy-cmd-share file'"
+add_item " Share Folder" TERM "bash -lc 'omarchy-cmd-share folder'"
 
 # Toggle
-ITEMS+=("󱄄 Toggle Screensaver|omarchy-toggle-screensaver")
-ITEMS+=("󰔎 Toggle Nightlight|omarchy-toggle-nightlight")
-ITEMS+=("󱫖 Toggle Idle Lock|omarchy-toggle-idle")
-ITEMS+=("󰍜 Toggle Top Bar|omarchy-toggle-waybar")
+add_item "󱄄 Toggle Screensaver" SHELL "omarchy-toggle-screensaver"
+add_item "󰔎 Toggle Nightlight" SHELL "omarchy-toggle-nightlight"
+add_item "󱫖 Toggle Idle Lock" SHELL "omarchy-toggle-idle"
+add_item "󰍜 Toggle Top Bar" SHELL "omarchy-toggle-waybar"
+add_item " Toggle Hybrid GPU" PRESENT "omarchy-toggle-hybrid-gpu"
 
 # Style
-ITEMS+=("󰸌 Theme|omarchy-menu theme")
-ITEMS+=(" Font|omarchy-menu font")
-ITEMS+=(" Background|omarchy-menu background")
+add_item "󰸌 Theme" SHELL "omarchy-menu theme"
+add_item " Font" SHELL "omarchy-menu font"
+add_item " Background" SHELL "omarchy-menu background"
+add_item " Edit Hyprland Look & Feel" SHELL "omarchy-launch-editor ~/.config/hypr/looknfeel.conf"
+add_item "󱄄 Edit Screensaver Text" SHELL "omarchy-launch-editor ~/.config/omarchy/branding/screensaver.txt"
+add_item " Edit About Text" SHELL "omarchy-launch-editor ~/.config/omarchy/branding/about.txt"
 
 # Setup
-ITEMS+=(" Audio|\$TERMINAL --class=Wiremix -e wiremix")
-ITEMS+=(" Wifi|rfkill unblock wifi; omarchy-launch-wifi")
-ITEMS+=("󰂯 Bluetooth|rfkill unblock bluetooth; blueberry")
+add_item " Audio" SHELL '$TERMINAL --class=Wiremix -e wiremix'
+add_item " Wifi" SHELL "rfkill unblock wifi; omarchy-launch-wifi"
+add_item "󰂯 Bluetooth" SHELL "rfkill unblock bluetooth; blueberry"
+add_item "󱐋 Power Profile" SHELL "omarchy-menu power"
+add_item "󰍹 Edit Monitors" SHELL "omarchy-launch-editor ~/.config/hypr/monitors.conf"
+add_item " Edit Keybindings" SHELL "omarchy-launch-editor ~/.config/hypr/bindings.conf"
+add_item " Edit Input" SHELL "omarchy-launch-editor ~/.config/hypr/input.conf"
+add_item " Keyboard Layout" PRESENT "omarchy-setup-keyboard"
+add_item " Edit Defaults" SHELL "omarchy-launch-editor ~/.config/uwsm/default"
+add_item "󰱔 DNS" PRESENT "omarchy-setup-dns"
+add_item "󰈷 Setup Fingerprint" PRESENT "omarchy-setup-fingerprint"
+add_item " Setup Fido2" PRESENT "omarchy-setup-fido2"
+add_item " Edit Hyprland Config" SHELL "omarchy-launch-editor ~/.config/hypr/hyprland.conf"
+add_item " Edit Hypridle Config" SHELL "omarchy-launch-editor ~/.config/hypr/hypridle.conf; omarchy-restart-hypridle"
+add_item " Edit Hyprlock Config" SHELL "omarchy-launch-editor ~/.config/hypr/hyprlock.conf"
+add_item " Edit Hyprsunset Config" SHELL "omarchy-launch-editor ~/.config/hypr/hyprsunset.conf; omarchy-restart-hyprsunset"
+add_item " Edit Swayosd Config" SHELL "omarchy-launch-editor ~/.config/swayosd/config.toml; omarchy-restart-swayosd"
+add_item "󱄅 Edit Fuzzel Config" SHELL "omarchy-launch-editor ~/.config/fuzzel/fuzzel.ini"
+add_item "󰍜 Edit Waybar Config" SHELL "omarchy-launch-editor ~/.config/waybar/config.jsonc; omarchy-restart-waybar"
+add_item "󰞅 Edit XCompose" SHELL "omarchy-launch-editor ~/.XCompose; omarchy-restart-xcompose"
 
 # Install
 ITEMS+=("󰣇 Install Package|terminal omarchy-pkg-install")
@@ -82,9 +136,53 @@ ITEMS+=("󰣇 Install AUR|terminal omarchy-pkg-aur-install")
 ITEMS+=(" Install AppImage|terminal omarchy-appimage-install")
 ITEMS+=(" Install Web App|present_terminal omarchy-webapp-install")
 ITEMS+=(" Install TUI|present_terminal omarchy-tui-install")
-ITEMS+=(" Install VSCode|present_terminal yay -S --noconfirm visual-studio-code-bin")
-ITEMS+=(" Install Cursor|present_terminal yay -S --noconfirm cursor-bin")
-ITEMS+=(" Install Zed|present_terminal sudo pacman -S --noconfirm zed")
+ITEMS+=(" Install Service: Dropbox|present_terminal yay -S --noconfirm dropbox")
+ITEMS+=(" Install Service: Tailscale|present_terminal yay -S --noconfirm tailscale")
+ITEMS+=("󰟵 Install Service: Bitwarden|present_terminal sudo pacman -S --noconfirm bitwarden bitwarden-cli && setsid gtk-launch bitwarden")
+ITEMS+=(" Install Service: Chromium Account|present_terminal omarchy-install-chromium-google-account")
+ITEMS+=("󰸌 Install Theme|present_terminal omarchy-theme-install")
+ITEMS+=(" Install Backgrounds|nautilus ~/.config/omarchy/current/theme/backgrounds")
+ITEMS+=(" Install Font: Meslo LG Mono|present_terminal sudo pacman -S --noconfirm --needed ttf-meslo-nerd && sleep 2 && omarchy-font-set 'MesloLGL Nerd Font'")
+ITEMS+=(" Install Font: Fira Code|present_terminal sudo pacman -S --noconfirm --needed ttf-firacode-nerd && sleep 2 && omarchy-font-set 'FiraCode Nerd Font'")
+ITEMS+=(" Install Font: Victor Code|present_terminal sudo pacman -S --noconfirm --needed ttf-victor-mono-nerd && sleep 2 && omarchy-font-set 'VictorMono Nerd Font'")
+ITEMS+=(" Install Font: Bitstream Vera Mono|present_terminal sudo pacman -S --noconfirm --needed ttf-bitstream-vera-mono-nerd && sleep 2 && omarchy-font-set 'BitstromWera Nerd Font'")
+ITEMS+=("󰫏 Install Dev: Ruby on Rails|present_terminal omarchy-install-dev-env ruby")
+ITEMS+=(" Install Dev: Docker DB|present_terminal omarchy-install-docker-dbs")
+ITEMS+=(" Install Dev: Node.js|present_terminal omarchy-install-dev-env node")
+ITEMS+=(" Install Dev: Bun|present_terminal omarchy-install-dev-env bun")
+ITEMS+=(" Install Dev: Deno|present_terminal omarchy-install-dev-env deno")
+ITEMS+=(" Install Dev: Go|present_terminal omarchy-install-dev-env go")
+ITEMS+=(" Install Dev: PHP|present_terminal omarchy-install-dev-env php")
+ITEMS+=(" Install Dev: Laravel|present_terminal omarchy-install-dev-env laravel")
+ITEMS+=(" Install Dev: Symfony|present_terminal omarchy-install-dev-env symfony")
+ITEMS+=(" Install Dev: Python|present_terminal omarchy-install-dev-env python")
+ITEMS+=(" Install Dev: Elixir|present_terminal omarchy-install-dev-env elixir")
+ITEMS+=(" Install Dev: Phoenix|present_terminal omarchy-install-dev-env phoenix")
+ITEMS+=(" Install Dev: Zig|present_terminal omarchy-install-dev-env zig")
+ITEMS+=(" Install Dev: Rust|present_terminal omarchy-install-dev-env rust")
+ITEMS+=(" Install Dev: Java|present_terminal omarchy-install-dev-env java")
+ITEMS+=(" Install Dev: .NET|present_terminal omarchy-install-dev-env dotnet")
+ITEMS+=(" Install Dev: OCaml|present_terminal omarchy-install-dev-env ocaml")
+ITEMS+=(" Install Dev: Clojure|present_terminal omarchy-install-dev-env clojure")
+ITEMS+=(" Install VSCode|present_terminal yay -S --noconfirm visual-studio-code-bin && setsid gtk-launch code")
+ITEMS+=(" Install Cursor|present_terminal yay -S --noconfirm cursor-bin && setsid gtk-launch cursor")
+ITEMS+=(" Install Zed|present_terminal sudo pacman -S --noconfirm zed && setsid gtk-launch dev.zed.Zed")
+ITEMS+=(" Install Sublime Text|present_terminal yay -S --noconfirm sublime-text-4 && setsid gtk-launch sublime_text")
+ITEMS+=(" Install Helix|present_terminal sudo pacman -S --noconfirm helix")
+ITEMS+=(" Install Emacs|present_terminal sudo pacman -S --noconfirm emacs-wayland && systemctl --user enable --now emacs.service")
+ITEMS+=(" Install Terminal: Alacritty|present_terminal omarchy-install-terminal alacritty")
+ITEMS+=(" Install Terminal: Ghostty|present_terminal yay -S --noconfirm ghostty-git")
+ITEMS+=(" Install Terminal: Kitty|present_terminal omarchy-install-terminal kitty")
+ITEMS+=("󱚤 Install AI: Claude Code|present_terminal sudo pacman -S --noconfirm claude-code")
+ITEMS+=("󱚤 Install AI: Gemini|present_terminal yay -S --noconfirm gemini-cli")
+ITEMS+=("󱚤 Install AI: OpenAI Codex|present_terminal yay -S --noconfirm openai-codex-bin")
+ITEMS+=("󱚤 Install AI: LM Studio|present_terminal sudo pacman -S --noconfirm lmstudio")
+ITEMS+=("󱚤 Install AI: Ollama|present_terminal omarchy-menu install >/dev/null")
+ITEMS+=("󱚤 Install AI: Crush|present_terminal sudo pacman -S --noconfirm crush-bin")
+ITEMS+=("󱚤 Install AI: opencode|present_terminal yay -S --noconfirm opencode-bin")
+ITEMS+=(" Install Gaming: Steam|present_terminal omarchy-install-steam")
+ITEMS+=(" Install Gaming: RetroArch|present_terminal yay -S --noconfirm retroarch retroarch-assets libretro libretro-fbneo && setsid gtk-launch com.libretro.RetroArch.desktop")
+ITEMS+=("󰍳 Install Gaming: Minecraft|present_terminal yay -S --noconfirm minecraft-launcher && setsid gtk-launch minecraft-launcher")
 
 # Remove
 ITEMS+=("󰭌 Remove Package|terminal omarchy-pkg-remove")
@@ -96,6 +194,25 @@ ITEMS+=(" Remove Fido2|present_terminal omarchy-setup-fido2 --remove")
 
 # Update
 ITEMS+=(" Update Omarchy|present_terminal omarchy-update")
+ITEMS+=("󰔫 Update Channel: Stable|present_terminal omarchy-channel-set stable")
+ITEMS+=("🟡 Update Channel: Edge|present_terminal omarchy-channel-set edge")
+ITEMS+=("🔴 Update Channel: Dev|present_terminal omarchy-channel-set dev")
+ITEMS+=(" Restore Hyprland Config|present_terminal omarchy-refresh-hyprland")
+ITEMS+=(" Restore Hypridle Config|present_terminal omarchy-refresh-hypridle")
+ITEMS+=(" Restore Hyprlock Config|present_terminal omarchy-refresh-hyprlock")
+ITEMS+=(" Restore Hyprsunset Config|present_terminal omarchy-refresh-hyprsunset")
+ITEMS+=("󱣴 Restore Plymouth Config|present_terminal omarchy-refresh-plymouth")
+ITEMS+=(" Restore Swayosd Config|present_terminal omarchy-refresh-swayosd")
+ITEMS+=("󱄅 Restore Fuzzel Config|present_terminal omarchy-refresh-fuzzel")
+ITEMS+=("󰍜 Restore Waybar Config|present_terminal omarchy-refresh-waybar")
+ITEMS+=(" Restart Hypridle|omarchy-restart-hypridle")
+ITEMS+=(" Restart Hyprsunset|omarchy-restart-hyprsunset")
+ITEMS+=(" Restart Swayosd|omarchy-restart-swayosd")
+ITEMS+=("󰍜 Restart Waybar|omarchy-restart-waybar")
+ITEMS+=("󱚾 Restart Wi-Fi|present_terminal omarchy-restart-wifi")
+ITEMS+=("󰂯 Restart Bluetooth|present_terminal omarchy-restart-bluetooth")
+ITEMS+=(" Update Drive Encryption Password|present_terminal omarchy-drive-set-password")
+ITEMS+=(" Update User Password|present_terminal passwd")
 ITEMS+=(" Update Firmware|present_terminal omarchy-update-firmware")
 ITEMS+=(" Update Timezone|present_terminal omarchy-tz-select")
 ITEMS+=(" Update Time|present_terminal omarchy-update-time")
@@ -104,7 +221,7 @@ ITEMS+=(" Update Time|present_terminal omarchy-update-time")
 ITEMS+=(" About|omarchy-launch-about")
 
 # Apps
-ITEMS+=("󰀻 (Browse all apps...)|FUZZEL")
+add_item "󰀻 (Browse all apps...)" FUZZEL ""
 
 # Icon for apps based on desktop file icon name
 icon_for_app() {
@@ -131,6 +248,7 @@ icon_for_app() {
         nautilus*|dolphin*|thunar*|pcmanfm*|files) echo "" ;;
         settings*|gnome-control-center*|system-settings*) echo "" ;;
         1password*|bitwarden*|keepass*|password*) echo "󰟵" ;;
+        helium*|*helium*) echo "✳" ;;
         font*) echo "" ;;
         *) echo "󰀻" ;;
     esac
@@ -168,9 +286,9 @@ generate_apps() {
             local icon_char
             icon_char=$(icon_for_app "$icon")
             if [[ "$term" == 1 ]]; then
-                echo "$icon_char $name|TERM:$exec"
+                echo "$icon_char $name|TERM|$exec"
             else
-                echo "$icon_char $name|GUI:$exec"
+                echo "$icon_char $name|GUI|$exec"
             fi
         done
     done | sort -t'|' -k1,1 -u > "$temp"
@@ -179,8 +297,8 @@ generate_apps() {
 }
 
 # Add apps to ITEMS
-while IFS='|' read -r name cmd; do
-    [[ -n "$name" ]] && ITEMS+=("$name|$cmd")
+while IFS='|' read -r name kind payload; do
+    [[ -n "$name" ]] && add_item "$name" "$kind" "$payload"
 done < <(generate_apps)
 
 # Toggle: if menu is already open, close it
@@ -224,6 +342,7 @@ for full_item in "${ITEMS[@]}"; do
 done
 
 # Show menu - run fuzzel in background
+ensure_fuzzel_ready
 choice_file=$(mktemp)
 printf '%s\n' "${SORTED_ITEMS[@]}" | cut -d'|' -f1 > "$CACHE_DIR/menu_items.txt"
 fuzzel --dmenu --width 35 --placeholder "Search all..." < "$CACHE_DIR/menu_items.txt" > "$choice_file" &
@@ -241,21 +360,28 @@ record_history "$choice"
 
 # Find and execute
 for item in "${SORTED_ITEMS[@]}"; do
-    name="${item%%|*}"
-    cmd="${item#*|}"
+    IFS='|' read -r name kind payload <<< "$item"
     if [[ "$name" == "$choice" ]]; then
-        case "$cmd" in
+        case "$kind" in
             FUZZEL)
+                ensure_fuzzel_ready
                 fuzzel
                 ;;
-            TERM:*)
-                terminal "${cmd#TERM:}"
+            TERM)
+                terminal bash -lc "$payload"
                 ;;
-            GUI:*)
-                uwsm-app -- "${cmd#GUI:}"
+            GUI)
+                uwsm-app -- $payload
+                ;;
+            PRESENT)
+                present_terminal "$payload"
+                ;;
+            SHELL)
+                run_shell "$payload"
                 ;;
             *)
-                eval "$cmd"
+                echo "Unknown menu item kind: $kind" >&2
+                exit 1
                 ;;
         esac
         exit 0

@@ -11,3 +11,6 @@ keymap:
       CapsLock-q: Mute
       CapsLock-w: VolumeDown
       CapsLock-e: VolumeUp
+      CapsLock-a: PreviousSong
+      CapsLock-s: PlayPause
+      CapsLock-d: NextSong

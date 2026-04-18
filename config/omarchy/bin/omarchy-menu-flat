@@ -79,13 +79,14 @@ add_item " Neovim Keymaps" SHELL "omarchy-launch-webapp https://www.lazyvim.o
 add_item "󱆃 Bash Cheatsheet" SHELL "omarchy-launch-webapp https://devhints.io/bash"
 
 # Capture
-add_item " Screenshot Region" SHELL "omarchy-cmd-screenshot"
-add_item " Screenshot Window" SHELL "omarchy-cmd-screenshot window"
-add_item " Screenshot Display" SHELL "omarchy-cmd-screenshot output"
-add_item " Screenrecord Region" SHELL "omarchy-cmd-screenrecord"
-add_item " Screenrecord Region + Audio" SHELL "omarchy-cmd-screenrecord region audio"
-add_item " Screenrecord Display" SHELL "omarchy-cmd-screenrecord output"
-add_item " Screenrecord Display + Audio" SHELL "omarchy-cmd-screenrecord output audio"
+# Small delay lets fuzzel fully unmap before capture tools grab the screen.
+add_item " Screenshot Region" SHELL "sleep 0.25; omarchy-cmd-screenshot"
+add_item " Screenshot Window" SHELL "sleep 0.25; omarchy-cmd-screenshot window"
+add_item " Screenshot Display" SHELL "sleep 0.25; omarchy-cmd-screenshot output"
+add_item " Screenrecord Region" SHELL "sleep 0.25; omarchy-cmd-screenrecord"
+add_item " Screenrecord Region + Audio" SHELL "sleep 0.25; omarchy-cmd-screenrecord region audio"
+add_item " Screenrecord Display" SHELL "sleep 0.25; omarchy-cmd-screenrecord output"
+add_item " Screenrecord Display + Audio" SHELL "sleep 0.25; omarchy-cmd-screenrecord output audio"
 add_item "󰃉 Color Picker" SHELL "pkill hyprpicker || hyprpicker -a"
 
 # Share

@@ -132,94 +132,94 @@ add_item "󰍜 Edit Waybar Config" SHELL "omarchy-launch-editor ~/.config/waybar
 add_item "󰞅 Edit XCompose" SHELL "omarchy-launch-editor ~/.XCompose; omarchy-restart-xcompose"
 
 # Install
-ITEMS+=("󰣇 Install Package|terminal omarchy-pkg-install")
-ITEMS+=("󰣇 Install AUR|terminal omarchy-pkg-aur-install")
-ITEMS+=(" Install AppImage|terminal omarchy-appimage-install")
-ITEMS+=(" Install Web App|present_terminal omarchy-webapp-install")
-ITEMS+=(" Install TUI|present_terminal omarchy-tui-install")
-ITEMS+=(" Install Service: Dropbox|present_terminal yay -S --noconfirm dropbox")
-ITEMS+=(" Install Service: Tailscale|present_terminal yay -S --noconfirm tailscale")
-ITEMS+=("󰟵 Install Service: Bitwarden|present_terminal sudo pacman -S --noconfirm bitwarden bitwarden-cli && setsid gtk-launch bitwarden")
-ITEMS+=(" Install Service: Chromium Account|present_terminal omarchy-install-chromium-google-account")
-ITEMS+=("󰸌 Install Theme|present_terminal omarchy-theme-install")
-ITEMS+=(" Install Backgrounds|nautilus ~/.config/omarchy/current/theme/backgrounds")
-ITEMS+=(" Install Font: Meslo LG Mono|present_terminal sudo pacman -S --noconfirm --needed ttf-meslo-nerd && sleep 2 && omarchy-font-set 'MesloLGL Nerd Font'")
-ITEMS+=(" Install Font: Fira Code|present_terminal sudo pacman -S --noconfirm --needed ttf-firacode-nerd && sleep 2 && omarchy-font-set 'FiraCode Nerd Font'")
-ITEMS+=(" Install Font: Victor Code|present_terminal sudo pacman -S --noconfirm --needed ttf-victor-mono-nerd && sleep 2 && omarchy-font-set 'VictorMono Nerd Font'")
-ITEMS+=(" Install Font: Bitstream Vera Mono|present_terminal sudo pacman -S --noconfirm --needed ttf-bitstream-vera-mono-nerd && sleep 2 && omarchy-font-set 'BitstromWera Nerd Font'")
-ITEMS+=("󰫏 Install Dev: Ruby on Rails|present_terminal omarchy-install-dev-env ruby")
-ITEMS+=(" Install Dev: Docker DB|present_terminal omarchy-install-docker-dbs")
-ITEMS+=(" Install Dev: Node.js|present_terminal omarchy-install-dev-env node")
-ITEMS+=(" Install Dev: Bun|present_terminal omarchy-install-dev-env bun")
-ITEMS+=(" Install Dev: Deno|present_terminal omarchy-install-dev-env deno")
-ITEMS+=(" Install Dev: Go|present_terminal omarchy-install-dev-env go")
-ITEMS+=(" Install Dev: PHP|present_terminal omarchy-install-dev-env php")
-ITEMS+=(" Install Dev: Laravel|present_terminal omarchy-install-dev-env laravel")
-ITEMS+=(" Install Dev: Symfony|present_terminal omarchy-install-dev-env symfony")
-ITEMS+=(" Install Dev: Python|present_terminal omarchy-install-dev-env python")
-ITEMS+=(" Install Dev: Elixir|present_terminal omarchy-install-dev-env elixir")
-ITEMS+=(" Install Dev: Phoenix|present_terminal omarchy-install-dev-env phoenix")
-ITEMS+=(" Install Dev: Zig|present_terminal omarchy-install-dev-env zig")
-ITEMS+=(" Install Dev: Rust|present_terminal omarchy-install-dev-env rust")
-ITEMS+=(" Install Dev: Java|present_terminal omarchy-install-dev-env java")
-ITEMS+=(" Install Dev: .NET|present_terminal omarchy-install-dev-env dotnet")
-ITEMS+=(" Install Dev: OCaml|present_terminal omarchy-install-dev-env ocaml")
-ITEMS+=(" Install Dev: Clojure|present_terminal omarchy-install-dev-env clojure")
-ITEMS+=(" Install VSCode|present_terminal yay -S --noconfirm visual-studio-code-bin && setsid gtk-launch code")
-ITEMS+=(" Install Cursor|present_terminal yay -S --noconfirm cursor-bin && setsid gtk-launch cursor")
-ITEMS+=(" Install Zed|present_terminal sudo pacman -S --noconfirm zed && setsid gtk-launch dev.zed.Zed")
-ITEMS+=(" Install Sublime Text|present_terminal yay -S --noconfirm sublime-text-4 && setsid gtk-launch sublime_text")
-ITEMS+=(" Install Helix|present_terminal sudo pacman -S --noconfirm helix")
-ITEMS+=(" Install Emacs|present_terminal sudo pacman -S --noconfirm emacs-wayland && systemctl --user enable --now emacs.service")
-ITEMS+=(" Install Terminal: Alacritty|present_terminal omarchy-install-terminal alacritty")
-ITEMS+=(" Install Terminal: Ghostty|present_terminal yay -S --noconfirm ghostty-git")
-ITEMS+=(" Install Terminal: Kitty|present_terminal omarchy-install-terminal kitty")
-ITEMS+=("󱚤 Install AI: Claude Code|present_terminal sudo pacman -S --noconfirm claude-code")
-ITEMS+=("󱚤 Install AI: Gemini|present_terminal yay -S --noconfirm gemini-cli")
-ITEMS+=("󱚤 Install AI: OpenAI Codex|present_terminal yay -S --noconfirm openai-codex-bin")
-ITEMS+=("󱚤 Install AI: LM Studio|present_terminal sudo pacman -S --noconfirm lmstudio")
-ITEMS+=("󱚤 Install AI: Ollama|present_terminal omarchy-menu install >/dev/null")
-ITEMS+=("󱚤 Install AI: Crush|present_terminal sudo pacman -S --noconfirm crush-bin")
-ITEMS+=("󱚤 Install AI: opencode|present_terminal yay -S --noconfirm opencode-bin")
-ITEMS+=(" Install Gaming: Steam|present_terminal omarchy-install-steam")
-ITEMS+=(" Install Gaming: RetroArch|present_terminal yay -S --noconfirm retroarch retroarch-assets libretro libretro-fbneo && setsid gtk-launch com.libretro.RetroArch.desktop")
-ITEMS+=("󰍳 Install Gaming: Minecraft|present_terminal yay -S --noconfirm minecraft-launcher && setsid gtk-launch minecraft-launcher")
+add_item "󰣇 Install Package" TERM "omarchy-pkg-install"
+add_item "󰣇 Install AUR" TERM "omarchy-pkg-aur-install"
+add_item " Install AppImage" TERM "omarchy-appimage-install"
+add_item " Install Web App" PRESENT "omarchy-webapp-install"
+add_item " Install TUI" PRESENT "omarchy-tui-install"
+add_item " Install Service: Dropbox" PRESENT "yay -S --noconfirm dropbox"
+add_item " Install Service: Tailscale" PRESENT "yay -S --noconfirm tailscale"
+add_item "󰟵 Install Service: Bitwarden" PRESENT "sudo pacman -S --noconfirm bitwarden bitwarden-cli && setsid gtk-launch bitwarden"
+add_item " Install Service: Chromium Account" PRESENT "omarchy-install-chromium-google-account"
+add_item "󰸌 Install Theme" PRESENT "omarchy-theme-install"
+add_item " Install Backgrounds" GUI "nautilus ~/.config/omarchy/current/theme/backgrounds"
+add_item " Install Font: Meslo LG Mono" PRESENT "sudo pacman -S --noconfirm --needed ttf-meslo-nerd && sleep 2 && omarchy-font-set 'MesloLGL Nerd Font'"
+add_item " Install Font: Fira Code" PRESENT "sudo pacman -S --noconfirm --needed ttf-firacode-nerd && sleep 2 && omarchy-font-set 'FiraCode Nerd Font'"
+add_item " Install Font: Victor Code" PRESENT "sudo pacman -S --noconfirm --needed ttf-victor-mono-nerd && sleep 2 && omarchy-font-set 'VictorMono Nerd Font'"
+add_item " Install Font: Bitstream Vera Mono" PRESENT "sudo pacman -S --noconfirm --needed ttf-bitstream-vera-mono-nerd && sleep 2 && omarchy-font-set 'BitstromWera Nerd Font'"
+add_item "󰫏 Install Dev: Ruby on Rails" PRESENT "omarchy-install-dev-env ruby"
+add_item " Install Dev: Docker DB" PRESENT "omarchy-install-docker-dbs"
+add_item " Install Dev: Node.js" PRESENT "omarchy-install-dev-env node"
+add_item " Install Dev: Bun" PRESENT "omarchy-install-dev-env bun"
+add_item " Install Dev: Deno" PRESENT "omarchy-install-dev-env deno"
+add_item " Install Dev: Go" PRESENT "omarchy-install-dev-env go"
+add_item " Install Dev: PHP" PRESENT "omarchy-install-dev-env php"
+add_item " Install Dev: Laravel" PRESENT "omarchy-install-dev-env laravel"
+add_item " Install Dev: Symfony" PRESENT "omarchy-install-dev-env symfony"
+add_item " Install Dev: Python" PRESENT "omarchy-install-dev-env python"
+add_item " Install Dev: Elixir" PRESENT "omarchy-install-dev-env elixir"
+add_item " Install Dev: Phoenix" PRESENT "omarchy-install-dev-env phoenix"
+add_item " Install Dev: Zig" PRESENT "omarchy-install-dev-env zig"
+add_item " Install Dev: Rust" PRESENT "omarchy-install-dev-env rust"
+add_item " Install Dev: Java" PRESENT "omarchy-install-dev-env java"
+add_item " Install Dev: .NET" PRESENT "omarchy-install-dev-env dotnet"
+add_item " Install Dev: OCaml" PRESENT "omarchy-install-dev-env ocaml"
+add_item " Install Dev: Clojure" PRESENT "omarchy-install-dev-env clojure"
+add_item " Install VSCode" PRESENT "yay -S --noconfirm visual-studio-code-bin && setsid gtk-launch code"
+add_item " Install Cursor" PRESENT "yay -S --noconfirm cursor-bin && setsid gtk-launch cursor"
+add_item " Install Zed" PRESENT "sudo pacman -S --noconfirm zed && setsid gtk-launch dev.zed.Zed"
+add_item " Install Sublime Text" PRESENT "yay -S --noconfirm sublime-text-4 && setsid gtk-launch sublime_text"
+add_item " Install Helix" PRESENT "sudo pacman -S --noconfirm helix"
+add_item " Install Emacs" PRESENT "sudo pacman -S --noconfirm emacs-wayland && systemctl --user enable --now emacs.service"
+add_item " Install Terminal: Alacritty" PRESENT "omarchy-install-terminal alacritty"
+add_item " Install Terminal: Ghostty" PRESENT "yay -S --noconfirm ghostty-git"
+add_item " Install Terminal: Kitty" PRESENT "omarchy-install-terminal kitty"
+add_item "󱚤 Install AI: Claude Code" PRESENT "sudo pacman -S --noconfirm claude-code"
+add_item "󱚤 Install AI: Gemini" PRESENT "yay -S --noconfirm gemini-cli"
+add_item "󱚤 Install AI: OpenAI Codex" PRESENT "yay -S --noconfirm openai-codex-bin"
+add_item "󱚤 Install AI: LM Studio" PRESENT "sudo pacman -S --noconfirm lmstudio"
+add_item "󱚤 Install AI: Ollama" PRESENT "omarchy-menu install >/dev/null"
+add_item "󱚤 Install AI: Crush" PRESENT "sudo pacman -S --noconfirm crush-bin"
+add_item "󱚤 Install AI: opencode" PRESENT "yay -S --noconfirm opencode-bin"
+add_item " Install Gaming: Steam" PRESENT "omarchy-install-steam"
+add_item " Install Gaming: RetroArch" PRESENT "yay -S --noconfirm retroarch retroarch-assets libretro libretro-fbneo && setsid gtk-launch com.libretro.RetroArch.desktop"
+add_item "󰍳 Install Gaming: Minecraft" PRESENT "yay -S --noconfirm minecraft-launcher && setsid gtk-launch minecraft-launcher"
 
 # Remove
-ITEMS+=("󰭌 Remove Package|terminal omarchy-pkg-remove")
-ITEMS+=(" Remove Web App|present_terminal omarchy-webapp-remove")
-ITEMS+=(" Remove TUI|present_terminal omarchy-tui-remove")
-ITEMS+=("󰸌 Remove Theme|present_terminal omarchy-theme-remove")
-ITEMS+=("󰈷 Remove Fingerprint|present_terminal omarchy-setup-fingerprint --remove")
-ITEMS+=(" Remove Fido2|present_terminal omarchy-setup-fido2 --remove")
+add_item "󰭌 Remove Package" TERM "omarchy-pkg-remove"
+add_item " Remove Web App" PRESENT "omarchy-webapp-remove"
+add_item " Remove TUI" PRESENT "omarchy-tui-remove"
+add_item "󰸌 Remove Theme" PRESENT "omarchy-theme-remove"
+add_item "󰈷 Remove Fingerprint" PRESENT "omarchy-setup-fingerprint --remove"
+add_item " Remove Fido2" PRESENT "omarchy-setup-fido2 --remove"
 
 # Update
-ITEMS+=(" Update Omarchy|present_terminal omarchy-update")
-ITEMS+=("󰔫 Update Channel: Stable|present_terminal omarchy-channel-set stable")
-ITEMS+=("🟡 Update Channel: Edge|present_terminal omarchy-channel-set edge")
-ITEMS+=("🔴 Update Channel: Dev|present_terminal omarchy-channel-set dev")
-ITEMS+=(" Restore Hyprland Config|present_terminal omarchy-refresh-hyprland")
-ITEMS+=(" Restore Hypridle Config|present_terminal omarchy-refresh-hypridle")
-ITEMS+=(" Restore Hyprlock Config|present_terminal omarchy-refresh-hyprlock")
-ITEMS+=(" Restore Hyprsunset Config|present_terminal omarchy-refresh-hyprsunset")
-ITEMS+=("󱣴 Restore Plymouth Config|present_terminal omarchy-refresh-plymouth")
-ITEMS+=(" Restore Swayosd Config|present_terminal omarchy-refresh-swayosd")
-ITEMS+=("󱄅 Restore Fuzzel Config|present_terminal omarchy-refresh-fuzzel")
-ITEMS+=("󰍜 Restore Waybar Config|present_terminal omarchy-refresh-waybar")
-ITEMS+=(" Restart Hypridle|omarchy-restart-hypridle")
-ITEMS+=(" Restart Hyprsunset|omarchy-restart-hyprsunset")
-ITEMS+=(" Restart Swayosd|omarchy-restart-swayosd")
-ITEMS+=("󰍜 Restart Waybar|omarchy-restart-waybar")
-ITEMS+=("󱚾 Restart Wi-Fi|present_terminal omarchy-restart-wifi")
-ITEMS+=("󰂯 Restart Bluetooth|present_terminal omarchy-restart-bluetooth")
-ITEMS+=(" Update Drive Encryption Password|present_terminal omarchy-drive-set-password")
-ITEMS+=(" Update User Password|present_terminal passwd")
-ITEMS+=(" Update Firmware|present_terminal omarchy-update-firmware")
-ITEMS+=(" Update Timezone|present_terminal omarchy-tz-select")
-ITEMS+=(" Update Time|present_terminal omarchy-update-time")
+add_item " Update Omarchy" PRESENT "omarchy-update"
+add_item "󰔫 Update Channel: Stable" PRESENT "omarchy-channel-set stable"
+add_item "🟡 Update Channel: Edge" PRESENT "omarchy-channel-set edge"
+add_item "🔴 Update Channel: Dev" PRESENT "omarchy-channel-set dev"
+add_item " Restore Hyprland Config" PRESENT "omarchy-refresh-hyprland"
+add_item " Restore Hypridle Config" PRESENT "omarchy-refresh-hypridle"
+add_item " Restore Hyprlock Config" PRESENT "omarchy-refresh-hyprlock"
+add_item " Restore Hyprsunset Config" PRESENT "omarchy-refresh-hyprsunset"
+add_item "󱣴 Restore Plymouth Config" PRESENT "omarchy-refresh-plymouth"
+add_item " Restore Swayosd Config" PRESENT "omarchy-refresh-swayosd"
+add_item "󱄅 Restore Fuzzel Config" PRESENT "omarchy-refresh-fuzzel"
+add_item "󰍜 Restore Waybar Config" PRESENT "omarchy-refresh-waybar"
+add_item " Restart Hypridle" SHELL "omarchy-restart-hypridle"
+add_item " Restart Hyprsunset" SHELL "omarchy-restart-hyprsunset"
+add_item " Restart Swayosd" SHELL "omarchy-restart-swayosd"
+add_item "󰍜 Restart Waybar" SHELL "omarchy-restart-waybar"
+add_item "󱚾 Restart Wi-Fi" PRESENT "omarchy-restart-wifi"
+add_item "󰂯 Restart Bluetooth" PRESENT "omarchy-restart-bluetooth"
+add_item " Update Drive Encryption Password" PRESENT "omarchy-drive-set-password"
+add_item " Update User Password" PRESENT "passwd"
+add_item " Update Firmware" PRESENT "omarchy-update-firmware"
+add_item " Update Timezone" PRESENT "omarchy-tz-select"
+add_item " Update Time" PRESENT "omarchy-update-time"
 
 # About
-ITEMS+=(" About|omarchy-launch-about")
+add_item " About" SHELL "omarchy-launch-about"
 
 # Apps
 add_item "󰀻 (Browse all apps...)" FUZZEL ""

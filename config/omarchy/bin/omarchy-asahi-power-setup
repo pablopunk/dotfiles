@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+log() { printf '[asahi-power] %s\n' "$*"; }
+
+have_sudo() {
+  command -v sudo >/dev/null 2>&1
+}
+
+run_root() {
+  if [[ ${EUID:-$(id -u)} -eq 0 ]]; then
+    "$@"
+  elif have_sudo; then
+    sudo "$@"
+  else
+    log "Need root privileges to run: $*"
+    return 1
+  fi
+}
+
+is_asahi_mac() {
+  [[ "$(uname -s)" == "Linux" ]] || return 1
+  [[ "$(uname -m)" == "aarch64" ]] || return 1
+  local product_name product_vendor
+  product_name="$(cat /sys/devices/virtual/dmi/id/product_name 2>/dev/null || true)"
+  product_vendor="$(cat /sys/devices/virtual/dmi/id/sys_vendor 2>/dev/null || true)"
+  [[ "$product_vendor" == "Apple Inc." ]] || return 1
+  [[ "$product_name" == MacBook* || "$product_name" == Mac* ]] || return 1
+}
+
+install_tlp() {
+  if command -v tlp >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if command -v pacman >/dev/null 2>&1; then
+    log "Installing tlp via pacman"
+    run_root pacman -Sy --noconfirm --needed tlp
+  elif command -v apt-get >/dev/null 2>&1; then
+    log "Installing tlp via apt"
+    run_root apt-get update
+    run_root apt-get install -y tlp
+  elif command -v dnf >/dev/null 2>&1; then
+    log "Installing tlp via dnf"
+    run_root dnf install -y tlp
+  else
+    log "Unsupported package manager; please install tlp manually"
+    return 1
+  fi
+}
+
+main() {
+  if ! is_asahi_mac; then
+    log "Not an Asahi Mac; skipping"
+    exit 0
+  fi
+
+  install_tlp
+
+  if systemctl list-unit-files power-profiles-daemon.service >/dev/null 2>&1; then
+    log "Masking power-profiles-daemon"
+    run_root systemctl mask --now power-profiles-daemon.service || true
+  fi
+
+  log "Enabling tlp"
+  run_root systemctl enable tlp || true
+  run_root tlp init start || run_root tlp start || true
+
+  if command -v tlp-stat >/dev/null 2>&1; then
+    tlp-stat -s || true
+  fi
+}
+
+main "$@"

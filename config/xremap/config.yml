@@ -8,3 +8,6 @@ keymap:
       CapsLock-j: Down
       CapsLock-k: Up
       CapsLock-l: Right
+      CapsLock-q: Mute
+      CapsLock-w: VolumeDown
+      CapsLock-e: VolumeUp

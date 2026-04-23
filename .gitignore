@@ -26,3 +26,5 @@ config/opencode/opencode-notifier.json
 config/opencode/.auto-update-history.json
 
 .env
+
+.tmp-cache

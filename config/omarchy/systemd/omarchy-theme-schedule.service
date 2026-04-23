@@ -1,0 +1,7 @@
+[Unit]
+Description=Apply scheduled Omarchy theme
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/omarchy-theme-schedule

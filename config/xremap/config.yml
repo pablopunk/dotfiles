@@ -1,9 +1,34 @@
 virtual_modifiers:
+  - Hangeul
   - CapsLock
 
-keymap:
-  - name: Caps+hjkl Navigation
+modmap:
+  - name: Tab as modifier when held
     remap:
+      Tab:
+        held: Hangeul
+        alone: Tab
+        free_hold: true
+  - name: CapsLock as modifier only
+    remap:
+      CapsLock:
+        held: CapsLock
+        alone: []
+        free_hold: true
+
+keymap:
+  - name: Tab+hjkl Navigation and media
+    remap:
+      Hangeul-h: Left
+      Hangeul-j: Down
+      Hangeul-k: Up
+      Hangeul-l: Right
+      Hangeul-q: Mute
+      Hangeul-w: VolumeDown
+      Hangeul-e: VolumeUp
+      Hangeul-a: PreviousSong
+      Hangeul-s: PlayPause
+      Hangeul-d: NextSong
       CapsLock-h: Left
       CapsLock-j: Down
       CapsLock-k: Up

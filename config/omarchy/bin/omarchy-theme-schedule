@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+hour="$(date +%H)"
+
+case "$hour" in
+  09)
+    omarchy-theme-set ethereal
+    ;;
+  20)
+    omarchy-theme-set gruvbox
+    ;;
+  *)
+    echo "No scheduled Omarchy theme change for hour $hour"
+    ;;
+esac

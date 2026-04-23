@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+hyprctl reload 2>/dev/null || true
+systemctl --user daemon-reload 2>/dev/null || true
+systemctl --user enable --now omarchy-theme-schedule.timer 2>/dev/null || true
+"$HOME/.local/bin/omarchy-asahi-power-setup" || true

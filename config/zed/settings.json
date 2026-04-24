@@ -7,10 +7,17 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "edit_predictions": {
     "provider": "zed"
   },
   "agent": {
+    "dock": "right",
     "default_model": {
       "provider": "anthropic",
       "model": "claude-haiku-4-5-thinking-latest"
@@ -34,6 +41,7 @@
     }
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": false
   },
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",

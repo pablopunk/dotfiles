@@ -680,8 +680,8 @@ local function pi_nvim()
   add("pablopunk/pi.nvim")
   add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "anthropic-1m",
-    model = "claude-haiku-4-5",
+    provider = "fireworks",
+    model = "accounts/fireworks/routers/kimi-k2p5-turbo",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

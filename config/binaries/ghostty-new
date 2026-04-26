@@ -1,0 +1,11 @@
+#!/bin/bash
+osascript -e '
+tell application "Ghostty"
+    if it is running then
+        tell application "System Events" to tell process "Ghostty"
+            click menu item "New Window" of menu "File" of menu bar 1
+        end tell
+    else
+        activate
+    end if
+end tell'

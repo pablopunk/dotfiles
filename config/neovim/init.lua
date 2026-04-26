@@ -680,8 +680,8 @@ local function pi_nvim()
   add("pablopunk/pi.nvim")
   add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "anthropic-1m",
-    model = "claude-haiku-4-5",
+    provider = "fireworks",
+    model = "accounts/fireworks/routers/kimi-k2p5-turbo",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()
@@ -916,30 +916,30 @@ local function treesitter()
 end
 
 local function lsp()
-  add("williamboman/mason.nvim")
-  add("williamboman/mason-lspconfig.nvim")
+  -- add("williamboman/mason.nvim")
+  -- add("williamboman/mason-lspconfig.nvim")
   add("neovim/nvim-lspconfig") -- provides server configs for vim.lsp.enable()
 
-  require("mason").setup({})
-  require("mason-lspconfig").setup({
-    ensure_installed = {
-      -- General
-      "bashls",
-      "jsonls",
-      "html",
-      "vimls",
-      "lua_ls",
-      -- JavaScript/TypeScript
-      "tsgo", -- Experimental Go-based TS server (better performance, monorepo support)
-      "eslint", -- ESLint language server
-      "biome", -- Biome language server (linter + formatter)
-      -- Frameworks
-      "astro", -- Astro support
-      "tailwindcss", -- Tailwind CSS completions
-      -- Go
-      "gopls",
-    },
-  })
+  -- require("mason").setup({})
+  -- require("mason-lspconfig").setup({
+  --   ensure_installed = {
+  --     -- General
+  --     "bashls",
+  --     "jsonls",
+  --     "html",
+  --     "vimls",
+  --     "lua_ls",
+  --     -- JavaScript/TypeScript
+  --     "tsgo", -- Experimental Go-based TS server (better performance, monorepo support)
+  --     "eslint", -- ESLint language server
+  --     "biome", -- Biome language server (linter + formatter)
+  --     -- Frameworks
+  --     "astro", -- Astro support
+  --     "tailwindcss", -- Tailwind CSS completions
+  --     -- Go
+  --     "gopls",
+  --   },
+  -- })
 
   -- Shared config for ALL LSP servers
   vim.lsp.config("*", {

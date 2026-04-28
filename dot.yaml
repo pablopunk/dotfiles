@@ -395,7 +395,7 @@ config:
     os: ["linux"]
     link:
       "./config/omarchy/bin/omarchy-menu-flat": "~/.local/bin/omarchy-menu-flat"
-      "./config/omarchy/bin/omarchy-toggle-nightlight": "~/.local/bin/omarchy-toggle-nightlight"
+      "./config/omarchy/bin/omarchy-toggle-nightlight-custom": "~/.local/bin/omarchy-toggle-nightlight-custom"
       "./config/omarchy/bin/omarchy-theme-schedule": "~/.local/bin/omarchy-theme-schedule"
       "./config/omarchy/bin/omarchy-asahi-power-setup": "~/.local/bin/omarchy-asahi-power-setup"
       "./config/omarchy/bin/omarchy-postlink": "~/.local/bin/omarchy-postlink"

@@ -22,7 +22,7 @@ restart_nightlighted_waybar() {
   fi
 }
 
-if [[ "$CURRENT_TEMP" == "$OFF_TEMP" ]]; then
+if [ "$CURRENT_TEMP" -ge 3000 ]; then
   hyprctl hyprsunset temperature "$ON_TEMP"
   notify-send "  Nightlight screen temperature (${ON_TEMP}K)"
   restart_nightlighted_waybar

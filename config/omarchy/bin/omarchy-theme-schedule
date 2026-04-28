@@ -3,14 +3,19 @@ set -euo pipefail
 
 hour="$(date +%H)"
 
-case "$hour" in
-  09)
-    omarchy-theme-set ethereal
-    ;;
-  20)
-    omarchy-theme-set gruvbox
-    ;;
-  *)
-    echo "No scheduled Omarchy theme change for hour $hour"
-    ;;
-esac
+# 09:00 - 19:59 -> ethereal
+# 20:00 - 08:59 -> gruvbox
+if [ "$hour" -ge 9 ] && [ "$hour" -lt 20 ]; then
+  theme="ethereal"
+else
+  theme="gruvbox"
+fi
+
+current_theme="$(omarchy-theme-current || echo "")"
+
+if [ "${current_theme,,}" != "${theme,,}" ]; then
+  echo "Switching theme from '$current_theme' to '$theme'"
+  omarchy-theme-set "$theme"
+else
+  echo "Theme is already '$theme'"
+fi

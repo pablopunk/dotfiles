@@ -2,8 +2,7 @@
 Description=Run scheduled Omarchy theme changes
 
 [Timer]
-OnCalendar=*-*-* 09:00:00
-OnCalendar=*-*-* 20:00:00
+OnCalendar=*:0/5
 Persistent=true
 Unit=omarchy-theme-schedule.service
 

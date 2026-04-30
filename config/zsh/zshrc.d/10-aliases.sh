@@ -33,3 +33,5 @@ alias :xa='exit'
 # source entry file
 alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'
+# claude code
+alias claude="claude --allow-dangerously-skip-permissions --dangerously-skip-permissions"

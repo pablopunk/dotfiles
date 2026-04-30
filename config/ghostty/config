@@ -3,8 +3,10 @@ font-size = 15
 
 theme = light:Catppuccin Latte,dark:Ayu
 
-background-opacity = 0.75
-background-blur-radius = 50
+background-blur-radius = 20
+background-opacity = 0.6
+background-blur = macos-glass-clear
+macos-titlebar-style = transparent
 window-padding-x = 12
 window-padding-y = 12
 # window-decoration = auto

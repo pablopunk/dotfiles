@@ -2,7 +2,7 @@
 # Flat omarchy menu - all items searchable in one list with icons
 # Features: recent-first ordering, toggle with Super+Space
 set -euo pipefail
-export PATH="$HOME/.local/share/omarchy/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/omarchy/bin:$PATH"
 
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/omarchy-menu-flat"
 APPS_CACHE="$CACHE_DIR/apps.cache"
@@ -96,7 +96,7 @@ add_item " Share Folder" TERM "bash -lc 'omarchy-cmd-share folder'"
 
 # Toggle
 add_item "󱄄 Toggle Screensaver" SHELL "omarchy-toggle-screensaver"
-add_item "󰔎 Toggle Nightlight" SHELL "omarchy-toggle-nightlight"
+add_item "󰔎 Toggle Nightlight" SHELL "omarchy-toggle-nightlight-custom"
 add_item "󱫖 Toggle Idle Lock" SHELL "omarchy-toggle-idle"
 add_item "󰍜 Toggle Top Bar" SHELL "omarchy-toggle-waybar"
 add_item " Toggle Hybrid GPU" PRESENT "omarchy-toggle-hybrid-gpu"

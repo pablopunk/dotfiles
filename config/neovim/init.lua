@@ -680,8 +680,8 @@ local function pi_nvim()
   add("pablopunk/pi.nvim")
   add({ source = "~/src/pi.nvim" })
   require("pi").setup({
-    provider = "fireworks",
-    model = "accounts/fireworks/routers/kimi-k2p5-turbo",
+    provider = "opencode",
+    model = "gemini-3-flash",
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()
@@ -1292,7 +1292,7 @@ local function noice()
   })
   require("noice").setup({
     lsp = { progress = { enabled = false } },
-    notify = { enabled = true, view = "notify" },
+    -- notify = { enabled = true, view = "notify" },
     messages = { enabled = true, view = "notify" },
     cmdline = { view = "cmdline_popup" },
   })

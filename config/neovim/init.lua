@@ -677,11 +677,14 @@ local function claude()
 end
 
 local function pi_nvim()
-  add("pablopunk/pi.nvim")
+  -- add("pablopunk/pi.nvim")
   add({ source = "~/src/pi.nvim" })
   require("pi").setup({
     provider = "opencode",
     model = "gemini-3-flash",
+    thinking = "off",
+    skills = false,
+    extensions = false,
   })
   map("n", "<leader>ai", function()
     require("pi").prompt_with_buffer()

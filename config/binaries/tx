@@ -35,6 +35,7 @@ top_level_dirs=(
 )
 recursive_dirs=(
   "$HOME/.worktrees"
+  "$HOME/.worktrees/fractal"
 )
 
 for dir in "${top_level_dirs[@]}" "${recursive_dirs[@]}"; do

@@ -72,6 +72,23 @@ fzf_with_query() {
   echo "$result"
 }
 
+normalize_for_match() {
+  tr '[:upper:]' '[:lower:]' <<<"$1" | tr '/' '-'
+}
+
+fuzzy_dir_matches() {
+  local query="$1"
+  local normalized_query normalized_dir dir
+  normalized_query=$(normalize_for_match "$query")
+
+  all_directories | while IFS= read -r dir; do
+    normalized_dir=$(normalize_for_match "$dir")
+    if [[ "$normalized_dir" == *"$normalized_query"* || "$normalized_query" == *"$normalized_dir"* ]]; then
+      echo "$dir"
+    fi
+  done
+}
+
 # Process fzf output: returns the final path to use
 # First line is always the query, second line is selection if exists
 # Returns empty string if processing fails
@@ -235,8 +252,10 @@ if [[ $# -eq 1 ]]; then
   if [[ -n $selected_name ]]; then
     go_to_session "$selected_name"
   fi
-  # Search for directories matching the argument
-  dir_matches=$(all_directories | grep -i "$1")
+  # Search for directories matching the argument. Normalize / to - so inputs like
+  # "fractal-Swift-Shift-read-thread-..." match paths like
+  # "~/.worktrees/fractal/Swift-Shift/read-thread-...".
+  dir_matches=$(fuzzy_dir_matches "$1")
   match_count=$(echo "$dir_matches" | grep -c .)
   # If exactly one match is found, select it automatically
   if [[ $match_count -eq 1 ]]; then

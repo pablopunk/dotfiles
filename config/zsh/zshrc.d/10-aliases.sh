@@ -14,7 +14,7 @@ alias ls='ls -G'
 alias ll='ls -lagh'
 alias la='ls -a1'
 alias l='ls -a1'
-alias t='tree -L 3'
+alias t='tree -L 2 --gitignore'
 # other
 alias prof='PS4='"'"'$(date "+%s.%N ($LINENO) + ")'"'"' bash -x '
 alias vi=nvim

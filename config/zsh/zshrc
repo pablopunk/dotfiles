@@ -99,3 +99,7 @@ export OFF_COLOR=cyan
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # }}} End Environment
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/pablopunk/.local/bin:$PATH"

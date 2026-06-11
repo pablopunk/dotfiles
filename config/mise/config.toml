@@ -5,3 +5,5 @@ python = "3.12"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
+trusted_config_paths = ["~/src", "~/Downloads", "~/.worktrees"]
+

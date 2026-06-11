@@ -38,6 +38,12 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End Zim configuration
 
+# Editing Key Bindings {{{
+# Make Ctrl-W stop at path separators instead of deleting whole paths.
+WORDCHARS=${WORDCHARS//\//}
+bindkey '^W' backward-kill-word
+# }}} End Editing Key Bindings
+
 # Homebrew Environment {{{
 # Pre-expanded `brew shellenv` to avoid slow eval (~20ms saved)
 if [ -f /proc/sys/kernel/osrelease ]; then

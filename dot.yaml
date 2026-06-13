@@ -431,6 +431,12 @@ config:
       kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 9" "Meta+Ctrl+Alt+Shift+R,,Xanela ao escritorio 9"
       kwriteconfig6 --file kwinrc --group Desktops --key Number 9
       kwriteconfig6 --file kwinrc --group Desktops --key Rows 2
+      # Hyper+T to launch Ghostty
+      if grep -qF '[services][com.mitchellh.ghostty.desktop]' ~/.config/kglobalshortcutsrc; then
+        sed -i '/^\[services\]\[com.mitchellh.ghostty.desktop\]$/{n;s/^_launch=.*/_launch=Meta+Ctrl+Alt+T,,Launch Ghostty/;}' ~/.config/kglobalshortcutsrc
+      else
+        printf '\n[services][com.mitchellh.ghostty.desktop]\n_launch=Meta+Ctrl+Alt+T,,Launch Ghostty\n' >> ~/.config/kglobalshortcutsrc
+      fi
       echo 'KDE shortcuts configured. Log out/in for them to take effect.'
 
   xremap:

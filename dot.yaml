@@ -14,6 +14,9 @@ profiles:
     - omabin
     - xremap
 
+  kde:
+    - kde-shortcuts
+
 config:
   cli:
     git:
@@ -404,6 +407,31 @@ config:
       "./config/omarchy/systemd/omarchy-theme-schedule.service": "~/.config/systemd/user/omarchy-theme-schedule.service"
       "./config/omarchy/systemd/omarchy-theme-schedule.timer": "~/.config/systemd/user/omarchy-theme-schedule.timer"
     postlink: "~/.local/bin/omarchy-postlink"
+
+  kde-shortcuts:
+    os: ["linux"]
+    postinstall: |
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 1" "Meta+Ctrl+Alt+1,Meta+F1\\tCtrl+F1,Ir ao escritorio 1"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 2" "Meta+Ctrl+Alt+2,Meta+F2\\tCtrl+F2,Ir ao escritorio 2"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 3" "Meta+Ctrl+Alt+3,Meta+F3\\tCtrl+F3,Ir ao escritorio 3"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 4" "Meta+Ctrl+Alt+4,Meta+F4\\tCtrl+F4,Ir ao escritorio 4"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 5" "Meta+Ctrl+Alt+5,,Ir ao escritorio 5"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 6" "Meta+Ctrl+Alt+Q,,Ir ao escritorio 6"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 7" "Meta+Ctrl+Alt+W,,Ir ao escritorio 7"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 8" "Meta+Ctrl+Alt+E,,Ir ao escritorio 8"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 9" "Meta+Ctrl+Alt+R,,Ir ao escritorio 9"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 1" "Meta+Ctrl+Alt+Shift+1,,Xanela ao escritorio 1"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 2" "Meta+Ctrl+Alt+Shift+2,,Xanela ao escritorio 2"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 3" "Meta+Ctrl+Alt+Shift+3,,Xanela ao escritorio 3"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 4" "Meta+Ctrl+Alt+Shift+4,,Xanela ao escritorio 4"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 5" "Meta+Ctrl+Alt+Shift+5,,Xanela ao escritorio 5"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 6" "Meta+Ctrl+Alt+Shift+Q,,Xanela ao escritorio 6"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 7" "Meta+Ctrl+Alt+Shift+W,,Xanela ao escritorio 7"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 8" "Meta+Ctrl+Alt+Shift+E,,Xanela ao escritorio 8"
+      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 9" "Meta+Ctrl+Alt+Shift+R,,Xanela ao escritorio 9"
+      kwriteconfig6 --file kwinrc --group Desktops --key Number 9
+      kwriteconfig6 --file kwinrc --group Desktops --key Rows 2
+      echo 'KDE shortcuts configured. Log out/in for them to take effect.'
 
   xremap:
     os: ["linux"]

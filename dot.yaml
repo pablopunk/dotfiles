@@ -10,13 +10,6 @@ profiles:
   work:
     - work
 
-  omarchy:
-    - omabin
-    - xremap
-
-  kde:
-    - kde-shortcuts
-
 config:
   cli:
     git:
@@ -376,68 +369,12 @@ config:
       uninstall:
         brew: "brew uninstall datadog-labs/pack/pup"
 
-    opencode-work:
-      os: ["mac"]
-      link:
-        "./config/opencode/opencode.work.jsonc": "~/.config-work/opencode/opencode.jsonc"
-        "./config/opencode/tui.jsonc": "~/.config-work/opencode/tui.jsonc"
-        "./config/opencode/sounds/": "~/.config-work/opencode/sounds"
-      postlink: |
-        mkdir -p ~/.config-work/opencode
-        mkdir -p ~/.local/share-work/opencode
-        sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config-work/opencode/opencode-notifier.json
-
     cleanshot:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
       uninstall:
         brew: "brew uninstall cleanshot"
-
-  omabin:
-    os: ["linux"]
-    link:
-      "./config/omarchy/bin/omarchy-menu-flat": "~/.local/bin/omarchy-menu-flat"
-      "./config/omarchy/bin/omarchy-toggle-nightlight-custom": "~/.local/bin/omarchy-toggle-nightlight-custom"
-      "./config/omarchy/bin/omarchy-theme-schedule": "~/.local/bin/omarchy-theme-schedule"
-      "./config/omarchy/bin/omarchy-asahi-power-setup": "~/.local/bin/omarchy-asahi-power-setup"
-      "./config/omarchy/bin/omarchy-postlink": "~/.local/bin/omarchy-postlink"
-      "./config/omarchy/bin/omarchy-xremap-postinstall": "~/.local/bin/omarchy-xremap-postinstall"
-      "./config/omarchy/hypr": "~/.config/hypr"
-      "./config/omarchy/systemd/omarchy-theme-schedule.service": "~/.config/systemd/user/omarchy-theme-schedule.service"
-      "./config/omarchy/systemd/omarchy-theme-schedule.timer": "~/.config/systemd/user/omarchy-theme-schedule.timer"
-    postlink: "~/.local/bin/omarchy-postlink"
-
-  kde-shortcuts:
-    os: ["linux"]
-    postinstall: |
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 1" "Meta+Ctrl+Alt+1,Meta+F1\\tCtrl+F1,Ir ao escritorio 1"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 2" "Meta+Ctrl+Alt+2,Meta+F2\\tCtrl+F2,Ir ao escritorio 2"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 3" "Meta+Ctrl+Alt+3,Meta+F3\\tCtrl+F3,Ir ao escritorio 3"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 4" "Meta+Ctrl+Alt+4,Meta+F4\\tCtrl+F4,Ir ao escritorio 4"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 5" "Meta+Ctrl+Alt+5,,Ir ao escritorio 5"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 6" "Meta+Ctrl+Alt+Q,,Ir ao escritorio 6"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 7" "Meta+Ctrl+Alt+W,,Ir ao escritorio 7"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 8" "Meta+Ctrl+Alt+E,,Ir ao escritorio 8"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Switch to Desktop 9" "Meta+Ctrl+Alt+R,,Ir ao escritorio 9"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 1" "Meta+Ctrl+Alt+Shift+1,,Xanela ao escritorio 1"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 2" "Meta+Ctrl+Alt+Shift+2,,Xanela ao escritorio 2"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 3" "Meta+Ctrl+Alt+Shift+3,,Xanela ao escritorio 3"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 4" "Meta+Ctrl+Alt+Shift+4,,Xanela ao escritorio 4"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 5" "Meta+Ctrl+Alt+Shift+5,,Xanela ao escritorio 5"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 6" "Meta+Ctrl+Alt+Shift+Q,,Xanela ao escritorio 6"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 7" "Meta+Ctrl+Alt+Shift+W,,Xanela ao escritorio 7"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 8" "Meta+Ctrl+Alt+Shift+E,,Xanela ao escritorio 8"
-      kwriteconfig6 --file kglobalshortcutsrc --group kwin --key "Window to Desktop 9" "Meta+Ctrl+Alt+Shift+R,,Xanela ao escritorio 9"
-      kwriteconfig6 --file kwinrc --group Desktops --key Number 9
-      kwriteconfig6 --file kwinrc --group Desktops --key Rows 2
-      # Hyper+T to launch Ghostty
-      if grep -qF '[services][com.mitchellh.ghostty.desktop]' ~/.config/kglobalshortcutsrc; then
-        sed -i '/^\[services\]\[com.mitchellh.ghostty.desktop\]$/{n;s/^_launch=.*/_launch=Meta+Ctrl+Alt+T,,Launch Ghostty/;}' ~/.config/kglobalshortcutsrc
-      else
-        printf '\n[services][com.mitchellh.ghostty.desktop]\n_launch=Meta+Ctrl+Alt+T,,Launch Ghostty\n' >> ~/.config/kglobalshortcutsrc
-      fi
-      echo 'KDE shortcuts configured. Log out/in for them to take effect.'
 
   xremap:
     os: ["linux"]

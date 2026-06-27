@@ -1,1 +1,0 @@
-/home/pol/.local/share/omarchy/AGENTS.md

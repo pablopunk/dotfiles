@@ -10,6 +10,9 @@ profiles:
   work:
     - work
 
+  niri:
+    - niri
+
 config:
   cli:
     git:
@@ -212,7 +215,7 @@ config:
         "eu.exelban.Stats": "./config/stats/Stats.xml"
 
     ghostty:
-      os: ["mac"]
+      os: ["mac", "linux"]
       install:
         brew: "[[ -d /Applications/Ghostty.app ]] || brew install ghostty"
         dnf: "sudo dnf install -y ghostty"
@@ -386,3 +389,19 @@ config:
       "./config/xremap/config.yml": "~/.config/xremap/config.yml"
       "./config/xremap/xremap.service": "~/.config/systemd/user/xremap.service"
     postinstall: "~/.local/bin/omarchy-xremap-postinstall"
+
+  niri:
+    niri:
+      os: ["linux"]
+      install:
+        pacman: "sudo pacman -S --noconfirm niri"
+      uninstall:
+        pacman: "sudo pacman -R --noconfirm niri"
+      link:
+        "./config/niri": "~/.config/niri"
+
+    noctalia:
+      os: ["linux"]
+      link:
+        "./config/noctalia": "~/.config/noctalia"
+

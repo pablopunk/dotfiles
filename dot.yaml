@@ -153,9 +153,11 @@ config:
 
     pi:
       install:
+        paru: sudo paru -S aur/pi-coding-agent
         bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
       uninstall:
-        bun: "bun rm -g @mariozechner/pi-coding-agent"
+        paru: sudo paru -R aur/pi-coding-agent
+        bun: "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
 
     macmon:
       os: ["mac"]
@@ -393,10 +395,6 @@ config:
   niri:
     niri:
       os: ["linux"]
-      install:
-        pacman: "sudo pacman -S --noconfirm niri"
-      uninstall:
-        pacman: "sudo pacman -R --noconfirm niri"
       link:
         "./config/niri": "~/.config/niri"
 

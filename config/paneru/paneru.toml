@@ -29,7 +29,9 @@
 focus_follows_mouse = true
 mouse_follows_focus = true
 preset_column_widths = [0.33333, 0.5, 0.66667]
-# animation_speed = 12  # uncomment for smooth transitions (8–20); unset = instant
+# animation_speed = 16  # smooth (8–20); unset = instant
+virtual_workspace_animations = false
+insert_windows_mid_strip = true
 auto_center = false
 
 [padding]

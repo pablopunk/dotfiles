@@ -236,14 +236,14 @@ config:
       link:
         "./config/karabiner/karabiner.json": "~/.config/karabiner/karabiner.json"
 
-    aerospace:
-      os: ["mac"]
-      install:
-        brew: "[[ -d /Applications/AeroSpace.app ]] || brew install pablopunk/brew/aerospace"
-      uninstall:
-        brew: "brew uninstall aerospace"
-      link:
-        "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
+    # aerospace:
+    #   os: ["mac"]
+    #   install:
+    #     brew: "[[ -d /Applications/AeroSpace.app ]] || brew install pablopunk/brew/aerospace"
+    #   uninstall:
+    #     brew: "brew uninstall aerospace"
+    #   link:
+    #     "./config/aerospace/aerospace.toml": "~/.config/aerospace/aerospace.toml"
 
     edges:
       os: ["mac"]
@@ -261,7 +261,7 @@ config:
         "./config/wallpapers": "~/.config/wallpapers"
       postlink: |
         if [[ $(uname -s) == "Darwin" ]]; then # i use hyprpaper on linux
-          wallpaper="huracan.jpg"
+          wallpaper="marek-piwnicki-qdrF44RImqw-unsplash.jpg"
           img_path="${HOME}/.config/wallpapers/${wallpaper}"
           osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"${img_path}\""
         fi
@@ -340,6 +340,15 @@ config:
         brew: brew install --cask xykong/tap/flux-markdown
       uninstall:
         brew: brew uninstall xykong/tap/flux-markdown
+
+    paneru:
+      os: ["mac"]
+      install:
+        brew: "brew install paneru"
+      uninstall:
+        brew: "brew uninstall paneru"
+      link:
+        "./config/paneru/paneru.toml": "~/.paneru"
 
   work:
     java:

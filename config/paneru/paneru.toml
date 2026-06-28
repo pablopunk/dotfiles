@@ -1,0 +1,196 @@
+# Paneru config — mapped from niri (Hyper = ctrl+alt+cmd)
+#
+# What mapped cleanly:
+#   - Navigation/move via Hyper+arrows/hjkl
+#   - Virtual workspace switching via Hyper+U/I (rows = niri workspaces)
+#   - Virtual workspace by number (Hyper+1..9)
+#   - Resize, fullwidth, center, float toggle, stack/unstack
+#   - First/last jumps, quit
+#   - Scroll-wheel strip sliding (Hyper+scroll) and workspace switching (Hyper+Shift+scroll)
+#   - Focus-follows-mouse, mouse-follows-focus
+#   - Preset column widths (1/3, 1/2, 2/3 — same as niri)
+#
+# What Paneru CAN'T do (no equivalent action):
+#   - Overview mode (Hyper+O)
+#   - Fullscreen-window toggle (Hyper+Shift+F) — use native macOS Ctrl+Cmd+F
+#   - Maximize-to-edges (Hyper+M) — use native macOS
+#   - Reset/set window height (Hyper+Shift+R, Hyper+Shift+-/=)
+#   - Center-visible-columns (Hyper+Shift+C)
+#   - Toggle tabbed display (Hyper+W) — macOS tabs are native
+#   - Power-off monitors (Hyper+Shift+P)
+#   - Keyboard-shortcuts-inhibit toggle
+#   - Per-window opacity/corner-radius/blur rules
+#   - Spring-based animations (Paneru only has linear animation_speed)
+#   - Spawn/launch binds (Hyper+T terminal, Super+Space launcher) — use other macOS tools
+#   - Screenshot binds (Print) — use macOS native Cmd+Shift+3/4/5
+#   - Media/volume/brightness keys — handled natively by macOS
+
+[options]
+focus_follows_mouse = true
+mouse_follows_focus = true
+preset_column_widths = [0.33333, 0.5, 0.66667]
+# animation_speed = 12  # uncomment for smooth transitions (8–20); unset = instant
+auto_center = false
+
+[padding]
+top = 8
+bottom = 8
+left = 8
+right = 8
+
+[swipe]
+sensitivity = 0.35
+deceleration = 4.0
+continuous = true
+
+[swipe.gesture]
+fingers_count = 4
+direction = "Natural"
+vertical = true
+
+[swipe.scroll]
+# Hyper + scroll  →  slide the strip horizontally
+modifier = "ctrl + alt + cmd"
+# Hyper + Shift + scroll  →  switch virtual workspace rows
+vertical_modifier = "shift"
+
+# ── Active window border (Nord "frost" accent) ──
+[decorations.active.border]
+enabled = false
+color = "#8fbcbb"
+width = 2.0
+radius = 8
+
+# ── Inactive window dimming (subtle, macOS-native) ──
+[decorations.inactive.dim]
+opacity = -0.12
+
+# ═══════════════════════════════════════════════════════════════
+# KEYBINDINGS  (Hyper = ctrl+alt+cmd)
+# ═══════════════════════════════════════════════════════════════
+
+[bindings]
+
+# ── Navigation (focus) ──
+# niri: Ctrl+Alt+Super+{Left,Down,Up,Right} / H,J,K,L  →  focus-column-{left,down,up,right}
+window_focus_west  = ["ctrl + alt + cmd - h", "ctrl + alt + cmd - leftarrow"]
+window_focus_east  = ["ctrl + alt + cmd - l", "ctrl + alt + cmd - rightarrow"]
+# ── j/k mapped to virtual workspace switching (niri's focus-workspace-down/up) ──
+# Paneru's window_focus_north/_south navigates vertical stacks (rare in a flat strip)
+# and falls through to display switching, not workspace switching.
+# j/k and u/i + arrows + pageup/pagedown  →  focus-workspace-{down,up}
+window_virtual_south = ["ctrl + alt + cmd - j", "ctrl + alt + cmd - downarrow", "ctrl + alt + cmd - u", "ctrl + alt + cmd - pagedown"]
+window_virtual_north = ["ctrl + alt + cmd - k", "ctrl + alt + cmd - uparrow", "ctrl + alt + cmd - i", "ctrl + alt + cmd - pageup"]
+
+# ── Move/swap windows ──
+# niri: Ctrl+Alt+Super+Shift+{Left,Right} / H,L  →  move-column-{left,right}
+window_swap_west  = ["ctrl + alt + cmd + shift - h", "ctrl + alt + cmd + shift - leftarrow"]
+window_swap_east  = ["ctrl + alt + cmd + shift - l", "ctrl + alt + cmd + shift - rightarrow"]
+
+# niri: Ctrl+Alt+Super+Shift+{Down,Up,J,K,U,I,Page_Down,Page_Up}  →  move-column/window-to-workspace-{down,up}
+window_virtualmove_south = ["ctrl + alt + cmd + shift - j", "ctrl + alt + cmd + shift - downarrow", "ctrl + alt + cmd + shift - u", "ctrl + alt + cmd + shift - pagedown"]
+window_virtualmove_north = ["ctrl + alt + cmd + shift - k", "ctrl + alt + cmd + shift - uparrow", "ctrl + alt + cmd + shift - i", "ctrl + alt + cmd + shift - pageup"]
+
+# ── Virtual workspace by number ──
+# niri: Ctrl+Alt+Super+1..9  →  focus-workspace N
+window_virtualnum_1 = "ctrl + alt + cmd - 1"
+window_virtualnum_2 = "ctrl + alt + cmd - 2"
+window_virtualnum_3 = "ctrl + alt + cmd - 3"
+window_virtualnum_4 = "ctrl + alt + cmd - 4"
+window_virtualnum_5 = "ctrl + alt + cmd - 5"
+window_virtualnum_6 = "ctrl + alt + cmd - 6"
+window_virtualnum_7 = "ctrl + alt + cmd - 7"
+window_virtualnum_8 = "ctrl + alt + cmd - 8"
+window_virtualnum_9 = "ctrl + alt + cmd - 9"
+
+# niri: Ctrl+Alt+Super+Shift+1..9  →  move-column-to-workspace N
+window_virtualmovenum_1 = "ctrl + alt + cmd + shift - 1"
+window_virtualmovenum_2 = "ctrl + alt + cmd + shift - 2"
+window_virtualmovenum_3 = "ctrl + alt + cmd + shift - 3"
+window_virtualmovenum_4 = "ctrl + alt + cmd + shift - 4"
+window_virtualmovenum_5 = "ctrl + alt + cmd + shift - 5"
+window_virtualmovenum_6 = "ctrl + alt + cmd + shift - 6"
+window_virtualmovenum_7 = "ctrl + alt + cmd + shift - 7"
+window_virtualmovenum_8 = "ctrl + alt + cmd + shift - 8"
+window_virtualmovenum_9 = "ctrl + alt + cmd + shift - 9"
+
+# ── Column width ──
+# niri: Ctrl+Alt+Super+R  →  switch-preset-column-width
+window_resize = "ctrl + alt + cmd - r"
+
+# niri: Ctrl+Alt+Super+Minus / =  →  set-column-width -10% / +10%
+# Paneru: window_shrink / window_grow cycles presets instead of % adjustments
+window_shrink = "ctrl + alt + cmd - minus"
+window_grow   = "ctrl + alt + cmd - ="
+
+# ── Maximize / fullwidth ──
+# niri: Ctrl+Alt+Super+F  →  maximize-column
+window_fullwidth = "ctrl + alt + cmd - f"
+
+# ── Center ──
+# niri: Ctrl+Alt+Super+C  →  center-column
+window_center = "ctrl + alt + cmd - c"
+
+# ── Float / tile toggle ──
+# niri: Ctrl+Alt+Super+V  →  toggle-window-floating
+window_manage = "ctrl + alt + cmd - v"
+
+# ── Stack / unstack ──
+# niri: Ctrl+Alt+Super+[  →  consume-or-expel-window-left
+window_stack = "ctrl + alt + cmd - leftbracket"
+# niri: Ctrl+Alt+Super+]  →  consume-or-expel-window-right
+window_unstack = "ctrl + alt + cmd - rightbracket"
+
+# niri: Ctrl+Alt+Super+,  →  consume-window-into-column
+# (also window_stack — different flavor, same Paneru action)
+# niri: Ctrl+Alt+Super+.  →  expel-window-from-column
+# (also window_unstack)
+
+# ── Jump to first / last ──
+# niri: Ctrl+Alt+Super+Home/End  →  focus-column-first/last
+window_focus_first = "ctrl + alt + cmd - home"
+window_focus_last  = "ctrl + alt + cmd - end"
+
+# niri: Ctrl+Alt+Super+Shift+Home/End  →  move-column-to-first/last
+window_swap_first = "ctrl + alt + cmd + shift - home"
+window_swap_last  = "ctrl + alt + cmd + shift - end"
+
+# ── Quit ──
+# niri: Ctrl+Alt+Super+Shift+E  →  quit
+# niri: Ctrl+Alt+Delete        →  quit
+quit = ["ctrl + alt + cmd + shift - e", "ctrl + alt - delete"]
+
+# ═══════════════════════════════════════════════════════════════
+# WINDOW RULES
+# ═══════════════════════════════════════════════════════════════
+
+[windows]
+
+# ── Global: gaps between windows ──
+# Two adjacent windows each contribute 8px → 16px total (matches niri gaps 16)
+[windows.all]
+title = ".*"
+horizontal_padding = 8
+vertical_padding = 8
+
+# ── Steam popups (ported from niri steam rules) ──
+[windows.steam]
+title = "^[Ss]team$"
+bundle_id = "com.valvesoftware.steam"
+floating = true
+
+[windows.steam-popups]
+title = "^notificationtoasts_\\d+_desktop$"
+bundle_id = "com.valvesoftware.steam"
+floating = true
+
+# ── Picture-in-Picture ──
+[windows.pip]
+title = "Picture.*(in)?.*[Pp]icture"
+floating = true
+
+# ── Floating password / auth dialogs ──
+[windows.passwords]
+title = "(Passwords|Keychain|Authentication|Login).*"
+floating = true
+grid = "6:6:1:1:4:4"

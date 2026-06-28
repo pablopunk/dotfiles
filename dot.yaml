@@ -10,9 +10,8 @@ profiles:
   work:
     - work
 
-  omarchy:
-    - omabin
-    - xremap
+  niri:
+    - niri
 
 config:
   cli:
@@ -154,9 +153,11 @@ config:
 
     pi:
       install:
+        paru: sudo paru -S aur/pi-coding-agent
         bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
       uninstall:
-        bun: "bun rm -g @mariozechner/pi-coding-agent"
+        paru: sudo paru -R aur/pi-coding-agent
+        bun: "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
 
     macmon:
       os: ["mac"]
@@ -216,7 +217,7 @@ config:
         "eu.exelban.Stats": "./config/stats/Stats.xml"
 
     ghostty:
-      os: ["mac"]
+      os: ["mac", "linux"]
       install:
         brew: "[[ -d /Applications/Ghostty.app ]] || brew install ghostty"
         dnf: "sudo dnf install -y ghostty"
@@ -373,37 +374,12 @@ config:
       uninstall:
         brew: "brew uninstall datadog-labs/pack/pup"
 
-    opencode-work:
-      os: ["mac"]
-      link:
-        "./config/opencode/opencode.work.jsonc": "~/.config-work/opencode/opencode.jsonc"
-        "./config/opencode/tui.jsonc": "~/.config-work/opencode/tui.jsonc"
-        "./config/opencode/sounds/": "~/.config-work/opencode/sounds"
-      postlink: |
-        mkdir -p ~/.config-work/opencode
-        mkdir -p ~/.local/share-work/opencode
-        sed "s|~|$HOME|g" ~/.dotfiles/config/opencode/opencode-notifier.template.json > ~/.config-work/opencode/opencode-notifier.json
-
     cleanshot:
       os: ["mac"]
       install:
         brew: "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
       uninstall:
         brew: "brew uninstall cleanshot"
-
-  omabin:
-    os: ["linux"]
-    link:
-      "./config/omarchy/bin/omarchy-menu-flat": "~/.local/bin/omarchy-menu-flat"
-      "./config/omarchy/bin/omarchy-toggle-nightlight-custom": "~/.local/bin/omarchy-toggle-nightlight-custom"
-      "./config/omarchy/bin/omarchy-theme-schedule": "~/.local/bin/omarchy-theme-schedule"
-      "./config/omarchy/bin/omarchy-asahi-power-setup": "~/.local/bin/omarchy-asahi-power-setup"
-      "./config/omarchy/bin/omarchy-postlink": "~/.local/bin/omarchy-postlink"
-      "./config/omarchy/bin/omarchy-xremap-postinstall": "~/.local/bin/omarchy-xremap-postinstall"
-      "./config/omarchy/hypr": "~/.config/hypr"
-      "./config/omarchy/systemd/omarchy-theme-schedule.service": "~/.config/systemd/user/omarchy-theme-schedule.service"
-      "./config/omarchy/systemd/omarchy-theme-schedule.timer": "~/.config/systemd/user/omarchy-theme-schedule.timer"
-    postlink: "~/.local/bin/omarchy-postlink"
 
   xremap:
     os: ["linux"]
@@ -415,3 +391,15 @@ config:
       "./config/xremap/config.yml": "~/.config/xremap/config.yml"
       "./config/xremap/xremap.service": "~/.config/systemd/user/xremap.service"
     postinstall: "~/.local/bin/omarchy-xremap-postinstall"
+
+  niri:
+    niri:
+      os: ["linux"]
+      link:
+        "./config/niri": "~/.config/niri"
+
+    noctalia:
+      os: ["linux"]
+      link:
+        "./config/noctalia": "~/.config/noctalia"
+

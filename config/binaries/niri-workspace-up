@@ -1,0 +1,10 @@
+#!/bin/bash
+# niri-workspace-up: focus workspace above (creates one if at workspace 1)
+ws=$(niri msg focused-window 2>/dev/null | grep "Workspace ID" | grep -oP "\d+")
+[ -z "$ws" ] && ws=1
+if [ "$ws" -gt 1 ]; then
+    niri msg action focus-workspace-up
+else
+    niri msg action move-workspace-down
+    niri msg action focus-workspace-up
+fi

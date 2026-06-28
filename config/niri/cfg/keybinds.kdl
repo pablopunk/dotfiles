@@ -15,6 +15,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Ctrl+Alt+Super+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Ctrl+Alt+Super+Shift+T hotkey-overlay-title="Open Floating Terminal: ghostty" { spawn-sh "ghostty & sleep 0.5 && niri msg action toggle-window-floating && sleep 0.1 && niri msg action set-window-width \"50%\" && niri msg action set-window-height \"50%\" && sleep 0.1 && niri msg action center-window"; }
     Super+Space hotkey-overlay-title="Run an Application: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Super+V hotkey-overlay-title="Clipboard History: noctalia" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: noctalia" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
@@ -261,9 +262,9 @@ binds {
     // Ctrl+Alt+Super+Space       { switch-layout "next"; }
     // Ctrl+Alt+Super+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Super+Shift+3 { screenshot-screen; }
+    Super+Shift+4 { screenshot; }
+    Super+Shift+5 { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

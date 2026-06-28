@@ -56,6 +56,9 @@ modifier = "ctrl + alt + cmd"
 # Hyper + Shift + scroll  →  switch virtual workspace rows
 vertical_modifier = "shift"
 
+[decorations]
+workspace_menu_status = false
+
 # ── Active window border (Nord "frost" accent) ──
 [decorations.active.border]
 enabled = false

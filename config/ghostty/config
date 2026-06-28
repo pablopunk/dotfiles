@@ -1,11 +1,13 @@
+#vim: set ft=conf:
 font-family = JetBrains Mono
 font-size = 15
 
 theme = light:Catppuccin Latte,dark:Ayu
 
-background-blur-radius = 20
 background-opacity = 0.8
-background-blur = macos-glass-clear
+# macOS 26 glass effect; falls back to regular blur elsewhere.
+# background-blur = macos-glass-clear
+background-blur = 80
 macos-titlebar-style = transparent
 window-padding-x = 12
 window-padding-y = 12

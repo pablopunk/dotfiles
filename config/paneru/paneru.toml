@@ -27,7 +27,7 @@
 
 [options]
 focus_follows_mouse = true
-mouse_follows_focus = true
+mouse_follows_focus = false
 preset_column_widths = [0.33333, 0.5, 0.66667]
 # animation_speed = 16  # smooth (8–20); unset = instant
 virtual_workspace_animations = false

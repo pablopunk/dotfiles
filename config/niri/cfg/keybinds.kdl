@@ -45,7 +45,7 @@ binds {
     // or do a four-finger swipe up on a touchpad.
     Ctrl+Alt+Super+O repeat=false { toggle-overview; }
 
-    Ctrl+Alt+Super+Q repeat=false { close-window; }
+    // Ctrl+Alt+Super+Q repeat=false { close-window; }
     Super+W { close-window; }
 
     Ctrl+Alt+Super+Left  { focus-column-left; }

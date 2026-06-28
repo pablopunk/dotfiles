@@ -9,6 +9,7 @@
 
 ## Workspaces
 - Vertical, per monitor, infinite downward. `empty-workspace-above-first` is enabled so there's always one above.
+- **⚠️ Beware:** this reserves workspace index 1 as a permanent empty buffer. All your real workspaces start at index 2. niri silently redirects `move-to-workspace 1` to 2. `Hyper+2` = your first workspace.
 - New workspaces spawn at the bottom when you focus past the last one.
 - Workspace IDs ≠ workspace indices. `niri msg focused-window` shows IDs; `focus-workspace N` uses indices.
 
@@ -24,3 +25,4 @@
 - No scratchpad, no 2D workspace grid, no window swallowing.
 - `background-color "transparent"` without noctalia running = no wallpaper (black screen).
 - If noctalia fails to start, there's no bar, no wallpaper, no launcher. Everything looks broken.
+- **Vertical stack ("split"):** niri has no split command like grid WMs. To stack windows vertically in one column, pull the neighboring window in with `Hyper+Comma`. To expel the bottom one out, `Hyper+Period`. `Hyper+BracketLeft`/`BracketRight` expels/consumes between adjacent columns.

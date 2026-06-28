@@ -19,6 +19,12 @@
        open-focused false
     }
 
+    window-rule {
+       match app-id=r#"zen$"# title="^Picture-in-Picture$"
+       open-floating true
+       default-floating-position x=16 y=48 relative-to="bottom-left"
+    }
+
     layer-rule {
         match namespace="^noctalia-wallpaper*"
         place-within-backdrop true

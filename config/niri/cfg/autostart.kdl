@@ -4,3 +4,4 @@
 spawn-sh-at-startup "qs -c noctalia-shell"
 // Clipboard history daemon
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+

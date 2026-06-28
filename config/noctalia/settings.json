@@ -274,7 +274,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Nord",
+        "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -659,10 +659,18 @@
             },
             {
                 "enabled": true,
+                "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
                 "id": "niri"
+            },
+            {
+                "enabled": true,
+                "id": "btop"
             }
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,

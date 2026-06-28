@@ -18,6 +18,12 @@ binds {
     Ctrl+Alt+Super+Shift+T hotkey-overlay-title="Open Floating Terminal: ghostty" { spawn-sh "ghostty & sleep 0.5 && niri msg action toggle-window-floating && sleep 0.1 && niri msg action set-window-width \"50%\" && niri msg action set-window-height \"50%\" && sleep 0.1 && niri msg action center-window"; }
     Super+Space hotkey-overlay-title="Run an Application: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Super+V hotkey-overlay-title="Clipboard History: noctalia" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+
+    // Voice dictation: hold Ctrl+Alt+Super+D to talk, auto-ends after 2s silence
+    // Press Ctrl+Alt+Super+Shift+D to end manually
+    Ctrl+Alt+Super+D hotkey-overlay-title="Start Dictation" { spawn "nerd-dictation" "begin" "--input=PW-CAT" "--simulate-input-tool=WTYPE" "--timeout=2.0" "--delay-exit=1.0" "--numbers-as-digits" "--full-sentence"; }
+    Ctrl+Alt+Super+Shift+D hotkey-overlay-title="End Dictation" { spawn "nerd-dictation" "end"; }
+    Ctrl+Alt+Super+Backspace hotkey-overlay-title="Cancel Dictation" { spawn "nerd-dictation" "cancel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: noctalia" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -247,6 +253,7 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Ctrl+Alt+Super+V       { toggle-window-floating; }
+    Ctrl+Alt+Super+s { spawn-sh "sticky-toggle"; }
     Ctrl+Alt+Super+Shift+V { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.

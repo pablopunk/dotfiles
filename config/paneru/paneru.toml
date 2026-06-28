@@ -83,9 +83,12 @@ window_focus_east  = ["ctrl + alt + cmd - l", "ctrl + alt + cmd - rightarrow"]
 # ── j/k mapped to virtual workspace switching (niri's focus-workspace-down/up) ──
 # Paneru's window_focus_north/_south navigates vertical stacks (rare in a flat strip)
 # and falls through to display switching, not workspace switching.
-# j/k and u/i + arrows + pageup/pagedown  →  focus-workspace-{down,up}
-window_virtual_south = ["ctrl + alt + cmd - j", "ctrl + alt + cmd - downarrow", "ctrl + alt + cmd - u", "ctrl + alt + cmd - pagedown"]
-window_virtual_north = ["ctrl + alt + cmd - k", "ctrl + alt + cmd - uparrow", "ctrl + alt + cmd - i", "ctrl + alt + cmd - pageup"]
+# j/k = switch virtual workspace rows (niri: focus-workspace-down/up)
+# downarrow/uparrow = navigate within stacked columns
+window_focus_south = ["ctrl + alt + cmd - downarrow"]
+window_focus_north = ["ctrl + alt + cmd - uparrow"]
+window_virtual_south = ["ctrl + alt + cmd - j", "ctrl + alt + cmd - u", "ctrl + alt + cmd - pagedown"]
+window_virtual_north = ["ctrl + alt + cmd - k", "ctrl + alt + cmd - i", "ctrl + alt + cmd - pageup"]
 
 # ── Move/swap windows ──
 # niri: Ctrl+Alt+Super+Shift+{Left,Right} / H,L  →  move-column-{left,right}
@@ -142,9 +145,10 @@ window_manage = "ctrl + alt + cmd - v"
 
 # ── Stack / unstack ──
 # niri: Ctrl+Alt+Super+[  →  consume-or-expel-window-left
-window_stack = "ctrl + alt + cmd - leftbracket"
-# niri: Ctrl+Alt+Super+]  →  consume-or-expel-window-right
-window_unstack = "ctrl + alt + cmd - rightbracket"
+# niri: Ctrl+Alt+Super+[ / ,  →  consume-or-expel-window-left / consume-window-into-column
+window_stack = ["ctrl + alt + cmd - leftbracket", "ctrl + alt + cmd - comma"]
+# niri: Ctrl+Alt+Super+] / .  →  consume-or-expel-window-right / expel-window-from-column
+window_unstack = ["ctrl + alt + cmd - rightbracket", "ctrl + alt + cmd - period"]
 
 # niri: Ctrl+Alt+Super+,  →  consume-window-into-column
 # (also window_stack — different flavor, same Paneru action)

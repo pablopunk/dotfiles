@@ -45,7 +45,8 @@ binds {
     // or do a four-finger swipe up on a touchpad.
     Ctrl+Alt+Super+O repeat=false { toggle-overview; }
 
-    // Ctrl+Alt+Super+Q repeat=false { close-window; }
+    Ctrl+Alt+Super+Q repeat=false { close-window; }
+    Super+Q { close-window; }
     Super+W { close-window; }
 
     Ctrl+Alt+Super+Left  { focus-column-left; }
@@ -53,8 +54,8 @@ binds {
     Ctrl+Alt+Super+Up    { focus-window-up; }
     Ctrl+Alt+Super+Right { focus-column-right; }
     Ctrl+Alt+Super+H     { focus-column-left; }
-    Ctrl+Alt+Super+J     { focus-window-down; }
-    Ctrl+Alt+Super+K     { focus-window-up; }
+    Ctrl+Alt+Super+J     { focus-window-or-workspace-down; }
+    Ctrl+Alt+Super+K     { focus-window-or-workspace-up; }
     Ctrl+Alt+Super+L     { focus-column-right; }
 
     Ctrl+Alt+Super+Shift+Left  { move-column-left; }
@@ -62,8 +63,8 @@ binds {
     Ctrl+Alt+Super+Shift+Up    { move-window-up; }
     Ctrl+Alt+Super+Shift+Right { move-column-right; }
     Ctrl+Alt+Super+Shift+H     { move-column-left; }
-    Ctrl+Alt+Super+Shift+J     { move-window-down; }
-    Ctrl+Alt+Super+Shift+K     { move-window-up; }
+    Ctrl+Alt+Super+Shift+J     { move-window-down-or-to-workspace-down; }
+    Ctrl+Alt+Super+Shift+K     { move-window-up-or-to-workspace-up; }
     Ctrl+Alt+Super+Shift+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching

@@ -46,6 +46,7 @@ binds {
     Ctrl+Alt+Super+O repeat=false { toggle-overview; }
 
     Super+W repeat=false { close-window; }
+    Super+Q repeat=false { close-window; }
 
     Ctrl+Alt+Super+Left  { focus-column-left; }
     Ctrl+Alt+Super+Down  { focus-window-down; }

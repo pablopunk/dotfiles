@@ -474,14 +474,19 @@ end
 
 local function unclutter()
   add("pablopunk/unclutter.nvim")
-  require("unclutter").setup({ clean_after = 0, tabline = true })
-  local unclutter_telescope = require("unclutter.telescope")
-  local unclutter_tabline = require("unclutter.tabline")
-  map("n", "<c-f>", function()
-    unclutter_telescope.open({ hide_current = true })
-  end, { desc = "Show unclutter buffers in Telescope" })
-  map("n", "<c-n>", unclutter_tabline.next, { desc = "Next buffer (unclutter)" })
-  map("n", "<c-p>", unclutter_tabline.prev, { desc = "Previous buffer (unclutter)" })
+  local ok, _ = pcall(function()
+    require("unclutter").setup({ clean_after = 0, tabline = true })
+    local unclutter_telescope = require("unclutter.telescope")
+    local unclutter_tabline = require("unclutter.tabline")
+    map("n", "<c-f>", function()
+      unclutter_telescope.open({ hide_current = true })
+    end, { desc = "Show unclutter buffers in Telescope" })
+    map("n", "<c-n>", unclutter_tabline.next, { desc = "Next buffer (unclutter)" })
+    map("n", "<c-p>", unclutter_tabline.prev, { desc = "Previous buffer (unclutter)" })
+  end)
+  if not ok then
+    vim.notify("unclutter.nvim failed to load (may need Neovim >= 0.10)", vim.log.levels.WARN)
+  end
 end
 
 local function plenary()
@@ -491,8 +496,8 @@ end
 -- Load these plugins first
 local function setup_priority_plugins()
   colors()
+  plenary() -- register before unclutter so it's available even if unclutter fails
   unclutter()
-  plenary()
 end
 
 local function plugins_that_could_be_default_behavior()
@@ -530,7 +535,10 @@ local function telescope_pull_request_files()
 end
 
 local function telescope()
-  add("nvim-telescope/telescope.nvim")
+  add({
+    source = "nvim-telescope/telescope.nvim",
+    depends = { "nvim-lua/plenary.nvim" },
+  })
   require("telescope").setup({
     defaults = {
       file_ignore_patterns = { ".git/", "node_modules/" },

@@ -15,8 +15,15 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Ctrl+Alt+Super+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Ctrl+Alt+Super+Shift+T hotkey-overlay-title="Open Floating Terminal: ghostty" { spawn-sh "ghostty & sleep 0.5 && niri msg action toggle-window-floating && sleep 0.1 && niri msg action set-window-width \"50%\" && niri msg action set-window-height \"50%\" && sleep 0.1 && niri msg action center-window"; }
     Super+Space hotkey-overlay-title="Run an Application: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Super+V hotkey-overlay-title="Clipboard History: noctalia" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+
+    // Voice dictation: hold Ctrl+Alt+Super+D to talk, auto-ends after 2s silence
+    // Press Ctrl+Alt+Super+Shift+D to end manually
+    Ctrl+Alt+Super+D hotkey-overlay-title="Start Dictation" { spawn "nerd-dictation" "begin" "--input=PW-CAT" "--simulate-input-tool=WTYPE" "--timeout=2.0" "--delay-exit=1.0" "--numbers-as-digits" "--full-sentence"; }
+    Ctrl+Alt+Super+Shift+D hotkey-overlay-title="End Dictation" { spawn "nerd-dictation" "end"; }
+    Ctrl+Alt+Super+Backspace hotkey-overlay-title="Cancel Dictation" { spawn "nerd-dictation" "cancel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: noctalia" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -45,16 +52,16 @@ binds {
     // or do a four-finger swipe up on a touchpad.
     Ctrl+Alt+Super+O repeat=false { toggle-overview; }
 
-    Ctrl+Alt+Super+Q repeat=false { close-window; }
-    Super+W { close-window; }
+    Super+W repeat=false { close-window; }
+    Super+Q repeat=false { close-window; }
 
     Ctrl+Alt+Super+Left  { focus-column-left; }
     Ctrl+Alt+Super+Down  { focus-window-down; }
     Ctrl+Alt+Super+Up    { focus-window-up; }
     Ctrl+Alt+Super+Right { focus-column-right; }
     Ctrl+Alt+Super+H     { focus-column-left; }
-    Ctrl+Alt+Super+J     { focus-window-down; }
-    Ctrl+Alt+Super+K     { focus-window-up; }
+    Ctrl+Alt+Super+J     { focus-window-or-workspace-down; }
+    Ctrl+Alt+Super+K     { focus-window-or-workspace-up; }
     Ctrl+Alt+Super+L     { focus-column-right; }
 
     Ctrl+Alt+Super+Shift+Left  { move-column-left; }
@@ -62,8 +69,8 @@ binds {
     Ctrl+Alt+Super+Shift+Up    { move-window-up; }
     Ctrl+Alt+Super+Shift+Right { move-column-right; }
     Ctrl+Alt+Super+Shift+H     { move-column-left; }
-    Ctrl+Alt+Super+Shift+J     { move-window-down; }
-    Ctrl+Alt+Super+Shift+K     { move-window-up; }
+    Ctrl+Alt+Super+Shift+J     { move-window-down-or-to-workspace-down; }
+    Ctrl+Alt+Super+Shift+K     { move-window-up-or-to-workspace-up; }
     Ctrl+Alt+Super+Shift+L     { move-column-right; }
 
     // Alternative commands that move across workspaces when reaching
@@ -246,6 +253,7 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Ctrl+Alt+Super+V       { toggle-window-floating; }
+    Ctrl+Alt+Super+s { spawn-sh "sticky-toggle"; }
     Ctrl+Alt+Super+Shift+V { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
@@ -261,9 +269,9 @@ binds {
     // Ctrl+Alt+Super+Space       { switch-layout "next"; }
     // Ctrl+Alt+Super+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Super+Shift+3 { screenshot-screen; }
+    Super+Shift+4 { screenshot; }
+    Super+Shift+5 { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

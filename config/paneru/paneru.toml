@@ -141,7 +141,7 @@ window_center = "ctrl + alt + cmd - c"
 
 # ── Float / tile toggle ──
 # niri: Ctrl+Alt+Super+V  →  toggle-window-floating
-window_manage = "ctrl + alt + cmd - v"
+window_manage = "ctrl + alt + cmd + shift - f"
 
 # ── Stack / unstack ──
 # niri: Ctrl+Alt+Super+[  →  consume-or-expel-window-left

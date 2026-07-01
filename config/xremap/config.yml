@@ -33,3 +33,9 @@ keymap:
       CapsLock-j: Down
       CapsLock-k: Up
       CapsLock-l: Right
+  - name: "Voyager: TLDE (ordfeminine/masculine) -> guillemets"
+    remap:
+      TLDE:
+        launch: ["wtype", "«"]
+      Shift-TLDE:
+        launch: ["wtype", "»"]

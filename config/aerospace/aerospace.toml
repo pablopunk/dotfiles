@@ -1,6 +1,8 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
+config-version = 2
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -268,6 +270,9 @@ automatically-unhide-macos-hidden-apps = false
   if.app-name-regex-substring = "Fractal"
   run = ['layout floating', 'move-node-to-workspace 2']
 [[on-window-detected]]
+  if.app-name-regex-substring = "Orca"
+  run = ['layout floating', 'move-node-to-workspace 2']
+[[on-window-detected]]
   if.app-name-regex-substring = "Slack"
   run = ['layout floating', 'move-node-to-workspace 3']
 [[on-window-detected]]
@@ -309,4 +314,5 @@ automatically-unhide-macos-hidden-apps = false
 
 # Float all other windows by default (catch-all — must be last)
 [[on-window-detected]]
+if = 'true'
 run = 'layout floating'

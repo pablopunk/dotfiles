@@ -19,4 +19,4 @@ The script will:
 - Install [Homebrew](https://brew.sh) (macOS only)
 - Install [dot](https://github.com/pablopunk/dot)
 - Clone the dotfiles repo to `~/.dotfiles`
-- Run `dot` with your preferred profiles (will ask)
+- Run `dot`, which will ask you what you want to install

@@ -325,11 +325,3 @@ link."config/niri" = "~/.config/niri"
 link."config/noctalia" = "~/.config/noctalia"
 install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
-
-[xremap]
-os = ["linux"]
-install.cargo = "cargo install xremap --features hypr"
-uninstall.cargo = "cargo uninstall xremap"
-link."config/xremap/config.yml" = "~/.config/xremap/config.yml"
-link."config/xremap/xremap.service" = "~/.config/systemd/user/xremap.service"
-postinstall = "~/.local/bin/omarchy-xremap-postinstall"

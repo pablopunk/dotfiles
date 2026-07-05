@@ -41,7 +41,7 @@ nvim --version                    # Verify editor config loads
 **File Organization:**
 - All configs in `config/` subdirectories by application
 - Helper scripts in `config/binaries/` (executable, with shebang)
-- Main orchestration in `dot.yaml` (single source of truth)
+- Main orchestration in `dot.toml` (single source of truth)
 
 **Naming Conventions:**
 - **Files:** kebab-case for scripts, lowercase for configs (`gitconfig`, `tmux.conf`)
@@ -58,7 +58,7 @@ nvim --version                    # Verify editor config loads
 # Color output: ANSI escape codes for user feedback
 ```
 
-**YAML Structure (`dot.yaml`):**
+**TOML Structure (`dot.toml`):**
 ```yaml
 profiles:
   "*":                    # Always installed on every machine
@@ -84,7 +84,7 @@ config:
 ```
 
 **Import/Path Conventions:**
-- Use `~` for home directory references in `dot.yaml`
+- Use `~` for home directory references in `dot.toml`
 - Relative paths from repo root: `"./config/app/file"`
 - No hardcoded absolute paths in configurations
 
@@ -143,7 +143,7 @@ dot work gui          # Installs: "*" + "work" + "gui"
 
 ## Purpose
 
-- **Overview:** This repo stores application configurations, preferences, helper binaries, and macOS defaults managed via `dot.yaml`.
+- **Overview:** This repo stores application configurations, preferences, helper binaries, and macOS defaults managed via `dot.toml`.
 - **Goal:** Make dotfiles installations reproducible, idempotent, and auditable across machines.
 
 ## Repository Structure
@@ -151,7 +151,7 @@ dot work gui          # Installs: "*" + "work" + "gui"
 - **`config/`**: Application-specific configuration folders (e.g., `neovim/`, `zsh/`, `tmux/`, `waybar/`).
 - **`config/binaries/`**: Small helper executables (e.g., `compress`, `gck`, `tt`, `tx`). These are symlinked to `~/.bin` and added to `PATH`.
 - **`config/wallpapers/`**: Static image files used by desktop environments.
-- **`dot.yaml`**: Main configuration file defining profiles, components, links, installs, and macOS defaults. This is the source of truth.
+- **`dot.toml`**: Main configuration file defining components, links, installs, and macOS defaults. This is the source of truth.
 - **Top-level files**: `README.md`, `.luarc.json`, `.gitignore`, and other global manifests.
 
 ## Profile Strategy
@@ -227,7 +227,7 @@ dot --dry-run -v work     # Verbose (show each step)
 ### Adding Tools/Components
 
 1. Create `config/myapp/` with config files
-2. Add the tool name to a profile in `dot.yaml`:
+2. Add the tool as a new section in `dot.toml`:
    ```yaml
    profiles:
      "*":
@@ -265,10 +265,10 @@ dot --dry-run -v work     # Verbose (show each step)
 ### Component won't install
 - **Check the install command**: `dot --dry-run -v [profile]` shows exact commands that will run
 - **Test manually**: Run the install command in your terminal to see actual errors
-- **Verify syntax**: Ensure the component is spelled correctly in `dot.yaml` and YAML is valid
+- **Verify syntax**: Ensure the component is spelled correctly in `dot.toml` and TOML is valid
 
 ### Symlinks not created
-- **Check paths**: Use `~` or env vars in `dot.yaml`, not absolute paths
+- **Check paths**: Use `~` or env vars in `dot.toml`, not absolute paths
 - **Parent directories**: Ensure target directories exist (e.g., `~/.config/` must exist)
 - **Conflicts**: Check for existing files at the target path that would block symlink creation
 - **Debug**: `ls -la ~/.config/app` to verify link was created correctly
@@ -285,7 +285,7 @@ dot --dry-run -v work     # Verbose (show each step)
 - **Rollback**: 
   ```bash
   git checkout -- config/     # Revert config files
-  git checkout -- dot.yaml    # Revert dot.yaml
+  git checkout -- dot.toml    # Revert dot.toml
   dot                          # Re-apply
   ```
 
@@ -293,7 +293,7 @@ dot --dry-run -v work     # Verbose (show each step)
 
 - **[dot GitHub repo](https://github.com/pablopunk/dot)**: Full documentation, examples, and source code
 - **`dot --help`**: Built-in help and command reference
-- **`dot --profiles`**: List all available profiles in your `dot.yaml`
+- **`dot --list`**: List all available components in your `dot.toml`
 
 ---
 

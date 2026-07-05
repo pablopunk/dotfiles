@@ -1,0 +1,327 @@
+[git]
+install.brew = "brew install git git-delta gh"
+check = "git"
+install.dnf = """
+sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+sudo dnf install gh git-delta git
+"""
+install.apt = """
+(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \\
+&& sudo mkdir -p -m 755 /etc/apt/keyrings \\
+&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \\
+&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \\
+&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \\
+&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \\
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \\
+&& sudo apt update \\
+&& sudo apt install gh git-delta git -y
+"""
+uninstall.brew = "brew uninstall git git-delta gh"
+uninstall.apt = "sudo apt purge -y gh git-delta git"
+uninstall.dnf = "sudo dnf remove -y gh git-delta git"
+link."config/git/gitconfig" = "~/.gitconfig"
+link."config/git/gh.yml" = "~/.config/gh/config.yml"
+postinstall = """
+gh auth status | grep 'Logged in to github.com account' > /dev/null || gh auth login -p ssh -h github.com
+gh extension list | grep gh-copilot > /dev/null || gh extension install github/gh-copilot
+gh extension list | grep gh-dash > /dev/null || gh extension install dlvhdr/gh-dash
+"""
+
+[zsh]
+install.brew = "brew install fd jq tldr tree vim wget zoxide zsh"
+install.apt = "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
+install.dnf = "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
+check = "zsh"
+uninstall.brew = "brew uninstall fd jq tldr tree vim wget zoxide zsh"
+uninstall.apt = "sudo apt purge -y fd-find jq tree vim wget zoxide zsh"
+uninstall.dnf = "sudo dnf remove -y fd-find jq tree vim wget zoxide zsh"
+link."config/zsh/zshrc" = "~/.zshrc"
+link."config/zsh/zimrc" = "~/.zimrc"
+link."config/zsh/functions" = "~/.zsh/functions"
+link."config/zsh/zshrc.d/00-path.sh" = "~/.zshrc.d/00-path.sh"
+link."config/zsh/zshrc.d/10-aliases.sh" = "~/.zshrc.d/10-aliases.sh"
+link."config/zsh/zshrc.d/20-core-functions.sh" = "~/.zshrc.d/20-core-functions.sh"
+link."config/zsh/zshrc.d/30-completions.sh" = "~/.zshrc.d/30-completions.sh"
+link."config/zsh/zshrc.d/50-zoxide.sh" = "~/.zshrc.d/50-zoxide.sh"
+postinstall = "[[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
+
+[tmux]
+install.brew = "brew install tmux bash"
+install.apt = "sudo apt install -y tmux"
+install.dnf = "sudo dnf install -y tmux"
+check = "tmux"
+uninstall.brew = "brew uninstall tmux bash"
+uninstall.apt = "sudo apt purge -y tmux"
+uninstall.dnf = "sudo dnf remove -y tmux"
+link."config/tmux/tmux.conf" = "~/.tmux.conf"
+postinstall = "[ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins"
+
+[vim]
+install.brew = "brew install vim"
+install.apt = "sudo apt install -y vim"
+install.dnf = "sudo dnf install -y vim"
+check = "vim"
+uninstall.brew = "brew uninstall vim"
+uninstall.apt = "sudo apt purge -y vim"
+uninstall.dnf = "sudo dnf remove -y vim"
+link."config/vim/vimrc" = "~/.vimrc"
+
+[neovim]
+install.brew = "brew install neovim"
+check = "nvim"
+install.apt = """
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update -y
+sudo apt install neovim -y
+"""
+install.dnf = "sudo dnf install -y neovim"
+uninstall.brew = "brew uninstall neovim"
+uninstall.apt = """
+sudo add-apt-repository -r ppa:neovim-ppa/unstable
+sudo apt purge -y neovim
+"""
+uninstall.dnf = "sudo dnf remove -y neovim"
+link."config/neovim/init.lua" = "~/.config/nvim/init.lua"
+link."config/neovim/lua/matugen-template.lua" = "~/.config/nvim/lua/matugen-template.lua"
+
+[btop]
+install.brew = "brew install btop"
+check = "btop"
+install.apt = "sudo apt install -y btop"
+install.dnf = "sudo dnf install -y btop"
+install.pacman = "sudo pacman -S --noconfirm btop"
+install.paru = "paru -S btop"
+uninstall.brew = "brew uninstall btop"
+uninstall.apt = "sudo apt purge -y btop"
+uninstall.dnf = "sudo dnf remove -y btop"
+uninstall.pacman = "sudo pacman -Rs --noconfirm btop"
+uninstall.paru = "paru -Rs btop"
+
+[mise]
+install.brew = "brew install mise"
+install.curl = "curl https://mise.run | sh"
+check = "mise"
+uninstall.brew = "brew uninstall mise"
+uninstall.curl = "rm -rf ~/.local/bin/mise ~/.local/share/mise"
+link."config/mise/config.toml" = "~/.config/mise/config.toml"
+link."config/zsh/zshrc.d/40-mise.sh" = "~/.zshrc.d/40-mise.sh"
+postinstall = "cd ~ && mise install"
+
+[editorconfig]
+link."config/editorconfig/editorconfig" = "~/.editorconfig"
+
+[ripgrep]
+install.brew = "brew install ripgrep"
+install.apt = "sudo apt install -y ripgrep"
+install.dnf = "sudo dnf install -y ripgrep"
+check = "rg"
+uninstall.brew = "brew uninstall ripgrep"
+uninstall.apt = "sudo apt purge -y ripgrep"
+uninstall.dnf = "sudo dnf remove -y ripgrep"
+link."config/ripgrep/ripgreprc" = "~/.ripgreprc"
+
+[binaries]
+link."config/binaries" = "~/.bin"
+
+[pi]
+install.paru = "paru -S --noconfirm aur/pi-coding-agent"
+install.bun = "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
+check = "pi"
+uninstall.paru = "paru -R aur/pi-coding-agent"
+uninstall.bun = "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
+
+[macmon]
+os = ["mac"]
+install.brew = "brew install macmon"
+uninstall.brew = "brew uninstall macmon"
+
+[mole]
+os = ["mac"]
+install.brew = "brew install mole"
+uninstall.brew = "brew uninstall mole"
+
+[coreutils]
+os = ["mac"]
+install.brew = "brew install coreutils"
+uninstall.brew = "brew uninstall coreutils"
+
+[zed]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Zed.app ]] || brew install zed"
+uninstall.brew = "brew uninstall zed"
+link."config/zed/settings.json" = "~/.config/zed/settings.json"
+link."config/zed/keymap.json" = "~/.config/zed/keymap.json"
+
+["1password"]
+os = ["mac"]
+install.brew = "[[ -d /Applications/1Password.app ]] || brew install 1password"
+uninstall.brew = "brew uninstall 1password"
+
+[ice]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Ice.app ]] || brew install ice"
+uninstall.brew = "brew uninstall ice"
+defaults."com.jordanbaird.Ice" = "./config/ice/Ice.xml"
+
+[stats]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Stats.app ]] || brew install --cask stats"
+uninstall.brew = "brew uninstall --cask stats"
+defaults."eu.exelban.Stats" = "./config/stats/Stats.xml"
+
+[ghostty]
+os = ["mac", "linux"]
+install.brew = "[[ -d /Applications/Ghostty.app ]] || brew install ghostty"
+install.dnf = "sudo dnf install -y ghostty"
+check = "ghostty"
+uninstall.brew = "brew uninstall ghostty"
+uninstall.dnf = "sudo dnf remove -y ghostty"
+link."config/ghostty/config" = "~/.config/ghostty/config"
+
+[karabiner]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Karabiner-Elements.app ]] || brew install karabiner-elements"
+check = "karabiner-elements"
+uninstall.brew = "brew uninstall karabiner-elements"
+link."config/karabiner/karabiner.json" = "~/.config/karabiner/karabiner.json"
+
+[edges]
+os = ["mac"]
+install.brew = "brew install pablopunk/brew/edges"
+uninstall.brew = "brew uninstall pablopunk/brew/edges"
+link."config/edges/edges.toml" = "~/.config/edges/edges.toml"
+postinstall = "brew services start edges"
+postlink = "brew services restart edges"
+
+[wallpapers]
+link."config/wallpapers" = "~/.config/wallpapers"
+postlink = """
+if [[ $(uname -s) == "Darwin" ]]; then
+  wallpaper="marek-piwnicki-qdrF44RImqw-unsplash.jpg"
+  img_path="${HOME}/.config/wallpapers/${wallpaper}"
+  osascript -e "tell application \\"Finder\\" to set desktop picture to POSIX file \\"${img_path}\\""
+fi
+"""
+
+[mos]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Mos.app ]] || brew install mos"
+uninstall.brew = "brew uninstall mos"
+defaults."com.caldis.Mos" = "./config/mos/Mos.xml"
+
+[syncthing]
+install.brew = "[[ -d /Applications/Syncthing.app ]] || brew install syncthing"
+install.pacman = "sudo pacman -S --noconfirm syncthing"
+install.paru = "paru -S --noconfirm syncthing"
+check = "syncthing"
+uninstall.brew = "brew uninstall syncthing"
+uninstall.pacman = "sudo pacman -Rs --noconfirm syncthing"
+uninstall.paru = "paru -Rs --noconfirm syncthing"
+link."config/syncthing/sync.conf" = "~/.config/syncthing/sync.conf"
+link."config/syncthing/setup.sh" = "~/.config/syncthing/setup.sh"
+postinstall = """
+if [[ "$(uname)" == "Darwin" ]]; then
+  brew services start syncthing
+else
+  systemctl --user enable --now syncthing 2>/dev/null || systemctl --user start syncthing 2>/dev/null || true
+fi
+"""
+postlink = "./config/syncthing/setup.sh"
+
+[mousetrap]
+os = ["mac"]
+install.brew = "brew install pablopunk/brew/mousetrap"
+uninstall.brew = "brew uninstall pablopunk/brew/mousetrap"
+
+[raycast]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Raycast.app ]] || brew install raycast"
+check = "raycast"
+uninstall.brew = "brew uninstall raycast"
+
+[swiftshift]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Swift-Shift.app ]] || brew install swift-shift"
+uninstall.brew = "brew uninstall swift-shift"
+defaults."com.pablopunk.Swift-Shift" = "./config/swiftshift/SwiftShift.xml"
+
+[tailscale]
+install.brew = "[[ -d /Applications/Tailscale.app ]] || brew install --cask tailscale"
+install.pacman = "sudo pacman -S --noconfirm tailscale"
+install.paru = "paru -S --noconfirm tailscale"
+check = "tailscale"
+uninstall.brew = "brew uninstall tailscale"
+uninstall.pacman = "sudo pacman -Rs --noconfirm tailscale"
+uninstall.paru = "paru -Rs --noconfirm tailscale"
+postinstall = """
+if [[ "$(uname)" == "Linux" ]]; then
+  sudo -n systemctl enable --now tailscaled 2>/dev/null || echo "⚠ Run: sudo systemctl enable --now tailscaled"
+fi
+echo "  Run 'sudo tailscale up --operator=\$USER' to authenticate"
+"""
+
+[telegram]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Telegram.app ]] || brew install telegram"
+check = "telegram"
+uninstall.brew = "brew uninstall telegram"
+
+[whatsapp]
+os = ["mac"]
+install.brew = "[[ -d /Applications/WhatsApp.app ]] || brew install whatsapp"
+check = "whatsapp"
+uninstall.brew = "brew uninstall whatsapp"
+
+[missive]
+os = ["mac"]
+install.brew = "[[ -d /Applications/Missive.app ]] || brew install missive"
+uninstall.brew = "brew uninstall missive"
+
+[fluxmarkdown]
+os = ["mac"]
+install.brew = "brew install --cask xykong/tap/flux-markdown"
+uninstall.brew = "brew uninstall xykong/tap/flux-markdown"
+
+[paneru]
+os = ["mac"]
+install.brew = "brew install paneru"
+uninstall.brew = "brew uninstall paneru"
+link."config/paneru/paneru.toml" = "~/.paneru"
+
+[java]
+link."config/java/99-java.sh" = "~/.zshrc.d/99-java.sh"
+
+[monitorcontrol]
+os = ["mac"]
+install.brew = "[[ -d /Applications/MonitorControl.app ]] || brew install monitorcontrol"
+uninstall.brew = "brew uninstall monitorcontrol"
+
+[orbstack]
+os = ["mac"]
+install.brew = "[[ -d /Applications/OrbStack.app ]] || brew install orbstack"
+uninstall.brew = "brew uninstall orbstack"
+
+[aws]
+os = ["mac"]
+install.brew = "brew install awscli"
+check = "aws"
+uninstall.brew = "brew uninstall awscli"
+link."config/aws/aws.sh" = "~/.zshrc.d/95-aws.sh"
+
+[pup]
+os = ["mac"]
+install.brew = "brew install datadog-labs/pack/pup"
+check = "pup"
+uninstall.brew = "brew uninstall datadog-labs/pack/pup"
+
+[cleanshot]
+os = ["mac"]
+install.brew = "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
+uninstall.brew = "brew uninstall cleanshot"
+
+[niri]
+link."config/niri" = "~/.config/niri"
+link."config/noctalia" = "~/.config/noctalia"
+install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
+uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"

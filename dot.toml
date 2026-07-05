@@ -133,56 +133,57 @@ uninstall.bun = "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu
 
 [macmon]
 os = ["mac"]
+check = "macmon"
 install.brew = "brew install macmon"
 uninstall.brew = "brew uninstall macmon"
 
 [mole]
 os = ["mac"]
+check = "mole"
 install.brew = "brew install mole"
 uninstall.brew = "brew uninstall mole"
 
-[coreutils]
-os = ["mac"]
-install.brew = "brew install coreutils"
-uninstall.brew = "brew uninstall coreutils"
-
 [zed]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Zed.app ]] || brew install zed"
+check = "test -d /Applications/Zed.app"
+install.brew = "brew install zed"
 uninstall.brew = "brew uninstall zed"
 link."config/zed/settings.json" = "~/.config/zed/settings.json"
 link."config/zed/keymap.json" = "~/.config/zed/keymap.json"
 
 ["1password"]
 os = ["mac"]
-install.brew = "[[ -d /Applications/1Password.app ]] || brew install 1password"
+check = "test -d /Applications/1Password.app"
+install.brew = "brew install 1password"
 uninstall.brew = "brew uninstall 1password"
 
 [ice]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Ice.app ]] || brew install ice"
+check = "test -d /Applications/Ice.app"
+install.brew = "brew install ice"
 uninstall.brew = "brew uninstall ice"
 defaults."com.jordanbaird.Ice" = "./config/ice/Ice.xml"
 
 [stats]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Stats.app ]] || brew install --cask stats"
+check = "test -d /Applications/Stats.app"
+install.brew = "brew install --cask stats"
 uninstall.brew = "brew uninstall --cask stats"
 defaults."eu.exelban.Stats" = "./config/stats/Stats.xml"
 
 [ghostty]
 os = ["mac", "linux"]
-install.brew = "[[ -d /Applications/Ghostty.app ]] || brew install ghostty"
-install.dnf = "sudo dnf install -y ghostty"
 check = "ghostty"
+install.brew = "brew install ghostty"
+install.dnf = "sudo dnf install -y ghostty"
 uninstall.brew = "brew uninstall ghostty"
 uninstall.dnf = "sudo dnf remove -y ghostty"
 link."config/ghostty/config" = "~/.config/ghostty/config"
 
 [karabiner]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Karabiner-Elements.app ]] || brew install karabiner-elements"
-check = "karabiner-elements"
+check = "test -d /Applications/Karabiner-Elements.app"
+install.brew = "brew install karabiner-elements"
 uninstall.brew = "brew uninstall karabiner-elements"
 link."config/karabiner/karabiner.json" = "~/.config/karabiner/karabiner.json"
 
@@ -206,12 +207,13 @@ fi
 
 [mos]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Mos.app ]] || brew install mos"
+check = "test -d /Applications/Mos.app"
+install.brew = "brew install mos"
 uninstall.brew = "brew uninstall mos"
 defaults."com.caldis.Mos" = "./config/mos/Mos.xml"
 
 [syncthing]
-install.brew = "[[ -d /Applications/Syncthing.app ]] || brew install syncthing"
+install.brew = "brew install syncthing"
 install.pacman = "sudo pacman -S --noconfirm syncthing"
 install.paru = "paru -S --noconfirm syncthing"
 check = "syncthing"
@@ -231,23 +233,25 @@ postlink = "./config/syncthing/setup.sh"
 
 [mousetrap]
 os = ["mac"]
+check = "test -d /Applications/Mousetrap.app"
 install.brew = "brew install pablopunk/brew/mousetrap"
 uninstall.brew = "brew uninstall pablopunk/brew/mousetrap"
 
 [raycast]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Raycast.app ]] || brew install raycast"
-check = "raycast"
+check = "test -d /Applications/Raycast.app"
+install.brew = "brew install raycast"
 uninstall.brew = "brew uninstall raycast"
 
 [swiftshift]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Swift-Shift.app ]] || brew install swift-shift"
+check = "test -d '/Applications/Swift Shift.app/'"
+install.brew = "brew install swift-shift"
 uninstall.brew = "brew uninstall swift-shift"
 defaults."com.pablopunk.Swift-Shift" = "./config/swiftshift/SwiftShift.xml"
 
 [tailscale]
-install.brew = "[[ -d /Applications/Tailscale.app ]] || brew install --cask tailscale"
+install.brew = "brew install --cask tailscale"
 install.pacman = "sudo pacman -S --noconfirm tailscale"
 install.paru = "paru -S --noconfirm tailscale"
 check = "tailscale"
@@ -263,23 +267,25 @@ echo "  Run 'sudo tailscale up --operator=\$USER' to authenticate"
 
 [telegram]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Telegram.app ]] || brew install telegram"
-check = "telegram"
+check = "test -d /Applications/Telegram.app"
+install.brew = "brew install telegram"
 uninstall.brew = "brew uninstall telegram"
 
 [whatsapp]
 os = ["mac"]
-install.brew = "[[ -d /Applications/WhatsApp.app ]] || brew install whatsapp"
-check = "whatsapp"
+check = "test -d /Applications/WhatsApp.app"
+install.brew = "brew install whatsapp"
 uninstall.brew = "brew uninstall whatsapp"
 
 [missive]
 os = ["mac"]
-install.brew = "[[ -d /Applications/Missive.app ]] || brew install missive"
+check = "test -d /Applications/Missive.app"
+install.brew = "brew install missive"
 uninstall.brew = "brew uninstall missive"
 
 [fluxmarkdown]
 os = ["mac"]
+check = "test -d /Applications/FluxMarkdown.app"
 install.brew = "brew install --cask xykong/tap/flux-markdown"
 uninstall.brew = "brew uninstall xykong/tap/flux-markdown"
 
@@ -294,12 +300,14 @@ link."config/java/99-java.sh" = "~/.zshrc.d/99-java.sh"
 
 [monitorcontrol]
 os = ["mac"]
-install.brew = "[[ -d /Applications/MonitorControl.app ]] || brew install monitorcontrol"
+check = "test -d /Applications/MonitorControl.app"
+install.brew = "brew install monitorcontrol"
 uninstall.brew = "brew uninstall monitorcontrol"
 
 [orbstack]
 os = ["mac"]
-install.brew = "[[ -d /Applications/OrbStack.app ]] || brew install orbstack"
+check = "test -d /Applications/OrbStack.app"
+install.brew = "brew install orbstack"
 uninstall.brew = "brew uninstall orbstack"
 
 [aws]
@@ -317,10 +325,12 @@ uninstall.brew = "brew uninstall datadog-labs/pack/pup"
 
 [cleanshot]
 os = ["mac"]
-install.brew = "[[ -d /Applications/CleanShot\\ X.app ]] || brew install cleanshot"
+check = "test -d '/Applications/CleanShot X.app'"
+install.brew = "brew install cleanshot"
 uninstall.brew = "brew uninstall cleanshot"
 
 [niri]
+os = ["linux"]
 link."config/niri" = "~/.config/niri"
 link."config/noctalia" = "~/.config/noctalia"
 install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"

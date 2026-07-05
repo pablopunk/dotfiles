@@ -430,15 +430,15 @@ config:
       link:
         "./config/niri": "~/.config/niri"
 
-    cliphist:
-      link:
-        "./config/cliphist": "~/.config/cliphist"
-      install:
-        paru: "paru -Sy cachyos-extra-v3/cliphist"
-      uninstall:
-        paru: "paru -Rs cachyos-extra-v3/cliphist"
-
     noctalia:
       link:
         "./config/noctalia": "~/.config/noctalia"
+
+    niri-utils:
+      link:
+        "./config/cliphist": "~/.config/cliphist"
+      install:
+        paru: "paru -Sy cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
+      uninstall:
+        paru: "paru -Rs cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 

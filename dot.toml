@@ -309,6 +309,7 @@ uninstall.brew = "brew uninstall awscli"
 link."config/aws/aws.sh" = "~/.zshrc.d/95-aws.sh"
 
 [pup]
+os = ["mac"]
 install.brew = "brew install datadog-labs/pack/pup"
 check = "pup"
 uninstall.brew = "brew uninstall datadog-labs/pack/pup"
@@ -320,11 +321,7 @@ uninstall.brew = "brew uninstall cleanshot"
 
 [niri]
 link."config/niri" = "~/.config/niri"
-
-[noctalia]
 link."config/noctalia" = "~/.config/noctalia"
-
-[niri-utils]
 install.paru = "paru -Sy cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 check = "cliphist"
 uninstall.paru = "paru -Rs cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"

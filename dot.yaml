@@ -6,12 +6,16 @@ profiles:
 
   gui:
     - apps
+    - tailscale
 
   work:
     - work
+    - tailscale
 
   niri:
     - niri
+    - tailscale
+    - syncthing
 
 config:
   cli:
@@ -276,12 +280,24 @@ config:
         "com.caldis.Mos": "./config/mos/Mos.xml"
 
     syncthing:
-      os: ["mac"]
       install:
         brew: "[[ -d /Applications/Syncthing.app ]] || brew install syncthing"
+        pacman: "sudo pacman -S --noconfirm syncthing"
+        paru: "paru -S --noconfirm syncthing"
       uninstall:
         brew: "brew uninstall syncthing"
-      postinstall: "brew services start syncthing"
+        pacman: "sudo pacman -Rs --noconfirm syncthing"
+        paru: "paru -Rs --noconfirm syncthing"
+      link:
+        "./config/syncthing/sync.conf": "~/.config/syncthing/sync.conf"
+        "./config/syncthing/setup.sh": "~/.config/syncthing/setup.sh"
+      postinstall: |
+        if [[ "$(uname)" == "Darwin" ]]; then
+          brew services start syncthing
+        else
+          systemctl --user enable --now syncthing 2>/dev/null || systemctl --user start syncthing 2>/dev/null || true
+        fi
+      postlink: "./config/syncthing/setup.sh"
 
     mousetrap:
       os: ["mac"]
@@ -307,11 +323,19 @@ config:
         "com.pablopunk.Swift-Shift": "./config/swiftshift/SwiftShift.xml"
 
     tailscale:
-      os: ["mac"]
       install:
         brew: "[[ -d /Applications/Tailscale.app ]] || brew install --cask tailscale"
+        pacman: "sudo pacman -S --noconfirm tailscale"
+        paru: "paru -S --noconfirm tailscale"
       uninstall:
         brew: "brew uninstall tailscale"
+        pacman: "sudo pacman -Rs --noconfirm tailscale"
+        paru: "paru -Rs --noconfirm tailscale"
+      postinstall: |
+        if [[ "$(uname)" == "Linux" ]]; then
+          sudo -n systemctl enable --now tailscaled 2>/dev/null || echo "⚠ Run: sudo systemctl enable --now tailscaled"
+        fi
+        echo "  Run 'sudo tailscale up --operator=\$USER' to authenticate"
 
     telegram:
       os: ["mac"]
@@ -403,12 +427,18 @@ config:
 
   niri:
     niri:
-      os: ["linux"]
       link:
         "./config/niri": "~/.config/niri"
 
+    cliphist:
+      link:
+        "./config/cliphist": "~/.config/cliphist"
+      install:
+        paru: "paru -Sy cachyos-extra-v3/cliphist"
+      uninstall:
+        paru: "paru -Rs cachyos-extra-v3/cliphist"
+
     noctalia:
-      os: ["linux"]
       link:
         "./config/noctalia": "~/.config/noctalia"
 

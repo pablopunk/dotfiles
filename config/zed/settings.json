@@ -19,8 +19,10 @@
   "agent": {
     "dock": "right",
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-haiku-4-5-thinking-latest"
+      "effort": "medium",
+      "enable_thinking": true,
+      "provider": "opencode",
+      "model": "go/deepseek-v4-pro"
     },
   },
   "telemetry": {
@@ -45,7 +47,7 @@
     "button": false
   },
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "theme": "Ayu Mirage",
+  "theme": "Catppuccin Mocha (Blur) [Light]",
   "buffer_font_size": 15.0,
   "vim_mode": true,
   "vim": {

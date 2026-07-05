@@ -820,6 +820,11 @@ local function mini_nvim()
       timing = require("mini.animate").gen_timing.linear({ duration = 100, unit = "total" }),
     },
   })
+  vim.api.nvim_create_user_command("ToggleAnimate", function()
+    vim.g.minianimate_disable = not vim.g.minianimate_disable
+    print("Animations " .. (vim.g.minianimate_disable and "disabled" or "enabled"))
+  end, {})
+  map("n", "<leader>ata", ":ToggleAnimate<CR>", { desc = "Toggle animations (mini.animate)" })
   require("mini.indentscope").setup({ symbol = "│" })
   vim.cmd("hi! link MiniIndentscopeSymbol Whitespace")
   require("mini.cursorword").setup({})

@@ -153,10 +153,10 @@ config:
 
     pi:
       install:
-        paru: sudo paru -S aur/pi-coding-agent
+        paru: paru -S aur/pi-coding-agent
         bun: "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
       uninstall:
-        paru: sudo paru -R aur/pi-coding-agent
+        paru: paru -R aur/pi-coding-agent
         bun: "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
 
     macmon:

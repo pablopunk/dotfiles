@@ -7,13 +7,7 @@ on:
       - main
 
 jobs:
-  shell-syntax:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-  dot-dry-run:
+  dot-validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,18 +27,25 @@ jobs:
           set -euo pipefail
           curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
 
-      - name: Run dry-run checks for all profiles
+      - name: Verify --list works
         run: |
           set -euo pipefail
           export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
-          dot --profiles
-          dot --dry-run -v
-          dot --dry-run -v gui
-          dot --dry-run -v work
-          dot --dry-run -v rice
-          dot --dry-run -v work gui rice
+          dot --list
 
-  dot-apply-default:
+      - name: Dry-run install cross-platform components
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot --dry-run -v -i git -i zsh -i tmux -i vim -i neovim -i btop -i mise -i editorconfig -i ripgrep -i binaries -i syncthing -i tailscale -i java -i ghostty
+
+      - name: Dry-run link cross-platform components
+        run: |
+          set -euo pipefail
+          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot --dry-run -v -l git -l zsh -l tmux -l vim -l neovim -l btop -l mise -l editorconfig -l ripgrep -l binaries -l syncthing -l tailscale -l java -l ghostty
+
+  dot-apply:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,43 +58,35 @@ jobs:
           cat > .ci/bin/gh <<'EOF'
           #!/usr/bin/env bash
           set -euo pipefail
-
           if [[ "${1:-}" == "auth" && "${2:-}" == "status" ]]; then
             printf 'Logged in to github.com account ci\n'
             exit 0
           fi
-
           if [[ "${1:-}" == "extension" && "${2:-}" == "list" ]]; then
-            printf 'gh-copilot\n'
-            printf 'gh-dash\n'
+            printf 'gh-copilot\ngh-dash\n'
             exit 0
           fi
-
-          if [[ "${1:-}" == "auth" && "${2:-}" == "login" ]]; then
-            exit 0
-          fi
-
-          if [[ "${1:-}" == "extension" && "${2:-}" == "install" ]]; then
-            exit 0
-          fi
-
           exit 0
           EOF
           chmod +x .ci/bin/gh
+
+      - name: Create stub package manager commands
+        run: |
+          set -euo pipefail
+          mkdir -p .ci/bin
+          for cmd in brew dnf cargo bun osascript defaults open; do
+            printf '#!/usr/bin/env bash\nexit 0\n' > ".ci/bin/$cmd"
+            chmod +x ".ci/bin/$cmd"
+          done
 
       - name: Install dot
         run: |
           set -euo pipefail
           curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
 
-      - name: Apply default profile
+      - name: Apply and verify core components
         run: |
           set -euo pipefail
           export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
-          dot
-
-      - name: Verify default profile converges
-        run: |
-          set -euo pipefail
-          export PATH="$PWD/.ci/bin:$HOME/.local/bin:$PATH"
+          dot -v -i git -i zsh -i tmux -i vim -i neovim -i btop -i mise -i editorconfig -i ripgrep -i binaries -i syncthing -i tailscale -i java -i ghostty
           dot --dry-run -v

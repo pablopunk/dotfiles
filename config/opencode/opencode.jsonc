@@ -7,23 +7,23 @@
   "small_model": "omniroute/pablo/fast",
   "agent": {
     "explore": {
-      "model": "omniroute/pablo/fast"
+      "model": "omniroute/pablo/fast",
     },
     "compaction": {
-      "model": "omniroute/pablo/chat"
+      "model": "omniroute/pablo/chat",
     },
     "summary": {
-      "model": "omniroute/pablo/fast"
+      "model": "omniroute/pablo/fast",
     },
     "build": {
-      "model": "omniroute/pablo/coding"
+      "model": "omniroute/pablo/coding",
     },
     "plan": {
-      "model": "omniroute/pablo/coding"
+      "model": "omniroute/pablo/coding",
     },
     "general": {
-      "model": "omniroute/pablo/chat"
-    }
+      "model": "omniroute/pablo/chat",
+    },
   },
   // === Permissions ===
   "permission": {
@@ -34,28 +34,28 @@
       "rm -rf /*": "deny",
       "rm -rf ~": "deny",
       "rm -rf ~/*": "deny",
-      ":(){:|:&};:": "deny"
-    }
+      ":(){:|:&};:": "deny",
+    },
   },
   "mcp": {
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}",
       },
-      "enabled": true
+      "enabled": true,
     },
     "grep.app": {
       "type": "remote",
       "url": "https://mcp.grep.app",
-      "enabled": true
+      "enabled": true,
     },
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?exaApiKey={env:EXA_API_KEY}",
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   // === Providers ===
   "provider": {
@@ -64,61 +64,208 @@
       "name": "OmniRoute",
       "options": {
         "baseURL": "https://omniroute.notflix.us/v1",
-        "apiKey": "{env:OMNIROUTE_API_KEY}"
+        "apiKey": "{env:OMNIROUTE_API_KEY}",
       },
       "models": {
         "pablo/coding": {
           "name": "pablo/coding",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
+            "output": ["text"],
+          },
         },
         "pablo/chat": {
           "name": "pablo/chat",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
+            "output": ["text"],
+          },
         },
         "pablo/fast": {
-          "name": "pablo/fast"
+          "name": "pablo/fast",
         },
-        "auto/best-free": {
-          "name": "auto/best-free",
+        "auto/best-coding": {
+          "name": "auto/best-coding",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
+            "output": ["text"],
+          },
         },
-        "auto/best-reason": {
-          "name": "auto/best-reason",
+        "auto/best-reasoning": {
+          "name": "auto/best-reasoning",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
+            "output": ["text"],
+          },
         },
-        "auto/coding:free": {
-          "name": "auto/coding:free",
+        "auto/best-fast": {
+          "name": "auto/best-fast",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
+            "output": ["text"],
+          },
+        },
+        "auto/best-vision": {
+          "name": "auto/best-vision",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/best-chat": {
+          "name": "auto/best-chat",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
         },
         "auto/best-coding-fast": {
           "name": "auto/best-coding-fast",
           "modalities": {
             "input": ["text", "image"],
-            "output": ["text"]
-          }
-        }
-      }
-    }
+            "output": ["text"],
+          },
+        },
+        "auto/pro-coding": {
+          "name": "auto/pro-coding",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/pro-reasoning": {
+          "name": "auto/pro-reasoning",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/pro-vision": {
+          "name": "auto/pro-vision",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/pro-chat": {
+          "name": "auto/pro-chat",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/pro-fast": {
+          "name": "auto/pro-fast",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding": {
+          "name": "auto/coding",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/fast": {
+          "name": "auto/fast",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/chat": {
+          "name": "auto/chat",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/cheap": {
+          "name": "auto/cheap",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/smart": {
+          "name": "auto/smart",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/best-free": {
+          "name": "auto/best-free",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding:fast": {
+          "name": "auto/coding:fast",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding:cheap": {
+          "name": "auto/coding:cheap",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding:free": {
+          "name": "auto/coding:free",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding:pro": {
+          "name": "auto/coding:pro",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/coding:reliable": {
+          "name": "auto/coding:reliable",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/reasoning": {
+          "name": "auto/reasoning",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/reasoning:pro": {
+          "name": "auto/reasoning:pro",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+        "auto/vision": {
+          "name": "auto/vision",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"],
+          },
+        },
+      },
+    },
   },
 
   // === Server ===
   "server": {
     "port": 4096,
-    "hostname": "0.0.0.0"
-  }
+    "hostname": "0.0.0.0",
+  },
 }

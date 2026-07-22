@@ -74,10 +74,12 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .ci/bin
-          for cmd in brew dnf cargo bun osascript defaults open; do
+          for cmd in brew dnf cargo bun mise osascript defaults open; do
             printf '#!/usr/bin/env bash\nexit 0\n' > ".ci/bin/$cmd"
             chmod +x ".ci/bin/$cmd"
           done
+          printf '#!/usr/bin/env bash\nwhile IFS= read -r _; do :; done\n' > .ci/bin/zsh
+          chmod +x .ci/bin/zsh
 
       - name: Install dot
         run: |

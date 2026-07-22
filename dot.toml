@@ -86,6 +86,12 @@ uninstall.dnf = "sudo dnf remove -y neovim"
 link."config/neovim/init.lua" = "~/.config/nvim/init.lua"
 link."config/neovim/lua/matugen-template.lua" = "~/.config/nvim/lua/matugen-template.lua"
 
+[opencode]
+install.curl = "curl -fsSL https://opencode.ai/install | bash"
+check = "opencode"
+link."config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
+link."config/opencode/opencode.sh" = "~/.zshrc.d/05-opencode.sh"
+
 [btop]
 install.brew = "brew install btop"
 check = "btop"

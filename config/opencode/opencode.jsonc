@@ -1,5 +1,5 @@
 {
-  "plugin": ["@mohak34/opencode-notifier@latest"],
+  "plugin": [],
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   // === Models ===

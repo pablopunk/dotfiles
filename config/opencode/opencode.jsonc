@@ -68,13 +68,42 @@
       },
       "models": {
         "pablo/coding": {
-          "name": "pablo/coding"
+          "name": "pablo/coding",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "pablo/chat": {
+          "name": "pablo/chat",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         },
         "pablo/fast": {
           "name": "pablo/fast"
         },
-        "pablo/chat": {
-          "name": "pablo/chat"
+        "auto/best-free": {
+          "name": "auto/best-free",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "auto/best-reason": {
+          "name": "auto/best-reason",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        },
+        "auto/coding:free": {
+          "name": "auto/coding:free",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         }
       }
     }

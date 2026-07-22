@@ -1,9 +1,9 @@
 [git]
-install.brew = "brew install git git-delta gh"
+install.brew = "brew install git hunk gh"
 check = "git"
 install.dnf = """
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install gh git-delta git
+sudo dnf install gh git
 """
 install.apt = """
 (type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \\
@@ -14,13 +14,14 @@ install.apt = """
 && sudo mkdir -p -m 755 /etc/apt/sources.list.d \\
 && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \\
 && sudo apt update \\
-&& sudo apt install gh git-delta git -y
+&& sudo apt install gh git -y
 """
-uninstall.brew = "brew uninstall git git-delta gh"
-uninstall.apt = "sudo apt purge -y gh git-delta git"
-uninstall.dnf = "sudo dnf remove -y gh git-delta git"
+uninstall.brew = "brew uninstall git hunk gh"
+uninstall.apt = "sudo apt purge -y gh git"
+uninstall.dnf = "sudo dnf remove -y gh git"
 link."config/git/gitconfig" = "~/.gitconfig"
 link."config/git/gh.yml" = "~/.config/gh/config.yml"
+link."config/git/hunk.toml" = "~/.config/hunk/config.toml"
 postinstall = """
 gh auth status | grep 'Logged in to github.com account' > /dev/null || gh auth login -p ssh -h github.com
 gh extension list | grep gh-copilot > /dev/null || gh extension install github/gh-copilot

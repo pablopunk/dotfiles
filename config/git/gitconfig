@@ -1,13 +1,7 @@
 #vim: ft=gitconfig
 [core]
-  pager = delta
+  pager = hunk pager
 	editor = nvim -u ~/.vimrc
-[delta]
-  line-numbers = true
-  side-by-side = true
-[push]
-  default = current
-  autoSetupRemote = true
 [pull]
 	rebase = false
 	default = current

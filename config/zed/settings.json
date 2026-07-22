@@ -7,6 +7,21 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "existing_window",
+  "diff_view_style": "unified",
+  "agent_servers": {
+    "pi-acp": {
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "outline_panel": {
     "dock": "left"
   },
@@ -17,12 +32,23 @@
     "provider": "zed"
   },
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^gh\\s+pr(\\s|$)"
+            }
+          ]
+        }
+      }
+    },
     "dock": "right",
     "default_model": {
       "effort": "medium",
       "enable_thinking": true,
-      "provider": "opencode",
-      "model": "go/deepseek-v4-pro"
+      "provider": "openai-subscribed",
+      "model": "gpt-5.5"
     },
   },
   "telemetry": {
@@ -47,7 +73,11 @@
     "button": false
   },
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "theme": "Catppuccin Mocha (Blur) [Light]",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Catppuccin Macchiato"
+  },
   "buffer_font_size": 15.0,
   "vim_mode": true,
   "vim": {

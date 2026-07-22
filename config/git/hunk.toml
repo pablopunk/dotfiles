@@ -1,0 +1,11 @@
+theme = "auto"
+mode = "auto" # auto, split, stack
+vcs = "git"
+watch = false
+exclude_untracked = false
+line_numbers = true
+wrap_lines = false
+menu_bar = true
+agent_notes = true
+prompt_save_view_preferences = true
+transparent_background = true

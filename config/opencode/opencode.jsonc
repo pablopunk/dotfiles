@@ -104,6 +104,13 @@
             "input": ["text", "image"],
             "output": ["text"]
           }
+        },
+        "auto/best-coding-fast": {
+          "name": "auto/best-coding-fast",
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
         }
       }
     }

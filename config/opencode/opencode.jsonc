@@ -3,26 +3,26 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   // === Models ===
-  "model": "openai/gpt-5.6-terra",
-  "small_model": "opencode-go/deepseek-v4-flash",
+  "model": "omniroute/pablo/coding",
+  "small_model": "omniroute/pablo/fast",
   "agent": {
     "explore": {
-      "model": "openai/gpt-5.6-luna"
+      "model": "omniroute/pablo/fast"
     },
     "compaction": {
-      "model": "openai/gpt-5.6-luna"
+      "model": "omniroute/pablo/chat"
     },
     "summary": {
-      "model": "openai/gpt-5.6-luna"
+      "model": "omniroute/pablo/fast"
     },
     "build": {
-      "model": "openai/gpt-5.6-terra"
+      "model": "omniroute/pablo/coding"
     },
     "plan": {
-      "model": "openai/gpt-5.6-terra"
+      "model": "omniroute/pablo/coding"
     },
     "general": {
-      "model": "openai/gpt-5.6-terra"
+      "model": "omniroute/pablo/chat"
     }
   },
   // === Permissions ===
@@ -59,6 +59,25 @@
   },
   // === Providers ===
   "provider": {
+    "omniroute": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OmniRoute",
+      "options": {
+        "baseURL": "https://omniroute.notflix.us/v1",
+        "apiKey": "{env:OMNIROUTE_API_KEY}"
+      },
+      "models": {
+        "pablo/coding": {
+          "name": "pablo/coding"
+        },
+        "pablo/fast": {
+          "name": "pablo/fast"
+        },
+        "pablo/chat": {
+          "name": "pablo/chat"
+        }
+      }
+    }
   },
 
   // === Server ===

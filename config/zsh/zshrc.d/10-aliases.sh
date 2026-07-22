@@ -33,5 +33,3 @@ alias :xa='exit'
 # source entry file
 alias zs='source ~/.zshrc'
 alias bs='source ~/.bashrc'
-# opencode
-alias oc='opencode'

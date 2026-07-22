@@ -35,6 +35,7 @@ fi
 git clone https://github.com/pablopunk/dotfiles.git ~/.dotfiles > /dev/null 2>&1
 cd "$HOME/.dotfiles"
 
+"$DOT_BIN" -i mise # install mise first cause bun is needed for other packages
 "$DOT_BIN"
 
 # Set zsh as default

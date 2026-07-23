@@ -138,6 +138,13 @@ check = "pi"
 uninstall.paru = "paru -R aur/pi-coding-agent"
 uninstall.bun = "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
 
+[herdr]
+install.curl = "curl -fsSL https://herdr.dev/install.sh | sh"
+check = "herdr"
+uninstall.curl = "rm -rf ~/.local/bin/herdr ~/.local/share/herdr"
+link."config/herdr/config.toml" = "~/.config/herdr/config.toml"
+link."config/herdr/herdr-action-palette" = "~/.config/herdr/herdr-action-palette"
+
 [macmon]
 os = ["mac"]
 check = "macmon"

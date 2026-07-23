@@ -1,0 +1,34 @@
+onboarding = false
+
+[theme]
+name = "tokyo-night"
+
+[keys]
+prefix = "ctrl+a"
+settings = ""
+copy_mode = "prefix+y"
+split_horizontal = ["prefix+s", "prefix+ctrl+s"]
+split_vertical = ["prefix+v", "prefix+ctrl+v"]
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+previous_workspace = "shift+up"
+next_workspace = "shift+down"
+previous_tab = "shift+left"
+next_tab = "shift+right"
+workspace_picker = ""
+new_worktree = "prefix+w"
+
+[[keys.command]]
+key = "prefix+alt+p"
+type = "popup"
+command = "/Users/pablopunk/.config/herdr/herdr-action-palette"
+description = "open action palette"
+width = "70%"
+height = "80%"
+
+[ui]
+agent_panel_scope = "all"
+agent_panel_sort = "spaces"
+prompt_new_tab_name = false

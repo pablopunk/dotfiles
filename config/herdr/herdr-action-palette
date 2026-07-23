@@ -1,0 +1,65 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+workspace_id=${HERDR_WORKSPACE_ID:?Run this from a Herdr workspace.}
+tab_id=${HERDR_TAB_ID:?Run this from a Herdr tab.}
+pane_id=${HERDR_PANE_ID:?Run this from a Herdr pane.}
+
+selection=$(printf '%s\n' \
+  $'New tab\tCtrl+A C\tnew_tab' \
+  $'New workspace\tCtrl+A Shift+N\tnew_workspace' \
+  $'New worktree\tCtrl+A W\tnew_worktree' \
+  $'Rename workspace\tCtrl+A Shift+W\trename_workspace' \
+  $'Close workspace\tCtrl+A Shift+D\tclose_workspace' \
+  $'Rename tab\tCtrl+A Shift+T\trename_tab' \
+  $'Close tab\tCtrl+A Shift+X\tclose_tab' \
+  $'Focus pane left\tCtrl+H\tfocus_left' \
+  $'Focus pane down\tCtrl+J\tfocus_down' \
+  $'Focus pane up\tCtrl+K\tfocus_up' \
+  $'Focus pane right\tCtrl+L\tfocus_right' \
+  $'Split horizontally\tCtrl+A S / Ctrl+A Ctrl+S\tsplit_down' \
+  $'Split vertically\tCtrl+A V / Ctrl+A Ctrl+V\tsplit_right' \
+  $'Rename pane\tCtrl+A Shift+P\trename_pane' \
+  $'Close pane\tCtrl+A X\tclose_pane' \
+  $'Zoom pane\tCtrl+A Z\tzoom_pane' \
+  $'Reload configuration\tCtrl+A Shift+R\treload_config' \
+  | fzf --prompt='Herdr action > ' --delimiter=$'\t' --with-nth=1,2 --height=100% --reverse) || exit 0
+
+action=${selection##*$'\t'}
+
+case "$action" in
+  new_tab) herdr tab create --workspace "$workspace_id" --focus ;;
+  new_workspace) herdr workspace create --focus ;;
+  new_worktree)
+    printf 'Branch name: '
+    read -r branch
+    [[ -n "$branch" ]] && herdr worktree create --workspace "$workspace_id" --branch "$branch" --focus
+    ;;
+  rename_workspace)
+    printf 'Workspace name: '
+    read -r label
+    [[ -n "$label" ]] && herdr workspace rename "$workspace_id" "$label"
+    ;;
+  close_workspace) herdr workspace close "$workspace_id" ;;
+  rename_tab)
+    printf 'Tab name: '
+    read -r label
+    [[ -n "$label" ]] && herdr tab rename "$tab_id" "$label"
+    ;;
+  close_tab) herdr tab close "$tab_id" ;;
+  focus_left) herdr pane focus --pane "$pane_id" --direction left ;;
+  focus_down) herdr pane focus --pane "$pane_id" --direction down ;;
+  focus_up) herdr pane focus --pane "$pane_id" --direction up ;;
+  focus_right) herdr pane focus --pane "$pane_id" --direction right ;;
+  split_down) herdr pane split --pane "$pane_id" --direction down --focus ;;
+  split_right) herdr pane split --pane "$pane_id" --direction right --focus ;;
+  rename_pane)
+    printf 'Pane name: '
+    read -r label
+    [[ -n "$label" ]] && herdr pane rename "$pane_id" "$label"
+    ;;
+  close_pane) herdr pane close "$pane_id" ;;
+  zoom_pane) herdr pane zoom --pane "$pane_id" --toggle ;;
+  reload_config) herdr server reload-config ;;
+esac

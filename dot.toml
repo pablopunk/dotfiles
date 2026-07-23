@@ -144,6 +144,7 @@ check = "herdr"
 uninstall.curl = "rm -rf ~/.local/bin/herdr ~/.local/share/herdr"
 link."config/herdr/config.toml" = "~/.config/herdr/config.toml"
 link."config/herdr/herdr-action-palette" = "~/.config/herdr/herdr-action-palette"
+link."config/herdr/plugins/herdr-ssh-server" = "~/.config/herdr/plugins/herdr-ssh-server"
 
 [macmon]
 os = ["mac"]

@@ -1,0 +1,9 @@
+id = "pablo.herdr-ssh-server"
+name = "Herdr SSH Server"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Starts a dedicated SSH server for Herdr remote attach."
+platforms = ["macos"]
+
+[[startup]]
+command = ["./start-sshd"]

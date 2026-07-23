@@ -4,22 +4,22 @@
   "autoupdate": true,
   // === Models ===
   "model": "omniroute/pablo/coding",
-  "small_model": "omniroute/auto/fast",
+  "small_model": "omniroute/pablo/fast",
   "agent": {
     "explore": {
-      "model": "omniroute/auto/fast",
+      "model": "omniroute/pablo/fast",
     },
     "compaction": {
-      "model": "omniroute/auto/best-fast",
+      "model": "omniroute/pablo/fast",
     },
     "summary": {
-      "model": "omniroute/pablo/best-fast",
+      "model": "omniroute/pablo/fast",
     },
     "build": {
       "model": "omniroute/pablo/coding",
     },
     "plan": {
-      "model": "omniroute/auto/best-reasoning",
+      "model": "omniroute/pablo/coding",
     },
     "general": {
       "model": "omniroute/pablo/chat",

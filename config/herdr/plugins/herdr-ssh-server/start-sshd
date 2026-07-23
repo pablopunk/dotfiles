@@ -1,0 +1,54 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+state_dir=${HERDR_PLUGIN_CONFIG_DIR:?Herdr plugin config directory is required.}
+host_key="$state_dir/ssh_host_ed25519_key"
+authorized_keys="$state_dir/authorized_keys"
+config="$state_dir/sshd_config"
+pid_file="$state_dir/sshd.pid"
+log_file="$state_dir/sshd.log"
+
+mkdir -p "$state_dir"
+chmod 700 "$state_dir"
+
+if [[ ! -f "$authorized_keys" ]]; then
+  cp "$HOME/.ssh/id_ed25519.pub" "$authorized_keys"
+  chmod 600 "$authorized_keys"
+fi
+
+if [[ ! -f "$host_key" ]]; then
+  ssh-keygen -q -t ed25519 -N '' -f "$host_key"
+fi
+
+cat > "$config" <<EOF
+Port 2222
+ListenAddress 0.0.0.0
+HostKey $host_key
+PidFile $pid_file
+AuthorizedKeysFile $authorized_keys
+AllowUsers $USER
+PasswordAuthentication yes
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
+PermitRootLogin no
+PermitUserEnvironment no
+AllowAgentForwarding no
+AllowTcpForwarding no
+GatewayPorts no
+PermitTunnel no
+X11Forwarding no
+UsePAM no
+Subsystem sftp internal-sftp
+LogLevel VERBOSE
+SetEnv PATH=$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+EOF
+
+chmod 600 "$config"
+
+if [[ -s "$pid_file" ]] && kill -0 "$(<"$pid_file")" 2>/dev/null; then
+  exit 0
+fi
+
+/usr/sbin/sshd -t -f "$config"
+/usr/sbin/sshd -f "$config" -E "$log_file"

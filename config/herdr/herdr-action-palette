@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-workspace_id=${HERDR_WORKSPACE_ID:?Run this from a Herdr workspace.}
-tab_id=${HERDR_TAB_ID:?Run this from a Herdr tab.}
-pane_id=${HERDR_PANE_ID:?Run this from a Herdr pane.}
+workspace_id=${HERDR_WORKSPACE_ID:-}
+tab_id=${HERDR_TAB_ID:-}
+pane_id=${HERDR_PANE_ID:-}
 
 selection=$(printf '%s\n' \
   $'New tab\tCtrl+A C\tnew_tab' \
@@ -24,7 +24,14 @@ selection=$(printf '%s\n' \
   $'Close pane\tCtrl+A X\tclose_pane' \
   $'Zoom pane\tCtrl+A Z\tzoom_pane' \
   $'Reload configuration\tCtrl+A Shift+R\treload_config' \
-  | fzf --prompt='Herdr action > ' --delimiter=$'\t' --with-nth=1,2 --height=100% --reverse) || exit 0
+  | (
+      while IFS=$'\t' read -r label key action; do
+        padding=$(( ${COLUMNS:-80} - ${#label} - ${#key} - 3 ))
+        (( padding < 1 )) && padding=1
+        printf '%s%*s%s\t%s\n' "$label" "$padding" '' "$key" "$action"
+      done
+    ) \
+  | /opt/homebrew/bin/fzf --prompt='Herdr action > ' --delimiter=$'\t' --with-nth=1 --height=100% --reverse) || exit 0
 
 action=${selection##*$'\t'}
 

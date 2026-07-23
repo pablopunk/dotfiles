@@ -21,14 +21,13 @@ workspace_picker = ""
 new_worktree = "prefix+w"
 
 [[keys.command]]
-key = "prefix+alt+p"
+key = "prefix+ctrl+space"
 type = "popup"
-command = "/Users/pablopunk/.config/herdr/herdr-action-palette"
+command = "~/.config/herdr/herdr-action-palette"
 description = "open action palette"
-width = "70%"
-height = "80%"
+width = "32%"
+height = "32%"
 
 [ui]
-agent_panel_scope = "all"
 agent_panel_sort = "spaces"
 prompt_new_tab_name = false

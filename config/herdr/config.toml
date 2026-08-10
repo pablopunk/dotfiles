@@ -1,8 +1,9 @@
 onboarding = false
 
 [theme]
-name = "tokyo-night"
+name = "nord"
 
+auto_switch = false
 [keys]
 prefix = "ctrl+a"
 settings = ""
@@ -29,5 +30,5 @@ width = "32%"
 height = "32%"
 
 [ui]
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 prompt_new_tab_name = false

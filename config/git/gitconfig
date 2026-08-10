@@ -1,6 +1,6 @@
 #vim: ft=gitconfig
 [core]
-  pager = hunk pager
+	pager = less
 	editor = nvim -u ~/.vimrc
 [pull]
 	rebase = false

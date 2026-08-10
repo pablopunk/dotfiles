@@ -214,9 +214,9 @@ postlink = "brew services restart edges"
 link."config/wallpapers" = "~/.config/wallpapers"
 postlink = """
 if [[ $(uname -s) == "Darwin" ]]; then
-  wallpaper="marek-piwnicki-qdrF44RImqw-unsplash.jpg"
+  wallpaper="omarchy-groove.jpg"
   img_path="${HOME}/.config/wallpapers/${wallpaper}"
-  osascript -e "tell application \\"Finder\\" to set desktop picture to POSIX file \\"${img_path}\\""
+  osascript -e "tell application \\"System Events\\" to set picture of every desktop to \\"${img_path}\\""
 fi
 """
 

@@ -1,6 +1,9 @@
 [tools]
 bun = "latest"
+codex = "latest"
+gh = "latest"
 node = "25"
+opencode = "latest"
 python = "3.12"
 
 [settings]

@@ -1,6 +1,6 @@
 #vim: ft=gitconfig
 [core]
-	pager = less
+	pager = hunk pager
 	editor = nvim -u ~/.vimrc
 [pull]
 	rebase = false
@@ -11,7 +11,7 @@
 [blame]
   date = short
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = hunk pager
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

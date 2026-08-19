@@ -48,6 +48,15 @@ hl.config({
   },
 })
 
+-- Allow directional focus (HYPER+h/j/k/l) to reach other windows while one is
+-- zoomed/fullscreen. Without this Hyprland blocks focus from leaving a
+-- fullscreen window, so the other windows in the split become unreachable.
+hl.config({
+  binds = {
+    movefocus_cycles_fullscreen = true,
+  },
+})
+
 -- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/
 -- hl.config({
 --   scrolling = {

@@ -66,6 +66,10 @@ o.bind("SUPER + CTRL + ALT + SHIFT + J", "Swap window down", hl.dsp.window.swap(
 o.bind("SUPER + CTRL + ALT + SHIFT + K", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
 o.bind("SUPER + CTRL + ALT + SHIFT + L", "Swap window to the right", hl.dsp.window.swap({ direction = "r" }))
 
+-- Window overview: HYPER+O.
+-- hyprview doesn't build on Hyprland 0.56.2 yet; binding is inert until then.
+o.bind("SUPER + CTRL + ALT + O", "Window overview", "hyprctl dispatch hyprview:toggle")
+
 -- Screenshots: SUPER+SHIFT+3 fullscreen, SUPER+SHIFT+4 area.
 hl.unbind("SUPER + SHIFT + code:12")  -- was: Move window to workspace 3
 hl.unbind("SUPER + SHIFT + code:13")  -- was: Move window to workspace 4

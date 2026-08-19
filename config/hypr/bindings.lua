@@ -33,9 +33,10 @@ o.bind("SUPER + CTRL + ALT + J", "Focus down, or next workspace", function() foc
 o.bind("SUPER + CTRL + ALT + K", "Focus up, or previous workspace", function() focus_or_workspace("u") end)
 o.bind("SUPER + CTRL + ALT + L", "Focus right, or next workspace", function() focus_or_workspace("r") end)
 
--- Toggle floating & pinned with HYPER+F (same as SUPER+O pop-out), toggle fullscreen with HYPER+SHIFT+F.
+-- fullscreen and floating
 o.bind("SUPER + CTRL + ALT + F", "Toggle window floating/pinned", "omarchy-hyprland-window-pop")
-o.bind("SUPER + CTRL + ALT + SHIFT + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
+o.bind("SUPER + CTRL + ALT + SHIFT + F", "Zoom window to edges", hl.dsp.window.fullscreen({ mode = "maximized" }))
+-- o.bind("SUPER + CTRL + ALT + SHIFT + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
 -- Toggle workspace layout (dwindle <-> scrolling) with HYPER+S.
 o.bind("SUPER + CTRL + ALT + S", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")

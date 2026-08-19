@@ -37,6 +37,17 @@ hl.config({
 --   },
 -- })
 
+-- https://wiki.hypr.land/Configuring/Basics/Variables/#misc
+hl.config({
+  misc = {
+    -- When a window is zoomed/fullscreen, what happens if you focus another window:
+    --   0 = keep focus on the zoomed window
+    --   1 = move the zoom to the newly focused window (Omarchy default)
+    --   2 = un-zoom the current window and focus the other one normally
+    on_focus_under_fullscreen = 2,
+  },
+})
+
 -- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/
 -- hl.config({
 --   scrolling = {

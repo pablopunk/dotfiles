@@ -5,4 +5,4 @@ export OPENCODE_PORT=4096
 
 alias opencode='opencode2'
 alias oc='opencode2'
-alias occ='oc --continue'
+alias occ='opencode2 --continue'

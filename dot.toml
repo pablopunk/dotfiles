@@ -32,10 +32,14 @@ gh extension list | grep gh-dash > /dev/null || gh extension install dlvhdr/gh-d
 install.brew = "brew install fd jq tldr tree vim wget zoxide zsh"
 install.apt = "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
 install.dnf = "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
+install.pacman = "sudo pacman -S --noconfirm fd jq tree vim wget zoxide zsh"
+install.paru = "paru -S --noconfirm fd jq tree vim wget zoxide zsh"
 check = "zsh"
 uninstall.brew = "brew uninstall fd jq tldr tree vim wget zoxide zsh"
 uninstall.apt = "sudo apt purge -y fd-find jq tree vim wget zoxide zsh"
 uninstall.dnf = "sudo dnf remove -y fd-find jq tree vim wget zoxide zsh"
+uninstall.pacman = "sudo pacman -Rs --noconfirm fd jq tree vim wget zoxide zsh"
+uninstall.paru = "paru -Rs --noconfirm fd jq tree vim wget zoxide zsh"
 link."config/zsh/zshrc" = "~/.zshrc"
 link."config/zsh/zimrc" = "~/.zimrc"
 link."config/zsh/functions" = "~/.zsh/functions"
@@ -44,7 +48,10 @@ link."config/zsh/zshrc.d/10-aliases.sh" = "~/.zshrc.d/10-aliases.sh"
 link."config/zsh/zshrc.d/20-core-functions.sh" = "~/.zshrc.d/20-core-functions.sh"
 link."config/zsh/zshrc.d/30-completions.sh" = "~/.zshrc.d/30-completions.sh"
 link."config/zsh/zshrc.d/50-zoxide.sh" = "~/.zshrc.d/50-zoxide.sh"
-postinstall = "[[ -d ~/.zim/ ]] || curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh"
+postinstall = """
+[[ -f ~/.zim/zimfw.zsh ]] || (mkdir -p ~/.zim && curl -fsSL https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh -o ~/.zim/zimfw.zsh)
+zsh -fc 'export ZIM_HOME=$HOME/.zim && source $ZIM_HOME/zimfw.zsh install'
+"""
 
 [tmux]
 install.brew = "brew install tmux bash"
@@ -351,3 +358,7 @@ link."config/niri" = "~/.config/niri"
 link."config/noctalia" = "~/.config/noctalia"
 install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
+
+[hypr]
+os = ["linux"]
+link."config/hypr" = "~/.config/hypr"

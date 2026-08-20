@@ -261,31 +261,50 @@ local function fix_cursorline_color()
   -- ]]
 end
 
-local function base16_noctalia()
+local function omarchy()
   add("RRethy/base16-nvim")
-  local ok, _ = pcall(function()
-    require("matugen").setup()
-  end)
-  if ok then
-    dark_theme = "base16-noctalia"
-    light_theme = dark_theme
+
+  local theme_file = vim.fn.stdpath("cache") .. "/omarchy-theme.lua"
+
+  local function apply()
+    local loader = loadfile(theme_file)
+    if not loader then
+      return false
+    end
+    local scheme = loader()
+    if type(scheme) ~= "table" then
+      return false
+    end
+    vim.opt.background = scheme.mode == "light" and "light" or "dark"
+    require("base16-colorscheme").setup(scheme)
+    return true
   end
-  return ok
+
+  local signal = vim.uv.new_signal()
+  signal:start("sigusr1", vim.schedule_wrap(apply))
+
+  local function reapply()
+    if not apply() then
+      vim.notify("Omarchy theme not available", vim.log.levels.WARN)
+    end
+  end
+  vim.api.nvim_create_user_command("Light", reapply, {})
+  vim.api.nvim_create_user_command("Dark", reapply, {})
+
+  return apply()
 end
 
 local function colors()
   vim.opt.background = "dark"
 
-  if base16_noctalia() then
-    -- matugen.setup() applied the theme via base16-colorscheme
-  else
+  if not omarchy() then
     catppuccin()
     vim.cmd("colorscheme " .. dark_theme)
+    color_utils()
   end
 
   add("pablopunk/transparent.vim")
   fix_cursorline_color()
-  color_utils()
 end
 
 local function snacks()

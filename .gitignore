@@ -28,3 +28,5 @@ config/opencode/.auto-update-history.json
 .env
 
 .tmp-cache
+
+config/hypr/bindings.lua.bak.*

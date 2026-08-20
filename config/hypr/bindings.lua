@@ -45,6 +45,35 @@ o.bind("SUPER + CTRL + ALT + S", "Toggle workspace layout", "omarchy-hyprland-wo
 hl.unbind("SUPER + P")  -- was: Pseudo window
 o.bind("SUPER + CTRL + ALT + P", "Pseudo window", hl.dsp.window.pseudo())
 
+-- Resize the active window: HYPER+- shrinks a bit, HYPER++ grows a bit.
+-- Works in tiled, floating, and pseudo mode (pseudo windows stay centered).
+-- Tune RESIZE_STEP to change the step size (5% of the window per press).
+local RESIZE_STEP = 0.05
+
+local function resize_window_step(grow)
+  local win = hl.get_active_window()
+  if not win or not win.size then
+    return
+  end
+  local factor = 1 + (grow and RESIZE_STEP or -RESIZE_STEP)
+  local x = math.max(80, math.floor(win.size.x * factor + 0.5))
+  local y = math.max(80, math.floor(win.size.y * factor + 0.5))
+  if grow then
+    -- Don't grow past the screen (window sizes use scaled coordinates).
+    local monitor = hl.get_active_monitor()
+    if monitor then
+      x = math.min(x, math.floor(monitor.width / monitor.scale))
+      y = math.min(y, math.floor(monitor.height / monitor.scale))
+    end
+  end
+  hl.dispatch(hl.dsp.window.resize({ x = x, y = y, relative = false }))
+end
+
+o.bind("SUPER + CTRL + ALT + MINUS", "Shrink window a bit", function() resize_window_step(false) end)
+-- Bound to both keysyms: "+" key sends `plus` on the ES layout, `equal` on US.
+o.bind("SUPER + CTRL + ALT + PLUS", "Grow window a bit", function() resize_window_step(true) end)
+o.bind("SUPER + CTRL + ALT + EQUAL", "Grow window a bit", function() resize_window_step(true) end)
+
 -- Toggle window split: HYPER+A (replaces SUPER+J).
 hl.unbind("SUPER + J")  -- was: Toggle window split
 o.bind("SUPER + CTRL + ALT + A", "Toggle window split", hl.dsp.layout("togglesplit"))
@@ -82,3 +111,53 @@ o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind("SUPER + SHIFT + SPACE")
+
+-- ============================================================
+-- Mousetrap: keyboard-driven mouse targeting
+-- SUPER + SPACE shows the grid; grid keys refine and click;
+-- ESC cancels; any other key exits the grid.
+-- ============================================================
+
+local mousetrap_bin = "mousetrap"
+
+local mousetrap_keys = {
+  { "1", "1" }, { "2", "2" }, { "3", "3" }, { "4", "4" }, { "5", "5" },
+  { "6", "6" }, { "7", "7" }, { "8", "8" }, { "9", "9" }, { "0", "0" },
+  { "q", "q" }, { "w", "w" }, { "e", "e" }, { "r", "r" }, { "t", "t" },
+  { "y", "y" }, { "u", "u" }, { "i", "i" }, { "o", "o" }, { "p", "p" },
+  { "a", "a" }, { "s", "s" }, { "d", "d" }, { "f", "f" }, { "g", "g" },
+  { "h", "h" }, { "j", "j" }, { "k", "k" }, { "l", "l" },
+  { "semicolon", ";" },
+  { "z", "z" }, { "x", "x" }, { "c", "c" }, { "v", "v" }, { "b", "b" },
+  { "n", "n" }, { "m", "m" },
+  { "comma", "," }, { "period", "." }, { "slash", "/" },
+}
+
+local function mousetrap_reset()
+  hl.dispatch(hl.dsp.submap("reset"))
+end
+
+hl.unbind("SUPER + SPACE") -- was: Omarchy menu
+
+hl.bind("SUPER + SPACE", function()
+  hl.dispatch(hl.dsp.exec_cmd(mousetrap_bin .. " activate"))
+  hl.dispatch(hl.dsp.submap("mousetrap"))
+end)
+
+hl.define_submap("mousetrap", function()
+  hl.bind("ESCAPE", function()
+    hl.dispatch(hl.dsp.exec_cmd(mousetrap_bin .. " cancel"))
+    mousetrap_reset()
+  end)
+  -- Any other key exits the grid without doing anything.
+  hl.bind("catchall", hl.dsp.submap("reset"))
+  for _, pair in ipairs(mousetrap_keys) do
+    local keysym, grid_key = pair[1], pair[2]
+    hl.bind(keysym, function()
+      hl.dispatch(hl.dsp.exec_cmd(mousetrap_bin .. " key-down " .. grid_key))
+    end)
+    hl.bind(keysym, function()
+      hl.dispatch(hl.dsp.exec_cmd(mousetrap_bin .. " key-up " .. grid_key))
+    end, { release = true })
+  end
+end)

@@ -79,3 +79,6 @@ o.bind("SUPER + SHIFT + code:13", "Area screenshot", "omarchy-capture-screenshot
 
 -- Helium: HYPER+G.
 o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium" })
+
+-- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
+hl.unbind("SUPER + SHIFT + SPACE")

@@ -1,45 +1,23 @@
 [git]
-install.brew = "brew install git hunk gh"
-check = "git"
-install.dnf = """
-sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-sudo dnf install gh git
-"""
-install.apt = """
-(type -p wget >/dev/null || (sudo apt update && sudo apt install wget -y)) \\
-&& sudo mkdir -p -m 755 /etc/apt/keyrings \\
-&& out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archive-keyring.gpg \\
-&& cat $out | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \\
-&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \\
-&& sudo mkdir -p -m 755 /etc/apt/sources.list.d \\
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \\
-&& sudo apt update \\
-&& sudo apt install gh git -y
-"""
-uninstall.brew = "brew uninstall git hunk gh"
-uninstall.apt = "sudo apt purge -y gh git"
-uninstall.dnf = "sudo dnf remove -y gh git"
+check = "command -v gh && command -v hunk"
+install.mise = "mise install gh hunk && mise use -g gh hunk"
+uninstall.mise = "mise uninstall gh hunk"
 link."config/git/gitconfig" = "~/.gitconfig"
 link."config/git/gh.yml" = "~/.config/gh/config.yml"
 link."config/git/hunk.toml" = "~/.config/hunk/config.toml"
-postinstall = """
-gh auth status | grep 'Logged in to github.com account' > /dev/null || gh auth login -p ssh -h github.com
-gh extension list | grep gh-copilot > /dev/null || gh extension install github/gh-copilot
-gh extension list | grep gh-dash > /dev/null || gh extension install dlvhdr/gh-dash
-"""
 
 [zsh]
-install.brew = "brew install fd jq tldr tree vim wget zoxide zsh"
-install.apt = "sudo apt install -y fd-find jq tree vim wget zoxide zsh"
-install.dnf = "sudo dnf install -y fd-find jq tree vim wget zoxide zsh"
-install.pacman = "sudo pacman -S --noconfirm fd jq tree vim wget zoxide zsh"
-install.paru = "paru -S --noconfirm fd jq tree vim wget zoxide zsh"
+install.brew = "brew install fd jq tldr tree wget zoxide zsh"
+install.apt = "sudo apt install -y fd-find jq tree wget zoxide zsh"
+install.dnf = "sudo dnf install -y fd-find jq tree wget zoxide zsh"
+install.pacman = "sudo pacman -S --noconfirm fd jq tree wget zoxide zsh"
+install.paru = "paru -S --noconfirm fd jq tree wget zoxide zsh"
 check = "zsh"
-uninstall.brew = "brew uninstall fd jq tldr tree vim wget zoxide zsh"
-uninstall.apt = "sudo apt purge -y fd-find jq tree vim wget zoxide zsh"
-uninstall.dnf = "sudo dnf remove -y fd-find jq tree vim wget zoxide zsh"
-uninstall.pacman = "sudo pacman -Rs --noconfirm fd jq tree vim wget zoxide zsh"
-uninstall.paru = "paru -Rs --noconfirm fd jq tree vim wget zoxide zsh"
+uninstall.brew = "brew uninstall fd jq tldr tree wget zoxide zsh"
+uninstall.apt = "sudo apt purge -y fd-find jq tree wget zoxide zsh"
+uninstall.dnf = "sudo dnf remove -y fd-find jq tree wget zoxide zsh"
+uninstall.pacman = "sudo pacman -Rs --noconfirm fd jq tree wget zoxide zsh"
+uninstall.paru = "paru -Rs --noconfirm fd jq tree wget zoxide zsh"
 link."config/zsh/zshrc" = "~/.zshrc"
 link."config/zsh/zimrc" = "~/.zimrc"
 link."config/zsh/functions" = "~/.zsh/functions"
@@ -54,100 +32,67 @@ zsh -fc 'export ZIM_HOME=$HOME/.zim && source $ZIM_HOME/zimfw.zsh install'
 """
 
 [tmux]
-install.brew = "brew install tmux bash"
-install.apt = "sudo apt install -y tmux"
-install.dnf = "sudo dnf install -y tmux"
 check = "tmux"
-uninstall.brew = "brew uninstall tmux bash"
-uninstall.apt = "sudo apt purge -y tmux"
-uninstall.dnf = "sudo dnf remove -y tmux"
+install.mise = "mise install tmux && mise use -g tmux"
+uninstall.mise = "mise uninstall tmux"
 link."config/tmux/tmux.conf" = "~/.tmux.conf"
 postinstall = "[ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins"
 
 [vim]
-install.brew = "brew install vim"
-install.apt = "sudo apt install -y vim"
-install.dnf = "sudo dnf install -y vim"
 check = "vim"
-uninstall.brew = "brew uninstall vim"
-uninstall.apt = "sudo apt purge -y vim"
-uninstall.dnf = "sudo dnf remove -y vim"
+install.mise = "mise install vim && mise use -g vim"
+uninstall.mise = "mise uninstall vim"
 link."config/vim/vimrc" = "~/.vimrc"
 
 [neovim]
-install.brew = "brew install neovim"
 check = "nvim"
-install.apt = """
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:neovim-ppa/unstable -y
-sudo apt update -y
-sudo apt install neovim -y
-"""
-install.dnf = "sudo dnf install -y neovim"
-uninstall.brew = "brew uninstall neovim"
-uninstall.apt = """
-sudo add-apt-repository -r ppa:neovim-ppa/unstable
-sudo apt purge -y neovim
-"""
-uninstall.dnf = "sudo dnf remove -y neovim"
+install.mise = "mise install neovim && mise use -g neovim"
+uninstall.mise = "mise uninstall neovim"
 link."config/neovim/init.lua" = "~/.config/nvim/init.lua"
 link."config/neovim/lua/matugen-template.lua" = "~/.config/nvim/lua/matugen-template.lua"
 
 [opencode]
-check = "opencode"
+install.bun = "bun install -g --trust @opencode-ai/cli@next"
+check = "opencode2"
+uninstall.bun = "bun remove -g @opencode-ai/cli"
 link."config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
 link."config/opencode/opencode.sh" = "~/.zshrc.d/05-opencode.sh"
 
 [btop]
-install.brew = "brew install btop"
 check = "btop"
-install.apt = "sudo apt install -y btop"
-install.dnf = "sudo dnf install -y btop"
-install.pacman = "sudo pacman -S --noconfirm btop"
-install.paru = "paru -S btop"
-uninstall.brew = "brew uninstall btop"
-uninstall.apt = "sudo apt purge -y btop"
-uninstall.dnf = "sudo dnf remove -y btop"
-uninstall.pacman = "sudo pacman -Rs --noconfirm btop"
-uninstall.paru = "paru -Rs btop"
+install.mise = "mise install btop && mise use -g btop"
+uninstall.mise = "mise uninstall btop"
 
 [mise]
+check = "mise"
 install.brew = "brew install mise"
 install.curl = "curl https://mise.run | sh"
-check = "mise"
 uninstall.brew = "brew uninstall mise"
 uninstall.curl = "rm -rf ~/.local/bin/mise ~/.local/share/mise"
-link."config/mise/config.toml" = "~/.config/mise/config.toml"
 link."config/zsh/zshrc.d/40-mise.sh" = "~/.zshrc.d/40-mise.sh"
-postinstall = "cd ~ && mise install"
+postinstall = "mise install bun && mise use -g bun" # bun is used as a pkg manager for other stuff
 
 [editorconfig]
 link."config/editorconfig/editorconfig" = "~/.editorconfig"
 
 [ripgrep]
-install.brew = "brew install ripgrep"
-install.apt = "sudo apt install -y ripgrep"
-install.dnf = "sudo dnf install -y ripgrep"
 check = "rg"
-uninstall.brew = "brew uninstall ripgrep"
-uninstall.apt = "sudo apt purge -y ripgrep"
-uninstall.dnf = "sudo dnf remove -y ripgrep"
+install.mise = "mise install ripgrep && mise use -g ripgrep"
+uninstall.mise = "mise uninstall ripgrep"
 link."config/ripgrep/ripgreprc" = "~/.ripgreprc"
 
 [binaries]
 link."config/binaries" = "~/.bin"
 
 [pi]
-install.paru = "paru -S --noconfirm aur/pi-coding-agent"
-install.bun = "bun install -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
 check = "pi"
-uninstall.paru = "paru -R aur/pi-coding-agent"
-uninstall.bun = "bun remove -g @mariozechner/pi-coding-agent granola-cli @tobilu/qmd"
+install.mise = "mise install pi && mise use -g pi"
+uninstall.mise = "mise uninstall pi"
 
 [herdr]
-install.curl = "curl -fsSL https://herdr.dev/install.sh | sh"
 check = "herdr"
-uninstall.curl = "rm -rf ~/.local/bin/herdr ~/.local/share/herdr"
+install.mise = "mise install herdr && mise use -g herdr"
+uninstall.mise = "mise uninstall herdr"
 link."config/herdr/config.toml" = "~/.config/herdr/config.toml"
 link."config/herdr/herdr-action-palette" = "~/.config/herdr/herdr-action-palette"
 link."config/herdr/plugins/herdr-ssh-server" = "~/.config/herdr/plugins/herdr-ssh-server"
@@ -234,10 +179,10 @@ uninstall.brew = "brew uninstall mos"
 defaults."com.caldis.Mos" = "./config/mos/Mos.xml"
 
 [syncthing]
+check = "syncthing"
 install.brew = "brew install syncthing"
 install.pacman = "sudo pacman -S --noconfirm syncthing"
 install.paru = "paru -S --noconfirm syncthing"
-check = "syncthing"
 uninstall.brew = "brew uninstall syncthing"
 uninstall.pacman = "sudo pacman -Rs --noconfirm syncthing"
 uninstall.paru = "paru -Rs --noconfirm syncthing"

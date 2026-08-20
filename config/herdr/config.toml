@@ -1,7 +1,7 @@
 onboarding = false
 
 [theme]
-name = "nord"
+name = "gruvbox"
 
 auto_switch = false
 [keys]

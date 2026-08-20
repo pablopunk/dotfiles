@@ -50,6 +50,8 @@ end
 
 local function setup_mappings()
   vim.g.mapleader = " "
+  -- Some mappings are only here as described commands in Telescope's keymap palette.
+  -- Use the <leader>. prefix for these mappings.
 
   map("i", "jk", "<esc>", { desc = "ESC" })
 
@@ -107,7 +109,7 @@ local function setup_mappings()
   map("n", "<leader>fpi", ":let @0 = expand('%:p:t')<cr>\"0p", { desc = "Insert file name" })
 
   -- System clipboard
-  map({ "n", "v" }, "<leader>y", '"*y', { desc = "Copy to system clipboard" })
+  map({ "n", "v" }, "y", '"+y', { desc = "Yank to system clipboard" })
 
   -- Y should not be the same as yy
   map("n", "Y", "y$", { desc = "Yank til end of line" })
@@ -161,6 +163,13 @@ local function setup_mappings()
 
   map("n", "]q", ":cnext<cr>", { desc = "Next quickfix file" })
   map("n", "[q", ":cprev<cr>", { desc = "Previous quickfix file" })
+
+  map("n", "<leader>.l", function()
+    vim.cmd("normal! J")
+  end, { desc = "Strip new lines from current line" })
+  map("n", "<leader>.L", function()
+    vim.cmd("%s/\\n//g")
+  end, { desc = "Strip new lines from file" })
 end
 
 local function setup_abbreviations()

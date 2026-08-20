@@ -76,3 +76,6 @@ hl.unbind("SUPER + SHIFT + code:12")  -- was: Move window to workspace 3
 hl.unbind("SUPER + SHIFT + code:13")  -- was: Move window to workspace 4
 o.bind("SUPER + SHIFT + code:12", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen save")
 o.bind("SUPER + SHIFT + code:13", "Area screenshot", "omarchy-capture-screenshot region")
+
+-- Helium: HYPER+G.
+o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium" })

@@ -1,6 +1,6 @@
 #vim: ft=gitconfig
 [core]
-	pager = hunk pager
+  pager = hunk pager
 	editor = nvim -u ~/.vimrc
 [pull]
 	rebase = false
@@ -10,8 +10,6 @@
 	name = Pablo P Varela
 [blame]
   date = short
-[interactive]
-  diffFilter = hunk pager
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -25,3 +23,6 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !gh auth git-credential
+[pager]
+	diff = hunk diff
+	log = less

@@ -87,7 +87,9 @@ link."config/neovim/init.lua" = "~/.config/nvim/init.lua"
 link."config/neovim/lua/matugen-template.lua" = "~/.config/nvim/lua/matugen-template.lua"
 
 [opencode]
-check = "opencode"
+install.bun = "bun install -g --trust @opencode-ai/cli@next"
+check = "opencode2"
+uninstall.bun = "bun remove -g @opencode-ai/cli"
 link."config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
 link."config/opencode/opencode.sh" = "~/.zshrc.d/05-opencode.sh"
 

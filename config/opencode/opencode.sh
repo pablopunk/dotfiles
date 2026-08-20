@@ -3,5 +3,6 @@
 # Server port for tmux multi-agent pane support
 export OPENCODE_PORT=4096
 
-alias oc='opencode'
+alias opencode='opencode2'
+alias oc='opencode2'
 alias occ='oc --continue'

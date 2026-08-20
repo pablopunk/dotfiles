@@ -16,6 +16,11 @@ o.bind("SUPER + CTRL + ALT + T", "Terminal", { omarchy = "terminal" })
 
 -- Vim-style window focus with HYPER + h/j/k/l.
 -- Falls back to next/previous workspace when no window in that direction.
+-- When hopping, lands on the window at the edge we entered from:
+--   right -> leftmost window of the next workspace
+--   left  -> rightmost window of the previous workspace
+--   down  -> topmost window of the next workspace
+--   up    -> bottommost window of the previous workspace
 local function focus_or_workspace(direction)
   local before = hl.get_active_window()
   local before_address = before and before.address
@@ -25,6 +30,36 @@ local function focus_or_workspace(direction)
   if before_address == after_address then
     local fallback = (direction == "l" or direction == "u") and "e-1" or "e+1"
     hl.dispatch(hl.dsp.focus({ workspace = fallback }))
+
+    -- Focus the edge window on the workspace we just entered.
+    local horizontal = direction == "l" or direction == "r"
+    -- +1 -> minimize coordinate (leftmost/topmost), -1 -> maximize (rightmost/bottommost).
+    local sign = (direction == "r" or direction == "d") and 1 or -1
+
+    local monitor = hl.get_active_monitor()
+    if monitor and monitor.active_workspace then
+      local ws_id = monitor.active_workspace.id
+      local best = nil
+      local best_key = nil
+      for _, w in ipairs(hl.get_windows()) do
+        if w.visible and w.workspace and w.workspace.id == ws_id
+          and w.monitor and w.monitor.id == monitor.id
+          and type(w.at) == "table" and type(w.size) == "table"
+        then
+          local cx = w.at.x + w.size.x / 2
+          local cy = w.at.y + w.size.y / 2
+          -- Tie-break along the other axis: topmost for l/r, leftmost for u/d.
+          local key = horizontal and (sign * cx + cy / 100000) or (sign * cy + cx / 100000)
+          if best_key == nil or key < best_key then
+            best_key = key
+            best = w
+          end
+        end
+      end
+      if best then
+        hl.dispatch(hl.dsp.focus({ window = "address:" .. best.address }))
+      end
+    end
   end
 end
 
@@ -111,4 +146,8 @@ o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind("SUPER + SHIFT + SPACE")
+
+-- Dictation: HYPER+V hold-to-talk (release to transcribe).
+o.bind("SUPER + CTRL + ALT + V", "Start dictation (hold to talk)", "voxtype record start")
+o.bind("SUPER + CTRL + ALT + V", "Stop dictation (hold to talk)", "voxtype record stop", { release = true })
 

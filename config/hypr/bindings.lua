@@ -63,6 +63,12 @@ local function focus_or_workspace(direction)
   end
 end
 
+-- boo
+hl.unbind("SUPER + LEFT")
+hl.unbind("SUPER + DOWN")
+hl.unbind("SUPER + UP")
+hl.unbind("SUPER + RIGHT")
+
 o.bind("SUPER + CTRL + ALT + H", "Focus left, or previous workspace", function() focus_or_workspace("l") end)
 o.bind("SUPER + CTRL + ALT + J", "Focus down, or next workspace", function() focus_or_workspace("d") end)
 o.bind("SUPER + CTRL + ALT + K", "Focus up, or previous workspace", function() focus_or_workspace("u") end)

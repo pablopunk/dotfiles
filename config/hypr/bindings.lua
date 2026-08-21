@@ -7,6 +7,7 @@
 -- HYPER = SUPER + CTRL + ALT
 
 -- Close the active window.
+hl.unbind("SUPER + W")  -- was: Close window
 o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
 
 -- New terminal: HYPER+T (replaces SUPER+RETURN).
@@ -162,4 +163,3 @@ o.bind("SUPER + CTRL + ALT + V", "Stop dictation (hold to talk)", "voxtype recor
 
 -- Clipboard manager: SUPER+SHIFT+V (same action as the default SUPER+CTRL+V).
 o.bind("SUPER + SHIFT + V", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
-

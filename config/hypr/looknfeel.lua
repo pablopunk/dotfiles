@@ -68,3 +68,44 @@ hl.config({
 --     column_width = 0.97,
 --   },
 -- })
+
+-- >>> omaland managed block >>>
+-- Written by Omaland. Safe to hand-edit: Omaland re-reads this block
+-- every time it opens, and only ever rewrites what's between the fences.
+hl.config({
+  decoration = {
+    active_opacity = 0.98,
+    border_part_of_window = true,
+    dim_inactive = false,
+    fullscreen_opacity = 1,
+    inactive_opacity = 0.93,
+    rounding = 6,
+    rounding_power = 10,
+
+    blur = {
+      noise = 0.083,
+      passes = 3,
+      size = 10,
+    },
+
+    glow = {
+      enabled = false,
+    },
+
+    shadow = {
+      enabled = false,
+    },
+  },
+
+  general = {
+    border_size = 2,
+    gaps_in = 4,
+    gaps_out = 8,
+    layout = "scrolling",
+
+    snap = {
+      enabled = true,
+    },
+  },
+})
+-- <<< omaland managed block <<<

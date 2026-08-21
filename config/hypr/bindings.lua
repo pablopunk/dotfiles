@@ -69,12 +69,12 @@ o.bind("SUPER + CTRL + ALT + K", "Focus up, or previous workspace", function() f
 o.bind("SUPER + CTRL + ALT + L", "Focus right, or next workspace", function() focus_or_workspace("r") end)
 
 -- fullscreen and floating
-o.bind("SUPER + CTRL + ALT + F", "Toggle window floating/pinned", "omarchy-hyprland-window-pop")
+o.bind("SUPER + CTRL + ALT + F", "Toggle window floating", hl.dsp.window.float({ action = "toggle" }))
 o.bind("SUPER + CTRL + ALT + SHIFT + F", "Zoom window to edges", hl.dsp.window.fullscreen({ mode = "maximized" }))
 -- o.bind("SUPER + CTRL + ALT + SHIFT + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
--- Toggle workspace layout (dwindle <-> scrolling) with HYPER+S.
-o.bind("SUPER + CTRL + ALT + S", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+-- Toggle workspace layout (dwindle <-> scrolling) with HYPER+A.
+o.bind("SUPER + CTRL + ALT + A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
 
 -- Pseudo window: HYPER+P (replaces SUPER+P).
 hl.unbind("SUPER + P")  -- was: Pseudo window
@@ -109,15 +109,18 @@ o.bind("SUPER + CTRL + ALT + MINUS", "Shrink window a bit", function() resize_wi
 o.bind("SUPER + CTRL + ALT + PLUS", "Grow window a bit", function() resize_window_step(true) end)
 o.bind("SUPER + CTRL + ALT + EQUAL", "Grow window a bit", function() resize_window_step(true) end)
 
--- Toggle window split: HYPER+A (replaces SUPER+J).
+-- Toggle window split: HYPER+S (replaces SUPER+J).
 hl.unbind("SUPER + J")  -- was: Toggle window split
-o.bind("SUPER + CTRL + ALT + A", "Toggle window split", hl.dsp.layout("togglesplit"))
+o.bind("SUPER + CTRL + ALT + S", "Toggle window split", hl.dsp.layout("togglesplit"))
 
 -- Switch workspaces with HYPER + 1-10.
 for workspace = 1, 10 do
   local key = "code:" .. tostring(workspace + 9)
   o.bind("SUPER + CTRL + ALT + " .. key, "Switch to workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
 end
+
+-- Previously visited workspace: HYPER+TAB.
+o.bind("SUPER + CTRL + ALT + TAB", "Former workspace", hl.dsp.focus({ workspace = "previous" }))
 
 -- Move window to workspace with HYPER+SHIFT+1-10.
 for workspace = 1, 10 do
@@ -138,11 +141,11 @@ o.bind("SUPER + CTRL + ALT + O", "Window overview", "hyprctl dispatch hyprview:t
 -- Screenshots: SUPER+SHIFT+3 fullscreen, SUPER+SHIFT+4 area.
 hl.unbind("SUPER + SHIFT + code:12")  -- was: Move window to workspace 3
 hl.unbind("SUPER + SHIFT + code:13")  -- was: Move window to workspace 4
-o.bind("SUPER + SHIFT + code:12", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen save")
+o.bind("SUPER + SHIFT + code:12", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
 o.bind("SUPER + SHIFT + code:13", "Area screenshot", "omarchy-capture-screenshot region")
 
 -- Helium: HYPER+G.
-o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium" })
+o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium-browser" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind("SUPER + SHIFT + SPACE")
@@ -150,4 +153,7 @@ hl.unbind("SUPER + SHIFT + SPACE")
 -- Dictation: HYPER+V hold-to-talk (release to transcribe).
 o.bind("SUPER + CTRL + ALT + V", "Start dictation (hold to talk)", "voxtype record start")
 o.bind("SUPER + CTRL + ALT + V", "Stop dictation (hold to talk)", "voxtype record stop", { release = true })
+
+-- Clipboard manager: SUPER+SHIFT+V (same action as the default SUPER+CTRL+V).
+o.bind("SUPER + SHIFT + V", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
 

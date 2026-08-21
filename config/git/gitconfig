@@ -1,6 +1,6 @@
 #vim: ft=gitconfig
 [core]
-  pager = hunk pager
+  pager = delta
 	editor = nvim -u ~/.vimrc
 [pull]
 	rebase = false
@@ -23,6 +23,3 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !gh auth git-credential
-[pager]
-	diff = hunk diff
-	log = less

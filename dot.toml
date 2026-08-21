@@ -1,10 +1,9 @@
 [git]
-check = "command -v gh && command -v hunk"
-install.mise = "mise install gh hunk && mise use -g gh hunk"
-uninstall.mise = "mise uninstall gh hunk"
+check = "command -v gh && command -v delta"
+install.mise = "mise install gh delta && mise use -g gh delta"
+uninstall.mise = "mise uninstall gh delta"
 link."config/git/gitconfig" = "~/.gitconfig"
 link."config/git/gh.yml" = "~/.config/gh/config.yml"
-link."config/git/hunk.toml" = "~/.config/hunk/config.toml"
 
 [zsh]
 install.brew = "brew install fd jq tldr tree wget zoxide zsh"

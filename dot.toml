@@ -180,9 +180,9 @@ defaults."com.caldis.Mos" = "./config/mos/Mos.xml"
 
 [syncthing]
 check = "syncthing"
-install.brew = "command -v syncthing || brew install syncthing"
-install.pacman = "command -v syncthing || sudo pacman -S --noconfirm syncthing"
-install.paru = "command -v syncthing || paru -S --noconfirm syncthing"
+install.brew = "brew install syncthing"
+install.pacman = "sudo pacman -S --noconfirm syncthing"
+install.paru = "paru -S --noconfirm syncthing"
 uninstall.brew = "brew uninstall syncthing"
 uninstall.pacman = "sudo pacman -Rs --noconfirm syncthing"
 uninstall.paru = "paru -Rs --noconfirm syncthing"

@@ -97,6 +97,9 @@ export LC_ALL="en_US.UTF-8"
 # Default editor
 export EDITOR="nvim"
 
+# Bun global binaries
+export PATH="$HOME/.cache/.bun/bin:$PATH"
+
 # Prompt colors (for custom prompts)
 export ON_COLOR=magenta
 export OFF_COLOR=cyan
@@ -113,4 +116,3 @@ export PATH="/Users/pablopunk/.local/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/pablopunk/.lmstudio/bin"
 # End of LM Studio CLI section
-

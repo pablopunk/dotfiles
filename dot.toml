@@ -93,8 +93,6 @@ check = "herdr"
 install.mise = "mise install herdr && mise use -g herdr"
 uninstall.mise = "mise uninstall herdr"
 link."config/herdr/config.toml" = "~/.config/herdr/config.toml"
-link."config/herdr/herdr-action-palette" = "~/.config/herdr/herdr-action-palette"
-link."config/herdr/plugins/herdr-ssh-server" = "~/.config/herdr/plugins/herdr-ssh-server"
 
 [macmon]
 os = ["mac"]

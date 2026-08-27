@@ -1,9 +1,9 @@
 onboarding = false
 
 [theme]
-name = "gruvbox"
+name = "terminal"
 
-auto_switch = false
+auto_switch = true
 [keys]
 prefix = "ctrl+a"
 settings = ""

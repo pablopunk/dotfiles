@@ -74,7 +74,7 @@ hl.config({
 -- every time it opens, and only ever rewrites what's between the fences.
 hl.config({
   decoration = {
-    active_opacity = 0.98,
+    active_opacity = 1,
     border_part_of_window = true,
     dim_inactive = false,
     fullscreen_opacity = 1,

@@ -21,14 +21,6 @@ next_tab = "shift+right"
 workspace_picker = ""
 new_worktree = "prefix+w"
 
-[[keys.command]]
-key = "prefix+ctrl+space"
-type = "popup"
-command = "~/.config/herdr/herdr-action-palette"
-description = "open action palette"
-width = "32%"
-height = "32%"
-
 [ui]
 agent_panel_sort = "priority"
 prompt_new_tab_name = false

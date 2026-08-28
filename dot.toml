@@ -302,3 +302,9 @@ uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v
 [hypr]
 os = ["linux"]
 link."config/hypr" = "~/.config/hypr"
+
+[agent-browser]
+check = "agent-browser"
+install.brew = "brew install agent-browser"
+uninstall.brew = "brew uninstall agent-browser"
+link."config/agent-browser/config.json" = "~/.agent-browser/config.json"

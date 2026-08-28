@@ -107,12 +107,6 @@ o.bind("SUPER + S", "Screenshot", "omarchy-capture-screenshot")
 hl.unbind("SUPER + TAB")
 o.bind("SUPER + TAB", "Former workspace", hl.dsp.focus({ workspace = "previous" }))
 
--- Screenshots: SUPER+SHIFT+3 fullscreen, SUPER+SHIFT+4 area.
-hl.unbind("SUPER + SHIFT + code:12")  -- was: Move window to workspace 3
-hl.unbind("SUPER + SHIFT + code:13")  -- was: Move window to workspace 4
-o.bind("SUPER + SHIFT + code:12", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
-o.bind("SUPER + SHIFT + code:13", "Area screenshot", "omarchy-capture-screenshot region")
-
 -- Helium on SUPER+G.
 hl.unbind("SUPER + G")  -- was: Toggle window grouping
 o.bind("SUPER + G", "Helium", { launch = "helium-browser" })

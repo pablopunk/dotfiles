@@ -6,6 +6,9 @@
 
 -- HYPER = SUPER + CTRL + ALT
 
+-- Toggle Mousetrap's keyboard grid.
+o.bind("SUPER + CTRL + ALT + SPACE", "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
+
 -- Close the active window.
 hl.unbind("SUPER + W")  -- was: Close window
 o.bind("SUPER + Q", "Close window", hl.dsp.window.close())

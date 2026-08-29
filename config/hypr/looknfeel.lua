@@ -73,6 +73,10 @@ hl.config({
 -- Written by Omaland. Safe to hand-edit: Omaland re-reads this block
 -- every time it opens, and only ever rewrites what's between the fences.
 hl.config({
+  animations = {
+    workspace_wraparound = false,
+  },
+
   decoration = {
     active_opacity = 0.97,
     border_part_of_window = true,

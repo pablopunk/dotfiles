@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Sync the Omarchy theme palette to Neovim and hot-reload running instances.
+
+THEME_DIR="$HOME/.local/state/omarchy/current/theme"
+NVIM_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/nvim"
+
+[[ -f $THEME_DIR/nvim-theme.lua ]] || exit 0
+
+mkdir -p "$NVIM_CACHE"
+cp "$THEME_DIR/nvim-theme.lua" "$NVIM_CACHE/omarchy-theme.lua"
+
+pkill -USR1 nvim 2>/dev/null || true

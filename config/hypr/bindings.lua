@@ -116,9 +116,11 @@ o.bind("SUPER + CTRL + ALT + MINUS", "Shrink window a bit", function() resize_wi
 o.bind("SUPER + CTRL + ALT + PLUS", "Grow window a bit", function() resize_window_step(true) end)
 o.bind("SUPER + CTRL + ALT + EQUAL", "Grow window a bit", function() resize_window_step(true) end)
 
--- Toggle window split: HYPER+S (replaces SUPER+J).
-hl.unbind("SUPER + J")  -- was: Toggle window split
-o.bind("SUPER + CTRL + ALT + S", "Toggle window split", hl.dsp.layout("togglesplit"))
+-- Area screenshot: HYPER+S.
+o.bind("SUPER + CTRL + ALT + S", "Area screenshot", "omarchy-capture-screenshot region")
+
+-- Fullscreen screenshot: HYPER+SHIFT+S.
+o.bind("SUPER + CTRL + ALT + SHIFT + S", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
 
 -- Switch workspaces with HYPER + 1-10.
 for workspace = 1, 10 do

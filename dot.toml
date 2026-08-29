@@ -305,7 +305,6 @@ link."config/hypr" = "~/.config/hypr"
 
 [omarchy]
 os = ["linux"]
-link."config/omarchy/shell.json" = "~/.config/omarchy/shell.json"
 link."config/omarchy/extensions/omarchy-menu.jsonc" = "~/.config/omarchy/extensions/omarchy-menu.jsonc"
 link."config/omarchy/hooks/theme-set.d/nvim-theme.hook" = "~/.config/omarchy/hooks/theme-set.d/nvim-theme.hook"
 

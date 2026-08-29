@@ -20,6 +20,11 @@ previous_tab = "shift+left"
 next_tab = "shift+right"
 workspace_picker = ""
 new_worktree = "prefix+w"
+new_workspace = "prefix+shift+w"
+rename_workspace = "prefix+r"
+resize_mode = ""
+reload_config = "prefix+,"
+goto = "prefix+space"
 
 [ui]
 agent_panel_sort = "priority"

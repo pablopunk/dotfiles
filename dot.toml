@@ -177,9 +177,9 @@ defaults."com.caldis.Mos" = "./config/mos/Mos.xml"
 
 [syncthing]
 check = "syncthing"
-install.brew = "command -v syncthing || brew install syncthing"
-install.pacman = "command -v syncthing || pkexec pacman -S --noconfirm syncthing"
-install.paru = "command -v syncthing || paru -S --noconfirm syncthing"
+install.brew = "syncthing --version || brew install syncthing"
+install.pacman = "syncthing --version || pkexec pacman -S --noconfirm syncthing"
+install.paru = "syncthing --version || paru -S --noconfirm syncthing"
 uninstall.brew = "brew uninstall syncthing"
 uninstall.pacman = "pkexec pacman -Rs --noconfirm syncthing"
 uninstall.paru = "paru -Rs --noconfirm syncthing"

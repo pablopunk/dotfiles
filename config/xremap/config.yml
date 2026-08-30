@@ -1,0 +1,22 @@
+virtual_modifiers:
+  - CapsLock
+
+modmap:
+  - name: CapsLock as modifier or CapsLock
+    remap:
+      CapsLock:
+        alone: BTN_TRIGGER_HAPPY1
+        held: CapsLock
+
+keymap:
+  - name: CapsLock arrows
+    remap:
+      BTN_TRIGGER_HAPPY1: CapsLock
+      Super-CapsLock-H: Super-Left
+      Super-CapsLock-J: Super-Down
+      Super-CapsLock-K: Super-Up
+      Super-CapsLock-L: Super-Right
+      CapsLock-H: Left
+      CapsLock-J: Down
+      CapsLock-K: Up
+      CapsLock-L: Right

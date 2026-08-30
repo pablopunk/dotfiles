@@ -3,7 +3,7 @@
   pager = delta
 	editor = nvim -u ~/.vimrc
 [pull]
-	rebase = false
+	rebase = true
 	default = current
 [user]
 	email = pablo@pablopunk.com

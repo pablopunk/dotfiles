@@ -5,18 +5,35 @@
 --   omarchy menu keybindings --print
 
 -- HYPER = SUPER + CTRL + ALT
+local SUPER = "SUPER"
+local SUPER_SHIFT = SUPER .. " + SHIFT"
+local HYPER = SUPER .. " + CTRL + ALT"
+local HYPER_SHIFT = HYPER .. " + SHIFT"
+
+local function combo(modifier, key)
+  return modifier .. " + " .. key
+end
+
+local function bind_super_and_hyper(key, description, dispatcher)
+  local super_key = combo(SUPER, key)
+  local hyper_key = combo(HYPER, key)
+
+  hl.unbind(super_key)
+  hl.unbind(hyper_key)
+  o.bind(hyper_key, description, dispatcher)
+  o.bind(super_key, description, dispatcher)
+end
 
 -- Toggle Mousetrap's keyboard grid.
-o.bind("SUPER + CTRL + ALT + SPACE", "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
+o.bind(combo(HYPER, "SPACE"), "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
 
 -- Close the active window.
-hl.unbind("SUPER + W")  -- was: Close window
-o.bind("SUPER + Q", "Close window", hl.dsp.window.close())
+hl.unbind(combo(SUPER, "W"))  -- was: Close window
+o.bind(combo(SUPER, "Q"), "Close window", hl.dsp.window.close())
 
 -- New terminal: HYPER+T (replaces SUPER+RETURN).
-hl.unbind("SUPER + RETURN")          -- was: Terminal
-hl.unbind("SUPER + CTRL + ALT + T")  -- was: Show time
-o.bind("SUPER + CTRL + ALT + T", "Terminal", { omarchy = "terminal" })
+hl.unbind(combo(SUPER, "RETURN"))  -- was: Terminal
+bind_super_and_hyper("T", "Terminal", { omarchy = "terminal" })
 
 -- Vim-style window focus with HYPER + h/j/k/l.
 -- Falls back to next/previous workspace when no window in that direction.
@@ -67,28 +84,34 @@ local function focus_or_workspace(direction)
   end
 end
 
--- boo
-hl.unbind("SUPER + LEFT")
-hl.unbind("SUPER + DOWN")
-hl.unbind("SUPER + UP")
-hl.unbind("SUPER + RIGHT")
+local directional_bindings = {
+  { key = "H", direction = "l", focus_description = "Focus left, or previous workspace", swap_description = "Swap window to the left" },
+  { key = "J", direction = "d", focus_description = "Focus down, or next workspace", swap_description = "Swap window down" },
+  { key = "K", direction = "u", focus_description = "Focus up, or previous workspace", swap_description = "Swap window up" },
+  { key = "L", direction = "r", focus_description = "Focus right, or next workspace", swap_description = "Swap window to the right" },
+}
 
-o.bind("SUPER + CTRL + ALT + H", "Focus left, or previous workspace", function() focus_or_workspace("l") end)
-o.bind("SUPER + CTRL + ALT + J", "Focus down, or next workspace", function() focus_or_workspace("d") end)
-o.bind("SUPER + CTRL + ALT + K", "Focus up, or previous workspace", function() focus_or_workspace("u") end)
-o.bind("SUPER + CTRL + ALT + L", "Focus right, or next workspace", function() focus_or_workspace("r") end)
+local function bind_focus(binding)
+  bind_super_and_hyper(binding.key, binding.focus_description, function()
+    focus_or_workspace(binding.direction)
+  end)
+end
+
+for _, binding in ipairs(directional_bindings) do
+  bind_focus(binding)
+end
 
 -- fullscreen and floating
-o.bind("SUPER + CTRL + ALT + F", "Toggle window floating", hl.dsp.window.float({ action = "toggle" }))
-o.bind("SUPER + CTRL + ALT + SHIFT + F", "Zoom window to edges", hl.dsp.window.fullscreen({ mode = "maximized" }))
+o.bind(combo(HYPER, "F"), "Toggle window floating", hl.dsp.window.float({ action = "toggle" }))
+o.bind(combo(HYPER_SHIFT, "F"), "Zoom window to edges", hl.dsp.window.fullscreen({ mode = "maximized" }))
 -- o.bind("SUPER + CTRL + ALT + SHIFT + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
 -- Toggle workspace layout (dwindle <-> scrolling) with HYPER+A.
-o.bind("SUPER + CTRL + ALT + A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+bind_super_and_hyper("A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
 
 -- Pseudo window: HYPER+P (replaces SUPER+P).
-hl.unbind("SUPER + P")  -- was: Pseudo window
-o.bind("SUPER + CTRL + ALT + P", "Pseudo window", hl.dsp.window.pseudo())
+hl.unbind(combo(SUPER, "P"))  -- was: Pseudo window
+o.bind(combo(HYPER, "P"), "Pseudo window", hl.dsp.window.pseudo())
 
 -- Resize the active window: HYPER+- shrinks a bit, HYPER++ grows a bit.
 -- Works in tiled, floating, and pseudo mode (pseudo windows stay centered).
@@ -114,51 +137,58 @@ local function resize_window_step(grow)
   hl.dispatch(hl.dsp.window.resize({ x = x, y = y, relative = false }))
 end
 
-o.bind("SUPER + CTRL + ALT + MINUS", "Shrink window a bit", function() resize_window_step(false) end)
--- Bound to both keysyms: "+" key sends `plus` on the ES layout, `equal` on US.
-o.bind("SUPER + CTRL + ALT + PLUS", "Grow window a bit", function() resize_window_step(true) end)
-o.bind("SUPER + CTRL + ALT + EQUAL", "Grow window a bit", function() resize_window_step(true) end)
+local resize_bindings = {
+  { key = "MINUS", description = "Shrink window a bit", grow = false },
+  -- Bound to both keysyms: "+" key sends `plus` on the ES layout, `equal` on US.
+  { key = "PLUS", description = "Grow window a bit", grow = true },
+  { key = "EQUAL", description = "Grow window a bit", grow = true },
+}
+
+local function bind_resize(binding)
+  o.bind(combo(HYPER, binding.key), binding.description, function()
+    resize_window_step(binding.grow)
+  end)
+end
+
+for _, binding in ipairs(resize_bindings) do
+  bind_resize(binding)
+end
 
 -- Area screenshot: HYPER+S.
-o.bind("SUPER + CTRL + ALT + S", "Area screenshot", "omarchy-capture-screenshot region")
+o.bind(combo(HYPER, "S"), "Area screenshot", "omarchy-capture-screenshot region")
 
 -- Fullscreen screenshot: HYPER+SHIFT+S.
-o.bind("SUPER + CTRL + ALT + SHIFT + S", "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
+o.bind(combo(HYPER_SHIFT, "S"), "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
 
 -- Switch workspaces with HYPER + 1-10.
 for workspace = 1, 10 do
   local key = "code:" .. tostring(workspace + 9)
-  o.bind("SUPER + CTRL + ALT + " .. key, "Switch to workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
+  o.bind(combo(HYPER, key), "Switch to workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
+  o.bind(combo(HYPER_SHIFT, key), "Move window to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
 end
 
 -- Previously visited workspace: HYPER+TAB.
-o.bind("SUPER + CTRL + ALT + TAB", "Former workspace", hl.dsp.focus({ workspace = "previous" }))
-
--- Move window to workspace with HYPER+SHIFT+1-10.
-for workspace = 1, 10 do
-  local key = "code:" .. tostring(workspace + 9)
-  o.bind("SUPER + CTRL + ALT + SHIFT + " .. key, "Move window to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
-end
+o.bind(combo(HYPER, "TAB"), "Former workspace", hl.dsp.focus({ workspace = "previous" }))
 
 -- Move windows with HYPER + SHIFT + h/j/k/l.
-o.bind("SUPER + CTRL + ALT + SHIFT + H", "Swap window to the left", hl.dsp.window.swap({ direction = "l" }))
-o.bind("SUPER + CTRL + ALT + SHIFT + J", "Swap window down", hl.dsp.window.swap({ direction = "d" }))
-o.bind("SUPER + CTRL + ALT + SHIFT + K", "Swap window up", hl.dsp.window.swap({ direction = "u" }))
-o.bind("SUPER + CTRL + ALT + SHIFT + L", "Swap window to the right", hl.dsp.window.swap({ direction = "r" }))
+for _, binding in ipairs(directional_bindings) do
+  o.bind(combo(HYPER_SHIFT, binding.key), binding.swap_description, hl.dsp.window.swap({ direction = binding.direction }))
+end
 
 -- Window overview: HYPER+O.
 -- hyprview doesn't build on Hyprland 0.56.2 yet; binding is inert until then.
-o.bind("SUPER + CTRL + ALT + O", "Window overview", "hyprctl dispatch hyprview:toggle")
+o.bind(combo(HYPER, "O"), "Window overview", "hyprctl dispatch hyprview:toggle")
 
 -- Helium: HYPER+G.
-o.bind("SUPER + CTRL + ALT + G", "Helium", { launch = "helium-browser" })
+bind_super_and_hyper("G", "Helium", { launch = "helium-browser" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
-hl.unbind("SUPER + SHIFT + SPACE")
+hl.unbind(combo(SUPER_SHIFT, "SPACE"))
 
 -- Dictation: HYPER+V hold-to-talk (release to transcribe).
-o.bind("SUPER + CTRL + ALT + V", "Start dictation (hold to talk)", "voxtype record start")
-o.bind("SUPER + CTRL + ALT + V", "Stop dictation (hold to talk)", "voxtype record stop", { release = true })
+local dictation_key = combo(HYPER, "V")
+o.bind(dictation_key, "Start dictation (hold to talk)", "voxtype record start")
+o.bind(dictation_key, "Stop dictation (hold to talk)", "voxtype record stop", { release = true })
 
 -- Clipboard manager: SUPER+SHIFT+V (same action as the default SUPER+CTRL+V).
-o.bind("SUPER + SHIFT + V", "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
+o.bind(combo(SUPER_SHIFT, "V"), "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")

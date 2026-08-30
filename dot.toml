@@ -303,6 +303,12 @@ uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v
 os = ["linux"]
 link."config/hypr" = "~/.config/hypr"
 
+[xremap]
+os = ["linux"]
+check = "test -x ~/.cargo/bin/xremap"
+link."config/xremap/config.yml" = "~/.config/xremap/config.yml"
+link."config/xremap/xremap.service" = "~/.config/systemd/user/xremap.service"
+
 [omarchy]
 os = ["linux"]
 link."config/omarchy/extensions/omarchy-menu.jsonc" = "~/.config/omarchy/extensions/omarchy-menu.jsonc"

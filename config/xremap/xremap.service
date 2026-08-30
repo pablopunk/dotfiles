@@ -1,0 +1,14 @@
+[Unit]
+Description=Map CapsLock+HJKL to arrows
+After=graphical-session.target
+PartOf=graphical-session.target
+ConditionPathExists=%h/.config/xremap/config.yml
+
+[Service]
+Type=simple
+ExecStart=%h/.cargo/bin/xremap --device "Apple SPI Keyboard" --watch=device,config %h/.config/xremap/config.yml
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=graphical-session.target

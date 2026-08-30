@@ -14,14 +14,13 @@ local function combo(modifier, key)
   return modifier .. " + " .. key
 end
 
-local function bind_super_and_hyper(key, description, dispatcher)
+local function bind_hyper(key, description, dispatcher)
   local super_key = combo(SUPER, key)
   local hyper_key = combo(HYPER, key)
 
   hl.unbind(super_key)
   hl.unbind(hyper_key)
   o.bind(hyper_key, description, dispatcher)
-  o.bind(super_key, description, dispatcher)
 end
 
 -- Toggle Mousetrap's keyboard grid.
@@ -33,7 +32,7 @@ o.bind(combo(SUPER, "Q"), "Close window", hl.dsp.window.close())
 
 -- New terminal: HYPER+T (replaces SUPER+RETURN).
 hl.unbind(combo(SUPER, "RETURN"))  -- was: Terminal
-bind_super_and_hyper("T", "Terminal", { omarchy = "terminal" })
+bind_hyper("T", "Terminal", { omarchy = "terminal" })
 
 -- Vim-style window focus with HYPER + h/j/k/l.
 -- Falls back to next/previous workspace when no window in that direction.
@@ -92,7 +91,7 @@ local directional_bindings = {
 }
 
 local function bind_focus(binding)
-  bind_super_and_hyper(binding.key, binding.focus_description, function()
+  bind_hyper(binding.key, binding.focus_description, function()
     focus_or_workspace(binding.direction)
   end)
 end
@@ -107,7 +106,7 @@ o.bind(combo(HYPER_SHIFT, "F"), "Zoom window to edges", hl.dsp.window.fullscreen
 -- o.bind("SUPER + CTRL + ALT + SHIFT + F", "Full screen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 
 -- Toggle workspace layout (dwindle <-> scrolling) with HYPER+A.
-bind_super_and_hyper("A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
+bind_hyper("A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-toggle")
 
 -- Pseudo window: HYPER+P (replaces SUPER+P).
 hl.unbind(combo(SUPER, "P"))  -- was: Pseudo window
@@ -180,7 +179,7 @@ end
 o.bind(combo(HYPER, "O"), "Window overview", "hyprctl dispatch hyprview:toggle")
 
 -- Helium: HYPER+G.
-bind_super_and_hyper("G", "Helium", { launch = "helium-browser" })
+bind_hyper("G", "Helium", { launch = "helium-browser" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))

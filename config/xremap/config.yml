@@ -8,6 +8,10 @@ modmap:
         alone: BTN_TRIGGER_HAPPY1
         held: CapsLock
 
+  - name: LeftAlt as Hyper
+    remap:
+      Alt_L: [Ctrl_L, Alt_L, Super_L]
+
 keymap:
   - name: CapsLock arrows
     remap:

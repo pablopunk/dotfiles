@@ -84,7 +84,7 @@ hl.config({
     fullscreen_opacity = 1,
     inactive_opacity = 0.93,
     rounding = 6,
-    rounding_power = 10,
+    rounding_power = 4.1,
 
     blur = {
       noise = 0.083,

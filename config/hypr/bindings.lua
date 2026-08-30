@@ -184,6 +184,9 @@ bind_hyper("G", "Helium", { launch = "helium-browser" })
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))
 
+-- Disable SUPER+S (was: Toggle scratchpad).
+hl.unbind(combo(SUPER, "S"))
+
 -- Dictation: HYPER+V hold-to-talk (release to transcribe).
 local dictation_key = combo(HYPER, "V")
 o.bind(dictation_key, "Start dictation (hold to talk)", "voxtype record start")

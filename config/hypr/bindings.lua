@@ -24,7 +24,10 @@ local function bind_hyper(key, description, dispatcher)
 end
 
 -- Toggle Mousetrap's keyboard grid.
-o.bind(combo(HYPER, "SPACE"), "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
+-- Hyprland 0.56.2 silently drops "SPACE"-keysym binds with SHIFT during
+-- config load, so the bind uses the space keycode (57) instead of the keysym.
+hl.unbind(combo(SUPER_SHIFT, "SPACE"))  -- was: Toggle top bar
+o.bind("SUPER + SHIFT + code:57", "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
 
 -- Close the active window.
 hl.unbind(combo(SUPER, "W"))  -- was: Close window
@@ -154,7 +157,7 @@ for _, binding in ipairs(resize_bindings) do
 end
 
 -- Area screenshot: HYPER+S.
-o.bind(combo(HYPER, "S"), "Area screenshot", "omarchy-capture-screenshot region")
+o.bind(combo(HYPER, "S"), "Area screenshot", "omarchy-capture-screenshot")
 
 -- Fullscreen screenshot: HYPER+SHIFT+S.
 o.bind(combo(HYPER_SHIFT, "S"), "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")

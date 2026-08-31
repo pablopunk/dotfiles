@@ -265,54 +265,54 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
   if.app-name-regex-substring = "Zen"
-  run = ['layout floating', 'move-node-to-workspace 1']
+  run = ['move-node-to-workspace 1']
 [[on-window-detected]]
   if.app-name-regex-substring = "Fractal"
-  run = ['layout floating', 'move-node-to-workspace 2']
+  run = ['move-node-to-workspace 2']
 [[on-window-detected]]
   if.app-name-regex-substring = "Orca"
-  run = ['layout floating', 'move-node-to-workspace 2']
+  run = ['move-node-to-workspace 2']
 [[on-window-detected]]
   if.app-name-regex-substring = "Slack"
-  run = ['layout floating', 'move-node-to-workspace 3']
+  run = ['move-node-to-workspace 3']
 [[on-window-detected]]
   if.app-name-regex-substring = "Claude"
-  run = ['layout floating', 'move-node-to-workspace 3']
+  run = ['move-node-to-workspace 3']
 [[on-window-detected]]
   if.app-name-regex-substring = "Missive"
-  run = ['layout floating', 'move-node-to-workspace 4']
+  run = ['move-node-to-workspace 4']
 [[on-window-detected]]
   if.app-name-regex-substring = "Calendar"
-  run = ['layout floating', 'move-node-to-workspace 4']
+  run = ['move-node-to-workspace 4']
 [[on-window-detected]]
   if.app-name-regex-substring = "zoom.us"
-  run = ['layout floating', 'move-node-to-workspace 5']
+  run = ['move-node-to-workspace 5']
 [[on-window-detected]]
   if.app-name-regex-substring = "Granola"
-  run = ['layout floating', 'move-node-to-workspace 5']
+  run = ['move-node-to-workspace 5']
 [[on-window-detected]]
   if.app-name-regex-substring = "OpenOats"
-  run = ['layout floating', 'move-node-to-workspace 5']
+  run = ['move-node-to-workspace 5']
 [[on-window-detected]]
   if.app-name-regex-substring = "Spotify"
-  run = ['layout floating', 'move-node-to-workspace W']
+  run = ['move-node-to-workspace W']
 [[on-window-detected]]
   if.app-name-regex-substring = "WhatsApp"
-  run = ['layout floating', 'move-node-to-workspace E']
+  run = ['move-node-to-workspace E']
 [[on-window-detected]]
   if.app-name-regex-substring = "Telegram"
-  run = ['layout floating', 'move-node-to-workspace E']
+  run = ['move-node-to-workspace E']
 [[on-window-detected]]
   if.app-name-regex-substring = "BambuStudio"
-  run = ['layout floating', 'move-node-to-workspace R']
+  run = ['move-node-to-workspace R']
 [[on-window-detected]]
   if.app-name-regex-substring = "Shapr3D"
-  run = ['layout floating', 'move-node-to-workspace R']
+  run = ['move-node-to-workspace R']
 [[on-window-detected]]
   if.app-name-regex-substring = "Pixelmator Pro"
-  run = ['layout floating', 'move-node-to-workspace R']
+  run = ['move-node-to-workspace R']
 
 # Float all other windows by default (catch-all — must be last)
-[[on-window-detected]]
-if = 'true'
-run = 'layout floating'
+# [[on-window-detected]]
+# if = 'true'
+# run = 'layout floating'

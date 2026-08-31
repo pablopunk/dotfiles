@@ -162,7 +162,7 @@ postlink = "brew services restart edges"
 link."config/wallpapers" = "~/.config/wallpapers"
 postlink = """
 if [[ $(uname -s) == "Darwin" ]]; then
-  wallpaper="omarchy-groove.jpg"
+  wallpaper="priscilla-du-preez-B9LlLJYmw74-unsplash.jpg"
   img_path="${HOME}/.config/wallpapers/${wallpaper}"
   osascript -e "tell application \\"System Events\\" to set picture of every desktop to \\"${img_path}\\""
 fi

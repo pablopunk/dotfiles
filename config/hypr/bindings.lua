@@ -181,8 +181,8 @@ end
 -- hyprview doesn't build on Hyprland 0.56.2 yet; binding is inert until then.
 o.bind(combo(HYPER, "O"), "Window overview", "hyprctl dispatch hyprview:toggle")
 
--- Helium: HYPER+G.
-bind_hyper("G", "Helium", { launch = "helium-browser" })
+-- Browser: HYPER+G.
+bind_hyper("G", "Browser", { launch = "omarchy launch browser" })
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))

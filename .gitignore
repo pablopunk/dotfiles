@@ -30,3 +30,4 @@ config/opencode/.auto-update-history.json
 .tmp-cache
 
 config/hypr/bindings.lua.bak.*
+config/hypr/monitors.lua

@@ -200,3 +200,7 @@ o.bind(combo(SUPER_SHIFT, "V"), "Clipboard manager", "omarchy-shell shell toggle
 
 -- Hyprland exposes portal shortcuts through an explicit global dispatcher bind.
 o.bind("ALT + SPACE", "Nevermind", hl.dsp.global("com.pablopunk.nvm:2639D857989B655DE11234819A5B5CD9-Alt+Space"))
+
+-- Emojis
+hl.unbind(combo(SUPER_SHIFT, "E"))
+o.bind(combo(SUPER_SHIFT, "E"), "Emoji", { launch = "omarchy menu emoji" })

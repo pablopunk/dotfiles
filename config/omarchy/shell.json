@@ -19,14 +19,14 @@
       ],
       "center": [
         {
-          "id": "omarchy.media"
-        },
-        {
           "id": "omarchy.indicators"
         },
         {
+          "id": "omarchy.media"
+        },
+        {
           "id": "omarchy.clock",
-          "format": "dddd HH:mm",
+          "format": "ddd d MMM HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
           "verticalFormat": "HH\n—\nmm",
           "birthYear": 1993,

@@ -197,3 +197,6 @@ o.bind(dictation_key, "Stop dictation (hold to talk)", "voxtype record stop", { 
 
 -- Clipboard manager: SUPER+SHIFT+V (same action as the default SUPER+CTRL+V).
 o.bind(combo(SUPER_SHIFT, "V"), "Clipboard manager", "omarchy-shell shell toggle omarchy.clipboard")
+
+-- Hyprland exposes portal shortcuts through an explicit global dispatcher bind.
+o.bind("ALT + SPACE", "Nevermind", hl.dsp.global("com.pablopunk.nvm:2639D857989B655DE11234819A5B5CD9-Alt+Space"))

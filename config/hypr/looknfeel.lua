@@ -79,7 +79,7 @@ hl.config({
 
   decoration = {
     active_opacity = 0.97,
-    border_part_of_window = true,
+    border_part_of_window = false,
     dim_inactive = false,
     fullscreen_opacity = 1,
     inactive_opacity = 0.93,
@@ -102,7 +102,7 @@ hl.config({
   },
 
   general = {
-    border_size = 2,
+    border_size = 5,
     gaps_in = 4,
     gaps_out = 8,
     layout = "scrolling",

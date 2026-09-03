@@ -26,7 +26,10 @@ require("hypr.autostart")
 require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
--- o.window("qemu", { workspace = "5" })
+hl.window_rule({
+  match = { class = "^com\\.pablopunk\\.nvm$" },
+  border_size = 0,
+})
 
 -- >>> omaland managed block >>>
 -- Written by Omaland. Safe to hand-edit: Omaland re-reads this block

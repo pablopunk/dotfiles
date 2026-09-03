@@ -102,9 +102,9 @@ hl.config({
   },
 
   general = {
-    border_size = 5,
-    gaps_in = 4,
-    gaps_out = 8,
+    border_size = 3,
+    gaps_in = 1,
+    gaps_out = 4,
     layout = "scrolling",
 
     snap = {

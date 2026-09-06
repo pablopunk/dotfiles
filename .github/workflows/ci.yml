@@ -25,7 +25,15 @@ jobs:
       - name: Install dot
         run: |
           set -euo pipefail
-          curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
+          for attempt in 1 2 3; do
+            if curl -fsSL --retry 5 --retry-all-errors https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash; then
+              break
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
 
       - name: Verify --list works
         run: |
@@ -84,7 +92,15 @@ jobs:
       - name: Install dot
         run: |
           set -euo pipefail
-          curl -fsSL https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash
+          for attempt in 1 2 3; do
+            if curl -fsSL --retry 5 --retry-all-errors https://raw.githubusercontent.com/pablopunk/dot/main/scripts/install.sh | bash; then
+              break
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
 
       - name: Apply and verify core components
         run: |

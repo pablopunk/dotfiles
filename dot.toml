@@ -113,6 +113,13 @@ uninstall.brew = "brew uninstall zed"
 link."config/zed/settings.json" = "~/.config/zed/settings.json"
 link."config/zed/keymap.json" = "~/.config/zed/keymap.json"
 
+[omniwm]
+os = ["mac"]
+check = "test -d /Applications/OmniWM.app"
+install.brew = "brew install --cask omniwm"
+uninstall.brew = "brew uninstall omniwm"
+link."config/omniwm" = "~/.config/omniwm"
+
 ["1password"]
 os = ["mac"]
 check = "test -d /Applications/1Password.app"

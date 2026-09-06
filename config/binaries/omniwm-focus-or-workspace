@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+direction="${1:-}"
+case "$direction" in
+  left) workspace_direction="prev" ;;
+  right) workspace_direction="next" ;;
+  *)
+    printf 'Usage: %s <left|right>\n' "${0##*/}" >&2
+    exit 2
+    ;;
+esac
+
+if [[ -n "${OMNIWMCTL:-}" && -x "$OMNIWMCTL" ]]; then
+  omniwmctl="$OMNIWMCTL"
+elif [[ -x /opt/homebrew/bin/omniwmctl ]]; then
+  omniwmctl=/opt/homebrew/bin/omniwmctl
+elif [[ -x /usr/local/bin/omniwmctl ]]; then
+  omniwmctl=/usr/local/bin/omniwmctl
+elif command -v omniwmctl >/dev/null 2>&1; then
+  omniwmctl="$(command -v omniwmctl)"
+else
+  printf 'omniwmctl was not found\n' >&2
+  exit 127
+fi
+
+focused_window_id() {
+  "$omniwmctl" query workspaces --current --format json |
+    /usr/bin/python3 -c '
+import json
+import sys
+
+payload = json.load(sys.stdin).get("result", {}).get("payload", {})
+workspaces = payload.get("workspaces", [])
+focused_window_id = workspaces[0].get("focusedWindowId") if workspaces else None
+if focused_window_id:
+    print(focused_window_id)
+'
+}
+
+before="$(focused_window_id)"
+if [[ -z "$before" ]]; then
+  exec "$omniwmctl" command focus "$direction"
+fi
+
+"$omniwmctl" command focus "$direction" >/dev/null
+for _ in {1..30}; do
+  after="$(focused_window_id)"
+  if [[ -n "$after" && "$after" != "$before" ]]; then
+    exit 0
+  fi
+  sleep 0.01
+done
+
+"$omniwmctl" command switch-workspace "$workspace_direction" >/dev/null

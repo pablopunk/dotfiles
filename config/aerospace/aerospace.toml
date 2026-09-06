@@ -9,7 +9,7 @@ config-version = 2
 after-login-command = []
 
 # Start AeroSpace at login
-start-at-login = true
+start-at-login = false
 
 # Utils for sketchybar https://github.com/FelixKratz/SketchyBar/discussions/599#discussioncomment-11093795
 # exec-on-workspace-change = [

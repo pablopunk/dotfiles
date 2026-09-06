@@ -3,7 +3,7 @@ onboarding = false
 [theme]
 name = "terminal"
 
-auto_switch = true
+auto_switch = false
 [keys]
 prefix = "ctrl+a"
 settings = ""
@@ -29,3 +29,8 @@ goto = "prefix+space"
 [ui]
 agent_panel_sort = "priority"
 prompt_new_tab_name = false
+
+show_agent_labels_on_pane_borders = true
+status_indicators = "dots"
+[ui.toast]
+delivery = "system"

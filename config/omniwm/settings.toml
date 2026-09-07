@@ -88,8 +88,9 @@ margin = 1
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
 containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
+defaultContainerPrimarySpan = 0.8
 infiniteLoop = false
-singleWindowFit = "fill"
+singleWindowFit = "container_primary_span"
 visibleContainerCount = 2
 
 [overview]
@@ -148,14 +149,14 @@ useWorkspaceId = false
 
 [workspaceBar]
 backgroundOpacity = 0.1
-deduplicateAppIcons = false
+deduplicateAppIcons = true
 enabled = true
 excludedBundleIDs = []
 height = 24.0
-hideEmptyWorkspaces = false
-hideInNativeFullscreen = false
-notchActiveZoneWidth = 180.0
-notchMode = "moveBelowMenuBar"
+hideEmptyWorkspaces = true
+hideInNativeFullscreen = true
+notchActiveZoneWidth = 120.0
+notchMode = "off"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 200.0
@@ -165,7 +166,7 @@ showLabels = true
 systemStatsButton = false
 windowLevel = "popup"
 xOffset = 0.0
-yOffset = 0.0
+yOffset = 8.0
 
 [workspaceBar.iconOverrides]
 
@@ -246,6 +247,156 @@ bundleId = "com.apple.MobileSMS"
 id = "552FB77D-BF0E-4737-90A6-B5BC6986C579"
 minHeight = 320.0
 minWidth = 660.0
+
+[[appRules]]
+appNameSubstring = "Karabiner"
+bundleId = ""
+id = "62DBAE96-A232-4677-9295-2D2E5FE2CE22"
+layout = "float"
+
+[[appRules]]
+bundleId = ""
+id = "40902C5A-D21A-41C0-A688-425834AE4E88"
+layout = "float"
+titleSubstring = "SecurityAgent"
+
+[[appRules]]
+bundleId = ""
+id = "C92B3BD9-A8C4-48E8-959F-258C8F8FD561"
+layout = "float"
+titleSubstring = "Vista Previa"
+
+[[appRules]]
+bundleId = ""
+id = "20027B2D-2C3C-4F54-A84D-866566DC7270"
+layout = "float"
+titleSubstring = "Preview"
+
+[[appRules]]
+bundleId = ""
+id = "CDB4810D-BE2E-4E21-8E82-57DBA641F751"
+layout = "float"
+titleSubstring = "1Password"
+
+[[appRules]]
+bundleId = ""
+id = "C6DB6F8B-B9B2-4C40-9E8D-8FE79C3077AA"
+layout = "float"
+titleSubstring = "Yonna"
+
+[[appRules]]
+bundleId = ""
+id = "71592C78-3783-4893-BAC0-F7A44163F444"
+layout = "float"
+titleSubstring = "Finder"
+
+[[appRules]]
+bundleId = ""
+id = "FBBFE648-8E59-402A-AA6C-CE868D97AEF7"
+layout = "float"
+titleSubstring = "Mouseless"
+
+[[appRules]]
+bundleId = ""
+id = "C41F9CF7-B47A-4683-8B85-CC1936BE8CD3"
+layout = "float"
+titleSubstring = "Google Chrome for Testing"
+
+[[appRules]]
+appNameSubstring = "Zen"
+assignToWorkspace = "1"
+bundleId = ""
+id = "C7EF964D-911B-4C74-AC4A-E3DE5DC61FB8"
+
+[[appRules]]
+appNameSubstring = "Fractal"
+assignToWorkspace = "2"
+bundleId = ""
+id = "6D22BB09-2985-4394-BF25-591441CECD9E"
+
+[[appRules]]
+appNameSubstring = "Orca"
+assignToWorkspace = "2"
+bundleId = ""
+id = "B3D631C4-DD76-402F-9F35-463D8B124F4C"
+
+[[appRules]]
+appNameSubstring = "Slack"
+assignToWorkspace = "3"
+bundleId = ""
+id = "00FB86BA-473C-410C-A0D9-D8D80FB9F428"
+
+[[appRules]]
+appNameSubstring = "Claude"
+assignToWorkspace = "3"
+bundleId = ""
+id = "59169FFF-BE75-46E6-BA34-4A5C5723A45B"
+
+[[appRules]]
+appNameSubstring = "Missive"
+assignToWorkspace = "4"
+bundleId = ""
+id = "59BD3E71-E6CB-408E-802C-90B049359E46"
+
+[[appRules]]
+appNameSubstring = "Calendar"
+assignToWorkspace = "4"
+bundleId = ""
+id = "164094A3-5E53-40A0-99AD-EE26A2FAE37D"
+
+[[appRules]]
+appNameSubstring = "zoom.us"
+assignToWorkspace = "5"
+bundleId = ""
+id = "4EC46684-DEC2-4401-A5F7-6C63DDA811FE"
+
+[[appRules]]
+appNameSubstring = "Granola"
+assignToWorkspace = "5"
+bundleId = ""
+id = "80B8A452-432D-47D5-9811-3065673A175E"
+
+[[appRules]]
+appNameSubstring = "OpenOats"
+assignToWorkspace = "5"
+bundleId = ""
+id = "6793EBE6-11C3-483A-B47F-6C17BD03E69C"
+
+[[appRules]]
+appNameSubstring = "Spotify"
+assignToWorkspace = "7"
+bundleId = ""
+id = "74D37CB2-2BC8-4433-9F57-586FD1F035E0"
+
+[[appRules]]
+appNameSubstring = "WhatsApp"
+assignToWorkspace = "8"
+bundleId = ""
+id = "9BF8BE6B-6812-484C-A31D-983FC9751E5B"
+
+[[appRules]]
+appNameSubstring = "Telegram"
+assignToWorkspace = "8"
+bundleId = ""
+id = "119F377A-DA35-4F34-9523-23C8349E6C3E"
+
+[[appRules]]
+appNameSubstring = "BambuStudio"
+assignToWorkspace = "9"
+bundleId = ""
+id = "6159E777-153B-44CA-97FE-93794C5645C7"
+
+[[appRules]]
+appNameSubstring = "Shapr3D"
+assignToWorkspace = "9"
+bundleId = ""
+id = "28B9AB5B-13FF-485B-86B3-1F4B8EDFE948"
+
+[[appRules]]
+appNameSubstring = "Pixelmator Pro"
+assignToWorkspace = "9"
+bundleId = ""
+id = "39D21D66-924B-4DD0-BDBC-55665EBA70E6"
 
 [[hotkeys]]
 binding = "Unassigned"

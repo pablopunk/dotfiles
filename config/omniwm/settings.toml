@@ -144,13 +144,13 @@ mode = "macOS"
 
 [statusBar]
 showAppNames = false
-showWorkspaceName = false
+showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
 backgroundOpacity = 0.1
 deduplicateAppIcons = true
-enabled = true
+enabled = false
 excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = true
@@ -1043,7 +1043,7 @@ binding = "Option+Shift+Equal"
 id = "setWindowSecondarySpan.increase10Percent"
 
 [[hotkeys]]
-binding = "Option+Shift+B"
+binding = "Hyper+B"
 id = "balanceSizes"
 
 [[hotkeys]]
@@ -1152,7 +1152,7 @@ id = "toggleSystemStats"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "1"
 
 [workspaces.monitorAssignment]

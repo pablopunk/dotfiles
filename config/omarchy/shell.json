@@ -17,6 +17,9 @@
           "id": "omarchy.workspaces"
         },
         {
+          "id": "omarchy.active-window"
+        },
+        {
           "id": "omarchy.media"
         }
       ],

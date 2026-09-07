@@ -1,0 +1,290 @@
+#!/usr/bin/env bash
+#
+# hr - Herdr workspace manager with fzf directory selection
+#
+# This tool keeps tx's directory and Git clone workflow, but uses Herdr
+# workspaces instead of tmux sessions.
+#
+# USAGE:
+#   hr                         # Select a Herdr workspace or directory
+#   hr <name>                  # Search for a workspace or directory
+#   hr my-project              # Creates ~/src/my-project if needed
+#   hr https://github.com/...  # Clones the repository into ~/src/
+#
+
+PROJECTS="$HOME/src"
+
+top_level_dirs=(
+  "$PROJECTS"
+  "$PROJECTS/maze"
+  "$HOME/Desktop"
+  "$HOME/Downloads"
+  "$HOME"
+)
+recursive_dirs=(
+  "$HOME/.worktrees"
+  "$HOME/.worktrees/fractal"
+)
+
+ensure_herdr_server() {
+  if herdr status server >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if [[ -n "${HERDR_ENV:-}" ]]; then
+    echo "Error: Herdr server is not running" >&2
+    return 1
+  fi
+
+  herdr server >/dev/null 2>&1 &
+  disown
+  for _ in {1..50}; do
+    if herdr status server >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.1
+  done
+
+  echo "Error: Failed to start Herdr server" >&2
+  return 1
+}
+
+ensure_herdr_server || exit 1
+
+for dir in "${top_level_dirs[@]}" "${recursive_dirs[@]}"; do
+  mkdir -p "$dir"
+done
+
+all_directories() {
+  {
+    for dir in "${top_level_dirs[@]}"; do
+      find "$dir" -mindepth 1 -maxdepth 1 -type d
+    done
+    for dir in "${recursive_dirs[@]}"; do
+      find "$dir" -mindepth 1 -maxdepth 2 -type d
+    done
+  } | sed "s|$HOME|~|g" | sed 's|//|/|g'
+}
+
+fzf_full() {
+  fzf --reverse "$@"
+}
+
+fzf_with_query() {
+  local result
+  result=$(all_directories | fzf --height=10 --reverse --print-query "$@")
+  echo "$result"
+}
+
+normalize_for_match() {
+  tr '[:upper:]' '[:lower:]' <<<"$1" | tr '/' '-'
+}
+
+fuzzy_dir_matches() {
+  local query="$1"
+  local normalized_query normalized_dir dir
+  normalized_query=$(normalize_for_match "$query")
+
+  all_directories | while IFS= read -r dir; do
+    normalized_dir=$(normalize_for_match "$dir")
+    if [[ "$normalized_dir" == *"$normalized_query"* || "$normalized_query" == *"$normalized_dir"* ]]; then
+      echo "$dir"
+    fi
+  done
+}
+
+handle_input() {
+  local input="$1"
+
+  [[ -z "$input" ]] && return 1
+
+  input="${input/#~/$HOME}"
+
+  if [[ "$input" =~ ^https?:// ]] || [[ "$input" =~ ^git@ ]]; then
+    handle_url "$input"
+    return
+  fi
+
+  if [[ "$input" =~ ^/ ]] || [[ "$input" =~ / ]]; then
+    if [[ ! -d "$input" ]]; then
+      if ! mkdir -p "$input" 2>/dev/null; then
+        echo "Error: Failed to create directory '$input'" >&2
+        return 1
+      fi
+    fi
+    echo "$input"
+    return
+  fi
+
+  local new_path="$PROJECTS/$input"
+  if ! mkdir -p "$new_path" 2>/dev/null; then
+    echo "Error: Failed to create directory '$new_path'" >&2
+    return 1
+  fi
+  echo "$new_path"
+}
+
+handle_url() {
+  local url="$1"
+  local repo_name
+
+  if [[ "$url" =~ /([^/]+)\.git$ ]]; then
+    repo_name="${BASH_REMATCH[1]}"
+  elif [[ "$url" =~ /([^/]+)$ ]]; then
+    repo_name="${BASH_REMATCH[1]}"
+  else
+    repo_name="repo-$(date +%s)"
+  fi
+
+  local clone_path="$PROJECTS/$repo_name"
+
+  if [[ -d "$clone_path" ]]; then
+    echo "$clone_path"
+    return
+  fi
+
+  echo "Cloning $url..." >&2
+  if git clone "$url" "$clone_path" 2>/dev/null; then
+    echo "$clone_path"
+  else
+    echo "Error: Failed to clone repository '$url'" >&2
+    return 1
+  fi
+}
+
+herdr_workspace_records() {
+  herdr workspace list 2>/dev/null |
+    jq -r '.result.workspaces[] | [.label, .workspace_id] | @tsv'
+}
+
+herdr_workspace_labels() {
+  herdr_workspace_records | cut -f1
+}
+
+workspace_id_for_label() {
+  local label="$1"
+  herdr_workspace_records |
+    awk -F '\t' -v label="$label" '$1 == label { print $2; exit }'
+}
+
+workspace_id_for_directory() {
+  local directory="$1"
+  local label workspace_id
+
+  while IFS=$'\t' read -r label workspace_id; do
+    [[ -z "$workspace_id" ]] && continue
+    if herdr pane list --workspace "$workspace_id" 2>/dev/null |
+      jq -e --arg cwd "$directory" 'any(.result.panes[]?; .cwd == $cwd or .foreground_cwd == $cwd)' >/dev/null; then
+      echo "$workspace_id"
+      return 0
+    fi
+  done < <(herdr_workspace_records)
+}
+
+process_fzf_result() {
+  local fzf_output="$1"
+  local query selection result
+
+  query=$(echo "$fzf_output" | head -n1)
+  selection=$(echo "$fzf_output" | tail -n1)
+
+  if [[ "$selection" != "$query" && -n "$selection" ]]; then
+    echo "$selection"
+    return 0
+  fi
+
+  if ! result=$(handle_input "$query") || [[ -z "$result" ]]; then
+    return 1
+  fi
+  echo "$result"
+}
+
+go_to_workspace() {
+  local workspace_name="$1"
+  local workspace_id
+
+  if [[ -n "${selected:-}" ]]; then
+    workspace_id=$(workspace_id_for_directory "$selected")
+  fi
+  if [[ -z "$workspace_id" ]]; then
+    workspace_id=$(workspace_id_for_label "$workspace_name")
+  fi
+
+  if [[ -n "$workspace_id" ]]; then
+    if ! herdr workspace focus "$workspace_id" >/dev/null; then
+      echo "Error: Failed to focus Herdr workspace '$workspace_name'" >&2
+      return 1
+    fi
+  else
+    if ! herdr workspace create --cwd "$selected" --label "$workspace_name" --focus >/dev/null; then
+      echo "Error: Failed to create Herdr workspace '$workspace_name'" >&2
+      return 1
+    fi
+  fi
+
+  if [[ -z "${HERDR_ENV:-}" ]]; then
+    exec herdr
+  fi
+  exit 0
+}
+
+if [[ $# -eq 0 ]]; then
+  herdr_workspaces=$(herdr_workspace_labels)
+  if [[ -n "$herdr_workspaces" ]]; then
+    fzf_result=$(echo "$herdr_workspaces" | fzf_full --print-query --prompt="Herdr workspaces: ")
+    if [[ -n "$fzf_result" ]]; then
+      query=$(echo "$fzf_result" | head -n1)
+      selection=$(echo "$fzf_result" | tail -n1)
+
+      if [[ "$selection" != "$query" && -n "$selection" ]]; then
+        go_to_workspace "$selection"
+      else
+        if [[ "$query" =~ ^https?:// ]] || [[ "$query" =~ ^git@ ]]; then
+          selected=$(handle_url "$query")
+          if [[ -n "$selected" && -d "$selected" ]]; then
+            selected_name=$(basename "$selected")
+            go_to_workspace "$selected_name"
+          fi
+        fi
+        set -- "$query"
+      fi
+    fi
+  fi
+fi
+
+if [[ $# -eq 1 ]]; then
+  selected_name=$(herdr_workspace_labels | grep "$1")
+  if [[ $(echo "$selected_name" | wc -l) -gt 1 ]]; then
+    selected_name=$(echo "$selected_name" | fzf_full)
+  fi
+  if [[ -n "$selected_name" ]]; then
+    go_to_workspace "$selected_name"
+  fi
+
+  dir_matches=$(fuzzy_dir_matches "$1")
+  match_count=$(echo "$dir_matches" | grep -c .)
+  if [[ $match_count -eq 1 ]]; then
+    selected="$dir_matches"
+  elif [[ $match_count -gt 1 ]]; then
+    fzf_result=$(echo "$dir_matches" | fzf_with_query -q "$1")
+    selected=$(process_fzf_result "$fzf_result")
+  else
+    fzf_result=$(fzf_with_query -q "$1")
+    selected=$(process_fzf_result "$fzf_result")
+  fi
+else
+  fzf_result=$(fzf_with_query)
+  selected=$(process_fzf_result "$fzf_result")
+fi
+
+[[ -z "${selected:-}" ]] && exit 0
+
+selected="${selected/#~/$HOME}"
+
+if [[ ! -d "$selected" ]]; then
+  echo "Error: Directory '$selected' does not exist" >&2
+  exit 1
+fi
+
+selected_name=$(basename "$selected")
+go_to_workspace "$selected_name"

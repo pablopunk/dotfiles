@@ -370,13 +370,13 @@ id = "74D37CB2-2BC8-4433-9F57-586FD1F035E0"
 
 [[appRules]]
 appNameSubstring = "WhatsApp"
-assignToWorkspace = "8"
+assignToWorkspace = "6"
 bundleId = ""
 id = "9BF8BE6B-6812-484C-A31D-983FC9751E5B"
 
 [[appRules]]
 appNameSubstring = "Telegram"
-assignToWorkspace = "8"
+assignToWorkspace = "6"
 bundleId = ""
 id = "119F377A-DA35-4F34-9523-23C8349E6C3E"
 

@@ -166,7 +166,7 @@ showLabels = true
 systemStatsButton = false
 windowLevel = "popup"
 xOffset = 0.0
-yOffset = 8.0
+yOffset = 4.0
 
 [workspaceBar.iconOverrides]
 
@@ -1192,7 +1192,7 @@ type = "main"
 
 [[workspaces]]
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "6"
 
 [workspaces.monitorAssignment]

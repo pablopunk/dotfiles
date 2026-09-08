@@ -1082,28 +1082,6 @@
                                     "key_code": "h",
                                     "modifiers": {
                                         "mandatory": ["left_option"],
-                                        "optional": []
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "$HOME/.bin/omniwm-focus-or-workspace left"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "layer1",
-                                        "type": "variable_unless",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": ["left_option"],
                                         "optional": ["shift"]
                                     }
                                 },
@@ -1157,28 +1135,6 @@
                                     {
                                         "key_code": "k",
                                         "modifiers": ["left_control", "left_option", "left_command"]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "layer1",
-                                        "type": "variable_unless",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": ["left_option"],
-                                        "optional": []
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "$HOME/.bin/omniwm-focus-or-workspace right"
                                     }
                                 ],
                                 "type": "basic"

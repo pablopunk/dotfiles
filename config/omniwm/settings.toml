@@ -87,14 +87,14 @@ margin = 1
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
-containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.8]
+containerPrimarySpanPresets = [0.33, 0.5, 0.67, 0.85, 1.0]
 defaultContainerPrimarySpan = 0.8
 infiniteLoop = false
 singleWindowFit = "container_primary_span"
 visibleContainerCount = 2
 
 [overview]
-zoom = 0.7
+zoom = 0.5
 
 [overview.backdrop]
 alpha = 1.0
@@ -831,7 +831,7 @@ binding = "Unassigned"
 id = "moveWindowToMonitor.down"
 
 [[hotkeys]]
-binding = "Hyper+Shift+F"
+binding = "Unassigned"
 id = "toggleFullscreen"
 
 [[hotkeys]]
@@ -1007,7 +1007,7 @@ binding = "Unassigned"
 id = "cycleWindowSecondarySpanBackward"
 
 [[hotkeys]]
-binding = "Option+Shift+F"
+binding = "Hyper+Shift+F"
 id = "toggleContainerFullPrimarySpan"
 
 [[hotkeys]]
@@ -1135,7 +1135,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Hyper+T"
+binding = "Unassigned"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]

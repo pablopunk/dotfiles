@@ -34,7 +34,7 @@ useGlobalGaps = true
 
 [focus]
 crossesMonitorAtEdge = true
-followsMouse = true
+followsMouse = false
 followsWindowToMonitor = false
 lockModifier = "off"
 moveCrossesMonitorAtEdge = false
@@ -87,7 +87,7 @@ margin = 1
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
-containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
+containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.8]
 defaultContainerPrimarySpan = 0.8
 infiniteLoop = false
 singleWindowFit = "container_primary_span"
@@ -691,7 +691,7 @@ binding = "Unassigned"
 id = "centerColumn"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Hyper+E"
 id = "centerVisibleColumns"
 
 [[hotkeys]]
@@ -983,7 +983,7 @@ binding = "Unassigned"
 id = "moveColumnToIndex.9"
 
 [[hotkeys]]
-binding = "Hyper+Period"
+binding = "Hyper+R"
 id = "cycleSizeForward"
 
 [[hotkeys]]
@@ -1152,7 +1152,7 @@ id = "toggleSystemStats"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "1"
 
 [workspaces.monitorAssignment]
@@ -1192,7 +1192,7 @@ type = "main"
 
 [[workspaces]]
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "6"
 
 [workspaces.monitorAssignment]

@@ -143,7 +143,7 @@ automatically-unhide-macos-hidden-apps = false
 
   # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
   # Open new Ghostty window (or launch if not running)
-  alt-cmd-ctrl-t = 'exec-and-forget ~/.bin/ghostty-new'
+  alt-cmd-ctrl-t = 'exec-and-forget ~/.bin/ghostty-mac-new'
 
   # Open new Ghostty window, make it floating, and center it
   alt-cmd-ctrl-shift-t = 'exec-and-forget ~/.bin/ghostty-new-float'

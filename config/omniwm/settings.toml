@@ -233,6 +233,7 @@ minWidth = 800.0
 [[appRules]]
 bundleId = "com.mitchellh.ghostty"
 id = "7876C9EF-437E-4D4F-9C27-B1B02F4AABCE"
+initialContainerPrimarySpan = 0.5
 minHeight = 48.0
 minWidth = 90.0
 

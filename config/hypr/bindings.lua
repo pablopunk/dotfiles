@@ -87,10 +87,10 @@ local function focus_or_workspace(direction)
 end
 
 local directional_bindings = {
-  { key = "H", direction = "l", focus_description = "Focus left, or previous workspace", swap_description = "Swap window to the left" },
-  { key = "J", direction = "d", focus_description = "Focus down, or next workspace", swap_description = "Swap window down" },
-  { key = "K", direction = "u", focus_description = "Focus up, or previous workspace", swap_description = "Swap window up" },
-  { key = "L", direction = "r", focus_description = "Focus right, or next workspace", swap_description = "Swap window to the right" },
+  { key = "H", direction = "l", focus_description = "Focus left, or previous workspace", move_description = "Move/stack window left" },
+  { key = "J", direction = "d", focus_description = "Focus down, or next workspace", move_description = "Move window down in column" },
+  { key = "K", direction = "u", focus_description = "Focus up, or previous workspace", move_description = "Move window up in column" },
+  { key = "L", direction = "r", focus_description = "Focus right, or next workspace", move_description = "Move/stack window right" },
 }
 
 local function bind_focus(binding)
@@ -204,8 +204,26 @@ end
 o.bind(combo(HYPER, "TAB"), "Former workspace", hl.dsp.focus({ workspace = "previous" }))
 
 -- Move windows with HYPER + SHIFT + h/j/k/l.
+-- In the scrolling layout, left/right walk a window across columns: it joins
+-- the neighbouring column when it is alone and pops back out into its own
+-- column when it is already stacked (the layout's consume_or_expel pair).
+-- Up/down reorder within the column. Other layouts use the normal move.
+local function move_window(direction)
+  local monitor = hl.get_active_monitor()
+  local layout = monitor and monitor.active_workspace and monitor.active_workspace.tiled_layout
+  if layout == "scrolling" and direction == "l" then
+    hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
+  elseif layout == "scrolling" and direction == "r" then
+    hl.dispatch(hl.dsp.layout("consume_or_expel next"))
+  else
+    hl.dispatch(hl.dsp.window.move({ direction = direction }))
+  end
+end
+
 for _, binding in ipairs(directional_bindings) do
-  o.bind(combo(HYPER_SHIFT, binding.key), binding.swap_description, hl.dsp.window.swap({ direction = binding.direction }))
+  o.bind(combo(HYPER_SHIFT, binding.key), binding.move_description, function()
+    move_window(binding.direction)
+  end)
 end
 
 -- Window overview: HYPER+O.

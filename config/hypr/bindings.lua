@@ -215,11 +215,43 @@ o.bind(combo(HYPER, "O"), "Window overview", "hyprctl dispatch hyprview:toggle")
 -- Browser: HYPER+G.
 bind_hyper("G", "Browser", { launch = "omarchy launch browser" })
 
+-- macOS-style app shortcuts: SUPER + key forwards CTRL + key to the focused
+-- app, like Omarchy's universal SUPER+C/V/X clipboard bindings.
+-- The down/up split works around Hyprland send_shortcut sometimes leaving
+-- synthetic key state stuck/repeating.
+-- https://github.com/hyprwm/Hyprland/discussions/14099
+local function send_ctrl(key)
+  return function()
+    hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = key, state = "down" }))
+    hl.timer(function()
+      hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = key, state = "up" }))
+    end, { timeout = 50, type = "oneshot" })
+  end
+end
+
+-- Any default on these keys is dropped first (SUPER+F was fullscreen).
+local app_shortcuts = {
+  { key = "T", description = "New tab" },
+  { key = "W", description = "Close tab" },
+  { key = "R", description = "Reload" },
+  { key = "P", description = "Print" },
+  { key = "A", description = "Select all" },
+  { key = "S", description = "Save" },
+  { key = "F", description = "Find" },
+  { key = "K", description = "Search" },
+  { key = "L", description = "Address bar" },
+  { key = "Z", description = "Undo" },
+}
+
+for _, shortcut in ipairs(app_shortcuts) do
+  hl.unbind(combo(SUPER, shortcut.key))
+  o.bind(combo(SUPER, shortcut.key), shortcut.description, send_ctrl(shortcut.key))
+end
+
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))
 
--- Disable SUPER+S (was: Toggle scratchpad).
-hl.unbind(combo(SUPER, "S"))
+-- SUPER+S (was: Toggle scratchpad) is now the app "Save" shortcut above.
 
 -- Dictation: HYPER+V hold-to-talk (release to transcribe).
 local dictation_key = combo(HYPER, "V")

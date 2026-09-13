@@ -115,40 +115,71 @@ bind_hyper("A", "Toggle workspace layout", "omarchy-hyprland-workspace-layout-to
 hl.unbind(combo(SUPER, "P"))  -- was: Pseudo window
 o.bind(combo(HYPER, "P"), "Pseudo window", hl.dsp.window.pseudo())
 
--- Resize the active window: HYPER+- shrinks a bit, HYPER++ grows a bit.
--- Works in tiled, floating, and pseudo mode (pseudo windows stay centered).
--- Tune RESIZE_STEP to change the step size (5% of the window per press).
-local RESIZE_STEP = 0.05
+-- Resize the active window through size presets.
+-- HYPER+. steps up, HYPER+, steps down, wrapping around at the ends.
+-- In the scrolling layout this cycles the native column-width presets
+-- (scrolling.explicit_column_widths, set in looknfeel.lua); in other layouts
+-- the window itself is resized to the preset fraction of the monitor.
+local RESIZE_PRESETS = { 0.33, 0.50, 0.67, 0.85 }
 
-local function resize_window_step(grow)
-  local win = hl.get_active_window()
-  if not win or not win.size then
-    return
+-- Index of the next preset in `direction` (+1 up, -1 down) from the current
+-- width fraction, skipping the preset the window is already at.
+-- The epsilon absorbs the gaps/borders around the window.
+local function next_preset_index(current, direction)
+  local epsilon = 0.02
+  if direction > 0 then
+    for i, preset in ipairs(RESIZE_PRESETS) do
+      if preset > current + epsilon then
+        return i
+      end
+    end
+    return 1
   end
-  local factor = 1 + (grow and RESIZE_STEP or -RESIZE_STEP)
-  local x = math.max(80, math.floor(win.size.x * factor + 0.5))
-  local y = math.max(80, math.floor(win.size.y * factor + 0.5))
-  if grow then
-    -- Don't grow past the screen (window sizes use scaled coordinates).
-    local monitor = hl.get_active_monitor()
-    if monitor then
-      x = math.min(x, math.floor(monitor.width / monitor.scale))
-      y = math.min(y, math.floor(monitor.height / monitor.scale))
+  for i = #RESIZE_PRESETS, 1, -1 do
+    if RESIZE_PRESETS[i] < current - epsilon then
+      return i
     end
   end
-  hl.dispatch(hl.dsp.window.resize({ x = x, y = y, relative = false }))
+  return #RESIZE_PRESETS
+end
+
+local function resize_window_preset(direction)
+  local win = hl.get_active_window()
+  local monitor = hl.get_active_monitor()
+  if not win or not win.size or not monitor then
+    return
+  end
+
+  -- In the scrolling layout, absolute resizeactive gets clamped by the
+  -- viewport (which made the presets creep in increments), so use the
+  -- layout's own preset cycle instead.
+  local workspace = monitor.active_workspace
+  if not win.floating and workspace and workspace.tiled_layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout(direction > 0 and "colresize +conf" or "colresize -conf"))
+    return
+  end
+
+  -- Window and monitor sizes use the same scaled (logical) coordinates.
+  local monitor_width = monitor.width / monitor.scale
+  local monitor_height = monitor.height / monitor.scale
+  local preset = RESIZE_PRESETS[next_preset_index(win.size.x / monitor_width, direction)]
+  hl.dispatch(hl.dsp.window.resize({
+    x = math.floor(monitor_width * preset + 0.5),
+    y = math.floor(monitor_height * preset + 0.5),
+    relative = false,
+  }))
 end
 
 local resize_bindings = {
-  { key = "MINUS", description = "Shrink window a bit", grow = false },
-  -- Bound to both keysyms: "+" key sends `plus` on the ES layout, `equal` on US.
-  { key = "PLUS", description = "Grow window a bit", grow = true },
-  { key = "EQUAL", description = "Grow window a bit", grow = true },
+  -- Keysym names must be lower-case: xkbcommon calls this key "comma",
+  -- and the upper-case "COMMA" does not match (same note in omarchy defaults).
+  { key = "comma", description = "Previous size preset", direction = -1 },
+  { key = "period", description = "Next size preset", direction = 1 },
 }
 
 local function bind_resize(binding)
   o.bind(combo(HYPER, binding.key), binding.description, function()
-    resize_window_step(binding.grow)
+    resize_window_preset(binding.direction)
   end)
 end
 

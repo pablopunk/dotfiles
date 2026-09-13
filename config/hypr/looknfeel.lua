@@ -69,6 +69,23 @@ hl.config({
 --   },
 -- })
 
+-- Column width presets for the scrolling layout, cycled with HYPER+. / HYPER+,.
+-- Keep in sync with RESIZE_PRESETS in bindings.lua (used by the other layouts).
+hl.config({
+  scrolling = {
+    explicit_column_widths = "0.33, 0.5, 0.67, 0.85",
+
+    -- Keep a lone window at its preset width instead of stretching it to
+    -- the whole screen (the default). With auto-centering, it sits centered.
+    fullscreen_on_one_column = false,
+
+    -- 1 = fit (default): focus only scrolls a column minimally into view, so
+    -- a 100%-wide tape (e.g. 33 + 67) stays flush. 0 = center dead-centers
+    -- focus on every change, which shifts an exactly-full tape off the edges.
+    focus_fit_method = 1,
+  },
+})
+
 -- >>> omaland managed block >>>
 -- Written by Omaland. Safe to hand-edit: Omaland re-reads this block
 -- every time it opens, and only ever rewrites what's between the fences.

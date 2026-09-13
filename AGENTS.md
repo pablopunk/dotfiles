@@ -221,7 +221,7 @@ dot --dry-run -v work     # Verbose (show each step)
 **Testing by Config Type:**
 - **Shell configs:** `source ~/.zshrc` or open new terminal
 - **Editors:** Restart editor or use reload command (`:e` in Vim)
-- **Window managers:** Restart or use reload hotkey (Super+Shift+E for Hyprland)
+- **Window managers:** Restart or reload (Hyprland: `hyprctl reload`, see `config/hypr/AGENTS.md`)
 - **Binaries:** Test with `~/.bin/script_name` after linking
 
 ### Adding Tools/Components

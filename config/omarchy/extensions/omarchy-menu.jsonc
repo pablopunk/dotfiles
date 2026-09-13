@@ -27,4 +27,14 @@
   // Example: replace the default About action by reusing the same id. Existing
   // fields are kept unless overridden.
   // "about": {"icon":"","label":"About","action":"omarchy-launch-or-focus-tui \"zsh -c 'fastfetch; read -k 1'\""},
+
+  // Zen Twilight ships as zen-twilight.desktop, which the stock browser rows
+  // don't know about, so add it to Setup > Default > Browser ourselves.
+  "setup.default.browser.zen-twilight": {
+    "icon": "󰖟",
+    "label": "Zen Twilight",
+    "when": "omarchy-cmd-present zen-twilight",
+    "checked": "[[ \"$(omarchy-default-browser)\" == \"zen-twilight.desktop\" ]]",
+    "action": "env -u BROWSER xdg-settings set default-web-browser zen-twilight.desktop && omarchy-notification-send -g 󰖟 \"Zen Twilight is now the default browser\"",
+  },
 }

@@ -235,35 +235,42 @@ bind_hyper("G", "Browser", { launch = "omarchy launch browser" })
 
 -- macOS-style app shortcuts: SUPER + key forwards CTRL + key to the focused
 -- app, like Omarchy's universal SUPER+C/V/X clipboard bindings.
+-- SUPER + SHIFT + key forwards CTRL + SHIFT + key (reopen tab, save as, ...).
 -- The down/up split works around Hyprland send_shortcut sometimes leaving
 -- synthetic key state stuck/repeating.
 -- https://github.com/hyprwm/Hyprland/discussions/14099
-local function send_ctrl(key)
+local function send_ctrl(key, shift)
   return function()
-    hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = key, state = "down" }))
+    local mods = shift and "CTRL SHIFT" or "CTRL"
+    hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "down" }))
     hl.timer(function()
-      hl.dispatch(hl.dsp.send_key_state({ mods = "CTRL", key = key, state = "up" }))
+      hl.dispatch(hl.dsp.send_key_state({ mods = mods, key = key, state = "up" }))
     end, { timeout = 50, type = "oneshot" })
   end
 end
 
--- Any default on these keys is dropped first (SUPER+F was fullscreen).
+-- Any default on these keys is dropped first (SUPER+F was fullscreen,
+-- SUPER+SHIFT+N the editor, and so on).
 local app_shortcuts = {
-  { key = "T", description = "New tab" },
-  { key = "W", description = "Close tab" },
-  { key = "R", description = "Reload" },
+  { key = "T", description = "New tab", shift_description = "Reopen closed tab" },
+  { key = "W", description = "Close tab", shift_description = "Close window" },
+  { key = "R", description = "Reload", shift_description = "Hard reload" },
   { key = "P", description = "Print" },
   { key = "A", description = "Select all" },
-  { key = "S", description = "Save" },
+  { key = "S", description = "Save", shift_description = "Save as" },
   { key = "F", description = "Find" },
   { key = "K", description = "Search" },
   { key = "L", description = "Address bar" },
-  { key = "Z", description = "Undo" },
+  { key = "Z", description = "Undo", shift_description = "Redo" },
+  { key = "N", description = "New", shift_description = "New private window" },
 }
 
 for _, shortcut in ipairs(app_shortcuts) do
+  local shift_description = shortcut.shift_description or ("Ctrl+Shift+" .. shortcut.key)
   hl.unbind(combo(SUPER, shortcut.key))
+  hl.unbind(combo(SUPER_SHIFT, shortcut.key))
   o.bind(combo(SUPER, shortcut.key), shortcut.description, send_ctrl(shortcut.key))
+  o.bind(combo(SUPER_SHIFT, shortcut.key), shift_description, send_ctrl(shortcut.key, true))
 end
 
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).

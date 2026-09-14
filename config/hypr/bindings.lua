@@ -233,6 +233,11 @@ o.bind(combo(HYPER, "O"), "Window overview", "hyprctl dispatch hyprview:toggle")
 -- Browser: HYPER+G.
 bind_hyper("G", "Browser", { launch = "omarchy launch browser" })
 
+-- 1Password: SUPER+SHIFT+1 (replaces moving a window to workspace 1).
+hl.unbind(combo(SUPER_SHIFT, "code:10"))
+o.bind(combo(SUPER_SHIFT, "code:10"), "1Password", { launch = "1password" })
+o.window({ class = "^com\\.onepassword\\.OnePassword$" }, { float = true })
+
 -- macOS-style app shortcuts: SUPER + key forwards CTRL + key to the focused
 -- app, like Omarchy's universal SUPER+C/V/X clipboard bindings.
 -- SUPER + SHIFT + key forwards CTRL + SHIFT + key (reopen tab, save as, ...).

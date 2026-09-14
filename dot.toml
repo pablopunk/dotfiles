@@ -308,7 +308,7 @@ link."config/niri" = "~/.config/niri"
 
 [wtype]
 os = ["linux"]
-check = "command -v wtype"
+check = "wtype"
 install.pacman = "pkexec pacman -S --noconfirm wtype"
 uninstall.pacman = "pkexec pacman -Rs --noconfirm wtype"
 

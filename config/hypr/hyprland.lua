@@ -36,3 +36,4 @@ hl.window_rule({
 -- every time it opens, and only ever rewrites what's between the fences.
 o.window(".*", { opacity = "1 1" })
 -- <<< omaland managed block <<<
+

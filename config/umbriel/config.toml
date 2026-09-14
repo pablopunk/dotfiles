@@ -1,0 +1,152 @@
+# Umbriel equivalent of the essential Niri setup.
+
+[general]
+autostart = ["noctalia"]
+xwayland = true
+show_cheatsheet = false
+
+[environment]
+ELECTRON_OZONE_PLATFORM_HINT = "auto"
+QT_QPA_PLATFORM = "wayland"
+QT_QPA_PLATFORMTHEME = "gtk3"
+QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"
+TERMINAL = "ghostty"
+
+[output.DP-3]
+mode = "2560x1440@99.946"
+scale = 1
+workspaces = "dynamic"
+workspace_axis = "vertical"
+
+[workspaces]
+back_and_forth = true
+empty_above = true
+
+[appearance]
+prefer_no_csd = true
+border_width = 2
+corner_radius = 8
+
+[appearance.blur]
+enabled = true
+optimized = true
+passes = 3
+radius = 3
+
+[input.keyboard]
+layout = "es"
+numlock_toggle = true
+
+[input.touchpad]
+tap = true
+natural_scroll = true
+
+[input.cursor]
+theme = "capitaine-cursors"
+size = 24
+
+[input.focus]
+follows_mouse = true
+
+[layout]
+mode = "scrolling"
+gap = 16
+width_presets = [0.33, 0.50, 0.67, 0.85]
+
+[layout.scrolling]
+default_width_fraction = 0.5
+center_focused = "never"
+
+[keybinds]
+# Apps and shell
+"Ctrl+Alt+Super+T" = "spawn:ghostty"
+"Ctrl+Alt+Super+G" = "spawn:gtk-launch \"$(xdg-settings get default-web-browser)\""
+"Super+Space" = "spawn:noctalia msg panel-toggle launcher"
+"Super+V" = "spawn:noctalia msg panel-toggle clipboard"
+"Super+Alt+L" = "spawn:noctalia msg session lock"
+"Super+Q" = "window-close"
+
+# Hyper navigation; Hyper+Shift moves
+"Ctrl+Alt+Super+Left" = "window-focus-left"
+"Ctrl+Alt+Super+Down" = "window-focus-down"
+"Ctrl+Alt+Super+Up" = "window-focus-up"
+"Ctrl+Alt+Super+Right" = "window-focus-right"
+"Ctrl+Alt+Super+H" = "window-focus-left"
+"Ctrl+Alt+Super+J" = "window-focus-or-workspace-down"
+"Ctrl+Alt+Super+K" = "window-focus-or-workspace-up"
+"Ctrl+Alt+Super+L" = "window-focus-right"
+"Ctrl+Alt+Super+Shift+Left" = "column-move-left"
+"Ctrl+Alt+Super+Shift+Down" = "window-move-down"
+"Ctrl+Alt+Super+Shift+Up" = "window-move-up"
+"Ctrl+Alt+Super+Shift+Right" = "column-move-right"
+"Ctrl+Alt+Super+Shift+H" = "column-move-left"
+"Ctrl+Alt+Super+Shift+J" = "window-move-or-workspace-down"
+"Ctrl+Alt+Super+Shift+K" = "window-move-or-workspace-up"
+"Ctrl+Alt+Super+Shift+L" = "column-move-right"
+
+# Workspaces
+"Ctrl+Alt+Super+U" = "workspace-next"
+"Ctrl+Alt+Super+I" = "workspace-previous"
+"Ctrl+Alt+Super+Shift+U" = "column-move-to-workspace-next"
+"Ctrl+Alt+Super+Shift+I" = "column-move-to-workspace-previous"
+"Ctrl+Alt+Super+1" = "workspace-switch:1"
+"Ctrl+Alt+Super+2" = "workspace-switch:2"
+"Ctrl+Alt+Super+3" = "workspace-switch:3"
+"Ctrl+Alt+Super+4" = "workspace-switch:4"
+"Ctrl+Alt+Super+5" = "workspace-switch:5"
+"Ctrl+Alt+Super+6" = "workspace-switch:6"
+"Ctrl+Alt+Super+7" = "workspace-switch:7"
+"Ctrl+Alt+Super+8" = "workspace-switch:8"
+"Ctrl+Alt+Super+9" = "workspace-switch:9"
+
+# Layout and window state
+"Ctrl+Alt+Super+O" = "overview-toggle"
+"Ctrl+Alt+Super+R" = "window-cycle-width"
+"Ctrl+Alt+Super+F" = "window-toggle-maximize"
+"Ctrl+Alt+Super+Shift+F" = "window-toggle-fullscreen"
+"Ctrl+Alt+Super+V" = "window-toggle-floating"
+"Ctrl+Alt+Super+S" = "window-toggle-pinned"
+"Ctrl+Alt+Super+BracketLeft" = "window-consume-or-expel-left"
+"Ctrl+Alt+Super+BracketRight" = "window-consume-or-expel-right"
+"Ctrl+Alt+Super+Comma" = "window-cycle-width-back"
+"Ctrl+Alt+Super+Period" = "window-cycle-width"
+"Ctrl+Alt+Super+Minus" = "window-modify-width:-0.1"
+"Ctrl+Alt+Super+Equal" = "window-modify-width:0.1"
+
+# Media and screenshots
+"XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up"
+"XF86AudioLowerVolume" = "spawn:noctalia msg volume-down"
+"XF86AudioMute" = "spawn:noctalia msg volume-mute"
+"XF86AudioMicMute" = "spawn:noctalia msg mic-mute"
+"XF86AudioPlay" = "spawn:noctalia msg media toggle"
+"XF86AudioPrev" = "spawn:noctalia msg media previous"
+"XF86AudioNext" = "spawn:noctalia msg media next"
+"Super+Shift+3" = "spawn:noctalia msg screenshot-fullscreen"
+"Super+Shift+4" = "spawn:noctalia msg screenshot-region"
+
+# Session
+"Ctrl+Alt+Super+Shift+E" = "session-quit"
+"Ctrl+Alt+Delete" = "session-quit"
+
+# Niri-like transparency and blur
+[[window_rule]]
+opacity = 0.92
+blur = true
+
+[[window_rule]]
+match.app_id = "^dev[.]noctalia[.]Noctalia$"
+default_floating = true
+default_size = [1020, 900]
+
+[[window_rule]]
+match.title = "^Picture-in-Picture$"
+default_floating = true
+default_position = { x = 16, y = 48, anchor = "bottom_left" }
+
+[[layer_rule]]
+match.namespace = '^noctalia-(bar-[^"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^"]*)$'
+blur = true
+blur_ignore_alpha = 0.5
+
+[include]
+files = ["noctalia.toml"]

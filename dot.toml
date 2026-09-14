@@ -305,6 +305,10 @@ link."config/noctalia" = "~/.config/noctalia"
 install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
 
+[umbriel]
+os = ["linux"]
+link."config/umbriel" = "~/.config/umbriel"
+
 [hypr]
 os = ["linux"]
 link."config/hypr" = "~/.config/hypr"

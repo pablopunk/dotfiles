@@ -73,6 +73,7 @@ hl.config({
 -- Keep in sync with RESIZE_PRESETS in bindings.lua (used by the other layouts).
 hl.config({
   scrolling = {
+    column_width = 0.85,
     explicit_column_widths = "0.33, 0.5, 0.67, 0.85",
 
     -- Keep a lone window at its preset width instead of stretching it to

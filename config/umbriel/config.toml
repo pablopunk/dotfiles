@@ -66,6 +66,32 @@ center_focused = "never"
 "Super+Alt+L" = "spawn:noctalia msg session lock"
 "Super+Q" = "window-close"
 
+# macOS-style app shortcuts: Super+key sends Ctrl+key to the focused app.
+# wtype provides the Wayland virtual-keyboard injection; Umbriel consumes the
+# Super chord so it does not also reach the application.
+"Super+T" = "spawn:wtype -M ctrl -k t -m ctrl"
+"Super+Shift+T" = "spawn:wtype -M ctrl -M shift -k t -m shift -m ctrl"
+"Super+W" = "spawn:wtype -M ctrl -k w -m ctrl"
+"Super+Shift+W" = "spawn:wtype -M ctrl -M shift -k w -m shift -m ctrl"
+"Super+R" = "spawn:wtype -M ctrl -k r -m ctrl"
+"Super+Shift+R" = "spawn:wtype -M ctrl -M shift -k r -m shift -m ctrl"
+"Super+P" = "spawn:wtype -M ctrl -k p -m ctrl"
+"Super+Shift+P" = "spawn:wtype -M ctrl -M shift -k p -m shift -m ctrl"
+"Super+A" = "spawn:wtype -M ctrl -k a -m ctrl"
+"Super+Shift+A" = "spawn:wtype -M ctrl -M shift -k a -m shift -m ctrl"
+"Super+S" = "spawn:wtype -M ctrl -k s -m ctrl"
+"Super+Shift+S" = "spawn:wtype -M ctrl -M shift -k s -m shift -m ctrl"
+"Super+F" = "spawn:wtype -M ctrl -k f -m ctrl"
+"Super+Shift+F" = "spawn:wtype -M ctrl -M shift -k f -m shift -m ctrl"
+"Super+K" = "spawn:wtype -M ctrl -k k -m ctrl"
+"Super+Shift+K" = "spawn:wtype -M ctrl -M shift -k k -m shift -m ctrl"
+"Super+L" = "spawn:wtype -M ctrl -k l -m ctrl"
+"Super+Shift+L" = "spawn:wtype -M ctrl -M shift -k l -m shift -m ctrl"
+"Super+Z" = "spawn:wtype -M ctrl -k z -m ctrl"
+"Super+Shift+Z" = "spawn:wtype -M ctrl -M shift -k z -m shift -m ctrl"
+"Super+N" = "spawn:wtype -M ctrl -k n -m ctrl"
+"Super+Shift+N" = "spawn:wtype -M ctrl -M shift -k n -m shift -m ctrl"
+
 # Hyper navigation; Hyper+Shift moves
 "Ctrl+Alt+Super+Left" = "window-focus-left"
 "Ctrl+Alt+Super+Down" = "window-focus-down"
@@ -75,14 +101,14 @@ center_focused = "never"
 "Ctrl+Alt+Super+J" = "window-focus-or-workspace-down"
 "Ctrl+Alt+Super+K" = "window-focus-or-workspace-up"
 "Ctrl+Alt+Super+L" = "window-focus-right"
-"Ctrl+Alt+Super+Shift+Left" = "column-move-left"
+"Ctrl+Alt+Super+Shift+Left" = "window-consume-or-expel-left"
 "Ctrl+Alt+Super+Shift+Down" = "window-move-down"
 "Ctrl+Alt+Super+Shift+Up" = "window-move-up"
-"Ctrl+Alt+Super+Shift+Right" = "column-move-right"
-"Ctrl+Alt+Super+Shift+H" = "column-move-left"
+"Ctrl+Alt+Super+Shift+Right" = "window-consume-or-expel-right"
+"Ctrl+Alt+Super+Shift+H" = "window-consume-or-expel-left"
 "Ctrl+Alt+Super+Shift+J" = "window-move-or-workspace-down"
 "Ctrl+Alt+Super+Shift+K" = "window-move-or-workspace-up"
-"Ctrl+Alt+Super+Shift+L" = "column-move-right"
+"Ctrl+Alt+Super+Shift+L" = "window-consume-or-expel-right"
 
 # Workspaces
 "Ctrl+Alt+Super+U" = "workspace-next"
@@ -142,6 +168,11 @@ default_size = [1020, 900]
 match.title = "^Picture-in-Picture$"
 default_floating = true
 default_position = { x = 16, y = 48, anchor = "bottom_left" }
+
+# 0.85 when alone, default_width_fraction (0.5) when another window opens
+[[window_rule]]
+match.is_alone = true
+default_width = 0.85
 
 [[layer_rule]]
 match.namespace = '^noctalia-(bar-[^"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^"]*)$'

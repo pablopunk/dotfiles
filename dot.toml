@@ -298,12 +298,19 @@ check = "test -d '/Applications/CleanShot X.app'"
 install.brew = "brew install cleanshot"
 uninstall.brew = "brew uninstall cleanshot"
 
+[noctalia]
+os = ["linux"]
+link."config/noctalia" = "~/.config/noctalia"
+
 [niri]
 os = ["linux"]
 link."config/niri" = "~/.config/niri"
-link."config/noctalia" = "~/.config/noctalia"
-install.paru = "paru -S --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
-uninstall.paru = "paru -Rs --noconfirm cachyos-extra-v3/cliphist cachyos-extra-v3/wlsunset"
+
+[wtype]
+os = ["linux"]
+check = "command -v wtype"
+install.pacman = "pkexec pacman -S --noconfirm wtype"
+uninstall.pacman = "pkexec pacman -Rs --noconfirm wtype"
 
 [umbriel]
 os = ["linux"]

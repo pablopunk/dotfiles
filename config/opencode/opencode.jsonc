@@ -3,8 +3,8 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   // === Models ===
-  "model": "opencode-go/deepseek-v4.1-flash",
-  "small_model": "opencode-go/deepseek-v4.1-flash",
+  "model": "opencode-go/meta/muse-spark-1.3-contributor",
+  "small_model": "opencode-go/meta/muse-spark-1.3-contributor",
   // === Permissions ===
   "permission": {
     "external_directory": "allow",

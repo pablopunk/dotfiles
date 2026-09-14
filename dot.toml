@@ -312,6 +312,12 @@ check = "wtype"
 install.pacman = "pkexec pacman -S --noconfirm wtype"
 uninstall.pacman = "pkexec pacman -Rs --noconfirm wtype"
 
+[polkit-gnome]
+os = ["linux"]
+check = "test -x /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+install.pacman = "pkexec pacman -S --noconfirm polkit-gnome"
+uninstall.pacman = "pkexec pacman -Rs --noconfirm polkit-gnome"
+
 [umbriel]
 os = ["linux"]
 link."config/umbriel" = "~/.config/umbriel"

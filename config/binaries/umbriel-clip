@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Usage: umbriel-clip x|c|v
+# macOS-style Super+X/C/V for Umbriel. Sends Ctrl+X/C/V via wtype,
+# except on terminals which need Ctrl+Shift+C/V (plain Ctrl+C is SIGINT).
+# In terminals, cut (x) maps to copy since terminals have no cut.
+set -euo pipefail
+
+key="${1:-}"
+case "$key" in
+  x|X) key="x"; plain_key="x"; term_key="c" ;;
+  c|C) key="c"; plain_key="c"; term_key="c" ;;
+  v|V) key="v"; plain_key="v"; term_key="v" ;;
+  *) echo "usage: $(basename "$0") x|c|v" >&2; exit 1 ;;
+esac
+
+focused_app="$(umbriel windows --json 2>/dev/null | jq -r '.[] | select(.active == true) | .app_id' | head -n1)"
+if [[ -z "$focused_app" ]]; then
+  focused_app="$(umbriel windows --json 2>/dev/null | jq -r '.[] | select(.focused == true) | .app_id' | head -n1)"
+fi
+
+case "${focused_app,,}" in
+  *ghostty*|*foot*|*kitty*|*alacritty*|*wezterm*|*konsole*|*gnome-terminal*|*ptyxis*|*blackbox*|*xterm*|*urxvt*|*st-256color*|*tmux*)
+    is_term=true ;;
+  *) is_term=false ;;
+esac
+
+if [[ "$is_term" == true ]]; then
+  wtype -M ctrl -M shift -k "$term_key" -m shift -m ctrl
+else
+  wtype -M ctrl -k "$plain_key" -m ctrl
+fi

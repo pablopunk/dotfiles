@@ -2,15 +2,19 @@ config_version = 14
 
 [shell]
 app_icon_colorize = false
+settings_window_translucent = true
+
+    [shell.panel]
+    transparency_mode = "glass"
 
 [theme.templates]
 community_ids = [ "opencode", "zen-browser", "telegram", "neovim", "herdr", "tmux" ]
 
 [wallpaper.default]
-path = "/home/pol/.dotfiles/config/wallpapers/fuji.jpg"
+path = "/home/pol/.dotfiles/config/wallpapers/huracan.jpg"
 
 [wallpaper.last]
-path = "/home/pol/.dotfiles/config/wallpapers/fuji.jpg"
+path = "/home/pol/.dotfiles/config/wallpapers/huracan.jpg"
 
 [wallpaper.monitors.DP-3]
-path = "/home/pol/.dotfiles/config/wallpapers/fuji.jpg"
+path = "/home/pol/.dotfiles/config/wallpapers/huracan.jpg"

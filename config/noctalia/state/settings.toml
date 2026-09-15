@@ -8,6 +8,9 @@ enabled = [ "rylos/tailnet", "noctalia/screen_recorder" ]
 app_icon_colorize = false
 settings_window_translucent = true
 
+    [shell.launcher.providers.emoji]
+    global = true
+
     [shell.panel]
     transparency_mode = "glass"
 

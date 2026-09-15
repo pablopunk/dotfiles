@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Usage: umbriel-overview-tab [next|prev]
+# Hyper+Tab opens Overview on the next workspace; Hyper+Shift+Tab on the
+# previous one. Subsequent presses keep cycling that direction while
+# staying in Overview. Closes via Esc / window select, not via this key.
+set -euo pipefail
+
+dir="${1:-next}"
+case "$dir" in
+  prev|previous) ws_cmd="workspace-previous" ;;
+  *) ws_cmd="workspace-next" ;;
+esac
+
+state=""
+coproc SUB { umbriel subscribe overview 2>/dev/null; }
+if IFS= read -r -t 1 state <&"${SUB[0]}"; then :; else state=""; fi
+kill "$SUB_PID" 2>/dev/null || true
+wait "$SUB_PID" 2>/dev/null || true
+# Wrapping step: workspace-next/previous stop at the ends, so jump to the
+# other side when focused is already at the edge (same output only).
+step() {
+  local data out focused_idx min_idx max_idx min_name max_name
+  data="$(umbriel workspaces --json 2>/dev/null || true)"
+  if [[ -n "$data" ]] && command -v jq >/dev/null 2>&1; then
+    out="$(echo "$data" | jq -r 'map(select(.focused == true))[0].output // empty')"
+    [[ -n "$out" ]] || { umbriel msg "$ws_cmd"; return; }
+    focused_idx="$(echo "$data" | jq -r --arg o "$out" 'map(select(.output == $o)) | map(select(.focused == true))[0].index // empty')"
+    min_idx="$(echo "$data" | jq -r --arg o "$out" 'map(select(.output == $o)) | min_by(.index) | .index // empty')"
+    max_idx="$(echo "$data" | jq -r --arg o "$out" 'map(select(.output == $o)) | max_by(.index) | .index // empty')"
+    min_name="$(echo "$data" | jq -r --arg o "$out" --argjson i "$min_idx" 'map(select(.output == $o and .index == $i))[0].name // empty' 2>/dev/null)"
+    max_name="$(echo "$data" | jq -r --arg o "$out" --argjson i "$max_idx" 'map(select(.output == $o and .index == $i))[0].name // empty' 2>/dev/null)"
+    if [[ "$ws_cmd" == "workspace-next" && "$focused_idx" == "$max_idx" && -n "$min_name" ]]; then
+      umbriel msg "workspace-switch:$min_name"
+    elif [[ "$ws_cmd" == "workspace-previous" && "$focused_idx" == "$min_idx" && -n "$max_name" ]]; then
+      umbriel msg "workspace-switch:$max_name"
+    else
+      umbriel msg "$ws_cmd"
+    fi
+  else
+    umbriel msg "$ws_cmd"
+  fi
+}
+if [[ "$state" == *'"open":true'* ]]; then
+  step
+else
+  umbriel msg overview-open
+  step
+fi

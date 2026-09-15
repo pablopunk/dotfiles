@@ -115,8 +115,10 @@ center_focused = "never"
 "Ctrl+Alt+Super+Shift+L" = "window-consume-or-expel-right"
 
 # Workspaces
+"Ctrl+Alt+Super+Tab" = "spawn:/home/pol/.bin/umbriel-overview-tab"
+"Ctrl+Alt+Super+Shift+Tab" = "spawn:/home/pol/.bin/umbriel-overview-tab prev"
 "Ctrl+Alt+Super+U" = "workspace-next"
-"Ctrl+Alt+Super+I" = "workspace-previous"
+"Ctrl+Alt+Super+I" = "spawn:noctalia msg settings-toggle"
 "Ctrl+Alt+Super+Shift+U" = "column-move-to-workspace-next"
 "Ctrl+Alt+Super+Shift+I" = "column-move-to-workspace-previous"
 "Ctrl+Alt+Super+1" = "workspace-switch:1"
@@ -156,6 +158,7 @@ center_focused = "never"
 
 # Session
 "Super+Shift+E" = "spawn:noctalia msg panel-toggle launcher /emo"
+"Super+Tab" = "workspace-focus-last"
 "Super+Shift+1" = "spawn:1password"
 "Ctrl+Alt+Super+Shift+E" = "session-quit"
 "Ctrl+Alt+Delete" = "session-quit"

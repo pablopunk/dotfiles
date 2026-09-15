@@ -1,5 +1,9 @@
 config_version = 14
 
+[plugins]
+auto_update = "all"
+enabled = [ "rylos/tailnet", "noctalia/screen_recorder" ]
+
 [shell]
 app_icon_colorize = false
 settings_window_translucent = true

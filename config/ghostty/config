@@ -11,6 +11,10 @@ background-blur = 80
 macos-titlebar-style = transparent
 window-padding-x = 12
 window-padding-y = 12
+# Universal clipboard (mirrors Omarchy defaults): Shift+Insert pastes and
+# Ctrl+Insert copies, so Super+C/V also work in terminals via wtype.
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
 keybind = global:ctrl+alt+cmd+t=new_window
 # window-decoration = auto
 # macos-titlebar-style = hidden

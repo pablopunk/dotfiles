@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 # Usage: umbriel-clip x|c|v
-# macOS-style Super+X/C/V for Umbriel. Sends Ctrl+X/C/V via wtype,
-# except on terminals which need Ctrl+Shift+C/V (plain Ctrl+C is SIGINT).
-# In terminals, cut (x) maps to copy since terminals have no cut.
+# Universal Super+X/C/V for Umbriel, mirroring Omarchy's
+# default/hypr/bindings/clipboard.lua:
+#   copy:  Ctrl+C, terminals get Ctrl+Insert
+#   paste: Ctrl+V, terminals get Shift+Insert
+#   cut:   always Ctrl+X (even in terminals)
+# Umbriel lacks Hyprland's send_key_state, so inject via wtype instead.
 set -euo pipefail
 
 key="${1:-}"
 case "$key" in
-  x|X) key="x"; plain_key="x"; term_key="c" ;;
-  c|C) key="c"; plain_key="c"; term_key="c" ;;
-  v|V) key="v"; plain_key="v"; term_key="v" ;;
+  x|X) op="cut" ;;
+  c|C) op="copy" ;;
+  v|V) op="paste" ;;
   *) echo "usage: $(basename "$0") x|c|v" >&2; exit 1 ;;
 esac
 
@@ -18,14 +21,19 @@ if [[ -z "$focused_app" ]]; then
   focused_app="$(umbriel windows --json 2>/dev/null | jq -r '.[] | select(.focused == true) | .app_id' | head -n1)"
 fi
 
+# Terminal list mirrors Omarchy's default/hypr/apps/terminals.lua, plus extras.
 case "${focused_app,,}" in
-  *ghostty*|*foot*|*kitty*|*alacritty*|*wezterm*|*konsole*|*gnome-terminal*|*ptyxis*|*blackbox*|*xterm*|*urxvt*|*st-256color*|*tmux*)
+  *alacritty*|*kitty*|*ghostty*|*foot*|*wezterm*|*omarchy*|*tui.*|*konsole*|*gnome-terminal*|*ptyxis*|*blackbox*|*xterm*|*urxvt*|*st-256color*|*tmux*)
     is_term=true ;;
   *) is_term=false ;;
 esac
 
-if [[ "$is_term" == true ]]; then
-  wtype -M ctrl -M shift -k "$term_key" -m shift -m ctrl
-else
-  wtype -M ctrl -k "$plain_key" -m ctrl
-fi
+case "$op" in
+  cut) wtype -M ctrl -k x -m ctrl ;;
+  copy)
+    if [[ "$is_term" == true ]]; then wtype -M ctrl -M shift -k c -m shift -m ctrl
+    else wtype -M ctrl -k c -m ctrl; fi ;;
+  paste)
+    if [[ "$is_term" == true ]]; then wtype -M ctrl -M shift -k v -m shift -m ctrl
+    else wtype -M ctrl -k v -m ctrl; fi ;;
+esac

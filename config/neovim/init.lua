@@ -261,9 +261,69 @@ local function fix_cursorline_color()
   -- ]]
 end
 
-local function omarchy()
-  add("RRethy/base16-nvim")
+local function noctalia_theme_mode()
+  -- Merged Noctalia [theme] mode: settings.toml wins over config.toml.
+  -- Returns "light" or "dark" (defaults to "dark").
+  local function mode_from_file(path)
+    local f = io.open(path, "r")
+    if not f then
+      return nil
+    end
+    local in_theme = false
+    local mode = nil
+    for line in f:lines() do
+      local section = line:match("^%s*%[(.-)%]%s*$")
+      if section then
+        in_theme = section == "theme"
+      elseif in_theme then
+        local m = line:match("^%s*mode%s*=%s*[\"'](.-)[\"']")
+        if m then
+          mode = m
+        end
+      end
+    end
+    f:close()
+    return mode
+  end
+  local base = mode_from_file(vim.fn.expand("~/.config/noctalia/config.toml"))
+  local override = mode_from_file(vim.fn.expand("~/.local/state/noctalia/settings.toml"))
+  local mode = override or base or "dark"
+  return mode == "light" and "light" or "dark"
+end
 
+local function noctalia()
+  -- Uses the file Noctalia's neovim community template generates:
+  -- $XDG_CONFIG_HOME/nvim/lua/matugen.lua (require("matugen")).
+  -- Nothing to version in this repo; Noctalia regenerates it on theme/
+  -- wallpaper change and sends SIGUSR1 (see template's apply.sh).
+  local function apply()
+    vim.opt.background = noctalia_theme_mode()
+    package.loaded["matugen"] = nil
+    local ok, matugen = pcall(require, "matugen")
+    if not ok or type(matugen) ~= "table" or type(matugen.setup) ~= "function" then
+      return false
+    end
+    local ok_setup = pcall(matugen.setup)
+    return ok_setup
+  end
+
+  -- matugen.lua also registers its own SIGUSR1 handler; this one additionally
+  -- keeps &background in sync with Noctalia's [theme] mode. Double setup is idempotent.
+  local signal = vim.uv.new_signal()
+  signal:start("sigusr1", vim.schedule_wrap(apply))
+
+  local function reapply()
+    if not apply() then
+      vim.notify("Noctalia theme not available", vim.log.levels.WARN)
+    end
+  end
+  vim.api.nvim_create_user_command("Light", reapply, { force = true })
+  vim.api.nvim_create_user_command("Dark", reapply, { force = true })
+
+  return apply()
+end
+
+local function omarchy()
   local theme_file = vim.fn.stdpath("cache") .. "/omarchy-theme.lua"
 
   local function apply()
@@ -288,8 +348,8 @@ local function omarchy()
       vim.notify("Omarchy theme not available", vim.log.levels.WARN)
     end
   end
-  vim.api.nvim_create_user_command("Light", reapply, {})
-  vim.api.nvim_create_user_command("Dark", reapply, {})
+  vim.api.nvim_create_user_command("Light", reapply, { force = true })
+  vim.api.nvim_create_user_command("Dark", reapply, { force = true })
 
   return apply()
 end
@@ -297,7 +357,9 @@ end
 local function colors()
   vim.opt.background = "dark"
 
-  if not omarchy() then
+  add("RRethy/base16-nvim") -- shared by noctalia() and omarchy()
+
+  if not noctalia() and not omarchy() then
     catppuccin()
     vim.cmd("colorscheme " .. dark_theme)
     color_utils()

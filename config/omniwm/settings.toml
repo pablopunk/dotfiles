@@ -9,7 +9,7 @@ schemaVersion = 3
 mode = "automatic"
 
 [borders]
-enabled = true
+enabled = false
 width = 2.5
 
 [borders.color]
@@ -35,7 +35,7 @@ useGlobalGaps = true
 [focus]
 crossesMonitorAtEdge = true
 followsMouse = false
-followsWindowToMonitor = false
+followsWindowToMonitor = true
 lockModifier = "off"
 moveCrossesMonitorAtEdge = false
 moveMouseToFocusedWindow = false
@@ -984,7 +984,7 @@ binding = "Unassigned"
 id = "moveColumnToIndex.9"
 
 [[hotkeys]]
-binding = "Hyper+R"
+binding = "Hyper+Period"
 id = "cycleSizeForward"
 
 [[hotkeys]]
@@ -1177,7 +1177,7 @@ type = "main"
 
 [[workspaces]]
 id = "248AA883-2261-4D45-943C-79C0E46A232B"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "4"
 
 [workspaces.monitorAssignment]
@@ -1193,7 +1193,7 @@ type = "main"
 
 [[workspaces]]
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "6"
 
 [workspaces.monitorAssignment]

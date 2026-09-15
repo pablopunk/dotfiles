@@ -377,15 +377,6 @@ local function snacks()
   })
 end
 
-local function vimade()
-  add("TaDaa/vimade")
-  require("vimade").setup({
-    recipe = { "minimalist", { animate = true } },
-    ncmode = "windows",
-    fadelevel = 0.4,
-  })
-end
-
 local function unclutter()
   add("pablopunk/unclutter.nvim")
   local ok, _ = pcall(function()
@@ -1280,7 +1271,6 @@ local function setup_plugins()
     highlight_colors()
     markdown()
     snacks()
-    vimade()
     todo()
   end
 end

@@ -301,6 +301,7 @@ uninstall.brew = "brew uninstall cleanshot"
 [noctalia]
 os = ["linux"]
 link."config/noctalia" = "~/.config/noctalia"
+link."config/noctalia/state/settings.toml" = "~/.local/state/noctalia/settings.toml"
 
 [niri]
 os = ["linux"]

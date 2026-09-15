@@ -1,0 +1,6 @@
+# Noctalia GUI overrides (app-managed layer).
+# Linked to ~/.local/state/noctalia/settings.toml. Noctalia writes through
+# symlinks, so Settings UI changes land here, versioned in dotfiles.
+# This file wins over config/noctalia/config.toml when keys overlap.
+# Starts minimal (migrated 2026-09-15: full state folded into config.toml).
+config_version = 14

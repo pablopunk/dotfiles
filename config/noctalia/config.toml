@@ -1,0 +1,98 @@
+# Noctalia base config (v5+ standalone binary, TOML).
+# Curated hand-written layer. Managed in dotfiles, linked to ~/.config/noctalia/config.toml.
+# Generated from `noctalia config export` on 2026-09-15, then curated.
+# GUI overrides live in ~/.local/state/noctalia/settings.toml (versioned via
+# config/noctalia/state/settings.toml) and win over this file when set.
+
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    center = [ "workspaces" ]
+    end = [ "tray", "bar", "network", "brightness", "battery", "clock", "notifications" ]
+    start = [ "active_window", "media" ]
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1280.0
+    cy = 1258.0
+    output = "DP-3"
+    placement_height = 1440.0
+    placement_width = 2560.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[nightlight]
+enabled = true
+
+[plugins]
+enabled = [ "rylos/tailnet" ]
+
+[shell]
+app_icon_colorize = true
+telemetry_enabled = true
+
+    [shell.launcher]
+    app_grid = true
+    categories = false
+    compact = true
+    show_app_actions = true
+
+    [shell.panel]
+    launcher_placement = "attached"
+
+[theme]
+builtin = "Gruvbox"
+community_palette = "Osaka jade"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "vibrant"
+
+    [theme.templates]
+    builtin_ids = [ "alacritty", "btop", "cava", "emacs", "foot", "gtk3", "gtk4", "ghostty", "helix", "kitty", "qt", "umbriel" ]
+    community_ids = [ "zen-browser", "herdr" ]
+
+[wallpaper]
+directory = "~/.dotfiles/config/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/pol/.dotfiles/config/wallpapers/priscilla-du-preez-B9LlLJYmw74-unsplash.jpg"
+
+    [wallpaper.last]
+    path = "/home/pol/.dotfiles/config/wallpapers/priscilla-du-preez-B9LlLJYmw74-unsplash.jpg"
+
+    [wallpaper.monitors.DP-3]
+    path = "/home/pol/.dotfiles/config/wallpapers/priscilla-du-preez-B9LlLJYmw74-unsplash.jpg"
+
+[widget.bar]
+type = "rylos/tailnet:bar"

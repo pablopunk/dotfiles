@@ -1,6 +1,16 @@
-# Noctalia GUI overrides (app-managed layer).
-# Linked to ~/.local/state/noctalia/settings.toml. Noctalia writes through
-# symlinks, so Settings UI changes land here, versioned in dotfiles.
-# This file wins over config/noctalia/config.toml when keys overlap.
-# Starts minimal (migrated 2026-09-15: full state folded into config.toml).
 config_version = 14
+
+[shell]
+app_icon_colorize = false
+
+[theme.templates]
+community_ids = [ "opencode", "zen-browser", "neovim", "herdr" ]
+
+[wallpaper.default]
+path = "/home/pol/.dotfiles/config/wallpapers/range-light.jpg"
+
+[wallpaper.last]
+path = "/home/pol/.dotfiles/config/wallpapers/range-light.jpg"
+
+[wallpaper.monitors.DP-3]
+path = "/home/pol/.dotfiles/config/wallpapers/range-light.jpg"

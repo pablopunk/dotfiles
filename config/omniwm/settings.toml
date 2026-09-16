@@ -87,8 +87,8 @@ margin = 1
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
-containerPrimarySpanPresets = [0.33, 0.5, 0.67, 0.85, 1.0]
-defaultContainerPrimarySpan = 0.8
+containerPrimarySpanPresets = [0.33, 0.5, 0.67, 0.85]
+defaultContainerPrimarySpan = 0.85
 infiniteLoop = false
 singleWindowFit = "container_primary_span"
 visibleContainerCount = 2
@@ -1008,7 +1008,7 @@ binding = "Unassigned"
 id = "cycleWindowSecondarySpanBackward"
 
 [[hotkeys]]
-binding = "Hyper+Shift+F"
+binding = "Hyper+F"
 id = "toggleContainerFullPrimarySpan"
 
 [[hotkeys]]
@@ -1116,7 +1116,7 @@ binding = "Unassigned"
 id = "rescueOffscreenWindows"
 
 [[hotkeys]]
-binding = "Hyper+F"
+binding = "Hyper+Shift+F"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]

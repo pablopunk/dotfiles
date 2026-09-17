@@ -692,6 +692,10 @@ binding = "Unassigned"
 id = "centerColumn"
 
 [[hotkeys]]
+binding = "Hyper+E"
+id = "centerVisibleColumns"
+
+[[hotkeys]]
 binding = "Control+Option+Shift+Up Arrow"
 id = "moveWindowToWorkspaceUp"
 

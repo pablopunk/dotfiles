@@ -24,7 +24,13 @@ new_workspace = "prefix+shift+w"
 rename_workspace = "prefix+r"
 resize_mode = ""
 reload_config = "prefix+,"
-goto = "prefix+space"
+
+[[keys.command]]
+key = "prefix+space"
+type = "popup"
+command = "hr"
+width = "60%"
+height = "40%"
 
 [ui]
 agent_panel_sort = "priority"

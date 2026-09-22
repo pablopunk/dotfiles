@@ -532,6 +532,14 @@ binding = "Hyper+Shift+R"
 id = "moveToWorkspace.7"
 
 [[hotkeys]]
+binding = "Hyper+Z"
+id = "switchWorkspace.8"
+
+[[hotkeys]]
+binding = "Hyper+Shift+Z"
+id = "moveToWorkspace.8"
+
+[[hotkeys]]
 binding = "Unassigned"
 id = "switchWorkspaceSlot.1"
 
@@ -1191,6 +1199,14 @@ type = "main"
 id = "8D4D711C-2B2F-4FEC-86BF-FA952037738A"
 layoutType = "niri"
 name = "R"
+
+[workspaces.monitorAssignment]
+type = "main"
+
+[[workspaces]]
+id = "F1E26C76-2C80-4D99-A04C-EA2500161CAE"
+layoutType = "niri"
+name = "Z"
 
 [workspaces.monitorAssignment]
 type = "main"

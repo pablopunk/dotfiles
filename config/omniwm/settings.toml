@@ -305,97 +305,85 @@ titleSubstring = "Google Chrome for Testing"
 
 [[appRules]]
 appNameSubstring = "Zen"
-assignToWorkspace = "1"
+assignToWorkspace = "A"
 bundleId = ""
 id = "C7EF964D-911B-4C74-AC4A-E3DE5DC61FB8"
 
 [[appRules]]
-appNameSubstring = "Fractal"
-assignToWorkspace = "2"
-bundleId = ""
-id = "6D22BB09-2985-4394-BF25-591441CECD9E"
-
-[[appRules]]
-appNameSubstring = "Orca"
-assignToWorkspace = "2"
-bundleId = ""
-id = "B3D631C4-DD76-402F-9F35-463D8B124F4C"
-
-[[appRules]]
 appNameSubstring = "Slack"
-assignToWorkspace = "3"
+assignToWorkspace = "D"
 bundleId = ""
 id = "00FB86BA-473C-410C-A0D9-D8D80FB9F428"
 
 [[appRules]]
 appNameSubstring = "Claude"
-assignToWorkspace = "3"
+assignToWorkspace = "D"
 bundleId = ""
 id = "59169FFF-BE75-46E6-BA34-4A5C5723A45B"
 
 [[appRules]]
 appNameSubstring = "Missive"
-assignToWorkspace = "4"
+assignToWorkspace = "F"
 bundleId = ""
 id = "59BD3E71-E6CB-408E-802C-90B049359E46"
 
 [[appRules]]
 appNameSubstring = "Calendar"
-assignToWorkspace = "4"
+assignToWorkspace = "F"
 bundleId = ""
 id = "164094A3-5E53-40A0-99AD-EE26A2FAE37D"
 
 [[appRules]]
 appNameSubstring = "zoom.us"
-assignToWorkspace = "5"
+assignToWorkspace = "D"
 bundleId = ""
 id = "4EC46684-DEC2-4401-A5F7-6C63DDA811FE"
 
 [[appRules]]
 appNameSubstring = "Granola"
-assignToWorkspace = "5"
+assignToWorkspace = "D"
 bundleId = ""
 id = "80B8A452-432D-47D5-9811-3065673A175E"
 
 [[appRules]]
 appNameSubstring = "OpenOats"
-assignToWorkspace = "5"
+assignToWorkspace = "D"
 bundleId = ""
 id = "6793EBE6-11C3-483A-B47F-6C17BD03E69C"
 
 [[appRules]]
 appNameSubstring = "Spotify"
-assignToWorkspace = "7"
+assignToWorkspace = "W"
 bundleId = ""
 id = "74D37CB2-2BC8-4433-9F57-586FD1F035E0"
 
 [[appRules]]
 appNameSubstring = "WhatsApp"
-assignToWorkspace = "6"
+assignToWorkspace = "E"
 bundleId = ""
 id = "9BF8BE6B-6812-484C-A31D-983FC9751E5B"
 
 [[appRules]]
 appNameSubstring = "Telegram"
-assignToWorkspace = "6"
+assignToWorkspace = "E"
 bundleId = ""
 id = "119F377A-DA35-4F34-9523-23C8349E6C3E"
 
 [[appRules]]
 appNameSubstring = "BambuStudio"
-assignToWorkspace = "9"
+assignToWorkspace = "R"
 bundleId = ""
 id = "6159E777-153B-44CA-97FE-93794C5645C7"
 
 [[appRules]]
 appNameSubstring = "Shapr3D"
-assignToWorkspace = "9"
+assignToWorkspace = "R"
 bundleId = ""
 id = "28B9AB5B-13FF-485B-86B3-1F4B8EDFE948"
 
 [[appRules]]
 appNameSubstring = "Pixelmator Pro"
-assignToWorkspace = "9"
+assignToWorkspace = "R"
 bundleId = ""
 id = "39D21D66-924B-4DD0-BDBC-55665EBA70E6"
 
@@ -480,76 +468,68 @@ binding = "Unassigned"
 id = "assignFocusedWindowToScratchpad.10"
 
 [[hotkeys]]
-binding = "Hyper+1"
+binding = "Hyper+A"
 id = "switchWorkspace.0"
 
 [[hotkeys]]
-binding = "Hyper+Shift+1"
+binding = "Hyper+Shift+A"
 id = "moveToWorkspace.0"
 
 [[hotkeys]]
-binding = "Hyper+2"
+binding = "Hyper+S"
 id = "switchWorkspace.1"
 
 [[hotkeys]]
-binding = "Hyper+Shift+2"
+binding = "Hyper+Shift+S"
 id = "moveToWorkspace.1"
 
 [[hotkeys]]
-binding = "Hyper+3"
+binding = "Hyper+D"
 id = "switchWorkspace.2"
 
 [[hotkeys]]
-binding = "Hyper+Shift+3"
+binding = "Hyper+Shift+D"
 id = "moveToWorkspace.2"
 
 [[hotkeys]]
-binding = "Hyper+4"
+binding = "Hyper+F"
 id = "switchWorkspace.3"
 
 [[hotkeys]]
-binding = "Hyper+Shift+4"
+binding = "Hyper+Shift+F"
 id = "moveToWorkspace.3"
 
 [[hotkeys]]
-binding = "Hyper+5"
+binding = "Hyper+Q"
 id = "switchWorkspace.4"
 
 [[hotkeys]]
-binding = "Hyper+Shift+5"
+binding = "Hyper+Shift+Q"
 id = "moveToWorkspace.4"
 
 [[hotkeys]]
-binding = "Hyper+6"
+binding = "Hyper+W"
 id = "switchWorkspace.5"
 
 [[hotkeys]]
-binding = "Hyper+Shift+6"
+binding = "Hyper+Shift+W"
 id = "moveToWorkspace.5"
 
 [[hotkeys]]
-binding = "Hyper+7"
+binding = "Hyper+E"
 id = "switchWorkspace.6"
 
 [[hotkeys]]
-binding = "Hyper+Shift+7"
+binding = "Hyper+Shift+E"
 id = "moveToWorkspace.6"
 
 [[hotkeys]]
-binding = "Hyper+8"
+binding = "Hyper+R"
 id = "switchWorkspace.7"
 
 [[hotkeys]]
-binding = "Hyper+Shift+8"
+binding = "Hyper+Shift+R"
 id = "moveToWorkspace.7"
-
-[[hotkeys]]
-binding = "Hyper+9"
-id = "switchWorkspace.8"
-
-[[hotkeys]]
-binding = "Hyper+Shift+9"
-id = "moveToWorkspace.8"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -692,7 +672,7 @@ binding = "Unassigned"
 id = "centerColumn"
 
 [[hotkeys]]
-binding = "Hyper+E"
+binding = "Hyper+I"
 id = "centerVisibleColumns"
 
 [[hotkeys]]
@@ -1008,7 +988,7 @@ binding = "Unassigned"
 id = "cycleWindowSecondarySpanBackward"
 
 [[hotkeys]]
-binding = "Hyper+F"
+binding = "Hyper+M"
 id = "toggleContainerFullPrimarySpan"
 
 [[hotkeys]]
@@ -1116,7 +1096,7 @@ binding = "Unassigned"
 id = "rescueOffscreenWindows"
 
 [[hotkeys]]
-binding = "Hyper+Shift+F"
+binding = "Hyper+Y"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
@@ -1140,7 +1120,7 @@ binding = "Unassigned"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
-binding = "Hyper+A"
+binding = "Hyper+U"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
@@ -1154,7 +1134,7 @@ id = "toggleSystemStats"
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
 layoutType = "niri"
-name = "1"
+name = "A"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1162,7 +1142,7 @@ type = "main"
 [[workspaces]]
 id = "454CECD4-5E9D-4ED1-95D7-979D48817F5F"
 layoutType = "niri"
-name = "2"
+name = "S"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1170,7 +1150,7 @@ type = "main"
 [[workspaces]]
 id = "BEB842B5-E894-4791-9FD1-397C3CDD3538"
 layoutType = "niri"
-name = "3"
+name = "D"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1178,7 +1158,7 @@ type = "main"
 [[workspaces]]
 id = "248AA883-2261-4D45-943C-79C0E46A232B"
 layoutType = "dwindle"
-name = "4"
+name = "F"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1186,7 +1166,15 @@ type = "main"
 [[workspaces]]
 id = "8B8C45D6-CE9E-41D9-BD50-BE4989D5E3DE"
 layoutType = "niri"
-name = "5"
+name = "Q"
+
+[workspaces.monitorAssignment]
+type = "main"
+
+[[workspaces]]
+id = "A7D5E104-6985-4516-8ED5-07F144F2A33D"
+layoutType = "niri"
+name = "W"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1194,23 +1182,7 @@ type = "main"
 [[workspaces]]
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
 layoutType = "dwindle"
-name = "6"
-
-[workspaces.monitorAssignment]
-type = "secondary"
-
-[[workspaces]]
-id = "A7D5E104-6985-4516-8ED5-07F144F2A33D"
-layoutType = "niri"
-name = "7"
-
-[workspaces.monitorAssignment]
-type = "secondary"
-
-[[workspaces]]
-id = "0E18F6B0-345A-4078-8B21-33641F07A861"
-layoutType = "niri"
-name = "8"
+name = "E"
 
 [workspaces.monitorAssignment]
 type = "main"
@@ -1218,7 +1190,7 @@ type = "main"
 [[workspaces]]
 id = "8D4D711C-2B2F-4FEC-86BF-FA952037738A"
 layoutType = "niri"
-name = "9"
+name = "R"
 
 [workspaces.monitorAssignment]
 type = "main"

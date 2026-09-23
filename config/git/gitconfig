@@ -18,8 +18,8 @@
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
-	helper =
-	helper = !gh auth git-credential
+	helper = 
+	helper = !/Users/pablopunk/.local/share/mise/installs/gh/2.99.0/gh_2.99.0_macOS_arm64/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper =
-	helper = !gh auth git-credential
+	helper = 
+	helper = !/Users/pablopunk/.local/share/mise/installs/gh/2.99.0/gh_2.99.0_macOS_arm64/bin/gh auth git-credential

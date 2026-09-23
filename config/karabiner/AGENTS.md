@@ -11,6 +11,7 @@ Tap-for-sticky plus hold-for-modifier pattern:
 - `from`/`to` the same modifier (hold behavior), `to_if_alone` with `sticky_modifier: toggle` (tap arms the one-shot).
 - Never post key events (not even `vk_none`) in `to_delayed_action.to_if_canceled`; any key event consumes the pending sticky. Use a `set_variable` no-op there.
 - Timeout via `to_delayed_action.to_if_invoked` with `sticky_modifier: off` plus `basic.to_delayed_action_delay_milliseconds`.
+- Tap-hold for held modifier: `to_if_alone` also sets a flag variable; a preceding manipulator with `variable_if` on that flag sends the held modifier combo and clears the flag in `to_after_key_up`. All delayed-action branches (`invoked` and `canceled`) must reset the flag with `set_variable`, never a key event.
 
 ## Verify
 

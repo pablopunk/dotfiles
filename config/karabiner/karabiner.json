@@ -448,8 +448,44 @@
                     },
 
                     {
-                        "description": "left_command tap to hyper OSM, hold to left_command",
+                        "description": "left_command tap to hyper OSM, hold to left_command, tap-hold for held hyper",
                         "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_tap",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 20550,
+                                                "vendor_id": 12815
+                                            },
+                                            {
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "modifiers": ["left_control", "left_option"]
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    { "set_variable": { "name": "hyper_tap", "value": 0 } }
+                                ],
+                                "type": "basic"
+                            },
                             {
                                 "conditions": [
                                     {
@@ -474,15 +510,17 @@
                                 "to_if_alone": [
                                     { "sticky_modifier": { "left_control": "toggle" } },
                                     { "sticky_modifier": { "left_option": "toggle" } },
-                                    { "sticky_modifier": { "left_command": "toggle" } }
+                                    { "sticky_modifier": { "left_command": "toggle" } },
+                                    { "set_variable": { "name": "hyper_tap", "value": 1 } }
                                 ],
                                 "to_delayed_action": {
                                     "to_if_invoked": [
                                         { "sticky_modifier": { "left_control": "off" } },
                                         { "sticky_modifier": { "left_option": "off" } },
-                                        { "sticky_modifier": { "left_command": "off" } }
+                                        { "sticky_modifier": { "left_command": "off" } },
+                                        { "set_variable": { "name": "hyper_tap", "value": 0 } }
                                     ],
-                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_osm", "value": 0 } }]
+                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_tap", "value": 0 } }]
                                 },
                                 "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
                                 "type": "basic"
@@ -490,8 +528,44 @@
                         ]
                     },
                     {
-                        "description": "swapped left_option (physical command) tap to hyper OSM, hold to left_option",
+                        "description": "swapped left_option (physical command) tap to hyper OSM, hold to left_option, tap-hold for held hyper",
                         "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "hyper_tap",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 20550,
+                                                "vendor_id": 12815
+                                            },
+                                            {
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "left_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_option",
+                                        "modifiers": ["left_control", "left_command"]
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    { "set_variable": { "name": "hyper_tap", "value": 0 } }
+                                ],
+                                "type": "basic"
+                            },
                             {
                                 "conditions": [
                                     {
@@ -516,15 +590,17 @@
                                 "to_if_alone": [
                                     { "sticky_modifier": { "left_control": "toggle" } },
                                     { "sticky_modifier": { "left_option": "toggle" } },
-                                    { "sticky_modifier": { "left_command": "toggle" } }
+                                    { "sticky_modifier": { "left_command": "toggle" } },
+                                    { "set_variable": { "name": "hyper_tap", "value": 1 } }
                                 ],
                                 "to_delayed_action": {
                                     "to_if_invoked": [
                                         { "sticky_modifier": { "left_control": "off" } },
                                         { "sticky_modifier": { "left_option": "off" } },
-                                        { "sticky_modifier": { "left_command": "off" } }
+                                        { "sticky_modifier": { "left_command": "off" } },
+                                        { "set_variable": { "name": "hyper_tap", "value": 0 } }
                                     ],
-                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_osm", "value": 0 } }]
+                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_tap", "value": 0 } }]
                                 },
                                 "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
                                 "type": "basic"

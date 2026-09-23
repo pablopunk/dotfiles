@@ -2,7 +2,7 @@
 
 ## Modification order
 
-Complex modifications see keys AFTER simple modifications apply (per Karabiner docs: input event modification chaining). Device rules here swap `left_command`/`left_option` on some keyboards, so a complex rule matching a logical modifier may fire on the other physical key. Scope such rules with `device_if`/`device_unless` on the swapped `vendor_id`/`product_id` pairs.
+Complex modifications see keys AFTER simple modifications apply (per Karabiner docs: input event modification chaining). Device rules here swap `left_command`/`left_option` on some keyboards, so a complex rule matching a logical modifier may fire on the other physical key. Scope such rules with `device_if`/`device_unless` on the swapped `vendor_id`/`product_id` pairs. The ZSA Voyager (`12951:6519`) stays out of the Command OSM rule.
 
 ## One-shot modifiers
 

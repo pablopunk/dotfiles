@@ -466,6 +466,10 @@
                                             {
                                                 "product_id": 592,
                                                 "vendor_id": 1452
+                                            },
+                                            {
+                                                "product_id": 6519,
+                                                "vendor_id": 12951
                                             }
                                         ],
                                         "type": "device_unless"
@@ -497,6 +501,10 @@
                                             {
                                                 "product_id": 592,
                                                 "vendor_id": 1452
+                                            },
+                                            {
+                                                "product_id": 6519,
+                                                "vendor_id": 12951
                                             }
                                         ],
                                         "type": "device_unless"

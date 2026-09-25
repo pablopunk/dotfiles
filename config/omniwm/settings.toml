@@ -150,7 +150,7 @@ useWorkspaceId = false
 [workspaceBar]
 backgroundOpacity = 0.1
 deduplicateAppIcons = true
-enabled = false
+enabled = true
 excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = true

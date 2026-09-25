@@ -39,7 +39,7 @@ prompt_new_tab_name = false
 show_agent_labels_on_pane_borders = true
 status_indicators = "symbols"
 [ui.toast]
-delivery = "system"
+delivery = "terminal"
 
 [theme.custom]
 accent = "#e68b66"
@@ -61,3 +61,6 @@ red = "#e37e55"
 blue = "#bae355"
 teal = "#edda92"
 peach = "#e3c555"
+
+[ui.sound]
+enabled = false

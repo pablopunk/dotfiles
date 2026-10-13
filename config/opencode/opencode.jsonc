@@ -1,10 +1,10 @@
 {
-  "plugin": [],
+  "plugins": ["opencode-context-pruner"],
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   // === Models ===
   "model": "openai/gpt-6-luna",
-  "small_model": "openrouter/google/gemini-2.5-flash-lite",
+  "small_model": "openai/gpt-6-luna",
   // === Permissions ===
   "permission": {
     "external_directory": "allow",
@@ -35,6 +35,16 @@
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?exaApiKey={env:EXA_API_KEY}",
       "enabled": true,
+    },
+    "servers": {
+      "workos": {
+        "type": "remote",
+        "url": "https://mcp.workos.com/mcp"
+      },
+      "stripe": {
+        "type": "remote",
+        "url": "https://mcp.stripe.com"
+      }
     },
   },
   // === Providers ===

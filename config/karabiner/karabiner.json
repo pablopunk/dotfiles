@@ -228,6 +228,7 @@
                     },
                     {
                         "description": "layer1 triggers",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -263,6 +264,7 @@
                     },
                     {
                         "description": "layer1: qwe to control volume",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -313,6 +315,7 @@
                     },
                     {
                         "description": "layer1: asd to control media",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -363,6 +366,7 @@
                     },
                     {
                         "description": "layer1: uiop to []{}",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -446,9 +450,9 @@
                             }
                         ]
                     },
-
                     {
                         "description": "left_option tap to hyper OSM, hold to left_option, tap-hold for held hyper",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -486,7 +490,12 @@
                                     }
                                 ],
                                 "to_after_key_up": [
-                                    { "set_variable": { "name": "hyper_tap", "value": 0 } }
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_tap",
+                                            "value": 0
+                                        }
+                                    }
                                 ],
                                 "type": "basic"
                             },
@@ -514,29 +523,47 @@
                                     "key_code": "left_option",
                                     "modifiers": { "optional": ["any"] }
                                 },
+                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
                                 "to": [{ "key_code": "left_option" }],
-                                "to_if_alone": [
-                                    { "sticky_modifier": { "left_control": "toggle" } },
-                                    { "sticky_modifier": { "left_option": "toggle" } },
-                                    { "sticky_modifier": { "left_command": "toggle" } },
-                                    { "set_variable": { "name": "hyper_tap", "value": 1 } }
-                                ],
                                 "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "hyper_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
                                     "to_if_invoked": [
                                         { "sticky_modifier": { "left_control": "off" } },
                                         { "sticky_modifier": { "left_option": "off" } },
                                         { "sticky_modifier": { "left_command": "off" } },
-                                        { "set_variable": { "name": "hyper_tap", "value": 0 } }
-                                    ],
-                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_tap", "value": 0 } }]
+                                        {
+                                            "set_variable": {
+                                                "name": "hyper_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
                                 },
-                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
+                                "to_if_alone": [
+                                    { "sticky_modifier": { "left_control": "toggle" } },
+                                    { "sticky_modifier": { "left_option": "toggle" } },
+                                    { "sticky_modifier": { "left_command": "toggle" } },
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_tap",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
                         "description": "swapped left_command (physical option) tap to hyper OSM, hold to left_command, tap-hold for held hyper",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -570,7 +597,12 @@
                                     }
                                 ],
                                 "to_after_key_up": [
-                                    { "set_variable": { "name": "hyper_tap", "value": 0 } }
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_tap",
+                                            "value": 0
+                                        }
+                                    }
                                 ],
                                 "type": "basic"
                             },
@@ -594,29 +626,47 @@
                                     "key_code": "left_command",
                                     "modifiers": { "optional": ["any"] }
                                 },
+                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
                                 "to": [{ "key_code": "left_command" }],
-                                "to_if_alone": [
-                                    { "sticky_modifier": { "left_control": "toggle" } },
-                                    { "sticky_modifier": { "left_option": "toggle" } },
-                                    { "sticky_modifier": { "left_command": "toggle" } },
-                                    { "set_variable": { "name": "hyper_tap", "value": 1 } }
-                                ],
                                 "to_delayed_action": {
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "hyper_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
                                     "to_if_invoked": [
                                         { "sticky_modifier": { "left_control": "off" } },
                                         { "sticky_modifier": { "left_option": "off" } },
                                         { "sticky_modifier": { "left_command": "off" } },
-                                        { "set_variable": { "name": "hyper_tap", "value": 0 } }
-                                    ],
-                                    "to_if_canceled": [{ "set_variable": { "name": "hyper_tap", "value": 0 } }]
+                                        {
+                                            "set_variable": {
+                                                "name": "hyper_tap",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
                                 },
-                                "parameters": { "basic.to_delayed_action_delay_milliseconds": 1000 },
+                                "to_if_alone": [
+                                    { "sticky_modifier": { "left_control": "toggle" } },
+                                    { "sticky_modifier": { "left_option": "toggle" } },
+                                    { "sticky_modifier": { "left_command": "toggle" } },
+                                    {
+                                        "set_variable": {
+                                            "name": "hyper_tap",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
                                 "type": "basic"
                             }
                         ]
                     },
                     {
                         "description": "layer1: hjkl as arrow keys",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -706,19 +756,6 @@
                         "product_id": 615,
                         "vendor_id": 76
                     },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "grave_accent_and_tilde" },
-                            "to": [{ "key_code": "non_us_backslash" }]
-                        },
-                        {
-                            "from": { "key_code": "non_us_backslash" },
-                            "to": [{ "key_code": "grave_accent_and_tilde" }]
-                        }
-                    ]
-                },
-                {
-                    "identifiers": { "is_keyboard": true },
                     "simple_modifications": [
                         {
                             "from": { "key_code": "grave_accent_and_tilde" },

@@ -1,0 +1,104 @@
+(defalias
+  caps-layer (tap-hold-press 150 150 caps (layer-while-held media))
+  hyper-osm (multi
+    (one-shot-release 1000 lctl)
+    (one-shot-release 1000 lalt)
+    (one-shot-release 1000 lmet)
+    (one-shot-release 1000 (layer-while-held hyper))
+  )
+  hyper-normal (tap-hold-press 150 150 @hyper-osm lalt)
+  hyper-swapped (tap-hold-press 150 150 @hyper-osm lmet)
+  held-hyper (multi lctl lalt lmet)
+)
+
+(platform (macos)
+  (definputdevices
+    1 ((vendor_id 12815) (product_id 20550))
+    2 ((vendor_id 1452) (product_id 592))
+  )
+)
+(platform (macos)
+  (deflocalkeys-macos media-rewind 168 media-fast-forward 159)
+)
+(platform (macos)
+  (defalias
+    device-caps @caps-layer
+    device-alt (switch
+      ((device-history 1 1)) @hyper-swapped break
+      ((device-history 2 1)) @hyper-swapped break
+      () @hyper-normal break)
+    device-meta (switch
+      ((device-history 1 1)) lalt break
+      ((device-history 2 1)) lalt break
+      () lmet break)
+    grave-key nubs
+    iso-key grv
+    close-brace RA-nuhs
+    rewind media-rewind
+    fast-forward media-fast-forward
+    function-three (fork mctl f3 (fn))
+    function-four (fork lpad f4 (fn))
+    function-five (fork bldn f5 (fn))
+    function-six (fork blup f6 (fn))
+  )
+)
+
+(platform (linux win winiov2 wintercept)
+  (defalias
+    device-caps @caps-layer
+    device-alt @hyper-normal
+    device-meta lmet
+    grave-key grv
+    iso-key nubs
+    close-brace RA-\
+    function-three f3
+    function-four f4
+    function-five f5
+    function-six f6
+  )
+)
+
+(platform (linux)
+  (deflocalkeys-linux media-rewind 168 media-fast-forward 208)
+)
+(platform (linux)
+  (defalias rewind media-rewind fast-forward media-fast-forward)
+)
+(platform (win winiov2 wintercept)
+  (defalias rewind prev fast-forward next)
+)
+
+(defsrc)
+
+(deflayermap (base)
+  caps @device-caps
+  lalt @device-alt
+  lmet @device-meta
+  grv @grave-key
+  nubs @iso-key
+  f3 @function-three
+  f4 @function-four
+  f5 @function-five
+  f6 @function-six
+)
+
+(deflayermap (media)
+  q mute
+  w vold
+  e volu
+  a @rewind
+  s pp
+  d @fast-forward
+  u RA-[
+  i RA-]
+  o RA-'
+  p @close-brace
+  h left
+  j down
+  k up
+  l right
+)
+
+(deflayermap (hyper)
+  lalt @held-hyper
+)

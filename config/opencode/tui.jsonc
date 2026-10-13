@@ -3,6 +3,7 @@
   "theme": "system",
   "scroll_acceleration": {
     "enabled": true
-  }
+  },
+  "plugin": ["./herdr-tui-session.js"]
 }
 

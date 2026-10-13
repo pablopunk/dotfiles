@@ -1,0 +1,7 @@
+(defcfg
+  process-unmapped-keys (all-except ralt)
+  macos-dev-names-exclude ("Voyager" "Karabiner DriverKit VirtualHIDKeyboard 1.8.0")
+  linux-dev-names-exclude ("ZSA Technology Labs Voyager" "Voyager")
+)
+
+(include keymap.kbd)

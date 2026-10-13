@@ -4,7 +4,6 @@
 
 path=(
   # User binaries
-  $HOME/.opencode/bin
   $HOME/.cargo/bin
   $HOME/.bun/bin
   $HOME/.deno/bin

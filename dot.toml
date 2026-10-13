@@ -154,7 +154,15 @@ os = ["mac"]
 check = "test -d /Applications/Karabiner-Elements.app"
 install.brew = "brew install karabiner-elements"
 uninstall.brew = "brew uninstall karabiner-elements"
-link."config/karabiner/karabiner.json" = "~/.config/karabiner/karabiner.json"
+
+[kanata]
+check = "kanata --version"
+install.brew = "brew install kanata karabiner-elements"
+install.cargo = "cargo install kanata"
+uninstall.brew = "bash ./config/kanata/uninstall.sh && brew uninstall kanata karabiner-elements"
+uninstall.cargo = "bash ./config/kanata/uninstall.sh && cargo uninstall kanata"
+link."config/kanata" = "~/.config/kanata"
+postlink = "bash ./config/kanata/setup.sh"
 
 [edges]
 os = ["mac"]

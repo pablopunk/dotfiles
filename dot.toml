@@ -51,7 +51,7 @@ link."config/neovim/init.lua" = "~/.config/nvim/init.lua"
 
 [opencode]
 install.bun = "bun install -g --trust @opencode-ai/cli@next"
-check = "opencode2"
+check = "opencode"
 uninstall.bun = "bun remove -g @opencode-ai/cli"
 link."config/opencode/opencode.jsonc" = "~/.config/opencode/opencode.jsonc"
 link."config/opencode/opencode.sh" = "~/.zshrc.d/05-opencode.sh"

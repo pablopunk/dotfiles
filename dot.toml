@@ -353,3 +353,6 @@ check = "agent-browser"
 install.brew = "brew install agent-browser"
 uninstall.brew = "brew uninstall agent-browser"
 link."config/agent-browser/config.json" = "~/.agent-browser/config.json"
+
+[nevermind]
+link."config/nevermind" = "~/.config/nevermind"

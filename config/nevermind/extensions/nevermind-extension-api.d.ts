@@ -893,6 +893,30 @@ export type ExtensionStorage = {
   ): Promise<T>;
 };
 
+/**
+ * Per-extension local secret values, encrypted with the operating system's
+ * secure storage. No separate Nevermind vault password is required, though
+ * the OS may request keychain access. On Linux, operations fail rather than
+ * write plaintext when a system keychain or credential store cannot be
+ * verified; portal-only setups may be unsupported. This protects secrets at
+ * rest and keeps them out of extension source; enabled extensions still run
+ * with full local access, so only use this with extensions you trust. Names
+ * may follow environment-variable conventions, but values are never injected
+ * into the shared `process.env`. Setup can collect a value using a password
+ * field and `set('PAPERLESS_API_TOKEN', value)`; do not echo or log it. Values
+ * remain stored when an extension is disabled or its source is removed.
+ */
+export type ExtensionSecrets = {
+  /** Read a secret such as `PAPERLESS_API_TOKEN`; returns undefined when unset. */
+  get(name: string): Promise<string | undefined>;
+  /** Store a string locally. Prefer OS-backed secrets over `storage` for credentials and tokens; use a host-owned password field if the user must supply one. */
+  set(name: string, value: string): Promise<void>;
+  /** Remove one stored secret. */
+  delete(name: string): Promise<void>;
+  /** Remove every stored secret for this extension. */
+  clear(): Promise<void>;
+};
+
 export type ExtensionRuntimeCache = {
   /** Process-memory cache; not persistent. Entries are scoped to this extension. */
   get<T = unknown>(key: string): T | undefined;
@@ -1827,6 +1851,8 @@ export type ExtensionContext = {
   };
 
   storage: ExtensionStorage;
+  /** OS-encrypted, extension-scoped credentials. Do not put secret values in `storage` or extension source. */
+  secrets: ExtensionSecrets;
   /**
    * Host-owned editor draft lifecycle for views declaring `draft`. Drafts are
    * unsaved-work buffers the host persists and recovers; they are not the

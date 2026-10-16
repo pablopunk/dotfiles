@@ -1,10 +1,19 @@
 import type { NevermindExtension, ExtensionContext, ExtensionAction, ExtensionItem, ExtensionDetail } from './nevermind-extension-api'
 
 const BASE = 'https://docs.notflix.us'
-let sessionToken = ''
-let tokenExpires = 0
+const TOKEN_SECRET = 'PAPERLESS_API_TOKEN'
 const thumbnails = new Map<number, string>()
-function forgetToken() { sessionToken = ''; tokenExpires = 0; thumbnails.clear() }
+let credentialVersion = 0
+async function getToken(ctx: ExtensionContext): Promise<string> {
+  const token = await ctx.secrets.get(TOKEN_SECRET)
+  if (!token) throw new Error('No saved Paperless API token. Reopen Search Paperless with AI to connect.')
+  return token
+}
+async function forgetToken(ctx: ExtensionContext) {
+  await ctx.secrets.delete(TOKEN_SECRET)
+  credentialVersion++
+  thumbnails.clear()
+}
 interface Document { id: number; title: string; content?: string; created?: string; original_file_name?: string; __search_hit__?: { highlights?: string } }
 interface Page { count: number; next: string | null; results: Document[] }
 function base64(bytes: Uint8Array) {
@@ -12,11 +21,11 @@ function base64(bytes: Uint8Array) {
   for (let i = 0; i < bytes.length; i += 8192) binary += String.fromCharCode(...bytes.subarray(i, i + 8192))
   return btoa(binary)
 }
-async function thumbnail(id: number): Promise<string> {
-  if (!sessionToken || Date.now() >= tokenExpires) throw new Error('Your API token expired. Reopen Search Paperless with AI to reconnect.')
+async function thumbnail(ctx: ExtensionContext, id: number): Promise<string> {
+  const token = await getToken(ctx)
+  const version = credentialVersion
   const cached = thumbnails.get(id)
   if (cached) return cached
-  const token = sessionToken
   let response: Response
   try {
     response = await fetch(`${BASE}/api/documents/${id}/thumb/`, {
@@ -29,13 +38,13 @@ async function thumbnail(id: number): Promise<string> {
   if (Number(response.headers.get('content-length') || 0) > 8 * 1024 * 1024) throw new Error('Document preview is too large.')
   const bytes = await response.arrayBuffer()
   if (bytes.byteLength > 8 * 1024 * 1024) throw new Error('Document preview is too large.')
-  if (sessionToken !== token || Date.now() >= tokenExpires) throw new Error('The Paperless session changed. Reopen the search.')
+  if (version !== credentialVersion) throw new Error('The Paperless connection changed. Reopen the search.')
   const image = `data:${mime};base64,${base64(new Uint8Array(bytes))}`
   if (thumbnails.size >= 48) thumbnails.delete(thumbnails.keys().next().value!)
   thumbnails.set(id, image)
   return image
 }
-async function request(params: URLSearchParams, token: string): Promise<Page> {
+async function request(ctx: ExtensionContext, params: URLSearchParams, token: string): Promise<Page> {
   let response: Response
   try {
     response = await fetch(`${BASE}/api/documents/?${params}`, {
@@ -46,7 +55,7 @@ async function request(params: URLSearchParams, token: string): Promise<Page> {
     throw new Error('Could not reach docs.notflix.us. Check your connection/VPN. A login-proxy redirect or a timeout can also prevent API access.')
   }
   if (response.status === 401 || response.status === 403) {
-    forgetToken()
+    if (await ctx.secrets.get(TOKEN_SECRET) === token) await forgetToken(ctx)
     throw new Error('Paperless rejected API access. Run Search Paperless with AI again and enter a valid API token with document-read permission.')
   }
   if (response.status === 400) throw new Error('Paperless rejected the search query. Use Edit Paperless Query or try a simpler search.')
@@ -87,7 +96,7 @@ function resultsView(ctx: ExtensionContext, input: string, query: string, page: 
     const id = Number(row.id.slice('document-'.length))
     const base = row.detail || { title: row.title }
     try {
-      return { ...base, text: undefined, subtitle: 'First-page preview', image: { src: await thumbnail(id), fit: 'contain', alt: row.title } }
+      return { ...base, text: undefined, subtitle: 'First-page preview', image: { src: await thumbnail(ctx, id), fit: 'contain', alt: row.title } }
     } catch (error) {
       return { ...base, image: undefined, subtitle: 'Preview unavailable', text: error instanceof Error ? error.message : 'Could not load this preview.' }
     }
@@ -116,13 +125,12 @@ function resultsView(ctx: ExtensionContext, input: string, query: string, page: 
       row.detail = detail
       return { patch: { items: [{ id, detail }] } }
     }),
-    actions: [searchPrompt(ctx), edit, ctx.actions.openUrl(BASE, 'Open Paperless'), ctx.actions.run('Forget API Token', (c) => {
-      forgetToken()
+    actions: [searchPrompt(ctx), edit, ctx.actions.openUrl(BASE, 'Open Paperless'), ctx.actions.run('Forget API Token', async (c) => {
+      await forgetToken(c)
       return c.navigation.replace(tokenView(c))
-    })],
+    }, { requiresConfirmation: true, confirmMessage: 'Delete the saved Paperless API token from Nevermind? This does not revoke it in Paperless.', confirmLabel: 'Forget Token', style: 'destructive' })],
     items: ctx.data.loader(async () => {
-      if (!sessionToken || Date.now() >= tokenExpires) throw new Error('Your in-memory token has expired. Run Search Paperless with AI again to reconnect.')
-      const data = await request(new URLSearchParams({ query, page: String(page), page_size: '30' }), sessionToken)
+      const data = await request(ctx, new URLSearchParams({ query, page: String(page), page_size: '30' }), await getToken(ctx))
       const items: ExtensionItem[] = data.results.map(d => {
         if (!Number.isSafeInteger(d.id) || d.id < 1) throw new Error('Paperless returned an invalid document ID.')
         const url = `${BASE}/documents/${d.id}/details`
@@ -157,16 +165,17 @@ function tokenView(ctx: ExtensionContext) {
   return ctx.ui.form({
     title: 'Connect Paperless',
     fields: [
-      { id: 'info', type: 'description', description: 'In docs.notflix.us, open your user menu → My Profile and create/copy your API token. The token stays in memory for up to 8 hours (or until Nevermind restarts); it is not saved to disk or sent to AI. Document text and preview images stay out of AI requests. Preview images are cached only in memory.' },
+      { id: 'info', type: 'description', description: 'In docs.notflix.us, open your user menu → My Profile and create/copy your API token. Once verified, the token is saved locally using Nevermind’s OS-encrypted secrets storage and reused across restarts, until you forget it or Paperless rejects it. It is never sent to AI. Document text and preview images stay out of AI requests. Preview images are cached only in memory.' },
       { id: 'token', label: 'Paperless API Token', type: 'password', required: true },
     ],
     actions: [ctx.actions.openUrl(BASE, 'Open Paperless to Get Token')],
-    submitAction: ctx.actions.run('Connect and Search', async (c, a) => {
+    submitAction: ctx.actions.run('Save Token and Search', async (c, a) => {
       const token = String(a.formValues?.token || '').trim().replace(/^Token\s+/i, '')
       if (!token || /\s/.test(token)) throw new Error('Enter a valid Paperless API token, without whitespace.')
-      await request(new URLSearchParams({ page_size: '1' }), token)
+      await request(c, new URLSearchParams({ page_size: '1' }), token)
+      await c.secrets.set(TOKEN_SECRET, token)
+      credentialVersion++
       thumbnails.clear()
-      sessionToken = token; tokenExpires = Date.now() + 8 * 60 * 60 * 1000
       return c.navigation.run(searchPrompt(c))
     }),
   })
@@ -176,8 +185,8 @@ export default {
   commands: [{
     id: 'search', title: 'Search Paperless with AI', aliases: ['Paperless', 'Notflix Documents'], icon: 'search',
     subtitle: 'Natural-language document search at docs.notflix.us',
-    run(ctx: ExtensionContext, _action: ExtensionAction) {
-      if (!sessionToken || Date.now() >= tokenExpires) { forgetToken(); return tokenView(ctx) }
+    async run(ctx: ExtensionContext, _action: ExtensionAction) {
+      if (!await ctx.secrets.get(TOKEN_SECRET)) return tokenView(ctx)
       return searchPrompt(ctx)
     },
   }],

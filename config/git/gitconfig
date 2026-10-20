@@ -19,7 +19,7 @@
 	defaultBranch = main
 [credential "https://github.com"]
 	helper = 
-	helper = !/home/pol/.local/share/mise/installs/gh/2.102.0/gh_2.102.0_linux_amd64/bin/gh auth git-credential
+	helper = !mise exec -- gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/home/pol/.local/share/mise/installs/gh/2.102.0/gh_2.102.0_linux_amd64/bin/gh auth git-credential
+	helper = !mise exec -- gh auth git-credential

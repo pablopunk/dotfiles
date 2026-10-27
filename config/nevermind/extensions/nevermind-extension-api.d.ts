@@ -1288,6 +1288,10 @@ export type ExtensionClipboardEntry = {
   type?: string;
   text?: string;
   imageDataUrl?: string;
+  /**
+   * Local PNG backing an image entry. Valid only while the entry stays in
+   * clipboard history: the host deletes unreferenced images, so do not store it.
+   */
   imagePath?: string;
   videoUrl?: string;
   filePath?: string;

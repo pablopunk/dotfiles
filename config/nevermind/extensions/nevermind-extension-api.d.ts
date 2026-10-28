@@ -43,10 +43,135 @@
  * ```
  */
 
+/** Fractions are of the display work area (menu bar and Dock excluded), origin top-left. `x` and `y` are 0..1, `width` and `height` are above 0 and at most 1, and `x + width` and `y + height` are at most 1. */
+export type ExtensionWindowLayoutSpec =
+  | {
+      kind: 'fraction';
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+      /** Repeating the same command on the same window cycles its size (½ → ⅔ → ⅓) when `options.cycle` is on. */
+      cycleGroup?: 'left' | 'right' | 'top' | 'bottom';
+    }
+  /** Keep the window's size and center it on its display. */
+  | { kind: 'center' }
+  /** Fill the display width, keeping vertical position and height. */
+  | { kind: 'maximize-width' }
+  /** Fill the display height, keeping horizontal position and width. */
+  | { kind: 'maximize-height' }
+  /** Center a window sized as fractions (0..1) of the work area, optionally capped in points. */
+  | {
+      kind: 'scaled-center';
+      widthFraction: number;
+      heightFraction: number;
+      maxWidth?: number;
+      maxHeight?: number;
+    }
+  /** Move the window to a screen edge, keeping its size. */
+  | { kind: 'edge'; edge: 'left' | 'right' | 'top' | 'bottom' }
+  /** Grow or shrink around the window's center by `step` (fraction of the work area, 0.01..0.25). */
+  | { kind: 'resize-step'; direction: 'larger' | 'smaller'; step: number }
+  /** Move to the next or previous display (left-to-right, top-to-bottom, wrapping), scaling proportionally. */
+  | { kind: 'display'; direction: 'next' | 'previous' }
+  /** Return the window to the frame it had before the first layout was applied. */
+  | { kind: 'restore' }
+  /** Enter or leave native full screen. The only operation that accepts a full-screen window. */
+  | { kind: 'toggle-full-screen' }
+  /**
+   * Place and/or size the window exactly. `x`/`y` are offsets from the top-left of the display work area; `width`/`height` are sizes.
+   * Each value is in `points` (>= 0 for offsets, > 0 for sizes, at most 100000) or `percent` of the work area (offsets 0..100, sizes above 0 and at most 100).
+   * Omitted fields keep the window's current value. The result is clamped to stay fully inside the work area.
+   */
+  | {
+      kind: 'exact';
+      x?: ExtensionWindowDimension;
+      y?: ExtensionWindowDimension;
+      width?: ExtensionWindowDimension;
+      height?: ExtensionWindowDimension;
+    };
+
+export type ExtensionWindowDimension = {
+  value: number;
+  unit: 'points' | 'percent';
+};
+
+export type ExtensionWindowManagementOptions = {
+  /** Whole pixels (0..40) kept free between windows and the display edges, per edge. Default 8 on every edge. */
+  outerGap?: { top?: number; right?: number; bottom?: number; left?: number };
+  /** Whole pixels (0..40) of total space between two adjacent tiles; each tile gives up half. Default 4. */
+  innerGap?: number;
+  /** Apply the outer gap to full-size Maximize. Default true. */
+  applyGapToMaximize?: boolean;
+  /** Cycle repeated half commands. Default true. */
+  cycle?: boolean;
+  /** Order repeated half commands cycle through. Default `half-two-thirds-third`. */
+  cycleOrder?: 'half-two-thirds-third' | 'half-third-two-thirds';
+  /** Order Next/Previous Display walk through displays. Default `left-to-right`. */
+  displayOrder?: 'left-to-right' | 'top-to-bottom';
+  /** Scale the window to the new display (`proportional`) or keep its size (`keep-size`). Default `proportional`. */
+  displayMoveSizing?: 'proportional' | 'keep-size';
+};
+
+/** Opaque host-owned window reference from `windows()`. Never construct one yourself. */
+export type ExtensionWindowHandle = { readonly id: string };
+
+export type ExtensionWindowInfo = {
+  handle: ExtensionWindowHandle;
+  /** Stable platform identifier of the owning app (the bundle identifier on macOS). Treat it as an opaque string; do not hard-code identifiers when `ctx.desktop.apps` can resolve the app. */
+  appId: string;
+  appName: string;
+  title: string;
+  frame: { x: number; y: number; width: number; height: number };
+  displayId: string;
+  isFullScreen: boolean;
+  isMinimized: boolean;
+};
+
+export type ExtensionDisplayInfo = {
+  id: string;
+  isPrimary: boolean;
+  frame: { x: number; y: number; width: number; height: number };
+  workArea: { x: number; y: number; width: number; height: number };
+};
+
+export type ExtensionWindowApplyResult =
+  | {
+      ok: true;
+      /** `partial` means the app constrained the frame (for example a minimum size). */
+      outcome: 'exact' | 'partial';
+      /** False when the window already had the requested frame. */
+      changed: boolean;
+      frame: { x: number; y: number; width: number; height: number };
+      reason?: string;
+    }
+  | {
+      ok: false;
+      reason:
+        | 'no-target'
+        | 'focus-not-restored'
+        | 'no-window'
+        | 'target-lost'
+        | 'full-screen'
+        | 'minimized'
+        | 'denied'
+        | 'unapplied'
+        | 'not-resizable'
+        | 'unsupported'
+        | 'invalid-spec'
+        | 'no-history'
+        | 'unknown-window'
+        | 'single-display';
+      /** Palette-ready explanation. */
+      message: string;
+    };
+
 /** Intent an extension declares for review; it does not restrict enabled local code. */
 export type ExtensionCapability =
   | 'desktop.apps'
   | 'desktop.files'
+  /** Declares intent to move and resize windows of other apps through `ctx.desktop.windowManagement`. */
+  | 'desktop.window-management'
   | 'clipboard.history'
   | 'ai'
   | 'extensions.ownership'
@@ -185,11 +310,21 @@ export type ExtensionActionContribution = {
   triggers?: ExtensionBackgroundTrigger[];
   /** Declarative action to run, commonly `ctx.windows.toggle(...)`, `ctx.actions.pasteText(...)`, or `ctx.actions.push(...)`. */
   action?: ExtensionAction;
+  /** Secondary actions listed in this durable action's Cmd+K panel, beside the host-owned Set keyboard shortcut, Set alias, and Options rows. Same shape and placement rules as an item's `actions`; reference another durable action with `ctx.actions.ref(...)`. */
+  actions?: ExtensionAction[];
+  /** Cmd+K panel for this durable action when sections or titles are needed. Normalized like an item's `actionPanel`; prefer `actions` for a flat list. */
+  actionPanel?: ExtensionActionPanel;
   /** Handler to run when a simple declarative action is not enough. */
   run?: (
     ctx: ExtensionContext,
     action: ExtensionAction,
   ) => ExtensionActionResult | Promise<ExtensionActionResult>;
+};
+
+/** Result of `ctx.actions.refreshContributions()`. `ok: false` means the previous durable actions are still registered. */
+export type ExtensionContributionRefreshResult = {
+  ok: boolean;
+  error?: string;
 };
 
 export type ExtensionPasteTextOptions = {
@@ -936,8 +1071,10 @@ export type ExtensionSettings = {
     [key: string]: unknown;
   }>;
   get<T = unknown>(id: string): T;
-  set<T = unknown>(id: string, value: T): T;
-  toggle(id: string): unknown;
+  /** Resolves after the value is saved to ~/.config/nevermind/config.json; rejects with the reason when it cannot be saved. */
+  set<T = unknown>(id: string, value: T): Promise<T>;
+  /** Resolves with the new value after it is saved; rejects with the reason when it cannot be saved. */
+  toggle(id: string): Promise<unknown>;
 };
 
 export type ExtensionDictationDevice = {
@@ -1113,9 +1250,82 @@ export type ExtensionData = {
   }): ExtensionDataLoaderHandle;
 };
 
+/**
+ * One question answered against the shared `input` and `attachments`. Ids are
+ * unique per call and become the keys of `ExtensionDecisionResult.answers`.
+ */
+export type ExtensionDecisionQuestion =
+  | {
+      id: string;
+      type: 'predicate';
+      /** A yes/no question about the shared input. */
+      question: string;
+    }
+  | {
+      id: string;
+      type: 'choice';
+      question: string;
+      /** Two to 32 distinct option values. The answer is always one of them. */
+      options: string[];
+    }
+  | {
+      id: string;
+      type: 'score';
+      question: string;
+      /** Integer scale; at most 10 levels. `labels` keys name levels inside min..max. */
+      min: number;
+      max: number;
+      labels?: Record<string, string>;
+    };
+
+/**
+ * `probability` is the model's probability that the predicate holds; `value` is
+ * `probability >= 0.5`. `probabilities` and `confidence` are optional and
+ * present only when the model reports them.
+ */
+export type ExtensionDecisionAnswer =
+  | { type: 'predicate'; value: boolean; probability: number }
+  | {
+      type: 'choice';
+      value: string;
+      probabilities?: Record<string, number>;
+      confidence?: number;
+    }
+  | {
+      type: 'score';
+      value: number;
+      probabilities?: Record<string, number>;
+      confidence?: number;
+    };
+
+export type ExtensionDecisionOptions = {
+  /** Shared text evaluated by every question in one batched call. May be empty when images carry the content. */
+  input: string | Record<string, unknown> | unknown[];
+  /** Text, file, clipboard or image attachments. Images are never dropped: unsupported images fail the call. */
+  attachments?:
+    | ExtensionAiResolvableAttachment
+    | ExtensionAiResolvableAttachment[];
+  questions: ExtensionDecisionQuestion[];
+  signal?: AbortSignal;
+};
+
+export type ExtensionDecisionResult = {
+  id: string;
+  model: string;
+  answers: Record<string, ExtensionDecisionAnswer>;
+  usage: { inputTokens: number; outputTokens: number };
+};
+
 export type ExtensionAi = {
   /** Whether the user is signed in and can use Nevermind AI features. */
   isAvailable(): Promise<boolean>;
+  /**
+   * Batched structured decisions over one shared input. Answers are typed per
+   * question (predicate, choice or score). Quota-limited per extension; declare
+   * the `ai` capability for review. Rejects with `code: 'unsupported_image_route'`
+   * when the configured decision model cannot read the images; nothing is dropped.
+   */
+  decide(options: ExtensionDecisionOptions): Promise<ExtensionDecisionResult>;
   /** Easy one-shot AI call. Quota-limited per extension; declare the `ai` capability for review. Smart/fast routes are configured by the backend admin. */
   (prompt: string, model?: ExtensionAiModel): Promise<string>;
   (prompt: string, options?: ExtensionAiOptions): Promise<string>;
@@ -1482,6 +1692,14 @@ export type ExtensionContext = {
       title?: string,
       options?: Record<string, unknown>,
     ): ExtensionAction;
+    /**
+     * Imperative, unlike the declarative helpers here: runs now. Re-runs this extension's
+     * `actions(ctx)` and applies the difference. New ids register, removed ids lose their
+     * global shortcut and root-search entry, and unchanged ids keep their `actionId` and
+     * shortcut. A failing or superseded run keeps the previous set. Call after storage
+     * that backs `actions(ctx)` changes, e.g. when the extension adds or removes user-defined commands.
+     */
+    refreshContributions(): Promise<ExtensionContributionRefreshResult>;
     /** Type text into the frontmost app without touching the clipboard. Check `ctx.system.capabilities.has('keyboard.type-text')` for support. */
     typeText(
       text: string,
@@ -1780,6 +1998,44 @@ export type ExtensionContext = {
       /** Icon for an app path as a data URL, or null when unavailable. */
       icon(appPath: string): Promise<string | null>;
     };
+    /** Move, resize, list and focus windows of other apps. The API is platform-neutral (points, work areas, opaque handles, stable app identifiers); only some platforms implement it, and where unsupported this facet is `undefined` and window commands are omitted — check `ctx.system.capabilities.has('window-management')`. */
+    windowManagement?: {
+      /** Apply a layout to the focused window of the app that was frontmost before Nevermind opened (or when a global shortcut fired). Never throws for runtime failures; inspect `ok`. */
+      apply(
+        spec: ExtensionWindowLayoutSpec,
+        options?: ExtensionWindowManagementOptions,
+      ): Promise<ExtensionWindowApplyResult>;
+      /** Displays with their frames and work areas (menu bar and Dock excluded), in global points with a top-left origin. */
+      displays(): Promise<ExtensionDisplayInfo[]>;
+      /**
+       * List windows of running apps, optionally narrowed by app identifier (`appId`), a case-insensitive `appName` match (use `ExtensionApp.name` from `ctx.desktop.apps`), and/or a case-insensitive `title` substring.
+       * Handles are opaque, short-lived, and only valid in this session; list again when `applyTo`/`focus` reports `unknown-window`.
+       * Minimized and other-Space windows may be missing. Returns an empty list when access is denied.
+       */
+      windows(query?: {
+        appId?: string;
+        appName?: string;
+        title?: string;
+      }): Promise<ExtensionWindowInfo[]>;
+      /**
+       * Poll `windows(query)` until a match exists or `timeoutMs` (default 5000, max 30000) passes; resolves to the first match or null.
+       * Pair it with `ctx.desktop.apps.launch(...)` to open an app and place its first window.
+       */
+      waitForWindow(
+        query: { appId?: string; appName?: string; title?: string },
+        options?: { timeoutMs?: number },
+      ): Promise<ExtensionWindowInfo | null>;
+      /** Apply a layout to a specific window from `windows()`/`waitForWindow()` instead of the invoking app's focused window. Same verification and result contract as `apply`. */
+      applyTo(
+        window: ExtensionWindowHandle,
+        spec: ExtensionWindowLayoutSpec,
+        options?: ExtensionWindowManagementOptions,
+      ): Promise<ExtensionWindowApplyResult>;
+      /** Bring a window to the front and focus its app. */
+      focus(
+        window: ExtensionWindowHandle,
+      ): Promise<{ ok: true } | { ok: false; reason: string; message: string }>;
+    };
     files?: {
       /**
        * Walk one or more directory roots and return matching files.
@@ -1811,6 +2067,8 @@ export type ExtensionContext = {
       reveal(filePath: string): unknown;
       preview(filePath: string): unknown;
       readText(filePath: string): Promise<string>;
+      /** Format a path for display, replacing the current user's home directory with `~`. Does not change the path used for file operations. */
+      displayPath(filePath: string): string;
       toFileUrl(filePath: string): string;
       /** Host-safe thumbnail URL for an image/video/file path when previewable. */
       thumbnail(filePath: string): string | null;
@@ -1960,9 +2218,21 @@ export type NevermindExtension = {
    * opening a view. Dynamic/state-driven rows such as calendar events, search results,
    * and files belong in views, `rootItems`, or `searchItems` instead.
    */
+  /**
+   * May be async: the host awaits it at registration, bounded by a 10 second timeout;
+   * palette open never waits for it. Keep each contribution `id` and `actionId` stable
+   * across `ctx.actions.refreshContributions()` runs, because global shortcuts and aliases
+   * bind to them. A throw or timeout keeps the last successful set.
+   */
   actions?(
     ctx: ExtensionContext,
-  ): ExtensionActionContribution[] | { actions: ExtensionActionContribution[] };
+  ):
+    | ExtensionActionContribution[]
+    | { actions: ExtensionActionContribution[] }
+    | Promise<
+        | ExtensionActionContribution[]
+        | { actions: ExtensionActionContribution[] }
+      >;
   /** Empty-query root contributions. Keep small, stable, cached, JSON-serializable, and bounded. Prefer one primary item per capability; expose Settings and secondary actions through that item's `actionPanel` so they appear under Cmd+K. If a secondary action should also be independently searchable, register it with `actions(ctx)` and reference it with `ctx.actions.ref(...)`. Do not duplicate durable actions here just for styling; put `appearance` on the action or command itself. */
   rootItems?(
     ctx: ExtensionContext,

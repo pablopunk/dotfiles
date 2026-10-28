@@ -31,3 +31,5 @@ config/opencode/.auto-update-history.json
 
 config/hypr/*.lua.bak.*
 config/hypr/monitors.lua
+
+config/nevermind/extensions/nevermind-extension-api.d.ts

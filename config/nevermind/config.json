@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "settings": {
+    "paletteHotkey": "Command+Space",
+    "hyperKey": "Command+Control+Alt"
+  },
+  "shortcuts": {
+    "extension-root:nevermind.apps:app:/Applications/Rex Beta.app": "Command+Control+Alt+T",
+    "extension-root:nevermind.apps:app:/Applications/Ardia.app": "Command+Control+Alt+A",
+    "extension-root:nevermind.apps:app:/Applications/T3 Code (Nightly).app": "Command+Control+Alt+S",
+    "extension-root:nevermind.apps:app:/Applications/Slack.app": "Command+Control+Alt+D",
+    "extension-root:nevermind.apps:app:/Applications/Notion Calendar.app": "Command+Control+Alt+F",
+    "extension-root:nevermind.apps:app:/Applications/Spotifin.app": "Command+Control+Alt+W",
+    "extension-root:nevermind.apps:app:/Applications/Telegram.app": "Command+Control+Alt+E",
+    "extension-root:nevermind.dictation:dictation": "Command+Control+Alt+V"
+  }
+}

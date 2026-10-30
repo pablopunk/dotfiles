@@ -2,7 +2,9 @@
   "version": 1,
   "settings": {
     "paletteHotkey": "Command+Space",
-    "hyperKey": "Command+Control+Alt"
+    "hyperKey": "Command+Control+Alt",
+    "errorReporting": true,
+    "updateChannel": "dev"
   },
   "shortcuts": {
     "extension-root:nevermind.apps:app:/Applications/Rex Beta.app": "Command+Control+Alt+T",
@@ -12,6 +14,17 @@
     "extension-root:nevermind.apps:app:/Applications/Notion Calendar.app": "Command+Control+Alt+F",
     "extension-root:nevermind.apps:app:/Applications/Spotifin.app": "Command+Control+Alt+W",
     "extension-root:nevermind.apps:app:/Applications/Telegram.app": "Command+Control+Alt+E",
-    "extension-root:nevermind.dictation:dictation": "Command+Control+Alt+V"
+    "extension-root:nevermind.dictation:dictation": "Command+Control+Alt+V",
+    "extension-action:window-management:layout.left-half": "Command+Control+Alt+Shift+H",
+    "extension-action:window-management:layout.right-half": "Command+Control+Alt+Shift+L",
+    "extension-action:window-management:layout.almost-maximize": "Command+Control+Alt+M",
+    "extension-action:window-management:layout.reasonable-size": "Command+Control+Alt+C",
+    "extension:nevermind.emoji-symbols:emoji-symbols": "Command+Shift+E",
+    "extension-action:window-management:layout.focus-right": "Command+Control+Alt+L",
+    "extension-action:window-management:layout.focus-left": "Command+Control+Alt+H",
+    "extension-action:window-management:layout.focus-up": "Command+Control+Alt+K"
+  },
+  "ai": {
+    "defaultModel": "smart"
   }
 }

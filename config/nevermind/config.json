@@ -4,7 +4,8 @@
     "paletteHotkey": "Command+Space",
     "hyperKey": "Command+Control+Alt",
     "errorReporting": true,
-    "updateChannel": "dev"
+    "updateChannel": "dev",
+    "menuBarIconStyle": "bolt-outline"
   },
   "shortcuts": {
     "extension-root:nevermind.apps:app:/Applications/Rex Beta.app": "Command+Control+Alt+T",

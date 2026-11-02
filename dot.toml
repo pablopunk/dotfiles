@@ -356,3 +356,7 @@ link."config/agent-browser/config.json" = "~/.agent-browser/config.json"
 
 [nevermind]
 link."config/nevermind" = "~/.config/nevermind"
+
+[ardia]
+os = ["mac"]
+link."config/ardia/config.json" = "~/.config/ardia/config.json"

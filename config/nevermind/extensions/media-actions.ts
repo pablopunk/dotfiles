@@ -34,6 +34,10 @@ function files(ctx: ExtensionContext) {
   if (!ctx.desktop.files) throw new Error('Media Actions requires the desktop files API.')
   return ctx.desktop.files
 }
+async function clipboardFilePaths(ctx: ExtensionContext): Promise<string[]> {
+  const copiedFiles = await ctx.desktop.clipboard?.readFiles()
+  return [...new Set((copiedFiles || []).map(file => file.path).filter(path => typeof path === 'string' && path.length > 0))]
+}
 async function pathExists(ctx: ExtensionContext, path: string): Promise<boolean> {
   const result = await shell(ctx).exec('/usr/bin/test', ['-e', path])
   if (result.exitCode !== 0 && result.exitCode !== 1) throw new Error(result.stderr.trim() || 'Could not check the output path.')
@@ -62,8 +66,12 @@ function supported(path: string, operation: Operation | 'speed'): boolean {
   return IMAGES.includes(ext) || CONVERT_VIDEOS.includes(ext)
 }
 async function selected(ctx: ExtensionContext, operation: Operation | 'speed', supplied?: string[]): Promise<string[]> {
-  const paths = supplied ?? await ctx.desktop.selection.files()
-  return [...new Set(paths || [])].filter(path => supported(path, operation))
+  if (supplied !== undefined) return [...new Set(supplied || [])].filter(path => supported(path, operation))
+  const finderPaths = [...new Set(await ctx.desktop.selection.files() || [])]
+  // Keep Finder selection as the preferred input; when it is empty, use files
+  // copied to the system clipboard. The user can therefore use either source.
+  const paths = finderPaths.length ? finderPaths : await clipboardFilePaths(ctx)
+  return paths.filter(path => supported(path, operation))
 }
 async function dimensions(ctx: ExtensionContext, path: string): Promise<{ width: number; height: number } | null> {
   try {
@@ -88,8 +96,8 @@ const BATCH: Record<Operation, string> = { compress: 'batch-compress', convert: 
 
 async function previewOperation(ctx: ExtensionContext, operation: Operation, supplied?: string[]): Promise<ExtensionActionResult> {
   const paths = await selected(ctx, operation, supplied)
-  if (!paths.length) return ctx.ui.error(operation === 'half' ? 'No Images Selected' : 'No Media Selected', 'Select supported files in Finder, then reopen Media Actions.')
-  // Keep the original Finder selection through nested views and batch confirmation.
+  if (!paths.length) return ctx.ui.error(operation === 'half' ? 'No Images Selected' : 'No Media Selected', 'Select supported files in Finder, or copy files in Finder and use the clipboard.')
+  // Keep the original Finder/clipboard input through nested views and batch confirmation.
   ctx.state[`selection:${operation}`] = paths
   const items: ExtensionItem[] = await Promise.all(paths.map(async path => {
     const ext = extensionOf(path)
@@ -118,7 +126,7 @@ async function previewOperation(ctx: ExtensionContext, operation: Operation, sup
 async function processBatch(ctx: ExtensionContext, operation: Operation): Promise<ExtensionActionResult> {
   const remembered = ctx.state[`selection:${operation}`] as string[] | undefined
   const paths = await selected(ctx, operation, remembered)
-  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select supported files in Finder first.')
+  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select supported files in Finder or copy files in Finder first.')
   const videoExtensions = operation === 'convert' ? CONVERT_VIDEOS : VIDEOS
   const hasVideos = operation !== 'half' && paths.some(path => videoExtensions.includes(extensionOf(path)))
   if (hasVideos && (await shell(ctx).which('ffmpeg')).exitCode !== 0) {
@@ -236,7 +244,7 @@ async function processBatch(ctx: ExtensionContext, operation: Operation): Promis
 
 async function speedMenu(ctx: ExtensionContext, supplied?: string[]): Promise<ExtensionActionResult> {
   const paths = await selected(ctx, 'speed', supplied)
-  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select one or more supported videos or GIFs in Finder first.')
+  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select videos or GIFs in Finder, or copy files in Finder and use the clipboard.')
   ctx.state['selection:speed'] = paths
   return ctx.navigation.push(ctx.ui.list({
     title: 'Select Speed', subtitle: `${paths.length} selected · videos and GIFs`,
@@ -245,7 +253,7 @@ async function speedMenu(ctx: ExtensionContext, supplied?: string[]): Promise<Ex
 }
 async function processSpeed(ctx: ExtensionContext, speed: { label: string; value: number }, captured: boolean): Promise<ExtensionActionResult> {
   const paths = await selected(ctx, 'speed', captured ? ctx.state['selection:speed'] as string[] | undefined : undefined)
-  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select videos or GIFs in Finder first.')
+  if (!paths.length) return ctx.ui.error('No Media Selected', 'Select videos or GIFs in Finder, or copy files in Finder first.')
   if ((await shell(ctx).which('ffmpeg')).exitCode !== 0) return ctx.ui.error('FFmpeg Missing', 'Speeding up media requires FFmpeg. Install it with Homebrew: brew install ffmpeg')
   if (paths.some(path => extensionOf(path) !== 'gif') && (await shell(ctx).which('ffprobe')).exitCode !== 0) return ctx.ui.error('FFprobe Missing', 'Audio detection requires ffprobe, included with FFmpeg.')
   const indicatorId = 'media-actions-speed'
@@ -287,18 +295,25 @@ async function processSpeed(ctx: ExtensionContext, speed: { label: string; value
 
 export default {
   id: 'local.media-actions', title: 'Media Actions',
-  subtitle: 'Compress, convert, resize, and speed up selected Finder media',
-  capabilities: ['desktop.files', 'system'],
+  subtitle: 'Compress, convert, resize, and speed up media from Finder or clipboard files',
+  capabilities: ['desktop.files', 'system', 'clipboard.history'],
   commands: [{
     id: 'media-actions', title: 'Media Actions', icon: 'clapperboard',
     aliases: ['media tools', 'media utilities'],
     subtitle: 'All media actions in one list',
     async run(ctx) {
-      const paths = [...new Set(await ctx.desktop.selection.files() || [])]
-      ctx.state['hubSelection'] = paths
+      const finderPaths = [...new Set(await ctx.desktop.selection.files() || [])]
+      const clipboardPaths = finderPaths.length ? [] : await clipboardFilePaths(ctx)
+      const paths = finderPaths.length ? finderPaths : clipboardPaths
+      ctx.state['hubSelection'] = paths.length ? paths : undefined
       const count = (operation: Operation | 'speed') => paths.filter(path => supported(path, operation)).length
+      const sourceLabel = finderPaths.length
+        ? `${finderPaths.length} Finder file${finderPaths.length === 1 ? '' : 's'} selected · Finder selection takes priority`
+        : clipboardPaths.length
+          ? `${clipboardPaths.length} clipboard file${clipboardPaths.length === 1 ? '' : 's'} available`
+          : 'Select files in Finder or copy files in Finder first'
       return ctx.ui.list({
-        title: 'Media Actions', subtitle: paths.length ? `${paths.length} Finder file${paths.length === 1 ? '' : 's'} selected · originals are preserved` : 'Select files in Finder before running an action',
+        title: 'Media Actions', subtitle: `${sourceLabel} · originals are preserved`,
         searchBarPlaceholder: 'Filter media actions…',
         items: [
           { id: 'compress', title: 'Compress Media', subtitle: 'Keep output only when smaller · images and videos', icon: 'file-down', accessories: [{ text: `${count('compress')} supported` }], primaryAction: ctx.actions.ref('open-compress', undefined, { useCapturedSelection: true }) },
@@ -321,7 +336,7 @@ export default {
         run: ctx => processBatch(ctx, operation),
       })),
       ...SPEEDS.map(speed => ctx.action({
-        id: `speed-${speed.value}`, title: `Speed Up Media ${speed.label}`, subtitle: 'Selected Finder videos and GIFs', icon: 'fast-forward',
+        id: `speed-${speed.value}`, title: `Speed Up Media ${speed.label}`, subtitle: 'Selected Finder or clipboard videos and GIFs', icon: 'fast-forward',
         run: (ctx, action) => processSpeed(ctx, speed, action.useCapturedSelection === true),
       })),
     ]

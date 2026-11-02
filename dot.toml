@@ -359,4 +359,4 @@ link."config/nevermind" = "~/.config/nevermind"
 
 [ardia]
 os = ["mac"]
-link."config/ardia/config.json" = "~/.config/ardia/config.json"
+link."config/ardia" = "~/.config/ardia"

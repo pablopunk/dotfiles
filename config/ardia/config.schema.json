@@ -1,0 +1,1040 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Ardia's config.json. Ardia applies it at launch and whenever it changes; it never writes it.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "theme": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9][a-z0-9_-]*$",
+      "description": "A theme in themes/<name>.json, or null for Ardia's own",
+      "default": null
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "warnBeforeQuitting": {
+          "type": "boolean",
+          "default": false
+        },
+        "warnBeforeClosingWindow": {
+          "type": "boolean",
+          "default": true
+        },
+        "restoreSession": {
+          "type": "boolean",
+          "default": true
+        },
+        "searchEngine": {
+          "type": "string",
+          "default": "google",
+          "description": "An engine id: google, bing, duckduckgo, perplexity, chatgpt, ecosia, brave, kagi, startpage, yahoo, baidu, yandex, or one added in Settings"
+        },
+        "searchSuggestions": {
+          "type": "boolean",
+          "default": true
+        },
+        "showSelectionSearch": {
+          "type": "boolean",
+          "default": true
+        },
+        "commandBarPreference": {
+          "type": "string",
+          "enum": [
+            "website",
+            "search"
+          ],
+          "default": "website"
+        },
+        "tabLayout": {
+          "type": "string",
+          "enum": [
+            "sidebar",
+            "top"
+          ],
+          "default": "sidebar"
+        },
+        "hideToolbarWhileScrolling": {
+          "type": "boolean",
+          "default": true
+        },
+        "newTabPosition": {
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom",
+            "nextToCurrent"
+          ],
+          "default": "bottom"
+        },
+        "newTabButtonPosition": {
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom"
+          ],
+          "default": "bottom"
+        },
+        "newTabOpens": {
+          "type": "string",
+          "enum": [
+            "page",
+            "commandBar"
+          ],
+          "default": "page"
+        },
+        "warnBeforeClosingLastTab": {
+          "type": "boolean",
+          "default": true
+        },
+        "undoReopensClosedTab": {
+          "type": "boolean",
+          "default": false
+        },
+        "warnBeforeMovingTabsToProfile": {
+          "type": "boolean",
+          "default": true
+        },
+        "shareTabsAcrossWindows": {
+          "type": "boolean",
+          "default": false
+        },
+        "tabReorderHaptics": {
+          "type": "boolean",
+          "default": true
+        },
+        "extendWebsiteColor": {
+          "type": "boolean",
+          "default": true
+        },
+        "cmdClickCreatesTabGroup": {
+          "type": "boolean",
+          "default": true
+        },
+        "optShiftClickOpensInGroup": {
+          "type": "boolean",
+          "default": true
+        },
+        "peekModifier": {
+          "type": "string",
+          "enum": [
+            "alt",
+            "shift",
+            "off"
+          ],
+          "default": "shift"
+        },
+        "peekLinksToOtherSites": {
+          "type": "boolean",
+          "default": false
+        },
+        "splitLinkModifier": {
+          "type": "string",
+          "enum": [
+            "altShift",
+            "alt"
+          ],
+          "default": "altShift"
+        },
+        "autoGroupMeetingTabs": {
+          "type": "boolean",
+          "default": true
+        },
+        "cleanUpInactiveTabsAfterMinutes": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "mutedSites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "neverTranslateSites": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {}
+        },
+        "autoPictureInPicture": {
+          "type": "boolean",
+          "default": true
+        },
+        "commandScrollZoom": {
+          "type": "boolean",
+          "default": true
+        },
+        "videoUpscaling": {
+          "type": "boolean",
+          "default": true
+        },
+        "sidebarMediaControls": {
+          "type": "boolean",
+          "default": true
+        },
+        "sidebarWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 190
+        },
+        "showSidebarButton": {
+          "type": "boolean",
+          "default": true
+        },
+        "showClearButton": {
+          "type": "boolean",
+          "default": true
+        },
+        "balancedTopApps": {
+          "type": "boolean",
+          "default": false
+        },
+        "showAdvancedSettings": {
+          "type": "boolean",
+          "default": false
+        },
+        "selectedTabGlow": {
+          "type": "string",
+          "enum": [
+            "full",
+            "soft",
+            "off"
+          ],
+          "default": "full"
+        },
+        "interfaceStyle": {
+          "type": "string",
+          "enum": [
+            "glass",
+            "classic"
+          ],
+          "default": "glass"
+        },
+        "glassTintWithTheme": {
+          "type": "boolean",
+          "default": false
+        },
+        "glassTintAmount": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.8
+        },
+        "pageScrollBars": {
+          "type": "string",
+          "enum": [
+            "system",
+            "thin"
+          ],
+          "default": "system"
+        },
+        "fadeUnloadedTabs": {
+          "type": "boolean",
+          "default": false
+        },
+        "warnBeforeClosingTabGroup": {
+          "type": "boolean",
+          "default": true
+        },
+        "batterySaverWhen": {
+          "type": "string",
+          "enum": [
+            "lowBattery",
+            "unplugged",
+            "never"
+          ],
+          "default": "lowBattery"
+        },
+        "memorySaver": {
+          "type": "boolean",
+          "default": true
+        },
+        "memorySaverMode": {
+          "type": "string",
+          "enum": [
+            "moderate",
+            "balanced",
+            "maximum"
+          ],
+          "default": "balanced"
+        },
+        "keepActiveSites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "extensionSidePanelWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 360
+        },
+        "showFullUrl": {
+          "type": "boolean",
+          "default": false
+        },
+        "bookmarksBar": {
+          "type": "string",
+          "enum": [
+            "always",
+            "newTab",
+            "never"
+          ],
+          "default": "never"
+        },
+        "bookmarksBarSize": {
+          "type": "string",
+          "enum": [
+            "default",
+            "large"
+          ],
+          "default": "default"
+        },
+        "hideBookmarksBarImport": {
+          "type": "boolean",
+          "default": false
+        },
+        "appearance": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "default": "auto"
+        },
+        "addressBar": {
+          "type": "string",
+          "enum": [
+            "toolbar",
+            "sidebar"
+          ],
+          "default": "toolbar"
+        },
+        "compactToolbar": {
+          "type": "boolean",
+          "default": false
+        },
+        "commandBarPlacement": {
+          "type": "string",
+          "enum": [
+            "field",
+            "centred"
+          ],
+          "default": "field"
+        },
+        "spacesFollowAppearance": {
+          "type": "boolean",
+          "default": true
+        },
+        "profileSwitcherIcons": {
+          "type": "boolean",
+          "default": false
+        },
+        "shortcuts": {
+          "type": "object",
+          "description": "Command id to shortcut. One shortcut: modifiers cmd, opt (option, alt), ctrl (control), shift or fn joined by +, then one key (a character, f1–f20, space, tab, return, escape, delete, up, down, left, right, home, end, pageup, pagedown), as in \"cmd+shift+t\"; or in glyphs, as in \"⇧⌘T\". \"\" unbinds the command. A command left out keeps what it has.",
+          "properties": {
+            "newTab": {
+              "type": "string",
+              "description": "New Tab (default ⌘T)"
+            },
+            "newWindow": {
+              "type": "string",
+              "description": "New Window (default ⌘N)"
+            },
+            "newIncognitoWindow": {
+              "type": "string",
+              "description": "New Incognito Window (default ⇧⌘N)"
+            },
+            "newLittleArdia": {
+              "type": "string",
+              "description": "New Little Ardia Window (default ⌥⌘N)"
+            },
+            "toggleOpenLinksInLittleArdia": {
+              "type": "string",
+              "description": "Open Links from Other Apps in Main Window (no default)"
+            },
+            "reopenClosedTab": {
+              "type": "string",
+              "description": "Reopen Closed Tab (default ⇧⌘T)"
+            },
+            "reopenClosedWindow": {
+              "type": "string",
+              "description": "Reopen Closed Window (no default)"
+            },
+            "restoreClosed": {
+              "type": "string",
+              "description": "restoreClosed (no default)"
+            },
+            "focusCommandBar": {
+              "type": "string",
+              "description": "Open Command Bar (default ⌘L, ⌃F5)"
+            },
+            "closeTab": {
+              "type": "string",
+              "description": "Close Tab (default ⌘W)"
+            },
+            "closeAllTabs": {
+              "type": "string",
+              "description": "Close All Tabs (default ⇧⌘K)"
+            },
+            "print": {
+              "type": "string",
+              "description": "Print… (default ⌘P)"
+            },
+            "copyUrl": {
+              "type": "string",
+              "description": "Copy URL (default ⇧⌘C)"
+            },
+            "copyUrlAsMarkdown": {
+              "type": "string",
+              "description": "Copy URL as Markdown (default ⌥⇧⌘C)"
+            },
+            "findInPage": {
+              "type": "string",
+              "description": "Find… (default ⌘F)"
+            },
+            "findNext": {
+              "type": "string",
+              "description": "Find Next (default ⌘G)"
+            },
+            "findPrevious": {
+              "type": "string",
+              "description": "Find Previous (default ⇧⌘G)"
+            },
+            "setAppearance": {
+              "type": "string",
+              "description": "setAppearance (no default)"
+            },
+            "setAppearance:auto": {
+              "type": "string",
+              "description": "Automatic (no default)"
+            },
+            "setAppearance:light": {
+              "type": "string",
+              "description": "Light (no default)"
+            },
+            "setAppearance:dark": {
+              "type": "string",
+              "description": "Dark (no default)"
+            },
+            "reload": {
+              "type": "string",
+              "description": "Refresh (default ⌘R)"
+            },
+            "forceReload": {
+              "type": "string",
+              "description": "Force Refresh the Page (default ⇧⌘R)"
+            },
+            "toggleTabLayout": {
+              "type": "string",
+              "description": "Show Tabs in Sidebar (default ⇧⌘S)"
+            },
+            "toggleSidebar": {
+              "type": "string",
+              "description": "Auto-Hide Tabs (default ⌘S, ⇧⌘L, ⇧⌘F)"
+            },
+            "openSplitPane": {
+              "type": "string",
+              "description": "Open Split Pane (default ⌃⇧=, ⌃+)"
+            },
+            "useSelectionForFind": {
+              "type": "string",
+              "description": "Use Selection for Find (default ⌘E)"
+            },
+            "findAndReplace": {
+              "type": "string",
+              "description": "Find and Replace… (default ⌥⌘F)"
+            },
+            "jumpToSelection": {
+              "type": "string",
+              "description": "Jump to Selection (default ⌘J)"
+            },
+            "focusNextPane": {
+              "type": "string",
+              "description": "Focus Next Split Pane (default ⌃⇧], ⌃})"
+            },
+            "focusPreviousPane": {
+              "type": "string",
+              "description": "Focus Previous Split Pane (default ⌃⇧[, ⌃{)"
+            },
+            "toggleFullUrl": {
+              "type": "string",
+              "description": "Show Full URL (no default)"
+            },
+            "toggleJavaScriptFromAppleEvents": {
+              "type": "string",
+              "description": "Allow JavaScript from Apple Events (no default)"
+            },
+            "toggleAddressBar": {
+              "type": "string",
+              "description": "Show Address Bar in Sidebar (no default)"
+            },
+            "cast": {
+              "type": "string",
+              "description": "Cast… (no default)"
+            },
+            "zoomReset": {
+              "type": "string",
+              "description": "Zoom to Actual Size (default ⌘0)"
+            },
+            "zoomIn": {
+              "type": "string",
+              "description": "Zoom In (default ⌘+, ⌘=)"
+            },
+            "zoomOut": {
+              "type": "string",
+              "description": "Zoom Out (default ⌘-)"
+            },
+            "devTools": {
+              "type": "string",
+              "description": "Developer Tools (default ⌥⌘I)"
+            },
+            "toggleDevTools": {
+              "type": "string",
+              "description": "Toggle Developer Tools (default F12)"
+            },
+            "javaScriptConsole": {
+              "type": "string",
+              "description": "JavaScript Console (default ⌥⌘J)"
+            },
+            "inspectElements": {
+              "type": "string",
+              "description": "Inspect Elements (default ⌥⌘C)"
+            },
+            "viewSource": {
+              "type": "string",
+              "description": "View Source (default ⌥⌘U)"
+            },
+            "back": {
+              "type": "string",
+              "description": "Go Back (default ⌘[, ⌘←)"
+            },
+            "forward": {
+              "type": "string",
+              "description": "Go Forward (default ⌘], ⌘→)"
+            },
+            "nextTab": {
+              "type": "string",
+              "description": "Next Tab (default ⇧⌘], ⌘}, ⌥⌘→, ⌃⇟, ⌥⌘↓)"
+            },
+            "previousTab": {
+              "type": "string",
+              "description": "Previous Tab (default ⇧⌘[, ⌘{, ⌥⌘←, ⌃⇞, ⌥⌘↑)"
+            },
+            "selectTab": {
+              "type": "string",
+              "description": "selectTab (no default)"
+            },
+            "selectTab:1": {
+              "type": "string",
+              "description": "Select Tab 1 (default ⌘1)"
+            },
+            "selectTab:2": {
+              "type": "string",
+              "description": "Select Tab 2 (default ⌘2)"
+            },
+            "selectTab:3": {
+              "type": "string",
+              "description": "Select Tab 3 (default ⌘3)"
+            },
+            "selectTab:4": {
+              "type": "string",
+              "description": "Select Tab 4 (default ⌘4)"
+            },
+            "selectTab:5": {
+              "type": "string",
+              "description": "Select Tab 5 (default ⌘5)"
+            },
+            "selectTab:6": {
+              "type": "string",
+              "description": "Select Tab 6 (default ⌘6)"
+            },
+            "selectTab:7": {
+              "type": "string",
+              "description": "Select Tab 7 (default ⌘7)"
+            },
+            "selectTab:8": {
+              "type": "string",
+              "description": "Select Tab 8 (default ⌘8)"
+            },
+            "selectLastTab": {
+              "type": "string",
+              "description": "Select Last Tab (default ⌘9)"
+            },
+            "togglePin": {
+              "type": "string",
+              "description": "Move to Top Apps (no default)"
+            },
+            "togglePin:tile": {
+              "type": "string",
+              "description": "Move Pinned Tab to Top Apps (no default)"
+            },
+            "togglePin:row": {
+              "type": "string",
+              "description": "togglePin:row (no default)"
+            },
+            "togglePinnedRow": {
+              "type": "string",
+              "description": "Move to Pinned (default ⌥⇧⌘D)"
+            },
+            "duplicateTab": {
+              "type": "string",
+              "description": "Duplicate (no default)"
+            },
+            "moveTabToProfile": {
+              "type": "string",
+              "description": "moveTabToProfile (no default)"
+            },
+            "moveTabToWindow": {
+              "type": "string",
+              "description": "moveTabToWindow (no default)"
+            },
+            "bookmarkPage": {
+              "type": "string",
+              "description": "Add to Bookmarks… (default ⌘D)"
+            },
+            "addBookmarkToFolder": {
+              "type": "string",
+              "description": "addBookmarkToFolder (no default)"
+            },
+            "openBookmark": {
+              "type": "string",
+              "description": "openBookmark (no default)"
+            },
+            "addFolderToSidebar": {
+              "type": "string",
+              "description": "addFolderToSidebar (no default)"
+            },
+            "restoreArcFolders": {
+              "type": "string",
+              "description": "restoreArcFolders (no default)"
+            },
+            "toggleMute": {
+              "type": "string",
+              "description": "Mute Tab (no default)"
+            },
+            "togglePageEngine": {
+              "type": "string",
+              "description": "Open Page in WebKit (no default)"
+            },
+            "downloads": {
+              "type": "string",
+              "description": "Downloads (default ⇧⌘J, ⌥⌘L)"
+            },
+            "mergeAllWindows": {
+              "type": "string",
+              "description": "Merge All Windows (no default)"
+            },
+            "switchProfile": {
+              "type": "string",
+              "description": "switchProfile (no default)"
+            },
+            "nextProfile": {
+              "type": "string",
+              "description": "Next Profile (no default)"
+            },
+            "previousProfile": {
+              "type": "string",
+              "description": "Previous Profile (no default)"
+            },
+            "newProfile": {
+              "type": "string",
+              "description": "New Profile… (no default)"
+            },
+            "openSettings": {
+              "type": "string",
+              "description": "Settings… (default ⌘,)"
+            },
+            "importBrowserData": {
+              "type": "string",
+              "description": "Import from Another Browser… (no default)"
+            },
+            "showHistory": {
+              "type": "string",
+              "description": "Show History… (default ⌘Y)"
+            },
+            "clearBrowsingData": {
+              "type": "string",
+              "description": "Clear Browsing Data… (default ⇧⌘⌫)"
+            },
+            "manageBookmarks": {
+              "type": "string",
+              "description": "Manage Bookmarks (default ⌥⌘B)"
+            },
+            "exportBookmarks": {
+              "type": "string",
+              "description": "Export Bookmarks… (no default)"
+            },
+            "bookmarkAllTabs": {
+              "type": "string",
+              "description": "Bookmark All Tabs… (default ⇧⌘D)"
+            },
+            "setBookmarksBar": {
+              "type": "string",
+              "description": "setBookmarksBar (no default)"
+            },
+            "setBookmarksBar:always": {
+              "type": "string",
+              "description": "Always (no default)"
+            },
+            "setBookmarksBar:newTab": {
+              "type": "string",
+              "description": "On New Tab Only (no default)"
+            },
+            "setBookmarksBar:never": {
+              "type": "string",
+              "description": "Never (no default)"
+            },
+            "toggleBookmarksBar": {
+              "type": "string",
+              "description": "Toggle Bookmarks Bar (default ⇧⌘B)"
+            },
+            "newTabInGroup": {
+              "type": "string",
+              "description": "New Tab in Group (default ⌥⌘T, ⌃⌘C)"
+            },
+            "newGroupWithTabs": {
+              "type": "string",
+              "description": "New Group with Tab (default ⌃⌘N, ⌃⌘P)"
+            },
+            "cleanUpTabs": {
+              "type": "string",
+              "description": "Clean Up Tabs (default ⌥⌘K)"
+            },
+            "tidyPins": {
+              "type": "string",
+              "description": "Tidy Pins (no default)"
+            },
+            "searchTabs": {
+              "type": "string",
+              "description": "Search Tabs… (default ⇧⌘A)"
+            },
+            "renameTab": {
+              "type": "string",
+              "description": "Rename… (no default)"
+            },
+            "changeTabIcon": {
+              "type": "string",
+              "description": "Change Icon… (no default)"
+            },
+            "returnToPinnedUrl": {
+              "type": "string",
+              "description": "Back to Pinned URL (default ⌘↩)"
+            },
+            "tabSwitcher": {
+              "type": "string",
+              "description": "tabSwitcher (no default)"
+            },
+            "tabSwitcher:forward": {
+              "type": "string",
+              "description": "Tab Switcher (forward) (default ⌃⇥)"
+            },
+            "tabSwitcher:backward": {
+              "type": "string",
+              "description": "Tab Switcher (backward) (default ⌃⇧⇥)"
+            },
+            "share": {
+              "type": "string",
+              "description": "Share… (default ⌥⌘S)"
+            },
+            "sendFeedback": {
+              "type": "string",
+              "description": "Send Feedback… (default ⌥⇧⌘I)"
+            },
+            "keyboardShortcuts": {
+              "type": "string",
+              "description": "Keyboard Shortcuts (no default)"
+            },
+            "copyDiagnostics": {
+              "type": "string",
+              "description": "Copy Diagnostics (no default)"
+            },
+            "recordPerformanceIssue": {
+              "type": "string",
+              "description": "Record Performance Issue… (no default)"
+            },
+            "toolTour": {
+              "type": "string",
+              "description": "Tool Tour (no default)"
+            },
+            "videoTour": {
+              "type": "string",
+              "description": "Video Tour (no default)"
+            },
+            "releaseNotes": {
+              "type": "string",
+              "description": "Release Notes (no default)"
+            },
+            "showOnboarding": {
+              "type": "string",
+              "description": "Show Onboarding (no default)"
+            },
+            "taskManager": {
+              "type": "string",
+              "description": "Task Manager (no default)"
+            },
+            "openExtension": {
+              "type": "string",
+              "description": "openExtension (no default)"
+            },
+            "addExtension": {
+              "type": "string",
+              "description": "Add Extension… (no default)"
+            },
+            "manageExtensions": {
+              "type": "string",
+              "description": "Manage Extensions… (no default)"
+            },
+            "pinExtensions": {
+              "type": "string",
+              "description": "Pin Extensions… (no default)"
+            },
+            "autofill": {
+              "type": "string",
+              "description": "autofill (no default)"
+            },
+            "autofill:contact": {
+              "type": "string",
+              "description": "Contact… (no default)"
+            },
+            "autofill:passwords": {
+              "type": "string",
+              "description": "Passwords… (no default)"
+            },
+            "autofill:creditCard": {
+              "type": "string",
+              "description": "Credit Card… (no default)"
+            },
+            "openFile": {
+              "type": "string",
+              "description": "Open File… (default ⌘O)"
+            },
+            "savePage": {
+              "type": "string",
+              "description": "Save Page As… (no default)"
+            },
+            "emailPageLocation": {
+              "type": "string",
+              "description": "Email Page Location (default ⇧⌘I)"
+            },
+            "printWithSystemDialog": {
+              "type": "string",
+              "description": "Print Using System Dialog… (default ⌥⌘P)"
+            },
+            "stop": {
+              "type": "string",
+              "description": "Stop (default ⌘.)"
+            },
+            "caretBrowsing": {
+              "type": "string",
+              "description": "Caret Browsing (default F7)"
+            },
+            "moveTabDown": {
+              "type": "string",
+              "description": "Move Tab Down (default ⌃⇧⇟)"
+            },
+            "moveTabUp": {
+              "type": "string",
+              "description": "Move Tab Up (default ⌃⇧⇞)"
+            },
+            "closeTabGroup": {
+              "type": "string",
+              "description": "Close Group (default ⌃⌘W)"
+            },
+            "openProfileMenu": {
+              "type": "string",
+              "description": "Show Profiles Menu (default ⇧⌘M)"
+            },
+            "std:quit:": {
+              "type": "string",
+              "description": "std:quit: (default ⌘Q)"
+            },
+            "std:hide:": {
+              "type": "string",
+              "description": "std:hide: (default ⌘H)"
+            },
+            "std:hideOtherApplications:": {
+              "type": "string",
+              "description": "std:hideOtherApplications: (default ⌥⌘H)"
+            },
+            "std:unhideAllApplications:": {
+              "type": "string",
+              "description": "std:unhideAllApplications: (no default)"
+            },
+            "std:closeWindow:": {
+              "type": "string",
+              "description": "std:closeWindow: (default ⇧⌘W)"
+            },
+            "std:undo:": {
+              "type": "string",
+              "description": "std:undo: (default ⌘Z)"
+            },
+            "std:redo:": {
+              "type": "string",
+              "description": "std:redo: (default ⇧⌘Z)"
+            },
+            "std:cut:": {
+              "type": "string",
+              "description": "std:cut: (default ⌘X)"
+            },
+            "std:copy:": {
+              "type": "string",
+              "description": "std:copy: (default ⌘C)"
+            },
+            "std:paste:": {
+              "type": "string",
+              "description": "std:paste: (default ⌘V)"
+            },
+            "std:pasteAndMatchStyle:": {
+              "type": "string",
+              "description": "std:pasteAndMatchStyle: (default ⇧⌘V)"
+            },
+            "std:delete:": {
+              "type": "string",
+              "description": "std:delete: (no default)"
+            },
+            "std:selectAll:": {
+              "type": "string",
+              "description": "std:selectAll: (default ⌘A)"
+            },
+            "std:showGuessPanel:": {
+              "type": "string",
+              "description": "std:showGuessPanel: (default ⌘:)"
+            },
+            "std:checkSpelling:": {
+              "type": "string",
+              "description": "std:checkSpelling: (default ⌘;)"
+            },
+            "std:toggleContinuousSpellChecking:": {
+              "type": "string",
+              "description": "std:toggleContinuousSpellChecking: (no default)"
+            },
+            "std:toggleGrammarChecking:": {
+              "type": "string",
+              "description": "std:toggleGrammarChecking: (no default)"
+            },
+            "std:toggleAutomaticSpellingCorrection:": {
+              "type": "string",
+              "description": "std:toggleAutomaticSpellingCorrection: (no default)"
+            },
+            "std:orderFrontSubstitutionsPanel:": {
+              "type": "string",
+              "description": "std:orderFrontSubstitutionsPanel: (no default)"
+            },
+            "std:toggleSmartInsertDelete:": {
+              "type": "string",
+              "description": "std:toggleSmartInsertDelete: (no default)"
+            },
+            "std:toggleAutomaticQuoteSubstitution:": {
+              "type": "string",
+              "description": "std:toggleAutomaticQuoteSubstitution: (no default)"
+            },
+            "std:toggleAutomaticDashSubstitution:": {
+              "type": "string",
+              "description": "std:toggleAutomaticDashSubstitution: (no default)"
+            },
+            "std:toggleAutomaticLinkDetection:": {
+              "type": "string",
+              "description": "std:toggleAutomaticLinkDetection: (no default)"
+            },
+            "std:toggleAutomaticDataDetection:": {
+              "type": "string",
+              "description": "std:toggleAutomaticDataDetection: (no default)"
+            },
+            "std:toggleAutomaticTextReplacement:": {
+              "type": "string",
+              "description": "std:toggleAutomaticTextReplacement: (no default)"
+            },
+            "std:uppercaseWord:": {
+              "type": "string",
+              "description": "std:uppercaseWord: (no default)"
+            },
+            "std:lowercaseWord:": {
+              "type": "string",
+              "description": "std:lowercaseWord: (no default)"
+            },
+            "std:capitalizeWord:": {
+              "type": "string",
+              "description": "std:capitalizeWord: (no default)"
+            },
+            "std:startSpeaking:": {
+              "type": "string",
+              "description": "std:startSpeaking: (no default)"
+            },
+            "std:stopSpeaking:": {
+              "type": "string",
+              "description": "std:stopSpeaking: (no default)"
+            },
+            "std:toggleFullScreen:": {
+              "type": "string",
+              "description": "std:toggleFullScreen: (default 🌐F, ⌃⌘F)"
+            },
+            "std:performMiniaturize:": {
+              "type": "string",
+              "description": "std:performMiniaturize: (default ⌘M)"
+            },
+            "std:miniaturizeAll:": {
+              "type": "string",
+              "description": "std:miniaturizeAll: (default ⌥⌘M)"
+            },
+            "std:performZoom:": {
+              "type": "string",
+              "description": "std:performZoom: (no default)"
+            },
+            "std:arrangeWindowsInFront:": {
+              "type": "string",
+              "description": "std:arrangeWindowsInFront: (no default)"
+            },
+            "std:toggleKeepOnTop:": {
+              "type": "string",
+              "description": "std:toggleKeepOnTop: (no default)"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "openLinksInLittleArdia": {
+          "type": "boolean",
+          "default": true
+        },
+        "littleArdiaSize": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "default": [
+            900,
+            640
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

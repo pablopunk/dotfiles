@@ -340,6 +340,7 @@ os = ["linux"]
 check = "test -x ~/.cargo/bin/xremap"
 link."config/xremap/config.yml" = "~/.config/xremap/config.yml"
 link."config/xremap/xremap.service" = "~/.config/systemd/user/xremap.service"
+postlink = "systemctl --user daemon-reload && systemctl --user enable --now xremap.service"
 
 [omarchy]
 os = ["linux"]

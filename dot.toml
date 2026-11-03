@@ -338,9 +338,11 @@ link."config/hypr" = "~/.config/hypr"
 [xremap]
 os = ["linux"]
 check = "test -x ~/.cargo/bin/xremap"
+install.cargo = "cargo install xremap --features hypr"
+uninstall.cargo = "cargo uninstall xremap"
 link."config/xremap/config.yml" = "~/.config/xremap/config.yml"
 link."config/xremap/xremap.service" = "~/.config/systemd/user/xremap.service"
-postlink = "systemctl --user daemon-reload && systemctl --user enable --now xremap.service"
+postlink = "bash ./config/xremap/setup.sh"
 
 [omarchy]
 os = ["linux"]

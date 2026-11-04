@@ -44,7 +44,15 @@
       "stripe": {
         "type": "remote",
         "url": "https://mcp.stripe.com"
+      },
+      "sentry": {
+        "type": "remote",
+        "url": "https://mcp.sentry.dev/mcp"
       }
+    },
+    "posthog": {
+      "type": "remote",
+      "url": "https://mcp.posthog.com/mcp"
     },
   },
   // === Providers ===

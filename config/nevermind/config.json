@@ -23,7 +23,9 @@
     "extension:nevermind.emoji-symbols:emoji-symbols": "Command+Shift+E",
     "extension-action:window-management:layout.focus-right": "Command+Control+Alt+L",
     "extension-action:window-management:layout.focus-left": "Command+Control+Alt+H",
-    "extension-action:window-management:layout.focus-up": "Command+Control+Alt+K"
+    "extension-action:window-management:layout.focus-up": "Command+Control+Alt+K",
+    "extension:nevermind.clipboard:clipboard-history": "Command+Shift+V",
+    "extension:local.screenshots:screenshots.grid": "Command+Shift+2"
   },
   "ai": {
     "defaultModel": "smart"

@@ -59,6 +59,18 @@
           ],
           "default": "sidebar"
         },
+        "autoHideTabs": {
+          "type": "boolean",
+          "default": false
+        },
+        "sidebarSide": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "default": "left"
+        },
         "hideToolbarWhileScrolling": {
           "type": "boolean",
           "default": true
@@ -120,6 +132,10 @@
           "type": "boolean",
           "default": true
         },
+        "dragToGroupInTopStrip": {
+          "type": "boolean",
+          "default": false
+        },
         "peekModifier": {
           "type": "string",
           "enum": [
@@ -132,6 +148,15 @@
         "peekLinksToOtherSites": {
           "type": "boolean",
           "default": false
+        },
+        "newTabLinksOpenIn": {
+          "type": "string",
+          "enum": [
+            "tab",
+            "peek",
+            "littleArdia"
+          ],
+          "default": "tab"
         },
         "splitLinkModifier": {
           "type": "string",
@@ -272,6 +297,10 @@
           ],
           "default": "balanced"
         },
+        "loadProfilesWhenOpened": {
+          "type": "boolean",
+          "default": true
+        },
         "keepActiveSites": {
           "type": "array",
           "items": {
@@ -287,6 +316,10 @@
         "showFullUrl": {
           "type": "boolean",
           "default": false
+        },
+        "showBookmarks": {
+          "type": "boolean",
+          "default": true
         },
         "bookmarksBar": {
           "type": "string",
@@ -329,6 +362,12 @@
         "compactToolbar": {
           "type": "boolean",
           "default": false
+        },
+        "pageFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12,
+          "default": 9
         },
         "commandBarPlacement": {
           "type": "string",
@@ -445,6 +484,10 @@
             "toggleTabLayout": {
               "type": "string",
               "description": "Show Tabs in Sidebar (default ⇧⌘S)"
+            },
+            "toggleSidebarSide": {
+              "type": "string",
+              "description": "Sidebar on Right (no default)"
             },
             "toggleSidebar": {
               "type": "string",
@@ -754,9 +797,9 @@
               "type": "string",
               "description": "Share… (default ⌥⌘S)"
             },
-            "sendFeedback": {
+            "reportProblem": {
               "type": "string",
-              "description": "Send Feedback… (default ⌥⇧⌘I)"
+              "description": "Report a Problem… (default ⌥⇧⌘I)"
             },
             "keyboardShortcuts": {
               "type": "string",
@@ -765,10 +808,6 @@
             "copyDiagnostics": {
               "type": "string",
               "description": "Copy Diagnostics (no default)"
-            },
-            "recordPerformanceIssue": {
-              "type": "string",
-              "description": "Record Performance Issue… (no default)"
             },
             "toolTour": {
               "type": "string",
@@ -1014,6 +1053,10 @@
           "type": "boolean",
           "default": true
         },
+        "littleArdiaOpensNewTabLinks": {
+          "type": "boolean",
+          "default": true
+        },
         "littleArdiaSize": {
           "type": "array",
           "prefixItems": [
@@ -1032,6 +1075,201 @@
             900,
             640
           ]
+        },
+        "omniboxProviders": {
+          "type": "array",
+          "maxItems": 32,
+          "description": "Address bar providers. With a keyword, typing it then Space or Tab enters that provider; without one, its rows join the list (global). rows: a static list. url: a template, {query} is what you type. suggest: an https endpoint answering OpenSearch suggestions or [{title, url}]. A suggest endpoint or a global provider only runs once approved in Ardia.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "keyword": {
+                "type": "string",
+                "pattern": "^[^\\s/?#:@.!]{1,32}$"
+              },
+              "title": {
+                "type": "string",
+                "description": "Shown on the chip and on each row, up to 60 characters"
+              },
+              "global": {
+                "type": "boolean",
+                "description": "No keyword: the rows join the normal list. Needed for a suggest endpoint without a keyword"
+              },
+              "rows": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "What the row says"
+                    },
+                    "url": {
+                      "type": "string",
+                      "pattern": "^https?://[^\\s/?#@]+([/?#]\\S*)?$",
+                      "description": "Where it goes: an http or https URL"
+                    },
+                    "subtitle": {
+                      "type": "string"
+                    },
+                    "icon": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "An https URL or a small data:image (png, jpeg, gif, webp, ico)"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "url"
+                  ],
+                  "additionalProperties": false
+                },
+                "maxItems": 200
+              },
+              "url": {
+                "type": "string",
+                "pattern": "^https?://\\S*\\{query\\}\\S*$",
+                "description": "A link template with {query}; needs a keyword"
+              },
+              "suggest": {
+                "type": "string",
+                "pattern": "^https?://\\S*\\{query\\}\\S*$",
+                "description": "An https suggestion endpoint with {query}"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "launchActions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "newTab",
+              "newWindow",
+              "newIncognitoWindow",
+              "newLittleArdia",
+              "toggleOpenLinksInLittleArdia",
+              "reopenClosedTab",
+              "reopenClosedWindow",
+              "focusCommandBar",
+              "closeTab",
+              "closeAllTabs",
+              "print",
+              "copyUrl",
+              "copyUrlAsMarkdown",
+              "findInPage",
+              "findNext",
+              "findPrevious",
+              "setAppearance",
+              "setAppearance:auto",
+              "setAppearance:light",
+              "setAppearance:dark",
+              "reload",
+              "forceReload",
+              "toggleTabLayout",
+              "toggleSidebarSide",
+              "toggleSidebar",
+              "openSplitPane",
+              "useSelectionForFind",
+              "findAndReplace",
+              "jumpToSelection",
+              "focusNextPane",
+              "focusPreviousPane",
+              "toggleFullUrl",
+              "toggleAddressBar",
+              "cast",
+              "zoomReset",
+              "zoomIn",
+              "zoomOut",
+              "devTools",
+              "toggleDevTools",
+              "javaScriptConsole",
+              "inspectElements",
+              "viewSource",
+              "back",
+              "forward",
+              "nextTab",
+              "previousTab",
+              "selectTab",
+              "selectTab:1",
+              "selectTab:2",
+              "selectTab:3",
+              "selectTab:4",
+              "selectTab:5",
+              "selectTab:6",
+              "selectTab:7",
+              "selectTab:8",
+              "selectLastTab",
+              "togglePin",
+              "togglePin:tile",
+              "togglePin:row",
+              "togglePinnedRow",
+              "duplicateTab",
+              "bookmarkPage",
+              "toggleMute",
+              "downloads",
+              "mergeAllWindows",
+              "nextProfile",
+              "previousProfile",
+              "newProfile",
+              "openSettings",
+              "importBrowserData",
+              "showHistory",
+              "clearBrowsingData",
+              "manageBookmarks",
+              "exportBookmarks",
+              "bookmarkAllTabs",
+              "setBookmarksBar",
+              "setBookmarksBar:always",
+              "setBookmarksBar:newTab",
+              "setBookmarksBar:never",
+              "toggleBookmarksBar",
+              "newTabInGroup",
+              "newGroupWithTabs",
+              "cleanUpTabs",
+              "tidyPins",
+              "searchTabs",
+              "renameTab",
+              "changeTabIcon",
+              "returnToPinnedUrl",
+              "tabSwitcher",
+              "tabSwitcher:forward",
+              "tabSwitcher:backward",
+              "share",
+              "reportProblem",
+              "keyboardShortcuts",
+              "copyDiagnostics",
+              "toolTour",
+              "videoTour",
+              "releaseNotes",
+              "showOnboarding",
+              "taskManager",
+              "addExtension",
+              "manageExtensions",
+              "pinExtensions",
+              "autofill",
+              "autofill:contact",
+              "autofill:passwords",
+              "autofill:creditCard",
+              "openFile",
+              "savePage",
+              "emailPageLocation",
+              "printWithSystemDialog",
+              "stop",
+              "caretBrowsing",
+              "moveTabDown",
+              "moveTabUp",
+              "closeTabGroup",
+              "openProfileMenu"
+            ]
+          },
+          "maxItems": 20,
+          "default": [],
+          "description": "Commands Ardia runs in the focused window after it restores the session, like [\"newTab\"]. Command ids, or id:variant."
         }
       },
       "additionalProperties": false

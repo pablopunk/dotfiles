@@ -22,3 +22,7 @@ keybind = global:ctrl+alt+cmd+t=new_window
 # fix for opencode https://github.com/anomalyco/opencode/issues/4046#issuecomment-3717801839
 # disabled because it breaks pi/tmux Shift+Enter handling
 # keybind = shift+enter=text:\x1b\r
+
+# >>> Scene: managed include. Remove this block to detach Scene. >>>
+config-file = ?"/Users/pablopunk/.config/ghostty/scene.conf"
+# <<< Scene <<<

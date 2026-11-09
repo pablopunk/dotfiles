@@ -6,6 +6,25 @@
                 "parameters": { "basic.to_if_held_down_threshold_milliseconds": 150 },
                 "rules": [
                     {
+                        "description": "Right Command to Hyper (⌃⌥⌘)",
+                        "enabled": true,
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command",
+                                        "modifiers": ["left_control", "left_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Home row mods (sdfg/hjkl)",
                         "enabled": false,
                         "manipulators": [

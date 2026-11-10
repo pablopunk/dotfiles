@@ -194,10 +194,13 @@ o.bind(combo(HYPER, "S"), "Area screenshot", "omarchy-capture-screenshot")
 o.bind(combo(HYPER_SHIFT, "S"), "Fullscreen screenshot", "omarchy-capture-screenshot fullscreen")
 
 -- Switch workspaces with HYPER + 1-10.
+-- Use Omarchy's per-monitor helpers, not raw ids: each monitor owns a block of
+-- ten (laptop 1-10, external 11-20, ...), and raw ids from another monitor's
+-- block get renumbered into the focused monitor's block on the next reconcile.
 for workspace = 1, 10 do
   local key = "code:" .. tostring(workspace + 9)
-  o.bind(combo(HYPER, key), "Switch to workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
-  o.bind(combo(HYPER_SHIFT, key), "Move window to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
+  o.bind(combo(HYPER, key), "Switch to workspace " .. workspace, o.workspaces.focus(workspace))
+  o.bind(combo(HYPER_SHIFT, key), "Move window to workspace " .. workspace, o.workspaces.move_window(workspace))
 end
 
 -- Previously visited workspace: HYPER+TAB.

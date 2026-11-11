@@ -381,6 +381,10 @@
           "type": "boolean",
           "default": true
         },
+        "adaptTextToColor": {
+          "type": "boolean",
+          "default": true
+        },
         "profileSwitcherIcons": {
           "type": "boolean",
           "default": false

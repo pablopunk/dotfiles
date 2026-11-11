@@ -4,6 +4,9 @@
   "scroll_acceleration": {
     "enabled": true
   },
-  "plugin": ["./herdr-tui-session.js"]
+  "plugin": [
+    "./herdr-tui-session.js",
+    "file:///Users/pablopunk/.config/opencode/plugins/orca-opencode-status-tui/tui.js"
+  ]
 }
 

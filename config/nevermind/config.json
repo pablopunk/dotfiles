@@ -5,7 +5,7 @@
     "hyperKey": "Command+Control+Alt",
     "errorReporting": true,
     "updateChannel": "dev",
-    "menuBarIconStyle": "bolt-outline"
+    "menuBarIconStyle": "gold-outline"
   },
   "shortcuts": {
     "extension-root:nevermind.apps:app:/Applications/Rex Beta.app": "Command+Control+Alt+T",

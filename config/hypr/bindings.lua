@@ -29,6 +29,9 @@ end
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))  -- was: Toggle top bar
 o.bind("SUPER + SHIFT + code:57", "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
 
+-- Omarchy menu (default disabled via omarchy_default_bindings).
+o.bind(combo(SUPER, "SPACE"), "Omarchy menu", { menu = "root" })
+
 -- Close the active window.
 hl.unbind(combo(SUPER, "W"))  -- was: Close window
 o.bind(combo(SUPER, "Q"), "Close window", hl.dsp.window.close())
@@ -38,19 +41,75 @@ hl.unbind(combo(SUPER, "RETURN"))  -- was: Terminal
 bind_hyper("T", "Terminal", { omarchy = "terminal" })
 
 -- Vim-style window focus with HYPER + h/j/k/l.
--- Falls back to next/previous workspace when no window in that direction.
+-- Only the axis matching the workspace slide animation hops workspaces when
+-- no window lies in that direction; the other axis stays inside the current
+-- workspace. Horizontal slide -> h/l hop, vertical slidevert -> j/k hop.
+-- A hop only counts when focus actually moved along the requested axis, so a
+-- sideways grab (HYPER+J landing on the window to the right) hops instead.
 -- When hopping, lands on the window at the edge we entered from:
 --   right -> leftmost window of the next workspace
 --   left  -> rightmost window of the previous workspace
 --   down  -> topmost window of the next workspace
 --   up    -> bottommost window of the previous workspace
+
+-- Single source of truth is the workspaces animation style in looknfeel.lua:
+-- a "vert" style (slidevert/slidefadevert) means vertical. Read once here
+-- since looknfeel.lua reloads together with this file anyway.
+local function workspace_animation_is_vertical()
+  if type(io) ~= "table" or type(io.open) ~= "function" then return false end
+  if type(os) ~= "table" or type(os.getenv) ~= "function" then return false end
+  local ok, text = pcall(function()
+    local home = os.getenv("HOME") or ""
+    local path = home .. "/.config/hypr/looknfeel.lua"
+    local file = assert(io.open(path, "r"))
+    local contents = file:read("*a") or ""
+    file:close()
+    return contents
+  end)
+  if not ok or type(text) ~= "string" then return false end
+  local leaf = text:match('hl%.animation%s*%(%s*%{[^}]*leaf%s*=%s*"workspaces"[^}]*%}')
+  if not leaf then return false end
+  local style = leaf:match('style%s*=%s*"([^"]+)"')
+  if not style then return false end
+  return style:find("vert") ~= nil
+end
+
+local workspace_is_vertical = workspace_animation_is_vertical()
+
+-- Workspace hopping follows the slide animation: l/r for a horizontal slide,
+-- u/d for a vertical one.
+local function hops_workspaces(direction)
+  local horizontal = direction == "l" or direction == "r"
+  return horizontal ~= workspace_is_vertical
+end
+
+-- A hop only counts when focus actually moved along the requested axis.
+-- Hyprland's directional focus falls back to the nearest window when nothing
+-- lies ahead, so with a side-by-side A|B split HYPER+J would land on B (to
+-- the right) instead of hopping: B is not below A, so hop instead.
+local function center_of(win)
+  if not win or type(win.at) ~= "table" or type(win.size) ~= "table" then return nil end
+  return win.at.x + win.size.x / 2, win.at.y + win.size.y / 2
+end
+
+local function moved_in_direction(before, after, direction)
+  if not before or not after or before.address == after.address then return false end
+  local x0, y0 = center_of(before)
+  local x1, y1 = center_of(after)
+  -- No geometry to judge by: trust the address change (previous behavior).
+  if not x0 or not x1 then return true end
+  if direction == "l" then return x1 < x0 end
+  if direction == "r" then return x1 > x0 end
+  if direction == "u" then return y1 < y0 end
+  return y1 > y0
+end
+
 local function focus_or_workspace(direction)
   local before = hl.get_active_window()
-  local before_address = before and before.address
   hl.dispatch(hl.dsp.focus({ direction = direction }))
   local after = hl.get_active_window()
-  local after_address = after and after.address
-  if before_address == after_address then
+  local moved = moved_in_direction(before, after, direction)
+  if not moved and hops_workspaces(direction) then
     local fallback = (direction == "l" or direction == "u") and "e-1" or "e+1"
     hl.dispatch(hl.dsp.focus({ workspace = fallback }))
 
@@ -87,10 +146,10 @@ local function focus_or_workspace(direction)
 end
 
 local directional_bindings = {
-  { key = "H", direction = "l", focus_description = "Focus left, or previous workspace", move_description = "Move/stack window left" },
-  { key = "J", direction = "d", focus_description = "Focus down, or next workspace", move_description = "Move window down in column" },
-  { key = "K", direction = "u", focus_description = "Focus up, or previous workspace", move_description = "Move window up in column" },
-  { key = "L", direction = "r", focus_description = "Focus right, or next workspace", move_description = "Move/stack window right" },
+  { key = "H", direction = "l", focus_base = "Focus left", move_description = "Move/stack window left" },
+  { key = "J", direction = "d", focus_base = "Focus down", move_description = "Move window down in column" },
+  { key = "K", direction = "u", focus_base = "Focus up", move_description = "Move window up in column" },
+  { key = "L", direction = "r", focus_base = "Focus right", move_description = "Move/stack window right" },
 }
 
 local function bind_focus(binding)
@@ -100,6 +159,9 @@ local function bind_focus(binding)
 end
 
 for _, binding in ipairs(directional_bindings) do
+  -- Keybinding menu text tracks which axis currently hops workspaces.
+  local hop_word = (binding.direction == "l" or binding.direction == "u") and "previous workspace" or "next workspace"
+  binding.focus_description = binding.focus_base .. (hops_workspaces(binding.direction) and (", or " .. hop_word) or "")
   bind_focus(binding)
 end
 
@@ -281,6 +343,40 @@ for _, shortcut in ipairs(app_shortcuts) do
   o.bind(combo(SUPER_SHIFT, shortcut.key), shift_description, send_ctrl(shortcut.key, true))
 end
 
+-- Universal copy/paste (restored from Omarchy defaults, lost with
+-- omarchy_default_bindings = false). Terminal-aware: sends Ctrl+Shift+C/V
+-- in terminals, plain Ctrl+C/V elsewhere. Cut is plain Ctrl+X everywhere.
+local function active_window_is_terminal()
+  local window = hl.get_active_window()
+  if not window then
+    return false
+  end
+  for _, tag in ipairs(window.tags or {}) do
+    if tag:gsub("%*$", "") == "terminal" then
+      return true
+    end
+  end
+  return false
+end
+
+local function universal_clipboard_shortcut(default_mods, default_key, terminal_mods, terminal_key)
+  return function()
+    if active_window_is_terminal() then
+      send_ctrl(terminal_key, terminal_mods:find("SHIFT") ~= nil)()
+    else
+      -- send_ctrl only knows CTRL [+ SHIFT]; mods here are always CTRL-based.
+      send_ctrl(default_key, default_mods:find("SHIFT") ~= nil)()
+    end
+  end
+end
+
+hl.unbind(combo(SUPER, "C"))
+o.bind(combo(SUPER, "C"), "Universal copy", universal_clipboard_shortcut("CTRL", "C", "CTRL SHIFT", "C"))
+hl.unbind(combo(SUPER, "V"))
+o.bind(combo(SUPER, "V"), "Universal paste", universal_clipboard_shortcut("CTRL", "V", "CTRL SHIFT", "V"))
+hl.unbind(combo(SUPER, "X"))
+o.bind(combo(SUPER, "X"), "Universal cut", send_ctrl("X"))
+
 -- Disable SUPER+SHIFT+SPACE (was: Toggle top bar).
 hl.unbind(combo(SUPER_SHIFT, "SPACE"))
 
@@ -307,3 +403,24 @@ if o.dictation_installed and o.dictation_installed() then
   o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
   o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
 end
+
+-- Media keys (restored from Omarchy defaults, lost with
+-- omarchy_default_bindings = false in hyprland.lua).
+-- Volume controls the speaker DSP sink via omarchy-audio-output-volume.
+o.bind("XF86AudioRaiseVolume", "Volume up", { audio = "raise" }, { locked = true, repeating = true })
+o.bind("XF86AudioLowerVolume", "Volume down", { audio = "lower" }, { locked = true, repeating = true })
+o.bind("XF86AudioMute", "Mute", { audio = "mute-toggle" }, { locked = true })
+o.bind("XF86AudioMicMute", "Mute microphone", "omarchy-audio-input-mute", { locked = true })
+o.bind("ALT + XF86AudioRaiseVolume", "Volume up precise", "omarchy-audio-output-volume +1", { locked = true, repeating = true })
+o.bind("ALT + XF86AudioLowerVolume", "Volume down precise", "omarchy-audio-output-volume -1", { locked = true, repeating = true })
+o.bind("SHIFT + XF86AudioMute", "Switch audio output", "omarchy-audio-output-switch", { locked = true })
+-- Display brightness.
+o.bind("XF86MonBrightnessUp", "Brightness up", { brightness = "raise" }, { locked = true, repeating = true })
+o.bind("XF86MonBrightnessDown", "Brightness down", { brightness = "lower" }, { locked = true, repeating = true })
+-- MacBook Air has no keyboard-backlight keys: CTRL + display-brightness keys
+-- drive the keyboard backlight instead (matches Omarchy defaults).
+o.bind("CTRL + XF86MonBrightnessDown", "Keyboard brightness down", "omarchy-brightness-keyboard down", { locked = true, repeating = true })
+o.bind("CTRL + XF86MonBrightnessUp", "Keyboard brightness up", "omarchy-brightness-keyboard up", { locked = true, repeating = true })
+o.bind("XF86KbdBrightnessUp", "Keyboard brightness up", "omarchy-brightness-keyboard up", { locked = true, repeating = true })
+o.bind("XF86KbdBrightnessDown", "Keyboard brightness down", "omarchy-brightness-keyboard down", { locked = true, repeating = true })
+o.bind("XF86KbdLightOnOff", "Keyboard backlight cycle", "omarchy-brightness-keyboard cycle", { locked = true })

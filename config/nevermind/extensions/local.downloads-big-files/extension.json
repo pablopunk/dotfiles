@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.downloads-big-files","title":"Downloads Big Files","subtitle":"Recursive biggest files with delete","capabilities":["desktop.files","system"],"convertedFrom":"downloads-big-files.ts"}

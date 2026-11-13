@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.ocr-clipboard-image","title":"OCR Clipboard Image","subtitle":"Copy image text, repairing wrapped URLs and preserving paragraphs","capabilities":["ocr","clipboard.history","desktop.files","desktop.clipboard"],"convertedFrom":"ocr-clipboard-image.ts"}

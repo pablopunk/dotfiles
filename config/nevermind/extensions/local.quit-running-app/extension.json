@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.quit-running-app","title":"Quit App","subtitle":"Force-kill a running app from /Applications","capabilities":["desktop.apps","system"],"convertedFrom":"quit-running-app.ts"}

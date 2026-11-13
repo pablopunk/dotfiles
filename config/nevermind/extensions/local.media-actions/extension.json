@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.media-actions","title":"Media Actions","subtitle":"Compress, convert, resize, and speed up media from Finder or clipboard files","capabilities":["desktop.files","system","clipboard.history"],"convertedFrom":"media-actions.ts"}

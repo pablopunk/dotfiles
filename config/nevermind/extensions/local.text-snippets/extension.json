@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.text-snippets","title":"Snippets","subtitle":"Save and manage reusable pieces of text","capabilities":["clipboard.history","desktop.clipboard"],"convertedFrom":"snippets.ts"}

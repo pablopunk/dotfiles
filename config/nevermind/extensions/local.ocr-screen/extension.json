@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.ocr-screen","title":"OCR Screen","subtitle":"Copy all visible text from the screen","capabilities":["ocr","clipboard.history","desktop.clipboard"],"convertedFrom":"ocr-screen.ts"}

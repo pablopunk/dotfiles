@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.url-from-screenshot","title":"URL from Screenshot","subtitle":"Extract wrapped terminal URLs from a clipboard image","capabilities":["ocr","clipboard.history","desktop.clipboard"],"convertedFrom":"url-from-screenshot.ts"}

@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"pablo.organize-downloads","title":"Organize Downloads","subtitle":"Sorts loose files in ~/Downloads into categories/ while keeping originals/ intact","capabilities":["desktop.files","system"],"convertedFrom":"organize-downloads.ts"}

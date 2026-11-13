@@ -1,0 +1,1 @@
+{"apiVersion":"1.0","id":"local.tailscale-machines","title":"Tailscale Machines","subtitle":"Copy device hostnames and IPs, with live online status","capabilities":["system"],"convertedFrom":"tailscale-machines.ts"}

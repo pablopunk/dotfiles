@@ -26,7 +26,8 @@
     "extension-action:window-management:layout.focus-up": "Command+Control+Alt+K",
     "extension:nevermind.clipboard:clipboard-history": "Command+Shift+V",
     "extension:local.screenshots:screenshots.grid": "Command+Shift+2",
-    "extension:nevermind.ai-commands:fix-selected-text-with-ai": "Command+Control+Alt+R"
+    "extension:nevermind.ai-commands:fix-selected-text-with-ai": "Command+Control+Alt+R",
+    "extension:nevermind.floating-notes:toggle-floating-notes": "Command+Control+Alt+Y"
   },
   "ai": {
     "defaultModel": "smart"

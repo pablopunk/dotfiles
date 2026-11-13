@@ -2,7 +2,8 @@
 -- Hyprland 0.56.2, lua format.
 
 -- >>> shortcuts
-hl.bind("SUPER + space", hl.dsp.exec_cmd("/home/pol/.local/bin/nevermind-next run palette-toggle"))
+hl.bind("SUPER + CTRL + ALT + Y", hl.dsp.exec_cmd("/home/pol/.local/nevermind-next.app/nevermind-next run extension:nevermind.floating-notes:toggle-floating-notes"))
+hl.bind("SUPER + space", hl.dsp.exec_cmd("/home/pol/.local/nevermind-next.app/nevermind-next run palette-toggle"))
 -- <<< shortcuts
 
 -- >>> appearance

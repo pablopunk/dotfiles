@@ -5,7 +5,7 @@
     "hyperKey": "Command+Control+Alt",
     "errorReporting": true,
     "updateChannel": "dev",
-    "menuBarIconStyle": "gold-outline"
+    "menuBarIconStyle": "bolt-outline"
   },
   "shortcuts": {
     "extension-root:nevermind.apps:app:/Applications/Rex Beta.app": "Command+Control+Alt+T",
@@ -27,9 +27,104 @@
     "extension:nevermind.clipboard:clipboard-history": "Command+Shift+V",
     "extension:local.screenshots:screenshots.grid": "Command+Shift+2",
     "extension:nevermind.ai-commands:fix-selected-text-with-ai": "Command+Control+Alt+R",
-    "extension:nevermind.floating-notes:toggle-floating-notes": "Command+Control+Alt+Y"
+    "extension:nevermind.floating-notes:toggle-floating-notes": "Command+Control+Alt+Y",
+    "extension:nevermind.menus:search-menu-items": "Command+Shift+M"
   },
   "ai": {
     "defaultModel": "smart"
+  },
+  "extensions": {
+    "enabled": {
+      "camera.view": {
+        "capabilities": "camera"
+      },
+      "github.issues": {
+        "capabilities": "system"
+      },
+      "github.prs": {
+        "capabilities": "system"
+      },
+      "local.audio-devices": {
+        "capabilities": "system"
+      },
+      "local.caffeinate": {
+        "capabilities": "system"
+      },
+      "local.convert-to-compatible": {
+        "capabilities": "desktop.files,system"
+      },
+      "local.downloads-big-files": {
+        "capabilities": "desktop.files,system"
+      },
+      "local.media-actions": {
+        "capabilities": "clipboard.history,desktop.files,system"
+      },
+      "local.my-github-repos": {
+        "capabilities": "system"
+      },
+      "local.ocr-clipboard-image": {
+        "capabilities": "clipboard.history,desktop.clipboard,desktop.files,ocr"
+      },
+      "local.ocr-screen": {
+        "capabilities": "clipboard.history,desktop.clipboard,ocr"
+      },
+      "local.online-wallpapers": {
+        "capabilities": "desktop.files,network,system"
+      },
+      "local.paperless-ai-search": {
+        "capabilities": "ai,network,secrets"
+      },
+      "local.quit-running-app": {
+        "capabilities": "desktop.apps,system"
+      },
+      "local.remove-app-quarantine": {
+        "capabilities": "desktop.files,system"
+      },
+      "local.resize-image-half": {
+        "capabilities": "desktop.files,system"
+      },
+      "local.restart-app": {
+        "capabilities": "desktop.apps,desktop.files,system"
+      },
+      "local.screenshots": {
+        "capabilities": "desktop.files"
+      },
+      "local.stage-manager-stages": {
+        "capabilities": "desktop.apps,system"
+      },
+      "local.syncthing-browser": {
+        "capabilities": ""
+      },
+      "local.tailscale-machines": {
+        "capabilities": "system"
+      },
+      "local.text-snippets": {
+        "capabilities": "clipboard.history,desktop.clipboard"
+      },
+      "local.url-from-screenshot": {
+        "capabilities": "clipboard.history,desktop.clipboard,ocr"
+      },
+      "local.wallpapers": {
+        "capabilities": "desktop.files,system"
+      },
+      "mac.calendar": {
+        "capabilities": "system"
+      },
+      "pablo.organize-downloads": {
+        "capabilities": "desktop.files,system"
+      },
+      "system.toggle-theme": {
+        "capabilities": "system"
+      },
+      "user.github-issues-menubar": {
+        "capabilities": "system"
+      },
+      "user.shortcut-lookup": {
+        "capabilities": "shortcuts"
+      },
+      "user.tailscale-toggle": {
+        "capabilities": "system"
+      }
+    }
   }
 }

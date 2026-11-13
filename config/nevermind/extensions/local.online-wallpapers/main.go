@@ -28,32 +28,11 @@ const (
 	backupKey            = "appearance-original-v1"
 	maxDownloadBytes     = 60 * 1024 * 1024
 	gridID               = "online-wallpapers-grid"
-	jxaSampleScript      = `ObjC.import('AppKit');
-function run(argv) {
- var image = $.NSImage.alloc.initWithContentsOfFile($(argv[0]));
- if (!image || image.isNil()) throw Error('Cannot decode wallpaper image');
- var bitmap = $.NSBitmapImageRep.imageRepWithData(image.TIFFRepresentation);
- if (!bitmap || bitmap.isNil()) throw Error('Cannot sample wallpaper image');
- var w = Number(bitmap.pixelsWide), h = Number(bitmap.pixelsHigh), samples = [];
- if (w < 1 || h < 1) throw Error('Wallpaper has no pixels');
- for (var y=0;y<40;y++) for (var x=0;x<40;x++) {
-  var color = bitmap.colorAtXY(Math.min(w-1,Math.floor((x+0.5)*w/40)),Math.min(h-1,Math.floor((y+0.5)*h/40))).colorUsingColorSpace($.NSColorSpace.sRGBColorSpace);
-  if (color && !color.isNil() && Number(color.alphaComponent)>0.5) samples.push([Number(color.redComponent),Number(color.greenComponent),Number(color.blueComponent)]);
- }
- return JSON.stringify(samples);
-}`
+	jxaSampleScript      = "ObjC.import('AppKit');function run(argv){var i=$.NSImage.alloc.initWithContentsOfFile($(argv[0]));if(!i||i.isNil())throw Error('bad image');var b=$.NSBitmapImageRep.imageRepWithData(i.TIFFRepresentation);if(!b||b.isNil())throw Error('bad bitmap');var w=Number(b.pixelsWide),h=Number(b.pixelsHigh),s=[];for(var y=0;y<40;y++)for(var x=0;x<40;x++){var c=b.colorAtXY(Math.min(w-1,Math.floor((x+0.5)*w/40)),Math.min(h-1,Math.floor((y+0.5)*h/40))).colorUsingColorSpace($.NSColorSpace.sRGBColorSpace);if(c&&!c.isNil()&&Number(c.alphaComponent)>0.5)s.push([Number(c.redComponent),Number(c.greenComponent),Number(c.blueComponent)]);}return JSON.stringify(s);}"
 )
 
 var appearanceKeys = []string{"AppleHighlightColor", "AppleIconAppearanceTintColor", "AppleIconAppearanceCustomTintColor", "AppleIconAppearanceTheme"}
-
-var feeds = []feed{
-	{title: "Top this month", value: "top"},
-	{title: "Nature & landscapes", value: "nature"},
-	{title: "Minimal", value: "minimal"},
-	{title: "Abstract", value: "abstract"},
-	{title: "Top this year", value: "year"},
-}
-
+var feeds = []feed{{"Top this month", "top"}, {"Nature & landscapes", "nature"}, {"Minimal", "minimal"}, {"Abstract", "abstract"}, {"Top this year", "year"}}
 var feedSearchTerms = map[string]string{"nature": "nature", "minimal": "minimalism", "abstract": "abstract"}
 
 var (
@@ -66,17 +45,8 @@ var (
 	busy              bool
 )
 
-type feed struct {
-	title string
-	value string
-}
-
-type browseState struct {
-	feed  string
-	query string
-	page  int
-}
-
+type feed struct{ title, value string }
+type browseState struct{ feed, query string; page int }
 type wallpaper struct {
 	ID         string `json:"id"`
 	URL        string `json:"url"`
@@ -92,25 +62,20 @@ type wallpaper struct {
 		Large string `json:"large"`
 	} `json:"thumbs"`
 }
-
 type wallhavenListing struct {
 	Data     []wallpaper `json:"data"`
 	LastPage int         `json:"last_page"`
 }
-
 type rgb [3]float64
-
 type palette struct {
 	Tint       rgb  `json:"tint"`
 	Highlight  rgb  `json:"highlight"`
 	Monochrome bool `json:"monochrome"`
 }
-
 type colorBin struct {
 	count int
 	sum   rgb
 }
-
 type colorCluster struct {
 	color rgb
 	count int
@@ -118,25 +83,9 @@ type colorCluster struct {
 
 func Commands(ctx api.Context) ([]api.Command, error) {
 	return []api.Command{
-		{
-			ID:       commandBrowse,
-			Title:    "Online Wallpapers",
-			Subtitle: "Browse top-rated landscape wallpapers · Wallhaven · No account needed",
-			Aliases:  []string{"wallhaven", "online backgrounds", "download wallpaper"},
-			Icon:     "image",
-		},
-		{
-			ID:       commandSearch,
-			Title:    "Search Online Wallpapers",
-			Subtitle: "Search Wallhaven for landscape wallpapers, 1080p+, SFW",
-			Icon:     "search",
-		},
-		{
-			ID:       commandRestoreColors,
-			Title:    "Restore Online Wallpaper Colors",
-			Subtitle: "Restore colors saved before this extension first applied matching colors",
-			Icon:     "undo-2",
-		},
+		{ID: commandBrowse, Title: "Online Wallpapers", Subtitle: "Browse top-rated landscape wallpapers · Wallhaven · No account needed", Aliases: []string{"wallhaven", "online backgrounds", "download wallpaper"}, Icon: "image"},
+		{ID: commandSearch, Title: "Search Online Wallpapers", Subtitle: "Search Wallhaven for landscape wallpapers, 1080p+, SFW", Icon: "search"},
+		{ID: commandRestoreColors, Title: "Restore Online Wallpaper Colors", Subtitle: "Restore colors saved before this extension first applied matching colors", Icon: "undo-2"},
 	}, nil
 }
 
@@ -190,7 +139,6 @@ func isMac(ctx api.Context) bool {
 	system := strings.ToLower(ctx.System().OS())
 	return strings.Contains(system, "mac") || strings.Contains(system, "darwin")
 }
-
 func withLock(run func() (api.Result, error)) (api.Result, error) {
 	busyMu.Lock()
 	if busy {
@@ -202,13 +150,7 @@ func withLock(run func() (api.Result, error)) (api.Result, error) {
 	defer releaseLock()
 	return run()
 }
-
-func releaseLock() {
-	busyMu.Lock()
-	defer busyMu.Unlock()
-	busy = false
-}
-
+func releaseLock() { busyMu.Lock(); defer busyMu.Unlock(); busy = false }
 func stateFromArgs(args map[string]string) browseState {
 	feedName := args["feed"]
 	if feedName == "" {
@@ -216,11 +158,9 @@ func stateFromArgs(args map[string]string) browseState {
 	}
 	return browseState{feed: feedName, query: args["query"], page: parsePage(args["page"])}
 }
-
 func (s browseState) args() map[string]string {
 	return map[string]string{"feed": s.feed, "query": s.query, "page": strconv.Itoa(s.page)}
 }
-
 func parsePage(value string) int {
 	page, err := strconv.Atoi(value)
 	if err != nil || page < 1 {
@@ -228,20 +168,17 @@ func parsePage(value string) int {
 	}
 	return page
 }
-
 func listingKey(state browseState) string {
 	return fmt.Sprintf("listing-v1:%s:%s:%d", state.feed, state.query, state.page)
 }
-
 func listing(ctx api.Context, state browseState) (wallhavenListing, error) {
 	var out wallhavenListing
-	err := ctx.Storage().Memo(listingKey(state), 10*time.Minute, &out, func() (any, error) {
+	err := ctx.Storage().MemoStale(listingKey(state), 30*time.Minute, 24*time.Hour, &out, func() (any, error) {
 		result, err := fetchListing(ctx, state)
 		return result, err
 	})
 	return out, err
 }
-
 func fetchListing(ctx api.Context, state browseState) (wallhavenListing, error) {
 	endpoint := "https://wallhaven.cc/api/v1/search?" + listingParams(state).Encode()
 	response, err := ctx.Network().Fetch(api.FetchRequest{URL: endpoint, TimeoutMs: 25000})

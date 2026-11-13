@@ -39,10 +39,7 @@ func listingParams(state browseState) url.Values {
 }
 
 func isLandscapeSFW(candidate wallpaper) bool {
-	return idPattern.MatchString(candidate.ID) && candidate.Purity == "sfw" &&
-		candidate.DimensionX >= 1920 && candidate.DimensionY >= 1080 &&
-		candidate.DimensionX > candidate.DimensionY &&
-		(candidate.FileType == "image/jpeg" || candidate.FileType == "image/png")
+	return idPattern.MatchString(candidate.ID) && candidate.Purity == "sfw" && candidate.DimensionX >= 1920 && candidate.DimensionY >= 1080 && candidate.DimensionX > candidate.DimensionY && (candidate.FileType == "image/jpeg" || candidate.FileType == "image/png")
 }
 
 func checkWallpaperURLs(candidate wallpaper) error {
@@ -66,28 +63,17 @@ func checkedURL(value, kind string) (string, error) {
 }
 
 func browseView(ctx api.Context, state browseState) (api.View, error) {
+	if cached, ok := cachedListing(ctx, state); ok {
+		view := gridViewFromListing(state, cached.Data, cached.LastPage)
+		attachSource(ctx, &view, state)
+		return view, nil
+	}
 	result, err := listing(ctx, state)
 	if err != nil {
 		return api.View{}, err
 	}
-	lastPage := result.LastPage
-	if lastPage < 1 {
-		lastPage = 1
-	}
-	common := browseActions(state, result.LastPage)
-	var items []api.Item
-	for _, candidate := range result.Data {
-		items = append(items, wallpaperItem(candidate, state, common))
-	}
-	view := api.GridView(gridTitle(state), 3, items...)
-	view.ID = gridID
-	view.Size = api.SizeLarge
-	view.Grid = &api.GridSpec{Columns: 3, Layout: "wide", AspectRatio: "16/9"}
-	view.Subtitle = fmt.Sprintf("Wallhaven · %s · Landscape · 1080p+ · Page %d/%d", sourceLabel(state), state.page, lastPage)
-	view.Placeholder = "Filter this page… · Use Search Online Wallpapers for a new search"
-	view.EmptyView = &api.EmptyState{Title: "No matching wallpapers", Subtitle: "Try another category or use Search Online Wallpapers."}
-	view.Filter = collectionAccessory(state)
-	view.Actions = common
+	view := gridViewFromListing(state, result.Data, result.LastPage)
+	attachSource(ctx, &view, state)
 	return view, nil
 }
 
@@ -139,12 +125,7 @@ func browseActions(state browseState, lastPage int) []api.Action {
 		following.Shortcut = "Control+N"
 		actions = append(actions, following)
 	}
-	return append(actions,
-		api.Run(commandSearch, "Search Online Wallpapers", nil),
-		api.Run(actionRefresh, "Refresh Results", state.args()),
-		api.Run(actionOpenFolder, "Open Download Folder", nil),
-		api.Run(commandRestoreColors, "Restore Online Wallpaper Colors", nil),
-	)
+	return append(actions, api.Run(commandSearch, "Search Online Wallpapers", nil), api.Run(actionRefresh, "Refresh Results", state.args()), api.Run(actionOpenFolder, "Open Download Folder", nil), api.Run(commandRestoreColors, "Restore Online Wallpaper Colors", nil))
 }
 
 func changeFeed(ctx api.Context, value string) (api.Result, error) {
@@ -164,21 +145,7 @@ func changeFeed(ctx api.Context, value string) (api.Result, error) {
 
 func wallpaperItem(candidate wallpaper, state browseState, common []api.Action) api.Item {
 	ref := wallpaperArgs(state, candidate.ID)
-	return api.Item{
-		ID:       candidate.ID,
-		Title:    "Wallhaven · " + candidate.ID,
-		Subtitle: fmt.Sprintf("%s · ♥ %d", candidate.Resolution, candidate.Favorites),
-		Image:    &api.Image{Src: thumbnailURL(candidate)},
-		Keywords: []string{candidate.ID, candidate.Resolution},
-		Primary:  api.Primary(applyAction("Set Wallpaper & Match Colors", "colors", ref, "image")),
-		Actions: append([]api.Action{
-			applyAction("Set Wallpaper Only", "only", ref, ""),
-			api.Run(actionPreview, "Preview Wallpaper", ref),
-			applyAction("Preview Matching Colors", "palette", ref, ""),
-			applyAction("Download Only", "save", ref, ""),
-			api.OpenURL("View on Wallhaven", candidate.URL),
-		}, common...),
-	}
+	return api.Item{ID: candidate.ID, Title: "Wallhaven \u00b7 " + candidate.ID, Subtitle: fmt.Sprintf("%s \u00b7 \u2665 %d", candidate.Resolution, candidate.Favorites), Image: &api.Image{Src: thumbnailURL(candidate)}, Keywords: []string{candidate.ID, candidate.Resolution}, Primary: api.Primary(applyAction("Set Wallpaper & Match Colors", "colors", ref, "image")), Actions: append([]api.Action{applyAction("Set Wallpaper Only", "only", ref, ""), api.Run(actionPreview, "Preview Wallpaper", ref), applyAction("Preview Matching Colors", "palette", ref, ""), applyAction("Download Only", "save", ref, ""), api.OpenURL("View on Wallhaven", candidate.URL)}, common...)}
 }
 
 func thumbnailURL(candidate wallpaper) string {
@@ -204,18 +171,7 @@ func applyAction(title, mode string, ref map[string]string, icon string) api.Act
 }
 
 func searchPrompt(ctx api.Context) api.Action {
-	return ctx.Input().Prompt(api.PromptSpec{
-		Title:   "Search Online Wallpapers",
-		Message: "Landscape wallpapers only · SFW · at least 1920×1080",
-		Fields: []api.Field{{
-			ID:          "query",
-			Label:       "Search wallpapers",
-			Type:        api.FieldText,
-			Placeholder: "mountains, forest, space…",
-			Required:    true,
-		}},
-		Action: api.Run(actionSearchSubmit, "Search", nil),
-	})
+	return ctx.Input().Prompt(api.PromptSpec{Title: "Search Online Wallpapers", Message: "Landscape wallpapers only \u00b7 SFW \u00b7 at least 1920\u00d71080", Fields: []api.Field{{ID: "query", Label: "Search wallpapers", Type: api.FieldText, Placeholder: "mountains, forest, space\u2026", Required: true}}, Action: api.Run(actionSearchSubmit, "Search", nil)})
 }
 
 func searchSubmit(ctx api.Context, form api.FormValues) (api.Result, error) {
@@ -246,7 +202,7 @@ func openDownloadFolder(ctx api.Context) (api.Result, error) {
 }
 
 func wallpaperDirectory(ctx api.Context) (string, error) {
-	result, err := ctx.Desktop().Shell().Script(`printf '%s' "$HOME"`, api.ShellOptions{})
+	result, err := ctx.Desktop().Shell().Script("printf '%s' \"$HOME\"", api.ShellOptions{})
 	if err != nil {
 		return "", err
 	}
@@ -269,15 +225,6 @@ func previewWallpaper(ctx api.Context, args map[string]string) (api.Result, erro
 		return api.Result{}, err
 	}
 	ref := wallpaperArgs(stateFromArgs(args), candidate.ID)
-	view := api.View{
-		Kind:    api.ViewPreview,
-		Title:   "Wallhaven · " + candidate.ID,
-		Preview: &api.PreviewSpec{Image: &api.Image{Src: candidate.Path}, Text: candidate.Resolution + " · Full-resolution preview from Wallhaven"},
-		Actions: []api.Action{
-			applyAction("Set Wallpaper & Match Colors", "colors", ref, ""),
-			applyAction("Set Wallpaper Only", "only", ref, ""),
-			api.OpenURL("View on Wallhaven", candidate.URL),
-		},
-	}
+	view := api.View{Kind: api.ViewPreview, Title: "Wallhaven \u00b7 " + candidate.ID, Preview: &api.PreviewSpec{Image: &api.Image{Src: candidate.Path}, Text: candidate.Resolution + " \u00b7 Full-resolution preview from Wallhaven"}, Actions: []api.Action{applyAction("Set Wallpaper & Match Colors", "colors", ref, ""), applyAction("Set Wallpaper Only", "only", ref, ""), api.OpenURL("View on Wallhaven", candidate.URL)}}
 	return api.Result{View: &view, Navigation: api.NavPush}, nil
 }

@@ -18,7 +18,6 @@ func binKey(color rgb) string {
 	return strings.Join(parts, ",")
 }
 
-// mergeCluster joins a color into the first cluster within 0.16, as the TypeScript extension does.
 func mergeCluster(clusters []colorCluster, mean rgb, count int) []colorCluster {
 	for index := range clusters {
 		if distance(clusters[index].color, mean) < 0.16 {
@@ -129,9 +128,9 @@ func applyColors(ctx api.Context, colors palette) (string, error) {
 		return "", err
 	}
 	if tahoe {
-		return fmt.Sprintf("Light tint %s · Highlight %s", hexColor(colors.Tint), hexColor(colors.Highlight)), nil
+		return fmt.Sprintf("Light tint %s \u00b7 Highlight %s", hexColor(colors.Tint), hexColor(colors.Highlight)), nil
 	}
-	return fmt.Sprintf("Highlight %s · Icon tint requires macOS 26+", hexColor(colors.Highlight)), nil
+	return fmt.Sprintf("Highlight %s \u00b7 Icon tint requires macOS 26+", hexColor(colors.Highlight)), nil
 }
 
 func majorVersion(text string) int {
@@ -258,10 +257,10 @@ func applyWallpaper(ctx api.Context, path string) error {
 	if !isMac(ctx) {
 		return errors.New("This wallpaper setter currently supports macOS only.")
 	}
-	escaped := strings.ReplaceAll(strings.ReplaceAll(path, `\`, `\\`), `"`, `\"`)
+	escaped := strings.ReplaceAll(strings.ReplaceAll(path, "\\", "\\\\"), "\"", "\\\"")
 	scripts := []string{
-		fmt.Sprintf(`tell application "System Events" to tell every desktop to set picture to POSIX file "%s"`, escaped),
-		fmt.Sprintf(`tell application "Finder" to set desktop picture to POSIX file "%s"`, escaped),
+		fmt.Sprintf("tell application \"System Events\" to tell every desktop to set picture to POSIX file \"%s\"", escaped),
+		fmt.Sprintf("tell application \"Finder\" to set desktop picture to POSIX file \"%s\"", escaped),
 	}
 	failure := ""
 	for _, script := range scripts {

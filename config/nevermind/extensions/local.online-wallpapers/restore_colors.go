@@ -33,7 +33,7 @@ func restoreColors(ctx api.Context) (api.Result, error) {
 	if err := restartDock(ctx); err != nil {
 		return api.Result{}, errors.New("Previous colors were restored, but " + err.Error())
 	}
-	return api.Result{}, ctx.Indicators().Show(api.IndicatorInput{Title: "Previous colors restored · Dock refreshed", Status: api.IndicatorSuccess, DurationMs: 4000})
+	return api.Result{}, ctx.Indicators().Show(api.IndicatorInput{Title: "Previous colors restored \u00b7 Dock refreshed", Status: api.IndicatorSuccess, DurationMs: 4000})
 }
 
 func sortedKeys(values map[string]*string) []string {

@@ -27,7 +27,7 @@ func lookupWallpaper(ctx api.Context, args map[string]string) (wallpaper, error)
 
 func runWallpaperMode(ctx api.Context, candidate wallpaper, args map[string]string) (api.Result, error) {
 	mode := args["mode"]
-	if err := ctx.Indicators().Show(api.IndicatorInput{ID: indicatorID, Title: "Downloading wallpaper…", Status: api.IndicatorLoading}); err != nil {
+	if err := ctx.Indicators().Show(api.IndicatorInput{ID: indicatorID, Title: "Downloading wallpaper\u2026", Status: api.IndicatorLoading}); err != nil {
 		return api.Result{}, err
 	}
 	result, err := wallpaperSteps(ctx, candidate, args, mode)
@@ -55,7 +55,7 @@ func wallpaperSteps(ctx api.Context, candidate wallpaper, args map[string]string
 	if mode == "only" {
 		return api.Result{}, ctx.Indicators().Show(api.IndicatorInput{ID: indicatorID, Title: "Wallpaper updated", Subtitle: candidate.Resolution, Status: api.IndicatorSuccess, DurationMs: 3000})
 	}
-	if err := ctx.Indicators().Update(api.IndicatorInput{ID: indicatorID, Title: "Wallpaper set · Matching colors…", Status: api.IndicatorLoading}); err != nil {
+	if err := ctx.Indicators().Update(api.IndicatorInput{ID: indicatorID, Title: "Wallpaper set \u00b7 Matching colors\u2026", Status: api.IndicatorLoading}); err != nil {
 		return api.Result{}, err
 	}
 	summary, err := matchColors(ctx, file)
@@ -65,11 +65,11 @@ func wallpaperSteps(ctx api.Context, candidate wallpaper, args map[string]string
 	if err := restartDock(ctx); err != nil {
 		return api.Result{}, errors.New("Wallpaper and colors were updated, but " + err.Error())
 	}
-	return api.Result{}, ctx.Indicators().Show(api.IndicatorInput{ID: indicatorID, Title: "Wallpaper and colors updated · Dock refreshed", Subtitle: summary, Status: api.IndicatorSuccess, DurationMs: 6000})
+	return api.Result{}, ctx.Indicators().Show(api.IndicatorInput{ID: indicatorID, Title: "Wallpaper updated \u00b7 Dock refreshed", Subtitle: summary, Status: api.IndicatorSuccess, DurationMs: 6000})
 }
 
 func previewPalette(ctx api.Context, candidate wallpaper, args map[string]string, file api.FileRef) (api.Result, error) {
-	if err := ctx.Indicators().Update(api.IndicatorInput{ID: indicatorID, Title: "Extracting colors locally…", Status: api.IndicatorLoading}); err != nil {
+	if err := ctx.Indicators().Update(api.IndicatorInput{ID: indicatorID, Title: "Extracting colors locally\u2026", Status: api.IndicatorLoading}); err != nil {
 		return api.Result{}, err
 	}
 	colors, err := extractPalette(ctx, file)
@@ -79,29 +79,29 @@ func previewPalette(ctx api.Context, candidate wallpaper, args map[string]string
 	if err := ctx.Indicators().Hide(indicatorID); err != nil {
 		return api.Result{}, err
 	}
-	view := api.View{
-		Kind:  api.ViewPreview,
-		Title: "Matching Colors",
-		Preview: &api.PreviewSpec{
-			Image: &api.Image{Src: ctx.Desktop().Files().FileURL(file.Path)},
-			Text:  paletteSummary(colors),
-		},
-		Actions: []api.Action{
-			applyAction("Set Wallpaper & Match Colors", "colors", wallpaperArgs(stateFromArgs(args), candidate.ID), ""),
-			api.OpenURL("View on Wallhaven", candidate.URL),
-		},
-	}
+	tintHex := hexColor(colors.Tint)
+	highHex := hexColor(colors.Highlight)
+	localSrc := ctx.Desktop().Files().FileURL(file.Path)
+	html := paletteHTML(candidate, tintHex, highHex, localSrc, colors.Monochrome)
+	view := api.View{Kind: api.ViewWebview, Title: "Matching Colors \u00b7 " + candidate.ID, Subtitle: candidate.Resolution + " \u00b7 Preview changes nothing", Size: api.SizeLarge, Webview: &api.WebviewSpec{HTML: html}, Actions: []api.Action{applyAction("Set Wallpaper & Match Colors", "colors", wallpaperArgs(stateFromArgs(args), candidate.ID), ""), api.CopyText("Copy Icon Tint "+tintHex, tintHex, false), api.CopyText("Copy Highlight "+highHex, highHex, false), api.OpenURL("View on Wallhaven", candidate.URL)}}
 	return api.Result{View: &view, Navigation: api.NavPush}, nil
+}
+
+func paletteHTML(candidate wallpaper, tintHex, highHex, imgSrc string, mono bool) string {
+	note := "Two distinct colors found."
+	if mono {
+		note = "Single-color fallback \u00b7 no distinct second color found."
+	}
+	safeImg := strings.ReplaceAll(imgSrc, "\"", "&quot;")
+	return "<html><head><meta charset=\"utf-8\"><style>body{margin:0;padding:20px;font-family:-apple-system,Helvetica,Arial,sans-serif;background:#f5f5f7;color:#111}.card{max-width:620px;margin:0 auto}img.wall{width:100%;border-radius:12px;display:block;border:1px solid rgba(0,0,0,.12)}.sw{display:flex;gap:12px;margin-top:14px}.swd{flex:1;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,.12);background:#fff}.c{height:110px}.l{padding:10px 12px;font-size:13px}.h{font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:15px;margin-top:2px}.s{opacity:.6;font-size:12px;margin-top:2px}.m{margin-top:10px;font-size:13px;font-weight:600}.n{margin-top:8px;font-size:12px;opacity:.65;line-height:1.5}</style></head><body><div class=\"card\"><img class=\"wall\" src=\"" + safeImg + "\"><div class=\"m\">Wallhaven \u00b7 " + candidate.ID + " \u00b7 " + candidate.Resolution + "</div><div class=\"sw\"><div class=\"swd\"><div class=\"c\" style=\"background:" + tintHex + "\"></div><div class=\"l\"><div>Icon tint</div><div class=\"h\">" + tintHex + "</div><div class=\"s\">Tinted Light \u00b7 macOS 26+</div></div></div><div class=\"swd\"><div class=\"c\" style=\"background:" + highHex + "\"></div><div class=\"l\"><div>Selection highlight</div><div class=\"h\">" + highHex + "</div><div class=\"s\">" + note + "</div></div></div></div></div><div class=\"n\">Preview changes no settings. Applying colors uses local extraction and restarts Dock. System Dark/Light stays unchanged.</div></div></body></html>"
 }
 
 func paletteSummary(colors palette) string {
 	monochrome := ""
 	if colors.Monochrome {
-		monochrome = " · Single-color fallback"
+		monochrome = " \u00b7 Single-color fallback"
 	}
-	return "Icon tint: " + hexColor(colors.Tint) + " (Tinted Light)\n" +
-		"Selection highlight: " + hexColor(colors.Highlight) + monochrome + "\n\n" +
-		"Preview changes no settings. Applying colors uses the same local extraction as your Wallpapers extension and restarts Dock. System-wide Dark/Light appearance stays unchanged. Icon tint requires macOS 26+ and uses undocumented preferences."
+	return "Icon tint: " + hexColor(colors.Tint) + " (Tinted Light)\n" + "Selection highlight: " + hexColor(colors.Highlight) + monochrome + "\n\n" + "Preview changes no settings."
 }
 
 func downloadWallpaper(ctx api.Context, candidate wallpaper) (api.FileRef, error) {
@@ -121,7 +121,10 @@ func downloadWallpaper(ctx api.Context, candidate wallpaper) (api.FileRef, error
 		return api.FileRef{}, err
 	}
 	if existing, err := ctx.Desktop().Files().Metadata(path); err == nil && existing.Size > 0 {
-		return existing, nil
+		if err := requireImageSignature(ctx, path, path); err == nil {
+			return existing, nil
+		}
+		_, _ = ctx.Desktop().Shell().Exec("/bin/rm", []string{"-f", path}, api.ShellOptions{})
 	}
 	if candidate.FileSize > maxDownloadBytes {
 		return api.FileRef{}, errors.New("This wallpaper exceeds the 60 MB download limit.")
@@ -132,18 +135,13 @@ func downloadWallpaper(ctx api.Context, candidate wallpaper) (api.FileRef, error
 	return ctx.Desktop().Files().Metadata(path)
 }
 
-// fetchWallpaperFile downloads through curl, because the extension API cannot write binary files.
-// curl does not follow redirects, which matches the TypeScript extension's redirect "error" policy.
 func fetchWallpaperFile(ctx api.Context, candidate wallpaper, path string) error {
 	source, err := checkedURL(candidate.Path, "image")
 	if err != nil {
 		return err
 	}
 	partial := path + ".part"
-	result, err := ctx.Desktop().Shell().Exec("/usr/bin/curl", []string{
-		"--silent", "--show-error", "--max-time", "90", "--max-filesize", strconv.Itoa(maxDownloadBytes),
-		"--output", partial, "--write-out", "%{http_code} %{content_type}", source,
-	}, api.ShellOptions{})
+	result, err := ctx.Desktop().Shell().Exec("/usr/bin/curl", []string{"--silent", "--show-error", "--max-time", "90", "--max-filesize", strconv.Itoa(maxDownloadBytes), "--output", partial, "--write-out", "%{http_code} %{content_type}", source}, api.ShellOptions{})
 	if err != nil {
 		return err
 	}
@@ -175,12 +173,16 @@ func requireImageSignature(ctx api.Context, partial, path string) error {
 	if err != nil {
 		return err
 	}
+	if kind.ExitCode != 0 {
+		return errors.New("Could not verify wallpaper file type: " + firstNonEmpty(strings.TrimSpace(kind.Stderr), strings.TrimSpace(kind.Stdout)))
+	}
+	actual := strings.TrimSpace(kind.Stdout)
 	expected := "image/jpeg"
 	if strings.HasSuffix(path, ".png") {
 		expected = "image/png"
 	}
-	if strings.TrimSpace(kind.Stdout) != expected {
-		return errors.New("Downloaded image has an unexpected file signature.")
+	if actual != expected {
+		return fmt.Errorf("Downloaded image has an unexpected file signature (%s, expected %s). The download was discarded. Try Download Only again.", actual, expected)
 	}
 	return nil
 }
@@ -204,7 +206,7 @@ func removeAfterFailure(ctx api.Context, partial string, cause error) error {
 func extractPalette(ctx api.Context, file api.FileRef) (palette, error) {
 	var colors palette
 	key := fmt.Sprintf("palette-v1:%s:%d:%d", file.Path, file.MtimeMs, file.Size)
-	err := ctx.Storage().Memo(key, 24*time.Hour, &colors, func() (any, error) {
+	err := ctx.Storage().MemoStale(key, 720*time.Hour, 2160*time.Hour, &colors, func() (any, error) {
 		result, err := samplePalette(ctx, file.Path)
 		return result, err
 	})

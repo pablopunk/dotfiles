@@ -30,7 +30,7 @@ hl.unbind(combo(SUPER_SHIFT, "SPACE"))  -- was: Toggle top bar
 o.bind("SUPER + SHIFT + code:57", "Toggle Mousetrap", hl.dsp.global("mousetrap:toggle"))
 
 -- Omarchy menu (default disabled via omarchy_default_bindings).
-o.bind(combo(SUPER, "SPACE"), "Omarchy menu", { menu = "root" })
+-- o.bind(combo(SUPER, "SPACE"), "Omarchy menu", { menu = "root" })
 
 -- Close the active window.
 hl.unbind(combo(SUPER, "W"))  -- was: Close window

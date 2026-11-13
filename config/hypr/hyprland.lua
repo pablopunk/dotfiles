@@ -37,3 +37,6 @@ hl.window_rule({
 o.window(".*", { opacity = "1 1" })
 -- <<< omaland managed block <<<
 
+
+-- Nevermind: shortcuts and window rules. Remove this line and the next to turn them off.
+pcall(require, "nevermind")

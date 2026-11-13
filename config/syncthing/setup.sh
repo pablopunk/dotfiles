@@ -97,6 +97,16 @@ for folder_entry in "${SYNCTHING_FOLDERS[@]}"; do
   fi
 done
 
+# Prune folders no longer in sync.conf (unshare only, keeps data on disk)
+desired_ids=$(printf '%s\n' "${SYNCTHING_FOLDERS[@]}" | cut -d'|' -f1)
+existing_folders=$("${CURL[@]}" "$API/config/folders" | jq -r '.[].id' 2>/dev/null || echo "")
+for fid in $existing_folders; do
+  if ! echo "$desired_ids" | grep -qFx "$fid"; then
+    "${CURL[@]}" -X DELETE "$API/config/folders/$fid" > /dev/null
+    echo "  Removed folder '$fid'"
+  fi
+done
+
 echo "  Syncthing configured"
 
 if [[ ${#needs_approval[@]} -gt 0 ]]; then

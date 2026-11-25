@@ -1,0 +1,55 @@
+{
+  "animateWindowMoves" : true,
+  "cycleTilingModeShortcut" : {
+    "keyCode" : 31,
+    "keyLabel" : "O",
+    "modifiers" : [
+      "control",
+      "option",
+      "command"
+    ]
+  },
+  "cycleTilingModeShortcutIsCleared" : false,
+  "directionKeys" : "hjkl",
+  "externalScreensHaveOwnTiling" : true,
+  "externalTiling" : {
+    "leaveRoomForStageManager" : true,
+    "mode" : "messy",
+    "rememberAppSizes" : false
+  },
+  "highlightFocusedWindow" : true,
+  "modeShortcuts" : {
+    "even" : {
+      "keyCode" : 32,
+      "keyLabel" : "U",
+      "modifiers" : [
+        "control",
+        "option",
+        "command"
+      ]
+    },
+    "messy" : {
+      "keyCode" : 34,
+      "keyLabel" : "I",
+      "modifiers" : [
+        "control",
+        "option",
+        "command"
+      ]
+    }
+  },
+  "modifiers" : [
+    "control",
+    "option",
+    "command"
+  ],
+  "moveModifier" : "shift",
+  "openStageOn" : "release",
+  "showMenuBarIcon" : true,
+  "tileWhenSwitchingStages" : true,
+  "tiling" : {
+    "leaveRoomForStageManager" : true,
+    "mode" : "even",
+    "rememberAppSizes" : false
+  }
+}

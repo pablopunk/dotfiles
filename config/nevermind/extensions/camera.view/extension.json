@@ -1,1 +1,1 @@
-{"apiVersion":"1.0","id":"camera.view","title":"Camera","capabilities":["camera"],"convertedFrom":"camera.ts"}
+{"apiVersion": "1.1", "id": "camera.view", "title": "Camera", "capabilities": ["camera"]}

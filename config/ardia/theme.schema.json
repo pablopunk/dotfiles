@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "An Ardia theme: colour roles that replace Ardia's own, per appearance",
+  "description": "An Ardia theme: colour roles that replace Ardia's own, per appearance, and the type, metrics, layout and icons it draws with",
   "type": "object",
   "properties": {
     "$schema": {
@@ -925,6 +925,334 @@
         }
       },
       "additionalProperties": false
+    },
+    "type": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "pattern": "^\\S(.{0,62}\\S)?$",
+          "description": "The interface font family, like \"Avenir Next\"; left out, the system font. A family macOS doesn't have falls back to the system font"
+        },
+        "mono": {
+          "type": "string",
+          "pattern": "^\\S(.{0,62}\\S)?$",
+          "default": "Menlo",
+          "description": "The monospaced family for codes, keys and logs"
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0.85,
+          "maximum": 1.3,
+          "default": 1,
+          "description": "Multiplies every text size, after sizes"
+        },
+        "sizes": {
+          "type": "object",
+          "properties": {
+            "badge": {
+              "type": "number",
+              "minimum": 7,
+              "maximum": 14,
+              "default": 9,
+              "description": "Counts on badges"
+            },
+            "tiny": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 16,
+              "default": 10,
+              "description": "The smallest labels"
+            },
+            "caption": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 18,
+              "default": 11,
+              "description": "Captions, section labels, URLs under titles"
+            },
+            "small": {
+              "type": "number",
+              "minimum": 9,
+              "maximum": 19,
+              "default": 12,
+              "description": "Sidebar tab titles, secondary text"
+            },
+            "body": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 21,
+              "default": 13,
+              "description": "Most text: menus, fields, folder and group names"
+            },
+            "title": {
+              "type": "number",
+              "minimum": 11,
+              "maximum": 24,
+              "default": 15,
+              "description": "Panel and dialog titles, the command bar's results"
+            },
+            "large": {
+              "type": "number",
+              "minimum": 13,
+              "maximum": 27,
+              "default": 17,
+              "description": "Large headings, the command bar's field"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Text sizes in points, each replacing one step of Ardia's scale"
+        },
+        "weights": {
+          "type": "object",
+          "properties": {
+            "regular": {
+              "enum": [
+                "100",
+                "200",
+                "300",
+                "400",
+                "500",
+                "600",
+                "700",
+                "800",
+                "900",
+                100,
+                200,
+                300,
+                400,
+                500,
+                600,
+                700,
+                800,
+                900
+              ],
+              "default": "400",
+              "description": "What regular text draws with"
+            },
+            "medium": {
+              "enum": [
+                "100",
+                "200",
+                "300",
+                "400",
+                "500",
+                "600",
+                "700",
+                "800",
+                "900",
+                100,
+                200,
+                300,
+                400,
+                500,
+                600,
+                700,
+                800,
+                900
+              ],
+              "default": "500",
+              "description": "What medium text (group names, selected rows) draws with"
+            },
+            "semibold": {
+              "enum": [
+                "100",
+                "200",
+                "300",
+                "400",
+                "500",
+                "600",
+                "700",
+                "800",
+                "900",
+                100,
+                200,
+                300,
+                400,
+                500,
+                600,
+                700,
+                800,
+                900
+              ],
+              "default": "600",
+              "description": "What semibold text (headings, badges) draws with"
+            },
+            "bold": {
+              "enum": [
+                "100",
+                "200",
+                "300",
+                "400",
+                "500",
+                "600",
+                "700",
+                "800",
+                "900",
+                100,
+                200,
+                300,
+                400,
+                500,
+                600,
+                700,
+                800,
+                900
+              ],
+              "default": "700",
+              "description": "What bold text draws with"
+            }
+          },
+          "additionalProperties": false,
+          "description": "What each of Ardia's weight names draws with, from \"100\" (thin) to \"900\" (black)"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Fonts and text sizes"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "rowHeight": {
+          "type": "number",
+          "minimum": 24,
+          "maximum": 56,
+          "default": 34,
+          "description": "Height of a sidebar row: tabs, folders, groups, the New Tab row and the sidebar address field"
+        },
+        "rowGap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 12,
+          "default": 3,
+          "description": "Space between sidebar rows"
+        },
+        "pinnedHeight": {
+          "type": "number",
+          "minimum": 28,
+          "maximum": 72,
+          "default": 41,
+          "description": "Height of a pinned tile in the sidebar's top apps grid"
+        },
+        "sidebarWidth": {
+          "type": "number",
+          "minimum": 160,
+          "maximum": 400,
+          "description": "The sidebar's width. The sidebar takes it when you switch to the theme or change this value, and a double-click on its edge returns to it; left out, the width is yours (Ardia's default is 190)"
+        },
+        "radius": {
+          "type": "object",
+          "properties": {
+            "row": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24,
+              "default": 10,
+              "description": "Sidebar rows (tabs, folders, New Tab), the sidebar address field, top-strip tabs"
+            },
+            "pinned": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24,
+              "default": 10,
+              "description": "Pinned tiles in the sidebar's top apps grid"
+            },
+            "tile": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24,
+              "default": 8,
+              "description": "List rows, menu rows, fields, cards and icon tiles"
+            },
+            "control": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 12,
+              "default": 4,
+              "description": "Small controls: steppers, chips, keys"
+            },
+            "toolbar": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 24,
+              "default": 7,
+              "description": "Toolbar button plates"
+            },
+            "panel": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 28,
+              "default": 12,
+              "description": "Popovers, menus and panels"
+            },
+            "sheet": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 32,
+              "default": 16,
+              "description": "Sheets, the tab switcher, search and other large panels"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Corner radii"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Sizes and corner radii, in points"
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "hide": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "pinned",
+              "newTab",
+              "addressField",
+              "navButtons",
+              "sidebarButton",
+              "downloads",
+              "profile"
+            ]
+          },
+          "default": [],
+          "description": "Parts of the sidebar to hide"
+        },
+        "addressField": {
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom"
+          ],
+          "default": "top",
+          "description": "Where the sidebar address field sits when the address bar is in the sidebar: top or bottom"
+        },
+        "newTab": {
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom"
+          ],
+          "description": "Where the New Tab row sits: top or bottom of the tab list; left out, Settings › Tabs decides"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Which parts of the sidebar show, and where"
+    },
+    "icons": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)*$"
+      },
+      "default": {},
+      "description": "SF Symbols to draw in place of Ardia's, by name: { \"plus\": \"plus.circle\" }"
     }
   },
   "additionalProperties": false

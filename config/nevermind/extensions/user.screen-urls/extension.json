@@ -1,0 +1,1 @@
+{"apiVersion":"1.1","id":"user.screen-urls","title":"Screen URLs","subtitle":"Copy links from visible display","capabilities":["ocr","desktop.clipboard"]}

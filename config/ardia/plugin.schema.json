@@ -1,0 +1,1334 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ardia plugin",
+  "type": "object",
+  "if": {
+    "properties": {
+      "manifest": {
+        "const": 2
+      }
+    },
+    "required": [
+      "manifest"
+    ]
+  },
+  "then": {
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string"
+      },
+      "manifest": {
+        "const": 2,
+        "description": "The manifest's version"
+      },
+      "name": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]{0,39}$",
+        "description": "The plugin's name; its folder has the same name"
+      },
+      "title": {
+        "type": "string",
+        "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+      },
+      "description": {
+        "type": "string",
+        "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+      },
+      "version": {
+        "type": "string",
+        "pattern": "^\\d{1,6}\\.\\d{1,6}\\.\\d{1,6}(-[0-9A-Za-z.-]{1,40})?$"
+      },
+      "requires": {
+        "type": "string",
+        "pattern": "^\\d{1,6}\\.\\d{1,6}\\.\\d{1,6}(-[0-9A-Za-z.-]{1,40})?$",
+        "description": "The first Ardia version the plugin works with"
+      },
+      "icon": {
+        "type": "string",
+        "pattern": "^[a-z0-9.]{1,64}$",
+        "description": "An SF Symbol name"
+      },
+      "keywords": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+        },
+        "description": "Words that find the plugin in Settings"
+      },
+      "telemetry": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,800}$"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "items"
+        ]
+      },
+      "main": {
+        "type": "string",
+        "pattern": "^[^/\\\\][^\\\\]*\\.(m?js|cjs)$",
+        "description": "The plugin's JavaScript, like dist/index.js; a plugin has main or sidecar, not both"
+      },
+      "memoryMB": {
+        "type": "integer",
+        "minimum": 64,
+        "maximum": 4096,
+        "default": 256,
+        "description": "main's memory limit"
+      },
+      "sidecar": {
+        "type": "object",
+        "properties": {
+          "run": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": {
+              "type": "string",
+              "pattern": "^[^\\u0000]{1,1024}$"
+            }
+          },
+          "memoryMB": {
+            "type": "integer",
+            "minimum": 64,
+            "maximum": 4096,
+            "default": 1024
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "run"
+        ],
+        "description": "A program Ardia runs beside the plugin; a plugin has main or sidecar, not both"
+      },
+      "activationEvents": {
+        "type": "array",
+        "maxItems": 32,
+        "items": {
+          "type": "string",
+          "pattern": "^(\\*|onStartupFinished|on(Command|View|Panel|Toolbar|Omnibox|Menu|Event|Url):\\S{1,253})$"
+        },
+        "description": "When main starts; worked out from contributes when left out"
+      },
+      "permissions": {
+        "type": "object",
+        "properties": {
+          "tabs": {
+            "enum": [
+              "read",
+              "write",
+              false
+            ],
+            "description": "read: see your tabs. write: also open them"
+          },
+          "fullUrls": {
+            "type": "boolean",
+            "description": "See whole addresses, with what follows ? and #"
+          },
+          "activePage": {
+            "type": "boolean",
+            "description": "Read the text of the tab you're on, for 30 seconds after you use the plugin"
+          },
+          "workspace": {
+            "type": "boolean",
+            "description": "See and rearrange every window, tab and group (needs tabs: write and fullUrls)"
+          },
+          "commands": {
+            "type": "boolean",
+            "description": "Run Ardia commands"
+          },
+          "storage": {
+            "type": "boolean",
+            "description": "Keep its own data"
+          },
+          "secrets": {
+            "type": "boolean",
+            "description": "Keep secrets in the Keychain"
+          },
+          "network": {
+            "anyOf": [
+              {
+                "const": false
+              },
+              {
+                "const": "*"
+              },
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 32,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(\\*\\.)?[a-z0-9.-]{1,253}$"
+                }
+              }
+            ],
+            "description": "false, \"*\" or hosts like api.example.com and *.example.com"
+          },
+          "control": {
+            "type": "boolean",
+            "description": "Let programs you run drive your tabs and pages"
+          }
+        },
+        "additionalProperties": false
+      },
+      "contributes": {
+        "type": "object",
+        "properties": {
+          "commands": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "icon": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9.]{1,64}$",
+                  "description": "An SF Symbol name"
+                },
+                "keywords": {
+                  "type": "array",
+                  "maxItems": 8,
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+                  }
+                },
+                "tool": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                },
+                "input": {
+                  "type": "object"
+                },
+                "open": {
+                  "enum": [
+                    "tab",
+                    "split"
+                  ],
+                  "description": "Open the plugin's page as a tab, or in Split View beside the current tab"
+                },
+                "context": {
+                  "type": "boolean",
+                  "description": "Hand the page the current tab (needs the tabs permission)"
+                },
+                "side": {
+                  "enum": [
+                    "left",
+                    "right",
+                    "top",
+                    "bottom"
+                  ],
+                  "default": "right"
+                },
+                "sideSetting": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$",
+                  "description": "A choice row whose value picks the side"
+                },
+                "path": {
+                  "type": "string",
+                  "pattern": "^(/[^?#\\s]*)?(\\?[^#\\s]*)?$",
+                  "description": "Where in the plugin's page to open, like /history"
+                },
+                "when": {
+                  "type": "string",
+                  "pattern": "^[\\s\\S]{1,200}$",
+                  "description": "Shows only when this holds, like urlHost == \"github.com\" && !isPinned"
+                },
+                "view": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$",
+                  "description": "Opens the command's view, which main renders"
+                },
+                "panel": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$",
+                  "description": "Opens one of the plugin's panels"
+                },
+                "handler": {
+                  "const": true,
+                  "description": "main handles it; the default when there's a main and nothing else"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "title"
+              ]
+            }
+          },
+          "tools": {
+            "type": "array",
+            "maxItems": 32,
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "description": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+                },
+                "timeout": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 300,
+                  "default": 30
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "title"
+              ]
+            }
+          },
+          "hooks": {
+            "type": "array",
+            "maxItems": 64,
+            "items": {
+              "enum": [
+                "window.opened",
+                "window.closed",
+                "window.focused",
+                "tab.opened",
+                "tab.closed",
+                "tab.activated",
+                "tab.navigated",
+                "settings.changed",
+                "app.launched",
+                "app.quitting",
+                "app.activated",
+                "app.deactivated",
+                "tab.idle",
+                "tab.resumed",
+                "media.started",
+                "media.stopped",
+                "tab.crashed",
+                "peek.opened",
+                "peek.closed",
+                "littleArdia.opened",
+                "split.created",
+                "split.closed",
+                "pin.added",
+                "pin.removed",
+                "tab.moved",
+                "profile.switched",
+                "system.sleep",
+                "system.wake",
+                "user.idle",
+                "user.active",
+                "page.error",
+                "bookmarks.changed",
+                "history.removed",
+                "download.changed",
+                "profile.changed",
+                "tab.opening",
+                "link.opening",
+                "download.deciding",
+                "permission.requested"
+              ]
+            }
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "defaults": {
+                "type": "object",
+                "description": "Ardia settings, as in config.json"
+              },
+              "rows": {
+                "type": "array",
+                "maxItems": 20,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                    },
+                    "title": {
+                      "type": "string",
+                      "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+                    },
+                    "type": {
+                      "enum": [
+                        "toggle",
+                        "text",
+                        "number",
+                        "choice",
+                        "secret"
+                      ]
+                    },
+                    "default": {
+                      "type": [
+                        "boolean",
+                        "string",
+                        "number"
+                      ]
+                    },
+                    "choices": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 12,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                          },
+                          "title": {
+                            "type": "string",
+                            "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "value",
+                          "title"
+                        ]
+                      }
+                    },
+                    "min": {
+                      "type": "number"
+                    },
+                    "max": {
+                      "type": "number"
+                    },
+                    "step": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "placeholder": {
+                      "type": "string",
+                      "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "key",
+                    "title",
+                    "type"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "programs": {
+            "type": "array",
+            "maxItems": 4,
+            "description": "Commands Ardia puts on your PATH while the plugin is on",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]{0,39}$",
+                  "description": "The command's name on PATH"
+                },
+                "path": {
+                  "type": "string",
+                  "pattern": "^[^/\\\\][^\\\\]*$",
+                  "description": "An executable file in the plugin's folder, like bin/tool"
+                },
+                "afterUpdate": {
+                  "type": "array",
+                  "maxItems": 4,
+                  "items": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 8,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[^\\u0000]{1,1024}$"
+                    }
+                  },
+                  "description": "Built-in plugins only: argument lists Ardia runs the program with, once per new version"
+                },
+                "example": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,120}$",
+                  "description": "A command to try, shown once the program is on PATH, like ardia tabs"
+                },
+                "claim": {
+                  "const": true,
+                  "description": "Built-in plugins only: reserves the name, so no other plugin can put a program with it on PATH"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "path"
+              ]
+            }
+          },
+          "passwordManager": {
+            "type": "object",
+            "properties": {
+              "fill": {
+                "enum": [
+                  "system"
+                ],
+                "description": "system: macOS's Passwords panel fills the field. tool is reserved and refused for now"
+              },
+              "fields": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 2,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "login",
+                    "oneTimeCode"
+                  ]
+                }
+              },
+              "verificationCodeSetup": {
+                "enum": [
+                  "system"
+                ],
+                "description": "Offer to set up two-factor codes a page shows in the app macOS uses for otpauth links"
+              },
+              "passkeys": {
+                "enum": [
+                  "system"
+                ],
+                "description": "Show the host's passkey status on the plugin's Settings page"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "fill",
+              "fields"
+            ],
+            "description": "Makes the plugin a password manager each profile can pick in Settings › Profiles › Passwords"
+          },
+          "menus": {
+            "type": "object",
+            "properties": {
+              "tab": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "command": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                    },
+                    "title": {
+                      "type": "string",
+                      "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                    },
+                    "icon": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9.]{1,64}$",
+                      "description": "An SF Symbol name"
+                    },
+                    "when": {
+                      "type": "string",
+                      "pattern": "^[\\s\\S]{1,200}$",
+                      "description": "Shows only when this holds, like urlHost == \"github.com\" && !isPinned"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "command"
+                  ]
+                }
+              },
+              "group": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "command": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                    },
+                    "title": {
+                      "type": "string",
+                      "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                    },
+                    "icon": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9.]{1,64}$",
+                      "description": "An SF Symbol name"
+                    },
+                    "when": {
+                      "type": "string",
+                      "pattern": "^[\\s\\S]{1,200}$",
+                      "description": "Shows only when this holds, like urlHost == \"github.com\" && !isPinned"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "command"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "toolbar": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "icon": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9.]{1,64}$",
+                  "description": "An SF Symbol name"
+                },
+                "command": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+                },
+                "view": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "tooltip": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,120}$"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "title",
+                "icon"
+              ]
+            }
+          },
+          "sidebarViews": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+                },
+                "icon": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9.]{1,64}$",
+                  "description": "An SF Symbol name"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "title"
+              ]
+            }
+          },
+          "panels": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+                },
+                "icon": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9.]{1,64}$",
+                  "description": "An SF Symbol name"
+                },
+                "mode": {
+                  "enum": [
+                    "sidecar",
+                    "tab",
+                    "split"
+                  ]
+                },
+                "file": {
+                  "type": "string",
+                  "pattern": "^[^/\\\\][^\\\\]*$",
+                  "description": "A page in the plugin's folder"
+                },
+                "view": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "retainContext": {
+                  "type": "boolean"
+                },
+                "side": {
+                  "enum": [
+                    "left",
+                    "right",
+                    "top",
+                    "bottom"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "title",
+                "mode"
+              ]
+            }
+          },
+          "omnibox": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "keyword": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,31}$"
+                },
+                "global": {
+                  "type": "boolean",
+                  "description": "Shows in every search; takes no keyword"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "title"
+              ]
+            }
+          },
+          "themes": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "file": {
+                  "type": "string",
+                  "pattern": "^[^/\\\\][^\\\\]*\\.json$",
+                  "description": "A theme file in the plugin's folder"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "title",
+                "file"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "alwaysOn": {
+        "const": true,
+        "description": "Built-in plugins only: once installed, no switch turns it off"
+      },
+      "official": {
+        "const": true,
+        "description": "Built-in plugins only: listed among Ardia's official plugins"
+      },
+      "autoInstall": {
+        "const": true,
+        "description": "Built-in plugins only, with alwaysOn: installed on a new profile with no click"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "manifest",
+      "name"
+    ]
+  },
+  "else": {
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string"
+      },
+      "manifest": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Version 1 manifests still load; Ardia reads them as version 2"
+      },
+      "name": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]{0,39}$",
+        "description": "The plugin's name; its folder has the same name"
+      },
+      "title": {
+        "type": "string",
+        "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+      },
+      "description": {
+        "type": "string",
+        "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+      },
+      "version": {
+        "type": "string",
+        "pattern": "^\\d{1,6}\\.\\d{1,6}\\.\\d{1,6}(-[0-9A-Za-z.-]{1,40})?$"
+      },
+      "requires": {
+        "type": "string",
+        "pattern": "^\\d{1,6}\\.\\d{1,6}\\.\\d{1,6}(-[0-9A-Za-z.-]{1,40})?$",
+        "description": "The first Ardia version the plugin works with"
+      },
+      "permissions": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "enum": [
+            "tabs",
+            "fullUrls",
+            "commands",
+            "network",
+            "control"
+          ]
+        }
+      },
+      "settings": {
+        "type": "object",
+        "properties": {
+          "defaults": {
+            "type": "object",
+            "description": "Ardia settings, as in config.json"
+          },
+          "rows": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                },
+                "title": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                },
+                "description": {
+                  "type": "string",
+                  "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+                },
+                "type": {
+                  "enum": [
+                    "toggle",
+                    "text",
+                    "choice"
+                  ]
+                },
+                "default": {
+                  "type": [
+                    "boolean",
+                    "string"
+                  ]
+                },
+                "choices": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 12,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{1,40}$"
+                      },
+                      "title": {
+                        "type": "string",
+                        "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "value",
+                      "title"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "key",
+                "title",
+                "type",
+                "default"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "description": "Version 1: defaults and rows. A file without manifest (version 0) gives Ardia settings here directly."
+      },
+      "commands": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+            },
+            "title": {
+              "type": "string",
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+            },
+            "icon": {
+              "type": "string",
+              "pattern": "^[a-z0-9.]{1,64}$",
+              "description": "An SF Symbol name"
+            },
+            "keywords": {
+              "type": "array",
+              "maxItems": 8,
+              "items": {
+                "type": "string",
+                "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+              }
+            },
+            "tool": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+            },
+            "input": {
+              "type": "object"
+            },
+            "open": {
+              "enum": [
+                "tab",
+                "split"
+              ],
+              "description": "Open the plugin's page as a tab, or in Split View beside the current tab"
+            },
+            "context": {
+              "type": "boolean",
+              "description": "Hand the page the current tab (needs the tabs permission)"
+            },
+            "side": {
+              "enum": [
+                "left",
+                "right",
+                "top",
+                "bottom"
+              ],
+              "default": "right"
+            },
+            "sideSetting": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,40}$",
+              "description": "A choice row whose value picks the side"
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^(/[^?#\\s]*)?(\\?[^#\\s]*)?$",
+              "description": "Where in the plugin's page to open, like /history"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "title"
+          ]
+        }
+      },
+      "page": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,40}$"
+          },
+          "icon": {
+            "type": "string",
+            "pattern": "^[a-z0-9.]{1,64}$",
+            "description": "An SF Symbol name"
+          },
+          "file": {
+            "type": "string",
+            "pattern": "^[^/\\\\][^\\\\]*$"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "file"
+        ]
+      },
+      "process": {
+        "type": "object",
+        "properties": {
+          "run": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "items": {
+              "type": "string",
+              "pattern": "^[^\\u0000]{1,1024}$"
+            }
+          },
+          "memoryMB": {
+            "type": "integer",
+            "minimum": 64,
+            "maximum": 4096,
+            "default": 1024
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "run"
+        ]
+      },
+      "programs": {
+        "type": "array",
+        "maxItems": 4,
+        "description": "Commands Ardia puts on your PATH while the plugin is on",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,39}$",
+              "description": "The command's name on PATH"
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^[^/\\\\][^\\\\]*$",
+              "description": "An executable file in the plugin's folder, like bin/tool"
+            },
+            "afterUpdate": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[^\\u0000]{1,1024}$"
+                }
+              },
+              "description": "Built-in plugins only: argument lists Ardia runs the program with, once per new version"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "path"
+          ]
+        }
+      },
+      "passwordManager": {
+        "type": "object",
+        "properties": {
+          "fill": {
+            "enum": [
+              "system"
+            ],
+            "description": "system: macOS's Passwords panel fills the field. tool is reserved and refused for now"
+          },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "login",
+                "oneTimeCode"
+              ]
+            }
+          },
+          "verificationCodeSetup": {
+            "enum": [
+              "system"
+            ],
+            "description": "Offer to set up two-factor codes a page shows in the app macOS uses for otpauth links"
+          },
+          "passkeys": {
+            "enum": [
+              "system"
+            ],
+            "description": "Show the host's passkey status on the plugin's Settings page"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "fill",
+          "fields"
+        ],
+        "description": "Makes the plugin a password manager each profile can pick in Settings › Profiles › Passwords"
+      },
+      "alwaysOn": {
+        "const": true,
+        "description": "Built-in plugins only: once installed, no switch turns it off"
+      },
+      "official": {
+        "const": true,
+        "description": "Built-in plugins only: listed among Ardia's official plugins"
+      },
+      "autoInstall": {
+        "const": true,
+        "description": "Built-in plugins only, with alwaysOn: installed on a new profile with no click"
+      },
+      "icon": {
+        "type": "string",
+        "pattern": "^[a-z0-9.]{1,64}$",
+        "description": "An SF Symbol name"
+      },
+      "hooks": {
+        "type": "array",
+        "maxItems": 64,
+        "items": {
+          "enum": [
+            "window.opened",
+            "window.closed",
+            "window.focused",
+            "tab.opened",
+            "tab.closed",
+            "tab.activated",
+            "tab.navigated",
+            "settings.changed",
+            "app.launched",
+            "app.quitting",
+            "app.activated",
+            "app.deactivated",
+            "tab.idle",
+            "tab.resumed",
+            "media.started",
+            "media.stopped",
+            "tab.crashed",
+            "peek.opened",
+            "peek.closed",
+            "littleArdia.opened",
+            "split.created",
+            "split.closed",
+            "pin.added",
+            "pin.removed",
+            "tab.moved",
+            "profile.switched",
+            "system.sleep",
+            "system.wake",
+            "user.idle",
+            "user.active",
+            "page.error",
+            "bookmarks.changed",
+            "history.removed",
+            "download.changed",
+            "profile.changed"
+          ]
+        }
+      },
+      "tools": {
+        "type": "array",
+        "maxItems": 32,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+            },
+            "title": {
+              "type": "string",
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,60}$"
+            },
+            "description": {
+              "type": "string",
+              "pattern": "^(?=[\\s\\S]*\\S)[^\\u0000-\\u001f\\u007f-\\u009f\\u061c\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]{1,200}$"
+            },
+            "timeout": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 300,
+              "default": 30
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "title"
+          ]
+        }
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "name"
+    ]
+  },
+  "x-ardia-rules": {
+    "untabbedEvents": [
+      "settings.changed",
+      "app.launched",
+      "app.quitting",
+      "app.activated",
+      "app.deactivated",
+      "system.sleep",
+      "system.wake",
+      "user.idle",
+      "user.active"
+    ],
+    "approvedSettings": [
+      "omniboxProviders",
+      "launchActions"
+    ],
+    "decideEvents": [
+      "tab.opening",
+      "link.opening",
+      "download.deciding",
+      "permission.requested"
+    ],
+    "reservedPageNames": [
+      "history",
+      "bookmarks",
+      "downloads",
+      "newtab",
+      "settings",
+      "about",
+      "accessibility",
+      "app-service-internals",
+      "apps",
+      "attribution-internals",
+      "autofill-internals",
+      "blob-internals",
+      "bluetooth-internals",
+      "chrome",
+      "chrome-urls",
+      "components",
+      "connectors-internals",
+      "crashes",
+      "credits",
+      "device-log",
+      "dino",
+      "discards",
+      "download-internals",
+      "extensions",
+      "extensions-internals",
+      "flags",
+      "gcm-internals",
+      "gpu",
+      "help",
+      "histograms",
+      "history-clusters-internals",
+      "indexeddb-internals",
+      "inspect",
+      "interstitials",
+      "invalidations",
+      "local-state",
+      "management",
+      "media-engagement",
+      "media-internals",
+      "memory-internals",
+      "metrics-internals",
+      "net-export",
+      "net-internals",
+      "network-errors",
+      "new-tab-page",
+      "ntp-tiles-internals",
+      "omnibox",
+      "optimization-guide-internals",
+      "password-manager",
+      "password-manager-internals",
+      "policy",
+      "predictors",
+      "prefs-internals",
+      "print",
+      "process-internals",
+      "quota-internals",
+      "reset-password",
+      "safe-browsing",
+      "serviceworker-internals",
+      "signin-internals",
+      "site-engagement",
+      "sync-internals",
+      "system",
+      "terms",
+      "topics-internals",
+      "tracing",
+      "translate-internals",
+      "ukm",
+      "usb-internals",
+      "user-actions",
+      "version",
+      "web-app-internals",
+      "webrtc-internals",
+      "webrtc-logs",
+      "webui-gallery",
+      "whats-new"
+    ]
+  }
+}

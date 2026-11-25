@@ -11,8 +11,8 @@
         "string",
         "null"
       ],
-      "pattern": "^[a-z0-9][a-z0-9_-]*$",
-      "description": "A theme in themes/<name>.json, or null for Ardia's own",
+      "pattern": "^(?:[a-z0-9][a-z0-9_-]*|plugin:[a-z0-9][a-z0-9-]{0,39}/[A-Za-z0-9_-]{1,40})$",
+      "description": "A theme in themes/<name>.json, a plugin's theme as plugin:<plugin>/<theme>, or null for Ardia's own",
       "default": null
     },
     "settings": {
@@ -30,6 +30,10 @@
           "type": "boolean",
           "default": true
         },
+        "separateDownloadFolders": {
+          "type": "boolean",
+          "default": false
+        },
         "searchEngine": {
           "type": "string",
           "default": "google",
@@ -39,17 +43,17 @@
           "type": "boolean",
           "default": true
         },
+        "commandBarHistory": {
+          "type": "boolean",
+          "default": true
+        },
         "showSelectionSearch": {
           "type": "boolean",
           "default": true
         },
-        "commandBarPreference": {
-          "type": "string",
-          "enum": [
-            "website",
-            "search"
-          ],
-          "default": "website"
+        "blockNotificationRequests": {
+          "type": "boolean",
+          "default": false
         },
         "tabLayout": {
           "type": "string",
@@ -73,7 +77,7 @@
         },
         "hideToolbarWhileScrolling": {
           "type": "boolean",
-          "default": true
+          "default": false
         },
         "newTabPosition": {
           "type": "string",
@@ -92,6 +96,10 @@
           ],
           "default": "bottom"
         },
+        "appLinksFirst": {
+          "type": "boolean",
+          "default": false
+        },
         "newTabOpens": {
           "type": "string",
           "enum": [
@@ -103,6 +111,10 @@
         "warnBeforeClosingLastTab": {
           "type": "boolean",
           "default": true
+        },
+        "keepTopAppsRunning": {
+          "type": "boolean",
+          "default": false
         },
         "undoReopensClosedTab": {
           "type": "boolean",
@@ -132,10 +144,6 @@
           "type": "boolean",
           "default": true
         },
-        "dragToGroupInTopStrip": {
-          "type": "boolean",
-          "default": false
-        },
         "peekModifier": {
           "type": "string",
           "enum": [
@@ -147,7 +155,7 @@
         },
         "peekLinksToOtherSites": {
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "newTabLinksOpenIn": {
           "type": "string",
@@ -156,7 +164,20 @@
             "peek",
             "littleArdia"
           ],
-          "default": "tab"
+          "default": "peek"
+        },
+        "popupsOpenAsTabs": {
+          "type": "boolean",
+          "default": false
+        },
+        "peekButtons": {
+          "type": "string",
+          "enum": [
+            "top",
+            "left",
+            "right"
+          ],
+          "default": "top"
         },
         "splitLinkModifier": {
           "type": "string",
@@ -178,7 +199,42 @@
           "exclusiveMinimum": 0,
           "default": null
         },
+        "suggestCleanUp": {
+          "type": "boolean",
+          "default": true
+        },
         "mutedSites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "showUnreadCounts": {
+          "type": "boolean",
+          "default": false
+        },
+        "showTopAppBadges": {
+          "type": "boolean",
+          "default": false
+        },
+        "showTabHoverMenu": {
+          "type": "boolean",
+          "default": true
+        },
+        "showFullUrlInTabHoverMenu": {
+          "type": "boolean",
+          "default": false
+        },
+        "closedTopAppTiles": {
+          "type": "boolean",
+          "default": true
+        },
+        "topAppFolders": {
+          "type": "boolean",
+          "default": true
+        },
+        "unreadHiddenSites": {
           "type": "array",
           "items": {
             "type": "string"
@@ -195,7 +251,22 @@
           },
           "default": {}
         },
+        "developerModeSites": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "default": {}
+        },
         "autoPictureInPicture": {
+          "type": "boolean",
+          "default": true
+        },
+        "playingNowAcrossProfiles": {
+          "type": "boolean",
+          "default": false
+        },
+        "sidebarMediaControls": {
           "type": "boolean",
           "default": true
         },
@@ -203,11 +274,11 @@
           "type": "boolean",
           "default": true
         },
-        "videoUpscaling": {
+        "blockAutoplayEverywhere": {
           "type": "boolean",
-          "default": true
+          "default": false
         },
-        "sidebarMediaControls": {
+        "videoUpscaling": {
           "type": "boolean",
           "default": true
         },
@@ -224,11 +295,11 @@
           "type": "boolean",
           "default": true
         },
-        "balancedTopApps": {
+        "tidyTabs": {
           "type": "boolean",
           "default": false
         },
-        "showAdvancedSettings": {
+        "balancedTopApps": {
           "type": "boolean",
           "default": false
         },
@@ -240,6 +311,58 @@
             "off"
           ],
           "default": "full"
+        },
+        "interfaceScale": {
+          "type": "number",
+          "enum": [
+            0.8,
+            0.85,
+            0.9,
+            0.95,
+            1,
+            1.05,
+            1.1,
+            1.15,
+            1.2,
+            1.25,
+            1.3,
+            1.35,
+            1.4,
+            1.45,
+            1.5
+          ],
+          "default": 1
+        },
+        "sidebarTextSize": {
+          "type": "string",
+          "enum": [
+            "default",
+            "large",
+            "larger"
+          ],
+          "default": "default"
+        },
+        "sidebarTextContrast": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "standard",
+            "high"
+          ],
+          "default": "auto"
+        },
+        "selectedTopApp": {
+          "type": "string",
+          "enum": [
+            "ring",
+            "fill",
+            "outline"
+          ],
+          "default": "ring"
+        },
+        "elementOutlines": {
+          "type": "boolean",
+          "default": true
         },
         "interfaceStyle": {
           "type": "string",
@@ -259,15 +382,11 @@
           "maximum": 1,
           "default": 0.8
         },
-        "pageScrollBars": {
-          "type": "string",
-          "enum": [
-            "system",
-            "thin"
-          ],
-          "default": "system"
-        },
         "fadeUnloadedTabs": {
+          "type": "boolean",
+          "default": false
+        },
+        "strikeSleepingTabs": {
           "type": "boolean",
           "default": false
         },
@@ -301,6 +420,17 @@
           "type": "boolean",
           "default": true
         },
+        "unloadProfilesAfter": {
+          "type": "string",
+          "enum": [
+            "never",
+            "5m",
+            "15m",
+            "1h",
+            "2h"
+          ],
+          "default": "never"
+        },
         "keepActiveSites": {
           "type": "array",
           "items": {
@@ -330,15 +460,7 @@
           ],
           "default": "never"
         },
-        "bookmarksBarSize": {
-          "type": "string",
-          "enum": [
-            "default",
-            "large"
-          ],
-          "default": "default"
-        },
-        "hideBookmarksBarImport": {
+        "bookmarksImportDismissed": {
           "type": "boolean",
           "default": false
         },
@@ -363,17 +485,51 @@
           "type": "boolean",
           "default": false
         },
+        "addressBarButtons": {
+          "type": "string",
+          "enum": [
+            "hover",
+            "always"
+          ],
+          "default": "hover"
+        },
+        "borderlessMode": {
+          "type": "boolean",
+          "default": false
+        },
+        "tabCornerRadius": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 20,
+          "default": null
+        },
+        "minimalismMode": {
+          "type": "boolean",
+          "default": false
+        },
         "pageFrame": {
           "type": "integer",
           "minimum": 0,
           "maximum": 12,
           "default": 9
         },
+        "pageFrameZeroInFullScreen": {
+          "type": "boolean",
+          "default": false
+        },
+        "pageFrameZeroWhenTabsHidden": {
+          "type": "boolean",
+          "default": false
+        },
         "commandBarPlacement": {
           "type": "string",
           "enum": [
             "field",
-            "centred"
+            "centred",
+            "centredOnClick"
           ],
           "default": "field"
         },
@@ -385,7 +541,11 @@
           "type": "boolean",
           "default": true
         },
-        "profileSwitcherIcons": {
+        "showProfileDots": {
+          "type": "boolean",
+          "default": true
+        },
+        "compactCliPill": {
           "type": "boolean",
           "default": false
         },
@@ -425,6 +585,10 @@
               "type": "string",
               "description": "restoreClosed (no default)"
             },
+            "clearRecentlyClosed": {
+              "type": "string",
+              "description": "Clear Recently Closed (no default)"
+            },
             "focusCommandBar": {
               "type": "string",
               "description": "Open Command Bar (default ⌘L, ⌃F5)"
@@ -460,6 +624,14 @@
             "findPrevious": {
               "type": "string",
               "description": "Find Previous (default ⇧⌘G)"
+            },
+            "hideElement": {
+              "type": "string",
+              "description": "Hide Element… (default ⇧⌘H)"
+            },
+            "showHiddenElements": {
+              "type": "string",
+              "description": "Hidden Elements on This Site… (default ⇧⌘U)"
             },
             "setAppearance": {
               "type": "string",
@@ -533,6 +705,10 @@
               "type": "string",
               "description": "Show Address Bar in Sidebar (no default)"
             },
+            "toggleMinimalism": {
+              "type": "string",
+              "description": "Minimalism Mode (default ⌃⌘M)"
+            },
             "cast": {
               "type": "string",
               "description": "Cast… (no default)"
@@ -579,11 +755,11 @@
             },
             "nextTab": {
               "type": "string",
-              "description": "Next Tab (default ⇧⌘], ⌘}, ⌥⌘→, ⌃⇟, ⌥⌘↓)"
+              "description": "Next Tab (default ⇧⌘], ⌘}, ⌃⇥, ⌃⇟, ⌥⌘↓)"
             },
             "previousTab": {
               "type": "string",
-              "description": "Previous Tab (default ⇧⌘[, ⌘{, ⌥⌘←, ⌃⇞, ⌥⌘↑)"
+              "description": "Previous Tab (default ⇧⌘[, ⌘{, ⌃⇧⇥, ⌃⇞, ⌥⌘↑)"
             },
             "selectTab": {
               "type": "string",
@@ -681,6 +857,10 @@
               "type": "string",
               "description": "Open Page in WebKit (no default)"
             },
+            "toggleReader": {
+              "type": "string",
+              "description": "Show Reader (default ⌥⌘R)"
+            },
             "downloads": {
               "type": "string",
               "description": "Downloads (default ⇧⌘J, ⌥⌘L)"
@@ -695,11 +875,11 @@
             },
             "nextProfile": {
               "type": "string",
-              "description": "Next Profile (no default)"
+              "description": "Next Profile (default ⌥⌘→)"
             },
             "previousProfile": {
               "type": "string",
-              "description": "Previous Profile (no default)"
+              "description": "Previous Profile (default ⌥⌘←)"
             },
             "newProfile": {
               "type": "string",
@@ -791,11 +971,11 @@
             },
             "tabSwitcher:forward": {
               "type": "string",
-              "description": "Tab Switcher (forward) (default ⌃⇥)"
+              "description": "Tab Switcher (forward) (no default)"
             },
             "tabSwitcher:backward": {
               "type": "string",
-              "description": "Tab Switcher (backward) (default ⌃⇧⇥)"
+              "description": "Tab Switcher (backward) (no default)"
             },
             "share": {
               "type": "string",
@@ -812,6 +992,10 @@
             "copyDiagnostics": {
               "type": "string",
               "description": "Copy Diagnostics (no default)"
+            },
+            "copyLastFreeze": {
+              "type": "string",
+              "description": "Copy Last Freeze (no default)"
             },
             "toolTour": {
               "type": "string",
@@ -947,7 +1131,7 @@
             },
             "std:pasteAndMatchStyle:": {
               "type": "string",
-              "description": "std:pasteAndMatchStyle: (default ⇧⌘V)"
+              "description": "std:pasteAndMatchStyle: (default ⇧⌘V, ⌥⇧⌘V)"
             },
             "std:delete:": {
               "type": "string",
@@ -1053,6 +1237,16 @@
           "additionalProperties": false,
           "default": {}
         },
+        "mouseShortcuts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {}
+        },
         "openLinksInLittleArdia": {
           "type": "boolean",
           "default": true
@@ -1060,6 +1254,10 @@
         "littleArdiaOpensNewTabLinks": {
           "type": "boolean",
           "default": true
+        },
+        "littleArdiaShortcutFromAnyApp": {
+          "type": "boolean",
+          "default": false
         },
         "littleArdiaSize": {
           "type": "array",
@@ -1159,15 +1357,16 @@
               "toggleOpenLinksInLittleArdia",
               "reopenClosedTab",
               "reopenClosedWindow",
+              "clearRecentlyClosed",
               "focusCommandBar",
               "closeTab",
               "closeAllTabs",
-              "print",
               "copyUrl",
               "copyUrlAsMarkdown",
               "findInPage",
               "findNext",
               "findPrevious",
+              "showHiddenElements",
               "setAppearance",
               "setAppearance:auto",
               "setAppearance:light",
@@ -1185,7 +1384,7 @@
               "focusPreviousPane",
               "toggleFullUrl",
               "toggleAddressBar",
-              "cast",
+              "toggleMinimalism",
               "zoomReset",
               "zoomIn",
               "zoomOut",
@@ -1215,18 +1414,14 @@
               "duplicateTab",
               "bookmarkPage",
               "toggleMute",
+              "toggleReader",
               "downloads",
               "mergeAllWindows",
               "nextProfile",
               "previousProfile",
-              "newProfile",
               "openSettings",
-              "importBrowserData",
               "showHistory",
-              "clearBrowsingData",
               "manageBookmarks",
-              "exportBookmarks",
-              "bookmarkAllTabs",
               "setBookmarksBar",
               "setBookmarksBar:always",
               "setBookmarksBar:newTab",
@@ -1237,43 +1432,95 @@
               "cleanUpTabs",
               "tidyPins",
               "searchTabs",
-              "renameTab",
-              "changeTabIcon",
               "returnToPinnedUrl",
-              "tabSwitcher",
-              "tabSwitcher:forward",
-              "tabSwitcher:backward",
-              "share",
-              "reportProblem",
               "keyboardShortcuts",
               "copyDiagnostics",
-              "toolTour",
+              "copyLastFreeze",
               "videoTour",
               "releaseNotes",
-              "showOnboarding",
               "taskManager",
               "addExtension",
               "manageExtensions",
-              "pinExtensions",
-              "autofill",
-              "autofill:contact",
-              "autofill:passwords",
-              "autofill:creditCard",
-              "openFile",
-              "savePage",
-              "emailPageLocation",
-              "printWithSystemDialog",
               "stop",
-              "caretBrowsing",
               "moveTabDown",
               "moveTabUp",
-              "closeTabGroup",
-              "openProfileMenu"
+              "closeTabGroup"
             ]
           },
           "maxItems": 20,
           "default": [],
           "description": "Commands Ardia runs in the focused window after it restores the session, like [\"newTab\"]. Command ids, or id:variant."
+        },
+        "commandBarStart": {
+          "type": "object",
+          "description": "What a new tab's command bar (⌘T) lists before you type. Set by plugins in config.json; there is no Settings row.",
+          "additionalProperties": false,
+          "properties": {
+            "openTabs": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "hidePinned": {
+                  "type": "boolean",
+                  "description": "Leave out pinned tabs (the sidebar's pinned rows)."
+                },
+                "hideTopApps": {
+                  "type": "boolean",
+                  "description": "Leave out Top Apps (the pinned tiles)."
+                },
+                "limit": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20,
+                  "description": "How many open tabs to list; 0 lists none."
+                }
+              }
+            }
+          },
+          "default": {}
+        },
+        "pressMotion": {
+          "type": "string",
+          "enum": [
+            "still",
+            "bounce"
+          ],
+          "default": "still"
+        },
+        "folderStyle": {
+          "type": "string",
+          "enum": [
+            "profile",
+            "neutral"
+          ],
+          "default": "profile"
+        },
+        "liveFolderIcon": {
+          "type": "string",
+          "enum": [
+            "folder",
+            "service"
+          ],
+          "default": "folder"
+        },
+        "readerTextSize": {
+          "type": "string",
+          "enum": [
+            "small",
+            "medium",
+            "large",
+            "larger",
+            "largest"
+          ],
+          "default": "medium"
+        },
+        "readerFont": {
+          "type": "string",
+          "enum": [
+            "serif",
+            "sans"
+          ],
+          "default": "serif"
         }
       },
       "additionalProperties": false

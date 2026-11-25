@@ -15,20 +15,16 @@
     "extension-root:nevermind.apps:app:/Applications/Notion Calendar.app": "Command+Control+Alt+F",
     "extension-root:nevermind.apps:app:/Applications/Spotifin.app": "Command+Control+Alt+W",
     "extension-root:nevermind.apps:app:/Applications/Telegram.app": "Command+Control+Alt+E",
-    "extension-root:nevermind.dictation:dictation": "Command+Control+Alt+V",
-    "extension-action:window-management:layout.left-half": "Command+Control+Alt+Shift+H",
-    "extension-action:window-management:layout.right-half": "Command+Control+Alt+Shift+L",
     "extension-action:window-management:layout.almost-maximize": "Command+Control+Alt+M",
     "extension-action:window-management:layout.reasonable-size": "Command+Control+Alt+C",
     "extension:nevermind.emoji-symbols:emoji-symbols": "Command+Shift+E",
-    "extension-action:window-management:layout.focus-right": "Command+Control+Alt+L",
-    "extension-action:window-management:layout.focus-left": "Command+Control+Alt+H",
-    "extension-action:window-management:layout.focus-up": "Command+Control+Alt+K",
     "extension:nevermind.clipboard:clipboard-history": "Command+Shift+V",
     "extension:local.screenshots:screenshots.grid": "Command+Shift+2",
     "extension:nevermind.ai-commands:fix-selected-text-with-ai": "Command+Control+Alt+R",
     "extension:nevermind.floating-notes:toggle-floating-notes": "Command+Control+Alt+Y",
-    "extension:nevermind.menus:search-menu-items": "Command+Shift+M"
+    "extension:nevermind.menus:search-menu-items": "Command+Shift+M",
+    "extension-root:nevermind.apps:app:/Applications/zoom.us.app": "Command+Control+Alt+Z",
+    "extension-root:nevermind.dictation:dictation": "Command+Control+Alt+V"
   },
   "ai": {
     "defaultModel": "smart"
@@ -119,12 +115,23 @@
       "user.github-issues-menubar": {
         "capabilities": "system"
       },
-      "user.shortcut-lookup": {
-        "capabilities": "shortcuts"
-      },
       "user.tailscale-toggle": {
         "capabilities": "system"
+      },
+      "user.screen-urls": {
+        "capabilities": "desktop.clipboard,ocr"
+      },
+      "user.weather-menubar": {
+        "capabilities": "network"
       }
     }
+  },
+  "aliases": {
+    "extension:camera.view:open-camera": [
+      "camera"
+    ],
+    "extension-root:nevermind.apps:app:/Applications/Notion Calendar.app": [
+      "cron"
+    ]
   }
 }
